@@ -6,7 +6,8 @@
 | O meu nome é Ramesh | My name is Ramesh | Basics - Intro |
 | Eu sou o Ramesh | I am Ramesh | Basics - Intro |
 | Eu sou casado | I am married | Basics - Intro |
-| ser/estar | To be/be | Ser \- permanent Estar \- temporary |
+| ser | To be | Ser \- permanent Estar \- temporary |
+| estar | be | Ser \- permanent Estar \- temporary |
 | eu estou cansado | I am tired |  |
 | Um problema | A problem | Masculine even though it ends in a |
 | Um dia | Day |  |
@@ -60,7 +61,8 @@
 | bom fim de semana\! | Good weekend | Basics - Greeting |
 | está bem | He is well | Basics - State |
 | estou bem | I am fine | Basics - State |
-| como está/estás? | How are you (formal/informal) | Ending in s makes it informal (Basics) |
+| como está | How are you (formal | Ending in s makes it informal (Basics) |
+| estás? | informal) | Ending in s makes it informal (Basics) |
 | estou bem, obrigado(a) | I am fine, thank you | Male ends in o (Basics) |
 | muito obrigado | Thank you very much | Basics - Polite |
 | tudo bem? | Everything good | Same answer (Basics) |
@@ -73,8 +75,10 @@
 | posso fazer | May I | Basics |
 | pode repetir, por favor | Can repeat please. Say it again please | Basics - Polite |
 | pode falar mais devagar, por favor | Can speak more slowly, please |  |
-| devagar/depressa | slowly/quickly |  |
-| rapido/lento | fast/slow | Transito lento \- slow traffic |
+| devagar | slowly |  |
+| depressa | quickly |  |
+| rapido | fast | Transito lento \- slow traffic |
+| lento | slow | Transito lento \- slow traffic |
 | falo um pouco de português | I speak a little Portuguese |  |
 
 # Thur 15 Jan 2026
@@ -83,7 +87,7 @@
 | :---- | :---- | :---- |
 | Eu também | Me too |  |
 | Concordo | I agree |  |
-| Está a chover desde novembro  | It has been (is) raining since November | Continuation of the verb for It is |
+| Está a chover desde novembro | It has been (is) raining since November | Continuation of the verb for It is |
 | Estar \+ a \+ infinitivo | Estar \+ a \= ing in english | Happening right now while speaking \- in this period of time |
 | Eu estou a aprender português | I am learning Portuguese |  |
 | Estudantes | Students |  |
@@ -102,23 +106,33 @@
 | Artigos definidos: o,a,os,as | Definitive articles for The | All four for the same, based on gender and number O \- masculine singular A \- feminine singular Os \- masculine plural As \- feminine plural |
 | Compreendo | I understand | Don’t need Eu as Compreendo on conjugates with I |
 | Artigos indefinidos: um,uma,uns,umas | Um \- Masculine singular Uma \- Feminine singular Uns \- Masculine plural Umas \- Feminine plural | Um \- Masculine singular Uma \- Feminine singular Uns \- Masculine plural Umas \- Feminine plural |
-| Uns jogadores são do benfica outros são do sporting | Some players are from Benfica and others are from Sporting  |  |
-| A equipa nacional portuguesa tem uns jogadores do benfica, outros do sporting e outros do porto  | The Portugal national team has players from Benfica, others from Sporting and others from Porto |  |
-| A equipa nacional portuguesa tem jogadores do benfica, do sporting e do Porto  | The Portugal national team has players from Benfica, Sporting and Porto |  |
-| ser,estar,ficar | All mean “to be” Ser \- Permanent (A ópera **é** um estilo de música) Estar \- Temporary  Ficar \- Geographical location (or stay),  | Ser \- Permanent (A ópera **é** um estilo de música) Estar \- Temporary  Ficar \- Geographical location (or stay),  |
+| Uns jogadores são do benfica outros são do sporting | Some players are from Benfica and others are from Sporting |  |
+| A equipa nacional portuguesa tem uns jogadores do benfica, outros do sporting e outros do porto | The Portugal national team has players from Benfica, others from Sporting and others from Porto |  |
+| A equipa nacional portuguesa tem jogadores do benfica, do sporting e do Porto | The Portugal national team has players from Benfica, Sporting and Porto |  |
+| ser,estar,ficar | All mean “to be” Ser \- Permanent (A ópera **é** um estilo de música) Estar \- Temporary  Ficar \- Geographical location (or stay), | Ser \- Permanent (A ópera **é** um estilo de música) Estar \- Temporary  Ficar \- Geographical location (or stay), |
 | Eu estou doente | I am sick (temporarily) |  |
 | O restaurante fica no centro de Lisboa | The restaurant is in (stay/is located) the center of lisbon |  |
-| Ser Eu sou Tu és Ele/ela/você é Nós somos Eles/elas/vocês são | To be \- permanent I am \- permanent You are \- informal He/She/You is (formal) We are He/She/You are (formal) | Voce is a little rude\! Formal, but you shouldn’t say it. Fala ingles \- don’t say voce Nós (Nosh) vs Nos (Noosh) |
+| Ser Eu sou Tu és Ele | To be \- permanent I am \- permanent You are \- informal He | Voce is a little rude\! Formal, but you shouldn’t say it. Fala ingles \- don’t say voce Nós (Nosh) vs Nos (Noosh) |
+| ela | She | Voce is a little rude\! Formal, but you shouldn’t say it. Fala ingles \- don’t say voce Nós (Nosh) vs Nos (Noosh) |
+| você é Nós somos Eles | You is (formal) We are He | Voce is a little rude\! Formal, but you shouldn’t say it. Fala ingles \- don’t say voce Nós (Nosh) vs Nos (Noosh) |
+| elas | She | Voce is a little rude\! Formal, but you shouldn’t say it. Fala ingles \- don’t say voce Nós (Nosh) vs Nos (Noosh) |
+| vocês são | You are (formal) | Voce is a little rude\! Formal, but you shouldn’t say it. Fala ingles \- don’t say voce Nós (Nosh) vs Nos (Noosh) |
 | Encontramo-nos à porta do cinema | We meet us at the door of the cinema |  |
 | Nós fomos de férias | We (Us) went on holiday |  |
-| Estar Eu estou Tu estás Ele/ela/você está Nós estamos Eles/elas/vocês estão | To be (temporary) I am (temp) You are (temp) He/She/You are (formal) We (us) are They (all man)/ They (men and women)/You (plural) are |  |
+| Estar Eu estou Tu estás Ele | To be (temporary) I am (temp) You are (temp) He |  |
+| ela | She |  |
+| você está Nós estamos Eles | You are (formal) We (us) are They (all man) |  |
+| elas | They (men and women) |  |
+| vocês estão | You (plural) are |  |
 | Nós estamos cansados | We are tired |  |
-| Nós estamos felizes/contentes | We are happy/content |  |
+| Nós estamos felizes | We are happy |  |
+| contentes | content |  |
 | Eu estou em casa | I am at home/house |  |
 | A casa é grande | The house is big (permanent) | No It in Portuguese so always male or female |
 | A casa está limpa | The house is clean (temporary) |  |
 | A caneta está em cima da mesa | The pen is on top of the table |  |
-| O carro está na garagem/na oficina | The car is in the garage/workshop (mechanic) |  |
+| O carro está na garagem | The car is in the garage |  |
+| na oficina | workshop (mechanic) |  |
 | O quadro é bonito | The picture is beautiful (pretty) |  |
 | O quadro está na parede | The picture is on the wall | Na \- in+the (on+the) |
 | Os quadros estão na parede | The pictures are on the wall |  |
@@ -126,7 +140,8 @@
 | Nunca | Never |  |
 | Raramente | Rarely |  |
 | Às vezes | Sometimes |  |
-| Normalmente/Habitualmente | Normally (usually)/habitually |  |
+| Normalmente | Normally (usually) |  |
+| Habitualmente | habitually |  |
 | Frequentemente | Often |  |
 | Sempre | Always |  |
 | Nunca faço surf/nunca fiz surf | Never do surf, never did surf | Doesn’t change adverb of frequency |
@@ -138,7 +153,13 @@
 | :---- | :---- | :---- |
 | Segunda-feira, dezanove de janeiro | Monday, 19th January |  |
 | Cem \- 100..cento e um Duzentos, trezentos, quatrocentos, quinhentos, seiscentos, setecentos, oitocentos, novecentos, mil | 100 or 101, 200, 300, 400, 500, 600, 700, 800, 900, 1000 |  |
-| Quinhentos e cinquenta e cinco | 555 Twelve \- dose Two \- doiz | 5 \- 50 (cinco \- cinquenta) 15 \- 500 (quinze \- quinhentos) |
+| Quinhentos e cinquenta e cinco | 555 |
+| Doze | 12 | 
+| Doiz | 2 | 
+| Cinco | 5 |
+| Cinquenta | 50 |
+| Quinze | 15 |
+| Quinhentos | 500 |
 | janeiro | January |  |
 | fevereiro | February |  |
 | março | March |  |
@@ -174,7 +195,10 @@
 | **até** | **Until** |  |
 | **desde** | **Since** |  |
 | **sobre** | **about** |  |
-| Eu vou à praia no verão/primavera/outono/inverno | I go to the beach in the summer/spring/autumn/winter | Verão \- summer no \= in+the \- pr. nu à \= to |
+| Eu vou à praia no verão | I go to the beach in the summer | Verão \- summer no \= in+the \- pr. nu à \= to |
+| primavera | spring | Verão \- summer no \= in+the \- pr. nu à \= to |
+| outono | autumn | Verão \- summer no \= in+the \- pr. nu à \= to |
+| inverno | winter | Verão \- summer no \= in+the \- pr. nu à \= to |
 | Eu vou ao supermercado | I go to the supermarket (masculine) |  |
 | Ao fim de semana vejo futebol | At the weekend (every) watch football |  |
 | Direto | Live (transmission) |  |
@@ -183,23 +207,29 @@
 | No fim de semana passado | The last weekend |  |
 | Este fim de semana | This weekend | Este \- Ishte |
 | Este próximo fim de semana | This next weekend |  |
-| Na semana anterior/na semana seguinte | The week before/the next week |  |
+| Na semana anterior | The week before |  |
+| na semana seguinte | the next week |  |
 | Daqui (de+aqui) a duas semanas | From here two weeks (in two weeks onwards) |  |
-| À segunda-feira/na segunda-feira | Every monday/a Monday (last or next) |  |
+| À segunda-feira | Every monday |  |
+| na segunda-feira | a Monday (last or next) |  |
 | Na segunda-feira vi um filme ótimo | Last Monday I watched a great film | vi/ver/estou a ver/vou ver \-watched/watch/watching/going to watch Vou \- simple future (going) |
 | Na segunda-feira vou ao cinema | Next Monday I will go to the cinema |  |
 | Eu vou de comboio para Lisboa | I go of train to Lisbon (not specific) | Comboio \- train de comboio \- a train no comboio \- the train |
 | eu vou de autocarro | I take the bus |  |
-| Eu vou no comboio das 18 horas/no autocarro n.44 | I go by the 6pm train/bus 44 (specific) | Autocarro \- bus |
-| Vou para Lisboa/Este presente é para ti | Go to Lisbon (destination)/This present is for you | é \- permanent \- ser |
+| Eu vou no comboio das 18 horas | I go by the 6pm train | Autocarro \- bus |
+| no autocarro n.44 | bus 44 (specific) | Autocarro \- bus |
+| Vou para Lisboa | Go to Lisbon (destination) | é \- permanent \- ser |
+| Este presente é para ti | This present is for you | é \- permanent \- ser |
 | Este lugar está reservado Estes lugares estão reservados | This is seat is reserved for you/These seats are reserved for you | Lugar \- seat |
 | Para a semana (que vem) | Next week (coming)  \- For the week that comes | Vem \- comes |
 | Por+a(s) \= pela(s) por+o(s)=pelo(s) | By/for period(s) of time |  |
 | Preciso do carro por 4 dias | I need the car for 4 days |  |
 | Eu vou para a Costa da Caparica pela ponte | I go to Costa da Caparica by the bridge | Pela \- pass by/over the Ponte \- bridge |
 | Não vou trabalhar por estar doente | I’m not going to work because I am sick |  |
-| Não vou à praia desde setembro/não vou à praia há 4 meses | I have not gone to the beach since september/There has been 4 months since I’ve been to the beach | há 4 meses \- been 4 months there have/  |
-| Haver \- há/houve | There is or there are/there was or there were |  |
+| Não vou à praia desde setembro | I have not gone to the beach since september | há 4 meses \- been 4 months there have/ |
+| não vou à praia há 4 meses | There has been 4 months since I’ve been to the beach | há 4 meses \- been 4 months there have/ |
+| Haver \- há | There is or there are |  |
+| houve | there was or there were |  |
 | Isto | that/this |  |
 | entao | then |  |
 | quarto | quarter |  |
@@ -215,14 +245,20 @@
 | Quando..? Quando (é que) chegas a Portugal? | When When are you arriving to Portugal |  |
 | Onde…? Onde fica o restaurante? Onde está o leite? De onde é? | Where Where is the restaurant? Where is the milk? Where are you from? | Use está because it is temporary |
 | Quem…? Quem vai ao jantar amanhã? | Who Who is going to dinner tomorrow? |  |
-| Que..? \+ nome Que comida preferes? | What/Which \+ noun? What food do you prefer? | a que horas \- at what time |
+| Que..? | What/Which \+ noun? | a que horas \- at what time |
+| \+ nome Que comida preferes? | What food do you prefer? | a que horas \- at what time |
 | O que…? \+ verbo O que fazes no fim de semana? O que fazes ao fim de semana? | also what \+ verb?  What do you do this weekend? (specific) What do you do on weekends? (general) | Que \- qoo |
 | Qual…? Qual é a tua cor favorita? | What or which singular What is your favorite color | a tua \- your a tua cor \- your car Qual é \- singular |
 | Quais…? Quais são as tuas músicas favoritas? | What or which plural What are your favorite musics \- plural | Quais são \- plural |
 | Quanto..? Quanto custa? Quanto tempo leva a viagem? | How much? How much does it cost How long does the trip take? | leva \- take |
-| Quantos..? Quantos anos tens? | How many? How old are you? | Tenho \- I have |
-| Porque…? Porque estás triste? Estás triste? Porquê? | Why? Why are you sad? Are you sad? Why? | Porque \- Porku Porquê \- Porkay |
-| Há quanto tempo…? Há quanto tempo vives em Lisboa? | How long? How long have you been living in Lisbon? |  |
+| Quantos..? | How many? | Tenho \- I have |
+| Quantos anos tens? | How old are you? | Tenho \- I have |
+| Porque…? | Why? | Porque \- Porku Porquê \- Porkay |
+| Porque estás triste? | Why are you sad? | Porque \- Porku Porquê \- Porkay |
+| Estás triste? | Are you sad? | Porque \- Porku Porquê \- Porkay |
+| Porquê? | Why? | Porque \- Porku Porquê \- Porkay |
+| Há quanto tempo…? | How long? |  |
+| Há quanto tempo vives em Lisboa? | How long have you been living in Lisbon? |  |
 | Está à espera do seu amigo? | Are you waiting for your friends? |  |
 | Como | How |  |
 | Para que queres | For what do you want? |  |
@@ -232,7 +268,7 @@
 | O eléctrico | The tram \- yellow ones in Lisbon |  |
 | pelo \- por |  |  |
 | Em que mês estamos? | Which month are we in? |  |
-| Fui \- foste | I was (past) \- (w)  |  |
+| Fui \- foste | I was (past) \- (w) |  |
 | Ir | To go |  |
 | roupas | clothes |  |
 | recibo |  |  |
@@ -262,7 +298,7 @@
 | A irmã | The sister | Family |
 | O menu, por favor | The menu, please | Restaurant |
 | A conta, por favor | The bill, please | Restaurant |
-| Água (sem gás / com gás) | Water (still / sparking) | Drinks |
+| Água (sem gás / com gás) | Water (still / sparkling) | Drinks |
 | Vinho tinto | Red wine | Drinks |
 | Vinho branco | White wine | Drinks |
 | Uma cerveja (imperial) | A beer (draught) | Drinks - Imperial is common for draught beer |
@@ -281,3 +317,108 @@
 | Eu preciso de ajuda | I need help | Common Phrase |
 | Eu não sei | I don't know | Common Phrase |
 | Eu posso? | Can I? | Common Phrase |
+
+# AI Generated Expansion (Stretch Goals)
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| Eu acordo às 7 horas | I wake up at 7 o'clock | Daily Routine - New |
+| Eu tomo duche | I take a shower | Daily Routine - New |
+| Eu escovo os dentes | I brush my teeth | Daily Routine - New |
+| Eu visto-me | I get dressed | Daily Routine - New |
+| Eu penteio o cabelo | I comb my hair | Daily Routine - New |
+| Eu saio de casa | I leave the house | Daily Routine - New |
+| Eu vou para o trabalho | I go to work | Daily Routine - New |
+| Eu começo a trabalhar | I start working | Daily Routine - New |
+| Eu almoço ao meio-dia | I have lunch at midday | Daily Routine - New |
+| Eu acabo o trabalho às 18h | I finish work at 6pm | Daily Routine - New |
+| Eu vou às compras | I go shopping | Daily Routine - New |
+| Eu faço o jantar | I make dinner | Daily Routine - New |
+| Eu lavo a loiça | I wash the dishes | Daily Routine - New |
+| Eu vejo televisão | I watch television | Daily Routine - New |
+| Eu leio um livro | I read a book | Daily Routine - New |
+| Eu vou para a cama | I go to bed | Daily Routine - New |
+| Eu adormeço | I fall asleep | Daily Routine - New |
+| Eu limpo a casa | I clean the house | Daily Routine - New |
+| Eu lavo a roupa | I wash the clothes | Daily Routine - New |
+| Eu descanso | I rest | Daily Routine - New |
+| Quanto custa isto? | How much does this cost? | Shopping - New |
+| É muito caro | It is very expensive | Shopping - New |
+| É barato | It is cheap | Shopping - New |
+| Posso pagar com cartão? | Can I pay with card? | Shopping - New |
+| Aceitam dinheiro? | Do you accept cash? | Shopping - New |
+| O troco | The change | Shopping - New |
+| O saco | The bag | Shopping - New |
+| A loja | The shop | Shopping - New |
+| Aberto | Open | Shopping - New |
+| Fechado | Closed | Shopping - New |
+| Eu quero comprar isto | I want to buy this | Shopping - New |
+| Tem um tamanho maior? | Do you have a bigger size? | Shopping - New |
+| Tem um tamanho menor? | Do you have a smaller size? | Shopping - New |
+| Posso experimentar? | Can I try it on? | Shopping - New |
+| Onde são os provadores? | Where are the fitting rooms? | Shopping - New |
+| Estou só a ver, obrigado | I am just looking, thanks | Shopping - New |
+| Onde é o mercado? | Where is the market? | Shopping - New |
+| Quilo | Kilo | Shopping - New |
+| Litro | Litre | Shopping - New |
+| Caixa | Checkout/Box | Shopping - New |
+| Estou doente | I am sick | Health - New |
+| Tenho febre | I have a fever | Health - New |
+| Tenho dor de cabeça | I have a headache | Health - New |
+| Tenho dor de barriga | I have a stomach ache | Health - New |
+| Preciso de um médico | I need a doctor | Health - New |
+| Chame uma ambulância | Call an ambulance | Health - New |
+| Onde é o hospital? | Where is the hospital? | Health - New |
+| Farmácia | Pharmacy | Health - New |
+| Medicamento | Medicine | Health - New |
+| Ajuda! | Help! | Health - New |
+| Fogo! | Fire! | Health - New |
+| Polícia | Police | Health - New |
+| Estou perdido | I am lost | Health - New |
+| Sinto-me mal | I feel bad | Health - New |
+| Tenho uma alergia | I have an allergy | Health - New |
+| Dói-me aqui | It hurts here | Health - New |
+| É uma emergência | It is an emergency | Health - New |
+| Cuidado! | Careful! | Health - New |
+| Perigo | Danger | Health - New |
+| Pare! | Stop! | Health - New |
+| Está sol | It is sunny | Weather - New |
+| Está nublado | It is cloudy | Weather - New |
+| Está vento | It is windy | Weather - New |
+| Está frio | It is cold | Weather - New |
+| Está calor | It is hot | Weather - New |
+| Vai chover | It is going to rain | Weather - New |
+| A neve | The snow | Weather - New |
+| A tempestade | The storm | Weather - New |
+| O céu | The sky | Weather - New |
+| O sol | The sun | Weather - New |
+| A lua | The moon | Weather - New |
+| As estrelas | The stars | Weather - New |
+| O inverno | The winter | Weather - New |
+| O verão | The summer | Weather - New |
+| A primavera | The spring | Weather - New |
+| O outono | The autumn | Weather - New |
+| Graus | Degrees | Weather - New |
+| Previsão do tempo | Weather forecast | Weather - New |
+| Guarda-chuva | Umbrella | Weather - New |
+| Impermeável | Raincoat | Weather - New |
+| O passaporte | The passport | Travel - New |
+| O bilhete | The ticket | Travel - New |
+| O aeroporto | The airport | Travel - New |
+| A estação de comboios | The train station | Travel - New |
+| A paragem de autocarro | The bus stop | Travel - New |
+| Partidas | Departures | Travel - New |
+| Chegadas | Arrivals | Travel - New |
+| Atrasado | Delayed | Travel - New |
+| Cancelado | Cancelled | Travel - New |
+| Reserva | Reservation | Travel - New |
+| Hotel | Hotel | Travel - New |
+| Quarto duplo | Double room | Travel - New |
+| Quarto individual | Single room | Travel - New |
+| Bagagem | Luggage | Travel - New |
+| Mapa | Map | Travel - New |
+| Entrada | Entrance | Travel - New |
+| Saída | Exit | Travel - New |
+| Empurrar | Push | Travel - New |
+| Puxar | Pull | Travel - New |
+| Informações | Information | Travel - New |
