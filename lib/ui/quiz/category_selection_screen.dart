@@ -34,7 +34,8 @@ class CategorySelectionScreen extends ConsumerWidget {
           itemBuilder: (context, index) {
             final category = categories[index];
             return FadeInUp(
-              delay: Duration(milliseconds: index * 100),
+              duration: const Duration(milliseconds: 300),
+              delay: Duration(milliseconds: index * 50),
               child: _CategoryCard(
                 category: category,
                 onTap: () {
