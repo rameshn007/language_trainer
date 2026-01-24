@@ -17,6 +17,7 @@ class QuizScreen extends ConsumerStatefulWidget {
 class _QuizScreenState extends ConsumerState<QuizScreen> {
   final CardSwiperController _swiperController = CardSwiperController();
   final TtsService _ttsService = TtsService();
+  double _speedMultiplier = 0.8; // Default as requested
 
   @override
   void initState() {
@@ -26,6 +27,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       await ref
           .read(quizViewModelProvider.notifier)
           .startQuiz(category: widget.category);
+      // Initialize speed
+      await _ttsService.setRate(_speedMultiplier);
     });
   }
 
@@ -34,6 +37,29 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     _swiperController.dispose();
     _ttsService.stop();
     super.dispose();
+  }
+
+  void _toggleSpeed() {
+    setState(() {
+      if (_speedMultiplier == 0.8) {
+        _speedMultiplier = 1.0;
+      } else if (_speedMultiplier == 1.0) {
+        _speedMultiplier = 1.5;
+      } else if (_speedMultiplier == 1.5) {
+        _speedMultiplier = 0.5;
+      } else {
+        _speedMultiplier = 0.8;
+      }
+    });
+    _ttsService.setRate(_speedMultiplier);
+
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Speed: ${_speedMultiplier}x"),
+        duration: const Duration(seconds: 1),
+      ),
+    );
   }
 
   void _handleAnswer(String option, Question question) async {
@@ -114,6 +140,34 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.speed),
+            tooltip: 'Toggle Speed',
+            onPressed: _toggleSpeed,
+          ),
+          IconButton(
+            icon: const Icon(Icons.record_voice_over), // or help_outline
+            tooltip: 'Voice Settings',
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Improve Voice Quality'),
+                  content: SingleChildScrollView(
+                    child: Text(_ttsService.getVoiceInstallationInstructions()),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: Column(
@@ -176,7 +230,14 @@ class _QuestionCardState extends State<QuestionCard> {
   bool _hasAttempted = false;
 
   void _onOptionTap(String option) {
-    if (_isCorrect) return; // Locked once correct
+    if (_isCorrect) {
+      // Repeat audio if tapping the correct answer again
+      if (option == widget.question.correctAnswer) {
+        widget.ttsService.speak(widget.question.sourceItem.portuguese);
+      }
+      return;
+    }
+
     if (_wrongAnswers.contains(option)) return; // Already tried this wrong one
 
     if (!_hasAttempted) {
