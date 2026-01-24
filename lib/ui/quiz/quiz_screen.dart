@@ -124,7 +124,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               ),
               const SizedBox(height: 40),
               ElevatedButton(
-                onPressed: () => Navigator.pop(context),
+                onPressed: () =>
+                    Navigator.of(context).popUntil((route) => route.isFirst),
                 child: const Text('Back to Home'),
               ),
             ],
