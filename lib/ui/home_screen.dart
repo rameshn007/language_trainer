@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import '../../services/markdown_parser.dart';
 import '../../main.dart';
 import 'quiz/category_selection_screen.dart';
+import 'loading_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -14,7 +15,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  bool _isLoading = false;
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -63,6 +64,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return const LoadingScreen();
+    }
+
     final storage = ref.watch(storageServiceProvider);
     final items = storage.getAllItems();
     final highScore = storage.getHighScore();
@@ -135,21 +140,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                     const SizedBox(height: 30),
 
-                    // Welcoming Illustration
-                    FadeInUp(
-                      delay: const Duration(milliseconds: 100),
-                      child: SizedBox(
-                        height: 250,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/images/home_illustration.png',
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
+                    // Illustration moved to LoadingScreen
                     if (items.isEmpty)
                       Center(
                         child: Column(
