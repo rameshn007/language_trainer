@@ -120,7 +120,6 @@
 | Encontramo-nos à porta do cinema | We meet us at the door of the cinema |  |
 | Nós fomos de férias | We (Us) went on holiday |  |
 | Estar Eu estou Tu estás Ele | To be (temporary) I am (temp) You are (temp) He |  |
-| ela | She |  |
 | você está Nós estamos Eles | You are (formal) We (us) are They (all man) |  |
 | elas | They (men and women) |  |
 | vocês estão | You (plural) are |  |
