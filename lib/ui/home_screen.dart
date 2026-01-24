@@ -29,16 +29,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     try {
       final storage = ref.read(storageServiceProvider);
 
-      if (!storage.hasData) {
-        final parser = MarkdownParser();
-        final items = await parser.loadAndParseRawData('assets/data/source.md');
-        await storage.saveItems(items);
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Loaded ${items.length} items from file')),
-        );
-      }
-      // Removed "Data already loaded" snackbar to avoid spam on startup
+      // Always reload to ensure sync with source.md/questions.json
+      // OLD: if (!storage.hasData) { ... }
+
+      final parser = MarkdownParser();
+      final items = await parser.loadAndParseRawData('assets/data/source.md');
+
+      // Clear old data to remove orphans (sanitization cleanup)
+      await storage.clearItems();
+      await storage.saveItems(items);
+
+      if (!mounted) return;
+      // Optional: Show snackbar only if meaningful change or debug?
+      // Keeping it for confirmation
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Synced ${items.length} items from source'),
+          duration: const Duration(seconds: 1),
+        ),
+      );
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(

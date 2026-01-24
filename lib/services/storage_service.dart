@@ -33,6 +33,11 @@ class StorageService {
     await _itemsBox!.putAll(itemsMap);
   }
 
+  Future<void> clearItems() async {
+    if (_itemsBox == null) return;
+    await _itemsBox!.clear();
+  }
+
   Future<void> updateItem(LanguageItem item) async {
     if (_itemsBox == null) return;
     await _itemsBox!.put(item.id, item);

@@ -90,7 +90,7 @@
 | Alunos | Pupils |  |
 | Aprendizes | The learners |  |
 | Exatamente | Exactly |  |
-| Ir \+ infinitivo |  |  |
+| Ir + infinitivo | To go + infinitive |  |
 | Eu vou fazer o jantar | I go to make dinner |  |
 | Refeições | Meals |  |
 | pequeno-almoço | Breakfast |  |
@@ -123,7 +123,12 @@
 | O quadro está na parede | The picture is on the wall | Na \- in+the (on+the) |
 | Os quadros estão na parede | The pictures are on the wall |  |
 | Semana passada, anteontem, ontem, hoje, amanhã, depois de amanhã, próxima semana | Last (Past) week, day before yesterday, yesterday, today, tomorrow, day after tomorrow, next week |  |
-| Nunca, raramente, às vezes, normalmente/habitualmente, frequentemente, sempre | Never, rarely, sometimes, normally (usually)/habitually, often, always |  |
+| Nunca | Never |  |
+| Raramente | Rarely |  |
+| Às vezes | Sometimes |  |
+| Normalmente/Habitualmente | Normally (usually)/habitually |  |
+| Frequentemente | Often |  |
+| Sempre | Always |  |
 | Nunca faço surf/nunca fiz surf | Never do surf, never did surf | Doesn’t change adverb of frequency |
 | (eu) vejo sempre futebol | I always watch football |  |
 
@@ -134,18 +139,48 @@
 | Segunda-feira, dezanove de janeiro | Monday, 19th January |  |
 | Cem \- 100..cento e um Duzentos, trezentos, quatrocentos, quinhentos, seiscentos, setecentos, oitocentos, novecentos, mil | 100 or 101, 200, 300, 400, 500, 600, 700, 800, 900, 1000 |  |
 | Quinhentos e cinquenta e cinco | 555 Twelve \- dose Two \- doiz | 5 \- 50 (cinco \- cinquenta) 15 \- 500 (quinze \- quinhentos) |
-| janeiro, fevereiro, março,  abril, maio, junho, julho, agosto, setembro, outubro, novembro, dezembro | January, February, March, April, May, June, July, August, September, October, November, December |  |
-| São 10h30,  13h40,  16h45,  19h15 É meio-dia, é meia-noite,  é 1h00 | Dez e meia (half 10\) or Dez e trinta,  Treze e quarenta,  Um quarto para as cinco da tarde (quarter to 5 in the afternoon),  dezanove e quinze (sete e um quarto da tarde) Midday,  Midnight,  1am | São \- plural é \- singular |
+| janeiro | January |  |
+| fevereiro | February |  |
+| março | March |  |
+| abril | April |  |
+| maio | May |  |
+| junho | June |  |
+| julho | July |  |
+| agosto | August |  |
+| setembro | September |  |
+| outubro | October |  |
+| novembro | November |  |
+| dezembro | December |  |
+| São 10h30 | Dez e meia (half 10) or Dez e trinta | São \- plural |
+| São 13h40 | Treze e quarenta |  |
+| São 16h45 | Um quarto para as cinco da tarde (quarter to 5 in the afternoon) |  |
+| São 19h15 | dezanove e quinze (sete e um quarto da tarde) |  |
+| É meio-dia | Midday | é \- singular |
+| É meia-noite | Midnight | é \- singular |
+| É 1h00 | 1am | é \- singular |
 | Que horas são? | What time is it? (use the plural) | Que \- key |
 | A que horas chegas a casa? | At what time do you arrive home? |  |
-| Chego a casa às 19h30/ao meio-dia/à meia-noite | I arrive at home at 7:30pm or at midday or at midnight | Midday (meio) \- masculine Midnight (meia) \- feimine |
+| Chego a casa às 19h30 | I arrive at home at 7:30pm |  |
+| Chego a casa ao meio-dia | I arrive at home at midday | Midday (meio) \- masculine |
+| Chego a casa à meia-noite | I arrive at home at midnight | Midnight (meia) \- feimine |
 | Preposição “a” a+a \= à a+o \= ao a+as= às |  |  |
-| **a, de, em, para, por, sem, com, até, desde, sobre** | **a \= at/to, de \= of/from, em \= in/on, para \= for/to, por \= by/for(period time)/because,  sem \= without,  com \= With até \= Until, desde \= Since, sobre \= about** | **Be careful to not mix para and por Sem, com, até desde, sobre \- not combined with articles (not modified)** |
-| Eu vou à praia no verão/primavera/outono/inverno Eu vou ao supermercado | I go to the beach in the summer/spring/autumn/winter I go to the supermarket (masculine) | Verão \- summer no \= in+the \- pr. nu à \= to (combo of preposition and article when pointing left) |
+| **a** | **at/to** | **Be careful to not mix para and por** |
+| **de** | **of/from** |  |
+| **em** | **in/on** |  |
+| **para** | **for/to** |  |
+| **por** | **by/for(period time)/because** |  |
+| **sem** | **without** | **Sem, com, até desde, sobre \- not combined with articles (not modified)** |
+| **com** | **With** |  |
+| **até** | **Until** |  |
+| **desde** | **Since** |  |
+| **sobre** | **about** |  |
+| Eu vou à praia no verão/primavera/outono/inverno | I go to the beach in the summer/spring/autumn/winter | Verão \- summer no \= in+the \- pr. nu à \= to |
+| Eu vou ao supermercado | I go to the supermarket (masculine) |  |
 | Ao fim de semana vejo futebol | At the weekend (every) watch football |  |
 | Direto | Live (transmission) |  |
 | Ao vivo | Live (band playing a bar) |  |
-| No (em+o=no) próximo fim de semana/ No fim de semana passado | The next weekend/The last weekend | No (combo of in the) \- can be last weekend or next weekend, specific weekend |
+| No (em+o=no) próximo fim de semana | The next weekend | No (combo of in the) \- can be last weekend or next weekend, specific weekend |
+| No fim de semana passado | The last weekend |  |
 | Este fim de semana | This weekend | Este \- Ishte |
 | Este próximo fim de semana | This next weekend |  |
 | Na semana anterior/na semana seguinte | The week before/the next week |  |
@@ -153,7 +188,8 @@
 | À segunda-feira/na segunda-feira | Every monday/a Monday (last or next) |  |
 | Na segunda-feira vi um filme ótimo | Last Monday I watched a great film | vi/ver/estou a ver/vou ver \-watched/watch/watching/going to watch Vou \- simple future (going) |
 | Na segunda-feira vou ao cinema | Next Monday I will go to the cinema |  |
-| Eu vou de comboio para Lisboa/eu vou de autocarro | I go of train to Lisbon (not specific)/I take the bus | Comboio \- train de comboio \- a train no comboio \- the train |
+| Eu vou de comboio para Lisboa | I go of train to Lisbon (not specific) | Comboio \- train de comboio \- a train no comboio \- the train |
+| eu vou de autocarro | I take the bus |  |
 | Eu vou no comboio das 18 horas/no autocarro n.44 | I go by the 6pm train/bus 44 (specific) | Autocarro \- bus |
 | Vou para Lisboa/Este presente é para ti | Go to Lisbon (destination)/This present is for you | é \- permanent \- ser |
 | Este lugar está reservado Estes lugares estão reservados | This is seat is reserved for you/These seats are reserved for you | Lugar \- seat |
