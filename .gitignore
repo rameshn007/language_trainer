@@ -1,0 +1,7 @@
+/.dart_tool
+.flutter-plugins-dependencies
+/.idea
+/android/.gradle
+/build
+/macos
+/ios/Pods
