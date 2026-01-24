@@ -134,7 +134,6 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Score: ${quizState.score}'),
         centerTitle: true,
@@ -277,7 +276,10 @@ class _QuestionCardState extends State<QuestionCard> {
                   Expanded(
                     child: Text(
                       "Translate this",
-                      style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.outline,
+                        fontSize: 12,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -306,8 +308,8 @@ class _QuestionCardState extends State<QuestionCard> {
                 final isCorrectAnswer = option == widget.question.correctAnswer;
                 final isWrongAnswer = _wrongAnswers.contains(option);
 
-                Color color = Colors.white;
-                Color textColor = Colors.black87;
+                Color? color;
+                Color? textColor;
 
                 if (_isCorrect && isCorrectAnswer) {
                   color = Colors.green.shade100;
@@ -315,6 +317,12 @@ class _QuestionCardState extends State<QuestionCard> {
                 } else if (isWrongAnswer) {
                   color = Colors.red.shade100;
                   textColor = Colors.red.shade900;
+                } else {
+                  // Default state
+                  color = Theme.of(context).brightness == Brightness.dark
+                      ? Theme.of(context).colorScheme.surfaceContainerHighest
+                      : Colors.white;
+                  textColor = Theme.of(context).colorScheme.onSurface;
                 }
 
                 return Padding(

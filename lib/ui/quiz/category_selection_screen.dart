@@ -65,6 +65,9 @@ class _CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final fgColor = isDark ? Colors.deepPurple.shade100 : Colors.deepPurple;
+
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -75,7 +78,9 @@ class _CategoryCard extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             gradient: LinearGradient(
-              colors: [Colors.deepPurple.shade100, Colors.deepPurple.shade50],
+              colors: isDark
+                  ? [Colors.deepPurple.shade900, Colors.deepPurple.shade800]
+                  : [Colors.deepPurple.shade100, Colors.deepPurple.shade50],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -83,18 +88,14 @@ class _CategoryCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                _getIconForCategory(category),
-                size: 40,
-                color: Colors.deepPurple,
-              ),
+              Icon(_getIconForCategory(category), size: 40, color: fgColor),
               const SizedBox(height: 12),
               Text(
                 category,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.deepPurple,
+                  color: fgColor,
                 ),
                 textAlign: TextAlign.center,
               ),

@@ -5,7 +5,6 @@ import 'package:animate_do/animate_do.dart';
 import '../../services/markdown_parser.dart';
 import '../../main.dart';
 import 'quiz/category_selection_screen.dart';
-import 'loading_screen.dart';
 import 'widgets/word_star_field.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -66,7 +65,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     if (_isLoading) {
-      return const LoadingScreen();
+      // return const LoadingScreen(); // Removed as per request
     }
 
     final storage = ref.watch(storageServiceProvider);
@@ -75,7 +74,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final learnedCount = items.where((i) => i.masteryLevel > 0).length;
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Language Trainer'),
         centerTitle: true,
@@ -165,7 +163,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
                 const Spacer(),
 
-                if (items.isEmpty)
+                if (_isLoading)
+                  const Center(child: CircularProgressIndicator())
+                else if (items.isEmpty)
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -197,8 +197,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       height: 60,
                       child: ElevatedButton.icon(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black87,
-                          foregroundColor: Colors.white,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).colorScheme.primary,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.onPrimary,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15),
                           ),
