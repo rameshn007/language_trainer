@@ -27,7 +27,7 @@ class TtsService {
         // 1. Look for voices with 'enhanced', 'premium', 'high' in name/identifier/quality
         // 2. Prefer 'Joana' (common high quality PT voice on iOS)
 
-        Map<Object?, Object?>? bestVoice;
+        // 2. Prefer 'Joana' (common high quality PT voice on iOS)
 
         // Helper to score voices
         int scoreVoice(Map<Object?, Object?> v) {
@@ -38,14 +38,17 @@ class TtsService {
 
           if (name.contains('enhanced') ||
               id.contains('enhanced') ||
-              quality.contains('enhanced'))
+              quality.contains('enhanced')) {
             score += 10;
+          }
           if (name.contains('premium') ||
               id.contains('premium') ||
-              quality.contains('premium'))
+              quality.contains('premium')) {
             score += 10;
-          if (name.contains('joana'))
+          }
+          if (name.contains('joana')) {
             score += 5; // Joana is usually good on iOS
+          }
 
           // Penalize compact
           if (name.contains('compact') || id.contains('compact')) score -= 5;
@@ -56,21 +59,20 @@ class TtsService {
         // Sort by score descending
         ptVoices.sort((a, b) => scoreVoice(b).compareTo(scoreVoice(a)));
 
-        bestVoice = ptVoices.first;
-        print("Selected Best Voice: $bestVoice");
+        var bestVoice = ptVoices.first;
+        // print("Selected Best Voice: $bestVoice");
 
-        // bestVoice is guaranteed non-null here as ptVoices is not empty
         await _flutterTts.setVoice({
-          "name": (bestVoice!["name"] ?? "") as String,
-          "locale": (bestVoice!["locale"] ?? "") as String,
-          "identifier": (bestVoice!["identifier"] ?? "") as String,
+          "name": (bestVoice["name"] ?? "") as String,
+          "locale": (bestVoice["locale"] ?? "") as String,
+          "identifier": (bestVoice["identifier"] ?? "") as String,
         });
       } else {
         // Fallback if no specific pt-PT voice found in list (rare)
         await _flutterTts.setLanguage("pt-PT");
       }
     } catch (e) {
-      print("Error setting voice: $e");
+      // print("Error setting voice: $e");
       // Fallback
       await _flutterTts.setLanguage("pt-PT");
     }
