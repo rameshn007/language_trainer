@@ -153,7 +153,13 @@
 | :---- | :---- | :---- |
 | Segunda-feira, dezanove de janeiro | Monday, 19th January |  |
 | Cem \- 100..cento e um Duzentos, trezentos, quatrocentos, quinhentos, seiscentos, setecentos, oitocentos, novecentos, mil | 100 or 101, 200, 300, 400, 500, 600, 700, 800, 900, 1000 |  |
-| Quinhentos e cinquenta e cinco | 555 Twelve \- dose Two \- doiz | 5 \- 50 (cinco \- cinquenta) 15 \- 500 (quinze \- quinhentos) |
+| Quinhentos e cinquenta e cinco | 555 |
+| Doze | 12 | 
+| Doiz | 2 | 
+| Cinco | 5 |
+| Cinquenta | 50 |
+| Quinze | 15 |
+| Quinhentos | 500 |
 | janeiro | January |  |
 | fevereiro | February |  |
 | março | March |  |
