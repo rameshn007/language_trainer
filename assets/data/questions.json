@@ -1,0 +1,7256 @@
+[
+  {
+    "id": "q_001",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Chamo-me Ramesh'?",
+    "options": [
+      "without",
+      "Call me Ramesh",
+      "We are tired",
+      "For what do you want?"
+    ],
+    "answer": "Call me Ramesh",
+    "sourceItem": "Chamo-me Ramesh"
+  },
+  {
+    "id": "q_002",
+    "type": "multipleChoice",
+    "question": "How do you say 'Call me Ramesh' in Portuguese?",
+    "options": [
+      "Refeições",
+      "uma filha tem quinze anos",
+      "Chamo-me Ramesh",
+      "Semana passada"
+    ],
+    "answer": "Chamo-me Ramesh",
+    "sourceItem": "Chamo-me Ramesh"
+  },
+  {
+    "id": "q_003",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O meu nome é Ramesh'?",
+    "options": [
+      "See you shortly",
+      "for/to (destination)",
+      "I like to read",
+      "My name is Ramesh"
+    ],
+    "answer": "My name is Ramesh",
+    "sourceItem": "O meu nome é Ramesh"
+  },
+  {
+    "id": "q_004",
+    "type": "multipleChoice",
+    "question": "How do you say 'My name is Ramesh' in Portuguese?",
+    "options": [
+      "Alunos",
+      "O meu nome é Ramesh",
+      "falo um pouco de português",
+      "depressa"
+    ],
+    "answer": "O meu nome é Ramesh",
+    "sourceItem": "O meu nome é Ramesh"
+  },
+  {
+    "id": "q_005",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O meu nome é _____' (My name is Ramesh)",
+    "options": [
+      "Ramesh",
+      "Pela",
+      "Que",
+      "fevereiro"
+    ],
+    "answer": "Ramesh",
+    "sourceItem": "O meu nome é Ramesh"
+  },
+  {
+    "id": "q_006",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu sou o Ramesh'?",
+    "options": [
+      "Meals",
+      "This/That",
+      "We are tired",
+      "I am Ramesh"
+    ],
+    "answer": "I am Ramesh",
+    "sourceItem": "Eu sou o Ramesh"
+  },
+  {
+    "id": "q_007",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am Ramesh' in Portuguese?",
+    "options": [
+      "Jantar",
+      "eu sou inglês",
+      "Qual?",
+      "Eu sou o Ramesh"
+    ],
+    "answer": "Eu sou o Ramesh",
+    "sourceItem": "Eu sou o Ramesh"
+  },
+  {
+    "id": "q_008",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu _____ o Ramesh' (I am Ramesh)",
+    "options": [
+      "até",
+      "por",
+      "sou",
+      "grande"
+    ],
+    "answer": "sou",
+    "sourceItem": "Eu sou o Ramesh"
+  },
+  {
+    "id": "q_009",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu sou casado'?",
+    "options": [
+      "I am married",
+      "I arrive at midday",
+      "I go to make dinner",
+      "Live (transmission)"
+    ],
+    "answer": "I am married",
+    "sourceItem": "Eu sou casado"
+  },
+  {
+    "id": "q_010",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am married' in Portuguese?",
+    "options": [
+      "Eu sou casado",
+      "Eu gosto viajar",
+      "Em que mês estamos?",
+      "haver"
+    ],
+    "answer": "Eu sou casado",
+    "sourceItem": "Eu sou casado"
+  },
+  {
+    "id": "q_011",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu sou _____' (I am married)",
+    "options": [
+      "casado",
+      "estou",
+      "Chego",
+      "músicas"
+    ],
+    "answer": "casado",
+    "sourceItem": "Eu sou casado"
+  },
+  {
+    "id": "q_012",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ser'?",
+    "options": [
+      "I want a coffee, please",
+      "to be (permanent)",
+      "What are your favorite musics?",
+      "The pen is on top of the table"
+    ],
+    "answer": "to be (permanent)",
+    "sourceItem": "ser"
+  },
+  {
+    "id": "q_013",
+    "type": "multipleChoice",
+    "question": "How do you say 'to be (permanent)' in Portuguese?",
+    "options": [
+      "julho",
+      "Nós estamos felizes",
+      "ser",
+      "Eu gosto de jogar ténis"
+    ],
+    "answer": "ser",
+    "sourceItem": "ser"
+  },
+  {
+    "id": "q_014",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'estar'?",
+    "options": [
+      "March",
+      "without",
+      "sometimes",
+      "to be (temporary)"
+    ],
+    "answer": "to be (temporary)",
+    "sourceItem": "estar"
+  },
+  {
+    "id": "q_015",
+    "type": "multipleChoice",
+    "question": "How do you say 'to be (temporary)' in Portuguese?",
+    "options": [
+      "estar",
+      "Eu sou o Ramesh",
+      "Quando?",
+      "pequeno-almoço"
+    ],
+    "answer": "estar",
+    "sourceItem": "estar"
+  },
+  {
+    "id": "q_016",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eu estou cansado'?",
+    "options": [
+      "I am tired",
+      "It is 10:30",
+      "here (close to me)",
+      "your"
+    ],
+    "answer": "I am tired",
+    "sourceItem": "eu estou cansado"
+  },
+  {
+    "id": "q_017",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am tired' in Portuguese?",
+    "options": [
+      "pode falar mais devagar",
+      "desculpe",
+      "Está a chover desde novembro",
+      "eu estou cansado"
+    ],
+    "answer": "eu estou cansado",
+    "sourceItem": "eu estou cansado"
+  },
+  {
+    "id": "q_018",
+    "type": "cloze",
+    "question": "Fill in the blank: 'eu _____ cansado' (I am tired)",
+    "options": [
+      "Que",
+      "Compreendo",
+      "cansados",
+      "estou"
+    ],
+    "answer": "estou",
+    "sourceItem": "eu estou cansado"
+  },
+  {
+    "id": "q_019",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Um problema'?",
+    "options": [
+      "A problem",
+      "the other is 12 years old",
+      "My name is Ramesh",
+      "Who?"
+    ],
+    "answer": "A problem",
+    "sourceItem": "Um problema"
+  },
+  {
+    "id": "q_020",
+    "type": "multipleChoice",
+    "question": "How do you say 'A problem' in Portuguese?",
+    "options": [
+      "Até nunca",
+      "boa semana!",
+      "amanhã",
+      "Um problema"
+    ],
+    "answer": "Um problema",
+    "sourceItem": "Um problema"
+  },
+  {
+    "id": "q_021",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Um dia'?",
+    "options": [
+      "See you tomorrow",
+      "yesterday",
+      "usually",
+      "Day"
+    ],
+    "answer": "Day",
+    "sourceItem": "Um dia"
+  },
+  {
+    "id": "q_022",
+    "type": "multipleChoice",
+    "question": "How do you say 'Day' in Portuguese?",
+    "options": [
+      "lento",
+      "da",
+      "Até nunca",
+      "Um dia"
+    ],
+    "answer": "Um dia",
+    "sourceItem": "Um dia"
+  },
+  {
+    "id": "q_023",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Um cinema'?",
+    "options": [
+      "I like to read",
+      "Cinema",
+      "This/That",
+      "See you very soon (within the hour)"
+    ],
+    "answer": "Cinema",
+    "sourceItem": "Um cinema"
+  },
+  {
+    "id": "q_024",
+    "type": "multipleChoice",
+    "question": "How do you say 'Cinema' in Portuguese?",
+    "options": [
+      "de",
+      "Um cinema",
+      "eu sou de Inglaterra",
+      "O eléctrico"
+    ],
+    "answer": "Um cinema",
+    "sourceItem": "Um cinema"
+  },
+  {
+    "id": "q_025",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Um carro'?",
+    "options": [
+      "always",
+      "A car",
+      "What (verb)?",
+      "Cinema"
+    ],
+    "answer": "A car",
+    "sourceItem": "Um carro"
+  },
+  {
+    "id": "q_026",
+    "type": "multipleChoice",
+    "question": "How do you say 'A car' in Portuguese?",
+    "options": [
+      "ali",
+      "Uma fatia de bolo",
+      "Um carro",
+      "julho"
+    ],
+    "answer": "Um carro",
+    "sourceItem": "Um carro"
+  },
+  {
+    "id": "q_027",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Uma casa'?",
+    "options": [
+      "this (near me)",
+      "of/from",
+      "A house",
+      "carrot cake"
+    ],
+    "answer": "A house",
+    "sourceItem": "Uma casa"
+  },
+  {
+    "id": "q_028",
+    "type": "multipleChoice",
+    "question": "How do you say 'A house' in Portuguese?",
+    "options": [
+      "Fui",
+      "Quem?",
+      "Uma casa",
+      "Eu estou a aprender português"
+    ],
+    "answer": "Uma casa",
+    "sourceItem": "Uma casa"
+  },
+  {
+    "id": "q_029",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu moro'?",
+    "options": [
+      "Brazil",
+      "I live",
+      "March",
+      "Good week!"
+    ],
+    "answer": "I live",
+    "sourceItem": "Eu moro"
+  },
+  {
+    "id": "q_030",
+    "type": "multipleChoice",
+    "question": "How do you say 'I live' in Portuguese?",
+    "options": [
+      "até à próxima semana",
+      "Compreendo",
+      "até",
+      "Eu moro"
+    ],
+    "answer": "Eu moro",
+    "sourceItem": "Eu moro"
+  },
+  {
+    "id": "q_031",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'vivo na Malveira'?",
+    "options": [
+      "I live in Malveira",
+      "until",
+      "I like to watch football",
+      "700"
+    ],
+    "answer": "I live in Malveira",
+    "sourceItem": "vivo na Malveira"
+  },
+  {
+    "id": "q_032",
+    "type": "multipleChoice",
+    "question": "How do you say 'I live in Malveira' in Portuguese?",
+    "options": [
+      "Nós estamos felizes",
+      "aquele",
+      "vivo na Malveira",
+      "Volto"
+    ],
+    "answer": "vivo na Malveira",
+    "sourceItem": "vivo na Malveira"
+  },
+  {
+    "id": "q_033",
+    "type": "cloze",
+    "question": "Fill in the blank: 'vivo na _____' (I live in Malveira)",
+    "options": [
+      "estar",
+      "café",
+      "setecentos",
+      "Malveira"
+    ],
+    "answer": "Malveira",
+    "sourceItem": "vivo na Malveira"
+  },
+  {
+    "id": "q_034",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'na'?",
+    "options": [
+      "Slice of cake",
+      "Weather/temperature",
+      "in the (em+a)",
+      "Live (band/person)"
+    ],
+    "answer": "in the (em+a)",
+    "sourceItem": "na"
+  },
+  {
+    "id": "q_035",
+    "type": "multipleChoice",
+    "question": "How do you say 'in the (em+a)' in Portuguese?",
+    "options": [
+      "Quantos anos tens?",
+      "na",
+      "Que horas são?",
+      "próxima semana"
+    ],
+    "answer": "na",
+    "sourceItem": "na"
+  },
+  {
+    "id": "q_036",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eu tenho duas filhas'?",
+    "options": [
+      "300",
+      "Call me Ramesh",
+      "I go to make dinner",
+      "I have two daughters"
+    ],
+    "answer": "I have two daughters",
+    "sourceItem": "eu tenho duas filhas"
+  },
+  {
+    "id": "q_037",
+    "type": "multipleChoice",
+    "question": "How do you say 'I have two daughters' in Portuguese?",
+    "options": [
+      "Um dia",
+      "eu tenho duas filhas",
+      "Porquê?",
+      "para"
+    ],
+    "answer": "eu tenho duas filhas",
+    "sourceItem": "eu tenho duas filhas"
+  },
+  {
+    "id": "q_038",
+    "type": "cloze",
+    "question": "Fill in the blank: 'eu _____ duas filhas' (I have two daughters)",
+    "options": [
+      "Nunca",
+      "dias",
+      "tenho",
+      "passear"
+    ],
+    "answer": "tenho",
+    "sourceItem": "eu tenho duas filhas"
+  },
+  {
+    "id": "q_039",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'uma filha tem quinze anos'?",
+    "options": [
+      "I like to play tennis",
+      "It is midnight",
+      "One daughter is 15 years old",
+      "I am at home"
+    ],
+    "answer": "One daughter is 15 years old",
+    "sourceItem": "uma filha tem quinze anos"
+  },
+  {
+    "id": "q_040",
+    "type": "multipleChoice",
+    "question": "How do you say 'One daughter is 15 years old' in Portuguese?",
+    "options": [
+      "nem carne",
+      "Que comida preferes?",
+      "próxima semana",
+      "uma filha tem quinze anos"
+    ],
+    "answer": "uma filha tem quinze anos",
+    "sourceItem": "uma filha tem quinze anos"
+  },
+  {
+    "id": "q_041",
+    "type": "cloze",
+    "question": "Fill in the blank: 'uma _____ tem quinze anos' (One daughter is 15 years old)",
+    "options": [
+      "novecentos",
+      "Estudantes",
+      "semana",
+      "filha"
+    ],
+    "answer": "filha",
+    "sourceItem": "uma filha tem quinze anos"
+  },
+  {
+    "id": "q_042",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a outra tem doze anos'?",
+    "options": [
+      "How much?",
+      "the other is 12 years old",
+      "How long (has it been)?",
+      "I come back"
+    ],
+    "answer": "the other is 12 years old",
+    "sourceItem": "a outra tem doze anos"
+  },
+  {
+    "id": "q_043",
+    "type": "multipleChoice",
+    "question": "How do you say 'the other is 12 years old' in Portuguese?",
+    "options": [
+      "Da Holanda",
+      "a outra tem doze anos",
+      "Pela ponte",
+      "Que comida preferes?"
+    ],
+    "answer": "a outra tem doze anos",
+    "sourceItem": "a outra tem doze anos"
+  },
+  {
+    "id": "q_044",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a _____ tem doze anos' (the other is 12 years old)",
+    "options": [
+      "outra",
+      "India",
+      "semana",
+      "este"
+    ],
+    "answer": "outra",
+    "sourceItem": "a outra tem doze anos"
+  },
+  {
+    "id": "q_045",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eu tenho quarenta e nove anos'?",
+    "options": [
+      "the other is 12 years old",
+      "500",
+      "I am 49 years old",
+      "February"
+    ],
+    "answer": "I am 49 years old",
+    "sourceItem": "eu tenho quarenta e nove anos"
+  },
+  {
+    "id": "q_046",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am 49 years old' in Portuguese?",
+    "options": [
+      "rápido",
+      "Pela ponte",
+      "Onde fica o restaurante?",
+      "eu tenho quarenta e nove anos"
+    ],
+    "answer": "eu tenho quarenta e nove anos",
+    "sourceItem": "eu tenho quarenta e nove anos"
+  },
+  {
+    "id": "q_047",
+    "type": "cloze",
+    "question": "Fill in the blank: 'eu _____ quarenta e nove anos' (I am 49 years old)",
+    "options": [
+      "Que",
+      "pequeno-almoço",
+      "tenho",
+      "meses"
+    ],
+    "answer": "tenho",
+    "sourceItem": "eu tenho quarenta e nove anos"
+  },
+  {
+    "id": "q_048",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eu sou engenheiro de software'?",
+    "options": [
+      "I am vegetarian",
+      "I am a software engineer",
+      "What time is it?",
+      "this (near me)"
+    ],
+    "answer": "I am a software engineer",
+    "sourceItem": "eu sou engenheiro de software"
+  },
+  {
+    "id": "q_049",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am a software engineer' in Portuguese?",
+    "options": [
+      "O que..?",
+      "Há quanto tempo vives em Lisboa?",
+      "eu sou engenheiro de software",
+      "queria"
+    ],
+    "answer": "eu sou engenheiro de software",
+    "sourceItem": "eu sou engenheiro de software"
+  },
+  {
+    "id": "q_050",
+    "type": "cloze",
+    "question": "Fill in the blank: 'eu sou engenheiro de _____' (I am a software engineer)",
+    "options": [
+      "café",
+      "novecentos",
+      "Quem",
+      "software"
+    ],
+    "answer": "software",
+    "sourceItem": "eu sou engenheiro de software"
+  },
+  {
+    "id": "q_051",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eu sou inglês'?",
+    "options": [
+      "unbelievable",
+      "It has been raining since November",
+      "Monday",
+      "I am English"
+    ],
+    "answer": "I am English",
+    "sourceItem": "eu sou inglês"
+  },
+  {
+    "id": "q_052",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am English' in Portuguese?",
+    "options": [
+      "Quanto tempo leva a viagem?",
+      "queria um café, por favor",
+      "eu sou inglês",
+      "acaba"
+    ],
+    "answer": "eu sou inglês",
+    "sourceItem": "eu sou inglês"
+  },
+  {
+    "id": "q_053",
+    "type": "cloze",
+    "question": "Fill in the blank: 'eu sou _____' (I am English)",
+    "options": [
+      "inglês",
+      "sou",
+      "Direto",
+      "Para"
+    ],
+    "answer": "inglês",
+    "sourceItem": "eu sou inglês"
+  },
+  {
+    "id": "q_054",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eu sou de Inglaterra'?",
+    "options": [
+      "I am from England",
+      "Never",
+      "How are you (informal)?",
+      "Milk based products"
+    ],
+    "answer": "I am from England",
+    "sourceItem": "eu sou de Inglaterra"
+  },
+  {
+    "id": "q_055",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am from England' in Portuguese?",
+    "options": [
+      "Para que queres?",
+      "eu sou de Inglaterra",
+      "habitualmente",
+      "mil"
+    ],
+    "answer": "eu sou de Inglaterra",
+    "sourceItem": "eu sou de Inglaterra"
+  },
+  {
+    "id": "q_056",
+    "type": "cloze",
+    "question": "Fill in the blank: 'eu _____ de Inglaterra' (I am from England)",
+    "options": [
+      "sou",
+      "está",
+      "quarenta",
+      "por"
+    ],
+    "answer": "sou",
+    "sourceItem": "eu sou de Inglaterra"
+  },
+  {
+    "id": "q_057",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'De India'?",
+    "options": [
+      "The India",
+      "Weather/temperature",
+      "400",
+      "See you tomorrow"
+    ],
+    "answer": "The India",
+    "sourceItem": "De India"
+  },
+  {
+    "id": "q_058",
+    "type": "multipleChoice",
+    "question": "How do you say 'The India' in Portuguese?",
+    "options": [
+      "Ao vivo",
+      "passatempos",
+      "Preciso do carro por 4 dias",
+      "De India"
+    ],
+    "answer": "De India",
+    "sourceItem": "De India"
+  },
+  {
+    "id": "q_059",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O Brazil'?",
+    "options": [
+      "Brazil",
+      "I like to play tennis",
+      "May I ask a question?",
+      "that (near you)"
+    ],
+    "answer": "Brazil",
+    "sourceItem": "O Brazil"
+  },
+  {
+    "id": "q_060",
+    "type": "multipleChoice",
+    "question": "How do you say 'Brazil' in Portuguese?",
+    "options": [
+      "O Brazil",
+      "O eléctrico",
+      "hoje está bom tempo",
+      "Nós fomos de férias"
+    ],
+    "answer": "O Brazil",
+    "sourceItem": "O Brazil"
+  },
+  {
+    "id": "q_061",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O Morocco'?",
+    "options": [
+      "I am learning Portuguese",
+      "Morocco",
+      "August",
+      "I go by bus"
+    ],
+    "answer": "Morocco",
+    "sourceItem": "O Morocco"
+  },
+  {
+    "id": "q_062",
+    "type": "multipleChoice",
+    "question": "How do you say 'Morocco' in Portuguese?",
+    "options": [
+      "O Morocco",
+      "seiscentos",
+      "duzentos",
+      "este"
+    ],
+    "answer": "O Morocco",
+    "sourceItem": "O Morocco"
+  },
+  {
+    "id": "q_063",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'da'?",
+    "options": [
+      "We meet at the door",
+      "from the (e+a)",
+      "I am Ramesh",
+      "What/Which (singular)?"
+    ],
+    "answer": "from the (e+a)",
+    "sourceItem": "da"
+  },
+  {
+    "id": "q_064",
+    "type": "multipleChoice",
+    "question": "How do you say 'from the (e+a)' in Portuguese?",
+    "options": [
+      "Ao vivo",
+      "bolo de cenoura",
+      "Eu vou de comboio",
+      "da"
+    ],
+    "answer": "da",
+    "sourceItem": "da"
+  },
+  {
+    "id": "q_065",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'dos Países Baixos'?",
+    "options": [
+      "Me too",
+      "I live in Malveira",
+      "See you next time",
+      "The Netherlands"
+    ],
+    "answer": "The Netherlands",
+    "sourceItem": "dos Países Baixos"
+  },
+  {
+    "id": "q_066",
+    "type": "multipleChoice",
+    "question": "How do you say 'The Netherlands' in Portuguese?",
+    "options": [
+      "Volto",
+      "trezentos",
+      "ficar",
+      "dos Países Baixos"
+    ],
+    "answer": "dos Países Baixos",
+    "sourceItem": "dos Países Baixos"
+  },
+  {
+    "id": "q_067",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ Países Baixos' (The Netherlands)",
+    "options": [
+      "carro",
+      "dos",
+      "Aprendizes",
+      "bom"
+    ],
+    "answer": "dos",
+    "sourceItem": "dos Países Baixos"
+  },
+  {
+    "id": "q_068",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Da Holanda'?",
+    "options": [
+      "Doctor",
+      "The Holland",
+      "How are you (informal)?",
+      "555"
+    ],
+    "answer": "The Holland",
+    "sourceItem": "Da Holanda"
+  },
+  {
+    "id": "q_069",
+    "type": "multipleChoice",
+    "question": "How do you say 'The Holland' in Portuguese?",
+    "options": [
+      "Encontramo-nos à porta",
+      "desculpa",
+      "Da Holanda",
+      "Gosto das pessoas"
+    ],
+    "answer": "Da Holanda",
+    "sourceItem": "Da Holanda"
+  },
+  {
+    "id": "q_070",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu gosto de jogar ténis'?",
+    "options": [
+      "Why (isolated)?",
+      "I like to play tennis",
+      "I live",
+      "clothes"
+    ],
+    "answer": "I like to play tennis",
+    "sourceItem": "Eu gosto de jogar ténis"
+  },
+  {
+    "id": "q_071",
+    "type": "multipleChoice",
+    "question": "How do you say 'I like to play tennis' in Portuguese?",
+    "options": [
+      "Eu moro",
+      "almoço",
+      "Eu gosto de jogar ténis",
+      "inacreditável"
+    ],
+    "answer": "Eu gosto de jogar ténis",
+    "sourceItem": "Eu gosto de jogar ténis"
+  },
+  {
+    "id": "q_072",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu gosto de _____ ténis' (I like to play tennis)",
+    "options": [
+      "mais",
+      "por",
+      "fica",
+      "jogar"
+    ],
+    "answer": "jogar",
+    "sourceItem": "Eu gosto de jogar ténis"
+  },
+  {
+    "id": "q_073",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu gosto ver futebol'?",
+    "options": [
+      "Good week!",
+      "I like to watch football",
+      "Me too",
+      "Where are you from?"
+    ],
+    "answer": "I like to watch football",
+    "sourceItem": "Eu gosto ver futebol"
+  },
+  {
+    "id": "q_074",
+    "type": "multipleChoice",
+    "question": "How do you say 'I like to watch football' in Portuguese?",
+    "options": [
+      "posso entrar?",
+      "Eu gosto ver futebol",
+      "Pela ponte",
+      "Qual é a tua cor favorita?"
+    ],
+    "answer": "Eu gosto ver futebol",
+    "sourceItem": "Eu gosto ver futebol"
+  },
+  {
+    "id": "q_075",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu _____ ver futebol' (I like to watch football)",
+    "options": [
+      "rápido",
+      "lugar",
+      "gosto",
+      "Ramesh"
+    ],
+    "answer": "gosto",
+    "sourceItem": "Eu gosto ver futebol"
+  },
+  {
+    "id": "q_076",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu gosto ler'?",
+    "options": [
+      "The Netherlands",
+      "How are you (formal)?",
+      "The learners",
+      "I like to read"
+    ],
+    "answer": "I like to read",
+    "sourceItem": "Eu gosto ler"
+  },
+  {
+    "id": "q_077",
+    "type": "multipleChoice",
+    "question": "How do you say 'I like to read' in Portuguese?",
+    "options": [
+      "pode repetir, por favor",
+      "Eu gosto ler",
+      "foste",
+      "Fui"
+    ],
+    "answer": "Eu gosto ler",
+    "sourceItem": "Eu gosto ler"
+  },
+  {
+    "id": "q_078",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu _____ ler' (I like to read)",
+    "options": [
+      "vou",
+      "gosto",
+      "posso",
+      "janeiro"
+    ],
+    "answer": "gosto",
+    "sourceItem": "Eu gosto ler"
+  },
+  {
+    "id": "q_079",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu gosto viajar'?",
+    "options": [
+      "I like to travel",
+      "unbelievable",
+      "yesterday",
+      "November"
+    ],
+    "answer": "I like to travel",
+    "sourceItem": "Eu gosto viajar"
+  },
+  {
+    "id": "q_080",
+    "type": "multipleChoice",
+    "question": "How do you say 'I like to travel' in Portuguese?",
+    "options": [
+      "Eu gosto viajar",
+      "A que horas chegas?",
+      "da",
+      "Uma fatia de bolo"
+    ],
+    "answer": "Eu gosto viajar",
+    "sourceItem": "Eu gosto viajar"
+  },
+  {
+    "id": "q_081",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu _____ viajar' (I like to travel)",
+    "options": [
+      "gosto",
+      "Semana",
+      "duzentos",
+      "está"
+    ],
+    "answer": "gosto",
+    "sourceItem": "Eu gosto viajar"
+  },
+  {
+    "id": "q_082",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu gosto passear'?",
+    "options": [
+      "in/on",
+      "there (close to you)",
+      "I like to take small trips",
+      "Can you speak more slowly"
+    ],
+    "answer": "I like to take small trips",
+    "sourceItem": "Eu gosto passear"
+  },
+  {
+    "id": "q_083",
+    "type": "multipleChoice",
+    "question": "How do you say 'I like to take small trips' in Portuguese?",
+    "options": [
+      "Em que mês estamos?",
+      "Eu gosto passear",
+      "muito obrigado",
+      "adeus"
+    ],
+    "answer": "Eu gosto passear",
+    "sourceItem": "Eu gosto passear"
+  },
+  {
+    "id": "q_084",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu gosto _____' (I like to take small trips)",
+    "options": [
+      "passear",
+      "Concordo",
+      "Nós",
+      "pequeno-almoço"
+    ],
+    "answer": "passear",
+    "sourceItem": "Eu gosto passear"
+  },
+  {
+    "id": "q_085",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'passatempos'?",
+    "options": [
+      "Some players are from Benfica",
+      "Monday",
+      "May I enter?",
+      "hobbies"
+    ],
+    "answer": "hobbies",
+    "sourceItem": "passatempos"
+  },
+  {
+    "id": "q_086",
+    "type": "multipleChoice",
+    "question": "How do you say 'hobbies' in Portuguese?",
+    "options": [
+      "Em que mês estamos?",
+      "Nós estamos felizes",
+      "Eu gosto ler",
+      "passatempos"
+    ],
+    "answer": "passatempos",
+    "sourceItem": "passatempos"
+  },
+  {
+    "id": "q_087",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'atividades'?",
+    "options": [
+      "Morocco",
+      "Who?",
+      "your",
+      "Activities"
+    ],
+    "answer": "Activities",
+    "sourceItem": "atividades"
+  },
+  {
+    "id": "q_088",
+    "type": "multipleChoice",
+    "question": "How do you say 'Activities' in Portuguese?",
+    "options": [
+      "atividades",
+      "nem carne",
+      "Eu gosto de jogar ténis",
+      "bom fim de semana!"
+    ],
+    "answer": "atividades",
+    "sourceItem": "atividades"
+  },
+  {
+    "id": "q_089",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'em Portugal eu gosto do clima'?",
+    "options": [
+      "available",
+      "See you next week",
+      "Things I like about Portugal are the weather",
+      "How are you (informal)?"
+    ],
+    "answer": "Things I like about Portugal are the weather",
+    "sourceItem": "em Portugal eu gosto do clima"
+  },
+  {
+    "id": "q_090",
+    "type": "multipleChoice",
+    "question": "How do you say 'Things I like about Portugal are the weather' in Portuguese?",
+    "options": [
+      "queria",
+      "Cem",
+      "Eu gosto passear",
+      "em Portugal eu gosto do clima"
+    ],
+    "answer": "em Portugal eu gosto do clima",
+    "sourceItem": "em Portugal eu gosto do clima"
+  },
+  {
+    "id": "q_091",
+    "type": "cloze",
+    "question": "Fill in the blank: 'em Portugal eu gosto do _____' (Things I like about Portugal are the weather)",
+    "options": [
+      "das",
+      "pouco",
+      "este",
+      "clima"
+    ],
+    "answer": "clima",
+    "sourceItem": "em Portugal eu gosto do clima"
+  },
+  {
+    "id": "q_092",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Gosto das pessoas'?",
+    "options": [
+      "The restaurant is located in the center",
+      "500",
+      "Weather/temperature",
+      "I like the people"
+    ],
+    "answer": "I like the people",
+    "sourceItem": "Gosto das pessoas"
+  },
+  {
+    "id": "q_093",
+    "type": "multipleChoice",
+    "question": "How do you say 'I like the people' in Portuguese?",
+    "options": [
+      "atividades",
+      "Gosto das pessoas",
+      "haver",
+      "Exatamente"
+    ],
+    "answer": "Gosto das pessoas",
+    "sourceItem": "Gosto das pessoas"
+  },
+  {
+    "id": "q_094",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Gosto das _____' (I like the people)",
+    "options": [
+      "mais",
+      "adeus",
+      "pessoas",
+      "esse"
+    ],
+    "answer": "pessoas",
+    "sourceItem": "Gosto das pessoas"
+  },
+  {
+    "id": "q_095",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Tempo'?",
+    "options": [
+      "I like to play tennis",
+      "Weather/temperature",
+      "yesterday",
+      "Things I like about Portugal are the weather"
+    ],
+    "answer": "Weather/temperature",
+    "sourceItem": "Tempo"
+  },
+  {
+    "id": "q_096",
+    "type": "multipleChoice",
+    "question": "How do you say 'Weather/temperature' in Portuguese?",
+    "options": [
+      "dezanove de janeiro",
+      "desde",
+      "Tempo",
+      "eu sou engenheiro de software"
+    ],
+    "answer": "Tempo",
+    "sourceItem": "Tempo"
+  },
+  {
+    "id": "q_097",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'hoje está bom tempo'?",
+    "options": [
+      "your",
+      "Today the weather is good",
+      "I like to read",
+      "What/Which (plural)?"
+    ],
+    "answer": "Today the weather is good",
+    "sourceItem": "hoje está bom tempo"
+  },
+  {
+    "id": "q_098",
+    "type": "multipleChoice",
+    "question": "How do you say 'Today the weather is good' in Portuguese?",
+    "options": [
+      "hoje está bom tempo",
+      "laticinios",
+      "até à próxima semana",
+      "setecentos"
+    ],
+    "answer": "hoje está bom tempo",
+    "sourceItem": "hoje está bom tempo"
+  },
+  {
+    "id": "q_099",
+    "type": "cloze",
+    "question": "Fill in the blank: 'hoje _____ bom tempo' (Today the weather is good)",
+    "options": [
+      "está",
+      "julho",
+      "sem",
+      "meia-noite"
+    ],
+    "answer": "está",
+    "sourceItem": "hoje está bom tempo"
+  },
+  {
+    "id": "q_100",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu gosto da doçaria portuguesa'?",
+    "options": [
+      "We went on holiday",
+      "I go to the beach",
+      "I like the confectionary in Portugal",
+      "How old are you?"
+    ],
+    "answer": "I like the confectionary in Portugal",
+    "sourceItem": "Eu gosto da doçaria portuguesa"
+  },
+  {
+    "id": "q_101",
+    "type": "multipleChoice",
+    "question": "How do you say 'I like the confectionary in Portugal' in Portuguese?",
+    "options": [
+      "Fui",
+      "O Morocco",
+      "Eu gosto da doçaria portuguesa",
+      "Há quanto tempo?"
+    ],
+    "answer": "Eu gosto da doçaria portuguesa",
+    "sourceItem": "Eu gosto da doçaria portuguesa"
+  },
+  {
+    "id": "q_102",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu gosto da doçaria _____' (I like the confectionary in Portugal)",
+    "options": [
+      "portuguesa",
+      "Qual",
+      "raramente",
+      "Para"
+    ],
+    "answer": "portuguesa",
+    "sourceItem": "Eu gosto da doçaria portuguesa"
+  },
+  {
+    "id": "q_103",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu sou vegetariano'?",
+    "options": [
+      "Students",
+      "Goodbye",
+      "400",
+      "I am vegetarian"
+    ],
+    "answer": "I am vegetarian",
+    "sourceItem": "Eu sou vegetariano"
+  },
+  {
+    "id": "q_104",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am vegetarian' in Portuguese?",
+    "options": [
+      "Eu sou vegetariano",
+      "Um cinema",
+      "Está à espera do seu amigo?",
+      "Da Holanda"
+    ],
+    "answer": "Eu sou vegetariano",
+    "sourceItem": "Eu sou vegetariano"
+  },
+  {
+    "id": "q_105",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu sou _____' (I am vegetarian)",
+    "options": [
+      "carro",
+      "vegetariano",
+      "até",
+      "casa"
+    ],
+    "answer": "vegetariano",
+    "sourceItem": "Eu sou vegetariano"
+  },
+  {
+    "id": "q_106",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eu não como peixe'?",
+    "options": [
+      "November",
+      "How much?",
+      "I don't eat fish",
+      "October"
+    ],
+    "answer": "I don't eat fish",
+    "sourceItem": "eu não como peixe"
+  },
+  {
+    "id": "q_107",
+    "type": "multipleChoice",
+    "question": "How do you say 'I don't eat fish' in Portuguese?",
+    "options": [
+      "eu não como peixe",
+      "Até nunca",
+      "O carro está na garagem",
+      "Encontramo-nos à porta"
+    ],
+    "answer": "eu não como peixe",
+    "sourceItem": "eu não como peixe"
+  },
+  {
+    "id": "q_108",
+    "type": "cloze",
+    "question": "Fill in the blank: 'eu _____ como peixe' (I don't eat fish)",
+    "options": [
+      "janeiro",
+      "quatrocentos",
+      "ontem",
+      "não"
+    ],
+    "answer": "não",
+    "sourceItem": "eu não como peixe"
+  },
+  {
+    "id": "q_109",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'pescetariano'?",
+    "options": [
+      "Day",
+      "A house",
+      "Pescatarian",
+      "I speak a little Portuguese"
+    ],
+    "answer": "Pescatarian",
+    "sourceItem": "pescetariano"
+  },
+  {
+    "id": "q_110",
+    "type": "multipleChoice",
+    "question": "How do you say 'Pescatarian' in Portuguese?",
+    "options": [
+      "pescetariano",
+      "bolo de cenoura",
+      "A casa está limpa",
+      "o teu"
+    ],
+    "answer": "pescetariano",
+    "sourceItem": "pescetariano"
+  },
+  {
+    "id": "q_111",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'nem carne'?",
+    "options": [
+      "Nor meat",
+      "We are tired",
+      "How long have you been living in Lisbon?",
+      "Breakfast"
+    ],
+    "answer": "Nor meat",
+    "sourceItem": "nem carne"
+  },
+  {
+    "id": "q_112",
+    "type": "multipleChoice",
+    "question": "How do you say 'Nor meat' in Portuguese?",
+    "options": [
+      "nem carne",
+      "mais ou menos",
+      "disponivel",
+      "Ao fim de semana"
+    ],
+    "answer": "nem carne",
+    "sourceItem": "nem carne"
+  },
+  {
+    "id": "q_113",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'laticinios'?",
+    "options": [
+      "clothes",
+      "Milk based products",
+      "We are happy",
+      "What is your favorite color?"
+    ],
+    "answer": "Milk based products",
+    "sourceItem": "laticinios"
+  },
+  {
+    "id": "q_114",
+    "type": "multipleChoice",
+    "question": "How do you say 'Milk based products' in Portuguese?",
+    "options": [
+      "vivo na Malveira",
+      "laticinios",
+      "posso fazer uma pregunta",
+      "o teu"
+    ],
+    "answer": "laticinios",
+    "sourceItem": "laticinios"
+  },
+  {
+    "id": "q_115",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'queria'?",
+    "options": [
+      "I want (polite)",
+      "Everything good?",
+      "I was/went",
+      "I am at home"
+    ],
+    "answer": "I want (polite)",
+    "sourceItem": "queria"
+  },
+  {
+    "id": "q_116",
+    "type": "multipleChoice",
+    "question": "How do you say 'I want (polite)' in Portuguese?",
+    "options": [
+      "A caneta está em cima da mesa",
+      "há 4 meses",
+      "queria",
+      "Lanche"
+    ],
+    "answer": "queria",
+    "sourceItem": "queria"
+  },
+  {
+    "id": "q_117",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'queria um café, por favor'?",
+    "options": [
+      "Coming from",
+      "day after tomorrow",
+      "When?",
+      "I want a coffee, please"
+    ],
+    "answer": "I want a coffee, please",
+    "sourceItem": "queria um café, por favor"
+  },
+  {
+    "id": "q_118",
+    "type": "multipleChoice",
+    "question": "How do you say 'I want a coffee, please' in Portuguese?",
+    "options": [
+      "com",
+      "É meio-dia",
+      "Concordo",
+      "queria um café, por favor"
+    ],
+    "answer": "queria um café, por favor",
+    "sourceItem": "queria um café, por favor"
+  },
+  {
+    "id": "q_119",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ um café, por favor' (I want a coffee, please)",
+    "options": [
+      "semana",
+      "por",
+      "Porque",
+      "queria"
+    ],
+    "answer": "queria",
+    "sourceItem": "queria um café, por favor"
+  },
+  {
+    "id": "q_120",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'adeus'?",
+    "options": [
+      "often",
+      "Goodbye",
+      "See you tomorrow",
+      "More or less"
+    ],
+    "answer": "Goodbye",
+    "sourceItem": "adeus"
+  },
+  {
+    "id": "q_121",
+    "type": "multipleChoice",
+    "question": "How do you say 'Goodbye' in Portuguese?",
+    "options": [
+      "Eu estou doente",
+      "adeus",
+      "atividades",
+      "Eu sou o Ramesh"
+    ],
+    "answer": "adeus",
+    "sourceItem": "adeus"
+  },
+  {
+    "id": "q_122",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'até já'?",
+    "options": [
+      "I go by train",
+      "I am fine",
+      "See you very soon (within the hour)",
+      "My name is Ramesh"
+    ],
+    "answer": "See you very soon (within the hour)",
+    "sourceItem": "até já"
+  },
+  {
+    "id": "q_123",
+    "type": "multipleChoice",
+    "question": "How do you say 'See you very soon (within the hour)' in Portuguese?",
+    "options": [
+      "até já",
+      "O carro está na garagem",
+      "Quem?",
+      "haver"
+    ],
+    "answer": "até já",
+    "sourceItem": "até já"
+  },
+  {
+    "id": "q_124",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'até logo'?",
+    "options": [
+      "some (fem. plural)",
+      "I want a coffee, please",
+      "See you again (slightly longer period)",
+      "Sorry (informal)"
+    ],
+    "answer": "See you again (slightly longer period)",
+    "sourceItem": "até logo"
+  },
+  {
+    "id": "q_125",
+    "type": "multipleChoice",
+    "question": "How do you say 'See you again (slightly longer period)' in Portuguese?",
+    "options": [
+      "Chego ao meio-dia",
+      "até logo",
+      "Na segunda-feira vou ao cinema",
+      "Onde?"
+    ],
+    "answer": "até logo",
+    "sourceItem": "até logo"
+  },
+  {
+    "id": "q_126",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'até breve'?",
+    "options": [
+      "By/Over the bridge",
+      "See you shortly",
+      "next week",
+      "Why (isolated)?"
+    ],
+    "answer": "See you shortly",
+    "sourceItem": "até breve"
+  },
+  {
+    "id": "q_127",
+    "type": "multipleChoice",
+    "question": "How do you say 'See you shortly' in Portuguese?",
+    "options": [
+      "lento",
+      "até breve",
+      "Um problema",
+      "novecentos"
+    ],
+    "answer": "até breve",
+    "sourceItem": "até breve"
+  },
+  {
+    "id": "q_128",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'até à próxima'?",
+    "options": [
+      "See you next time",
+      "I like the confectionary in Portugal",
+      "The car is in the garage",
+      "How much does it cost?"
+    ],
+    "answer": "See you next time",
+    "sourceItem": "até à próxima"
+  },
+  {
+    "id": "q_129",
+    "type": "multipleChoice",
+    "question": "How do you say 'See you next time' in Portuguese?",
+    "options": [
+      "São 10h30",
+      "Qual?",
+      "até à próxima",
+      "O que..?"
+    ],
+    "answer": "até à próxima",
+    "sourceItem": "até à próxima"
+  },
+  {
+    "id": "q_130",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ à próxima' (See you next time)",
+    "options": [
+      "setembro",
+      "até",
+      "por",
+      "Ramesh"
+    ],
+    "answer": "até",
+    "sourceItem": "até à próxima"
+  },
+  {
+    "id": "q_131",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'até amanhã'?",
+    "options": [
+      "I don't eat fish",
+      "Nor meat",
+      "See you tomorrow",
+      "400"
+    ],
+    "answer": "See you tomorrow",
+    "sourceItem": "até amanhã"
+  },
+  {
+    "id": "q_132",
+    "type": "multipleChoice",
+    "question": "How do you say 'See you tomorrow' in Portuguese?",
+    "options": [
+      "Da Holanda",
+      "até amanhã",
+      "junho",
+      "pequeno-almoço"
+    ],
+    "answer": "até amanhã",
+    "sourceItem": "até amanhã"
+  },
+  {
+    "id": "q_133",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'até sábado'?",
+    "options": [
+      "Lunch",
+      "Where is the milk?",
+      "See you Saturday",
+      "Weather/temperature"
+    ],
+    "answer": "See you Saturday",
+    "sourceItem": "até sábado"
+  },
+  {
+    "id": "q_134",
+    "type": "multipleChoice",
+    "question": "How do you say 'See you Saturday' in Portuguese?",
+    "options": [
+      "até sábado",
+      "falo um pouco de português",
+      "Quantos anos tens?",
+      "Uma fatia de bolo"
+    ],
+    "answer": "até sábado",
+    "sourceItem": "até sábado"
+  },
+  {
+    "id": "q_135",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'até à próxima semana'?",
+    "options": [
+      "See you next week",
+      "I go by bus",
+      "January",
+      "We meet at the door"
+    ],
+    "answer": "See you next week",
+    "sourceItem": "até à próxima semana"
+  },
+  {
+    "id": "q_136",
+    "type": "multipleChoice",
+    "question": "How do you say 'See you next week' in Portuguese?",
+    "options": [
+      "até à próxima semana",
+      "novembro",
+      "até à próxima",
+      "de"
+    ],
+    "answer": "até à próxima semana",
+    "sourceItem": "até à próxima semana"
+  },
+  {
+    "id": "q_137",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ à próxima semana' (See you next week)",
+    "options": [
+      "estamos",
+      "adeus",
+      "grande",
+      "até"
+    ],
+    "answer": "até",
+    "sourceItem": "até à próxima semana"
+  },
+  {
+    "id": "q_138",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Até nunca'?",
+    "options": [
+      "This/That",
+      "See you never",
+      "The tram",
+      "Good weekend!"
+    ],
+    "answer": "See you never",
+    "sourceItem": "Até nunca"
+  },
+  {
+    "id": "q_139",
+    "type": "multipleChoice",
+    "question": "How do you say 'See you never' in Portuguese?",
+    "options": [
+      "Até nunca",
+      "próxima semana",
+      "Nunca",
+      "eu estou cansado"
+    ],
+    "answer": "Até nunca",
+    "sourceItem": "Até nunca"
+  },
+  {
+    "id": "q_140",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'boa semana!'?",
+    "options": [
+      "Where are you from?",
+      "Lunch",
+      "May I enter?",
+      "Good week!"
+    ],
+    "answer": "Good week!",
+    "sourceItem": "boa semana!"
+  },
+  {
+    "id": "q_141",
+    "type": "multipleChoice",
+    "question": "How do you say 'Good week!' in Portuguese?",
+    "options": [
+      "O meu nome é Ramesh",
+      "boa semana!",
+      "uma filha tem quinze anos",
+      "com licença"
+    ],
+    "answer": "boa semana!",
+    "sourceItem": "boa semana!"
+  },
+  {
+    "id": "q_142",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'bom fim de semana!'?",
+    "options": [
+      "Good weekend!",
+      "Who is going to dinner?",
+      "It is 10:30",
+      "Some players are from Benfica"
+    ],
+    "answer": "Good weekend!",
+    "sourceItem": "bom fim de semana!"
+  },
+  {
+    "id": "q_143",
+    "type": "multipleChoice",
+    "question": "How do you say 'Good weekend!' in Portuguese?",
+    "options": [
+      "almoço",
+      "Direto",
+      "posso entrar?",
+      "bom fim de semana!"
+    ],
+    "answer": "bom fim de semana!",
+    "sourceItem": "bom fim de semana!"
+  },
+  {
+    "id": "q_144",
+    "type": "cloze",
+    "question": "Fill in the blank: 'bom fim de _____' (Good weekend!)",
+    "options": [
+      "raramente",
+      "está",
+      "semana",
+      "tudo"
+    ],
+    "answer": "semana",
+    "sourceItem": "bom fim de semana!"
+  },
+  {
+    "id": "q_145",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'está bem'?",
+    "options": [
+      "He is well",
+      "I was/went",
+      "The restaurant is located in the center",
+      "by/for (period)/because"
+    ],
+    "answer": "He is well",
+    "sourceItem": "está bem"
+  },
+  {
+    "id": "q_146",
+    "type": "multipleChoice",
+    "question": "How do you say 'He is well' in Portuguese?",
+    "options": [
+      "de",
+      "está bem",
+      "Preciso do carro por 4 dias",
+      "Eu estou a aprender português"
+    ],
+    "answer": "está bem",
+    "sourceItem": "está bem"
+  },
+  {
+    "id": "q_147",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'estou bem'?",
+    "options": [
+      "It is midnight",
+      "I am fine",
+      "I am sick",
+      "yesterday"
+    ],
+    "answer": "I am fine",
+    "sourceItem": "estou bem"
+  },
+  {
+    "id": "q_148",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am fine' in Portuguese?",
+    "options": [
+      "queria",
+      "estou bem",
+      "ali",
+      "setembro"
+    ],
+    "answer": "estou bem",
+    "sourceItem": "estou bem"
+  },
+  {
+    "id": "q_149",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'como está?'?",
+    "options": [
+      "By/Over the bridge",
+      "that (over there)",
+      "How are you (formal)?",
+      "Last Monday I watched a film"
+    ],
+    "answer": "How are you (formal)?",
+    "sourceItem": "como está?"
+  },
+  {
+    "id": "q_150",
+    "type": "multipleChoice",
+    "question": "How do you say 'How are you (formal)?' in Portuguese?",
+    "options": [
+      "como está?",
+      "pode repetir, por favor",
+      "Quais?",
+      "O eléctrico"
+    ],
+    "answer": "como está?",
+    "sourceItem": "como está?"
+  },
+  {
+    "id": "q_151",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'como estás?'?",
+    "options": [
+      "I go to the supermarket",
+      "How are you (informal)?",
+      "Where is the milk?",
+      "Milk based products"
+    ],
+    "answer": "How are you (informal)?",
+    "sourceItem": "como estás?"
+  },
+  {
+    "id": "q_152",
+    "type": "multipleChoice",
+    "question": "How do you say 'How are you (informal)?' in Portuguese?",
+    "options": [
+      "outubro",
+      "Eu sou vegetariano",
+      "Eu vou à praia",
+      "como estás?"
+    ],
+    "answer": "como estás?",
+    "sourceItem": "como estás?"
+  },
+  {
+    "id": "q_153",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'muito obrigado'?",
+    "options": [
+      "This present is for you",
+      "My name is Ramesh",
+      "Everything good?",
+      "Thank you very much"
+    ],
+    "answer": "Thank you very much",
+    "sourceItem": "muito obrigado"
+  },
+  {
+    "id": "q_154",
+    "type": "multipleChoice",
+    "question": "How do you say 'Thank you very much' in Portuguese?",
+    "options": [
+      "muito obrigado",
+      "desculpa",
+      "Há quanto tempo?",
+      "Eu vou de comboio"
+    ],
+    "answer": "muito obrigado",
+    "sourceItem": "muito obrigado"
+  },
+  {
+    "id": "q_155",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'tudo bem?'?",
+    "options": [
+      "your",
+      "By/Over the bridge",
+      "a (masc. singular)",
+      "Everything good?"
+    ],
+    "answer": "Everything good?",
+    "sourceItem": "tudo bem?"
+  },
+  {
+    "id": "q_156",
+    "type": "multipleChoice",
+    "question": "How do you say 'Everything good?' in Portuguese?",
+    "options": [
+      "aqui",
+      "Desde quando?",
+      "Que comida preferes?",
+      "tudo bem?"
+    ],
+    "answer": "tudo bem?",
+    "sourceItem": "tudo bem?"
+  },
+  {
+    "id": "q_157",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'mais ou menos'?",
+    "options": [
+      "More or less",
+      "I like the confectionary in Portugal",
+      "It has been raining since November",
+      "in/on"
+    ],
+    "answer": "More or less",
+    "sourceItem": "mais ou menos"
+  },
+  {
+    "id": "q_158",
+    "type": "multipleChoice",
+    "question": "How do you say 'More or less' in Portuguese?",
+    "options": [
+      "Onde está o leite?",
+      "esse",
+      "mais ou menos",
+      "Uma casa"
+    ],
+    "answer": "mais ou menos",
+    "sourceItem": "mais ou menos"
+  },
+  {
+    "id": "q_159",
+    "type": "cloze",
+    "question": "Fill in the blank: 'mais ou _____' (More or less)",
+    "options": [
+      "Até",
+      "maio",
+      "menos",
+      "depressa"
+    ],
+    "answer": "menos",
+    "sourceItem": "mais ou menos"
+  },
+  {
+    "id": "q_160",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'desculpe'?",
+    "options": [
+      "See you tomorrow",
+      "Sorry (formal)",
+      "At what time do you arrive?",
+      "April"
+    ],
+    "answer": "Sorry (formal)",
+    "sourceItem": "desculpe"
+  },
+  {
+    "id": "q_161",
+    "type": "multipleChoice",
+    "question": "How do you say 'Sorry (formal)' in Portuguese?",
+    "options": [
+      "queria",
+      "boa semana!",
+      "hoje está bom tempo",
+      "desculpe"
+    ],
+    "answer": "desculpe",
+    "sourceItem": "desculpe"
+  },
+  {
+    "id": "q_162",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'desculpa'?",
+    "options": [
+      "always",
+      "January",
+      "Sorry (informal)",
+      "How long have you been living in Lisbon?"
+    ],
+    "answer": "Sorry (informal)",
+    "sourceItem": "desculpa"
+  },
+  {
+    "id": "q_163",
+    "type": "multipleChoice",
+    "question": "How do you say 'Sorry (informal)' in Portuguese?",
+    "options": [
+      "desculpa",
+      "Semana passada",
+      "vivo na Malveira",
+      "É meia-noite"
+    ],
+    "answer": "desculpa",
+    "sourceItem": "desculpa"
+  },
+  {
+    "id": "q_164",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'com licença'?",
+    "options": [
+      "The India",
+      "Weather/temperature",
+      "Excuse me",
+      "I always watch football"
+    ],
+    "answer": "Excuse me",
+    "sourceItem": "com licença"
+  },
+  {
+    "id": "q_165",
+    "type": "multipleChoice",
+    "question": "How do you say 'Excuse me' in Portuguese?",
+    "options": [
+      "setembro",
+      "Quanto custa?",
+      "com licença",
+      "sempre"
+    ],
+    "answer": "com licença",
+    "sourceItem": "com licença"
+  },
+  {
+    "id": "q_166",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'posso entrar?'?",
+    "options": [
+      "available",
+      "Why (start/middle)?",
+      "May I enter?",
+      "July"
+    ],
+    "answer": "May I enter?",
+    "sourceItem": "posso entrar?"
+  },
+  {
+    "id": "q_167",
+    "type": "multipleChoice",
+    "question": "How do you say 'May I enter?' in Portuguese?",
+    "options": [
+      "seiscentos",
+      "agosto",
+      "posso entrar?",
+      "há 4 meses"
+    ],
+    "answer": "posso entrar?",
+    "sourceItem": "posso entrar?"
+  },
+  {
+    "id": "q_168",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'posso fazer uma pregunta'?",
+    "options": [
+      "The Holland",
+      "A house",
+      "Breakfast",
+      "May I ask a question?"
+    ],
+    "answer": "May I ask a question?",
+    "sourceItem": "posso fazer uma pregunta"
+  },
+  {
+    "id": "q_169",
+    "type": "multipleChoice",
+    "question": "How do you say 'May I ask a question?' in Portuguese?",
+    "options": [
+      "posso fazer uma pregunta",
+      "Na segunda-feira vi um filme",
+      "Aprendizes",
+      "Jantar"
+    ],
+    "answer": "posso fazer uma pregunta",
+    "sourceItem": "posso fazer uma pregunta"
+  },
+  {
+    "id": "q_170",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ fazer uma pregunta' (May I ask a question?)",
+    "options": [
+      "estamos",
+      "tens",
+      "posso",
+      "Desde"
+    ],
+    "answer": "posso",
+    "sourceItem": "posso fazer uma pregunta"
+  },
+  {
+    "id": "q_171",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'pode repetir, por favor'?",
+    "options": [
+      "How are you (informal)?",
+      "Can you repeat please",
+      "always",
+      "at/to"
+    ],
+    "answer": "Can you repeat please",
+    "sourceItem": "pode repetir, por favor"
+  },
+  {
+    "id": "q_172",
+    "type": "multipleChoice",
+    "question": "How do you say 'Can you repeat please' in Portuguese?",
+    "options": [
+      "Um cinema",
+      "Eu vou ao supermercado",
+      "pode repetir, por favor",
+      "aí"
+    ],
+    "answer": "pode repetir, por favor",
+    "sourceItem": "pode repetir, por favor"
+  },
+  {
+    "id": "q_173",
+    "type": "cloze",
+    "question": "Fill in the blank: 'pode repetir, por _____' (Can you repeat please)",
+    "options": [
+      "gosto",
+      "Alunos",
+      "favor",
+      "vejo"
+    ],
+    "answer": "favor",
+    "sourceItem": "pode repetir, por favor"
+  },
+  {
+    "id": "q_174",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'pode falar mais devagar'?",
+    "options": [
+      "until",
+      "Can you speak more slowly",
+      "In two weeks",
+      "I go to make dinner"
+    ],
+    "answer": "Can you speak more slowly",
+    "sourceItem": "pode falar mais devagar"
+  },
+  {
+    "id": "q_175",
+    "type": "multipleChoice",
+    "question": "How do you say 'Can you speak more slowly' in Portuguese?",
+    "options": [
+      "Nós fomos de férias",
+      "pode falar mais devagar",
+      "por",
+      "uma filha tem quinze anos"
+    ],
+    "answer": "pode falar mais devagar",
+    "sourceItem": "pode falar mais devagar"
+  },
+  {
+    "id": "q_176",
+    "type": "cloze",
+    "question": "Fill in the blank: 'pode falar _____ devagar' (Can you speak more slowly)",
+    "options": [
+      "filme",
+      "acaba",
+      "doente",
+      "mais"
+    ],
+    "answer": "mais",
+    "sourceItem": "pode falar mais devagar"
+  },
+  {
+    "id": "q_177",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'devagar'?",
+    "options": [
+      "I am learning Portuguese",
+      "Thank you very much",
+      "slowly",
+      "It is midnight"
+    ],
+    "answer": "slowly",
+    "sourceItem": "devagar"
+  },
+  {
+    "id": "q_178",
+    "type": "multipleChoice",
+    "question": "How do you say 'slowly' in Portuguese?",
+    "options": [
+      "devagar",
+      "haver",
+      "pode repetir, por favor",
+      "eu tenho duas filhas"
+    ],
+    "answer": "devagar",
+    "sourceItem": "devagar"
+  },
+  {
+    "id": "q_179",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'depressa'?",
+    "options": [
+      "available",
+      "at/to",
+      "quickly",
+      "I am Ramesh"
+    ],
+    "answer": "quickly",
+    "sourceItem": "depressa"
+  },
+  {
+    "id": "q_180",
+    "type": "multipleChoice",
+    "question": "How do you say 'quickly' in Portuguese?",
+    "options": [
+      "Está a chover desde novembro",
+      "Vens",
+      "como está?",
+      "depressa"
+    ],
+    "answer": "depressa",
+    "sourceItem": "depressa"
+  },
+  {
+    "id": "q_181",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'rápido'?",
+    "options": [
+      "fast",
+      "800",
+      "Thank you very much",
+      "Since when?"
+    ],
+    "answer": "fast",
+    "sourceItem": "rápido"
+  },
+  {
+    "id": "q_182",
+    "type": "multipleChoice",
+    "question": "How do you say 'fast' in Portuguese?",
+    "options": [
+      "próxima semana",
+      "dezanove de janeiro",
+      "rápido",
+      "quatrocentos"
+    ],
+    "answer": "rápido",
+    "sourceItem": "rápido"
+  },
+  {
+    "id": "q_183",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'lento'?",
+    "options": [
+      "some (fem. plural)",
+      "What/Which (singular)?",
+      "slow",
+      "See you very soon (within the hour)"
+    ],
+    "answer": "slow",
+    "sourceItem": "lento"
+  },
+  {
+    "id": "q_184",
+    "type": "multipleChoice",
+    "question": "How do you say 'slow' in Portuguese?",
+    "options": [
+      "lento",
+      "eu tenho duas filhas",
+      "Eu sou o Ramesh",
+      "boa semana!"
+    ],
+    "answer": "lento",
+    "sourceItem": "lento"
+  },
+  {
+    "id": "q_185",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'falo um pouco de português'?",
+    "options": [
+      "June",
+      "See you very soon (within the hour)",
+      "I speak a little Portuguese",
+      "by/for (period)/because"
+    ],
+    "answer": "I speak a little Portuguese",
+    "sourceItem": "falo um pouco de português"
+  },
+  {
+    "id": "q_186",
+    "type": "multipleChoice",
+    "question": "How do you say 'I speak a little Portuguese' in Portuguese?",
+    "options": [
+      "Eu também",
+      "falo um pouco de português",
+      "eu sou engenheiro de software",
+      "eu não como peixe"
+    ],
+    "answer": "falo um pouco de português",
+    "sourceItem": "falo um pouco de português"
+  },
+  {
+    "id": "q_187",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ um pouco de português' (I speak a little Portuguese)",
+    "options": [
+      "sem",
+      "falo",
+      "Brazil",
+      "cansado"
+    ],
+    "answer": "falo",
+    "sourceItem": "falo um pouco de português"
+  },
+  {
+    "id": "q_188",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu também'?",
+    "options": [
+      "September",
+      "Me too",
+      "500",
+      "We are tired"
+    ],
+    "answer": "Me too",
+    "sourceItem": "Eu também"
+  },
+  {
+    "id": "q_189",
+    "type": "multipleChoice",
+    "question": "How do you say 'Me too' in Portuguese?",
+    "options": [
+      "Eu também",
+      "trezentos",
+      "atividades",
+      "Onde está o leite?"
+    ],
+    "answer": "Eu também",
+    "sourceItem": "Eu também"
+  },
+  {
+    "id": "q_190",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Concordo'?",
+    "options": [
+      "800",
+      "I agree",
+      "sometimes",
+      "The India"
+    ],
+    "answer": "I agree",
+    "sourceItem": "Concordo"
+  },
+  {
+    "id": "q_191",
+    "type": "multipleChoice",
+    "question": "How do you say 'I agree' in Portuguese?",
+    "options": [
+      "Jantar",
+      "Concordo",
+      "Porque estás triste?",
+      "Segunda-feira"
+    ],
+    "answer": "Concordo",
+    "sourceItem": "Concordo"
+  },
+  {
+    "id": "q_192",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Está a chover desde novembro'?",
+    "options": [
+      "It has been raining since November",
+      "here (close to me)",
+      "800",
+      "I want a coffee, please"
+    ],
+    "answer": "It has been raining since November",
+    "sourceItem": "Está a chover desde novembro"
+  },
+  {
+    "id": "q_193",
+    "type": "multipleChoice",
+    "question": "How do you say 'It has been raining since November' in Portuguese?",
+    "options": [
+      "Vens",
+      "Há quanto tempo?",
+      "passatempos",
+      "Está a chover desde novembro"
+    ],
+    "answer": "Está a chover desde novembro",
+    "sourceItem": "Está a chover desde novembro"
+  },
+  {
+    "id": "q_194",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ a chover desde novembro' (It has been raining since November)",
+    "options": [
+      "Está",
+      "setecentos",
+      "dezembro",
+      "semanas"
+    ],
+    "answer": "Está",
+    "sourceItem": "Está a chover desde novembro"
+  },
+  {
+    "id": "q_195",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu estou a aprender português'?",
+    "options": [
+      "Are you waiting for your friend?",
+      "since",
+      "I agree",
+      "I am learning Portuguese"
+    ],
+    "answer": "I am learning Portuguese",
+    "sourceItem": "Eu estou a aprender português"
+  },
+  {
+    "id": "q_196",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am learning Portuguese' in Portuguese?",
+    "options": [
+      "Até nunca",
+      "Eu estou a aprender português",
+      "Porque estás triste?",
+      "O que..?"
+    ],
+    "answer": "Eu estou a aprender português",
+    "sourceItem": "Eu estou a aprender português"
+  },
+  {
+    "id": "q_197",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu estou a _____ português' (I am learning Portuguese)",
+    "options": [
+      "sábado",
+      "este",
+      "aprender",
+      "obrigado"
+    ],
+    "answer": "aprender",
+    "sourceItem": "Eu estou a aprender português"
+  },
+  {
+    "id": "q_198",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Estudantes'?",
+    "options": [
+      "Students",
+      "We are tired",
+      "Doctor",
+      "More or less"
+    ],
+    "answer": "Students",
+    "sourceItem": "Estudantes"
+  },
+  {
+    "id": "q_199",
+    "type": "multipleChoice",
+    "question": "How do you say 'Students' in Portuguese?",
+    "options": [
+      "Eu gosto viajar",
+      "O meu nome é Ramesh",
+      "posso entrar?",
+      "Estudantes"
+    ],
+    "answer": "Estudantes",
+    "sourceItem": "Estudantes"
+  },
+  {
+    "id": "q_200",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Alunos'?",
+    "options": [
+      "To be (location/stay)",
+      "without",
+      "Pupils",
+      "Tea-time / Snack"
+    ],
+    "answer": "Pupils",
+    "sourceItem": "Alunos"
+  },
+  {
+    "id": "q_201",
+    "type": "multipleChoice",
+    "question": "How do you say 'Pupils' in Portuguese?",
+    "options": [
+      "ontem",
+      "de",
+      "Alunos",
+      "Quais são as tuas músicas favoritas?"
+    ],
+    "answer": "Alunos",
+    "sourceItem": "Alunos"
+  },
+  {
+    "id": "q_202",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Aprendizes'?",
+    "options": [
+      "I am tired",
+      "At the weekend",
+      "This seat is reserved",
+      "The learners"
+    ],
+    "answer": "The learners",
+    "sourceItem": "Aprendizes"
+  },
+  {
+    "id": "q_203",
+    "type": "multipleChoice",
+    "question": "How do you say 'The learners' in Portuguese?",
+    "options": [
+      "Daqui a duas semanas",
+      "Aprendizes",
+      "Onde está o leite?",
+      "trezentos"
+    ],
+    "answer": "Aprendizes",
+    "sourceItem": "Aprendizes"
+  },
+  {
+    "id": "q_204",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Exatamente'?",
+    "options": [
+      "It is midnight",
+      "from the (e+a)",
+      "See you next week",
+      "Exactly"
+    ],
+    "answer": "Exactly",
+    "sourceItem": "Exatamente"
+  },
+  {
+    "id": "q_205",
+    "type": "multipleChoice",
+    "question": "How do you say 'Exactly' in Portuguese?",
+    "options": [
+      "estou bem",
+      "dezanove de janeiro",
+      "Exatamente",
+      "queria um café, por favor"
+    ],
+    "answer": "Exatamente",
+    "sourceItem": "Exatamente"
+  },
+  {
+    "id": "q_206",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu vou fazer o jantar'?",
+    "options": [
+      "The restaurant is located in the center",
+      "I like to play tennis",
+      "I go to make dinner",
+      "700"
+    ],
+    "answer": "I go to make dinner",
+    "sourceItem": "Eu vou fazer o jantar"
+  },
+  {
+    "id": "q_207",
+    "type": "multipleChoice",
+    "question": "How do you say 'I go to make dinner' in Portuguese?",
+    "options": [
+      "Eu vou fazer o jantar",
+      "A caneta está em cima da mesa",
+      "ontem",
+      "atividades"
+    ],
+    "answer": "Eu vou fazer o jantar",
+    "sourceItem": "Eu vou fazer o jantar"
+  },
+  {
+    "id": "q_208",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu vou fazer o _____' (I go to make dinner)",
+    "options": [
+      "atividades",
+      "quatrocentos",
+      "jantar",
+      "pescetariano"
+    ],
+    "answer": "jantar",
+    "sourceItem": "Eu vou fazer o jantar"
+  },
+  {
+    "id": "q_209",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Refeições'?",
+    "options": [
+      "Weather/temperature",
+      "Meals",
+      "here (close to me)",
+      "May I ask a question?"
+    ],
+    "answer": "Meals",
+    "sourceItem": "Refeições"
+  },
+  {
+    "id": "q_210",
+    "type": "multipleChoice",
+    "question": "How do you say 'Meals' in Portuguese?",
+    "options": [
+      "de",
+      "Refeições",
+      "seiscentos",
+      "boa semana!"
+    ],
+    "answer": "Refeições",
+    "sourceItem": "Refeições"
+  },
+  {
+    "id": "q_211",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'pequeno-almoço'?",
+    "options": [
+      "Breakfast",
+      "I like to travel",
+      "Slice of cake",
+      "I want (polite)"
+    ],
+    "answer": "Breakfast",
+    "sourceItem": "pequeno-almoço"
+  },
+  {
+    "id": "q_212",
+    "type": "multipleChoice",
+    "question": "How do you say 'Breakfast' in Portuguese?",
+    "options": [
+      "pequeno-almoço",
+      "aquele",
+      "De India",
+      "Direto"
+    ],
+    "answer": "pequeno-almoço",
+    "sourceItem": "pequeno-almoço"
+  },
+  {
+    "id": "q_213",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'almoço'?",
+    "options": [
+      "Last Monday I watched a film",
+      "1000",
+      "Lunch",
+      "Meals"
+    ],
+    "answer": "Lunch",
+    "sourceItem": "almoço"
+  },
+  {
+    "id": "q_214",
+    "type": "multipleChoice",
+    "question": "How do you say 'Lunch' in Portuguese?",
+    "options": [
+      "hoje está bom tempo",
+      "Há quanto tempo?",
+      "almoço",
+      "Qual?"
+    ],
+    "answer": "almoço",
+    "sourceItem": "almoço"
+  },
+  {
+    "id": "q_215",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Lanche'?",
+    "options": [
+      "I go to the beach",
+      "I am learning Portuguese",
+      "Tea-time / Snack",
+      "quickly"
+    ],
+    "answer": "Tea-time / Snack",
+    "sourceItem": "Lanche"
+  },
+  {
+    "id": "q_216",
+    "type": "multipleChoice",
+    "question": "How do you say 'Tea-time / Snack' in Portuguese?",
+    "options": [
+      "de",
+      "Lanche",
+      "Pela ponte",
+      "como está?"
+    ],
+    "answer": "Lanche",
+    "sourceItem": "Lanche"
+  },
+  {
+    "id": "q_217",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Jantar'?",
+    "options": [
+      "I always watch football",
+      "Dinner",
+      "The India",
+      "Which month are we in?"
+    ],
+    "answer": "Dinner",
+    "sourceItem": "Jantar"
+  },
+  {
+    "id": "q_218",
+    "type": "multipleChoice",
+    "question": "How do you say 'Dinner' in Portuguese?",
+    "options": [
+      "Nós estamos cansados",
+      "aqui",
+      "Jantar",
+      "A que horas chegas?"
+    ],
+    "answer": "Jantar",
+    "sourceItem": "Jantar"
+  },
+  {
+    "id": "q_219",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Uma fatia de bolo'?",
+    "options": [
+      "slowly",
+      "by/for (period)/because",
+      "Breakfast",
+      "Slice of cake"
+    ],
+    "answer": "Slice of cake",
+    "sourceItem": "Uma fatia de bolo"
+  },
+  {
+    "id": "q_220",
+    "type": "multipleChoice",
+    "question": "How do you say 'Slice of cake' in Portuguese?",
+    "options": [
+      "abril",
+      "aí",
+      "Uma fatia de bolo",
+      "Até nunca"
+    ],
+    "answer": "Uma fatia de bolo",
+    "sourceItem": "Uma fatia de bolo"
+  },
+  {
+    "id": "q_221",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Uma fatia de _____' (Slice of cake)",
+    "options": [
+      "inacreditável",
+      "bolo",
+      "passatempos",
+      "acaba"
+    ],
+    "answer": "bolo",
+    "sourceItem": "Uma fatia de bolo"
+  },
+  {
+    "id": "q_222",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'bolo de cenoura'?",
+    "options": [
+      "What (verb)?",
+      "carrot cake",
+      "This present is for you",
+      "I never surf"
+    ],
+    "answer": "carrot cake",
+    "sourceItem": "bolo de cenoura"
+  },
+  {
+    "id": "q_223",
+    "type": "multipleChoice",
+    "question": "How do you say 'carrot cake' in Portuguese?",
+    "options": [
+      "Ao fim de semana",
+      "bolo de cenoura",
+      "de",
+      "Para que queres?"
+    ],
+    "answer": "bolo de cenoura",
+    "sourceItem": "bolo de cenoura"
+  },
+  {
+    "id": "q_224",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ de cenoura' (carrot cake)",
+    "options": [
+      "Exatamente",
+      "bolo",
+      "sempre",
+      "este"
+    ],
+    "answer": "bolo",
+    "sourceItem": "bolo de cenoura"
+  },
+  {
+    "id": "q_225",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Compreendo'?",
+    "options": [
+      "I understand",
+      "Pescatarian",
+      "For what do you want?",
+      "I like to read"
+    ],
+    "answer": "I understand",
+    "sourceItem": "Compreendo"
+  },
+  {
+    "id": "q_226",
+    "type": "multipleChoice",
+    "question": "How do you say 'I understand' in Portuguese?",
+    "options": [
+      "Nunca faço surf",
+      "sempre",
+      "Compreendo",
+      "Eu vou ao supermercado"
+    ],
+    "answer": "Compreendo",
+    "sourceItem": "Compreendo"
+  },
+  {
+    "id": "q_227",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'um'?",
+    "options": [
+      "a (masc. singular)",
+      "The India",
+      "At the weekend",
+      "since"
+    ],
+    "answer": "a (masc. singular)",
+    "sourceItem": "um"
+  },
+  {
+    "id": "q_228",
+    "type": "multipleChoice",
+    "question": "How do you say 'a (masc. singular)' in Portuguese?",
+    "options": [
+      "Um cinema",
+      "um",
+      "Eu gosto ver futebol",
+      "Quem vai ao jantar?"
+    ],
+    "answer": "um",
+    "sourceItem": "um"
+  },
+  {
+    "id": "q_229",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'uma'?",
+    "options": [
+      "a (fem. singular)",
+      "I come back",
+      "I go to the supermarket",
+      "I am fine"
+    ],
+    "answer": "a (fem. singular)",
+    "sourceItem": "uma"
+  },
+  {
+    "id": "q_230",
+    "type": "multipleChoice",
+    "question": "How do you say 'a (fem. singular)' in Portuguese?",
+    "options": [
+      "uma",
+      "Eu estou em casa",
+      "está bem",
+      "Vens"
+    ],
+    "answer": "uma",
+    "sourceItem": "uma"
+  },
+  {
+    "id": "q_231",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'uns'?",
+    "options": [
+      "Good weekend!",
+      "Which month are we in?",
+      "some (masc. plural)",
+      "Are you waiting for your friend?"
+    ],
+    "answer": "some (masc. plural)",
+    "sourceItem": "uns"
+  },
+  {
+    "id": "q_232",
+    "type": "multipleChoice",
+    "question": "How do you say 'some (masc. plural)' in Portuguese?",
+    "options": [
+      "uns",
+      "Qual é a tua cor favorita?",
+      "outubro",
+      "adeus"
+    ],
+    "answer": "uns",
+    "sourceItem": "uns"
+  },
+  {
+    "id": "q_233",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'umas'?",
+    "options": [
+      "I understand",
+      "some (fem. plural)",
+      "How long does the trip take?",
+      "since"
+    ],
+    "answer": "some (fem. plural)",
+    "sourceItem": "umas"
+  },
+  {
+    "id": "q_234",
+    "type": "multipleChoice",
+    "question": "How do you say 'some (fem. plural)' in Portuguese?",
+    "options": [
+      "há 4 meses",
+      "Eu sou o Ramesh",
+      "umas",
+      "Desde quando?"
+    ],
+    "answer": "umas",
+    "sourceItem": "umas"
+  },
+  {
+    "id": "q_235",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Uns jogadores são do benfica'?",
+    "options": [
+      "Brazil",
+      "December",
+      "Some players are from Benfica",
+      "finishes/ends"
+    ],
+    "answer": "Some players are from Benfica",
+    "sourceItem": "Uns jogadores são do benfica"
+  },
+  {
+    "id": "q_236",
+    "type": "multipleChoice",
+    "question": "How do you say 'Some players are from Benfica' in Portuguese?",
+    "options": [
+      "depois de amanhã",
+      "Uns jogadores são do benfica",
+      "Porque estás triste?",
+      "eu tenho quarenta e nove anos"
+    ],
+    "answer": "Uns jogadores são do benfica",
+    "sourceItem": "Uns jogadores são do benfica"
+  },
+  {
+    "id": "q_237",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Uns _____ são do benfica' (Some players are from Benfica)",
+    "options": [
+      "uma",
+      "jogadores",
+      "portuguesa",
+      "Uma"
+    ],
+    "answer": "jogadores",
+    "sourceItem": "Uns jogadores são do benfica"
+  },
+  {
+    "id": "q_238",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ficar'?",
+    "options": [
+      "How are you (informal)?",
+      "I like to watch football",
+      "Next Monday I will go to the cinema",
+      "To be (location/stay)"
+    ],
+    "answer": "To be (location/stay)",
+    "sourceItem": "ficar"
+  },
+  {
+    "id": "q_239",
+    "type": "multipleChoice",
+    "question": "How do you say 'To be (location/stay)' in Portuguese?",
+    "options": [
+      "Na segunda-feira vou ao cinema",
+      "Nós estamos cansados",
+      "Uma fatia de bolo",
+      "ficar"
+    ],
+    "answer": "ficar",
+    "sourceItem": "ficar"
+  },
+  {
+    "id": "q_240",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu estou doente'?",
+    "options": [
+      "Everything good?",
+      "Brazil",
+      "I am sick",
+      "December"
+    ],
+    "answer": "I am sick",
+    "sourceItem": "Eu estou doente"
+  },
+  {
+    "id": "q_241",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am sick' in Portuguese?",
+    "options": [
+      "O meu nome é Ramesh",
+      "até sábado",
+      "Eu estou doente",
+      "oitocentos"
+    ],
+    "answer": "Eu estou doente",
+    "sourceItem": "Eu estou doente"
+  },
+  {
+    "id": "q_242",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu _____ doente' (I am sick)",
+    "options": [
+      "passada",
+      "estou",
+      "oitocentos",
+      "boa"
+    ],
+    "answer": "estou",
+    "sourceItem": "Eu estou doente"
+  },
+  {
+    "id": "q_243",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O restaurante fica no centro'?",
+    "options": [
+      "Dinner",
+      "1000",
+      "555",
+      "The restaurant is located in the center"
+    ],
+    "answer": "The restaurant is located in the center",
+    "sourceItem": "O restaurante fica no centro"
+  },
+  {
+    "id": "q_244",
+    "type": "multipleChoice",
+    "question": "How do you say 'The restaurant is located in the center' in Portuguese?",
+    "options": [
+      "O restaurante fica no centro",
+      "Quanto tempo leva a viagem?",
+      "frequentemente",
+      "por"
+    ],
+    "answer": "O restaurante fica no centro",
+    "sourceItem": "O restaurante fica no centro"
+  },
+  {
+    "id": "q_245",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O restaurante _____ no centro' (The restaurant is located in the center)",
+    "options": [
+      "fica",
+      "desculpa",
+      "estou",
+      "Porque"
+    ],
+    "answer": "fica",
+    "sourceItem": "O restaurante fica no centro"
+  },
+  {
+    "id": "q_246",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Encontramo-nos à porta'?",
+    "options": [
+      "How long (has it been)?",
+      "We meet at the door",
+      "A car",
+      "Last Monday I watched a film"
+    ],
+    "answer": "We meet at the door",
+    "sourceItem": "Encontramo-nos à porta"
+  },
+  {
+    "id": "q_247",
+    "type": "multipleChoice",
+    "question": "How do you say 'We meet at the door' in Portuguese?",
+    "options": [
+      "Eu gosto da doçaria portuguesa",
+      "bom fim de semana!",
+      "Encontramo-nos à porta",
+      "Qual é a tua cor favorita?"
+    ],
+    "answer": "Encontramo-nos à porta",
+    "sourceItem": "Encontramo-nos à porta"
+  },
+  {
+    "id": "q_248",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ à porta' (We meet at the door)",
+    "options": [
+      "custa",
+      "Encontramo-nos",
+      "roupas",
+      "Porquê"
+    ],
+    "answer": "Encontramo-nos",
+    "sourceItem": "Encontramo-nos à porta"
+  },
+  {
+    "id": "q_249",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nós fomos de férias'?",
+    "options": [
+      "We went on holiday",
+      "555",
+      "December",
+      "How old are you?"
+    ],
+    "answer": "We went on holiday",
+    "sourceItem": "Nós fomos de férias"
+  },
+  {
+    "id": "q_250",
+    "type": "multipleChoice",
+    "question": "How do you say 'We went on holiday' in Portuguese?",
+    "options": [
+      "Nós fomos de férias",
+      "tudo bem?",
+      "acaba",
+      "sem"
+    ],
+    "answer": "Nós fomos de férias",
+    "sourceItem": "Nós fomos de férias"
+  },
+  {
+    "id": "q_251",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ fomos de férias' (We went on holiday)",
+    "options": [
+      "estou",
+      "acaba",
+      "Nós",
+      "meio-dia"
+    ],
+    "answer": "Nós",
+    "sourceItem": "Nós fomos de férias"
+  },
+  {
+    "id": "q_252",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nós estamos cansados'?",
+    "options": [
+      "We are tired",
+      "until",
+      "Doctor",
+      "At the weekend"
+    ],
+    "answer": "We are tired",
+    "sourceItem": "Nós estamos cansados"
+  },
+  {
+    "id": "q_253",
+    "type": "multipleChoice",
+    "question": "How do you say 'We are tired' in Portuguese?",
+    "options": [
+      "dezanove de janeiro",
+      "Nós estamos cansados",
+      "Eu vou de comboio",
+      "Eu gosto ver futebol"
+    ],
+    "answer": "Nós estamos cansados",
+    "sourceItem": "Nós estamos cansados"
+  },
+  {
+    "id": "q_254",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Nós _____ cansados' (We are tired)",
+    "options": [
+      "esse",
+      "estamos",
+      "Porque",
+      "Está"
+    ],
+    "answer": "estamos",
+    "sourceItem": "Nós estamos cansados"
+  },
+  {
+    "id": "q_255",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nós estamos felizes'?",
+    "options": [
+      "The Holland",
+      "A car",
+      "I am married",
+      "We are happy"
+    ],
+    "answer": "We are happy",
+    "sourceItem": "Nós estamos felizes"
+  },
+  {
+    "id": "q_256",
+    "type": "multipleChoice",
+    "question": "How do you say 'We are happy' in Portuguese?",
+    "options": [
+      "falo um pouco de português",
+      "a outra tem doze anos",
+      "Nós estamos felizes",
+      "umas"
+    ],
+    "answer": "Nós estamos felizes",
+    "sourceItem": "Nós estamos felizes"
+  },
+  {
+    "id": "q_257",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ estamos felizes' (We are happy)",
+    "options": [
+      "sem",
+      "mais",
+      "estamos",
+      "Nós"
+    ],
+    "answer": "Nós",
+    "sourceItem": "Nós estamos felizes"
+  },
+  {
+    "id": "q_258",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu estou em casa'?",
+    "options": [
+      "Slice of cake",
+      "Good weekend!",
+      "I am at home",
+      "Last Monday I watched a film"
+    ],
+    "answer": "I am at home",
+    "sourceItem": "Eu estou em casa"
+  },
+  {
+    "id": "q_259",
+    "type": "multipleChoice",
+    "question": "How do you say 'I am at home' in Portuguese?",
+    "options": [
+      "vivo na Malveira",
+      "Daqui a duas semanas",
+      "Eu estou em casa",
+      "fevereiro"
+    ],
+    "answer": "Eu estou em casa",
+    "sourceItem": "Eu estou em casa"
+  },
+  {
+    "id": "q_260",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu _____ em casa' (I am at home)",
+    "options": [
+      "Fui",
+      "umas",
+      "semana",
+      "estou"
+    ],
+    "answer": "estou",
+    "sourceItem": "Eu estou em casa"
+  },
+  {
+    "id": "q_261",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A casa é grande'?",
+    "options": [
+      "Meals",
+      "I go by bus",
+      "How old are you?",
+      "The house is big"
+    ],
+    "answer": "The house is big",
+    "sourceItem": "A casa é grande"
+  },
+  {
+    "id": "q_262",
+    "type": "multipleChoice",
+    "question": "How do you say 'The house is big' in Portuguese?",
+    "options": [
+      "A casa é grande",
+      "Médico",
+      "até",
+      "em"
+    ],
+    "answer": "A casa é grande",
+    "sourceItem": "A casa é grande"
+  },
+  {
+    "id": "q_263",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A _____ é grande' (The house is big)",
+    "options": [
+      "Cem",
+      "casa",
+      "duzentos",
+      "vivo"
+    ],
+    "answer": "casa",
+    "sourceItem": "A casa é grande"
+  },
+  {
+    "id": "q_264",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A casa está limpa'?",
+    "options": [
+      "More or less",
+      "The house is clean",
+      "carrot cake",
+      "I want (polite)"
+    ],
+    "answer": "The house is clean",
+    "sourceItem": "A casa está limpa"
+  },
+  {
+    "id": "q_265",
+    "type": "multipleChoice",
+    "question": "How do you say 'The house is clean' in Portuguese?",
+    "options": [
+      "A casa está limpa",
+      "falo um pouco de português",
+      "Eu estou doente",
+      "dos Países Baixos"
+    ],
+    "answer": "A casa está limpa",
+    "sourceItem": "A casa está limpa"
+  },
+  {
+    "id": "q_266",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A _____ está limpa' (The house is clean)",
+    "options": [
+      "abril",
+      "casa",
+      "obrigado",
+      "inacreditável"
+    ],
+    "answer": "casa",
+    "sourceItem": "A casa está limpa"
+  },
+  {
+    "id": "q_267",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A caneta está em cima da mesa'?",
+    "options": [
+      "The pen is on top of the table",
+      "Weather/temperature",
+      "555",
+      "The car is in the garage"
+    ],
+    "answer": "The pen is on top of the table",
+    "sourceItem": "A caneta está em cima da mesa"
+  },
+  {
+    "id": "q_268",
+    "type": "multipleChoice",
+    "question": "How do you say 'The pen is on top of the table' in Portuguese?",
+    "options": [
+      "Eu gosto passear",
+      "A caneta está em cima da mesa",
+      "sempre",
+      "Eu sou casado"
+    ],
+    "answer": "A caneta está em cima da mesa",
+    "sourceItem": "A caneta está em cima da mesa"
+  },
+  {
+    "id": "q_269",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A caneta _____ em cima da mesa' (The pen is on top of the table)",
+    "options": [
+      "passada",
+      "disponivel",
+      "está",
+      "Estudantes"
+    ],
+    "answer": "está",
+    "sourceItem": "A caneta está em cima da mesa"
+  },
+  {
+    "id": "q_270",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O carro está na garagem'?",
+    "options": [
+      "Some players are from Benfica",
+      "slow",
+      "We are tired",
+      "The car is in the garage"
+    ],
+    "answer": "The car is in the garage",
+    "sourceItem": "O carro está na garagem"
+  },
+  {
+    "id": "q_271",
+    "type": "multipleChoice",
+    "question": "How do you say 'The car is in the garage' in Portuguese?",
+    "options": [
+      "Vens",
+      "até amanhã",
+      "O carro está na garagem",
+      "eu não como peixe"
+    ],
+    "answer": "O carro está na garagem",
+    "sourceItem": "O carro está na garagem"
+  },
+  {
+    "id": "q_272",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O carro _____ na garagem' (The car is in the garage)",
+    "options": [
+      "rápido",
+      "este",
+      "português",
+      "está"
+    ],
+    "answer": "está",
+    "sourceItem": "O carro está na garagem"
+  },
+  {
+    "id": "q_273",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O quadro está na parede'?",
+    "options": [
+      "The picture is on the wall",
+      "See you shortly",
+      "Sorry (informal)",
+      "yesterday"
+    ],
+    "answer": "The picture is on the wall",
+    "sourceItem": "O quadro está na parede"
+  },
+  {
+    "id": "q_274",
+    "type": "multipleChoice",
+    "question": "How do you say 'The picture is on the wall' in Portuguese?",
+    "options": [
+      "nem carne",
+      "Refeições",
+      "Porquê?",
+      "O quadro está na parede"
+    ],
+    "answer": "O quadro está na parede",
+    "sourceItem": "O quadro está na parede"
+  },
+  {
+    "id": "q_275",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O quadro _____ na parede' (The picture is on the wall)",
+    "options": [
+      "Segunda-feira",
+      "anteontem",
+      "está",
+      "Alunos"
+    ],
+    "answer": "está",
+    "sourceItem": "O quadro está na parede"
+  },
+  {
+    "id": "q_276",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Semana passada'?",
+    "options": [
+      "usually",
+      "It is 10:30",
+      "700",
+      "Last week"
+    ],
+    "answer": "Last week",
+    "sourceItem": "Semana passada"
+  },
+  {
+    "id": "q_277",
+    "type": "multipleChoice",
+    "question": "How do you say 'Last week' in Portuguese?",
+    "options": [
+      "esse",
+      "dezanove de janeiro",
+      "Semana passada",
+      "Onde está o leite?"
+    ],
+    "answer": "Semana passada",
+    "sourceItem": "Semana passada"
+  },
+  {
+    "id": "q_278",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'anteontem'?",
+    "options": [
+      "in the (em+a)",
+      "day before yesterday",
+      "Last week",
+      "1000"
+    ],
+    "answer": "day before yesterday",
+    "sourceItem": "anteontem"
+  },
+  {
+    "id": "q_279",
+    "type": "multipleChoice",
+    "question": "How do you say 'day before yesterday' in Portuguese?",
+    "options": [
+      "Gosto das pessoas",
+      "anteontem",
+      "A casa está limpa",
+      "Vens"
+    ],
+    "answer": "anteontem",
+    "sourceItem": "anteontem"
+  },
+  {
+    "id": "q_280",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ontem'?",
+    "options": [
+      "I like to travel",
+      "I like to take small trips",
+      "Sorry (formal)",
+      "yesterday"
+    ],
+    "answer": "yesterday",
+    "sourceItem": "ontem"
+  },
+  {
+    "id": "q_281",
+    "type": "multipleChoice",
+    "question": "How do you say 'yesterday' in Portuguese?",
+    "options": [
+      "Eu vou de autocarro",
+      "Chego ao meio-dia",
+      "Uma casa",
+      "ontem"
+    ],
+    "answer": "ontem",
+    "sourceItem": "ontem"
+  },
+  {
+    "id": "q_282",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'hoje'?",
+    "options": [
+      "600",
+      "Where are you from?",
+      "today",
+      "Pupils"
+    ],
+    "answer": "today",
+    "sourceItem": "hoje"
+  },
+  {
+    "id": "q_283",
+    "type": "multipleChoice",
+    "question": "How do you say 'today' in Portuguese?",
+    "options": [
+      "hoje",
+      "Porque?",
+      "Direto",
+      "Quanto?"
+    ],
+    "answer": "hoje",
+    "sourceItem": "hoje"
+  },
+  {
+    "id": "q_284",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'amanhã'?",
+    "options": [
+      "you were/went",
+      "tomorrow",
+      "slowly",
+      "often"
+    ],
+    "answer": "tomorrow",
+    "sourceItem": "amanhã"
+  },
+  {
+    "id": "q_285",
+    "type": "multipleChoice",
+    "question": "How do you say 'tomorrow' in Portuguese?",
+    "options": [
+      "Este fim de semana",
+      "Concordo",
+      "até à próxima",
+      "amanhã"
+    ],
+    "answer": "amanhã",
+    "sourceItem": "amanhã"
+  },
+  {
+    "id": "q_286",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'depois de amanhã'?",
+    "options": [
+      "At what time do you arrive?",
+      "day before yesterday",
+      "day after tomorrow",
+      "100"
+    ],
+    "answer": "day after tomorrow",
+    "sourceItem": "depois de amanhã"
+  },
+  {
+    "id": "q_287",
+    "type": "multipleChoice",
+    "question": "How do you say 'day after tomorrow' in Portuguese?",
+    "options": [
+      "depois de amanhã",
+      "eu sou de Inglaterra",
+      "novembro",
+      "com licença"
+    ],
+    "answer": "depois de amanhã",
+    "sourceItem": "depois de amanhã"
+  },
+  {
+    "id": "q_288",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ de amanhã' (day after tomorrow)",
+    "options": [
+      "depois",
+      "tem",
+      "Jantar",
+      "trezentos"
+    ],
+    "answer": "depois",
+    "sourceItem": "depois de amanhã"
+  },
+  {
+    "id": "q_289",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'próxima semana'?",
+    "options": [
+      "here (close to me)",
+      "next week",
+      "Pescatarian",
+      "February"
+    ],
+    "answer": "next week",
+    "sourceItem": "próxima semana"
+  },
+  {
+    "id": "q_290",
+    "type": "multipleChoice",
+    "question": "How do you say 'next week' in Portuguese?",
+    "options": [
+      "O meu nome é Ramesh",
+      "próxima semana",
+      "Eu gosto viajar",
+      "até já"
+    ],
+    "answer": "próxima semana",
+    "sourceItem": "próxima semana"
+  },
+  {
+    "id": "q_291",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nunca'?",
+    "options": [
+      "with",
+      "I live in Malveira",
+      "Never",
+      "January"
+    ],
+    "answer": "Never",
+    "sourceItem": "Nunca"
+  },
+  {
+    "id": "q_292",
+    "type": "multipleChoice",
+    "question": "How do you say 'Never' in Portuguese?",
+    "options": [
+      "Quando chegas a Portugal?",
+      "Chamo-me Ramesh",
+      "por",
+      "Nunca"
+    ],
+    "answer": "Nunca",
+    "sourceItem": "Nunca"
+  },
+  {
+    "id": "q_293",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'raramente'?",
+    "options": [
+      "I live",
+      "rarely",
+      "Cinema",
+      "Live (band/person)"
+    ],
+    "answer": "rarely",
+    "sourceItem": "raramente"
+  },
+  {
+    "id": "q_294",
+    "type": "multipleChoice",
+    "question": "How do you say 'rarely' in Portuguese?",
+    "options": [
+      "O restaurante fica no centro",
+      "raramente",
+      "Eu também",
+      "julho"
+    ],
+    "answer": "raramente",
+    "sourceItem": "raramente"
+  },
+  {
+    "id": "q_295",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'às vezes'?",
+    "options": [
+      "What/Which (noun)?",
+      "Excuse me",
+      "sometimes",
+      "I am sick"
+    ],
+    "answer": "sometimes",
+    "sourceItem": "às vezes"
+  },
+  {
+    "id": "q_296",
+    "type": "multipleChoice",
+    "question": "How do you say 'sometimes' in Portuguese?",
+    "options": [
+      "janeiro",
+      "muito obrigado",
+      "às vezes",
+      "Cem"
+    ],
+    "answer": "às vezes",
+    "sourceItem": "às vezes"
+  },
+  {
+    "id": "q_297",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'habitualmente'?",
+    "options": [
+      "usually",
+      "What (verb)?",
+      "Why (isolated)?",
+      "The pen is on top of the table"
+    ],
+    "answer": "usually",
+    "sourceItem": "habitualmente"
+  },
+  {
+    "id": "q_298",
+    "type": "multipleChoice",
+    "question": "How do you say 'usually' in Portuguese?",
+    "options": [
+      "Há quanto tempo vives em Lisboa?",
+      "até à próxima",
+      "Na segunda-feira vi um filme",
+      "habitualmente"
+    ],
+    "answer": "habitualmente",
+    "sourceItem": "habitualmente"
+  },
+  {
+    "id": "q_299",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'frequentemente'?",
+    "options": [
+      "For what do you want?",
+      "often",
+      "By/Over the bridge",
+      "To be (location/stay)"
+    ],
+    "answer": "often",
+    "sourceItem": "frequentemente"
+  },
+  {
+    "id": "q_300",
+    "type": "multipleChoice",
+    "question": "How do you say 'often' in Portuguese?",
+    "options": [
+      "muito obrigado",
+      "Eu sou vegetariano",
+      "eu sou inglês",
+      "frequentemente"
+    ],
+    "answer": "frequentemente",
+    "sourceItem": "frequentemente"
+  },
+  {
+    "id": "q_301",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'sempre'?",
+    "options": [
+      "I am learning Portuguese",
+      "To be (location/stay)",
+      "always",
+      "I go by bus"
+    ],
+    "answer": "always",
+    "sourceItem": "sempre"
+  },
+  {
+    "id": "q_302",
+    "type": "multipleChoice",
+    "question": "How do you say 'always' in Portuguese?",
+    "options": [
+      "próxima semana",
+      "Alunos",
+      "sempre",
+      "Eu gosto de jogar ténis"
+    ],
+    "answer": "sempre",
+    "sourceItem": "sempre"
+  },
+  {
+    "id": "q_303",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nunca faço surf'?",
+    "options": [
+      "Me too",
+      "I never surf",
+      "Activities",
+      "For what do you want?"
+    ],
+    "answer": "I never surf",
+    "sourceItem": "Nunca faço surf"
+  },
+  {
+    "id": "q_304",
+    "type": "multipleChoice",
+    "question": "How do you say 'I never surf' in Portuguese?",
+    "options": [
+      "Nunca faço surf",
+      "Eu gosto ler",
+      "como estás?",
+      "eu sou inglês"
+    ],
+    "answer": "Nunca faço surf",
+    "sourceItem": "Nunca faço surf"
+  },
+  {
+    "id": "q_305",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Nunca faço _____' (I never surf)",
+    "options": [
+      "português",
+      "está",
+      "surf",
+      "Nunca"
+    ],
+    "answer": "surf",
+    "sourceItem": "Nunca faço surf"
+  },
+  {
+    "id": "q_306",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'vejo sempre futebol'?",
+    "options": [
+      "I always watch football",
+      "Next week",
+      "What do you do this weekend?",
+      "A problem"
+    ],
+    "answer": "I always watch football",
+    "sourceItem": "vejo sempre futebol"
+  },
+  {
+    "id": "q_307",
+    "type": "multipleChoice",
+    "question": "How do you say 'I always watch football' in Portuguese?",
+    "options": [
+      "Que..?",
+      "até logo",
+      "vejo sempre futebol",
+      "maio"
+    ],
+    "answer": "vejo sempre futebol",
+    "sourceItem": "vejo sempre futebol"
+  },
+  {
+    "id": "q_308",
+    "type": "cloze",
+    "question": "Fill in the blank: 'vejo _____ futebol' (I always watch football)",
+    "options": [
+      "sempre",
+      "pequeno-almoço",
+      "Nunca",
+      "fevereiro"
+    ],
+    "answer": "sempre",
+    "sourceItem": "vejo sempre futebol"
+  },
+  {
+    "id": "q_309",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Segunda-feira'?",
+    "options": [
+      "finishes/ends",
+      "Cinema",
+      "Monday",
+      "This weekend"
+    ],
+    "answer": "Monday",
+    "sourceItem": "Segunda-feira"
+  },
+  {
+    "id": "q_310",
+    "type": "multipleChoice",
+    "question": "How do you say 'Monday' in Portuguese?",
+    "options": [
+      "Um carro",
+      "Segunda-feira",
+      "Eu estou doente",
+      "De India"
+    ],
+    "answer": "Segunda-feira",
+    "sourceItem": "Segunda-feira"
+  },
+  {
+    "id": "q_311",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'dezanove de janeiro'?",
+    "options": [
+      "some (masc. plural)",
+      "He is well",
+      "My name is Ramesh",
+      "19th of January"
+    ],
+    "answer": "19th of January",
+    "sourceItem": "dezanove de janeiro"
+  },
+  {
+    "id": "q_312",
+    "type": "multipleChoice",
+    "question": "How do you say '19th of January' in Portuguese?",
+    "options": [
+      "Eu também",
+      "dezanove de janeiro",
+      "Na segunda-feira vi um filme",
+      "até sábado"
+    ],
+    "answer": "dezanove de janeiro",
+    "sourceItem": "dezanove de janeiro"
+  },
+  {
+    "id": "q_313",
+    "type": "cloze",
+    "question": "Fill in the blank: 'dezanove de _____' (19th of January)",
+    "options": [
+      "semana",
+      "Quanto",
+      "janeiro",
+      "Exatamente"
+    ],
+    "answer": "janeiro",
+    "sourceItem": "dezanove de janeiro"
+  },
+  {
+    "id": "q_314",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Cem'?",
+    "options": [
+      "I like to travel",
+      "100",
+      "I don't eat fish",
+      "It is 10:30"
+    ],
+    "answer": "100",
+    "sourceItem": "Cem"
+  },
+  {
+    "id": "q_315",
+    "type": "multipleChoice",
+    "question": "How do you say '100' in Portuguese?",
+    "options": [
+      "Cem",
+      "Gosto das pessoas",
+      "passatempos",
+      "até já"
+    ],
+    "answer": "Cem",
+    "sourceItem": "Cem"
+  },
+  {
+    "id": "q_316",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'duzentos'?",
+    "options": [
+      "I live in Malveira",
+      "Can you repeat please",
+      "What do you do this weekend?",
+      "200"
+    ],
+    "answer": "200",
+    "sourceItem": "duzentos"
+  },
+  {
+    "id": "q_317",
+    "type": "multipleChoice",
+    "question": "How do you say '200' in Portuguese?",
+    "options": [
+      "em",
+      "duzentos",
+      "eu estou cansado",
+      "como estás?"
+    ],
+    "answer": "duzentos",
+    "sourceItem": "duzentos"
+  },
+  {
+    "id": "q_318",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'trezentos'?",
+    "options": [
+      "300",
+      "Where?",
+      "Pupils",
+      "Activities"
+    ],
+    "answer": "300",
+    "sourceItem": "trezentos"
+  },
+  {
+    "id": "q_319",
+    "type": "multipleChoice",
+    "question": "How do you say '300' in Portuguese?",
+    "options": [
+      "esse",
+      "eu sou inglês",
+      "umas",
+      "trezentos"
+    ],
+    "answer": "trezentos",
+    "sourceItem": "trezentos"
+  },
+  {
+    "id": "q_320",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'quatrocentos'?",
+    "options": [
+      "tomorrow",
+      "500",
+      "400",
+      "How long (has it been)?"
+    ],
+    "answer": "400",
+    "sourceItem": "quatrocentos"
+  },
+  {
+    "id": "q_321",
+    "type": "multipleChoice",
+    "question": "How do you say '400' in Portuguese?",
+    "options": [
+      "habitualmente",
+      "Nós estamos felizes",
+      "boa semana!",
+      "quatrocentos"
+    ],
+    "answer": "quatrocentos",
+    "sourceItem": "quatrocentos"
+  },
+  {
+    "id": "q_322",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'quinhentos'?",
+    "options": [
+      "in/on",
+      "you were/went",
+      "Last Monday I watched a film",
+      "500"
+    ],
+    "answer": "500",
+    "sourceItem": "quinhentos"
+  },
+  {
+    "id": "q_323",
+    "type": "multipleChoice",
+    "question": "How do you say '500' in Portuguese?",
+    "options": [
+      "dezanove de janeiro",
+      "quinhentos",
+      "Fui",
+      "posso fazer uma pregunta"
+    ],
+    "answer": "quinhentos",
+    "sourceItem": "quinhentos"
+  },
+  {
+    "id": "q_324",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'seiscentos'?",
+    "options": [
+      "I agree",
+      "600",
+      "See you shortly",
+      "next week"
+    ],
+    "answer": "600",
+    "sourceItem": "seiscentos"
+  },
+  {
+    "id": "q_325",
+    "type": "multipleChoice",
+    "question": "How do you say '600' in Portuguese?",
+    "options": [
+      "Quando?",
+      "pescetariano",
+      "seiscentos",
+      "o teu"
+    ],
+    "answer": "seiscentos",
+    "sourceItem": "seiscentos"
+  },
+  {
+    "id": "q_326",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'setecentos'?",
+    "options": [
+      "See you shortly",
+      "700",
+      "November",
+      "We are happy"
+    ],
+    "answer": "700",
+    "sourceItem": "setecentos"
+  },
+  {
+    "id": "q_327",
+    "type": "multipleChoice",
+    "question": "How do you say '700' in Portuguese?",
+    "options": [
+      "de",
+      "Preciso do carro por 4 dias",
+      "setecentos",
+      "Segunda-feira"
+    ],
+    "answer": "setecentos",
+    "sourceItem": "setecentos"
+  },
+  {
+    "id": "q_328",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'oitocentos'?",
+    "options": [
+      "What are your favorite musics?",
+      "I like to travel",
+      "800",
+      "Where are you from?"
+    ],
+    "answer": "800",
+    "sourceItem": "oitocentos"
+  },
+  {
+    "id": "q_329",
+    "type": "multipleChoice",
+    "question": "How do you say '800' in Portuguese?",
+    "options": [
+      "Preciso do carro por 4 dias",
+      "até",
+      "oitocentos",
+      "O meu nome é Ramesh"
+    ],
+    "answer": "oitocentos",
+    "sourceItem": "oitocentos"
+  },
+  {
+    "id": "q_330",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'novecentos'?",
+    "options": [
+      "I like the people",
+      "900",
+      "I want (polite)",
+      "then"
+    ],
+    "answer": "900",
+    "sourceItem": "novecentos"
+  },
+  {
+    "id": "q_331",
+    "type": "multipleChoice",
+    "question": "How do you say '900' in Portuguese?",
+    "options": [
+      "boa semana!",
+      "novecentos",
+      "Quem?",
+      "quatrocentos"
+    ],
+    "answer": "novecentos",
+    "sourceItem": "novecentos"
+  },
+  {
+    "id": "q_332",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'mil'?",
+    "options": [
+      "We are happy",
+      "usually",
+      "hobbies",
+      "1000"
+    ],
+    "answer": "1000",
+    "sourceItem": "mil"
+  },
+  {
+    "id": "q_333",
+    "type": "multipleChoice",
+    "question": "How do you say '1000' in Portuguese?",
+    "options": [
+      "mil",
+      "A caneta está em cima da mesa",
+      "Um carro",
+      "um"
+    ],
+    "answer": "mil",
+    "sourceItem": "mil"
+  },
+  {
+    "id": "q_334",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quinhentos e cinquenta e cinco'?",
+    "options": [
+      "A problem",
+      "Coming from",
+      "Things I like about Portugal are the weather",
+      "555"
+    ],
+    "answer": "555",
+    "sourceItem": "Quinhentos e cinquenta e cinco"
+  },
+  {
+    "id": "q_335",
+    "type": "multipleChoice",
+    "question": "How do you say '555' in Portuguese?",
+    "options": [
+      "passatempos",
+      "nem carne",
+      "esse",
+      "Quinhentos e cinquenta e cinco"
+    ],
+    "answer": "Quinhentos e cinquenta e cinco",
+    "sourceItem": "Quinhentos e cinquenta e cinco"
+  },
+  {
+    "id": "q_336",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Quinhentos e _____ e cinco' (555)",
+    "options": [
+      "cinquenta",
+      "sempre",
+      "Quem",
+      "almoço"
+    ],
+    "answer": "cinquenta",
+    "sourceItem": "Quinhentos e cinquenta e cinco"
+  },
+  {
+    "id": "q_337",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'janeiro'?",
+    "options": [
+      "January",
+      "We meet at the door",
+      "Monday",
+      "Never"
+    ],
+    "answer": "January",
+    "sourceItem": "janeiro"
+  },
+  {
+    "id": "q_338",
+    "type": "multipleChoice",
+    "question": "How do you say 'January' in Portuguese?",
+    "options": [
+      "janeiro",
+      "aqui",
+      "duzentos",
+      "Quais são as tuas músicas favoritas?"
+    ],
+    "answer": "janeiro",
+    "sourceItem": "janeiro"
+  },
+  {
+    "id": "q_339",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'fevereiro'?",
+    "options": [
+      "I go to the beach",
+      "He is well",
+      "February",
+      "I was/went"
+    ],
+    "answer": "February",
+    "sourceItem": "fevereiro"
+  },
+  {
+    "id": "q_340",
+    "type": "multipleChoice",
+    "question": "How do you say 'February' in Portuguese?",
+    "options": [
+      "fevereiro",
+      "devagar",
+      "A casa é grande",
+      "uma"
+    ],
+    "answer": "fevereiro",
+    "sourceItem": "fevereiro"
+  },
+  {
+    "id": "q_341",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'março'?",
+    "options": [
+      "available",
+      "The pen is on top of the table",
+      "March",
+      "I was/went"
+    ],
+    "answer": "March",
+    "sourceItem": "março"
+  },
+  {
+    "id": "q_342",
+    "type": "multipleChoice",
+    "question": "How do you say 'March' in Portuguese?",
+    "options": [
+      "março",
+      "com licença",
+      "O que..?",
+      "Refeições"
+    ],
+    "answer": "março",
+    "sourceItem": "março"
+  },
+  {
+    "id": "q_343",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'abril'?",
+    "options": [
+      "How are you (formal)?",
+      "Dinner",
+      "often",
+      "April"
+    ],
+    "answer": "April",
+    "sourceItem": "abril"
+  },
+  {
+    "id": "q_344",
+    "type": "multipleChoice",
+    "question": "How do you say 'April' in Portuguese?",
+    "options": [
+      "Onde está o leite?",
+      "abril",
+      "Quando?",
+      "Eu sou vegetariano"
+    ],
+    "answer": "abril",
+    "sourceItem": "abril"
+  },
+  {
+    "id": "q_345",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'maio'?",
+    "options": [
+      "To be (location/stay)",
+      "I arrive at midday",
+      "Doctor",
+      "May"
+    ],
+    "answer": "May",
+    "sourceItem": "maio"
+  },
+  {
+    "id": "q_346",
+    "type": "multipleChoice",
+    "question": "How do you say 'May' in Portuguese?",
+    "options": [
+      "até logo",
+      "Daqui a duas semanas",
+      "Este presente é para ti",
+      "maio"
+    ],
+    "answer": "maio",
+    "sourceItem": "maio"
+  },
+  {
+    "id": "q_347",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'junho'?",
+    "options": [
+      "June",
+      "When do you arrive to Portugal?",
+      "What food do you prefer?",
+      "Coming from"
+    ],
+    "answer": "June",
+    "sourceItem": "junho"
+  },
+  {
+    "id": "q_348",
+    "type": "multipleChoice",
+    "question": "How do you say 'June' in Portuguese?",
+    "options": [
+      "haver",
+      "junho",
+      "Uma fatia de bolo",
+      "Quantos anos tens?"
+    ],
+    "answer": "junho",
+    "sourceItem": "junho"
+  },
+  {
+    "id": "q_349",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'julho'?",
+    "options": [
+      "My name is Ramesh",
+      "Call me Ramesh",
+      "July",
+      "I understand"
+    ],
+    "answer": "July",
+    "sourceItem": "julho"
+  },
+  {
+    "id": "q_350",
+    "type": "multipleChoice",
+    "question": "How do you say 'July' in Portuguese?",
+    "options": [
+      "Nunca",
+      "julho",
+      "hoje",
+      "Quem?"
+    ],
+    "answer": "julho",
+    "sourceItem": "julho"
+  },
+  {
+    "id": "q_351",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'agosto'?",
+    "options": [
+      "day before yesterday",
+      "July",
+      "in the (em+a)",
+      "August"
+    ],
+    "answer": "August",
+    "sourceItem": "agosto"
+  },
+  {
+    "id": "q_352",
+    "type": "multipleChoice",
+    "question": "How do you say 'August' in Portuguese?",
+    "options": [
+      "Quanto?",
+      "está bem",
+      "Eu estou a aprender português",
+      "agosto"
+    ],
+    "answer": "agosto",
+    "sourceItem": "agosto"
+  },
+  {
+    "id": "q_353",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'setembro'?",
+    "options": [
+      "a (fem. singular)",
+      "your",
+      "September",
+      "Thank you very much"
+    ],
+    "answer": "September",
+    "sourceItem": "setembro"
+  },
+  {
+    "id": "q_354",
+    "type": "multipleChoice",
+    "question": "How do you say 'September' in Portuguese?",
+    "options": [
+      "setembro",
+      "A caneta está em cima da mesa",
+      "estar",
+      "Eu gosto viajar"
+    ],
+    "answer": "setembro",
+    "sourceItem": "setembro"
+  },
+  {
+    "id": "q_355",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'outubro'?",
+    "options": [
+      "to be (temporary)",
+      "Nor meat",
+      "We meet at the door",
+      "October"
+    ],
+    "answer": "October",
+    "sourceItem": "outubro"
+  },
+  {
+    "id": "q_356",
+    "type": "multipleChoice",
+    "question": "How do you say 'October' in Portuguese?",
+    "options": [
+      "desculpa",
+      "outubro",
+      "depois de amanhã",
+      "até já"
+    ],
+    "answer": "outubro",
+    "sourceItem": "outubro"
+  },
+  {
+    "id": "q_357",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'novembro'?",
+    "options": [
+      "November",
+      "Sorry (informal)",
+      "then",
+      "March"
+    ],
+    "answer": "November",
+    "sourceItem": "novembro"
+  },
+  {
+    "id": "q_358",
+    "type": "multipleChoice",
+    "question": "How do you say 'November' in Portuguese?",
+    "options": [
+      "O que..?",
+      "Que horas são?",
+      "novembro",
+      "maio"
+    ],
+    "answer": "novembro",
+    "sourceItem": "novembro"
+  },
+  {
+    "id": "q_359",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'dezembro'?",
+    "options": [
+      "I am married",
+      "I go to make dinner",
+      "April",
+      "December"
+    ],
+    "answer": "December",
+    "sourceItem": "dezembro"
+  },
+  {
+    "id": "q_360",
+    "type": "multipleChoice",
+    "question": "How do you say 'December' in Portuguese?",
+    "options": [
+      "dezembro",
+      "Ao fim de semana",
+      "nem carne",
+      "até sábado"
+    ],
+    "answer": "dezembro",
+    "sourceItem": "dezembro"
+  },
+  {
+    "id": "q_361",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'São 10h30'?",
+    "options": [
+      "It is 10:30",
+      "I go by train",
+      "fast",
+      "See you shortly"
+    ],
+    "answer": "It is 10:30",
+    "sourceItem": "São 10h30"
+  },
+  {
+    "id": "q_362",
+    "type": "multipleChoice",
+    "question": "How do you say 'It is 10:30' in Portuguese?",
+    "options": [
+      "Uma fatia de bolo",
+      "Pela ponte",
+      "São 10h30",
+      "muito obrigado"
+    ],
+    "answer": "São 10h30",
+    "sourceItem": "São 10h30"
+  },
+  {
+    "id": "q_363",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'É meio-dia'?",
+    "options": [
+      "I go to make dinner",
+      "clothes",
+      "It is midday",
+      "then"
+    ],
+    "answer": "It is midday",
+    "sourceItem": "É meio-dia"
+  },
+  {
+    "id": "q_364",
+    "type": "multipleChoice",
+    "question": "How do you say 'It is midday' in Portuguese?",
+    "options": [
+      "Eu sou vegetariano",
+      "Encontramo-nos à porta",
+      "É meio-dia",
+      "uma filha tem quinze anos"
+    ],
+    "answer": "É meio-dia",
+    "sourceItem": "É meio-dia"
+  },
+  {
+    "id": "q_365",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'É meia-noite'?",
+    "options": [
+      "Tea-time / Snack",
+      "I like the confectionary in Portugal",
+      "It is midnight",
+      "fast"
+    ],
+    "answer": "It is midnight",
+    "sourceItem": "É meia-noite"
+  },
+  {
+    "id": "q_366",
+    "type": "multipleChoice",
+    "question": "How do you say 'It is midnight' in Portuguese?",
+    "options": [
+      "até breve",
+      "Quais?",
+      "tudo bem?",
+      "É meia-noite"
+    ],
+    "answer": "É meia-noite",
+    "sourceItem": "É meia-noite"
+  },
+  {
+    "id": "q_367",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Que horas são?'?",
+    "options": [
+      "What time is it?",
+      "Goodbye",
+      "January",
+      "Activities"
+    ],
+    "answer": "What time is it?",
+    "sourceItem": "Que horas são?"
+  },
+  {
+    "id": "q_368",
+    "type": "multipleChoice",
+    "question": "How do you say 'What time is it?' in Portuguese?",
+    "options": [
+      "Que horas são?",
+      "na",
+      "pode falar mais devagar",
+      "O eléctrico"
+    ],
+    "answer": "Que horas são?",
+    "sourceItem": "Que horas são?"
+  },
+  {
+    "id": "q_369",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ horas são?' (What time is it?)",
+    "options": [
+      "gosto",
+      "Que",
+      "licença",
+      "peixe"
+    ],
+    "answer": "Que",
+    "sourceItem": "Que horas são?"
+  },
+  {
+    "id": "q_370",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A que horas chegas?'?",
+    "options": [
+      "At what time do you arrive?",
+      "500",
+      "It is midday",
+      "What (verb)?"
+    ],
+    "answer": "At what time do you arrive?",
+    "sourceItem": "A que horas chegas?"
+  },
+  {
+    "id": "q_371",
+    "type": "multipleChoice",
+    "question": "How do you say 'At what time do you arrive?' in Portuguese?",
+    "options": [
+      "A que horas chegas?",
+      "hoje está bom tempo",
+      "Compreendo",
+      "Eu sou o Ramesh"
+    ],
+    "answer": "A que horas chegas?",
+    "sourceItem": "A que horas chegas?"
+  },
+  {
+    "id": "q_372",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A que horas _____' (At what time do you arrive?)",
+    "options": [
+      "segunda-feira",
+      "queria",
+      "chegas",
+      "com"
+    ],
+    "answer": "chegas",
+    "sourceItem": "A que horas chegas?"
+  },
+  {
+    "id": "q_373",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Chego ao meio-dia'?",
+    "options": [
+      "I arrive at midday",
+      "He is well",
+      "I agree",
+      "By/Over the bridge"
+    ],
+    "answer": "I arrive at midday",
+    "sourceItem": "Chego ao meio-dia"
+  },
+  {
+    "id": "q_374",
+    "type": "multipleChoice",
+    "question": "How do you say 'I arrive at midday' in Portuguese?",
+    "options": [
+      "aqui",
+      "Eu gosto ler",
+      "raramente",
+      "Chego ao meio-dia"
+    ],
+    "answer": "Chego ao meio-dia",
+    "sourceItem": "Chego ao meio-dia"
+  },
+  {
+    "id": "q_375",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Chego ao _____' (I arrive at midday)",
+    "options": [
+      "Direto",
+      "filha",
+      "janeiro",
+      "meio-dia"
+    ],
+    "answer": "meio-dia",
+    "sourceItem": "Chego ao meio-dia"
+  },
+  {
+    "id": "q_376",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a'?",
+    "options": [
+      "at/to",
+      "When?",
+      "October",
+      "Exactly"
+    ],
+    "answer": "at/to",
+    "sourceItem": "a"
+  },
+  {
+    "id": "q_377",
+    "type": "multipleChoice",
+    "question": "How do you say 'at/to' in Portuguese?",
+    "options": [
+      "Chego ao meio-dia",
+      "a",
+      "Fui",
+      "uma filha tem quinze anos"
+    ],
+    "answer": "a",
+    "sourceItem": "a"
+  },
+  {
+    "id": "q_378",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'de'?",
+    "options": [
+      "about",
+      "fast",
+      "of/from",
+      "July"
+    ],
+    "answer": "of/from",
+    "sourceItem": "de"
+  },
+  {
+    "id": "q_379",
+    "type": "multipleChoice",
+    "question": "How do you say 'of/from' in Portuguese?",
+    "options": [
+      "disponivel",
+      "de",
+      "Nós estamos felizes",
+      "eu sou inglês"
+    ],
+    "answer": "de",
+    "sourceItem": "de"
+  },
+  {
+    "id": "q_380",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'em'?",
+    "options": [
+      "without",
+      "Pupils",
+      "at/to",
+      "in/on"
+    ],
+    "answer": "in/on",
+    "sourceItem": "em"
+  },
+  {
+    "id": "q_381",
+    "type": "multipleChoice",
+    "question": "How do you say 'in/on' in Portuguese?",
+    "options": [
+      "em",
+      "sobre",
+      "até amanhã",
+      "da"
+    ],
+    "answer": "em",
+    "sourceItem": "em"
+  },
+  {
+    "id": "q_382",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'para'?",
+    "options": [
+      "Doctor",
+      "What do you do this weekend?",
+      "for/to (destination)",
+      "carrot cake"
+    ],
+    "answer": "for/to (destination)",
+    "sourceItem": "para"
+  },
+  {
+    "id": "q_383",
+    "type": "multipleChoice",
+    "question": "How do you say 'for/to (destination)' in Portuguese?",
+    "options": [
+      "junho",
+      "para",
+      "Nós fomos de férias",
+      "até breve"
+    ],
+    "answer": "para",
+    "sourceItem": "para"
+  },
+  {
+    "id": "q_384",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'por'?",
+    "options": [
+      "by/for (period)/because",
+      "without",
+      "Excuse me",
+      "100"
+    ],
+    "answer": "by/for (period)/because",
+    "sourceItem": "por"
+  },
+  {
+    "id": "q_385",
+    "type": "multipleChoice",
+    "question": "How do you say 'by/for (period)/because' in Portuguese?",
+    "options": [
+      "dos Países Baixos",
+      "por",
+      "De India",
+      "na"
+    ],
+    "answer": "por",
+    "sourceItem": "por"
+  },
+  {
+    "id": "q_386",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'sem'?",
+    "options": [
+      "fast",
+      "until",
+      "slowly",
+      "without"
+    ],
+    "answer": "without",
+    "sourceItem": "sem"
+  },
+  {
+    "id": "q_387",
+    "type": "multipleChoice",
+    "question": "How do you say 'without' in Portuguese?",
+    "options": [
+      "Nós estamos cansados",
+      "Chamo-me Ramesh",
+      "sem",
+      "bom fim de semana!"
+    ],
+    "answer": "sem",
+    "sourceItem": "sem"
+  },
+  {
+    "id": "q_388",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'com'?",
+    "options": [
+      "today",
+      "Doctor",
+      "Thank you very much",
+      "with"
+    ],
+    "answer": "with",
+    "sourceItem": "com"
+  },
+  {
+    "id": "q_389",
+    "type": "multipleChoice",
+    "question": "How do you say 'with' in Portuguese?",
+    "options": [
+      "disponivel",
+      "um",
+      "com",
+      "Quanto?"
+    ],
+    "answer": "com",
+    "sourceItem": "com"
+  },
+  {
+    "id": "q_390",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'até'?",
+    "options": [
+      "Coming from",
+      "until",
+      "Next Monday I will go to the cinema",
+      "to be (permanent)"
+    ],
+    "answer": "until",
+    "sourceItem": "até"
+  },
+  {
+    "id": "q_391",
+    "type": "multipleChoice",
+    "question": "How do you say 'until' in Portuguese?",
+    "options": [
+      "até",
+      "dezanove de janeiro",
+      "duzentos",
+      "Para a semana"
+    ],
+    "answer": "até",
+    "sourceItem": "até"
+  },
+  {
+    "id": "q_392",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'desde'?",
+    "options": [
+      "Tea-time / Snack",
+      "since",
+      "Monday",
+      "How long have you been living in Lisbon?"
+    ],
+    "answer": "since",
+    "sourceItem": "desde"
+  },
+  {
+    "id": "q_393",
+    "type": "multipleChoice",
+    "question": "How do you say 'since' in Portuguese?",
+    "options": [
+      "atividades",
+      "O Morocco",
+      "abril",
+      "desde"
+    ],
+    "answer": "desde",
+    "sourceItem": "desde"
+  },
+  {
+    "id": "q_394",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'sobre'?",
+    "options": [
+      "This present is for you",
+      "What is your favorite color?",
+      "See you very soon (within the hour)",
+      "about"
+    ],
+    "answer": "about",
+    "sourceItem": "sobre"
+  },
+  {
+    "id": "q_395",
+    "type": "multipleChoice",
+    "question": "How do you say 'about' in Portuguese?",
+    "options": [
+      "frequentemente",
+      "Até nunca",
+      "setembro",
+      "sobre"
+    ],
+    "answer": "sobre",
+    "sourceItem": "sobre"
+  },
+  {
+    "id": "q_396",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu vou à praia'?",
+    "options": [
+      "I go to the beach",
+      "there (close to you)",
+      "September",
+      "How long does the trip take?"
+    ],
+    "answer": "I go to the beach",
+    "sourceItem": "Eu vou à praia"
+  },
+  {
+    "id": "q_397",
+    "type": "multipleChoice",
+    "question": "How do you say 'I go to the beach' in Portuguese?",
+    "options": [
+      "passatempos",
+      "pode falar mais devagar",
+      "depressa",
+      "Eu vou à praia"
+    ],
+    "answer": "Eu vou à praia",
+    "sourceItem": "Eu vou à praia"
+  },
+  {
+    "id": "q_398",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu _____ à praia' (I go to the beach)",
+    "options": [
+      "Ramesh",
+      "Refeições",
+      "vou",
+      "adeus"
+    ],
+    "answer": "vou",
+    "sourceItem": "Eu vou à praia"
+  },
+  {
+    "id": "q_399",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu vou ao supermercado'?",
+    "options": [
+      "555",
+      "clothes",
+      "What time is it?",
+      "I go to the supermarket"
+    ],
+    "answer": "I go to the supermarket",
+    "sourceItem": "Eu vou ao supermercado"
+  },
+  {
+    "id": "q_400",
+    "type": "multipleChoice",
+    "question": "How do you say 'I go to the supermarket' in Portuguese?",
+    "options": [
+      "eu sou inglês",
+      "hoje está bom tempo",
+      "Preciso do carro por 4 dias",
+      "Eu vou ao supermercado"
+    ],
+    "answer": "Eu vou ao supermercado",
+    "sourceItem": "Eu vou ao supermercado"
+  },
+  {
+    "id": "q_401",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu _____ ao supermercado' (I go to the supermarket)",
+    "options": [
+      "horas",
+      "cinco",
+      "então",
+      "vou"
+    ],
+    "answer": "vou",
+    "sourceItem": "Eu vou ao supermercado"
+  },
+  {
+    "id": "q_402",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ao fim de semana'?",
+    "options": [
+      "At the weekend",
+      "How long (has it been)?",
+      "1000",
+      "I like the people"
+    ],
+    "answer": "At the weekend",
+    "sourceItem": "Ao fim de semana"
+  },
+  {
+    "id": "q_403",
+    "type": "multipleChoice",
+    "question": "How do you say 'At the weekend' in Portuguese?",
+    "options": [
+      "Uma fatia de bolo",
+      "frequentemente",
+      "posso fazer uma pregunta",
+      "Ao fim de semana"
+    ],
+    "answer": "Ao fim de semana",
+    "sourceItem": "Ao fim de semana"
+  },
+  {
+    "id": "q_404",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ao fim de _____' (At the weekend)",
+    "options": [
+      "Cem",
+      "São",
+      "bem",
+      "semana"
+    ],
+    "answer": "semana",
+    "sourceItem": "Ao fim de semana"
+  },
+  {
+    "id": "q_405",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Direto'?",
+    "options": [
+      "Live (transmission)",
+      "19th of January",
+      "What are your favorite musics?",
+      "The house is big"
+    ],
+    "answer": "Live (transmission)",
+    "sourceItem": "Direto"
+  },
+  {
+    "id": "q_406",
+    "type": "multipleChoice",
+    "question": "How do you say 'Live (transmission)' in Portuguese?",
+    "options": [
+      "muito obrigado",
+      "almoço",
+      "Eu sou vegetariano",
+      "Direto"
+    ],
+    "answer": "Direto",
+    "sourceItem": "Direto"
+  },
+  {
+    "id": "q_407",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ao vivo'?",
+    "options": [
+      "over there (far)",
+      "Live (band/person)",
+      "often",
+      "carrot cake"
+    ],
+    "answer": "Live (band/person)",
+    "sourceItem": "Ao vivo"
+  },
+  {
+    "id": "q_408",
+    "type": "multipleChoice",
+    "question": "How do you say 'Live (band/person)' in Portuguese?",
+    "options": [
+      "até já",
+      "agosto",
+      "Ao vivo",
+      "amanhã"
+    ],
+    "answer": "Ao vivo",
+    "sourceItem": "Ao vivo"
+  },
+  {
+    "id": "q_409",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Este fim de semana'?",
+    "options": [
+      "until",
+      "Exactly",
+      "Where is the milk?",
+      "This weekend"
+    ],
+    "answer": "This weekend",
+    "sourceItem": "Este fim de semana"
+  },
+  {
+    "id": "q_410",
+    "type": "multipleChoice",
+    "question": "How do you say 'This weekend' in Portuguese?",
+    "options": [
+      "até à próxima",
+      "Lanche",
+      "Este fim de semana",
+      "A casa é grande"
+    ],
+    "answer": "Este fim de semana",
+    "sourceItem": "Este fim de semana"
+  },
+  {
+    "id": "q_411",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Este _____ de semana' (This weekend)",
+    "options": [
+      "está",
+      "fim",
+      "Onde",
+      "novecentos"
+    ],
+    "answer": "fim",
+    "sourceItem": "Este fim de semana"
+  },
+  {
+    "id": "q_412",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Daqui a duas semanas'?",
+    "options": [
+      "I like to travel",
+      "Activities",
+      "In two weeks",
+      "What are your favorite musics?"
+    ],
+    "answer": "In two weeks",
+    "sourceItem": "Daqui a duas semanas"
+  },
+  {
+    "id": "q_413",
+    "type": "multipleChoice",
+    "question": "How do you say 'In two weeks' in Portuguese?",
+    "options": [
+      "Desde quando?",
+      "anteontem",
+      "Daqui a duas semanas",
+      "Uma fatia de bolo"
+    ],
+    "answer": "Daqui a duas semanas",
+    "sourceItem": "Daqui a duas semanas"
+  },
+  {
+    "id": "q_414",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Daqui a _____ semanas' (In two weeks)",
+    "options": [
+      "duas",
+      "umas",
+      "nunca",
+      "Isto"
+    ],
+    "answer": "duas",
+    "sourceItem": "Daqui a duas semanas"
+  },
+  {
+    "id": "q_415",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Na segunda-feira vi um filme'?",
+    "options": [
+      "Last Monday I watched a film",
+      "Meals",
+      "What time is it?",
+      "The pen is on top of the table"
+    ],
+    "answer": "Last Monday I watched a film",
+    "sourceItem": "Na segunda-feira vi um filme"
+  },
+  {
+    "id": "q_416",
+    "type": "multipleChoice",
+    "question": "How do you say 'Last Monday I watched a film' in Portuguese?",
+    "options": [
+      "desculpa",
+      "Na segunda-feira vi um filme",
+      "Eu vou de autocarro",
+      "foste"
+    ],
+    "answer": "Na segunda-feira vi um filme",
+    "sourceItem": "Na segunda-feira vi um filme"
+  },
+  {
+    "id": "q_417",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Na segunda-feira vi um _____' (Last Monday I watched a film)",
+    "options": [
+      "Pela",
+      "trezentos",
+      "Qual",
+      "filme"
+    ],
+    "answer": "filme",
+    "sourceItem": "Na segunda-feira vi um filme"
+  },
+  {
+    "id": "q_418",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Na segunda-feira vou ao cinema'?",
+    "options": [
+      "800",
+      "I am fine",
+      "Lunch",
+      "Next Monday I will go to the cinema"
+    ],
+    "answer": "Next Monday I will go to the cinema",
+    "sourceItem": "Na segunda-feira vou ao cinema"
+  },
+  {
+    "id": "q_419",
+    "type": "multipleChoice",
+    "question": "How do you say 'Next Monday I will go to the cinema' in Portuguese?",
+    "options": [
+      "Na segunda-feira vou ao cinema",
+      "bom fim de semana!",
+      "Eu vou de comboio",
+      "Quanto tempo leva a viagem?"
+    ],
+    "answer": "Na segunda-feira vou ao cinema",
+    "sourceItem": "Na segunda-feira vou ao cinema"
+  },
+  {
+    "id": "q_420",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Na segunda-feira vou ao _____' (Next Monday I will go to the cinema)",
+    "options": [
+      "cinema",
+      "setecentos",
+      "custa",
+      "por"
+    ],
+    "answer": "cinema",
+    "sourceItem": "Na segunda-feira vou ao cinema"
+  },
+  {
+    "id": "q_421",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu vou de comboio'?",
+    "options": [
+      "The house is clean",
+      "I go by train",
+      "Activities",
+      "To be (location/stay)"
+    ],
+    "answer": "I go by train",
+    "sourceItem": "Eu vou de comboio"
+  },
+  {
+    "id": "q_422",
+    "type": "multipleChoice",
+    "question": "How do you say 'I go by train' in Portuguese?",
+    "options": [
+      "setecentos",
+      "eu não como peixe",
+      "Eu vou de comboio",
+      "Onde?"
+    ],
+    "answer": "Eu vou de comboio",
+    "sourceItem": "Eu vou de comboio"
+  },
+  {
+    "id": "q_423",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu _____ de comboio' (I go by train)",
+    "options": [
+      "semana",
+      "Lanche",
+      "vou",
+      "próxima"
+    ],
+    "answer": "vou",
+    "sourceItem": "Eu vou de comboio"
+  },
+  {
+    "id": "q_424",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu vou de autocarro'?",
+    "options": [
+      "I go by bus",
+      "I am English",
+      "See you next week",
+      "next week"
+    ],
+    "answer": "I go by bus",
+    "sourceItem": "Eu vou de autocarro"
+  },
+  {
+    "id": "q_425",
+    "type": "multipleChoice",
+    "question": "How do you say 'I go by bus' in Portuguese?",
+    "options": [
+      "Quando chegas a Portugal?",
+      "Porque?",
+      "Eu vou de autocarro",
+      "São 10h30"
+    ],
+    "answer": "Eu vou de autocarro",
+    "sourceItem": "Eu vou de autocarro"
+  },
+  {
+    "id": "q_426",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu vou de _____' (I go by bus)",
+    "options": [
+      "aquele",
+      "semana",
+      "autocarro",
+      "hoje"
+    ],
+    "answer": "autocarro",
+    "sourceItem": "Eu vou de autocarro"
+  },
+  {
+    "id": "q_427",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Este presente é para ti'?",
+    "options": [
+      "sometimes",
+      "to be (temporary)",
+      "here (close to me)",
+      "This present is for you"
+    ],
+    "answer": "This present is for you",
+    "sourceItem": "Este presente é para ti"
+  },
+  {
+    "id": "q_428",
+    "type": "multipleChoice",
+    "question": "How do you say 'This present is for you' in Portuguese?",
+    "options": [
+      "está bem",
+      "Este presente é para ti",
+      "Eu gosto viajar",
+      "trezentos"
+    ],
+    "answer": "Este presente é para ti",
+    "sourceItem": "Este presente é para ti"
+  },
+  {
+    "id": "q_429",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Este _____ é para ti' (This present is for you)",
+    "options": [
+      "são",
+      "Para",
+      "grande",
+      "presente"
+    ],
+    "answer": "presente",
+    "sourceItem": "Este presente é para ti"
+  },
+  {
+    "id": "q_430",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Este lugar está reservado'?",
+    "options": [
+      "quickly",
+      "Students",
+      "This seat is reserved",
+      "We are tired"
+    ],
+    "answer": "This seat is reserved",
+    "sourceItem": "Este lugar está reservado"
+  },
+  {
+    "id": "q_431",
+    "type": "multipleChoice",
+    "question": "How do you say 'This seat is reserved' in Portuguese?",
+    "options": [
+      "De India",
+      "Uma fatia de bolo",
+      "Eu vou de comboio",
+      "Este lugar está reservado"
+    ],
+    "answer": "Este lugar está reservado",
+    "sourceItem": "Este lugar está reservado"
+  },
+  {
+    "id": "q_432",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ lugar está reservado' (This seat is reserved)",
+    "options": [
+      "pequeno-almoço",
+      "por",
+      "devagar",
+      "Este"
+    ],
+    "answer": "Este",
+    "sourceItem": "Este lugar está reservado"
+  },
+  {
+    "id": "q_433",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Para a semana'?",
+    "options": [
+      "Next week",
+      "How much?",
+      "The restaurant is located in the center",
+      "today"
+    ],
+    "answer": "Next week",
+    "sourceItem": "Para a semana"
+  },
+  {
+    "id": "q_434",
+    "type": "multipleChoice",
+    "question": "How do you say 'Next week' in Portuguese?",
+    "options": [
+      "Para a semana",
+      "Eu vou ao supermercado",
+      "março",
+      "Nós fomos de férias"
+    ],
+    "answer": "Para a semana",
+    "sourceItem": "Para a semana"
+  },
+  {
+    "id": "q_435",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ a semana' (Next week)",
+    "options": [
+      "desde",
+      "abril",
+      "Para",
+      "nunca"
+    ],
+    "answer": "Para",
+    "sourceItem": "Para a semana"
+  },
+  {
+    "id": "q_436",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Preciso do carro por 4 dias'?",
+    "options": [
+      "4 months ago",
+      "today",
+      "I need the car for 4 days",
+      "I am fine"
+    ],
+    "answer": "I need the car for 4 days",
+    "sourceItem": "Preciso do carro por 4 dias"
+  },
+  {
+    "id": "q_437",
+    "type": "multipleChoice",
+    "question": "How do you say 'I need the car for 4 days' in Portuguese?",
+    "options": [
+      "Preciso do carro por 4 dias",
+      "Chamo-me Ramesh",
+      "com",
+      "Porque estás triste?"
+    ],
+    "answer": "Preciso do carro por 4 dias",
+    "sourceItem": "Preciso do carro por 4 dias"
+  },
+  {
+    "id": "q_438",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Preciso do carro por 4 _____' (I need the car for 4 days)",
+    "options": [
+      "pescetariano",
+      "uma",
+      "bolo",
+      "dias"
+    ],
+    "answer": "dias",
+    "sourceItem": "Preciso do carro por 4 dias"
+  },
+  {
+    "id": "q_439",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Pela ponte'?",
+    "options": [
+      "By/Over the bridge",
+      "Good weekend!",
+      "carrot cake",
+      "November"
+    ],
+    "answer": "By/Over the bridge",
+    "sourceItem": "Pela ponte"
+  },
+  {
+    "id": "q_440",
+    "type": "multipleChoice",
+    "question": "How do you say 'By/Over the bridge' in Portuguese?",
+    "options": [
+      "Eu vou ao supermercado",
+      "Pela ponte",
+      "Nunca faço surf",
+      "vivo na Malveira"
+    ],
+    "answer": "Pela ponte",
+    "sourceItem": "Pela ponte"
+  },
+  {
+    "id": "q_441",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'há 4 meses'?",
+    "options": [
+      "Who is going to dinner?",
+      "See you shortly",
+      "See you next week",
+      "4 months ago"
+    ],
+    "answer": "4 months ago",
+    "sourceItem": "há 4 meses"
+  },
+  {
+    "id": "q_442",
+    "type": "multipleChoice",
+    "question": "How do you say '4 months ago' in Portuguese?",
+    "options": [
+      "nem carne",
+      "Onde está o leite?",
+      "anteontem",
+      "há 4 meses"
+    ],
+    "answer": "há 4 meses",
+    "sourceItem": "há 4 meses"
+  },
+  {
+    "id": "q_443",
+    "type": "cloze",
+    "question": "Fill in the blank: 'há 4 _____' (4 months ago)",
+    "options": [
+      "meses",
+      "Nós",
+      "vegetariano",
+      "julho"
+    ],
+    "answer": "meses",
+    "sourceItem": "há 4 meses"
+  },
+  {
+    "id": "q_444",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'haver'?",
+    "options": [
+      "Thank you very much",
+      "there is/are",
+      "Excuse me",
+      "19th of January"
+    ],
+    "answer": "there is/are",
+    "sourceItem": "haver"
+  },
+  {
+    "id": "q_445",
+    "type": "multipleChoice",
+    "question": "How do you say 'there is/are' in Portuguese?",
+    "options": [
+      "abril",
+      "Qual?",
+      "Ao vivo",
+      "haver"
+    ],
+    "answer": "haver",
+    "sourceItem": "haver"
+  },
+  {
+    "id": "q_446",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Isto'?",
+    "options": [
+      "This/That",
+      "See you next time",
+      "Where is the restaurant?",
+      "October"
+    ],
+    "answer": "This/That",
+    "sourceItem": "Isto"
+  },
+  {
+    "id": "q_447",
+    "type": "multipleChoice",
+    "question": "How do you say 'This/That' in Portuguese?",
+    "options": [
+      "A caneta está em cima da mesa",
+      "O Brazil",
+      "Desde quando?",
+      "Isto"
+    ],
+    "answer": "Isto",
+    "sourceItem": "Isto"
+  },
+  {
+    "id": "q_448",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'então'?",
+    "options": [
+      "A car",
+      "Next Monday I will go to the cinema",
+      "then",
+      "Why (start/middle)?"
+    ],
+    "answer": "then",
+    "sourceItem": "então"
+  },
+  {
+    "id": "q_449",
+    "type": "multipleChoice",
+    "question": "How do you say 'then' in Portuguese?",
+    "options": [
+      "Qual?",
+      "Eu gosto viajar",
+      "então",
+      "O Brazil"
+    ],
+    "answer": "então",
+    "sourceItem": "então"
+  },
+  {
+    "id": "q_450",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'disponivel'?",
+    "options": [
+      "available",
+      "some (masc. plural)",
+      "I go to the beach",
+      "of/from"
+    ],
+    "answer": "available",
+    "sourceItem": "disponivel"
+  },
+  {
+    "id": "q_451",
+    "type": "multipleChoice",
+    "question": "How do you say 'available' in Portuguese?",
+    "options": [
+      "disponivel",
+      "Que horas são?",
+      "A caneta está em cima da mesa",
+      "Aprendizes"
+    ],
+    "answer": "disponivel",
+    "sourceItem": "disponivel"
+  },
+  {
+    "id": "q_452",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'inacreditável'?",
+    "options": [
+      "unbelievable",
+      "slow",
+      "sometimes",
+      "This/That"
+    ],
+    "answer": "unbelievable",
+    "sourceItem": "inacreditável"
+  },
+  {
+    "id": "q_453",
+    "type": "multipleChoice",
+    "question": "How do you say 'unbelievable' in Portuguese?",
+    "options": [
+      "Quem vai ao jantar?",
+      "esse",
+      "inacreditável",
+      "como estás?"
+    ],
+    "answer": "inacreditável",
+    "sourceItem": "inacreditável"
+  },
+  {
+    "id": "q_454",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quando?'?",
+    "options": [
+      "fast",
+      "next week",
+      "November",
+      "When?"
+    ],
+    "answer": "When?",
+    "sourceItem": "Quando?"
+  },
+  {
+    "id": "q_455",
+    "type": "multipleChoice",
+    "question": "How do you say 'When?' in Portuguese?",
+    "options": [
+      "Preciso do carro por 4 dias",
+      "estar",
+      "Quinhentos e cinquenta e cinco",
+      "Quando?"
+    ],
+    "answer": "Quando?",
+    "sourceItem": "Quando?"
+  },
+  {
+    "id": "q_456",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quando chegas a Portugal?'?",
+    "options": [
+      "When do you arrive to Portugal?",
+      "Sorry (informal)",
+      "A car",
+      "fast"
+    ],
+    "answer": "When do you arrive to Portugal?",
+    "sourceItem": "Quando chegas a Portugal?"
+  },
+  {
+    "id": "q_457",
+    "type": "multipleChoice",
+    "question": "How do you say 'When do you arrive to Portugal?' in Portuguese?",
+    "options": [
+      "Quando chegas a Portugal?",
+      "Quinhentos e cinquenta e cinco",
+      "março",
+      "haver"
+    ],
+    "answer": "Quando chegas a Portugal?",
+    "sourceItem": "Quando chegas a Portugal?"
+  },
+  {
+    "id": "q_458",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ chegas a Portugal?' (When do you arrive to Portugal?)",
+    "options": [
+      "quinhentos",
+      "estou",
+      "Porque",
+      "Quando"
+    ],
+    "answer": "Quando",
+    "sourceItem": "Quando chegas a Portugal?"
+  },
+  {
+    "id": "q_459",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Onde?'?",
+    "options": [
+      "I am vegetarian",
+      "Why are you sad?",
+      "I go to the supermarket",
+      "Where?"
+    ],
+    "answer": "Where?",
+    "sourceItem": "Onde?"
+  },
+  {
+    "id": "q_460",
+    "type": "multipleChoice",
+    "question": "How do you say 'Where?' in Portuguese?",
+    "options": [
+      "Onde?",
+      "dos Países Baixos",
+      "Eu gosto ver futebol",
+      "Cem"
+    ],
+    "answer": "Onde?",
+    "sourceItem": "Onde?"
+  },
+  {
+    "id": "q_461",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Onde fica o restaurante?'?",
+    "options": [
+      "Pupils",
+      "August",
+      "I like to take small trips",
+      "Where is the restaurant?"
+    ],
+    "answer": "Where is the restaurant?",
+    "sourceItem": "Onde fica o restaurante?"
+  },
+  {
+    "id": "q_462",
+    "type": "multipleChoice",
+    "question": "How do you say 'Where is the restaurant?' in Portuguese?",
+    "options": [
+      "da",
+      "Chego ao meio-dia",
+      "Em que mês estamos?",
+      "Onde fica o restaurante?"
+    ],
+    "answer": "Onde fica o restaurante?",
+    "sourceItem": "Onde fica o restaurante?"
+  },
+  {
+    "id": "q_463",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ fica o restaurante?' (Where is the restaurant?)",
+    "options": [
+      "por",
+      "entrar",
+      "está",
+      "Onde"
+    ],
+    "answer": "Onde",
+    "sourceItem": "Onde fica o restaurante?"
+  },
+  {
+    "id": "q_464",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Onde está o leite?'?",
+    "options": [
+      "Where is the milk?",
+      "Why are you sad?",
+      "then",
+      "Exactly"
+    ],
+    "answer": "Where is the milk?",
+    "sourceItem": "Onde está o leite?"
+  },
+  {
+    "id": "q_465",
+    "type": "multipleChoice",
+    "question": "How do you say 'Where is the milk?' in Portuguese?",
+    "options": [
+      "É meio-dia",
+      "laticinios",
+      "Onde está o leite?",
+      "Quantos anos tens?"
+    ],
+    "answer": "Onde está o leite?",
+    "sourceItem": "Onde está o leite?"
+  },
+  {
+    "id": "q_466",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Onde _____ o leite?' (Where is the milk?)",
+    "options": [
+      "desculpe",
+      "tempo",
+      "são",
+      "está"
+    ],
+    "answer": "está",
+    "sourceItem": "Onde está o leite?"
+  },
+  {
+    "id": "q_467",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'De onde é?'?",
+    "options": [
+      "Good week!",
+      "When?",
+      "I agree",
+      "Where are you from?"
+    ],
+    "answer": "Where are you from?",
+    "sourceItem": "De onde é?"
+  },
+  {
+    "id": "q_468",
+    "type": "multipleChoice",
+    "question": "How do you say 'Where are you from?' in Portuguese?",
+    "options": [
+      "Preciso do carro por 4 dias",
+      "de",
+      "De onde é?",
+      "laticinios"
+    ],
+    "answer": "De onde é?",
+    "sourceItem": "De onde é?"
+  },
+  {
+    "id": "q_469",
+    "type": "cloze",
+    "question": "Fill in the blank: 'De _____ é?' (Where are you from?)",
+    "options": [
+      "outubro",
+      "raramente",
+      "Segunda-feira",
+      "onde"
+    ],
+    "answer": "onde",
+    "sourceItem": "De onde é?"
+  },
+  {
+    "id": "q_470",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quem?'?",
+    "options": [
+      "Who?",
+      "This/That",
+      "to be (permanent)",
+      "yesterday"
+    ],
+    "answer": "Who?",
+    "sourceItem": "Quem?"
+  },
+  {
+    "id": "q_471",
+    "type": "multipleChoice",
+    "question": "How do you say 'Who?' in Portuguese?",
+    "options": [
+      "Eu gosto ver futebol",
+      "Quem?",
+      "amanhã",
+      "quatrocentos"
+    ],
+    "answer": "Quem?",
+    "sourceItem": "Quem?"
+  },
+  {
+    "id": "q_472",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quem vai ao jantar?'?",
+    "options": [
+      "to be (temporary)",
+      "Who is going to dinner?",
+      "carrot cake",
+      "clothes"
+    ],
+    "answer": "Who is going to dinner?",
+    "sourceItem": "Quem vai ao jantar?"
+  },
+  {
+    "id": "q_473",
+    "type": "multipleChoice",
+    "question": "How do you say 'Who is going to dinner?' in Portuguese?",
+    "options": [
+      "o teu",
+      "Quem vai ao jantar?",
+      "foste",
+      "desde"
+    ],
+    "answer": "Quem vai ao jantar?",
+    "sourceItem": "Quem vai ao jantar?"
+  },
+  {
+    "id": "q_474",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Quem _____ ao jantar?' (Who is going to dinner?)",
+    "options": [
+      "ontem",
+      "nem",
+      "vai",
+      "meio-dia"
+    ],
+    "answer": "vai",
+    "sourceItem": "Quem vai ao jantar?"
+  },
+  {
+    "id": "q_475",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Que..?'?",
+    "options": [
+      "What/Which (noun)?",
+      "See you next time",
+      "The house is big",
+      "My name is Ramesh"
+    ],
+    "answer": "What/Which (noun)?",
+    "sourceItem": "Que..?"
+  },
+  {
+    "id": "q_476",
+    "type": "multipleChoice",
+    "question": "How do you say 'What/Which (noun)?' in Portuguese?",
+    "options": [
+      "até breve",
+      "habitualmente",
+      "Que..?",
+      "É meia-noite"
+    ],
+    "answer": "Que..?",
+    "sourceItem": "Que..?"
+  },
+  {
+    "id": "q_477",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Que comida preferes?'?",
+    "options": [
+      "Activities",
+      "August",
+      "Today the weather is good",
+      "What food do you prefer?"
+    ],
+    "answer": "What food do you prefer?",
+    "sourceItem": "Que comida preferes?"
+  },
+  {
+    "id": "q_478",
+    "type": "multipleChoice",
+    "question": "How do you say 'What food do you prefer?' in Portuguese?",
+    "options": [
+      "Que comida preferes?",
+      "Quem?",
+      "Qual é a tua cor favorita?",
+      "Desde quando?"
+    ],
+    "answer": "Que comida preferes?",
+    "sourceItem": "Que comida preferes?"
+  },
+  {
+    "id": "q_479",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Que comida _____' (What food do you prefer?)",
+    "options": [
+      "desde",
+      "doente",
+      "praia",
+      "preferes"
+    ],
+    "answer": "preferes",
+    "sourceItem": "Que comida preferes?"
+  },
+  {
+    "id": "q_480",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O que..?'?",
+    "options": [
+      "Live (band/person)",
+      "hobbies",
+      "Why (start/middle)?",
+      "What (verb)?"
+    ],
+    "answer": "What (verb)?",
+    "sourceItem": "O que..?"
+  },
+  {
+    "id": "q_481",
+    "type": "multipleChoice",
+    "question": "How do you say 'What (verb)?' in Portuguese?",
+    "options": [
+      "O que..?",
+      "Quinhentos e cinquenta e cinco",
+      "Que..?",
+      "em Portugal eu gosto do clima"
+    ],
+    "answer": "O que..?",
+    "sourceItem": "O que..?"
+  },
+  {
+    "id": "q_482",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O que fazes no fim de semana?'?",
+    "options": [
+      "often",
+      "Why (start/middle)?",
+      "What do you do this weekend?",
+      "Me too"
+    ],
+    "answer": "What do you do this weekend?",
+    "sourceItem": "O que fazes no fim de semana?"
+  },
+  {
+    "id": "q_483",
+    "type": "multipleChoice",
+    "question": "How do you say 'What do you do this weekend?' in Portuguese?",
+    "options": [
+      "Alunos",
+      "O que fazes no fim de semana?",
+      "O Morocco",
+      "Quem?"
+    ],
+    "answer": "O que fazes no fim de semana?",
+    "sourceItem": "O que fazes no fim de semana?"
+  },
+  {
+    "id": "q_484",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O que fazes no fim de _____' (What do you do this weekend?)",
+    "options": [
+      "também",
+      "maio",
+      "Qual",
+      "semana"
+    ],
+    "answer": "semana",
+    "sourceItem": "O que fazes no fim de semana?"
+  },
+  {
+    "id": "q_485",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Qual?'?",
+    "options": [
+      "I like the confectionary in Portugal",
+      "What is your favorite color?",
+      "Morocco",
+      "What/Which (singular)?"
+    ],
+    "answer": "What/Which (singular)?",
+    "sourceItem": "Qual?"
+  },
+  {
+    "id": "q_486",
+    "type": "multipleChoice",
+    "question": "How do you say 'What/Which (singular)?' in Portuguese?",
+    "options": [
+      "É meio-dia",
+      "Qual?",
+      "aquele",
+      "estou bem"
+    ],
+    "answer": "Qual?",
+    "sourceItem": "Qual?"
+  },
+  {
+    "id": "q_487",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Qual é a tua cor favorita?'?",
+    "options": [
+      "What is your favorite color?",
+      "without",
+      "finishes/ends",
+      "unbelievable"
+    ],
+    "answer": "What is your favorite color?",
+    "sourceItem": "Qual é a tua cor favorita?"
+  },
+  {
+    "id": "q_488",
+    "type": "multipleChoice",
+    "question": "How do you say 'What is your favorite color?' in Portuguese?",
+    "options": [
+      "às vezes",
+      "Eu gosto ler",
+      "este",
+      "Qual é a tua cor favorita?"
+    ],
+    "answer": "Qual é a tua cor favorita?",
+    "sourceItem": "Qual é a tua cor favorita?"
+  },
+  {
+    "id": "q_489",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Qual é a tua _____ favorita?' (What is your favorite color?)",
+    "options": [
+      "cor",
+      "Lanche",
+      "ser",
+      "Nós"
+    ],
+    "answer": "cor",
+    "sourceItem": "Qual é a tua cor favorita?"
+  },
+  {
+    "id": "q_490",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quais?'?",
+    "options": [
+      "then",
+      "What food do you prefer?",
+      "What/Which (plural)?",
+      "How long (has it been)?"
+    ],
+    "answer": "What/Which (plural)?",
+    "sourceItem": "Quais?"
+  },
+  {
+    "id": "q_491",
+    "type": "multipleChoice",
+    "question": "How do you say 'What/Which (plural)?' in Portuguese?",
+    "options": [
+      "muito obrigado",
+      "Gosto das pessoas",
+      "Quais?",
+      "Qual?"
+    ],
+    "answer": "Quais?",
+    "sourceItem": "Quais?"
+  },
+  {
+    "id": "q_492",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quais são as tuas músicas favoritas?'?",
+    "options": [
+      "a (fem. singular)",
+      "What are your favorite musics?",
+      "Things I like about Portugal are the weather",
+      "I am from England"
+    ],
+    "answer": "What are your favorite musics?",
+    "sourceItem": "Quais são as tuas músicas favoritas?"
+  },
+  {
+    "id": "q_493",
+    "type": "multipleChoice",
+    "question": "How do you say 'What are your favorite musics?' in Portuguese?",
+    "options": [
+      "Quais são as tuas músicas favoritas?",
+      "acaba",
+      "ficar",
+      "Vens"
+    ],
+    "answer": "Quais são as tuas músicas favoritas?",
+    "sourceItem": "Quais são as tuas músicas favoritas?"
+  },
+  {
+    "id": "q_494",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Quais são as tuas _____ favoritas?' (What are your favorite musics?)",
+    "options": [
+      "carro",
+      "depressa",
+      "músicas",
+      "aquele"
+    ],
+    "answer": "músicas",
+    "sourceItem": "Quais são as tuas músicas favoritas?"
+  },
+  {
+    "id": "q_495",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quanto?'?",
+    "options": [
+      "in the (em+a)",
+      "always",
+      "Last Monday I watched a film",
+      "How much?"
+    ],
+    "answer": "How much?",
+    "sourceItem": "Quanto?"
+  },
+  {
+    "id": "q_496",
+    "type": "multipleChoice",
+    "question": "How do you say 'How much?' in Portuguese?",
+    "options": [
+      "Quanto?",
+      "Este fim de semana",
+      "com licença",
+      "roupas"
+    ],
+    "answer": "Quanto?",
+    "sourceItem": "Quanto?"
+  },
+  {
+    "id": "q_497",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quanto custa?'?",
+    "options": [
+      "The tram",
+      "Students",
+      "How much does it cost?",
+      "I like to take small trips"
+    ],
+    "answer": "How much does it cost?",
+    "sourceItem": "Quanto custa?"
+  },
+  {
+    "id": "q_498",
+    "type": "multipleChoice",
+    "question": "How do you say 'How much does it cost?' in Portuguese?",
+    "options": [
+      "Preciso do carro por 4 dias",
+      "Quanto custa?",
+      "até à próxima",
+      "tudo bem?"
+    ],
+    "answer": "Quanto custa?",
+    "sourceItem": "Quanto custa?"
+  },
+  {
+    "id": "q_499",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quanto tempo leva a viagem?'?",
+    "options": [
+      "How long does the trip take?",
+      "Next week",
+      "How old are you?",
+      "by/for (period)/because"
+    ],
+    "answer": "How long does the trip take?",
+    "sourceItem": "Quanto tempo leva a viagem?"
+  },
+  {
+    "id": "q_500",
+    "type": "multipleChoice",
+    "question": "How do you say 'How long does the trip take?' in Portuguese?",
+    "options": [
+      "até logo",
+      "Quinhentos e cinquenta e cinco",
+      "Quanto tempo leva a viagem?",
+      "Um cinema"
+    ],
+    "answer": "Quanto tempo leva a viagem?",
+    "sourceItem": "Quanto tempo leva a viagem?"
+  },
+  {
+    "id": "q_501",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Quanto _____ leva a viagem?' (How long does the trip take?)",
+    "options": [
+      "desculpe",
+      "amanhã",
+      "com",
+      "tempo"
+    ],
+    "answer": "tempo",
+    "sourceItem": "Quanto tempo leva a viagem?"
+  },
+  {
+    "id": "q_502",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quantos anos tens?'?",
+    "options": [
+      "Things I like about Portugal are the weather",
+      "Milk based products",
+      "How old are you?",
+      "sometimes"
+    ],
+    "answer": "How old are you?",
+    "sourceItem": "Quantos anos tens?"
+  },
+  {
+    "id": "q_503",
+    "type": "multipleChoice",
+    "question": "How do you say 'How old are you?' in Portuguese?",
+    "options": [
+      "almoço",
+      "eu sou inglês",
+      "Quantos anos tens?",
+      "Alunos"
+    ],
+    "answer": "Quantos anos tens?",
+    "sourceItem": "Quantos anos tens?"
+  },
+  {
+    "id": "q_504",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Quantos anos _____' (How old are you?)",
+    "options": [
+      "tens",
+      "até",
+      "Concordo",
+      "que"
+    ],
+    "answer": "tens",
+    "sourceItem": "Quantos anos tens?"
+  },
+  {
+    "id": "q_505",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Porque?'?",
+    "options": [
+      "September",
+      "Why (start/middle)?",
+      "See you tomorrow",
+      "rarely"
+    ],
+    "answer": "Why (start/middle)?",
+    "sourceItem": "Porque?"
+  },
+  {
+    "id": "q_506",
+    "type": "multipleChoice",
+    "question": "How do you say 'Why (start/middle)?' in Portuguese?",
+    "options": [
+      "Para a semana",
+      "Porque?",
+      "esse",
+      "Volto"
+    ],
+    "answer": "Porque?",
+    "sourceItem": "Porque?"
+  },
+  {
+    "id": "q_507",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Porquê?'?",
+    "options": [
+      "Why (start/middle)?",
+      "Why (isolated)?",
+      "finishes/ends",
+      "A house"
+    ],
+    "answer": "Why (isolated)?",
+    "sourceItem": "Porquê?"
+  },
+  {
+    "id": "q_508",
+    "type": "multipleChoice",
+    "question": "How do you say 'Why (isolated)?' in Portuguese?",
+    "options": [
+      "Quinhentos e cinquenta e cinco",
+      "Alunos",
+      "Porquê?",
+      "Onde está o leite?"
+    ],
+    "answer": "Porquê?",
+    "sourceItem": "Porquê?"
+  },
+  {
+    "id": "q_509",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Porque estás triste?'?",
+    "options": [
+      "Everything good?",
+      "Why are you sad?",
+      "See you next week",
+      "I never surf"
+    ],
+    "answer": "Why are you sad?",
+    "sourceItem": "Porque estás triste?"
+  },
+  {
+    "id": "q_510",
+    "type": "multipleChoice",
+    "question": "How do you say 'Why are you sad?' in Portuguese?",
+    "options": [
+      "acaba",
+      "hoje está bom tempo",
+      "Porque estás triste?",
+      "depois de amanhã"
+    ],
+    "answer": "Porque estás triste?",
+    "sourceItem": "Porque estás triste?"
+  },
+  {
+    "id": "q_511",
+    "type": "cloze",
+    "question": "Fill in the blank: '_____ estás triste?' (Why are you sad?)",
+    "options": [
+      "Estudantes",
+      "Porque",
+      "cansados",
+      "outubro"
+    ],
+    "answer": "Porque",
+    "sourceItem": "Porque estás triste?"
+  },
+  {
+    "id": "q_512",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Há quanto tempo?'?",
+    "options": [
+      "without",
+      "How long (has it been)?",
+      "We went on holiday",
+      "My name is Ramesh"
+    ],
+    "answer": "How long (has it been)?",
+    "sourceItem": "Há quanto tempo?"
+  },
+  {
+    "id": "q_513",
+    "type": "multipleChoice",
+    "question": "How do you say 'How long (has it been)?' in Portuguese?",
+    "options": [
+      "Eu estou em casa",
+      "Há quanto tempo?",
+      "Quanto custa?",
+      "Quanto?"
+    ],
+    "answer": "Há quanto tempo?",
+    "sourceItem": "Há quanto tempo?"
+  },
+  {
+    "id": "q_514",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Há _____ tempo?' (How long (has it been)?)",
+    "options": [
+      "Cem",
+      "eléctrico",
+      "hoje",
+      "quanto"
+    ],
+    "answer": "quanto",
+    "sourceItem": "Há quanto tempo?"
+  },
+  {
+    "id": "q_515",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Há quanto tempo vives em Lisboa?'?",
+    "options": [
+      "I am 49 years old",
+      "clothes",
+      "1000",
+      "How long have you been living in Lisbon?"
+    ],
+    "answer": "How long have you been living in Lisbon?",
+    "sourceItem": "Há quanto tempo vives em Lisboa?"
+  },
+  {
+    "id": "q_516",
+    "type": "multipleChoice",
+    "question": "How do you say 'How long have you been living in Lisbon?' in Portuguese?",
+    "options": [
+      "Eu vou ao supermercado",
+      "Na segunda-feira vou ao cinema",
+      "Este lugar está reservado",
+      "Há quanto tempo vives em Lisboa?"
+    ],
+    "answer": "Há quanto tempo vives em Lisboa?",
+    "sourceItem": "Há quanto tempo vives em Lisboa?"
+  },
+  {
+    "id": "q_517",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Há quanto _____ vives em Lisboa?' (How long have you been living in Lisbon?)",
+    "options": [
+      "Isto",
+      "devagar",
+      "tempo",
+      "Quinhentos"
+    ],
+    "answer": "tempo",
+    "sourceItem": "Há quanto tempo vives em Lisboa?"
+  },
+  {
+    "id": "q_518",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Está à espera do seu amigo?'?",
+    "options": [
+      "I am Ramesh",
+      "I am fine",
+      "I like to read",
+      "Are you waiting for your friend?"
+    ],
+    "answer": "Are you waiting for your friend?",
+    "sourceItem": "Está à espera do seu amigo?"
+  },
+  {
+    "id": "q_519",
+    "type": "multipleChoice",
+    "question": "How do you say 'Are you waiting for your friend?' in Portuguese?",
+    "options": [
+      "novecentos",
+      "dezanove de janeiro",
+      "Está à espera do seu amigo?",
+      "Pela ponte"
+    ],
+    "answer": "Está à espera do seu amigo?",
+    "sourceItem": "Está à espera do seu amigo?"
+  },
+  {
+    "id": "q_520",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Está à espera do seu _____' (Are you waiting for your friend?)",
+    "options": [
+      "Quais",
+      "adeus",
+      "Isto",
+      "amigo"
+    ],
+    "answer": "amigo",
+    "sourceItem": "Está à espera do seu amigo?"
+  },
+  {
+    "id": "q_521",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Para que queres?'?",
+    "options": [
+      "I like to take small trips",
+      "See you again (slightly longer period)",
+      "For what do you want?",
+      "600"
+    ],
+    "answer": "For what do you want?",
+    "sourceItem": "Para que queres?"
+  },
+  {
+    "id": "q_522",
+    "type": "multipleChoice",
+    "question": "How do you say 'For what do you want?' in Portuguese?",
+    "options": [
+      "Para que queres?",
+      "Eu estou em casa",
+      "Concordo",
+      "pequeno-almoço"
+    ],
+    "answer": "Para que queres?",
+    "sourceItem": "Para que queres?"
+  },
+  {
+    "id": "q_523",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Para _____ queres?' (For what do you want?)",
+    "options": [
+      "Isto",
+      "habitualmente",
+      "que",
+      "Nunca"
+    ],
+    "answer": "que",
+    "sourceItem": "Para que queres?"
+  },
+  {
+    "id": "q_524",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Desde quando?'?",
+    "options": [
+      "Since when?",
+      "Call me Ramesh",
+      "for/to (destination)",
+      "finishes/ends"
+    ],
+    "answer": "Since when?",
+    "sourceItem": "Desde quando?"
+  },
+  {
+    "id": "q_525",
+    "type": "multipleChoice",
+    "question": "How do you say 'Since when?' in Portuguese?",
+    "options": [
+      "Desde quando?",
+      "frequentemente",
+      "laticinios",
+      "Direto"
+    ],
+    "answer": "Desde quando?",
+    "sourceItem": "Desde quando?"
+  },
+  {
+    "id": "q_526",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Vens'?",
+    "options": [
+      "rarely",
+      "Coming from",
+      "Last Monday I watched a film",
+      "your"
+    ],
+    "answer": "Coming from",
+    "sourceItem": "Vens"
+  },
+  {
+    "id": "q_527",
+    "type": "multipleChoice",
+    "question": "How do you say 'Coming from' in Portuguese?",
+    "options": [
+      "Da Holanda",
+      "Vens",
+      "maio",
+      "raramente"
+    ],
+    "answer": "Vens",
+    "sourceItem": "Vens"
+  },
+  {
+    "id": "q_528",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O eléctrico'?",
+    "options": [
+      "I like to take small trips",
+      "Students",
+      "The tram",
+      "clothes"
+    ],
+    "answer": "The tram",
+    "sourceItem": "O eléctrico"
+  },
+  {
+    "id": "q_529",
+    "type": "multipleChoice",
+    "question": "How do you say 'The tram' in Portuguese?",
+    "options": [
+      "Quanto tempo leva a viagem?",
+      "uns",
+      "O eléctrico",
+      "Da Holanda"
+    ],
+    "answer": "O eléctrico",
+    "sourceItem": "O eléctrico"
+  },
+  {
+    "id": "q_530",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Em que mês estamos?'?",
+    "options": [
+      "500",
+      "More or less",
+      "Which month are we in?",
+      "The picture is on the wall"
+    ],
+    "answer": "Which month are we in?",
+    "sourceItem": "Em que mês estamos?"
+  },
+  {
+    "id": "q_531",
+    "type": "multipleChoice",
+    "question": "How do you say 'Which month are we in?' in Portuguese?",
+    "options": [
+      "dezembro",
+      "Em que mês estamos?",
+      "eu sou inglês",
+      "Na segunda-feira vou ao cinema"
+    ],
+    "answer": "Em que mês estamos?",
+    "sourceItem": "Em que mês estamos?"
+  },
+  {
+    "id": "q_532",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Em que mês _____' (Which month are we in?)",
+    "options": [
+      "lento",
+      "estamos",
+      "Para",
+      "comboio"
+    ],
+    "answer": "estamos",
+    "sourceItem": "Em que mês estamos?"
+  },
+  {
+    "id": "q_533",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Fui'?",
+    "options": [
+      "that (over there)",
+      "I was/went",
+      "Students",
+      "unbelievable"
+    ],
+    "answer": "I was/went",
+    "sourceItem": "Fui"
+  },
+  {
+    "id": "q_534",
+    "type": "multipleChoice",
+    "question": "How do you say 'I was/went' in Portuguese?",
+    "options": [
+      "Onde está o leite?",
+      "Eu vou à praia",
+      "Nunca",
+      "Fui"
+    ],
+    "answer": "Fui",
+    "sourceItem": "Fui"
+  },
+  {
+    "id": "q_535",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'foste'?",
+    "options": [
+      "you were/went",
+      "I like the confectionary in Portugal",
+      "sometimes",
+      "See you Saturday"
+    ],
+    "answer": "you were/went",
+    "sourceItem": "foste"
+  },
+  {
+    "id": "q_536",
+    "type": "multipleChoice",
+    "question": "How do you say 'you were/went' in Portuguese?",
+    "options": [
+      "foste",
+      "Gosto das pessoas",
+      "duzentos",
+      "Eu gosto ver futebol"
+    ],
+    "answer": "foste",
+    "sourceItem": "foste"
+  },
+  {
+    "id": "q_537",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'roupas'?",
+    "options": [
+      "Activities",
+      "I am 49 years old",
+      "yesterday",
+      "clothes"
+    ],
+    "answer": "clothes",
+    "sourceItem": "roupas"
+  },
+  {
+    "id": "q_538",
+    "type": "multipleChoice",
+    "question": "How do you say 'clothes' in Portuguese?",
+    "options": [
+      "roupas",
+      "Quantos anos tens?",
+      "Desde quando?",
+      "Porque estás triste?"
+    ],
+    "answer": "roupas",
+    "sourceItem": "roupas"
+  },
+  {
+    "id": "q_539",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Médico'?",
+    "options": [
+      "Doctor",
+      "that (over there)",
+      "from the (e+a)",
+      "How much?"
+    ],
+    "answer": "Doctor",
+    "sourceItem": "Médico"
+  },
+  {
+    "id": "q_540",
+    "type": "multipleChoice",
+    "question": "How do you say 'Doctor' in Portuguese?",
+    "options": [
+      "queria um café, por favor",
+      "Médico",
+      "Na segunda-feira vou ao cinema",
+      "Que horas são?"
+    ],
+    "answer": "Médico",
+    "sourceItem": "Médico"
+  },
+  {
+    "id": "q_541",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'este'?",
+    "options": [
+      "from the (e+a)",
+      "November",
+      "this (near me)",
+      "A problem"
+    ],
+    "answer": "this (near me)",
+    "sourceItem": "este"
+  },
+  {
+    "id": "q_542",
+    "type": "multipleChoice",
+    "question": "How do you say 'this (near me)' in Portuguese?",
+    "options": [
+      "dezembro",
+      "este",
+      "foste",
+      "para"
+    ],
+    "answer": "este",
+    "sourceItem": "este"
+  },
+  {
+    "id": "q_543",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'esse'?",
+    "options": [
+      "that (near you)",
+      "See you next time",
+      "4 months ago",
+      "I am English"
+    ],
+    "answer": "that (near you)",
+    "sourceItem": "esse"
+  },
+  {
+    "id": "q_544",
+    "type": "multipleChoice",
+    "question": "How do you say 'that (near you)' in Portuguese?",
+    "options": [
+      "O carro está na garagem",
+      "esse",
+      "Quais são as tuas músicas favoritas?",
+      "habitualmente"
+    ],
+    "answer": "esse",
+    "sourceItem": "esse"
+  },
+  {
+    "id": "q_545",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'aquele'?",
+    "options": [
+      "We went on holiday",
+      "I am Ramesh",
+      "that (over there)",
+      "I go by bus"
+    ],
+    "answer": "that (over there)",
+    "sourceItem": "aquele"
+  },
+  {
+    "id": "q_546",
+    "type": "multipleChoice",
+    "question": "How do you say 'that (over there)' in Portuguese?",
+    "options": [
+      "aquele",
+      "dezanove de janeiro",
+      "janeiro",
+      "frequentemente"
+    ],
+    "answer": "aquele",
+    "sourceItem": "aquele"
+  },
+  {
+    "id": "q_547",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'aqui'?",
+    "options": [
+      "Last Monday I watched a film",
+      "here (close to me)",
+      "How are you (informal)?",
+      "My name is Ramesh"
+    ],
+    "answer": "here (close to me)",
+    "sourceItem": "aqui"
+  },
+  {
+    "id": "q_548",
+    "type": "multipleChoice",
+    "question": "How do you say 'here (close to me)' in Portuguese?",
+    "options": [
+      "dezanove de janeiro",
+      "Encontramo-nos à porta",
+      "desculpa",
+      "aqui"
+    ],
+    "answer": "aqui",
+    "sourceItem": "aqui"
+  },
+  {
+    "id": "q_549",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'aí'?",
+    "options": [
+      "This weekend",
+      "August",
+      "there (close to you)",
+      "since"
+    ],
+    "answer": "there (close to you)",
+    "sourceItem": "aí"
+  },
+  {
+    "id": "q_550",
+    "type": "multipleChoice",
+    "question": "How do you say 'there (close to you)' in Portuguese?",
+    "options": [
+      "Exatamente",
+      "bom fim de semana!",
+      "eu não como peixe",
+      "aí"
+    ],
+    "answer": "aí",
+    "sourceItem": "aí"
+  },
+  {
+    "id": "q_551",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ali'?",
+    "options": [
+      "over there (far)",
+      "in the (em+a)",
+      "I have two daughters",
+      "I like to read"
+    ],
+    "answer": "over there (far)",
+    "sourceItem": "ali"
+  },
+  {
+    "id": "q_552",
+    "type": "multipleChoice",
+    "question": "How do you say 'over there (far)' in Portuguese?",
+    "options": [
+      "ali",
+      "Da Holanda",
+      "Cem",
+      "Eu estou em casa"
+    ],
+    "answer": "ali",
+    "sourceItem": "ali"
+  },
+  {
+    "id": "q_553",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o teu'?",
+    "options": [
+      "When?",
+      "October",
+      "May",
+      "your"
+    ],
+    "answer": "your",
+    "sourceItem": "o teu"
+  },
+  {
+    "id": "q_554",
+    "type": "multipleChoice",
+    "question": "How do you say 'your' in Portuguese?",
+    "options": [
+      "o teu",
+      "até logo",
+      "Preciso do carro por 4 dias",
+      "até amanhã"
+    ],
+    "answer": "o teu",
+    "sourceItem": "o teu"
+  },
+  {
+    "id": "q_555",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'acaba'?",
+    "options": [
+      "about",
+      "finishes/ends",
+      "How long have you been living in Lisbon?",
+      "The India"
+    ],
+    "answer": "finishes/ends",
+    "sourceItem": "acaba"
+  },
+  {
+    "id": "q_556",
+    "type": "multipleChoice",
+    "question": "How do you say 'finishes/ends' in Portuguese?",
+    "options": [
+      "Para que queres?",
+      "acaba",
+      "há 4 meses",
+      "Eu vou de comboio"
+    ],
+    "answer": "acaba",
+    "sourceItem": "acaba"
+  },
+  {
+    "id": "q_557",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Volto'?",
+    "options": [
+      "Last week",
+      "rarely",
+      "I like to travel",
+      "I come back"
+    ],
+    "answer": "I come back",
+    "sourceItem": "Volto"
+  },
+  {
+    "id": "q_558",
+    "type": "multipleChoice",
+    "question": "How do you say 'I come back' in Portuguese?",
+    "options": [
+      "laticinios",
+      "quatrocentos",
+      "Semana passada",
+      "Volto"
+    ],
+    "answer": "Volto",
+    "sourceItem": "Volto"
+  }
+]
