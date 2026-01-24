@@ -1,0 +1,211 @@
+# Mon 12 Jan 2026
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| Chamo-me Ramesh | Call me Ramesh |  |
+| O meu nome é Ramesh | My name is Ramesh |  |
+| Eu sou o Ramesh | I am Ramesh |  |
+| Eu sou casado | I am married |  |
+| ser/estar | To be/be | Ser \- permanent Estar \- temporary |
+| eu estou cansado | I am tired |  |
+| Um problema | A problem | Masculine even though it ends in a |
+| Um dia | Day |  |
+| Um cinema | Cinema |  |
+| Um carro | A car (masculine) |  |
+| Uma casa | A house (feminine) |  |
+| Eu moro | I live |  |
+| vivo na Malveira | I live | Vivo is for the bigger place |
+| em+a=na | in |  |
+| eu tenho duas filhas | I have two daughters | Do I have to say Eu? Can it just be “Tenho duas filhas’? |
+| uma filha tem quinze anos e a outra tem doze anos | One daughter is (has) 15 years and the other is (has) 12 years | Doze (12) pronounced like dose Dois (2) pronounced do-iz |
+| eu tenho quarenta e nove anos | I am (have) 49 years |  |
+| eu sou engenheiro de software | I am a software engineer | Engenheiro (engineeiro) |
+| eu sou inglês | I am in English |  |
+| eu sou de Inglaterra | I am from England |  |
+| De India | The India |  |
+| O Brazil | Brazil | Colonies of Portugal don’t have De |
+| O Morocco | Morocco |  |
+| e+a=da | From the |  |
+| dos Países Baixos | The Netherlands | Literally \- the low countries |
+| Da Holanda | The Holland |  |
+| Eu gosto de jogar ténis | I like to play tennis |  |
+| Eu gosto ver futebol | I like to watch football |  |
+| Eu gosto ler | I like to read |  |
+| Eu gosto viajar | I like to travel |  |
+| Eu gosto passear | I like to take small trips |  |
+| passatempos | Pass times/hobbies |  |
+| atividades | Activities |  |
+| em Portugal eu gosto do clima | Things I like about Portugal are the weather |  |
+| Gosto das pessoas | The people |  |
+| Tempo | Weather/temperature |  |
+| hoje está bom tempo | Today the weather is good |  |
+| Eu gosto da doçaria portuguesa | I like the confectionary in Portugal | Like the sweet things in Portugal |
+| Eu sou vegetariano | I am vegetarian |  |
+| eu não como peixe | I don’t eat fish |  |
+| pescetariano | Pescatarian |  |
+| nem carne | Nor meat | eu não como peixe nem carne |
+| laticinios | Milk (lactose) based products | Milk, cheese, eggs etc. |
+| queria | I want | Polite way to say you want something |
+| (eu) queria um café, por favor | Want a coffee, please | No need to say I want as Queria already implies I |
+| adeus | Goodbye |  |
+| até já | See you very soon | See you within the hour |
+| até logo | See you again | Slightly longer period |
+| até breve | See you shortly |  |
+| até à próxima | See you next time |  |
+| até amanhã | See you tomorrow |  |
+| até sábado | See you Saturday | Sab-ado (not elongated pronunciation like in Spanish) |
+| até à próxima semana | See you next week |  |
+| Até nunca | See you never |  |
+| boa semana\! | Good week | Mana |
+| bom fim de semana\! | Good weekend |  |
+| está bem | He is well |  |
+| estou bem | I am fine |  |
+| como está/estás? | How are you (formal/informal) | Ending in s makes it informal |
+| estou bem, obrigado(a) | I am fine, thank you | Male ends in o |
+| muito obrigado | Thank you very much |  |
+| tudo bem? | Everything good | Same answer |
+| mais ou menos | More or less (just okay) |  |
+| desculpe | Sorry (formal) |  |
+| desculpa | Sorry (informal) |  |
+| com licença | With permission (excuse me) |  |
+| posso entrar? | May I enter? |  |
+| posso fazer uma pregunta | May I ask a question? |  |
+| posso fazer | May I |  |
+| pode repetir, por favor | Can repeat please. Say it again please |  |
+| pode falar mais devagar, por favor | Can speak more slowly, please |  |
+| devagar/depressa | slowly/quickly |  |
+| rapido/lento | fast/slow | Transito lento \- slow traffic |
+| falo um pouco de português | I speak a little Portuguese |  |
+
+# Thur 15 Jan 2026
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| Eu também | Me too |  |
+| Concordo | I agree |  |
+| Está a chover desde novembro  | It has been (is) raining since November | Continuation of the verb for It is |
+| Estar \+ a \+ infinitivo | Estar \+ a \= ing in english | Happening right now while speaking \- in this period of time |
+| Eu estou a aprender português | I am learning Portuguese |  |
+| Estudantes | Students |  |
+| Alunos | Pupils |  |
+| Aprendizes | The learners |  |
+| Exatamente | Exactly |  |
+| Ir \+ infinitivo |  |  |
+| Eu vou fazer o jantar | I go to make dinner |  |
+| Refeições | Meals |  |
+| pequeno-almoço | Breakfast |  |
+| almoço | Lunch |  |
+| Lanche | Tea-time, Tiffin |  |
+| Jantar | Dinner |  |
+| Uma fatia de bolo | Slice of cake | **Adjective as always after the noun** |
+| Bom dia, queria um café e um fatia de bolo de cenoura, por favor | Good day, I would like a coffee and a slice of carrot cake, please |  |
+| Artigos definidos: o,a,os,as | Definitive articles for The | All four for the same, based on gender and number O \- masculine singular A \- feminine singular Os \- masculine plural As \- feminine plural |
+| Compreendo | I understand | Don’t need Eu as Compreendo on conjugates with I |
+| Artigos indefinidos: um,uma,uns,umas | Um \- Masculine singular Uma \- Feminine singular Uns \- Masculine plural Umas \- Feminine plural | Um \- Masculine singular Uma \- Feminine singular Uns \- Masculine plural Umas \- Feminine plural |
+| Uns jogadores são do benfica outros são do sporting | Some players are from Benfica and others are from Sporting  |  |
+| A equipa nacional portuguesa tem uns jogadores do benfica, outros do sporting e outros do porto  | The Portugal national team has players from Benfica, others from Sporting and others from Porto |  |
+| A equipa nacional portuguesa tem jogadores do benfica, do sporting e do Porto  | The Portugal national team has players from Benfica, Sporting and Porto |  |
+| ser,estar,ficar | All mean “to be” Ser \- Permanent (A ópera **é** um estilo de música) Estar \- Temporary  Ficar \- Geographical location (or stay),  | Ser \- Permanent (A ópera **é** um estilo de música) Estar \- Temporary  Ficar \- Geographical location (or stay),  |
+| Eu estou doente | I am sick (temporarily) |  |
+| O restaurante fica no centro de Lisboa | The restaurant is in (stay/is located) the center of lisbon |  |
+| Ser Eu sou Tu és Ele/ela/você é Nós somos Eles/elas/vocês são | To be \- permanent I am \- permanent You are \- informal He/She/You is (formal) We are He/She/You are (formal) | Voce is a little rude\! Formal, but you shouldn’t say it. Fala ingles \- don’t say voce Nós (Nosh) vs Nos (Noosh) |
+| Encontramo-nos à porta do cinema | We meet us at the door of the cinema |  |
+| Nós fomos de férias | We (Us) went on holiday |  |
+| Estar Eu estou Tu estás Ele/ela/você está Nós estamos Eles/elas/vocês estão | To be (temporary) I am (temp) You are (temp) He/She/You are (formal) We (us) are They (all man)/ They (men and women)/You (plural) are |  |
+| Nós estamos cansados | We are tired |  |
+| Nós estamos felizes/contentes | We are happy/content |  |
+| Eu estou em casa | I am at home/house |  |
+| A casa é grande | The house is big (permanent) | No It in Portuguese so always male or female |
+| A casa está limpa | The house is clean (temporary) |  |
+| A caneta está em cima da mesa | The pen is on top of the table |  |
+| O carro está na garagem/na oficina | The car is in the garage/workshop (mechanic) |  |
+| O quadro é bonito | The picture is beautiful (pretty) |  |
+| O quadro está na parede | The picture is on the wall | Na \- in+the (on+the) |
+| Os quadros estão na parede | The pictures are on the wall |  |
+| Semana passada, anteontem, ontem, hoje, amanhã, depois de amanhã, próxima semana | Last (Past) week, day before yesterday, yesterday, today, tomorrow, day after tomorrow, next week |  |
+| Nunca, raramente, às vezes, normalmente/habitualmente, frequentemente, sempre | Never, rarely, sometimes, normally (usually)/habitually, often, always |  |
+| Nunca faço surf/nunca fiz surf | Never do surf, never did surf | Doesn’t change adverb of frequency |
+| (eu) vejo sempre futebol | I always watch football |  |
+
+# Mon 19 Jan 2026
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| Segunda-feira, dezanove de janeiro | Monday, 19th January |  |
+| Cem \- 100..cento e um Duzentos, trezentos, quatrocentos, quinhentos, seiscentos, setecentos, oitocentos, novecentos, mil | 100 or 101, 200, 300, 400, 500, 600, 700, 800, 900, 1000 |  |
+| Quinhentos e cinquenta e cinco | 555 Twelve \- dose Two \- doiz | 5 \- 50 (cinco \- cinquenta) 15 \- 500 (quinze \- quinhentos) |
+| janeiro, fevereiro, março,  abril, maio, junho, julho, agosto, setembro, outubro, novembro, dezembro | January, February, March, April, May, June, July, August, September, October, November, December |  |
+| São 10h30,  13h40,  16h45,  19h15 É meio-dia, é meia-noite,  é 1h00 | Dez e meia (half 10\) or Dez e trinta,  Treze e quarenta,  Um quarto para as cinco da tarde (quarter to 5 in the afternoon),  dezanove e quinze (sete e um quarto da tarde) Midday,  Midnight,  1am | São \- plural é \- singular |
+| Que horas são? | What time is it? (use the plural) | Que \- key |
+| A que horas chegas a casa? | At what time do you arrive home? |  |
+| Chego a casa às 19h30/ao meio-dia/à meia-noite | I arrive at home at 7:30pm or at midday or at midnight | Midday (meio) \- masculine Midnight (meia) \- feimine |
+| Preposição “a” a+a \= à a+o \= ao a+as= às |  |  |
+| **a, de, em, para, por, sem, com, até, desde, sobre** | **a \= at/to, de \= of/from, em \= in/on, para \= for/to, por \= by/for(period time)/because,  sem \= without,  com \= With até \= Until, desde \= Since, sobre \= about** | **Be careful to not mix para and por Sem, com, até desde, sobre \- not combined with articles (not modified)** |
+| Eu vou à praia no verão/primavera/outono/inverno Eu vou ao supermercado | I go to the beach in the summer/spring/autumn/winter I go to the supermarket (masculine) | Verão \- summer no \= in+the \- pr. nu à \= to (combo of preposition and article when pointing left) |
+| Ao fim de semana vejo futebol | At the weekend (every) watch football |  |
+| Direto | Live (transmission) |  |
+| Ao vivo | Live (band playing a bar) |  |
+| No (em+o=no) próximo fim de semana/ No fim de semana passado | The next weekend/The last weekend | No (combo of in the) \- can be last weekend or next weekend, specific weekend |
+| Este fim de semana | This weekend | Este \- Ishte |
+| Este próximo fim de semana | This next weekend |  |
+| Na semana anterior/na semana seguinte | The week before/the next week |  |
+| Daqui (de+aqui) a duas semanas | From here two weeks (in two weeks onwards) |  |
+| À segunda-feira/na segunda-feira | Every monday/a Monday (last or next) |  |
+| Na segunda-feira vi um filme ótimo | Last Monday I watched a great film | vi/ver/estou a ver/vou ver \-watched/watch/watching/going to watch Vou \- simple future (going) |
+| Na segunda-feira vou ao cinema | Next Monday I will go to the cinema |  |
+| Eu vou de comboio para Lisboa/eu vou de autocarro | I go of train to Lisbon (not specific)/I take the bus | Comboio \- train de comboio \- a train no comboio \- the train |
+| Eu vou no comboio das 18 horas/no autocarro n.44 | I go by the 6pm train/bus 44 (specific) | Autocarro \- bus |
+| Vou para Lisboa/Este presente é para ti | Go to Lisbon (destination)/This present is for you | é \- permanent \- ser |
+| Este lugar está reservado Estes lugares estão reservados | This is seat is reserved for you/These seats are reserved for you | Lugar \- seat |
+| Para a semana (que vem) | Next week (coming)  \- For the week that comes | Vem \- comes |
+| Por+a(s) \= pela(s) por+o(s)=pelo(s) | By/for period(s) of time |  |
+| Preciso do carro por 4 dias | I need the car for 4 days |  |
+| Eu vou para a Costa da Caparica pela ponte | I go to Costa da Caparica by the bridge | Pela \- pass by/over the Ponte \- bridge |
+| Não vou trabalhar por estar doente | I’m not going to work because I am sick |  |
+| Não vou à praia desde setembro/não vou à praia há 4 meses | I have not gone to the beach since september/There has been 4 months since I’ve been to the beach | há 4 meses \- been 4 months there have/  |
+| Haver \- há/houve | There is or there are/there was or there were |  |
+| Isto | that/this |  |
+| entao | then |  |
+| quarto | quarter |  |
+| São cerca | It’s about | Used for time |
+| ti | you |  |
+| disponivel | available |  |
+
+# Thu 22 Jan 2026
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| inacreditável | unbelievable |  |
+| Quando..? Quando (é que) chegas a Portugal? | When When are you arriving to Portugal |  |
+| Onde…? Onde fica o restaurante? Onde está o leite? De onde é? | Where Where is the restaurant? Where is the milk? Where are you from? | Use está because it is temporary |
+| Quem…? Quem vai ao jantar amanhã? | Who Who is going to dinner tomorrow? |  |
+| Que..? \+ nome Que comida preferes? | What/Which \+ noun? What food do you prefer? | a que horas \- at what time |
+| O que…? \+ verbo O que fazes no fim de semana? O que fazes ao fim de semana? | also what \+ verb?  What do you do this weekend? (specific) What do you do on weekends? (general) | Que \- qoo |
+| Qual…? Qual é a tua cor favorita? | What or which singular What is your favorite color | a tua \- your a tua cor \- your car Qual é \- singular |
+| Quais…? Quais são as tuas músicas favoritas? | What or which plural What are your favorite musics \- plural | Quais são \- plural |
+| Quanto..? Quanto custa? Quanto tempo leva a viagem? | How much? How much does it cost How long does the trip take? | leva \- take |
+| Quantos..? Quantos anos tens? | How many? How old are you? | Tenho \- I have |
+| Porque…? Porque estás triste? Estás triste? Porquê? | Why? Why are you sad? Are you sad? Why? | Porque \- Porku Porquê \- Porkay |
+| Há quanto tempo…? Há quanto tempo vives em Lisboa? | How long? How long have you been living in Lisbon? |  |
+| Está à espera do seu amigo? | Are you waiting for your friends? |  |
+| Como | How |  |
+| Para que queres | For what do you want? |  |
+| De onde | From where? |  |
+| Desde quando | Since when? |  |
+| Vens | Coming from |  |
+| O eléctrico | The tram \- yellow ones in Lisbon |  |
+| pelo \- por |  |  |
+| Em que mês estamos? | Which month are we in? |  |
+| Fui \- foste | I was (past) \- (w)  |  |
+| Ir | To go |  |
+| roupas | clothes |  |
+| recibo |  |  |
+| em que | in which |  |
+| Médico | Doctor \- masculine |  |
+| acquele | That one over there |  |
+| este,esse,aquele |  |  |
+| aqui,aí,ali | close to you (here), far from you (there), far from both of us (over there) |  |
+| o teu | your |  |
+| acaba | finish \- to end |  |
+| Volto | Come back (Voltar) |  |
+
