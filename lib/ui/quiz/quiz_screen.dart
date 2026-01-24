@@ -17,7 +17,7 @@ class QuizScreen extends ConsumerStatefulWidget {
 class _QuizScreenState extends ConsumerState<QuizScreen> {
   final CardSwiperController _swiperController = CardSwiperController();
   final TtsService _ttsService = TtsService();
-  double _speedMultiplier = 0.8; // Default as requested
+  double _speedMultiplier = 0.75; // Default as requested
 
   @override
   void initState() {
@@ -41,14 +41,14 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
   void _toggleSpeed() {
     setState(() {
-      if (_speedMultiplier == 0.8) {
+      if (_speedMultiplier == 0.75) {
         _speedMultiplier = 1.0;
       } else if (_speedMultiplier == 1.0) {
         _speedMultiplier = 1.5;
       } else if (_speedMultiplier == 1.5) {
         _speedMultiplier = 0.5;
       } else {
-        _speedMultiplier = 0.8;
+        _speedMultiplier = 0.75;
       }
     });
     _ttsService.setRate(_speedMultiplier);
