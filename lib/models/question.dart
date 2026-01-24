@@ -29,6 +29,8 @@ class Question {
   final QuestionType type;
   @HiveField(5)
   final LanguageItem sourceItem;
+  @HiveField(6)
+  final String? category;
 
   Question({
     required this.id,
@@ -37,5 +39,6 @@ class Question {
     required this.correctAnswer,
     required this.type,
     required this.sourceItem,
+    this.category,
   });
 }

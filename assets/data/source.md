@@ -2,10 +2,10 @@
 
 | Portugues | English | Notes |
 | :---- | :---- | :---- |
-| Chamo-me Ramesh | Call me Ramesh |  |
-| O meu nome é Ramesh | My name is Ramesh |  |
-| Eu sou o Ramesh | I am Ramesh |  |
-| Eu sou casado | I am married |  |
+| Chamo-me Ramesh | Call me Ramesh | Basics - Intro |
+| O meu nome é Ramesh | My name is Ramesh | Basics - Intro |
+| Eu sou o Ramesh | I am Ramesh | Basics - Intro |
+| Eu sou casado | I am married | Basics - Intro |
 | ser/estar | To be/be | Ser \- permanent Estar \- temporary |
 | eu estou cansado | I am tired |  |
 | Um problema | A problem | Masculine even though it ends in a |
@@ -47,31 +47,31 @@
 | laticinios | Milk (lactose) based products | Milk, cheese, eggs etc. |
 | queria | I want | Polite way to say you want something |
 | (eu) queria um café, por favor | Want a coffee, please | No need to say I want as Queria already implies I |
-| adeus | Goodbye |  |
-| até já | See you very soon | See you within the hour |
-| até logo | See you again | Slightly longer period |
-| até breve | See you shortly |  |
-| até à próxima | See you next time |  |
-| até amanhã | See you tomorrow |  |
-| até sábado | See you Saturday | Sab-ado (not elongated pronunciation like in Spanish) |
-| até à próxima semana | See you next week |  |
-| Até nunca | See you never |  |
-| boa semana\! | Good week | Mana |
-| bom fim de semana\! | Good weekend |  |
-| está bem | He is well |  |
-| estou bem | I am fine |  |
-| como está/estás? | How are you (formal/informal) | Ending in s makes it informal |
-| estou bem, obrigado(a) | I am fine, thank you | Male ends in o |
-| muito obrigado | Thank you very much |  |
-| tudo bem? | Everything good | Same answer |
-| mais ou menos | More or less (just okay) |  |
-| desculpe | Sorry (formal) |  |
-| desculpa | Sorry (informal) |  |
-| com licença | With permission (excuse me) |  |
-| posso entrar? | May I enter? |  |
-| posso fazer uma pregunta | May I ask a question? |  |
-| posso fazer | May I |  |
-| pode repetir, por favor | Can repeat please. Say it again please |  |
+| adeus | Goodbye | Basics - Greeting |
+| até já | See you very soon | See you within the hour (Basics) |
+| até logo | See you again | Slightly longer period (Basics) |
+| até breve | See you shortly | Basics - Greeting |
+| até à próxima | See you next time | Basics - Greeting |
+| até amanhã | See you tomorrow | Basics - Greeting |
+| até sábado | See you Saturday | Sab-ado (Basics) |
+| até à próxima semana | See you next week | Basics - Greeting |
+| Até nunca | See you never | Basics - Greeting |
+| boa semana\! | Good week | Mana (Basics) |
+| bom fim de semana\! | Good weekend | Basics - Greeting |
+| está bem | He is well | Basics - State |
+| estou bem | I am fine | Basics - State |
+| como está/estás? | How are you (formal/informal) | Ending in s makes it informal (Basics) |
+| estou bem, obrigado(a) | I am fine, thank you | Male ends in o (Basics) |
+| muito obrigado | Thank you very much | Basics - Polite |
+| tudo bem? | Everything good | Same answer (Basics) |
+| mais ou menos | More or less (just okay) | Basics |
+| desculpe | Sorry (formal) | Basics - Polite |
+| desculpa | Sorry (informal) | Basics - Polite |
+| com licença | With permission (excuse me) | Basics - Polite |
+| posso entrar? | May I enter? | Basics |
+| posso fazer uma pregunta | May I ask a question? | Basics |
+| posso fazer | May I | Basics |
+| pode repetir, por favor | Can repeat please. Say it again please | Basics - Polite |
 | pode falar mais devagar, por favor | Can speak more slowly, please |  |
 | devagar/depressa | slowly/quickly |  |
 | rapido/lento | fast/slow | Transito lento \- slow traffic |
@@ -245,3 +245,39 @@
 | acaba | finish \- to end |  |
 | Volto | Come back (Voltar) |  |
 
+
+# Fri 24 Jan 2026 (AI Expansion)
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| O avô | The grandfather | Family |
+| A avó | The grandmother | Family |
+| O tio | The uncle | Family |
+| A tia | The aunt | Family |
+| O primo | The cousin (male) | Family |
+| A prima | The cousin (female) | Family |
+| O marido | The husband | Family |
+| A mulher / A esposa | The wife | Family |
+| O irmão | The brother | Family |
+| A irmã | The sister | Family |
+| O menu, por favor | The menu, please | Restaurant |
+| A conta, por favor | The bill, please | Restaurant |
+| Água (sem gás / com gás) | Water (still / sparking) | Drinks |
+| Vinho tinto | Red wine | Drinks |
+| Vinho branco | White wine | Drinks |
+| Uma cerveja (imperial) | A beer (draught) | Drinks - Imperial is common for draught beer |
+| Pão com manteiga | Bread with butter | Food |
+| Queijo | Cheese | Food |
+| Onde é a casa de banho? | Where is the bathroom? | Directions |
+| Vire à esquerda | Turn left | Directions |
+| Vire à direita | Turn right | Directions |
+| Siga em frente | Go straight ahead | Directions |
+| Fica perto | It is near | Directions |
+| Fica longe | It is far | Directions |
+| A rua | The street | City |
+| A praça | The square | City |
+| Eu tenho fome | I am hungry (have hunger) | Common Phrase |
+| Eu tenho sede | I am thirsty (have thirst) | Common Phrase |
+| Eu preciso de ajuda | I need help | Common Phrase |
+| Eu não sei | I don't know | Common Phrase |
+| Eu posso? | Can I? | Common Phrase |

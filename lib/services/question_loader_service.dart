@@ -50,6 +50,7 @@ class QuestionLoaderService {
             correctAnswer: obj['answer'],
             type: _parseType(obj['type']),
             sourceItem: sourceItem,
+            category: obj['cat'],
           ),
         );
       }

@@ -48,19 +48,40 @@ class QuizViewModel extends Notifier<QuizState> {
     return QuizState(questions: []);
   }
 
-  Future<void> startQuiz({int count = 20}) async {
+  Future<void> startQuiz({int count = 20, String? category}) async {
     final storage = ref.read(storageServiceProvider);
     final items = storage.getAllItems();
     if (items.isEmpty) return;
 
     // Load JSON questions
-    final jsonQuestions = await _loader.loadQuestions(
+    var jsonQuestions = await _loader.loadQuestions(
       'assets/data/questions.json',
       items,
     );
 
+    // Filter by category if specified
+    if (category != null) {
+      jsonQuestions = jsonQuestions
+          .where((q) => q.category == category)
+          .toList();
+    }
+
     // Generate algorithmic questions to fill the count
-    final algoQuestions = _engine.generateQuiz(items, count: count);
+    // TODO: Pass category to engine if we want algorithmic questions to respect it too?
+    // For now, if category is selected, maybe we rely mostly on JSON?
+    // Or we filter items passed to engine?
+
+    // List<LanguageItem> engineItems = items;
+    if (category != null) {
+      // Filter items that belong to this category (needs reverse lookup or mapping)
+      // Since LanguageItem doesn't store category explicitly (it's in JSON/Notes),
+      // we might just skip algorithmic questions or try our best.
+      // Simplest: only use JSON questions when category is selected to avoid noise.
+    }
+
+    final algoQuestions = (category == null)
+        ? _engine.generateQuiz(items, count: count)
+        : <Question>[]; // Skip algo for now on specific categories to be safe
 
     // Merge: Prefer JSON questions, them algorithmic
     final combined = [...jsonQuestions, ...algoQuestions];

@@ -40,12 +40,26 @@ def parse_markdown(file_path):
             en = en.replace("**", "").replace("*", "")
 
             # If there are notes, we stick them in 'notes' field but we mainly use pt/en
-            notes = parts[3] if len(parts) > 3 else ""
+            # EXTRACT CATEGORY: Use the Notes column as the category if it exists
+            # We map specific keywords in Notes to standard categories
+            notes = parts[3].strip() if len(parts) > 3 else "General"
             
+            # Simple keyword matching to standardized categories
+            category = "General"
+            notes_lower = notes.lower()
+            
+            if "family" in notes_lower: category = "Family"
+            elif "food" in notes_lower or "restaurant" in notes_lower or "drinks" in notes_lower: category = "Food & Drink"
+            elif "directions" in notes_lower or "city" in notes_lower or "location" in notes_lower: category = "Travel & Directions"
+            elif "verb" in notes_lower or "action" in notes_lower or "grammar" in notes_lower: category = "Grammar & Verbs"
+            elif "time" in notes_lower or "month" in notes_lower or "day" in notes_lower or "number" in notes_lower: category = "Time & Numbers"
+            elif "intro" in notes_lower or "greeting" in notes_lower: category = "Basics"
+
             items.append({
                 "pt": pt,
                 "en": en,
-                "notes": notes
+                "notes": notes,
+                "cat": category
             })
     return items
 
@@ -89,7 +103,8 @@ def main():
             "question": f"What is the English translation of '{item['pt']}'?",
             "options": get_distractors(item, raw_data, "en"),
             "answer": item["en"],
-            "sourceItem": item["pt"]
+            "sourceItem": item["pt"],
+            "cat": item["cat"]
         }
         questions.append(q_obj)
         id_counter += 1
@@ -102,7 +117,8 @@ def main():
             "question": f"How do you say '{item['en']}' in Portuguese?",
             "options": get_distractors(item, raw_data, "pt"),
             "answer": item["pt"],
-            "sourceItem": item["pt"]
+            "sourceItem": item["pt"],
+            "cat": item["cat"]
         }
         questions.append(q_obj_rev)
         id_counter += 1
@@ -157,7 +173,8 @@ def main():
                 "question": f"Fill in the blank: '{cloze_sentence}' ({item['en']})",
                 "options": distractors,
                 "answer": target_word_clean,
-                "sourceItem": item["pt"]
+                "sourceItem": item["pt"],
+                "cat": item["cat"]
             }
             questions.append(q_obj_cloze)
             id_counter += 1

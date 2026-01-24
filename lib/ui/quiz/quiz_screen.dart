@@ -7,7 +7,8 @@ import 'quiz_view_model.dart';
 import '../../services/tts_service.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
-  const QuizScreen({super.key});
+  final String? category;
+  const QuizScreen({super.key, this.category});
 
   @override
   ConsumerState<QuizScreen> createState() => _QuizScreenState();
@@ -22,7 +23,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     super.initState();
     // Start quiz on load
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await ref.read(quizViewModelProvider.notifier).startQuiz();
+      await ref
+          .read(quizViewModelProvider.notifier)
+          .startQuiz(category: widget.category);
     });
   }
 
@@ -51,7 +54,21 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     if (quizState.questions.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: const Text('Quiz')),
-        body: const Center(child: CircularProgressIndicator()),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.search_off, size: 60, color: Colors.grey),
+              const SizedBox(height: 16),
+              const Text('No questions found for this category.'),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Go Back'),
+              ),
+            ],
+          ),
+        ),
       );
     }
 
@@ -188,106 +205,115 @@ class _QuestionCardState extends State<QuestionCard> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const SizedBox(width: 48), // Balance
-                Expanded(
-                  child: Text(
-                    "Translate this",
-                    style: TextStyle(color: Colors.grey[600], fontSize: 12),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                if (widget.question.type != QuestionType.cloze)
-                  IconButton(
-                    icon: const Icon(Icons.volume_up),
-                    onPressed: () => widget.ttsService.speak(
-                      widget.question.sourceItem.portuguese,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(width: 48), // Balance
+                  Expanded(
+                    child: Text(
+                      "Translate this",
+                      style: TextStyle(color: Colors.grey[600], fontSize: 12),
+                      textAlign: TextAlign.center,
                     ),
-                  )
-                else
-                  const SizedBox(width: 48), // Maintain balance
-              ],
-            ),
-            const Spacer(),
-            Text(
-              widget.question.questionText,
-              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const Spacer(),
-            ...widget.question.options.map((option) {
-              final isCorrectAnswer = option == widget.question.correctAnswer;
-              final isWrongAnswer = _wrongAnswers.contains(option);
+                  ),
+                  if (widget.question.type != QuestionType.cloze)
+                    IconButton(
+                      icon: const Icon(Icons.volume_up),
+                      onPressed: () => widget.ttsService.speak(
+                        widget.question.sourceItem.portuguese,
+                      ),
+                    )
+                  else
+                    const SizedBox(width: 48), // Maintain balance
+                ],
+              ),
+              const SizedBox(height: 20),
+              Text(
+                widget.question.questionText,
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 30),
+              ...widget.question.options.map((option) {
+                final isCorrectAnswer = option == widget.question.correctAnswer;
+                final isWrongAnswer = _wrongAnswers.contains(option);
 
-              Color color = Colors.white;
-              Color textColor = Colors.black87;
+                Color color = Colors.white;
+                Color textColor = Colors.black87;
 
-              if (_isCorrect && isCorrectAnswer) {
-                color = Colors.green.shade100;
-                textColor = Colors.green.shade900;
-              } else if (isWrongAnswer) {
-                color = Colors.red.shade100;
-                textColor = Colors.red.shade900;
-              }
+                if (_isCorrect && isCorrectAnswer) {
+                  color = Colors.green.shade100;
+                  textColor = Colors.green.shade900;
+                } else if (isWrongAnswer) {
+                  color = Colors.red.shade100;
+                  textColor = Colors.red.shade900;
+                }
 
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 55,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: color,
-                      foregroundColor: textColor,
-                      elevation: (_isCorrect || isWrongAnswer) ? 0 : 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: BorderSide(
-                          color:
-                              (_isCorrect && isCorrectAnswer) || isWrongAnswer
-                              ? textColor
-                              : Colors.transparent,
-                          width: 2,
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 55,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: color,
+                        foregroundColor: textColor,
+                        elevation: (_isCorrect || isWrongAnswer) ? 0 : 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: BorderSide(
+                            color:
+                                (_isCorrect && isCorrectAnswer) || isWrongAnswer
+                                ? textColor
+                                : Colors.transparent,
+                            width: 2,
+                          ),
                         ),
                       ),
-                    ),
-                    onPressed: () => _onOptionTap(option),
-                    child: Text(option, style: const TextStyle(fontSize: 16)),
-                  ),
-                ),
-              );
-            }),
-            const SizedBox(height: 20),
-            Visibility(
-              visible: _isCorrect,
-              maintainSize: true,
-              maintainAnimation: true,
-              maintainState: true,
-              child: SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      onPressed: () => _onOptionTap(option),
+                      child: Text(option, style: const TextStyle(fontSize: 16)),
                     ),
                   ),
-                  onPressed: widget.onNext,
-                  icon: const Icon(Icons.arrow_forward),
-                  label: const Text(
-                    "Next Question",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                );
+              }),
+              const SizedBox(height: 20),
+              Visibility(
+                visible: _isCorrect,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: widget.onNext,
+                    icon: const Icon(Icons.arrow_forward),
+                    label: const Text(
+                      "Next Question",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

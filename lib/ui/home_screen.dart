@@ -4,7 +4,7 @@ import 'package:animate_do/animate_do.dart';
 
 import '../../services/markdown_parser.dart';
 import '../../main.dart';
-import 'quiz/quiz_screen.dart';
+import 'quiz/category_selection_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -148,7 +148,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const QuizScreen(),
+                              builder: (context) =>
+                                  const CategorySelectionScreen(),
                             ),
                           ).then(
                             (_) => setState(() {}),

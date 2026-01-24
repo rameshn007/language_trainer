@@ -23,13 +23,14 @@ class QuestionAdapter extends TypeAdapter<Question> {
       correctAnswer: fields[3] as String,
       type: fields[4] as QuestionType,
       sourceItem: fields[5] as LanguageItem,
+      category: fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Question obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class QuestionAdapter extends TypeAdapter<Question> {
       ..writeByte(4)
       ..write(obj.type)
       ..writeByte(5)
-      ..write(obj.sourceItem);
+      ..write(obj.sourceItem)
+      ..writeByte(6)
+      ..write(obj.category);
   }
 
   @override
