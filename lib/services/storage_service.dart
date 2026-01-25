@@ -64,6 +64,20 @@ class StorageService {
     }
   }
 
+  Future<void> resetHighScore() async {
+    await _settingsBox?.delete('high_score');
+  }
+
+  Future<void> resetStats() async {
+    if (_itemsBox == null) return;
+    final allItems = _itemsBox!.values.toList();
+    for (var item in allItems) {
+      item.masteryLevel = 0;
+      item.lastReviewed = null;
+    }
+    await saveItems(allItems);
+  }
+
   // Helper to check if we have data seeded
   bool get hasData => _itemsBox?.isNotEmpty ?? false;
 }

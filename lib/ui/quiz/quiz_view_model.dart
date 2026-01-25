@@ -66,29 +66,57 @@ class QuizViewModel extends Notifier<QuizState> {
           .toList();
     }
 
-    // Generate algorithmic questions to fill the count
-    // TODO: Pass category to engine if we want algorithmic questions to respect it too?
-    // For now, if category is selected, maybe we rely mostly on JSON?
-    // Or we filter items passed to engine?
-
-    // List<LanguageItem> engineItems = items;
-    if (category != null) {
-      // Filter items that belong to this category (needs reverse lookup or mapping)
-      // Since LanguageItem doesn't store category explicitly (it's in JSON/Notes),
-      // we might just skip algorithmic questions or try our best.
-      // Simplest: only use JSON questions when category is selected to avoid noise.
-    }
-
     final algoQuestions = (category == null)
         ? _engine.generateQuiz(items, count: count)
-        : <Question>[]; // Skip algo for now on specific categories to be safe
+        : <Question>[];
 
-    // Merge: Prefer JSON questions, them algorithmic
-    final combined = [...jsonQuestions, ...algoQuestions];
-    combined.shuffle();
+    // Combine all potential questions
+    final allPotentialQuestions = [...jsonQuestions, ...algoQuestions];
 
-    // Take required count
-    final finalSelection = combined.take(count).toList();
+    // Group questions by their sourceItem ID (or text if ID missing)
+    // to ensure we don't ask multiple questions about the same word in one session.
+    final Map<String, List<Question>> groupedBySource = {};
+    for (var q in allPotentialQuestions) {
+      // Use sourceItem.id if valid, otherwise fallback to portuguese text or question text
+      // We want to group by the underlying CONCEPT/WORD.
+      final key = !q.sourceItem.isEmpty
+          ? q.sourceItem.id
+          : q.questionText; // Fallback, though ideally sourceItem is always present
+
+      groupedBySource.putIfAbsent(key, () => []).add(q);
+    }
+
+    final List<Question> finalSelection = [];
+    final List<String> sourceKeys = groupedBySource.keys.toList();
+
+    // Shuffle the keys (concepts) so we pick random words
+    sourceKeys.shuffle();
+
+    // 1. First pass: Pick ONE random question for each concept
+    for (var key in sourceKeys) {
+      if (finalSelection.length >= count) break;
+
+      final questionsForConcept = groupedBySource[key]!;
+      // Pick a random question variant for this concept (e.g. PT->EN vs EN->PT vs Cloze)
+      questionsForConcept.shuffle();
+      finalSelection.add(questionsForConcept.first);
+    }
+
+    // 2. Second pass: If we still need more questions (rare, if count > available concepts),
+    // go through again and pick a SECOND variant if available.
+    if (finalSelection.length < count) {
+      for (var key in sourceKeys) {
+        if (finalSelection.length >= count) break;
+
+        final questionsForConcept = groupedBySource[key]!;
+        if (questionsForConcept.length > 1) {
+          finalSelection.add(questionsForConcept[1]);
+        }
+      }
+    }
+
+    // Final shuffle of the selected questions so they aren't ordered by concept grouping process
+    finalSelection.shuffle();
 
     state = QuizState(questions: finalSelection);
   }
