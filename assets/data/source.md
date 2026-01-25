@@ -421,3 +421,164 @@
 | Empurrar | Push | Travel - New |
 | Puxar | Pull | Travel - New |
 | Informações | Information | Travel - New |
+
+# AI Expansion Phase 2 (25 Jan 2026)
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| Vermelho | Red | Colors |
+| Azul | Blue | Colors |
+| Verde | Green | Colors |
+| Amarelo | Yellow | Colors |
+| Preto | Black | Colors |
+| Branco | White | Colors |
+| Cinzento | Grey | Colors |
+| Laranja | Orange | Colors |
+| Roxo | Purple | Colors |
+| Cor-de-rosa | Pink | Colors |
+| Castanho | Brown | Colors |
+| Feliz | Happy | Feelings |
+| Triste | Sad | Feelings |
+| Cansado | Tired | Feelings |
+| Zangado | Angry | Feelings |
+| Assustado | Scared | Feelings |
+| Surpreendido | Surprised | Feelings |
+| Entediado | Bored | Feelings |
+| Ansioso | Anxious | Feelings |
+| Doente | Sick | Feelings |
+| Alto | Tall/High | Description |
+| Baixo | Short/Low | Description |
+| Magro | Thin | Description |
+| Gordo | Fat | Description |
+| Jovem | Young | Description |
+| Velho | Old | Description |
+| Bonito | Beautiful | Description |
+| Feio | Ugly | Description |
+| Rico | Rich | Description |
+| Pobre | Poor | Description |
+| A escola | The school | City |
+| A universidade | The university | City |
+| O correio | The post office | City |
+| O banco | The bank | City |
+| A biblioteca | The library | City |
+| O museu | The museum | City |
+| O jardim | The garden | City |
+| A ponte | The bridge | City |
+| O rio | The river | City |
+| A praia | The beach | City |
+| O mar | The sea | City |
+| Professor | Teacher | Professions |
+| Médico | Doctor | Professions |
+| Enfermeiro | Nurse | Professions |
+| Engenheiro | Engineer | Professions |
+| Advogado | Lawyer | Professions |
+| Polícia | Police Officer | Professions |
+| Bombeiro | Firefighter | Professions |
+| Cozinheiro | Cook/Chef | Professions |
+| Empregado de mesa | Waiter | Professions |
+| Estudante | Student | Professions |
+| Motorista | Driver | Professions |
+| Arquiteto | Architect | Professions |
+| Jornalista | Journalist | Professions |
+| Ator | Actor | Professions |
+| Cantor | Singer | Professions |
+| Maçã | Apple | Food - Fruit |
+| Banana | Banana | Food - Fruit |
+| Laranja | Orange | Food - Fruit |
+| Uva | Grape | Food - Fruit |
+| Morango | Strawberry | Food - Fruit |
+| Limão | Lemon | Food - Fruit |
+| Batata | Potato | Food - Veg |
+| Cenoura | Carrot | Food - Veg |
+| Cebola | Onion | Food - Veg |
+| Tomate | Tomato | Food - Veg |
+| Alface | Lettuce | Food - Veg |
+| Arroz | Rice | Food |
+| Massa | Pasta | Food |
+| Frango | Chicken | Food |
+| Carne de vaca | Beef | Food |
+| Carne de porco | Pork | Food |
+| Ovo | Egg | Food |
+| Leite | Milk | Food |
+| Sumo | Juice | Food |
+| Café | Coffee | Food |
+| Chá | Tea | Food |
+| Pequeno-almoço | Breakfast | Meals |
+| Almoço | Lunch | Meals |
+| Jantar | Dinner | Meals |
+| Lanche | Snack | Meals |
+| Segundo | Second | Time |
+| Minuto | Minute | Time |
+| Hora | Hour | Time |
+| Dia | Day | Time |
+| Semana | Week | Time |
+| Mês | Month | Time |
+| Ano | Year | Time |
+| Manhã | Morning | Time |
+| Tarde | Afternoon | Time |
+| Noite | Night | Time |
+| Ontem | Yesterday | Time |
+| Hoje | Today | Time |
+| Amanhã | Tomorrow | Time |
+| Agora | Now | Time |
+| Depois | Later/After | Time |
+| Antes | Before | Time |
+| Sempre | Always | Time |
+| Nunca | Never | Time |
+| Às vezes | Sometimes | Time |
+| Frequentemente | Frequently | Time |
+| Correr | To run | Verbs |
+| Comer | To eat | Verbs |
+| Beber | To drink | Verbs |
+| Dormir | To sleep | Verbs |
+| Falar | To speak | Verbs |
+| Ouvir | To hear/listen | Verbs |
+| Ver | To see | Verbs |
+| Olhar | To look | Verbs |
+| Andar | To walk | Verbs |
+| Trabalhar | To work | Verbs |
+| Estudar | To study | Verbs |
+| Comprar | To buy | Verbs |
+| Vender | To sell | Verbs |
+| Abrir | To open | Verbs |
+| Fechar | To close | Verbs |
+| Escrever | To write | Verbs |
+| Ler | To read | Verbs |
+| Jogar | To play (games/sports) | Verbs |
+| Tocar | To touch/play (instrument) | Verbs |
+| Gostar | To like | Verbs |
+| Amar | To love | Verbs |
+| Odiar | To hate | Verbs |
+| Querer | To want | Verbs |
+| Poder | To be able to/Can | Verbs |
+| Dever | Should/Must | Verbs |
+| Saber | To know (facts/how to) | Verbs |
+| Conhecer | To know (people/places) | Verbs |
+| Pensar | To think | Verbs |
+| Acreditar | To believe | Verbs |
+| Sentir | To feel | Verbs |
+| Ajudar | To help | Verbs |
+| Esperar | To wait/hope | Verbs |
+| Chegar | To arrive | Verbs |
+| Partir | To leave/depart | Verbs |
+| Ficar | To stay/become | Verbs |
+| Dar | To give | Verbs |
+| Receber | To receive | Verbs |
+| Enviar | To send | Verbs |
+| Trazer | To bring | Verbs |
+| Levar | To take (away) | Verbs |
+| Perder | To lose | Verbs |
+| Ganhar | To win/earn | Verbs |
+| Usar | To use | Verbs |
+| Tentar | To try | Verbs |
+| Começar | To start | Verbs |
+| Acabar | To finish | Verbs |
+| O carro | The car | Transport |
+| O autocarro | The bus | Transport |
+| O comboio | The train | Transport |
+| O metro | The subway/metro | Transport |
+| O táxi | The taxi | Transport |
+| O avião | The plane | Transport |
+| O barco | The boat | Transport |
+| A bicicleta | The bicycle | Transport |
+| A mota | The motorcycle | Transport |
