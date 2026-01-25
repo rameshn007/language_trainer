@@ -33,19 +33,40 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       // Always reload to ensure sync with source.md/questions.json
       // OLD: if (!storage.hasData) { ... }
 
-      final parser = MarkdownParser();
-      final items = await parser.loadAndParseRawData('assets/data/source.md');
+      // Merge logic:
+      // 1. Get existing items map for fast lookup
+      final existingItems = storage.getAllItems();
+      final Map<String, int> masteryMap = {
+        for (var i in existingItems) i.id: i.masteryLevel,
+      };
+      final Map<String, DateTime?> reviewMap = {
+        for (var i in existingItems) i.id: i.lastReviewed,
+      };
 
-      // Clear old data to remove orphans (sanitization cleanup)
+      // 2. Parse fresh items from source
+      final parser = MarkdownParser();
+      final freshItems = await parser.loadAndParseRawData(
+        'assets/data/source.md',
+      );
+
+      // 3. Update fresh items with existing progress
+      for (var item in freshItems) {
+        if (masteryMap.containsKey(item.id)) {
+          item.masteryLevel = masteryMap[item.id]!;
+          item.lastReviewed = reviewMap[item.id];
+        }
+      }
+
+      // 4. Save merged list (overwrites structure but keeps progress)
       await storage.clearItems();
-      await storage.saveItems(items);
+      await storage.saveItems(freshItems);
 
       if (!mounted) return;
       // Optional: Show snackbar only if meaningful change or debug?
       // Keeping it for confirmation
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Synced ${items.length} items from source'),
+          content: Text('Synced ${freshItems.length} items from source'),
           duration: const Duration(seconds: 1),
         ),
       );
@@ -58,6 +79,41 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
+      }
+    }
+  }
+
+  Future<void> _confirmReset() async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Reset Statistics?'),
+        content: const Text(
+          'This will reset your "Learned" count and High Score to zero. This action cannot be undone.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: Colors.red),
+            child: const Text('Reset'),
+          ),
+        ],
+      ),
+    );
+
+    if (result == true) {
+      final storage = ref.read(storageServiceProvider);
+      await storage.resetStats();
+      await storage.resetHighScore();
+      setState(() {}); // Refresh UI
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Statistics reset successfully.')),
+        );
       }
     }
   }
@@ -78,10 +134,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         title: const Text('Language Trainer'),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh),
-            onPressed: _loadData,
-            tooltip: 'Reload from File',
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'refresh') {
+                _loadData();
+              } else if (value == 'reset') {
+                _confirmReset();
+              }
+            },
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'refresh',
+                child: ListTile(
+                  leading: Icon(Icons.refresh),
+                  title: Text('Refresh Data'),
+                ),
+              ),
+              const PopupMenuItem<String>(
+                value: 'reset',
+                child: ListTile(
+                  leading: Icon(Icons.restore),
+                  title: Text('Reset Stats'),
+                ),
+              ),
+            ],
           ),
         ],
       ),
