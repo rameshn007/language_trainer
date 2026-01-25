@@ -167,6 +167,12 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               );
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.close),
+            tooltip: 'Close Quiz',
+            onPressed: () =>
+                Navigator.of(context).popUntil((route) => route.isFirst),
+          ),
         ],
       ),
       body: SafeArea(
