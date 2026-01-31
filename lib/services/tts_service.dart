@@ -12,6 +12,15 @@ class TtsService {
     // 1. Get all available voices
     var voices = await _flutterTts.getVoices;
 
+    if (Platform.isIOS) {
+      await _flutterTts
+          .setIosAudioCategory(IosTextToSpeechAudioCategory.playback, [
+            IosTextToSpeechAudioCategoryOptions.defaultToSpeaker,
+            IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+            IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+          ]);
+    }
+
     try {
       // 2. Filter for Portuguese (Portugal)
       // Note: adjust locale check if needed (e.g., specific to 'pt-PT')
