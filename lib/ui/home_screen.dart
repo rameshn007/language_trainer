@@ -6,6 +6,7 @@ import '../../services/markdown_parser.dart';
 import '../../main.dart';
 import 'quiz/category_selection_screen.dart';
 import 'widgets/word_star_field.dart';
+import 'vocabulary/vocabulary_list_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -310,6 +311,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ],
+            ),
+          ),
+          // Vocabulary List FAB
+          Positioned(
+            right: 20,
+            bottom: MediaQuery.of(context).padding.bottom + 60 + 60 + 15,
+            child: FloatingActionButton(
+              heroTag: 'vocab_fab',
+              backgroundColor: Theme.of(context).colorScheme.primary,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VocabularyListScreen(),
+                  ),
+                ).then((_) => setState(() {}));
+              },
+              child: const Icon(Icons.list),
             ),
           ),
         ],

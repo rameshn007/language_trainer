@@ -43,6 +43,11 @@ class StorageService {
     await _itemsBox!.put(item.id, item);
   }
 
+  Future<void> deleteItem(String id) async {
+    if (_itemsBox == null) return;
+    await _itemsBox!.delete(id);
+  }
+
   // --- Settings / Progress ---
   dynamic getSetting(String key, {dynamic defaultValue}) {
     return _settingsBox?.get(key, defaultValue: defaultValue);
