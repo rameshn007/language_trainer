@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/language_item.dart';
 
 import '../../main.dart'; // for storageServiceProvider
+import '../../services/tts_service.dart';
 
 class VocabularyListScreen extends ConsumerStatefulWidget {
   const VocabularyListScreen({super.key});
@@ -17,11 +18,46 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   List<LanguageItem> _filteredItems = [];
   String _searchQuery = '';
   final TextEditingController _searchController = TextEditingController();
+  final TtsService _ttsService = TtsService();
+  double _speedMultiplier = 0.75;
 
   @override
   void initState() {
     super.initState();
     _loadItems();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _ttsService.setRate(_speedMultiplier);
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _ttsService.stop();
+    super.dispose();
+  }
+
+  void _toggleSpeed() {
+    setState(() {
+      if (_speedMultiplier == 0.75) {
+        _speedMultiplier = 1.0;
+      } else if (_speedMultiplier == 1.0) {
+        _speedMultiplier = 1.5;
+      } else if (_speedMultiplier == 1.5) {
+        _speedMultiplier = 0.5;
+      } else {
+        _speedMultiplier = 0.75;
+      }
+    });
+    _ttsService.setRate(_speedMultiplier);
+
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Speed: ${_speedMultiplier}x"),
+        duration: const Duration(seconds: 1),
+      ),
+    );
   }
 
   void _loadItems() {
@@ -104,6 +140,13 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vocabulary List'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.speed),
+            tooltip: 'Toggle Speed',
+            onPressed: _toggleSpeed,
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(
@@ -130,6 +173,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
         itemBuilder: (context, index) {
           final item = _filteredItems[index];
           return InkWell(
+            onTap: () => _ttsService.speak(item.portuguese),
             onDoubleTap: () => _showEditDialog(item),
             onLongPress: () => _deleteItem(item),
             child: Padding(
