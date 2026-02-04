@@ -19,6 +19,9 @@ class ExerciseViewModel extends Notifier<QuizState> {
     // Load JSON questions from specific Unit file
     var questions = await _loader.loadQuestions(jsonPath, items);
 
+    // Randomize the order of questions
+    questions.shuffle();
+
     // No shuffling or algo generation - preserve Unit order
     state = QuizState(questions: questions);
   }
