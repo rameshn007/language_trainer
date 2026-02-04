@@ -42,4 +42,7 @@ post_install do |installer|
   
   # Fix CwlCatchExceptionSupport umbrella header
   system("sed -i '' 's/#import \"CwlCatchException.h\"/#import <CwlCatchExceptionSupport\\/CwlCatchException.h>/g' Pods/Target\\ Support\\ Files/CwlCatchExceptionSupport/CwlCatchExceptionSupport-umbrella.h")
+
+  # Fix flutter_tts umbrella header
+  system("sed -i '' 's/#import \"FlutterTtsPlugin.h\"/#import <flutter_tts\\/FlutterTtsPlugin.h>/g' Pods/Target\\ Support\\ Files/flutter_tts/flutter_tts-umbrella.h")
 end
