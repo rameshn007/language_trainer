@@ -277,7 +277,7 @@ class _VocabularyItemDialogState extends State<VocabularyItemDialog> {
             // Create new item
             // If editing, preserve mastery and lastReviewed
             final newItem = LanguageItem(
-              id: '${pt}_${en}'.replaceAll(' ', '_'),
+              id: '${pt}_$en'.replaceAll(' ', '_'),
               portuguese: pt,
               english: en,
               masteryLevel: widget.item?.masteryLevel ?? 0,
