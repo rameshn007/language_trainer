@@ -7,6 +7,7 @@ import '../../main.dart';
 import 'quiz/category_selection_screen.dart';
 import 'widgets/word_star_field.dart';
 import 'vocabulary/vocabulary_list_screen.dart';
+import 'exercise/exercise_list_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -269,44 +270,86 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   padding: const EdgeInsets.fromLTRB(20, 20, 20, 60),
                   child: FadeInUp(
                     delay: const Duration(milliseconds: 200),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 60,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.primary,
-                          foregroundColor: Theme.of(
-                            context,
-                          ).colorScheme.onPrimary,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          width: double.infinity,
+                          height: 55,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
+                              foregroundColor: Theme.of(
+                                context,
+                              ).colorScheme.onPrimary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              elevation: 5,
+                            ),
+                            onPressed: items.isEmpty || _isLoading
+                                ? null
+                                : () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CategorySelectionScreen(),
+                                      ),
+                                    ).then((_) => setState(() {}));
+                                  },
+                            icon: const Icon(
+                              Icons.play_arrow_rounded,
+                              size: 28,
+                            ),
+                            label: const Text(
+                              'Start Quiz',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
-                          elevation: 5,
                         ),
-                        onPressed: items.isEmpty || _isLoading
-                            ? null
-                            : () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CategorySelectionScreen(),
-                                  ),
-                                ).then(
-                                  (_) => setState(() {}),
-                                ); // Refresh stats when back
-                              },
-                        icon: const Icon(Icons.play_arrow_rounded, size: 28),
-                        label: const Text(
-                          'Start Quiz',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 55,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.secondary,
+                              foregroundColor: Theme.of(
+                                context,
+                              ).colorScheme.onSecondary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              elevation: 5,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ExerciseListScreen(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.assignment, size: 28),
+                            label: const Text(
+                              'Exercises',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ),
@@ -316,20 +359,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           // Vocabulary List FAB
           Positioned(
             right: 20,
-            bottom: MediaQuery.of(context).padding.bottom + 60 + 60 + 15,
-            child: FloatingActionButton(
-              heroTag: 'vocab_fab',
-              backgroundColor: Theme.of(context).colorScheme.primary,
-              foregroundColor: Theme.of(context).colorScheme.onPrimary,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const VocabularyListScreen(),
-                  ),
-                ).then((_) => setState(() {}));
-              },
-              child: const Icon(Icons.list),
+            bottom: MediaQuery.of(context).padding.bottom + 200,
+            child: FadeInUp(
+              delay: const Duration(milliseconds: 200),
+              child: FloatingActionButton(
+                heroTag: 'vocab_fab',
+                backgroundColor: Theme.of(context).colorScheme.primary,
+                foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const VocabularyListScreen(),
+                    ),
+                  ).then((_) => setState(() {}));
+                },
+                child: const Icon(Icons.list),
+              ),
             ),
           ),
         ],
