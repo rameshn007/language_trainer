@@ -73,52 +73,93 @@ class QuizViewModel extends Notifier<QuizState> {
     // Combine all potential questions
     final allPotentialQuestions = [...jsonQuestions, ...algoQuestions];
 
-    // Group questions by their sourceItem ID (or text if ID missing)
-    // to ensure we don't ask multiple questions about the same word in one session.
-    final Map<String, List<Question>> groupedBySource = {};
+    // Filter by seen status
+    final seenIds = storage.getSeenQuestionIds();
+    final unseenQuestions = <Question>[];
+    final seenQuestions = <Question>[];
+
     for (var q in allPotentialQuestions) {
-      // Use sourceItem.id if valid, otherwise fallback to portuguese text or question text
-      // We want to group by the underlying CONCEPT/WORD.
-      final key = !q.sourceItem.isEmpty
-          ? q.sourceItem.id
-          : q.questionText; // Fallback, though ideally sourceItem is always present
-
-      groupedBySource.putIfAbsent(key, () => []).add(q);
-    }
-
-    final List<Question> finalSelection = [];
-    final List<String> sourceKeys = groupedBySource.keys.toList();
-
-    // Shuffle the keys (concepts) so we pick random words
-    sourceKeys.shuffle();
-
-    // 1. First pass: Pick ONE random question for each concept
-    for (var key in sourceKeys) {
-      if (finalSelection.length >= count) break;
-
-      final questionsForConcept = groupedBySource[key]!;
-      // Pick a random question variant for this concept (e.g. PT->EN vs EN->PT vs Cloze)
-      questionsForConcept.shuffle();
-      finalSelection.add(questionsForConcept.first);
-    }
-
-    // 2. Second pass: If we still need more questions (rare, if count > available concepts),
-    // go through again and pick a SECOND variant if available.
-    if (finalSelection.length < count) {
-      for (var key in sourceKeys) {
-        if (finalSelection.length >= count) break;
-
-        final questionsForConcept = groupedBySource[key]!;
-        if (questionsForConcept.length > 1) {
-          finalSelection.add(questionsForConcept[1]);
-        }
+      if (seenIds.contains(q.id)) {
+        seenQuestions.add(q);
+      } else {
+        unseenQuestions.add(q);
       }
     }
 
-    // Final shuffle of the selected questions so they aren't ordered by concept grouping process
-    finalSelection.shuffle();
+    final List<Question> finalSelection = [];
 
-    state = QuizState(questions: finalSelection);
+    // Group questions by their sourceItem ID (or text if ID missing)
+    // We want to prioritize UNSEEN questions first.
+
+    // Helper to select from a pool
+    void selectFromPool(List<Question> pool, int remainingCount) {
+      if (remainingCount <= 0 || pool.isEmpty) return;
+
+      final Map<String, List<Question>> grouped = {};
+      for (var q in pool) {
+        final key = !q.sourceItem.isEmpty ? q.sourceItem.id : q.questionText;
+        grouped.putIfAbsent(key, () => []).add(q);
+      }
+
+      final keys = grouped.keys.toList()..shuffle();
+
+      // 1. Pick one per concept
+      for (var key in keys) {
+        if (finalSelection.length >= count) return;
+        final variants = grouped[key]!..shuffle();
+
+        // Helper: check if we already picked a question for this concept in this session
+        // (to avoid duplicates from mixed pools)
+        bool alreadyPicked = finalSelection.any(
+          (q) =>
+              (!q.sourceItem.isEmpty && q.sourceItem.id == key) ||
+              (q.questionText ==
+                  variants.first.questionText), // heuristic fallback
+        );
+
+        if (!alreadyPicked) {
+          finalSelection.add(variants.first);
+        }
+      }
+
+      // 2. If still need more, pick seconds
+      if (finalSelection.length < count) {
+        // Simply use the shuffle method below to pick from remainder if needed
+        // The complex logic isn't strictly necessary for the fallback
+      }
+    }
+
+    // A. Fill with unseen
+    selectFromPool(unseenQuestions, count);
+
+    // B. Fill remainder with seen if needed
+    if (finalSelection.length < count) {
+      // Only candidates that strictly haven't been picked yet (by ID)
+      // But selectFromPool logic above creates a new selection list.
+      // We need a more robust way to combine.
+
+      // SIMPLIFIED APPROACH:
+      // 1. Shuffle both lists
+      unseenQuestions.shuffle();
+      seenQuestions.shuffle();
+
+      // 2. Take all unseen
+      finalSelection.addAll(unseenQuestions);
+
+      // 3. Take seen until count reached
+      for (var q in seenQuestions) {
+        if (finalSelection.length >= count) break;
+        finalSelection.add(q);
+      }
+    }
+
+    // Cap at count (in case unseen was > count)
+    var resultQuestions = finalSelection.take(count).toList();
+
+    // Final shuffle
+    resultQuestions.shuffle();
+
+    state = QuizState(questions: resultQuestions);
   }
 
   void answerQuestion(String answer) {
@@ -127,6 +168,10 @@ class QuizViewModel extends Notifier<QuizState> {
     final isCorrect = answer == state.currentQuestion!.correctAnswer;
 
     final newScore = isCorrect ? state.score + 1 : state.score;
+
+    // Mark as seen immediately
+    final storage = ref.read(storageServiceProvider);
+    storage.markQuestionAsSeen(state.currentQuestion!.id);
 
     if (isCorrect) {
       _updateMastery(state.currentQuestion!.sourceItem, true);

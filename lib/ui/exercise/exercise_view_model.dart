@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../models/question.dart';
 import '../../models/language_item.dart';
 import '../../services/question_loader_service.dart';
 import '../../main.dart'; // for storageServiceProvider
@@ -19,11 +20,27 @@ class ExerciseViewModel extends Notifier<QuizState> {
     // Load JSON questions from specific Unit file
     var questions = await _loader.loadQuestions(jsonPath, items);
 
-    // Randomize the order of questions
+    // Initial shuffle needed before filtering heuristic?
+    // Actually the user wants randomization.
     questions.shuffle();
 
-    // No shuffling or algo generation - preserve Unit order
-    state = QuizState(questions: questions);
+    final seenIds = storage.getSeenQuestionIds();
+    final unseenQuestions = questions
+        .where((q) => !seenIds.contains(q.id))
+        .toList();
+
+    List<Question> finalQuestions;
+
+    if (unseenQuestions.isEmpty) {
+      // If all questions are seen, we reset/reuse the full list
+      // This allows the user to re-practice the unit immediately without reset
+      finalQuestions = questions;
+    } else {
+      // Otherwise, only show what's left
+      finalQuestions = unseenQuestions;
+    }
+
+    state = QuizState(questions: finalQuestions);
   }
 
   void answerQuestion(String answer) {
@@ -31,6 +48,10 @@ class ExerciseViewModel extends Notifier<QuizState> {
 
     final isCorrect = answer == state.currentQuestion!.correctAnswer;
     final newScore = isCorrect ? state.score + 1 : state.score;
+
+    // Mark as seen immediately
+    final storage = ref.read(storageServiceProvider);
+    storage.markQuestionAsSeen(state.currentQuestion!.id);
 
     if (isCorrect) {
       _updateMastery(state.currentQuestion!.sourceItem, true);
