@@ -1,0 +1,192 @@
+[
+    {
+        "id": "u3_q1",
+        "questionText": "O Hospital ____ grande e moderno.",
+        "options": [
+            "é",
+            "fica",
+            "sou",
+            "está"
+        ],
+        "correctAnswer": "é",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ser_desc",
+            "portuguese": "Ele é grande",
+            "english": "It is big",
+            "notes": "Ser for characteristics"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u3_q2",
+        "questionText": "O hospital ____ no centro de Portugal.",
+        "options": [
+            "é",
+            "fica",
+            "são",
+            "está"
+        ],
+        "correctAnswer": "fica",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ficar_loc",
+            "portuguese": "Fica no centro",
+            "english": "It is located in the center",
+            "notes": "Ficar for permanent location"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u3_q3",
+        "questionText": "____ seis horas da tarde.",
+        "options": [
+            "São",
+            "É",
+            "Somos",
+            "Ficam"
+        ],
+        "correctAnswer": "São",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ser_time",
+            "portuguese": "São seis horas",
+            "english": "It is six o'clock",
+            "notes": "Ser for time (plural)"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u3_q4",
+        "questionText": "A Maria ____ estudante de Arquitetura.",
+        "options": [
+            "é",
+            "fica",
+            "está",
+            "sou"
+        ],
+        "correctAnswer": "é",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ser_prof",
+            "portuguese": "Ela é estudante",
+            "english": "She is a student",
+            "notes": "Ser for profession"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u3_q5",
+        "questionText": "Nós ____ primos deles.",
+        "options": [
+            "somos",
+            "bomos",
+            "são",
+            "fomos"
+        ],
+        "correctAnswer": "somos",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ser_nos",
+            "portuguese": "Nós somos",
+            "english": "We are",
+            "notes": "Ser conjugation (Nós)"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u3_q6",
+        "questionText": "Tu ____ o Pedro? Sim, sou.",
+        "options": [
+            "és",
+            "é",
+            "sou",
+            "eres"
+        ],
+        "correctAnswer": "és",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ser_tu",
+            "portuguese": "Tu és",
+            "english": "You are",
+            "notes": "Ser conjugation (Tu)"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u3_q7",
+        "questionText": "Vocês ____ de Paris?",
+        "options": [
+            "são",
+            "somos",
+            "estão",
+            "ficam"
+        ],
+        "correctAnswer": "são",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ser_voces",
+            "portuguese": "Vocês são",
+            "english": "You (pl) are",
+            "notes": "Ser conjugation (Vocês/Eles/Elas)"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u3_q8",
+        "questionText": "O Porto ____ em Portugal?",
+        "options": [
+            "fica",
+            "é",
+            "está",
+            "são"
+        ],
+        "correctAnswer": "fica",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ficar_city",
+            "portuguese": "Fica em Portugal",
+            "english": "Is located in Portugal",
+            "notes": "Ficar for city location"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u3_q9",
+        "questionText": "Eu ____ amiga do João.",
+        "options": [
+            "sou",
+            "é",
+            "estou",
+            "sô"
+        ],
+        "correctAnswer": "sou",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ser_eu",
+            "portuguese": "Eu sou",
+            "english": "I am",
+            "notes": "Ser conjugation (Eu)"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u3_q10",
+        "questionText": "A Maria e o João ____ irmãos.",
+        "options": [
+            "são",
+            "é",
+            "somos",
+            "estão"
+        ],
+        "correctAnswer": "são",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ser_eles",
+            "portuguese": "Eles são",
+            "english": "They are",
+            "notes": "Ser conjugation (Eles)"
+        },
+        "category": "Grammar"
+    }
+]

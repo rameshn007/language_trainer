@@ -1,0 +1,192 @@
+[
+    {
+        "id": "u4_q1",
+        "questionText": "O Pedro (fazer) ____ os exercícios.",
+        "options": [
+            "faz",
+            "faze",
+            "faço",
+            "faza"
+        ],
+        "correctAnswer": "faz",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "fazer_ele",
+            "portuguese": "Ele faz",
+            "english": "He does/makes",
+            "notes": "Irregular verb Fazer"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u4_q2",
+        "questionText": "Eu (ver) ____ televisão no quarto.",
+        "options": [
+            "vejo",
+            "vêo",
+            "vi",
+            "veio"
+        ],
+        "correctAnswer": "vejo",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ver_eu",
+            "portuguese": "Eu vejo",
+            "english": "I see/watch",
+            "notes": "Irregular verb Ver"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u4_q3",
+        "questionText": "Nós (dar) ____ um presente à mãe.",
+        "options": [
+            "damos",
+            "damo",
+            "dámos",
+            "dão"
+        ],
+        "correctAnswer": "damos",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "dar_nos",
+            "portuguese": "Nós damos",
+            "english": "We give",
+            "notes": "Irregular verb Dar"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u4_q4",
+        "questionText": "Tu (ler) ____ o dicionário?",
+        "options": [
+            "lês",
+            "les",
+            "leio",
+            "lê"
+        ],
+        "correctAnswer": "lês",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ler_tu",
+            "portuguese": "Tu lês",
+            "english": "You read",
+            "notes": "Irregular verb Ler"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u4_q5",
+        "questionText": "A Maria (ter) ____ dezoito anos amanhã.",
+        "options": [
+            "tem",
+            "têm",
+            "tenhe",
+            "tens"
+        ],
+        "correctAnswer": "tem",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "ter_ela",
+            "portuguese": "Ela tem",
+            "english": "She has",
+            "notes": "Irregular verb Ter"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u4_q6",
+        "questionText": "Eu (trazer) ____ o guarda-chuva.",
+        "options": [
+            "trago",
+            "traze",
+            "traz",
+            "trazi"
+        ],
+        "correctAnswer": "trago",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "trazer_eu",
+            "portuguese": "Eu trago",
+            "english": "I bring",
+            "notes": "Irregular verb Trazer"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u4_q7",
+        "questionText": "Eu não (saber) ____ falar francês.",
+        "options": [
+            "sei",
+            "sabo",
+            "saibo",
+            "sabe"
+        ],
+        "correctAnswer": "sei",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "saber_eu",
+            "portuguese": "Eu sei",
+            "english": "I know",
+            "notes": "Irregular verb Saber"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u4_q8",
+        "questionText": "Eles (vir) ____ à escola à tarde.",
+        "options": [
+            "vêm",
+            "vem",
+            "veem",
+            "vêem"
+        ],
+        "correctAnswer": "vêm",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "vir_eles",
+            "portuguese": "Eles vêm",
+            "english": "They come",
+            "notes": "Irregular verb Vir (Plural: vêm)"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u4_q9",
+        "questionText": "A Ana (pôr) ____ os livros na pasta.",
+        "options": [
+            "põe",
+            "ponhe",
+            "poe",
+            "põem"
+        ],
+        "correctAnswer": "põe",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "por_ela",
+            "portuguese": "Ela põe",
+            "english": "She puts",
+            "notes": "Irregular verb Pôr"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u4_q10",
+        "questionText": "Eu (querer) ____ ser veterinária.",
+        "options": [
+            "quero",
+            "quer",
+            "quere",
+            "quis"
+        ],
+        "correctAnswer": "quero",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "querer_eu",
+            "portuguese": "Eu quero",
+            "english": "I want",
+            "notes": "Irregular verb Querer"
+        },
+        "category": "Grammar"
+    }
+]

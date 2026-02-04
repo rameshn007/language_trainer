@@ -1,0 +1,198 @@
+[
+  {
+    "id": "u2_q1",
+    "questionText": "Ele veste o casaco? Não, mas eu ____ o casaco.",
+    "options": ["visto", "veste", "vestem", "vesto"],
+    "correctAnswer": "visto",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vestir",
+      "portuguese": "Eu visto",
+      "english": "I wear",
+      "notes": "Irregular -ir verb (vestir -> eu visto)"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q2",
+    "questionText": "Elas conseguem fazer o teste? Não, mas eu ____.",
+    "options": ["conseguo", "consigo", "consegue", "conseguem"],
+    "correctAnswer": "consigo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conseguir",
+      "portuguese": "Eu consigo",
+      "english": "I manage/can",
+      "notes": "Irregular -ir verb (conseguir -> eu consigo)"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q3",
+    "questionText": "A criança despe-se sozinha? Não, mas eu ____-me.",
+    "options": ["despo", "dispo", "despe", "dispe"],
+    "correctAnswer": "dispo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "despir",
+      "portuguese": "Eu dispo",
+      "english": "I undress",
+      "notes": "Irregular -ir verb (despir -> eu dispo)"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q4",
+    "questionText": "A Maria prefere chá? Não, mas eu ____ chá.",
+    "options": ["prefero", "prefiro", "prefere", "preferem"],
+    "correctAnswer": "prefiro",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "preferir",
+      "portuguese": "Eu prefiro",
+      "english": "I prefer",
+      "notes": "Irregular -ir verb (preferir -> eu prefiro)"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q5",
+    "questionText": "O João sente calor na cozinha? Não, mas eu ____.",
+    "options": ["sento", "sinto", "sente", "sentem"],
+    "correctAnswer": "sinto",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "sentir",
+      "portuguese": "Eu sinto",
+      "english": "I feel",
+      "notes": "Irregular -ir verb (sentir -> eu sinto)"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q6",
+    "questionText": "Você dorme bem? Sim, eu ____ bem.",
+    "options": ["dormo", "durmo", "dorme", "durma"],
+    "correctAnswer": "durmo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "dormir",
+      "portuguese": "Eu durmo",
+      "english": "I sleep",
+      "notes": "Irregular -ir verb (dormir -> eu durmo)"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q7",
+    "questionText": "Você descobre bons restaurantes? Sim, eu ____.",
+    "options": ["descobro", "descubro", "descobre", "descobrem"],
+    "correctAnswer": "descubro",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "descobrir",
+      "portuguese": "Eu descubro",
+      "english": "I discover",
+      "notes": "Irregular -ir verb (descobrir -> eu descubro)"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q8",
+    "questionText": "Você engole comprimidos com água? Sim, eu ____.",
+    "options": ["engolo", "engulo", "engole", "engule"],
+    "correctAnswer": "engulo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "engolir",
+      "portuguese": "Eu engulo",
+      "english": "I swallow",
+      "notes": "Irregular -ir verb (engolir -> eu engulo)"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q9",
+    "questionText": "Você tosse quando fuma? Sim, eu ____.",
+    "options": ["tosso", "tusso", "tosse", "tusse"],
+    "correctAnswer": "tusso",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "tossir",
+      "portuguese": "Eu tusso",
+      "english": "I cough",
+      "notes": "Irregular -ir verb (tossir -> eu tusso)"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q10",
+    "questionText": "A Maria (gostar) ____ de visitar novas cidades.",
+    "options": ["gosto", "gostas", "gosta", "gostam"],
+    "correctAnswer": "gosta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "u2_cloze_1",
+      "portuguese": "Ela gosta",
+      "english": "She likes",
+      "notes": "Regular -ar verb context"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q11",
+    "questionText": "Quando ela viaja, (preparar) ____ a viagem antes.",
+    "options": ["preparo", "preparas", "prepara", "preparam"],
+    "correctAnswer": "prepara",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "u2_cloze_2",
+      "portuguese": "Ela prepara",
+      "english": "She prepares",
+      "notes": "Regular -ar verb context"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q12",
+    "questionText": "Ela (andar) ____ nas ruas para conhecer um pouco as pessoas.",
+    "options": ["ando", "andas", "anda", "andam"],
+    "correctAnswer": "anda",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "u2_cloze_3",
+      "portuguese": "Ela anda",
+      "english": "She walks",
+      "notes": "Regular -ar verb context"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q13",
+    "questionText": "Ela (conhecer) ____ a história e a cultura do país.",
+    "options": ["conheço", "conheces", "conhece", "conhecem"],
+    "correctAnswer": "conhece",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "u2_cloze_4",
+      "portuguese": "Ela conhece",
+      "english": "She knows",
+      "notes": "Regular -er verb context"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "u2_q14",
+    "questionText": "Ela (comer) ____ a comida tradicional do país.",
+    "options": ["como", "comes", "come", "comem"],
+    "correctAnswer": "come",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "u2_cloze_5",
+      "portuguese": "Ela come",
+      "english": "She eats",
+      "notes": "Regular -er verb context"
+    },
+    "category": "Grammar"
+  }
+]

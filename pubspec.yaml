@@ -79,6 +79,7 @@ flutter:
 
   assets:
     - assets/data/
+    - assets/data/exercises/
     - assets/images/
 
 

@@ -1,0 +1,192 @@
+[
+    {
+        "id": "u5_q1",
+        "questionText": "A Maria (falar) ____ inglês.",
+        "options": [
+            "fala",
+            "falo",
+            "falas",
+            "falam"
+        ],
+        "correctAnswer": "fala",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "falar_ela",
+            "portuguese": "Ela fala",
+            "english": "She speaks",
+            "notes": "Regular -ar verb"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u5_q2",
+        "questionText": "O João (estudar) ____ Física.",
+        "options": [
+            "estuda",
+            "estudo",
+            "estudas",
+            "estudam"
+        ],
+        "correctAnswer": "estuda",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "estudar_ele",
+            "portuguese": "Ele estuda",
+            "english": "He studies",
+            "notes": "Regular -ar verb"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u5_q3",
+        "questionText": "Eu (beber) ____ um sumo.",
+        "options": [
+            "bebo",
+            "bebe",
+            "bebes",
+            "bebem"
+        ],
+        "correctAnswer": "bebo",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "beber_eu",
+            "portuguese": "Eu bebo",
+            "english": "I drink",
+            "notes": "Regular -er verb"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u5_q4",
+        "questionText": "Nós (morar) ____ em Lisboa.",
+        "options": [
+            "moramos",
+            "moremos",
+            "moram",
+            "mora"
+        ],
+        "correctAnswer": "moramos",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "morar_nos",
+            "portuguese": "Nós moramos",
+            "english": "We live",
+            "notes": "Regular -ar verb"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u5_q5",
+        "questionText": "Tu (correr) ____ de manhã?",
+        "options": [
+            "corres",
+            "corro",
+            "corre",
+            "correm"
+        ],
+        "correctAnswer": "corres",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "correr_tu",
+            "portuguese": "Tu corres",
+            "english": "You run",
+            "notes": "Regular -er verb"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u5_q6",
+        "questionText": "Eu (apanhar) ____ o metro.",
+        "options": [
+            "apanho",
+            "apanha",
+            "apanhes",
+            "apanham"
+        ],
+        "correctAnswer": "apanho",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "apanhar_eu",
+            "portuguese": "Eu apanho",
+            "english": "I catch/take",
+            "notes": "Regular -ar verb"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u5_q7",
+        "questionText": "Ela não (viver) ____ no Porto.",
+        "options": [
+            "vive",
+            "viva",
+            "vivo",
+            "vivem"
+        ],
+        "correctAnswer": "vive",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "viver_ela",
+            "portuguese": "Ela vive",
+            "english": "She lives",
+            "notes": "Regular -er verb"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u5_q8",
+        "questionText": "Eu (partir) ____ o copo.",
+        "options": [
+            "parto",
+            "parte",
+            "partes",
+            "partem"
+        ],
+        "correctAnswer": "parto",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "partir_eu",
+            "portuguese": "Eu parto",
+            "english": "I break/leave",
+            "notes": "Regular -ir verb"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u5_q9",
+        "questionText": "Eles (compreender) ____ tudo.",
+        "options": [
+            "compreendem",
+            "compreende",
+            "compreendem",
+            "compreendemos"
+        ],
+        "correctAnswer": "compreendem",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "compreender_eles",
+            "portuguese": "Eles compreendem",
+            "english": "They understand",
+            "notes": "Regular -er verb"
+        },
+        "category": "Grammar"
+    },
+    {
+        "id": "u5_q10",
+        "questionText": "Você (fumar) ____ muito?",
+        "options": [
+            "fuma",
+            "fumo",
+            "fumas",
+            "fumam"
+        ],
+        "correctAnswer": "fuma",
+        "type": "cloze",
+        "sourceItem": {
+            "id": "fumar_voce",
+            "portuguese": "Você fuma",
+            "english": "Do you smoke",
+            "notes": "Regular -ar verb"
+        },
+        "category": "Grammar"
+    }
+]
