@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import '../../models/question.dart';
 import 'quiz_view_model.dart';
 import '../../services/tts_service.dart';
+import '../vocabulary/vocabulary_list_screen.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final String? category;
@@ -137,7 +138,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Score: ${quizState.score}'),
-        centerTitle: true,
+        centerTitle: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
@@ -145,6 +146,18 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             icon: const Icon(Icons.speed),
             tooltip: 'Toggle Speed',
             onPressed: _toggleSpeed,
+          ),
+          IconButton(
+            icon: const Icon(Icons.list_alt),
+            tooltip: 'Vocabulary List',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const VocabularyListScreen(),
+                ),
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.record_voice_over), // or help_outline
