@@ -51,8 +51,12 @@ class QuizEngineService {
     // Shuffle options
     options.shuffle(_random);
 
+    // Deterministic ID so we can track if this specific question variant was seen
+    final variantSuffix = ptToEn ? 'pt_en' : 'en_pt';
+    final qId = '${target.id}_$variantSuffix';
+
     return Question(
-      id: '${target.id}_${_random.nextInt(10000)}',
+      id: qId,
       questionText: questionText,
       options: options,
       correctAnswer: correctAnswer,
