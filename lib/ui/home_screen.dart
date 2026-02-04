@@ -4,6 +4,7 @@ import 'package:animate_do/animate_do.dart';
 
 import '../../services/markdown_parser.dart';
 import '../../main.dart';
+import '../../services/carplay_service.dart';
 import 'quiz/category_selection_screen.dart';
 import 'widgets/word_star_field.dart';
 import 'vocabulary/vocabulary_list_screen.dart';
@@ -23,6 +24,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Initialize CarPlay after the first frame to avoid disrupting startup
+      try {
+        CarPlayService().init();
+      } catch (e) {
+        debugPrint("CarPlay Init Error: $e");
+      }
       _loadData();
     });
   }

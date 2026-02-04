@@ -14,6 +14,9 @@ void main() async {
   final storageService = StorageService();
   await storageService.init();
 
+  // CarPlay initialization moved to HomeScreen
+  // CarPlayService().init();
+
   runApp(
     ProviderScope(
       overrides: [storageServiceProvider.overrideWithValue(storageService)],
