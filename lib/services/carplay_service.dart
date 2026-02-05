@@ -149,40 +149,57 @@ class CarPlayService {
   }) {
     if (replace) {
       FlutterCarplay.pop(animated: false);
-      // Small delay to ensure pop is registered by native side before pushing logic continues?
-      // Although this method is void, a small await might help if we were async.
-      // But we can't await void.
     }
 
-    final List<CPInformationItem> infoItems = [
-      CPInformationItem(title: detail, detail: ""),
-    ];
+    // Main status item
+    final headerItem = CPListItem(
+      text: title,
+      detailText: detail,
+      image:
+          "assets/images/app_icon.png", // Re-use icon or remove if unnecessary
+    );
 
+    List<CPListItem> allItems = [headerItem];
+
+    // Options (if any)
     if (options.isNotEmpty) {
-      // Add options to the list
-      // CPInformationItem doesn't look like a list, but we can stack them.
+      // Create a section for options? Or just add them.
+      // Let's add them as items.
       for (var opt in options) {
-        infoItems.add(CPInformationItem(title: "• $opt", detail: ""));
+        allItems.add(
+          CPListItem(
+            text: opt,
+            detailText: "", // Option text
+          ),
+        );
       }
     }
 
+    // Stop Button
+    final stopItem = CPListItem(
+      text: "Stop Quiz",
+      detailText: "End current session",
+      image: "assets/images/app_icon.png", // Or a stop icon if available
+      onPress: (complete, setItem) {
+        AppLogger.log("Stop Quiz pressed", name: 'CarPlay');
+        _isPlaying = false;
+        _voiceService.stop();
+        complete();
+        FlutterCarplay.pop(animated: true);
+      },
+    );
+    allItems.add(stopItem);
+
     FlutterCarplay.push(
-      template: CPInformationTemplate(
-        title: title,
-        layout: CPInformationTemplateLayout.leading,
-        actions: [
-          CPTextButton(
-            title: "Stop Quiz",
-            onPress: () {
-              AppLogger.log("Stop Quiz pressed", name: 'CarPlay');
-              _isPlaying = false;
-              _voiceService.stop();
-              // Pop back to root
-              FlutterCarplay.pop(animated: true);
-            },
+      template: CPListTemplate(
+        sections: [
+          CPListSection(
+            items: allItems,
+            header: title, // Use title as section header too
           ),
         ],
-        informationItems: infoItems,
+        title: "Quiz",
+        systemIcon: "play.fill",
       ),
       animated: true,
     );
