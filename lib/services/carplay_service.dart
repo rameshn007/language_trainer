@@ -4,6 +4,7 @@ import '../models/question.dart';
 import '../models/language_item.dart';
 import 'storage_service.dart';
 import 'quiz_engine_service.dart';
+import '../utils/logger.dart';
 
 class CarPlayService {
   final VoiceQuizService _voiceService = VoiceQuizService();
@@ -21,7 +22,7 @@ class CarPlayService {
 
   /// Initialise CarPlay
   void init({StorageService? storageService}) {
-    print("CarPlay: init() called");
+    AppLogger.log("init() called", name: 'CarPlay');
     _storageService = storageService;
 
     _startQuizItem = CPListItem(
@@ -29,7 +30,7 @@ class CarPlayService {
       detailText: "Practice Portuguese hands-free",
       image: "assets/images/app_icon.png",
       onPress: (complete, setItem) {
-        print("CarPlay: 'Start Voice Quiz' pressed");
+        AppLogger.log("'Start Voice Quiz' pressed", name: 'CarPlay');
         complete();
         Future.delayed(const Duration(milliseconds: 200), () {
           _startCarPlayQuiz();
@@ -38,7 +39,7 @@ class CarPlayService {
     );
 
     _flutterCarplay.addListenerOnConnectionChange((status) {
-      print("CarPlay: Connection Status Changed: $status");
+      AppLogger.log("Connection Status Changed: $status", name: 'CarPlay');
       // Check if status name contains 'connected' (case insensitive just to be safe)
       if (status.toString().toLowerCase().contains("connected")) {
         _setupRootTemplate();
@@ -47,7 +48,7 @@ class CarPlayService {
   }
 
   void _setupRootTemplate() {
-    print("CarPlay: Setting up root template");
+    AppLogger.log("Setting up root template", name: 'CarPlay');
     try {
       FlutterCarplay.setRootTemplate(
         rootTemplate: CPListTemplate(
@@ -59,29 +60,29 @@ class CarPlayService {
         ),
         animated: true,
       );
-      print("CarPlay: setRootTemplate called");
+      AppLogger.log("setRootTemplate called", name: 'CarPlay');
     } catch (e) {
-      print("CarPlay: Error in _setupRootTemplate: $e");
+      AppLogger.error("Error in _setupRootTemplate", name: 'CarPlay', error: e);
     }
   }
 
   void _startCarPlayQuiz() async {
-    print("CarPlay: _startCarPlayQuiz called");
+    AppLogger.log("_startCarPlayQuiz called", name: 'CarPlay');
     try {
       // 1. Loading/Starting
       // REMOVED: _updateStatusTemplate("Starting Quiz...", ...)
       // We will go straight to Q1 after fetching.
-      print("CarPlay: Fetching questions...");
+      AppLogger.log("Fetching questions...", name: 'CarPlay');
 
       // 2. Initialize Voice Service
-      print("CarPlay: Initializing VoiceService...");
+      AppLogger.log("Initializing VoiceService...", name: 'CarPlay');
       await _voiceService.init();
-      print("CarPlay: VoiceService initialized");
+      AppLogger.log("VoiceService initialized", name: 'CarPlay');
 
       // 3. Fetch Questions
-      print("CarPlay: Fetching questions...");
+      AppLogger.log("Fetching questions...", name: 'CarPlay');
       List<Question> questions = await _fetchQuestions();
-      print("CarPlay: Fetched ${questions.length} questions");
+      AppLogger.log("Fetched ${questions.length} questions", name: 'CarPlay');
 
       if (questions.isEmpty) {
         if (questions.isEmpty) {
@@ -95,12 +96,16 @@ class CarPlayService {
         }
       }
 
-      print("CarPlay: Starting quiz loop...");
+      AppLogger.log("Starting quiz loop...", name: 'CarPlay');
       await _runQuizLoop(questions);
-      print("CarPlay: Quiz loop finished");
+      AppLogger.log("Quiz loop finished", name: 'CarPlay');
     } catch (e, stack) {
-      print("CarPlay: Error starting quiz: $e");
-      print(stack);
+      AppLogger.error(
+        "Error starting quiz",
+        name: 'CarPlay',
+        error: e,
+        stackTrace: stack,
+      );
       _updateStatusTemplate("Error", "Could not start quiz: $e", replace: true);
     }
   }
@@ -108,13 +113,13 @@ class CarPlayService {
   Future<List<Question>> _fetchQuestions() async {
     // If no storage service available, return empty or mock
     if (_storageService == null) {
-      print("CarPlay: Storage not initialized!");
+      AppLogger.log("Storage not initialized!", name: 'CarPlay');
       return _mockFallbackQuestions();
     }
 
     final items = _storageService!.getAllItems();
     if (items.isEmpty) {
-      print("CarPlay: No items in storage.");
+      AppLogger.log("No items in storage.", name: 'CarPlay');
       return _mockFallbackQuestions();
     }
 
@@ -169,7 +174,7 @@ class CarPlayService {
           CPTextButton(
             title: "Stop Quiz",
             onPress: () {
-              print("CarPlay: Stop Quiz pressed");
+              AppLogger.log("Stop Quiz pressed", name: 'CarPlay');
               _isPlaying = false;
               _voiceService.stop();
               // Pop back to root
@@ -185,15 +190,18 @@ class CarPlayService {
 
   // The main loop
   Future<void> _runQuizLoop(List<Question> questions) async {
-    print("CarPlay: _runQuizLoop started with ${questions.length} questions");
+    AppLogger.log(
+      "_runQuizLoop started with ${questions.length} questions",
+      name: 'CarPlay',
+    );
     _isPlaying = true;
 
     int score = 0;
 
     for (var i = 0; i < questions.length; i++) {
-      print("CarPlay: Loop iteration $i");
+      AppLogger.log("Loop iteration $i", name: 'CarPlay');
       if (!_isPlaying) {
-        print("CarPlay: Quiz stopped (isPlaying=false)");
+        AppLogger.log("Quiz stopped (isPlaying=false)", name: 'CarPlay');
         break;
       }
 
@@ -201,7 +209,7 @@ class CarPlayService {
 
       // Update UI
       // Update UI
-      print("CarPlay: Updating status for Question ${i + 1}");
+      AppLogger.log("Updating status for Question ${i + 1}", name: 'CarPlay');
 
       // If it's the first question, we are pushing onto Root (Stack: Root -> Q1). replace=false.
       // If subsequent (i > 0), we want to replace previous Q (Stack: Root -> Q1 -> pop -> Q2). replace=true.
@@ -219,29 +227,29 @@ class CarPlayService {
       await Future.delayed(const Duration(milliseconds: 300));
 
       // Play Audio
-      print("CarPlay: Playing audio for question...");
+      AppLogger.log("Playing audio for question...", name: 'CarPlay');
       await _voiceService.playQuestion(q);
-      print("CarPlay: Audio finished");
+      AppLogger.log("Audio finished", name: 'CarPlay');
 
       // Listen
-      print("CarPlay: Listening for answer...");
+      AppLogger.log("Listening for answer...", name: 'CarPlay');
       // REMOVED: _updateStatusTemplate("Listening...", ...) to avoid flash
       // The screen will stay on the Question + Options while listening.
 
       String? answer = await _voiceService.listenForAnswer(
         const Duration(seconds: 15),
       );
-      print("CarPlay: Received answer: $answer");
+      AppLogger.log("Received answer: $answer", name: 'CarPlay');
 
       if (answer == null) {
-        print("CarPlay: Answer was null (timeout/no speech)");
+        AppLogger.log("Answer was null (timeout/no speech)", name: 'CarPlay');
         await _voiceService.speakFeedback(false); // Timeout/No speech
       } else {
         // Check for stop command
         final normalizedAnswer = answer.toLowerCase().trim();
         if (normalizedAnswer.contains("stop questions") ||
             normalizedAnswer.contains("parar")) {
-          print("CarPlay: Stop command received via voice");
+          AppLogger.log("Stop command received via voice", name: 'CarPlay');
           await _voiceService.speak("Stopping quiz.");
           _isPlaying = false;
           _voiceService.stop();
@@ -250,13 +258,13 @@ class CarPlayService {
         }
 
         bool correct = _voiceService.isCorrect(answer, q.correctAnswer);
-        print("CarPlay: Answer correct? $correct");
+        AppLogger.log("Answer correct? $correct", name: 'CarPlay');
         if (correct) score++;
         await _voiceService.speakFeedback(correct);
       }
 
       // Pause before next
-      print("CarPlay: Pausing before next question...");
+      AppLogger.log("Pausing before next question...", name: 'CarPlay');
       await Future.delayed(const Duration(seconds: 3));
     }
 
