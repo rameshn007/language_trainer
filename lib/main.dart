@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'services/storage_service.dart';
+import 'services/carplay_service.dart';
 import 'ui/home_screen.dart';
 
 // Global provider for storage service
@@ -16,6 +17,8 @@ void main() async {
 
   // CarPlay initialization moved to HomeScreen
   // CarPlayService().init();
+  print("MAIN: main() started");
+  CarPlayService().init();
 
   runApp(
     ProviderScope(

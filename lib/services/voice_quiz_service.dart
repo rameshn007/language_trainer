@@ -11,10 +11,16 @@ class VoiceQuizService {
 
   // Initialize TTS and STT
   Future<void> init() async {
-    await _tts.setLanguage("en-US");
-    await _tts.setSpeechRate(0.5); // Slower for clarity
-    await _tts.setVolume(1.0);
-    await _tts.setPitch(1.0);
+    print("VoiceService: init() called");
+    try {
+      await _tts.setLanguage("en-US");
+      await _tts.setSpeechRate(0.5); // Slower for clarity
+      await _tts.setVolume(1.0);
+      await _tts.setPitch(1.0);
+      print("VoiceService: TTS initialized");
+    } catch (e) {
+      print("VoiceService: Error initializing TTS: $e");
+    }
 
     // Initialize STT (permissions request happens here usually, or on first listen)
     // We don't strictly need to await available as we check it before listening
@@ -87,12 +93,25 @@ class VoiceQuizService {
 
   Future<void> _speak(String text) async {
     if (text.isEmpty) return;
+    print("VoiceService: Speaking '$text'...");
     Completer<void> completer = Completer();
     _tts.setCompletionHandler(() {
-      completer.complete();
+      print("VoiceService: Finished speaking '$text'");
+      if (!completer.isCompleted) completer.complete();
     });
+
+    _tts.setErrorHandler((msg) {
+      print("VoiceService: TTS Error: $msg");
+      if (!completer.isCompleted) completer.complete(); // Don't hang on error
+    });
+
     await _tts.speak(text);
-    await completer.future;
+    // Timeout to prevent hanging
+    try {
+      await completer.future.timeout(Duration(seconds: 10));
+    } catch (e) {
+      print("VoiceService: Timeout waiting for speech completion '$text'");
+    }
   }
 
   Future<String?> listenForAnswer(Duration duration) async {
