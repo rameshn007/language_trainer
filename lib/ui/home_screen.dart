@@ -23,6 +23,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Initialize CarPlay after the first frame to avoid disrupting startup
+      // CarPlayService().init(); // Moved to main.dart
+      // try {
+      //   CarPlayService().init();
+      // } catch (e) {
+      //   debugPrint("CarPlay Init Error: $e");
+      // }
       _loadData();
     });
   }
