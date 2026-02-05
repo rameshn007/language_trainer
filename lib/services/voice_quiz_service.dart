@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import '../models/question.dart';
+import '../models/language_item.dart';
 import '../utils/logger.dart';
 
 class VoiceQuizService {
@@ -150,19 +151,85 @@ class VoiceQuizService {
     );
   }
 
+  // Vocabulary Challenge
+  Future<void> speakVocabularyChallenge(
+    LanguageItem item, {
+    bool isPortuguese = true,
+  }) async {
+    await _tts.setLanguage("en-US");
+
+    if (isPortuguese) {
+      // Ask: "What does [Portuguese Word] mean?"
+      await speak("What does");
+      await _tts.setLanguage("pt-PT");
+      await speak(item.portuguese);
+      await _tts.setLanguage("en-US");
+      await speak("mean?");
+    } else {
+      // Ask: "How do you say [English Word] in Portuguese?"
+      await speak("How do you say");
+      await speak(item.english);
+      await speak("in Portuguese?");
+    }
+  }
+
   // Fuzzy match logic
   bool isCorrect(String spoken, String correctOption) {
     // Normalize
-    final s = spoken.toLowerCase().trim();
-    final c = correctOption.toLowerCase().trim();
+    final s = _normalize(spoken);
+    final c = _normalize(correctOption);
 
-    // Direct match
+    // 1. Direct match
     if (s == c) return true;
 
-    // Similarity (Levenshtein or just 'contains')
+    // 2. Contains match (if one is a substring of the other)
     if (s.contains(c) || c.contains(s)) return true;
 
-    return false;
+    // 3. Levenshtein Distance (for typos/accent misinterpretations)
+    // Allow for ~30% difference
+    final distance = _levenshtein(s, c);
+    final maxLength = s.length > c.length ? s.length : c.length;
+    if (maxLength == 0) return false;
+
+    final similarity = 1.0 - (distance / maxLength);
+    AppLogger.log(
+      "Fuzzy Match: '$s' vs '$c' -> Sim: $similarity",
+      name: 'VoiceService',
+    );
+
+    return similarity > 0.65; // Allow 35% error rate
+  }
+
+  int _levenshtein(String s, String t) {
+    if (s == t) return 0;
+    if (s.isEmpty) return t.length;
+    if (t.isEmpty) return s.length;
+
+    List<int> v0 = List<int>.generate(t.length + 1, (i) => i);
+    List<int> v1 = List<int>.filled(t.length + 1, 0);
+
+    for (int i = 0; i < s.length; i++) {
+      v1[0] = i + 1;
+
+      for (int j = 0; j < t.length; j++) {
+        int cost = (s.codeUnitAt(i) == t.codeUnitAt(j)) ? 0 : 1;
+        v1[j + 1] = [
+          v1[j] + 1,
+          v0[j + 1] + 1,
+          v0[j] + cost,
+        ].reduce((a, b) => a < b ? a : b);
+      }
+
+      for (int j = 0; j < v0.length; j++) {
+        v0[j] = v1[j];
+      }
+    }
+
+    return v1[t.length];
+  }
+
+  String _normalize(String input) {
+    return input.toLowerCase().trim().replaceAll(RegExp(r'[^\w\s]'), '');
   }
 
   // Setup methods to stop/dispose

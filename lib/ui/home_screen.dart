@@ -8,6 +8,7 @@ import 'quiz/category_selection_screen.dart';
 import 'widgets/word_star_field.dart';
 import 'vocabulary/vocabulary_list_screen.dart';
 import 'exercise/exercise_list_screen.dart';
+import 'voice_trainer_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -356,6 +357,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             ),
                           ),
                         ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 55,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.deepOrange,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              elevation: 5,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const VoiceTrainerScreen(),
+                                ),
+                              ).then((_) => setState(() {}));
+                            },
+                            icon: const Icon(Icons.mic, size: 28),
+                            label: const Text(
+                              'Voice Trainer',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -366,7 +399,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           // Vocabulary List FAB
           Positioned(
             right: 20,
-            bottom: MediaQuery.of(context).padding.bottom + 200,
+            bottom: MediaQuery.of(context).padding.bottom + 260,
             child: FadeInUp(
               delay: const Duration(milliseconds: 200),
               child: FloatingActionButton(

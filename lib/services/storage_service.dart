@@ -103,6 +103,24 @@ class StorageService {
     await _seenQuestionsBox?.clear();
   }
 
+  Future<void> updateMastery(String itemId, bool isCorrect) async {
+    if (_itemsBox == null) return;
+    final item = _itemsBox!.get(itemId);
+    if (item == null) return;
+
+    if (isCorrect) {
+      // Increment mastery, max 5 (Mastered)
+      item.masteryLevel = (item.masteryLevel + 1).clamp(0, 5);
+      item.lastReviewed = DateTime.now();
+    } else {
+      // Decrement mastery, min 0
+      // If was > 3 (familiar), drop to 3? Or just decrement?
+      // Simple decrement for now.
+      item.masteryLevel = (item.masteryLevel - 1).clamp(0, 5);
+    }
+    await updateItem(item);
+  }
+
   // Helper to check if we have data seeded
   bool get hasData => _itemsBox?.isNotEmpty ?? false;
 }
