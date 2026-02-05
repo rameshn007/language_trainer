@@ -32,30 +32,17 @@ class VoiceQuizService {
     await _tts.setLanguage("en-US");
     await speak("Translate this:");
 
-    if (q.sourceItem.english.isNotEmpty) {
-      await speak(q.sourceItem.english);
-    } else {
-      // Fallback if source item missing, though usually it's there.
-      // If it's a "What is the meaning of..." question, we might parse text.
-      // For now, assume standards.
-    }
-
-    // 2. Speak the Portuguese part (The challenge)
-    // If it's a translation question, usually English is given, user picks Portuguese.
-    // Or Portuguese given, user picks English.
-    // Let's assume standard "Translate English to Portuguese" or vice versa based on Quiz logic.
-    // For the "English part in English and read the Portuguese part in Portuguese" request:
+    // REMOVED: await speak(q.sourceItem.english);
+    // Reason: Spoilers if question is PT->EN, and redundancy if EN->PT.
+    // We only read the questionText now.
 
     // If Question Text contains the prompt?
-    // Let's play the question text in English first (usually "How do you say...?")
-    await _tts.setLanguage("en-US");
-    await speak(q.questionText); // "How do you say 'Hello'?"
+    // Let's play the question text.
+    // Determine language:
+    bool isPortuguese = (q.questionText == q.sourceItem.portuguese);
 
-    // If there is a Portuguese reference in the question (not the answer), strictly speaking
-    // the user asked: "state the english part in english and read the portuguese part in portuguese"
-    // This implies a mixed sentence or context.
-    // Since our questions are usually "How do you say X", X is english.
-    // If the question is "What does 'Ola' mean", Ola is portuguese.
+    await _tts.setLanguage(isPortuguese ? "pt-PT" : "en-US");
+    await speak(q.questionText);
 
     // Let's skip complex parsing for now and just read options clearly.
 
@@ -65,27 +52,11 @@ class VoiceQuizService {
     for (int i = 0; i < q.options.length; i++) {
       final option = q.options[i];
 
-      // Detect language of option roughly?
-      // Usually options are the Target Language.
-      // If we are learning Portuguese, options are likely Portuguese.
-      // But if question is "Meaning of Ola", options are English.
-
-      // HEURISTIC: Check if option contains Portuguese characters or just assume default based on app usage?
-      // The app is "Language Trainer" (English -> Portuguese likely).
-      // Let's try to infer or split.
-
-      // Simple approach: Read option in Portuguese if it looks Portuguese-ish?
-      // Or better: Read in BOTH if unsure? No, that's confusing.
-
-      // Let's assume options are Portuguese for "How do you say X?" questions.
-      // We'll set language to Portuguese for options by default as it's a Portuguese trainer.
-      // Unless logic dictates otherwise.
-
-      await _tts.setLanguage("pt-BR");
+      await _tts.setLanguage("pt-PT");
       await speak(option);
 
       if (i < q.options.length - 1) {
-        await _tts.setLanguage("pt-BR"); // "ou" is Portuguese
+        await _tts.setLanguage("pt-PT"); // "ou" is Portuguese
         await speak("ou");
       }
     }
@@ -133,7 +104,7 @@ class VoiceQuizService {
           _lastRecognizedWords = result.recognizedWords;
         }
       },
-      localeId: "pt-BR", // Listening for Portuguese answers
+      localeId: "pt-PT", // Listening for Portuguese answers
       listenFor: duration,
       pauseFor: Duration(seconds: 2),
     );

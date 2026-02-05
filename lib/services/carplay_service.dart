@@ -68,9 +68,10 @@ class CarPlayService {
   void _startCarPlayQuiz() async {
     print("CarPlay: _startCarPlayQuiz called");
     try {
-      // 1. Show "Loading..." or "Starting..." on CarPlay IMMEDIATELY
-      // We can push a new template (Information Template)
-      _updateStatusTemplate("Starting Quiz...", "Get ready!");
+      // 1. Loading/Starting
+      // REMOVED: _updateStatusTemplate("Starting Quiz...", ...)
+      // We will go straight to Q1 after fetching.
+      print("CarPlay: Fetching questions...");
 
       // 2. Initialize Voice Service
       print("CarPlay: Initializing VoiceService...");
@@ -83,9 +84,15 @@ class CarPlayService {
       print("CarPlay: Fetched ${questions.length} questions");
 
       if (questions.isEmpty) {
-        _updateStatusTemplate("Error", "No questions available.");
-        await _voiceService.speakFeedback(false); // Make it speak error
-        return;
+        if (questions.isEmpty) {
+          _updateStatusTemplate(
+            "Error",
+            "No questions available.",
+            replace: true,
+          );
+          await _voiceService.speakFeedback(false); // Make it speak error
+          return;
+        }
       }
 
       print("CarPlay: Starting quiz loop...");
@@ -94,7 +101,7 @@ class CarPlayService {
     } catch (e, stack) {
       print("CarPlay: Error starting quiz: $e");
       print(stack);
-      _updateStatusTemplate("Error", "Could not start quiz: $e");
+      _updateStatusTemplate("Error", "Could not start quiz: $e", replace: true);
     }
   }
 
@@ -128,13 +135,49 @@ class CarPlayService {
     ];
   }
 
-  void _updateStatusTemplate(String title, String detail) {
+  // Revised method signature
+  void _updateStatusTemplate(
+    String title,
+    String detail, {
+    bool replace = true,
+    List<String> options = const [],
+  }) {
+    if (replace) {
+      FlutterCarplay.pop(animated: false);
+      // Small delay to ensure pop is registered by native side before pushing logic continues?
+      // Although this method is void, a small await might help if we were async.
+      // But we can't await void.
+    }
+
+    final List<CPInformationItem> infoItems = [
+      CPInformationItem(title: detail, detail: ""),
+    ];
+
+    if (options.isNotEmpty) {
+      // Add options to the list
+      // CPInformationItem doesn't look like a list, but we can stack them.
+      for (var opt in options) {
+        infoItems.add(CPInformationItem(title: "• $opt", detail: ""));
+      }
+    }
+
     FlutterCarplay.push(
       template: CPInformationTemplate(
         title: title,
         layout: CPInformationTemplateLayout.leading,
-        actions: [],
-        informationItems: [CPInformationItem(title: detail, detail: "")],
+        actions: [
+          CPTextButton(
+            title: "Stop Quiz",
+            onPress: () {
+              print("CarPlay: Stop Quiz pressed");
+              _isPlaying = false;
+              _voiceService.stop();
+              // Pop back to root
+              FlutterCarplay.pop(animated: true);
+            },
+          ),
+        ],
+        informationItems: infoItems,
       ),
       animated: true,
     );
@@ -157,8 +200,23 @@ class CarPlayService {
       final q = questions[i];
 
       // Update UI
+      // Update UI
       print("CarPlay: Updating status for Question ${i + 1}");
-      _updateStatusTemplate("Question ${i + 1}", q.questionText);
+
+      // If it's the first question, we are pushing onto Root (Stack: Root -> Q1). replace=false.
+      // If subsequent (i > 0), we want to replace previous Q (Stack: Root -> Q1 -> pop -> Q2). replace=true.
+      bool shouldReplace = (i > 0);
+
+      _updateStatusTemplate(
+        "Question ${i + 1}",
+        q.questionText,
+        replace: shouldReplace,
+        options: q.options,
+      );
+
+      // Add small delay to ensure native transition (pop/push) settles
+      // especially important if user hits Back repeatedly
+      await Future.delayed(const Duration(milliseconds: 300));
 
       // Play Audio
       print("CarPlay: Playing audio for question...");
@@ -167,9 +225,11 @@ class CarPlayService {
 
       // Listen
       print("CarPlay: Listening for answer...");
-      _updateStatusTemplate("Listening...", "Speak your answer now");
+      // REMOVED: _updateStatusTemplate("Listening...", ...) to avoid flash
+      // The screen will stay on the Question + Options while listening.
+
       String? answer = await _voiceService.listenForAnswer(
-        const Duration(seconds: 5),
+        const Duration(seconds: 15),
       );
       print("CarPlay: Received answer: $answer");
 
@@ -177,6 +237,18 @@ class CarPlayService {
         print("CarPlay: Answer was null (timeout/no speech)");
         await _voiceService.speakFeedback(false); // Timeout/No speech
       } else {
+        // Check for stop command
+        final normalizedAnswer = answer.toLowerCase().trim();
+        if (normalizedAnswer.contains("stop questions") ||
+            normalizedAnswer.contains("parar")) {
+          print("CarPlay: Stop command received via voice");
+          await _voiceService.speak("Stopping quiz.");
+          _isPlaying = false;
+          _voiceService.stop();
+          FlutterCarplay.pop(animated: true);
+          break;
+        }
+
         bool correct = _voiceService.isCorrect(answer, q.correctAnswer);
         print("CarPlay: Answer correct? $correct");
         if (correct) score++;
@@ -192,6 +264,7 @@ class CarPlayService {
       _updateStatusTemplate(
         "Quiz Finished",
         "Score: $score / ${questions.length}",
+        replace: true,
       );
       await _voiceService.speak(
         "Quiz finished. You got $score out of ${questions.length} correct.",
