@@ -2,6 +2,8 @@ import 'package:flutter_carplay/flutter_carplay.dart';
 import 'voice_quiz_service.dart';
 import '../models/question.dart';
 import '../models/language_item.dart';
+import 'storage_service.dart';
+import 'quiz_engine_service.dart';
 
 class CarPlayService {
   final VoiceQuizService _voiceService = VoiceQuizService();
@@ -13,11 +15,14 @@ class CarPlayService {
   CarPlayService._internal();
 
   final FlutterCarplay _flutterCarplay = FlutterCarplay();
+  final QuizEngineService _quizEngine = QuizEngineService();
   late CPListItem _startQuizItem;
+  StorageService? _storageService;
 
   /// Initialise CarPlay
-  void init() {
+  void init({StorageService? storageService}) {
     print("CarPlay: init() called");
+    _storageService = storageService;
 
     _startQuizItem = CPListItem(
       text: "Start Voice Quiz",
@@ -72,29 +77,55 @@ class CarPlayService {
       await _voiceService.init();
       print("CarPlay: VoiceService initialized");
 
-      // 3. Fetch Questions (Mocking or accessing Provider)
-      // Accessing the provider container directly is tricky if not passed.
-      // Ideally we inject the Questions or use the Service Locator pattern.
-      // For now, let's assume we can get the container or ref from main.
+      // 3. Fetch Questions
+      print("CarPlay: Fetching questions...");
+      List<Question> questions = await _fetchQuestions();
+      print("CarPlay: Fetched ${questions.length} questions");
 
-      // TEMPORARY: Access global container if available, or just create a fresh batch
-      // Since we are in the same isolate, we can potentially access the provider.
-      // TEMPORARY: Mock data for now.
-      // final container = ProviderScope.containerOf(rootNavigatorKey.currentContext!);
-      // ^ This relies on context which we don't have here easily.
+      if (questions.isEmpty) {
+        _updateStatusTemplate("Error", "No questions available.");
+        await _voiceService.speakFeedback(false); // Make it speak error
+        return;
+      }
 
-      // FALLBACK: Let's assume we trigger `QuizViewModel`.
-      // For this implementation, I will just proceed with the structure.
-
-      // ... logic to start loop ...
       print("CarPlay: Starting quiz loop...");
-      await _runQuizLoop();
+      await _runQuizLoop(questions);
       print("CarPlay: Quiz loop finished");
     } catch (e, stack) {
       print("CarPlay: Error starting quiz: $e");
       print(stack);
       _updateStatusTemplate("Error", "Could not start quiz: $e");
     }
+  }
+
+  Future<List<Question>> _fetchQuestions() async {
+    // If no storage service available, return empty or mock
+    if (_storageService == null) {
+      print("CarPlay: Storage not initialized!");
+      return _mockFallbackQuestions();
+    }
+
+    final items = _storageService!.getAllItems();
+    if (items.isEmpty) {
+      print("CarPlay: No items in storage.");
+      return _mockFallbackQuestions();
+    }
+
+    // Generate quiz (randomized by default in service)
+    return _quizEngine.generateQuiz(items, count: 5);
+  }
+
+  List<Question> _mockFallbackQuestions() {
+    return [
+      Question(
+        id: "1",
+        questionText: "How do you say 'Hello'?",
+        options: ["Ola", "Adeus", "Obrigado", "Sim"],
+        correctAnswer: "Ola",
+        type: QuestionType.multipleChoice,
+        sourceItem: LanguageItem.empty(),
+      ),
+    ];
   }
 
   void _updateStatusTemplate(String title, String detail) {
@@ -110,38 +141,20 @@ class CarPlayService {
   }
 
   // The main loop
-  Future<void> _runQuizLoop() async {
-    print("CarPlay: _runQuizLoop started");
+  Future<void> _runQuizLoop(List<Question> questions) async {
+    print("CarPlay: _runQuizLoop started with ${questions.length} questions");
     _isPlaying = true;
-
-    // Mock question list for the prototype loop
-    // In real implementation, fetch from ViewModel state
-    // Mock question list for the prototype loop
-    // In real implementation, fetch from ViewModel state
-    // List<Question> questions = []; // populate this
-
-    // Since I can't easily reach the ProviderContainer without context in this snippet,
-    // I will note that integration point.
 
     int score = 0;
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < questions.length; i++) {
       print("CarPlay: Loop iteration $i");
       if (!_isPlaying) {
         print("CarPlay: Quiz stopped (isPlaying=false)");
         break;
       }
 
-      // Mock Question
-      // In reality: questions[i]
-      var q = Question(
-        id: "1", // ID should be unique really
-        questionText: "How do you say 'Hello'?",
-        options: ["Ola", "Adeus", "Obrigado", "Sim"],
-        correctAnswer: "Ola",
-        type: QuestionType.multipleChoice,
-        sourceItem: LanguageItem.empty(),
-      );
+      final q = questions[i];
 
       // Update UI
       print("CarPlay: Updating status for Question ${i + 1}");
@@ -156,7 +169,7 @@ class CarPlayService {
       print("CarPlay: Listening for answer...");
       _updateStatusTemplate("Listening...", "Speak your answer now");
       String? answer = await _voiceService.listenForAnswer(
-        Duration(seconds: 5),
+        const Duration(seconds: 5),
       );
       print("CarPlay: Received answer: $answer");
 
@@ -172,12 +185,18 @@ class CarPlayService {
 
       // Pause before next
       print("CarPlay: Pausing before next question...");
-      await Future.delayed(Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 3));
     }
 
     if (_isPlaying) {
-      _updateStatusTemplate("Quiz Finished", "Score: $score / 5");
-      await Future.delayed(Duration(seconds: 5));
+      _updateStatusTemplate(
+        "Quiz Finished",
+        "Score: $score / ${questions.length}",
+      );
+      await _voiceService.speak(
+        "Quiz finished. You got $score out of ${questions.length} correct.",
+      );
+      await Future.delayed(const Duration(seconds: 5));
       FlutterCarplay.pop(); // Return to menu
     }
   }

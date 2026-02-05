@@ -18,7 +18,7 @@ void main() async {
   // CarPlay initialization moved to HomeScreen
   // CarPlayService().init();
   print("MAIN: main() started");
-  CarPlayService().init();
+  CarPlayService().init(storageService: storageService);
 
   runApp(
     ProviderScope(

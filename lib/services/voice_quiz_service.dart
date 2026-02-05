@@ -30,10 +30,10 @@ class VoiceQuizService {
   Future<void> playQuestion(Question q) async {
     // 1. Speak the English part (Context)
     await _tts.setLanguage("en-US");
-    await _speak("Translate this:");
+    await speak("Translate this:");
 
     if (q.sourceItem.english.isNotEmpty) {
-      await _speak(q.sourceItem.english);
+      await speak(q.sourceItem.english);
     } else {
       // Fallback if source item missing, though usually it's there.
       // If it's a "What is the meaning of..." question, we might parse text.
@@ -49,7 +49,7 @@ class VoiceQuizService {
     // If Question Text contains the prompt?
     // Let's play the question text in English first (usually "How do you say...?")
     await _tts.setLanguage("en-US");
-    await _speak(q.questionText); // "How do you say 'Hello'?"
+    await speak(q.questionText); // "How do you say 'Hello'?"
 
     // If there is a Portuguese reference in the question (not the answer), strictly speaking
     // the user asked: "state the english part in english and read the portuguese part in portuguese"
@@ -59,7 +59,7 @@ class VoiceQuizService {
 
     // Let's skip complex parsing for now and just read options clearly.
 
-    await _speak("Is it?");
+    await speak("Is it?");
 
     // 3. Read Options
     for (int i = 0; i < q.options.length; i++) {
@@ -82,16 +82,16 @@ class VoiceQuizService {
       // Unless logic dictates otherwise.
 
       await _tts.setLanguage("pt-BR");
-      await _speak(option);
+      await speak(option);
 
       if (i < q.options.length - 1) {
         await _tts.setLanguage("pt-BR"); // "ou" is Portuguese
-        await _speak("ou");
+        await speak("ou");
       }
     }
   }
 
-  Future<void> _speak(String text) async {
+  Future<void> speak(String text) async {
     if (text.isEmpty) return;
     print("VoiceService: Speaking '$text'...");
     Completer<void> completer = Completer();
@@ -173,9 +173,9 @@ class VoiceQuizService {
   Future<void> speakFeedback(bool correct) async {
     await _tts.setLanguage("en-US");
     if (correct) {
-      await _speak("Correct!");
+      await speak("Correct!");
     } else {
-      await _speak("Incorrect.");
+      await speak("Incorrect.");
     }
   }
 }
