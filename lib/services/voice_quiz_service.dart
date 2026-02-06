@@ -10,6 +10,10 @@ class VoiceQuizService {
   final SpeechToText _stt = SpeechToText();
 
   String _lastRecognizedWords = '';
+  final StreamController<double> _soundLevelController =
+      StreamController<double>.broadcast();
+
+  Stream<double> get soundLevelStream => _soundLevelController.stream;
 
   // Initialize TTS and STT
   Future<void> init() async {
@@ -23,15 +27,20 @@ class VoiceQuizService {
     } catch (e) {
       AppLogger.error("Error initializing TTS", name: 'VoiceService', error: e);
     }
+  }
 
-    // Initialize STT (permissions request happens here usually, or on first listen)
-    // We don't strictly need to await available as we check it before listening
+  double _currentRate = 0.5;
+
+  Future<void> setSpeechRate(double rate) async {
+    _currentRate = rate;
+    await _tts.setSpeechRate(rate);
   }
 
   // Play the full question flow
   Future<void> playQuestion(Question q) async {
     // 1. Speak the English part (Context)
     await _tts.setLanguage("en-US");
+    await _tts.setSpeechRate(_currentRate);
     await speak("Translate this:");
 
     // REMOVED: await speak(q.sourceItem.english);
@@ -91,7 +100,10 @@ class VoiceQuizService {
     }
   }
 
-  Future<String?> listenForAnswer(Duration duration) async {
+  Future<String?> listenForAnswer(
+    Duration duration, {
+    String localeId = "pt-PT",
+  }) async {
     Completer<String?> completer = Completer();
 
     // Helper to complete safely
@@ -130,15 +142,22 @@ class VoiceQuizService {
 
     await _stt.listen(
       onResult: (result) {
+        AppLogger.log(
+          "STT Result: '${result.recognizedWords}' (final: ${result.finalResult})",
+          name: 'VoiceService',
+        );
         _lastRecognizedWords = result.recognizedWords;
         // If final result (due to pause timeout), complete
         if (result.finalResult) {
           complete(_lastRecognizedWords);
         }
       },
-      localeId: "pt-PT", // Listening for Portuguese answers
+      localeId: localeId, // Dynamic locale
       listenFor: duration,
       pauseFor: const Duration(seconds: 3),
+      onSoundLevelChange: (level) {
+        _soundLevelController.add(level);
+      },
     );
 
     // Timeout safety (max duration + buffer)
@@ -157,6 +176,7 @@ class VoiceQuizService {
     bool isPortuguese = true,
   }) async {
     await _tts.setLanguage("en-US");
+    await _tts.setSpeechRate(_currentRate);
 
     if (isPortuguese) {
       // Ask: "What does [Portuguese Word] mean?"
@@ -239,12 +259,21 @@ class VoiceQuizService {
   }
 
   // Feedback
-  Future<void> speakFeedback(bool correct) async {
-    await _tts.setLanguage("en-US");
-    if (correct) {
-      await speak("Correct!");
+  Future<void> speakFeedback(bool correct, {String locale = "en-US"}) async {
+    await _tts.setLanguage(locale);
+    await _tts.setSpeechRate(_currentRate); // Re-apply user rate
+    if (locale == "pt-PT") {
+      if (correct) {
+        await speak("Correto!");
+      } else {
+        await speak("Incorreto.");
+      }
     } else {
-      await speak("Incorrect.");
+      if (correct) {
+        await speak("Correct!");
+      } else {
+        await speak("Incorrect.");
+      }
     }
   }
 }

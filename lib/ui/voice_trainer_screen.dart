@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import '../models/language_item.dart';
 import '../services/voice_quiz_service.dart';
 import '../main.dart';
+import 'dart:math';
+import 'vocabulary/vocabulary_list_screen.dart';
 
 class VoiceTrainerScreen extends ConsumerStatefulWidget {
   const VoiceTrainerScreen({super.key});
@@ -21,7 +24,14 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
   bool _isSpeaking = false;
   String _statusText = "Ready to start";
   String _userSpokenText = "";
+
+  double _speechRate = 0.5; // 0.5 is often "normal" on iOS
+  double _soundLevel = 0.0;
+  StreamSubscription<double>? _levelSubscription;
+
   bool _isPlaying = false;
+  bool _isPortugueseQuestion =
+      true; // true = "What does [PT] mean?", false = "How to say [EN]?"
 
   // Stats for this session
   int _correctCount = 0;
@@ -35,8 +45,50 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
 
   Future<void> _initTrainer() async {
     await _voiceService.init();
+    await _voiceService.setSpeechRate(_speechRate);
     _buildSessionQueue();
     if (mounted) setState(() {});
+  }
+
+  void _cycleSpeed() {
+    setState(() {
+      if (_speechRate == 0.4) {
+        _speechRate = 0.5;
+      } else if (_speechRate == 0.5) {
+        _speechRate = 0.6;
+      } else {
+        _speechRate = 0.4;
+      }
+    });
+    _voiceService.setSpeechRate(_speechRate);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Speed: ${_speechRate}x"),
+        duration: const Duration(milliseconds: 500),
+      ),
+    );
+  }
+
+  void _openVocabularyList() async {
+    // Pause if playing
+    bool wasPlaying = _isPlaying;
+    if (wasPlaying) {
+      await _stopSession(); // Clean pause
+    }
+
+    if (!mounted) return;
+
+    await Navigator.of(
+      context,
+    ).push(MaterialPageRoute(builder: (_) => const VocabularyListScreen()));
+
+    // On return
+    if (mounted) {
+      _buildSessionQueue(); // Refresh queue
+      if (wasPlaying) {
+        _startSession(); // Auto-resume
+      }
+    }
   }
 
   void _buildSessionQueue() {
@@ -68,6 +120,11 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
     } else {
       _statusText = "No words found in vocabulary.";
     }
+
+    // Filter out current item from queue to avoid immediate repeat if it was just added
+    if (_currentItem != null) {
+      _sessionQueue.removeWhere((item) => item.id == _currentItem!.id);
+    }
   }
 
   @override
@@ -77,15 +134,24 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
   }
 
   Future<void> _startSession() async {
-    if (_sessionQueue.isEmpty) return;
+    if (_sessionQueue.isEmpty && _currentItem == null) return;
 
-    setState(() {
-      _isPlaying = true;
-      _correctCount = 0;
-      _totalAsked = 0;
-    });
-
-    await _nextItem();
+    if (_currentItem != null) {
+      // RESUME
+      setState(() {
+        _isPlaying = true;
+        _statusText = "Resuming...";
+      });
+      await _playCurrentItem();
+    } else {
+      // START NEW
+      setState(() {
+        _isPlaying = true;
+        _correctCount = 0;
+        _totalAsked = 0;
+      });
+      await _nextItem();
+    }
   }
 
   Future<void> _nextItem() async {
@@ -106,22 +172,28 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       _currentItem = _sessionQueue.removeAt(0);
       _statusText = "Listen...";
       _userSpokenText = "";
+      // New Challenge Direction
+      _isPortugueseQuestion = Random().nextBool();
     });
 
+    await _playCurrentItem();
+  }
+
+  Future<void> _playCurrentItem() async {
     if (_currentItem == null) return;
 
-    // Challenge Flow
     if (mounted) setState(() => _isSpeaking = true);
-    await _voiceService.speakVocabularyChallenge(_currentItem!);
+    await _voiceService.speakVocabularyChallenge(
+      _currentItem!,
+      isPortuguese: _isPortugueseQuestion,
+    );
     if (mounted) setState(() => _isSpeaking = false);
 
-    if (!mounted) return;
+    if (!mounted || !_isPlaying) return;
 
     // Auto-listen after question?
-
-    // Auto-listen after question?
-    // Let's allow user to tap mic, OR auto-listen.
-    // For hands-free, auto-listen is better.
+    await Future.delayed(const Duration(milliseconds: 500));
+    if (!mounted || !_isPlaying) return;
     await _listen();
   }
 
@@ -131,28 +203,52 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
     setState(() {
       _isListening = true;
       _statusText = "Listening...";
+      _soundLevel = 0.0;
+    });
+
+    _levelSubscription?.cancel();
+    _levelSubscription = _voiceService.soundLevelStream.listen((level) {
+      // Level is usually -10 to 10 or similar logic depending on library.
+      // normalize to 0.0 - 1.0 range if possible, or just raw.
+      // Assuming positive magnitude for visualization.
+      if (mounted) {
+        setState(() {
+          _soundLevel = level.clamp(0.0, 10.0) / 10.0;
+        });
+      }
     });
 
     final spoken = await _voiceService.listenForAnswer(
       const Duration(seconds: 15),
+      localeId: _isPortugueseQuestion ? "en-US" : "pt-PT",
     );
 
     if (!mounted) return;
+
+    _levelSubscription?.cancel();
 
     setState(() {
       _isListening = false;
       _userSpokenText = spoken ?? "(No speech detected)";
     });
 
+    if (!_isPlaying) return;
+
     _processAnswer(spoken);
   }
 
   Future<void> _processAnswer(String? spoken) async {
-    if (_currentItem == null) return;
+    if (_currentItem == null || !_isPlaying) return;
 
     bool correct = false;
     if (spoken != null) {
-      correct = _voiceService.isCorrect(spoken, _currentItem!.english);
+      if (_isPortugueseQuestion) {
+        // Asked: PT, Expected: EN check
+        correct = _voiceService.isCorrect(spoken, _currentItem!.english);
+      } else {
+        // Asked: EN, Expected: PT check
+        correct = _voiceService.isCorrect(spoken, _currentItem!.portuguese);
+      }
     }
 
     final storage = ref.read(storageServiceProvider);
@@ -165,11 +261,22 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         _correctCount++;
         _totalAsked++;
       });
-      await _voiceService.speakFeedback(true);
-      if (!mounted) return;
-      await _voiceService.speak(
-        "It means ${_currentItem!.english}",
-      ); // Reinforce
+      await _voiceService.speakFeedback(
+        true,
+        locale: _isPortugueseQuestion ? "en-US" : "pt-PT",
+      );
+      if (!mounted || !_isPlaying) return;
+
+      // Reinforce
+      if (_isPortugueseQuestion) {
+        await _voiceService.speak("It means ${_currentItem!.english}");
+      } else {
+        // await _voiceService.setSpeechRate(0.85); // Slightly slower for PT
+        await _voiceService.speak(
+          "É ${_currentItem!.portuguese}",
+        ); // "It is..."
+        // await _voiceService.setSpeechRate(_speechRate); // Restore
+      }
 
       // Update Stats
       await storage.updateMastery(_currentItem!.id, true);
@@ -178,9 +285,19 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         _statusText = "Incorrect. It was: ${_currentItem!.english}";
         _totalAsked++;
       });
-      await _voiceService.speakFeedback(false);
-      if (!mounted) return;
-      await _voiceService.speak("The answer is ${_currentItem!.english}");
+      await _voiceService.speakFeedback(
+        false,
+        locale: _isPortugueseQuestion ? "en-US" : "pt-PT",
+      );
+      if (!mounted || !_isPlaying) return;
+
+      if (_isPortugueseQuestion) {
+        await _voiceService.speak("The answer is ${_currentItem!.english}");
+      } else {
+        // await _voiceService.setSpeechRate(0.85);
+        await _voiceService.speak("A resposta é ${_currentItem!.portuguese}");
+        // await _voiceService.setSpeechRate(_speechRate);
+      }
 
       // Update Stats
       await storage.updateMastery(_currentItem!.id, false);
@@ -217,7 +334,26 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Voice Trainer")),
+      appBar: AppBar(
+        title: const Text("Voice Trainer"),
+        actions: [
+          TextButton(
+            onPressed: _cycleSpeed,
+            child: Text(
+              "${_speechRate}x",
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          IconButton(
+            icon: const Icon(Icons.list),
+            onPressed: _openVocabularyList,
+            tooltip: "Vocabulary List",
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -236,7 +372,9 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
             // Current Word Display
             if (_currentItem != null) ...[
               Text(
-                _currentItem!.portuguese,
+                _isPortugueseQuestion
+                    ? _currentItem!.portuguese
+                    : _currentItem!.english,
                 style: Theme.of(context).textTheme.displayMedium,
                 textAlign: TextAlign.center,
               ),
@@ -244,7 +382,13 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
               if (_isSpeaking)
                 const Text("Speaking...", style: TextStyle(color: Colors.blue))
               else
-                const Text("What does it mean?"),
+                Text(
+                  _isPortugueseQuestion
+                      ? "What does it mean?"
+                      : "How do you say it in Portuguese?",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
             ],
 
             const Spacer(),
@@ -281,12 +425,15 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
                 backgroundColor: _isListening
                     ? Colors.red
                     : Theme.of(context).colorScheme.primary,
-                child: Icon(
-                  _isPlaying
-                      ? (_isListening ? Icons.mic : Icons.mic_none)
-                      : Icons.play_arrow,
-                  size: 40,
-                  color: Colors.white,
+                child: Transform.scale(
+                  scale: 1.0 + (_soundLevel * 0.5), // Modulate size
+                  child: Icon(
+                    _isPlaying
+                        ? (_isListening ? Icons.mic : Icons.mic_none)
+                        : Icons.play_arrow,
+                    size: 40,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
