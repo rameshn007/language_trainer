@@ -140,7 +140,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       // RESUME
       setState(() {
         _isPlaying = true;
-        _statusText = "Resuming...";
+        _statusText = "Listen...";
       });
       await _playCurrentItem();
     } else {

@@ -73,30 +73,46 @@ class VoiceQuizService {
     }
   }
 
-  Future<void> speak(String text) async {
+  Future<void> speak(String text, {bool waitForCompletion = true}) async {
     if (text.isEmpty) return;
-    AppLogger.log("Speaking '$text'...", name: 'VoiceService');
-    Completer<void> completer = Completer();
-    _tts.setCompletionHandler(() {
-      AppLogger.log("Finished speaking '$text'", name: 'VoiceService');
-      if (!completer.isCompleted) completer.complete();
-    });
+    AppLogger.log(
+      "Speaking '$text' (wait: $waitForCompletion)...",
+      name: 'VoiceService',
+    );
 
-    _tts.setErrorHandler((msg) {
-      AppLogger.error("TTS Error: $msg", name: 'VoiceService');
-      if (!completer.isCompleted) completer.complete(); // Don't hang on error
-    });
+    // Create completer only if we need to wait
+    Completer<void>? completer;
+    if (waitForCompletion) {
+      completer = Completer();
+      _tts.setCompletionHandler(() {
+        AppLogger.log("Finished speaking '$text'", name: 'VoiceService');
+        if (completer != null && !completer.isCompleted) completer.complete();
+      });
+
+      _tts.setErrorHandler((msg) {
+        AppLogger.error("TTS Error: $msg", name: 'VoiceService');
+        if (completer != null && !completer.isCompleted) completer.complete();
+      });
+    } else {
+      // If not waiting, we assume fire-and-forget logic for handlers,
+      // or we rely on the final "wait=true" call to set the handler that matters.
+      // However, to be safe, we might clear handlers or leave them.
+      // Leaving them is fine as long as we don't rely on them.
+    }
 
     await _tts.speak(text);
-    // Timeout to prevent hanging
-    try {
-      await completer.future.timeout(Duration(seconds: 10));
-    } catch (e) {
-      AppLogger.error(
-        "Timeout waiting for speech completion '$text'",
-        name: 'VoiceService',
-        error: e,
-      );
+
+    if (waitForCompletion && completer != null) {
+      // Timeout to prevent hanging
+      try {
+        await completer.future.timeout(Duration(seconds: 10));
+      } catch (e) {
+        AppLogger.error(
+          "Timeout waiting for speech completion '$text'",
+          name: 'VoiceService',
+          error: e,
+        );
+      }
     }
   }
 
@@ -180,16 +196,25 @@ class VoiceQuizService {
 
     if (isPortuguese) {
       // Ask: "What does [Portuguese Word] mean?"
-      await speak("What does");
+      await speak("What does", waitForCompletion: false);
+
       await _tts.setLanguage("pt-PT");
-      await speak(item.portuguese);
+      await _tts.setSpeechRate(_currentRate);
+      await speak(item.portuguese, waitForCompletion: false);
+
       await _tts.setLanguage("en-US");
-      await speak("mean?");
+      await _tts.setSpeechRate(_currentRate);
+      await speak(
+        "mean?",
+        waitForCompletion: true,
+      ); // Wait only for the last one
     } else {
       // Ask: "How do you say [English Word] in Portuguese?"
-      await speak("How do you say");
-      await speak(item.english);
-      await speak("in Portuguese?");
+      // Optimization: Merge EN string
+      await speak(
+        "How do you say ${item.english} in Portuguese?",
+        waitForCompletion: true,
+      );
     }
   }
 
