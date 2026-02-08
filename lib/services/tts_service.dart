@@ -4,24 +4,26 @@ import 'package:flutter_tts/flutter_tts.dart';
 class TtsService {
   final FlutterTts _flutterTts = FlutterTts();
 
+  Map<String, String>? _bestPtVoice;
+
   TtsService() {
     _init();
   }
 
   Future<void> _init() async {
     // 1. Get all available voices
-    var voices = await _flutterTts.getVoices;
-
-    if (Platform.isIOS) {
-      await _flutterTts
-          .setIosAudioCategory(IosTextToSpeechAudioCategory.playback, [
-            IosTextToSpeechAudioCategoryOptions.defaultToSpeaker,
-            IosTextToSpeechAudioCategoryOptions.allowBluetooth,
-            IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
-          ]);
-    }
-
     try {
+      var voices = await _flutterTts.getVoices;
+
+      if (Platform.isIOS) {
+        await _flutterTts
+            .setIosAudioCategory(IosTextToSpeechAudioCategory.playback, [
+              IosTextToSpeechAudioCategoryOptions.defaultToSpeaker,
+              IosTextToSpeechAudioCategoryOptions.allowBluetooth,
+              IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+            ]);
+      }
+
       // 2. Filter for Portuguese (Portugal)
       // Note: adjust locale check if needed (e.g., specific to 'pt-PT')
       var ptVoices = voices.where((v) {
@@ -34,8 +36,6 @@ class TtsService {
 
         // Strategy:
         // 1. Look for voices with 'enhanced', 'premium', 'high' in name/identifier/quality
-        // 2. Prefer 'Joana' (common high quality PT voice on iOS)
-
         // 2. Prefer 'Joana' (common high quality PT voice on iOS)
 
         // Helper to score voices
@@ -69,13 +69,13 @@ class TtsService {
         ptVoices.sort((a, b) => scoreVoice(b).compareTo(scoreVoice(a)));
 
         var bestVoice = ptVoices.first;
-        // print("Selected Best Voice: $bestVoice");
-
-        await _flutterTts.setVoice({
+        _bestPtVoice = {
           "name": (bestVoice["name"] ?? "") as String,
           "locale": (bestVoice["locale"] ?? "") as String,
           "identifier": (bestVoice["identifier"] ?? "") as String,
-        });
+        };
+
+        await _flutterTts.setVoice(_bestPtVoice!);
       } else {
         // Fallback if no specific pt-PT voice found in list (rare)
         await _flutterTts.setLanguage("pt-PT");
@@ -123,10 +123,22 @@ class TtsService {
     return "Please check your system Text-to-Speech settings to install high-quality voices.";
   }
 
-  Future<void> speak(String text) async {
-    if (text.isNotEmpty) {
-      await _flutterTts.speak(text);
+  Future<void> speak(String text, {String? language}) async {
+    if (text.isEmpty) return;
+
+    if (language != null) {
+      if (language.startsWith('en')) {
+        await _flutterTts.setLanguage('en-US');
+      } else if (language.startsWith('pt')) {
+        if (_bestPtVoice != null) {
+          await _flutterTts.setVoice(_bestPtVoice!);
+        } else {
+          await _flutterTts.setLanguage('pt-PT');
+        }
+      }
     }
+
+    await _flutterTts.speak(text);
   }
 
   Future<void> stop() async {

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
 
-import '../../services/markdown_parser.dart';
-import '../../main.dart';
+import '../services/markdown_parser.dart';
 import 'quiz/category_selection_screen.dart';
-import 'widgets/word_star_field.dart';
 import 'vocabulary/vocabulary_list_screen.dart';
 import 'exercise/exercise_list_screen.dart';
 import 'voice_trainer_screen.dart';
+import 'phrase_trainer_screen.dart';
+import '../main.dart';
+import 'widgets/word_star_field.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -24,13 +25,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // Initialize CarPlay after the first frame to avoid disrupting startup
-      // CarPlayService().init(); // Moved to main.dart
-      // try {
-      //   CarPlayService().init();
-      // } catch (e) {
-      //   debugPrint("CarPlay Init Error: $e");
-      // }
       _loadData();
     });
   }
@@ -39,58 +33,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     setState(() => _isLoading = true);
     try {
       final storage = ref.read(storageServiceProvider);
-
-      // Always reload to ensure sync with source.md/questions.json
-      // OLD: if (!storage.hasData) { ... }
-
-      // Merge logic:
-      // 1. Get existing items map for fast lookup
-      final existingItems = storage.getAllItems();
-      final Map<String, int> masteryMap = {
-        for (var i in existingItems) i.id: i.masteryLevel,
-      };
-      final Map<String, DateTime?> reviewMap = {
-        for (var i in existingItems) i.id: i.lastReviewed,
-      };
-
-      // 2. Parse fresh items from source
       final parser = MarkdownParser();
       final freshItems = await parser.loadAndParseRawData(
         'assets/data/source.md',
       );
-
-      // 3. Update fresh items with existing progress
+      // merge logic similar to previous implementation
+      final existingItems = storage.getAllItems();
+      final masteryMap = {for (var i in existingItems) i.id: i.masteryLevel};
+      final reviewMap = {for (var i in existingItems) i.id: i.lastReviewed};
       for (var item in freshItems) {
         if (masteryMap.containsKey(item.id)) {
           item.masteryLevel = masteryMap[item.id]!;
           item.lastReviewed = reviewMap[item.id];
         }
       }
-
-      // 4. Save merged list (overwrites structure but keeps progress)
       await storage.clearItems();
       await storage.saveItems(freshItems);
-
-      if (!mounted) return;
-      // Optional: Show snackbar only if meaningful change or debug?
-      // Keeping it for confirmation
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Synced ${freshItems.length} items from source'),
-          duration: const Duration(seconds: 1),
-        ),
-      );
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Error: $e')));
-      }
-    } finally {
-      if (mounted) {
-        setState(() => _isLoading = false);
-      }
-    }
+    } catch (_) {}
+    if (!mounted) return;
+    setState(() => _isLoading = false);
   }
 
   Future<void> _confirmReset() async {
@@ -114,26 +75,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ],
       ),
     );
-
     if (result == true) {
       final storage = ref.read(storageServiceProvider);
       await storage.resetStats();
       await storage.resetHighScore();
-      setState(() {}); // Refresh UI
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Statistics reset successfully.')),
-        );
-      }
+      setState(() {});
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading) {
-      // return const LoadingScreen(); // Removed as per request
-    }
-
     final storage = ref.watch(storageServiceProvider);
     final items = storage.getAllItems();
     final highScore = storage.getHighScore();
@@ -150,21 +101,35 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 _loadData();
               } else if (value == 'reset') {
                 _confirmReset();
+              } else if (value == 'vocab') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const VocabularyListScreen(),
+                  ),
+                );
               }
             },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(
+            itemBuilder: (context) => [
+              const PopupMenuItem(
                 value: 'refresh',
                 child: ListTile(
                   leading: Icon(Icons.refresh),
                   title: Text('Refresh Data'),
                 ),
               ),
-              const PopupMenuItem<String>(
+              const PopupMenuItem(
                 value: 'reset',
                 child: ListTile(
                   leading: Icon(Icons.restore),
                   title: Text('Reset Stats'),
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'vocab',
+                child: ListTile(
+                  leading: Icon(Icons.list),
+                  title: Text('Vocabulary List'),
                 ),
               ),
             ],
@@ -173,7 +138,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: Stack(
         children: [
-          // Background Star Field
           if (items.isNotEmpty)
             Positioned.fill(
               child: Opacity(
@@ -189,8 +153,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ),
             ),
-
-          // Foreground Content
           SafeArea(
             child: Column(
               children: [
@@ -198,7 +160,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   padding: const EdgeInsets.all(20),
                   child: Column(
                     children: [
-                      // Stats Board
                       FadeInDown(
                         child: Container(
                           padding: const EdgeInsets.all(20),
@@ -246,9 +207,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ],
                   ),
                 ),
-
                 const Spacer(),
-
                 if (_isLoading)
                   const Center(child: CircularProgressIndicator())
                 else if (items.isEmpty)
@@ -270,12 +229,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       ],
                     ),
                   ),
-
                 if (items.isEmpty) const Spacer(),
-
-                // Pinned Bottom Actions
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 20, 20, 60),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 60),
                   child: FadeInUp(
                     delay: const Duration(milliseconds: 200),
                     child: Column(
@@ -303,7 +259,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
+                                        builder: (_) =>
                                             const CategorySelectionScreen(),
                                       ),
                                     ).then((_) => setState(() {}));
@@ -342,8 +298,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ExerciseListScreen(),
+                                  builder: (_) => const ExerciseListScreen(),
                                 ),
                               );
                             },
@@ -374,14 +329,44 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      const VoiceTrainerScreen(),
+                                  builder: (_) => const VoiceTrainerScreen(),
                                 ),
-                              ).then((_) => setState(() {}));
+                              );
                             },
                             icon: const Icon(Icons.mic, size: 28),
                             label: const Text(
                               'Voice Trainer',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 55,
+                          child: ElevatedButton.icon(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              elevation: 5,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => const PhraseTrainerScreen(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.translate, size: 28),
+                            label: const Text(
+                              'Phrase Trainer',
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
@@ -394,28 +379,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ],
-            ),
-          ),
-          // Vocabulary List FAB
-          Positioned(
-            right: 20,
-            bottom: MediaQuery.of(context).padding.bottom + 260,
-            child: FadeInUp(
-              delay: const Duration(milliseconds: 200),
-              child: FloatingActionButton(
-                heroTag: 'vocab_fab',
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const VocabularyListScreen(),
-                    ),
-                  ).then((_) => setState(() {}));
-                },
-                child: const Icon(Icons.list),
-              ),
             ),
           ),
         ],
