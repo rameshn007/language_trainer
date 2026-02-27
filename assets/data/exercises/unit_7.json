@@ -1,0 +1,1446 @@
+[
+  {
+    "id": "even_more_q1",
+    "questionText": "Translate to English: empregado",
+    "options": [
+      "blueberry",
+      "any employee (waiter)",
+      "each week",
+      "chickpeas"
+    ],
+    "correctAnswer": "any employee (waiter)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_1",
+      "portuguese": "empregado",
+      "english": "any employee (waiter)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q2",
+    "questionText": "Translate to English: Chamam",
+    "options": [
+      "to call someone",
+      "What",
+      "those ones",
+      "between"
+    ],
+    "correctAnswer": "to call someone",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_2",
+      "portuguese": "Chamam",
+      "english": "to call someone",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q3",
+    "questionText": "Translate to English: consultam",
+    "options": [
+      "all the time",
+      "to have or to take (only for breakfast)",
+      "ribs (bone)",
+      "consult"
+    ],
+    "correctAnswer": "consult",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_3",
+      "portuguese": "consultam",
+      "english": "consult",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q4",
+    "questionText": "Translate to English: decidem",
+    "options": [
+      "inside",
+      "I always have",
+      "boiled",
+      "to decide"
+    ],
+    "correctAnswer": "to decide",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_4",
+      "portuguese": "decidem",
+      "english": "to decide",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q5",
+    "questionText": "Translate to English: pastelaria",
+    "options": [
+      "between",
+      "room temperature water",
+      "coffee shop",
+      "at \\--"
+    ],
+    "correctAnswer": "coffee shop",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_5",
+      "portuguese": "pastelaria",
+      "english": "coffee shop",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q6",
+    "questionText": "Translate to English: gal\u0101o",
+    "options": [
+      "cappuccino (traditional milk with coffee)",
+      "terrace",
+      "of course",
+      "What"
+    ],
+    "correctAnswer": "cappuccino (traditional milk with coffee)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_6",
+      "portuguese": "gal\u0101o",
+      "english": "cappuccino (traditional milk with coffee)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q7",
+    "questionText": "Translate to English: gal\u0101o escuro",
+    "options": [
+      "More coffee than milk",
+      "much cheap",
+      "roasted",
+      "I always have"
+    ],
+    "correctAnswer": "More coffee than milk",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_7",
+      "portuguese": "gal\u0101o escuro",
+      "english": "More coffee than milk",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q8",
+    "questionText": "Translate to English: gal\u0101o claro",
+    "options": [
+      "More milk than coffee",
+      "ice",
+      "nowadays",
+      "complete"
+    ],
+    "correctAnswer": "More milk than coffee",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_8",
+      "portuguese": "gal\u0101o claro",
+      "english": "More milk than coffee",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q9",
+    "questionText": "Translate to English: torrada",
+    "options": [
+      "toasted bread",
+      "inside",
+      "to finish",
+      "between"
+    ],
+    "correctAnswer": "toasted bread",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_9",
+      "portuguese": "torrada",
+      "english": "toasted bread",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q10",
+    "questionText": "Translate to English: Com certeza",
+    "options": [
+      "much cheap",
+      "in the afternoon",
+      "green peas",
+      "for sure"
+    ],
+    "correctAnswer": "for sure",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_10",
+      "portuguese": "Com certeza",
+      "english": "for sure",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q11",
+    "questionText": "Translate to English: tomar",
+    "options": [
+      "during the afternoon",
+      "to have or to take (only for breakfast)",
+      "any employee (waiter)",
+      "What"
+    ],
+    "correctAnswer": "to have or to take (only for breakfast)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_11",
+      "portuguese": "tomar",
+      "english": "to have or to take (only for breakfast)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q12",
+    "questionText": "Translate to English: jantamos",
+    "options": [
+      "to dine",
+      "fried",
+      "expensive",
+      "inside"
+    ],
+    "correctAnswer": "to dine",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_12",
+      "portuguese": "jantamos",
+      "english": "to dine",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q13",
+    "questionText": "Translate to English: almo\u00e7amos",
+    "options": [
+      "to lunch",
+      "menu",
+      "in the afternoon",
+      "now"
+    ],
+    "correctAnswer": "to lunch",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_13",
+      "portuguese": "almo\u00e7amos",
+      "english": "to lunch",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q14",
+    "questionText": "Translate to English: \u00e0 tarde",
+    "options": [
+      "in the afternoon",
+      "there is/there are more",
+      "cold",
+      "we would like"
+    ],
+    "correctAnswer": "in the afternoon",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_14",
+      "portuguese": "\u00e0 tarde",
+      "english": "in the afternoon",
+      "notes": "usually say this"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q15",
+    "questionText": "Translate to English: de tarde",
+    "options": [
+      "for sure",
+      "during the afternoon",
+      "full",
+      "menu"
+    ],
+    "correctAnswer": "during the afternoon",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_15",
+      "portuguese": "de tarde",
+      "english": "during the afternoon",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q16",
+    "questionText": "Translate to English: massa",
+    "options": [
+      "ice",
+      "boiled",
+      "pasta noodles",
+      "to dine"
+    ],
+    "correctAnswer": "pasta noodles",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_16",
+      "portuguese": "massa",
+      "english": "pasta noodles",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q17",
+    "questionText": "Translate to English: aqueles",
+    "options": [
+      "More milk than coffee",
+      "those ones",
+      "not yet",
+      "we would like"
+    ],
+    "correctAnswer": "those ones",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_17",
+      "portuguese": "aqueles",
+      "english": "those ones",
+      "notes": "referring to people, objects etc, like those shoes, those people"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q18",
+    "questionText": "Translate to English: completa",
+    "options": [
+      "fried (starred egg)",
+      "coffee shop",
+      "any employee (waiter)",
+      "complete"
+    ],
+    "correctAnswer": "complete",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_18",
+      "portuguese": "completa",
+      "english": "complete",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q19",
+    "questionText": "Translate to English: entre",
+    "options": [
+      "bottle",
+      "of course not",
+      "chickpeas",
+      "between"
+    ],
+    "correctAnswer": "between",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_19",
+      "portuguese": "entre",
+      "english": "between",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q20",
+    "questionText": "Translate to English: Hoje em dia",
+    "options": [
+      "to have or to take (only for breakfast)",
+      "nowadays",
+      "not yet",
+      "between"
+    ],
+    "correctAnswer": "nowadays",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_20",
+      "portuguese": "Hoje em dia",
+      "english": "nowadays",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q21",
+    "questionText": "Translate to English: saud\u00e1vel",
+    "options": [
+      "healthy",
+      "fried",
+      "between",
+      "complete"
+    ],
+    "correctAnswer": "healthy",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_21",
+      "portuguese": "saud\u00e1vel",
+      "english": "healthy",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q22",
+    "questionText": "Translate to English: que t\u00e9m",
+    "options": [
+      "have",
+      "that have",
+      "Breakfast (in Brazilian portuguese)",
+      "each"
+    ],
+    "correctAnswer": "that have",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_22",
+      "portuguese": "que t\u00e9m",
+      "english": "that have",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q23",
+    "questionText": "Translate to English: h\u00e1 mais",
+    "options": [
+      "there is/there are more",
+      "toasted bread",
+      "boiled",
+      "fried"
+    ],
+    "correctAnswer": "there is/there are more",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_23",
+      "portuguese": "h\u00e1 mais",
+      "english": "there is/there are more",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q24",
+    "questionText": "Translate to English: ao pequeno-almoco",
+    "options": [
+      "Breakfast (in Brazilian portuguese)",
+      "to lunch",
+      "at \\--",
+      "between"
+    ],
+    "correctAnswer": "at \\--",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_24",
+      "portuguese": "ao pequeno-almoco",
+      "english": "at \\--",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q25",
+    "questionText": "Translate to English: queque",
+    "options": [
+      "full of hunger",
+      "coffee shop",
+      "cold",
+      "cake (or muffin)"
+    ],
+    "correctAnswer": "cake (or muffin)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_25",
+      "portuguese": "queque",
+      "english": "cake (or muffin)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q26",
+    "questionText": "Translate to English: mirtilos",
+    "options": [
+      "room temperature water",
+      "blueberry",
+      "vase",
+      "cake (or muffin)"
+    ],
+    "correctAnswer": "blueberry",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_26",
+      "portuguese": "mirtilos",
+      "english": "blueberry",
+      "notes": "mir ti los"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q27",
+    "questionText": "Translate to English: O que \u00e9 que",
+    "options": [
+      "chickpeas",
+      "What",
+      "now",
+      "of course"
+    ],
+    "correctAnswer": "What",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_27",
+      "portuguese": "O que \u00e9 que",
+      "english": "What",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q28",
+    "questionText": "Translate to English: cheia",
+    "options": [
+      "enough",
+      "complete",
+      "fried",
+      "full"
+    ],
+    "correctAnswer": "full",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_28",
+      "portuguese": "cheia",
+      "english": "full",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q29",
+    "questionText": "Translate to English: cheia de fome",
+    "options": [
+      "boiled",
+      "full of hunger",
+      "fried (starred egg)",
+      "What"
+    ],
+    "correctAnswer": "full of hunger",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_29",
+      "portuguese": "cheia de fome",
+      "english": "full of hunger",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q30",
+    "questionText": "Translate to English: agora",
+    "options": [
+      "cappuccino (traditional milk with coffee)",
+      "full of hunger",
+      "now",
+      "I always have"
+    ],
+    "correctAnswer": "now",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_30",
+      "portuguese": "agora",
+      "english": "now",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q31",
+    "questionText": "Translate to English: caf\u00e9 da manh\u00e3",
+    "options": [
+      "Breakfast (in Brazilian portuguese)",
+      "of course yes",
+      "grilled",
+      "More coffee than milk"
+    ],
+    "correctAnswer": "Breakfast (in Brazilian portuguese)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_31",
+      "portuguese": "caf\u00e9 da manh\u00e3",
+      "english": "Breakfast (in Brazilian portuguese)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q32",
+    "questionText": "Translate to English: Tomo",
+    "options": [
+      "chickpeas",
+      "all the time",
+      "have",
+      "at \\--"
+    ],
+    "correctAnswer": "have",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_32",
+      "portuguese": "Tomo",
+      "english": "have",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q33",
+    "questionText": "Translate to English: Tomo sempre",
+    "options": [
+      "all the time",
+      "menu",
+      "chickpeas",
+      "I always have"
+    ],
+    "correctAnswer": "I always have",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_33",
+      "portuguese": "Tomo sempre",
+      "english": "I always have",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q34",
+    "questionText": "Translate to English: sufficiente",
+    "options": [
+      "bottle",
+      "enough",
+      "to call someone",
+      "each time"
+    ],
+    "correctAnswer": "enough",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_34",
+      "portuguese": "sufficiente",
+      "english": "enough",
+      "notes": "that is enough"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q35",
+    "questionText": "Translate to English: insuficiente",
+    "options": [
+      "insufficient",
+      "cake (or muffin)",
+      "a table indoors or outside/terrace",
+      "green peas"
+    ],
+    "correctAnswer": "insufficient",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_35",
+      "portuguese": "insuficiente",
+      "english": "insufficient",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q36",
+    "questionText": "Translate to English: mais barato",
+    "options": [
+      "cake (or muffin)",
+      "fried (starred egg)",
+      "roasted",
+      "much cheap"
+    ],
+    "correctAnswer": "much cheap",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_36",
+      "portuguese": "mais barato",
+      "english": "much cheap",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q37",
+    "questionText": "Translate to English: caro",
+    "options": [
+      "between",
+      "to have or to take (only for breakfast)",
+      "expensive",
+      "toasted bread"
+    ],
+    "correctAnswer": "expensive",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_37",
+      "portuguese": "caro",
+      "english": "expensive",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q38",
+    "questionText": "Translate to English: esplanada",
+    "options": [
+      "to decide",
+      "What",
+      "now",
+      "terrace"
+    ],
+    "correctAnswer": "terrace",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_38",
+      "portuguese": "esplanada",
+      "english": "terrace",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q39",
+    "questionText": "Translate to English: interior",
+    "options": [
+      "there is/there are more",
+      "of course yes",
+      "inside",
+      "a table indoors or outside/terrace"
+    ],
+    "correctAnswer": "inside",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_39",
+      "portuguese": "interior",
+      "english": "inside",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q40",
+    "questionText": "Translate to English: uma mesa no interior ou na esplanada",
+    "options": [
+      "much cheap",
+      "green peas",
+      "a table indoors or outside/terrace",
+      "full"
+    ],
+    "correctAnswer": "a table indoors or outside/terrace",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_40",
+      "portuguese": "uma mesa no interior ou na esplanada",
+      "english": "a table indoors or outside/terrace",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q41",
+    "questionText": "Translate to English: bitoque",
+    "options": [
+      "we would like",
+      "thin steak",
+      "much cheap",
+      "I always have"
+    ],
+    "correctAnswer": "thin steak",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_41",
+      "portuguese": "bitoque",
+      "english": "thin steak",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q42",
+    "questionText": "Translate to English: grelhado",
+    "options": [
+      "grilled",
+      "enough",
+      "each",
+      "to dine"
+    ],
+    "correctAnswer": "grilled",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_42",
+      "portuguese": "grelhado",
+      "english": "grilled",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q43",
+    "questionText": "Translate to English: claro",
+    "options": [
+      "of course",
+      "What",
+      "to have or to take (only for breakfast)",
+      "thin steak"
+    ],
+    "correctAnswer": "of course",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_43",
+      "portuguese": "claro",
+      "english": "of course",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q44",
+    "questionText": "Translate to English: claro que sim",
+    "options": [
+      "nowadays",
+      "of course yes",
+      "fried",
+      "those ones"
+    ],
+    "correctAnswer": "of course yes",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_44",
+      "portuguese": "claro que sim",
+      "english": "of course yes",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q45",
+    "questionText": "Translate to English: claro que n\u00e3o",
+    "options": [
+      "of course not",
+      "healthy",
+      "blueberry",
+      "any employee (waiter)"
+    ],
+    "correctAnswer": "of course not",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_45",
+      "portuguese": "claro que n\u00e3o",
+      "english": "of course not",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q46",
+    "questionText": "Translate to English: Ainda n\u00e3o",
+    "options": [
+      "not yet",
+      "cappuccino (traditional milk with coffee)",
+      "in the afternoon",
+      "each"
+    ],
+    "correctAnswer": "not yet",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_46",
+      "portuguese": "Ainda n\u00e3o",
+      "english": "not yet",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q47",
+    "questionText": "Translate to English: gelo",
+    "options": [
+      "menu",
+      "enough",
+      "pasta noodles",
+      "ice"
+    ],
+    "correctAnswer": "ice",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_47",
+      "portuguese": "gelo",
+      "english": "ice",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q48",
+    "questionText": "Translate to English: fresca",
+    "options": [
+      "not yet",
+      "chickpeas",
+      "stove",
+      "cold"
+    ],
+    "correctAnswer": "cold",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_48",
+      "portuguese": "fresca",
+      "english": "cold",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q49",
+    "questionText": "Translate to English: uma \u00e1gua natural",
+    "options": [
+      "complete",
+      "green peas",
+      "sauce",
+      "room temperature water"
+    ],
+    "correctAnswer": "room temperature water",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_49",
+      "portuguese": "uma \u00e1gua natural",
+      "english": "room temperature water",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q50",
+    "questionText": "Translate to English: garrafa",
+    "options": [
+      "for sure",
+      "bottle",
+      "a table indoors or outside/terrace",
+      "to have or to take (only for breakfast)"
+    ],
+    "correctAnswer": "bottle",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_50",
+      "portuguese": "garrafa",
+      "english": "bottle",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q51",
+    "questionText": "Translate to English: jarro",
+    "options": [
+      "there is/there are more",
+      "vase",
+      "cake (or muffin)",
+      "full"
+    ],
+    "correctAnswer": "vase",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_51",
+      "portuguese": "jarro",
+      "english": "vase",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q52",
+    "questionText": "Translate to English: Queriamos",
+    "options": [
+      "More milk than coffee",
+      "ice",
+      "that have",
+      "we would like"
+    ],
+    "correctAnswer": "we would like",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_52",
+      "portuguese": "Queriamos",
+      "english": "we would like",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q53",
+    "questionText": "Translate to English: acabar",
+    "options": [
+      "cold",
+      "expensive",
+      "to finish",
+      "for sure"
+    ],
+    "correctAnswer": "to finish",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_53",
+      "portuguese": "acabar",
+      "english": "to finish",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q54",
+    "questionText": "Translate to English: ementa",
+    "options": [
+      "to call someone",
+      "thin steak",
+      "menu",
+      "Breakfast (in Brazilian portuguese)"
+    ],
+    "correctAnswer": "menu",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_54",
+      "portuguese": "ementa",
+      "english": "menu",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q55",
+    "questionText": "Translate to English: menu",
+    "options": [
+      "a table indoors or outside/terrace",
+      "What",
+      "menu",
+      "the menu please"
+    ],
+    "correctAnswer": "menu",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_55",
+      "portuguese": "menu",
+      "english": "menu",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q56",
+    "questionText": "Translate to English: lista",
+    "options": [
+      "of course not",
+      "each week",
+      "thin steak",
+      "menu"
+    ],
+    "correctAnswer": "menu",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_56",
+      "portuguese": "lista",
+      "english": "menu",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q57",
+    "questionText": "Translate to English: a ementa por favor",
+    "options": [
+      "much cheap",
+      "the menu please",
+      "each day",
+      "during the afternoon"
+    ],
+    "correctAnswer": "the menu please",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_57",
+      "portuguese": "a ementa por favor",
+      "english": "the menu please",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q58",
+    "questionText": "Translate to English: cada",
+    "options": [
+      "each",
+      "enough",
+      "sauce",
+      "What"
+    ],
+    "correctAnswer": "each",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_58",
+      "portuguese": "cada",
+      "english": "each",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q59",
+    "questionText": "Translate to English: cada dia",
+    "options": [
+      "healthy",
+      "to have or to take (only for breakfast)",
+      "each day",
+      "room temperature water"
+    ],
+    "correctAnswer": "each day",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_59",
+      "portuguese": "cada dia",
+      "english": "each day",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q60",
+    "questionText": "Translate to English: cada semana",
+    "options": [
+      "of course yes",
+      "to decide",
+      "that have",
+      "each week"
+    ],
+    "correctAnswer": "each week",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_60",
+      "portuguese": "cada semana",
+      "english": "each week",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q61",
+    "questionText": "Translate to English: cada vez",
+    "options": [
+      "each time",
+      "of course yes",
+      "blueberry",
+      "any employee (waiter)"
+    ],
+    "correctAnswer": "each time",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_61",
+      "portuguese": "cada vez",
+      "english": "each time",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q62",
+    "questionText": "Translate to English: todas as vezes",
+    "options": [
+      "full of hunger",
+      "enough",
+      "make bread (bake)",
+      "all the time"
+    ],
+    "correctAnswer": "all the time",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_62",
+      "portuguese": "todas as vezes",
+      "english": "all the time",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q63",
+    "questionText": "Translate to English: sempre",
+    "options": [
+      "now",
+      "room temperature water",
+      "there is/there are more",
+      "always"
+    ],
+    "correctAnswer": "always",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_63",
+      "portuguese": "sempre",
+      "english": "always",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q64",
+    "questionText": "Translate to English: batatas cozidas",
+    "options": [
+      "expensive",
+      "boiled potato",
+      "vase",
+      "menu"
+    ],
+    "correctAnswer": "boiled potato",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_64",
+      "portuguese": "batatas cozidas",
+      "english": "boiled potato",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q65",
+    "questionText": "Translate to English: cozido",
+    "options": [
+      "blueberry",
+      "that have",
+      "ribs (bone)",
+      "boiled"
+    ],
+    "correctAnswer": "boiled",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_65",
+      "portuguese": "cozido",
+      "english": "boiled",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q66",
+    "questionText": "Translate to English: grelhado",
+    "options": [
+      "Breakfast (in Brazilian portuguese)",
+      "menu",
+      "grilled",
+      "inside"
+    ],
+    "correctAnswer": "grilled",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_66",
+      "portuguese": "grelhado",
+      "english": "grilled",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q67",
+    "questionText": "Translate to English: frito",
+    "options": [
+      "What",
+      "fried",
+      "vase",
+      "grilled"
+    ],
+    "correctAnswer": "fried",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_67",
+      "portuguese": "frito",
+      "english": "fried",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q68",
+    "questionText": "Translate to English: assado",
+    "options": [
+      "consult",
+      "roasted",
+      "blueberry",
+      "oven"
+    ],
+    "correctAnswer": "roasted",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_68",
+      "portuguese": "assado",
+      "english": "roasted",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q69",
+    "questionText": "Translate to English: fazer pao",
+    "options": [
+      "nowadays",
+      "expensive",
+      "make bread (bake)",
+      "there is/there are more"
+    ],
+    "correctAnswer": "make bread (bake)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_69",
+      "portuguese": "fazer pao",
+      "english": "make bread (bake)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q70",
+    "questionText": "Translate to English: molho",
+    "options": [
+      "coffee shop",
+      "each",
+      "fried",
+      "sauce"
+    ],
+    "correctAnswer": "sauce",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_70",
+      "portuguese": "molho",
+      "english": "sauce",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q71",
+    "questionText": "Translate to English: ovo estrelado",
+    "options": [
+      "fried (starred egg)",
+      "make bread (bake)",
+      "fried",
+      "ribs (bone)"
+    ],
+    "correctAnswer": "fried (starred egg)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_71",
+      "portuguese": "ovo estrelado",
+      "english": "fried (starred egg)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q72",
+    "questionText": "Translate to English: forno",
+    "options": [
+      "that have",
+      "ice",
+      "we would like",
+      "oven"
+    ],
+    "correctAnswer": "oven",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_72",
+      "portuguese": "forno",
+      "english": "oven",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q73",
+    "questionText": "Translate to English: fog\u0101o",
+    "options": [
+      "green peas",
+      "stove",
+      "full of hunger",
+      "of course yes"
+    ],
+    "correctAnswer": "stove",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_73",
+      "portuguese": "fog\u0101o",
+      "english": "stove",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q74",
+    "questionText": "Translate to English: Ervilhas",
+    "options": [
+      "boiled potato",
+      "inside",
+      "make bread (bake)",
+      "green peas"
+    ],
+    "correctAnswer": "green peas",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_74",
+      "portuguese": "Ervilhas",
+      "english": "green peas",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q75",
+    "questionText": "Translate to English: Entrecosto",
+    "options": [
+      "ribs (bone)",
+      "full of hunger",
+      "I always have",
+      "room temperature water"
+    ],
+    "correctAnswer": "ribs (bone)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_75",
+      "portuguese": "Entrecosto",
+      "english": "ribs (bone)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "even_more_q76",
+    "questionText": "Translate to English: gr\u00e3o",
+    "options": [
+      "expensive",
+      "green peas",
+      "enough",
+      "chickpeas"
+    ],
+    "correctAnswer": "chickpeas",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "even_more_src_76",
+      "portuguese": "gr\u00e3o",
+      "english": "chickpeas",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  }
+]

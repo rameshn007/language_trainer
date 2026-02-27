@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 import 'exercise_screen.dart';
+import '../vocabulary/vocabulary_list_screen.dart';
 
 class ExerciseListScreen extends StatelessWidget {
   const ExerciseListScreen({super.key});
@@ -34,12 +35,50 @@ class ExerciseListScreen extends StatelessWidget {
       'hintPath': 'assets/images/unit_5_hint.png',
       'icon': 'chat',
     },
+    {
+      'title': 'Unit 6: New Vocabulary',
+      'subtitle': 'Practice new vocabulary from new.md',
+      'path': 'assets/data/exercises/unit_6.json',
+      'icon': 'book',
+    },
+    {
+      'title': 'Unit 7: Even More Vocabulary',
+      'subtitle': 'Practice new vocabulary from Even_More_words.md',
+      'path': 'assets/data/exercises/unit_7.json',
+      'icon': 'book',
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Exercises'), centerTitle: true),
+      appBar: AppBar(
+        title: const Text('Exercises'),
+        centerTitle: true,
+        actions: [
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert),
+            onSelected: (value) {
+              if (value == 'vocabulary') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VocabularyListScreen(),
+                  ),
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return const [
+                PopupMenuItem<String>(
+                  value: 'vocabulary',
+                  child: Text('Vocabulary'),
+                ),
+              ];
+            },
+          ),
+        ],
+      ),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: units.length,

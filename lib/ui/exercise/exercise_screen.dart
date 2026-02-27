@@ -4,6 +4,7 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../services/tts_service.dart';
 import '../quiz/quiz_screen.dart'; // Reuse QuestionCard
+import '../vocabulary/vocabulary_list_screen.dart';
 
 import 'exercise_view_model.dart';
 
@@ -160,6 +161,27 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
               tooltip: 'Show Hint',
               onPressed: _showHint,
             ),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert),
+            onSelected: (value) {
+              if (value == 'vocabulary') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VocabularyListScreen(),
+                  ),
+                );
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return const [
+                PopupMenuItem<String>(
+                  value: 'vocabulary',
+                  child: Text('Vocabulary'),
+                ),
+              ];
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.close),
             onPressed: () => Navigator.pop(context),
