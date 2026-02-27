@@ -17,7 +17,7 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
   List<LanguageItem> _phrases = [];
   int _currentIndex = 0;
   bool _isAutoPlaying = false;
-  double _speechRate = 0.5;
+  double _speechRate = 0.8;
 
   final TtsService _ttsService = TtsService();
 
@@ -167,6 +167,8 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
         _speechRate = 0.5;
       } else if (_speechRate == 0.5) {
         _speechRate = 0.6;
+      } else if (_speechRate == 0.6) {
+        _speechRate = 0.8;
       } else {
         _speechRate = 0.4;
       }
