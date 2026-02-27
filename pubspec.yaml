@@ -50,13 +50,19 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: "^0.13.1"
+  flutter_launcher_icons: "^0.14.1"
   flutter_lints: ^6.0.0
 
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/images/app_icon.png"
+  image_path_ios_dark_transparent: "assets/images/app_icon_transparent.png"
+  image_path_ios_tinted_grayscale: "assets/images/app_icon_transparent.png"
+  desaturate_tinted_to_grayscale_ios: true
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/app_icon_transparent.png"
+  monochrome_icon: "assets/images/app_icon_transparent.png"
   remove_alpha_ios: true
 
 
