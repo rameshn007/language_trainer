@@ -83,6 +83,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     }
   }
 
+  Future<T?> _pushScreen<T>(Widget screen, [Offset? center]) {
+    return Navigator.push<T>(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => screen,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          if (center == null) {
+            return FadeTransition(opacity: animation, child: child);
+          }
+
+          return ClipPath(
+            clipper: CircularRevealClipper(
+              fraction: animation.value,
+              center: center,
+            ),
+            child: child,
+          );
+        },
+        transitionDuration: const Duration(milliseconds: 650),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final storage = ref.watch(storageServiceProvider);
@@ -101,13 +124,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 _loadData();
               } else if (value == 'reset') {
                 _confirmReset();
-              } else if (value == 'vocab') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const VocabularyListScreen(),
-                  ),
-                );
               }
             },
             itemBuilder: (context) => [
@@ -123,13 +139,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 child: ListTile(
                   leading: Icon(Icons.restore),
                   title: Text('Reset Stats'),
-                ),
-              ),
-              const PopupMenuItem(
-                value: 'vocab',
-                child: ListTile(
-                  leading: Icon(Icons.list),
-                  title: Text('Vocabulary List'),
                 ),
               ),
             ],
@@ -166,18 +175,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
-                                Colors.deepPurple.shade400,
-                                Colors.deepPurple.shade700,
+                                Colors.deepPurple.shade400.withValues(
+                                  alpha: 0.9,
+                                ),
+                                Colors.deepPurple.shade700.withValues(
+                                  alpha: 0.9,
+                                ),
                               ],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
                             borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: Colors.white.withValues(alpha: 0.2),
+                              width: 1.5,
+                            ),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.deepPurple.withValues(alpha: 0.3),
-                                blurRadius: 10,
-                                offset: const Offset(0, 5),
+                                color: Colors.black.withValues(alpha: 0.15),
+                                blurRadius: 15,
+                                offset: const Offset(0, 8),
                               ),
                             ],
                           ),
@@ -231,148 +248,106 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 if (items.isEmpty) const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 60),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
                   child: FadeInUp(
                     delay: const Duration(milliseconds: 200),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        SizedBox(
-                          width: double.infinity,
-                          height: 55,
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Theme.of(
-                                context,
-                              ).colorScheme.primary,
-                              foregroundColor: Theme.of(
-                                context,
-                              ).colorScheme.onPrimary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              elevation: 5,
-                            ),
-                            onPressed: items.isEmpty || _isLoading
-                                ? null
-                                : () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) =>
-                                            const CategorySelectionScreen(),
-                                      ),
-                                    ).then((_) => setState(() {}));
-                                  },
-                            icon: const Icon(
-                              Icons.play_arrow_rounded,
-                              size: 28,
-                            ),
-                            label: const Text(
-                              'Start Quiz',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _buildGridButton(
+                                context: context,
+                                label: 'Start Quiz',
+                                icon: Icons.quiz_rounded,
+                                bgColor: Theme.of(context).colorScheme.primary,
+                                fgColor: Colors.white,
+                                onPressed: items.isEmpty || _isLoading
+                                    ? null
+                                    : (offset) {
+                                        _pushScreen(
+                                          const CategorySelectionScreen(),
+                                          offset,
+                                        ).then((_) => setState(() {}));
+                                      },
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: _buildGridButton(
+                                context: context,
+                                label: 'Vocabulary',
+                                icon: Icons.book_rounded,
+                                bgColor: Colors.blue.shade600,
+                                fgColor: Colors.white,
+                                onPressed: (offset) {
+                                  _pushScreen(
+                                    const VocabularyListScreen(),
+                                    offset,
+                                  );
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: _buildGridButton(
+                                context: context,
+                                label: 'Exercises',
+                                icon: Icons.assignment_rounded,
+                                bgColor: Theme.of(
+                                  context,
+                                ).colorScheme.secondary,
+                                fgColor: Colors.white,
+                                onPressed: (offset) {
+                                  _pushScreen(
+                                    const ExerciseListScreen(),
+                                    offset,
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 12),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 55,
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Theme.of(
-                                context,
-                              ).colorScheme.secondary,
-                              foregroundColor: Theme.of(
-                                context,
-                              ).colorScheme.onSecondary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              elevation: 5,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const ExerciseListScreen(),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.assignment, size: 28),
-                            label: const Text(
-                              'Exercises',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                        Row(
+                          children: [
+                            const Spacer(flex: 1),
+                            Expanded(
+                              flex: 2,
+                              child: _buildGridButton(
+                                context: context,
+                                label: 'Voice Trainer',
+                                icon: Icons.mic_rounded,
+                                bgColor: Colors.deepOrange,
+                                fgColor: Colors.white,
+                                onPressed: (offset) {
+                                  _pushScreen(
+                                    const VoiceTrainerScreen(),
+                                    offset,
+                                  );
+                                },
                               ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 55,
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.deepOrange,
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              elevation: 5,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const VoiceTrainerScreen(),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.mic, size: 28),
-                            label: const Text(
-                              'Voice Trainer',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                            const SizedBox(width: 12),
+                            Expanded(
+                              flex: 2,
+                              child: _buildGridButton(
+                                context: context,
+                                label: 'Phrase Trainer',
+                                icon: Icons.translate_rounded,
+                                bgColor: Colors.green,
+                                fgColor: Colors.white,
+                                onPressed: (offset) {
+                                  _pushScreen(
+                                    const PhraseTrainerScreen(),
+                                    offset,
+                                  );
+                                },
                               ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 55,
-                          child: ElevatedButton.icon(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              elevation: 5,
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const PhraseTrainerScreen(),
-                                ),
-                              );
-                            },
-                            icon: const Icon(Icons.translate, size: 28),
-                            label: const Text(
-                              'Phrase Trainer',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
+                            const Spacer(flex: 1),
+                          ],
                         ),
                       ],
                     ),
@@ -405,5 +380,115 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ],
     );
+  }
+
+  Widget _buildGridButton({
+    required BuildContext context,
+    required String label,
+    required IconData icon,
+    required Color bgColor,
+    required Color fgColor,
+    void Function(Offset offset)? onPressed,
+  }) {
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxHeight: 110),
+      child: Card(
+        elevation: 2,
+        color: Colors.transparent,
+        shadowColor: Colors.black.withValues(alpha: 0.1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: null, // We handle tap via GestureDetector below
+          child: GestureDetector(
+            onTapUp: (details) {
+              if (onPressed != null) {
+                onPressed(details.globalPosition);
+              }
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    onPressed == null
+                        ? Colors.grey.shade300.withValues(alpha: 0.7)
+                        : bgColor.withValues(alpha: 0.85),
+                    onPressed == null
+                        ? Colors.grey.shade400.withValues(alpha: 0.7)
+                        : bgColor.withValues(alpha: 0.95),
+                  ],
+                ),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  width: 1.2,
+                ),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    icon,
+                    size: 28,
+                    color: onPressed == null ? Colors.white70 : fgColor,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    label,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: onPressed == null ? Colors.white70 : fgColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CircularRevealClipper extends CustomClipper<Path> {
+  final double fraction;
+  final Offset center;
+
+  CircularRevealClipper({required this.fraction, required this.center});
+
+  @override
+  Path getClip(Size size) {
+    // Calculate the distance to the farthest corner
+    final double maxRadius = _calculateDistanceToFarthestCorner(size, center);
+    final double currentRadius = maxRadius * fraction;
+
+    return Path()
+      ..addOval(Rect.fromCircle(center: center, radius: currentRadius));
+  }
+
+  @override
+  bool shouldReclip(CircularRevealClipper oldClipper) {
+    return oldClipper.fraction != fraction || oldClipper.center != center;
+  }
+
+  double _calculateDistanceToFarthestCorner(Size size, Offset center) {
+    final List<Offset> corners = [
+      const Offset(0, 0),
+      Offset(size.width, 0),
+      Offset(0, size.height),
+      Offset(size.width, size.height),
+    ];
+
+    double maxDistance = 0;
+    for (final corner in corners) {
+      final double distance = (center - corner).distance;
+      if (distance > maxDistance) {
+        maxDistance = distance;
+      }
+    }
+    return maxDistance;
   }
 }
