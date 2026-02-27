@@ -1,0 +1,1845 @@
+[
+  {
+    "id": "new_q1",
+    "questionText": "Translate to English: neve",
+    "options": [
+      "although",
+      "I did (past of fazer)",
+      "I remember",
+      "snow"
+    ],
+    "correctAnswer": "snow",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_1",
+      "portuguese": "neve",
+      "english": "snow",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q2",
+    "questionText": "Translate to English: consigo",
+    "options": [
+      "I remember",
+      "you come?",
+      "able \\- to be able",
+      "receives"
+    ],
+    "correctAnswer": "able \\- to be able",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_2",
+      "portuguese": "consigo",
+      "english": "able \\- to be able",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q3",
+    "questionText": "Translate to English: dispo-me",
+    "options": [
+      "do you remember",
+      "We give",
+      "undress \\- me",
+      "however"
+    ],
+    "correctAnswer": "undress \\- me",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_3",
+      "portuguese": "dispo-me",
+      "english": "undress \\- me",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q4",
+    "questionText": "Translate to English: Ele veste",
+    "options": [
+      "I will in a minute",
+      "feeling",
+      "cough",
+      "he dress"
+    ],
+    "correctAnswer": "he dress",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_4",
+      "portuguese": "Ele veste",
+      "english": "he dress",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q5",
+    "questionText": "Translate to English: cascao",
+    "options": [
+      "snow",
+      "coat/jacket",
+      "Ask \\- variant of pedir",
+      "Meanwhile"
+    ],
+    "correctAnswer": "coat/jacket",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_5",
+      "portuguese": "cascao",
+      "english": "coat/jacket",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q6",
+    "questionText": "Translate to English: sente",
+    "options": [
+      "I go",
+      "feeling",
+      "I did (past of fazer)",
+      "he wish"
+    ],
+    "correctAnswer": "feeling",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_6",
+      "portuguese": "sente",
+      "english": "feeling",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q7",
+    "questionText": "Translate to English: descubro",
+    "options": [
+      "however",
+      "discover",
+      "he dress",
+      "still"
+    ],
+    "correctAnswer": "discover",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_7",
+      "portuguese": "descubro",
+      "english": "discover",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q8",
+    "questionText": "Translate to English: engolir",
+    "options": [
+      "We go, the two of us.",
+      "swallow",
+      "theirs",
+      "I did (past of fazer)"
+    ],
+    "correctAnswer": "swallow",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_8",
+      "portuguese": "engolir",
+      "english": "swallow",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q9",
+    "questionText": "Translate to English: tosse",
+    "options": [
+      "snow",
+      "I come",
+      "you come?",
+      "cough"
+    ],
+    "correctAnswer": "cough",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_9",
+      "portuguese": "tosse",
+      "english": "cough",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q10",
+    "questionText": "Translate to English: tusso",
+    "options": [
+      "do you remember",
+      "cough \\- first person irregular",
+      "do your homework",
+      "undress \\- me"
+    ],
+    "correctAnswer": "cough \\- first person irregular",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_10",
+      "portuguese": "tusso",
+      "english": "cough \\- first person irregular",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q11",
+    "questionText": "Translate to English: fumar",
+    "options": [
+      "theirs",
+      "We give",
+      "smoke",
+      "exit (go out)"
+    ],
+    "correctAnswer": "smoke",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_11",
+      "portuguese": "fumar",
+      "english": "smoke",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q12",
+    "questionText": "Translate to English: povo",
+    "options": [
+      "still",
+      "people from a country",
+      "discover",
+      "swallow"
+    ],
+    "correctAnswer": "people from a country",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_12",
+      "portuguese": "povo",
+      "english": "people from a country",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q13",
+    "questionText": "Translate to English: parte",
+    "options": [
+      "I did (past of fazer)",
+      "their future",
+      "part",
+      "despite"
+    ],
+    "correctAnswer": "part",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_13",
+      "portuguese": "parte",
+      "english": "part",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q14",
+    "questionText": "Translate to English: consegues",
+    "options": [
+      "however",
+      "you can",
+      "but",
+      "undress \\- me"
+    ],
+    "correctAnswer": "you can",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_14",
+      "portuguese": "consegues",
+      "english": "you can",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q15",
+    "questionText": "Translate to English: por issoe",
+    "options": [
+      "I set (the table)",
+      "Ask Ana for the newspaper",
+      "cough",
+      "therefore"
+    ],
+    "correctAnswer": "therefore",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_15",
+      "portuguese": "por issoe",
+      "english": "therefore",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q16",
+    "questionText": "Translate to English: recebe",
+    "options": [
+      "to go",
+      "able \\- to be able",
+      "feeling",
+      "receives"
+    ],
+    "correctAnswer": "receives",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_16",
+      "portuguese": "recebe",
+      "english": "receives",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q17",
+    "questionText": "Translate to English: ainda assim",
+    "options": [
+      "even though",
+      "We give",
+      "to wish",
+      "feeling"
+    ],
+    "correctAnswer": "even though",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_17",
+      "portuguese": "ainda assim",
+      "english": "even though",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q18",
+    "questionText": "Translate to English: mesmo que",
+    "options": [
+      "undress \\- me",
+      "cough \\- first person irregular",
+      "We give",
+      "even if"
+    ],
+    "correctAnswer": "even if",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_18",
+      "portuguese": "mesmo que",
+      "english": "even if",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q19",
+    "questionText": "Translate to English: apesar de",
+    "options": [
+      "listen/hear",
+      "I will in a minute",
+      "however",
+      "despite"
+    ],
+    "correctAnswer": "despite",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_19",
+      "portuguese": "apesar de",
+      "english": "despite",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q20",
+    "questionText": "Translate to English: no entanto",
+    "options": [
+      "even if",
+      "however",
+      "that way (and like this)",
+      "Ask Ana for the newspaper"
+    ],
+    "correctAnswer": "however",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_20",
+      "portuguese": "no entanto",
+      "english": "however",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q21",
+    "questionText": "Translate to English: embora",
+    "options": [
+      "although",
+      "my journey/trip",
+      "to come",
+      "able \\- to be able"
+    ],
+    "correctAnswer": "although",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_21",
+      "portuguese": "embora",
+      "english": "although",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q22",
+    "questionText": "Translate to English: mas",
+    "options": [
+      "he wish",
+      "but",
+      "listen/hear",
+      "I set (the table)"
+    ],
+    "correctAnswer": "but",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_22",
+      "portuguese": "mas",
+      "english": "but",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q23",
+    "questionText": "Translate to English: ando",
+    "options": [
+      "not anymore",
+      "that way (and like this)",
+      "swallow",
+      "I walk"
+    ],
+    "correctAnswer": "I walk",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_23",
+      "portuguese": "ando",
+      "english": "I walk",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q24",
+    "questionText": "Translate to English: e assim",
+    "options": [
+      "We go, the two of us.",
+      "bedroom",
+      "I make",
+      "that way (and like this)"
+    ],
+    "correctAnswer": "that way (and like this)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_24",
+      "portuguese": "e assim",
+      "english": "that way (and like this)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q25",
+    "questionText": "Translate to English: das minhas viagens",
+    "options": [
+      "he wish",
+      "able \\- to be able",
+      "undress \\- me",
+      "my journey/trip"
+    ],
+    "correctAnswer": "my journey/trip",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_25",
+      "portuguese": "das minhas viagens",
+      "english": "my journey/trip",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q26",
+    "questionText": "Translate to English: quarto",
+    "options": [
+      "I walk",
+      "exit (go out)",
+      "Isn’t it",
+      "bedroom"
+    ],
+    "correctAnswer": "bedroom",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_26",
+      "portuguese": "quarto",
+      "english": "bedroom",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q27",
+    "questionText": "Translate to English: Nos damos",
+    "options": [
+      "We give",
+      "I come",
+      "coat/jacket",
+      "Ask Ana for the newspaper"
+    ],
+    "correctAnswer": "We give",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_27",
+      "portuguese": "Nos damos",
+      "english": "We give",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q28",
+    "questionText": "Translate to English: peço",
+    "options": [
+      "Ask \\- variant of pedir",
+      "cough",
+      "snow",
+      "Ask Ana for the newspaper"
+    ],
+    "correctAnswer": "Ask \\- variant of pedir",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_28",
+      "portuguese": "peço",
+      "english": "Ask \\- variant of pedir",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q29",
+    "questionText": "Translate to English: ouço/oiço",
+    "options": [
+      "people from a country",
+      "smoke",
+      "discover",
+      "listen/hear"
+    ],
+    "correctAnswer": "listen/hear",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_29",
+      "portuguese": "ouço/oiço",
+      "english": "listen/hear",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q30",
+    "questionText": "Translate to English: vir",
+    "options": [
+      "not anymore",
+      "exit (go out)",
+      "to come",
+      "to go"
+    ],
+    "correctAnswer": "to come",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_30",
+      "portuguese": "vir",
+      "english": "to come",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q31",
+    "questionText": "Translate to English: ir",
+    "options": [
+      "I set (the table)",
+      "to go",
+      "Ask Ana for the newspaper",
+      "however"
+    ],
+    "correctAnswer": "to go",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_31",
+      "portuguese": "ir",
+      "english": "to go",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q32",
+    "questionText": "Translate to English: Eu venho",
+    "options": [
+      "bedroom",
+      "he wish",
+      "I come",
+      "not anymore"
+    ],
+    "correctAnswer": "I come",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_32",
+      "portuguese": "Eu venho",
+      "english": "I come",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q33",
+    "questionText": "Translate to English: Eu vou",
+    "options": [
+      "I go",
+      "swallow",
+      "able \\- to be able",
+      "part"
+    ],
+    "correctAnswer": "I go",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_33",
+      "portuguese": "Eu vou",
+      "english": "I go",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q34",
+    "questionText": "Translate to English: Faço",
+    "options": [
+      "smoke",
+      "I make",
+      "even though",
+      "I walk"
+    ],
+    "correctAnswer": "I make",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_34",
+      "portuguese": "Faço",
+      "english": "I make",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q35",
+    "questionText": "Translate to English: ponho",
+    "options": [
+      "to bring",
+      "my journey/trip",
+      "do your homework",
+      "I set (the table)"
+    ],
+    "correctAnswer": "I set (the table)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_35",
+      "portuguese": "ponho",
+      "english": "I set (the table)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q36",
+    "questionText": "Translate to English: trazer",
+    "options": [
+      "that way (and like this)",
+      "to bring",
+      "cough",
+      "my journey/trip"
+    ],
+    "correctAnswer": "to bring",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_36",
+      "portuguese": "trazer",
+      "english": "to bring",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q37",
+    "questionText": "Translate to English: trago",
+    "options": [
+      "I bring",
+      "he dress",
+      "therefore",
+      "although"
+    ],
+    "correctAnswer": "I bring",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_37",
+      "portuguese": "trago",
+      "english": "I bring",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q38",
+    "questionText": "Translate to English: venho",
+    "options": [
+      "exit (go out)",
+      "I bring",
+      "I come",
+      "to bring"
+    ],
+    "correctAnswer": "I come",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_38",
+      "portuguese": "venho",
+      "english": "I come",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q39",
+    "questionText": "Translate to English: vens",
+    "options": [
+      "I come",
+      "you come?",
+      "despite",
+      "that way (and like this)"
+    ],
+    "correctAnswer": "you come?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_39",
+      "portuguese": "vens",
+      "english": "you come?",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q40",
+    "questionText": "Translate to English: Pedes o jornal à Ana?",
+    "options": [
+      "I remember",
+      "Ask Ana for the newspaper",
+      "I bring",
+      "cough \\- first person irregular"
+    ],
+    "correctAnswer": "Ask Ana for the newspaper",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_40",
+      "portuguese": "Pedes o jornal à Ana?",
+      "english": "Ask Ana for the newspaper",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q41",
+    "questionText": "Translate to English: A Guida e o Francisco sao amigos",
+    "options": [
+      "Margaret and Francisco are friends.",
+      "I bring",
+      "feeling",
+      "not anymore"
+    ],
+    "correctAnswer": "Margaret and Francisco are friends.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_41",
+      "portuguese": "A Guida e o Francisco sao amigos",
+      "english": "Margaret and Francisco are friends.",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q42",
+    "questionText": "Translate to English: desejar",
+    "options": [
+      "Meanwhile",
+      "to wish",
+      "Ask \\- variant of pedir",
+      "I bring"
+    ],
+    "correctAnswer": "to wish",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_42",
+      "portuguese": "desejar",
+      "english": "to wish",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q43",
+    "questionText": "Translate to English: deseja",
+    "options": [
+      "he wish",
+      "I remember",
+      "undress \\- me",
+      "swallow"
+    ],
+    "correctAnswer": "he wish",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_43",
+      "portuguese": "deseja",
+      "english": "he wish",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q44",
+    "questionText": "Translate to English: ainda",
+    "options": [
+      "to come",
+      "I did (past of fazer)",
+      "smoke",
+      "still"
+    ],
+    "correctAnswer": "still",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_44",
+      "portuguese": "ainda",
+      "english": "still",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q45",
+    "questionText": "Translate to English: ainda nāo",
+    "options": [
+      "not yet",
+      "theirs",
+      "feeling",
+      "We go, the two of us."
+    ],
+    "correctAnswer": "not yet",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_45",
+      "portuguese": "ainda nāo",
+      "english": "not yet",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q46",
+    "questionText": "Translate to English: já nāo",
+    "options": [
+      "not anymore",
+      "even though",
+      "that way (and like this)",
+      "Not possible"
+    ],
+    "correctAnswer": "not anymore",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_46",
+      "portuguese": "já nāo",
+      "english": "not anymore",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q47",
+    "questionText": "Translate to English: faz os trabalhos de casa",
+    "options": [
+      "do your homework",
+      "is to remember",
+      "even though",
+      "people from a country"
+    ],
+    "correctAnswer": "do your homework",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_47",
+      "portuguese": "faz os trabalhos de casa",
+      "english": "do your homework",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q48",
+    "questionText": "Translate to English: já faço",
+    "options": [
+      "to come",
+      "I will in a minute",
+      "I come",
+      "cough \\- first person irregular"
+    ],
+    "correctAnswer": "I will in a minute",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_48",
+      "portuguese": "já faço",
+      "english": "I will in a minute",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q49",
+    "questionText": "Translate to English: já fiz",
+    "options": [
+      "Isn’t it",
+      "I did (past of fazer)",
+      "I will in a minute",
+      "even though"
+    ],
+    "correctAnswer": "I did (past of fazer)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_49",
+      "portuguese": "já fiz",
+      "english": "I did (past of fazer)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q50",
+    "questionText": "Translate to English: Entertanto",
+    "options": [
+      "Margaret and Francisco are friends.",
+      "Meanwhile",
+      "people from a country",
+      "I make"
+    ],
+    "correctAnswer": "Meanwhile",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_50",
+      "portuguese": "Entertanto",
+      "english": "Meanwhile",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q51",
+    "questionText": "Translate to English: sonhar",
+    "options": [
+      "dream",
+      "snow",
+      "bedroom",
+      "Ask \\- variant of pedir"
+    ],
+    "correctAnswer": "dream",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_51",
+      "portuguese": "sonhar",
+      "english": "dream",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q52",
+    "questionText": "Translate to English: deles",
+    "options": [
+      "exit (go out)",
+      "theirs",
+      "even if",
+      "We go, the two of us."
+    ],
+    "correctAnswer": "theirs",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_52",
+      "portuguese": "deles",
+      "english": "theirs",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q53",
+    "questionText": "Translate to English: o futuro deles",
+    "options": [
+      "feeling",
+      "their future",
+      "listen/hear",
+      "Isn’t it"
+    ],
+    "correctAnswer": "their future",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_53",
+      "portuguese": "o futuro deles",
+      "english": "their future",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q54",
+    "questionText": "Translate to English: lembraste",
+    "options": [
+      "he wish",
+      "even if",
+      "do you remember",
+      "feeling"
+    ],
+    "correctAnswer": "do you remember",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_54",
+      "portuguese": "lembraste",
+      "english": "do you remember",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q55",
+    "questionText": "Translate to English: lembrar-se",
+    "options": [
+      "is to remember",
+      "I set (the table)",
+      "do your homework",
+      "smoke"
+    ],
+    "correctAnswer": "is to remember",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_55",
+      "portuguese": "lembrar-se",
+      "english": "is to remember",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q56",
+    "questionText": "Translate to English: lembro-me",
+    "options": [
+      "bedroom",
+      "exit (go out)",
+      "I remember",
+      "even if"
+    ],
+    "correctAnswer": "I remember",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_56",
+      "portuguese": "lembro-me",
+      "english": "I remember",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q57",
+    "questionText": "Translate to English: sair",
+    "options": [
+      "to come",
+      "able \\- to be able",
+      "he wish",
+      "exit (go out)"
+    ],
+    "correctAnswer": "exit (go out)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_57",
+      "portuguese": "sair",
+      "english": "exit (go out)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q58",
+    "questionText": "Translate to English: Nao podes",
+    "options": [
+      "bedroom",
+      "Not possible",
+      "I did (past of fazer)",
+      "to come"
+    ],
+    "correctAnswer": "Not possible",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_58",
+      "portuguese": "Nao podes",
+      "english": "Not possible",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q59",
+    "questionText": "Translate to English: Não é?",
+    "options": [
+      "Isn’t it",
+      "Ask \\- variant of pedir",
+      "undress \\- me",
+      "able \\- to be able"
+    ],
+    "correctAnswer": "Isn’t it",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_59",
+      "portuguese": "Não é?",
+      "english": "Isn’t it",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q60",
+    "questionText": "Translate to English: Entao vamos os dois",
+    "options": [
+      "We go, the two of us.",
+      "swallow",
+      "I will in a minute",
+      "to come"
+    ],
+    "correctAnswer": "We go, the two of us.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_60",
+      "portuguese": "Entao vamos os dois",
+      "english": "We go, the two of us.",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "new_q_exp_61",
+    "questionText": "Translate to English: Está a nevar muito hoje.",
+    "options": [
+      "I bring",
+      "It is snowing a lot today.",
+      "He has a lot of cough and needs a doctor.",
+      "She feels cold during the winter."
+    ],
+    "correctAnswer": "It is snowing a lot today.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_61",
+      "portuguese": "Está a nevar muito hoje.",
+      "english": "It is snowing a lot today.",
+      "notes": "nevar = to snow"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_62",
+    "questionText": "Translate to English: Eu gosto de brincar na neve.",
+    "options": [
+      "I like to play in the snow.",
+      "discover",
+      "I put on my coat because it is cold.",
+      "their future"
+    ],
+    "correctAnswer": "I like to play in the snow.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_62",
+      "portuguese": "Eu gosto de brincar na neve.",
+      "english": "I like to play in the snow.",
+      "notes": "brincar = to play"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_63",
+    "questionText": "Translate to English: Eu não consigo abrir a porta.",
+    "options": [
+      "smoke",
+      "I cannot open the door.",
+      "I leave home very early.",
+      "even if"
+    ],
+    "correctAnswer": "I cannot open the door.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_63",
+      "portuguese": "Eu não consigo abrir a porta.",
+      "english": "I cannot open the door.",
+      "notes": "conseguir + infinitive"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_64",
+    "questionText": "Translate to English: Você consegue entender português?",
+    "options": [
+      "I don't hear anything with this noise.",
+      "Can you understand Portuguese?",
+      "He has a lot of cough and needs a doctor.",
+      "he wish"
+    ],
+    "correctAnswer": "Can you understand Portuguese?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_64",
+      "portuguese": "Você consegue entender português?",
+      "english": "Can you understand Portuguese?",
+      "notes": "conseguir + infinitive"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_65",
+    "questionText": "Translate to English: Eu visto o meu casaco porque está frio.",
+    "options": [
+      "still",
+      "I go",
+      "I put on my coat because it is cold.",
+      "I bring"
+    ],
+    "correctAnswer": "I put on my coat because it is cold.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_65",
+      "portuguese": "Eu visto o meu casaco porque está frio.",
+      "english": "I put on my coat because it is cold.",
+      "notes": "vestir + roupa"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_66",
+    "questionText": "Translate to English: Ela veste uma saia vermelha.",
+    "options": [
+      "able \\- to be able",
+      "do your homework",
+      "She wears a red skirt.",
+      "still"
+    ],
+    "correctAnswer": "She wears a red skirt.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_66",
+      "portuguese": "Ela veste uma saia vermelha.",
+      "english": "She wears a red skirt.",
+      "notes": ""
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_67",
+    "questionText": "Translate to English: Eu dispo o casaco quando entro em casa.",
+    "options": [
+      "I take off the coat when I enter home.",
+      "We listen to music every day.",
+      "to bring",
+      "smoke"
+    ],
+    "correctAnswer": "I take off the coat when I enter home.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_67",
+      "portuguese": "Eu dispo o casaco quando entro em casa.",
+      "english": "I take off the coat when I enter home.",
+      "notes": "despir = to undress/take off"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_68",
+    "questionText": "Translate to English: Eu sinto-me muito cansado hoje.",
+    "options": [
+      "We are going to the cinema tomorrow.",
+      "I feel very tired today.",
+      "despite",
+      "to come"
+    ],
+    "correctAnswer": "I feel very tired today.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_68",
+      "portuguese": "Eu sinto-me muito cansado hoje.",
+      "english": "I feel very tired today.",
+      "notes": "sentir-se = to feel (oneself)"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_69",
+    "questionText": "Translate to English: Ela sente frio durante o inverno.",
+    "options": [
+      "She feels cold during the winter.",
+      "I cannot swallow this pill.",
+      "receives",
+      "I did (past of fazer)"
+    ],
+    "correctAnswer": "She feels cold during the winter.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_69",
+      "portuguese": "Ela sente frio durante o inverno.",
+      "english": "She feels cold during the winter.",
+      "notes": "sentir frio = to feel cold"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_70",
+    "questionText": "Translate to English: Nós descobrimos uma praia linda.",
+    "options": [
+      "I set (the table)",
+      "We discovered a beautiful beach.",
+      "I come",
+      "I cannot swallow this pill."
+    ],
+    "correctAnswer": "We discovered a beautiful beach.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_70",
+      "portuguese": "Nós descobrimos uma praia linda.",
+      "english": "We discovered a beautiful beach.",
+      "notes": "descobrir = to discover"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_71",
+    "questionText": "Translate to English: Eu não consigo engolir este comprimido.",
+    "options": [
+      "smoke",
+      "I cannot swallow this pill.",
+      "They come to the party on Saturday.",
+      "I don't hear anything with this noise."
+    ],
+    "correctAnswer": "I cannot swallow this pill.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_71",
+      "portuguese": "Eu não consigo engolir este comprimido.",
+      "english": "I cannot swallow this pill.",
+      "notes": "comprimido = pill"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_72",
+    "questionText": "Translate to English: Ele tem muita tosse e precisa de um médico.",
+    "options": [
+      "He has a lot of cough and needs a doctor.",
+      "do your homework",
+      "Ask \\- variant of pedir",
+      "people from a country"
+    ],
+    "correctAnswer": "He has a lot of cough and needs a doctor.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_72",
+      "portuguese": "Ele tem muita tosse e precisa de um médico.",
+      "english": "He has a lot of cough and needs a doctor.",
+      "notes": "tosse (noun) = cough"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_73",
+    "questionText": "Translate to English: Eu tusso muito durante a noite.",
+    "options": [
+      "I cough a lot during the night.",
+      "I remember",
+      "She feels cold during the winter.",
+      "The book is good, however it is expensive."
+    ],
+    "correctAnswer": "I cough a lot during the night.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_73",
+      "portuguese": "Eu tusso muito durante a noite.",
+      "english": "I cough a lot during the night.",
+      "notes": "tossir (verb) = to cough"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_74",
+    "questionText": "Translate to English: Está a chover, por isso não vou sair.",
+    "options": [
+      "They go out at night with friends.",
+      "It is raining, therefore I will not go out.",
+      "people from a country",
+      "still"
+    ],
+    "correctAnswer": "It is raining, therefore I will not go out.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_74",
+      "portuguese": "Está a chover, por isso não vou sair.",
+      "english": "It is raining, therefore I will not go out.",
+      "notes": "por isso = therefore/so"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_75",
+    "questionText": "Translate to English: Eu vou à praia, mesmo que chova.",
+    "options": [
+      "I remember",
+      "I bring",
+      "I will go to the beach, even if it rains.",
+      "She feels cold during the winter."
+    ],
+    "correctAnswer": "I will go to the beach, even if it rains.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_75",
+      "portuguese": "Eu vou à praia, mesmo que chova.",
+      "english": "I will go to the beach, even if it rains.",
+      "notes": "mesmo que + subjunctive"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_76",
+    "questionText": "Translate to English: Apesar do frio, nós fomos passear.",
+    "options": [
+      "he dress",
+      "you can",
+      "Despite the cold, we went for a walk.",
+      "Margaret and Francisco are friends."
+    ],
+    "correctAnswer": "Despite the cold, we went for a walk.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_76",
+      "portuguese": "Apesar do frio, nós fomos passear.",
+      "english": "Despite the cold, we went for a walk.",
+      "notes": "apesar de = despite"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_77",
+    "questionText": "Translate to English: O livro é bom, no entanto é caro.",
+    "options": [
+      "It is raining, therefore I will not go out.",
+      "able \\- to be able",
+      "receives",
+      "The book is good, however it is expensive."
+    ],
+    "correctAnswer": "The book is good, however it is expensive.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_77",
+      "portuguese": "O livro é bom, no entanto é caro.",
+      "english": "The book is good, however it is expensive.",
+      "notes": "no entanto = however"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_78",
+    "questionText": "Translate to English: Eu peço um café e um pastel de nata.",
+    "options": [
+      "I order a coffee and a pastel de nata.",
+      "I cough a lot during the night.",
+      "even if",
+      "you can"
+    ],
+    "correctAnswer": "I order a coffee and a pastel de nata.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_78",
+      "portuguese": "Eu peço um café e um pastel de nata.",
+      "english": "I order a coffee and a pastel de nata.",
+      "notes": "pedir = to ask/order (in a restaurant)"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_79",
+    "questionText": "Translate to English: Nós ouvimos música todos os dias.",
+    "options": [
+      "I come",
+      "do your homework",
+      "We listen to music every day.",
+      "I cannot swallow this pill."
+    ],
+    "correctAnswer": "We listen to music every day.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_79",
+      "portuguese": "Nós ouvimos música todos os dias.",
+      "english": "We listen to music every day.",
+      "notes": "ouvir = to listen"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_80",
+    "questionText": "Translate to English: Eu não ouço nada com este barulho.",
+    "options": [
+      "receives",
+      "I don't hear anything with this noise.",
+      "despite",
+      "I put on my coat because it is cold."
+    ],
+    "correctAnswer": "I don't hear anything with this noise.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_80",
+      "portuguese": "Eu não ouço nada com este barulho.",
+      "english": "I don't hear anything with this noise.",
+      "notes": "ouvir = to hear (eu ouço)"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_81",
+    "questionText": "Translate to English: Eles vêm à festa no sábado.",
+    "options": [
+      "Despite the cold, we went for a walk.",
+      "They come to the party on Saturday.",
+      "We give",
+      "I put on my coat because it is cold."
+    ],
+    "correctAnswer": "They come to the party on Saturday.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_81",
+      "portuguese": "Eles vêm à festa no sábado.",
+      "english": "They come to the party on Saturday.",
+      "notes": "vir = to come"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_82",
+    "questionText": "Translate to English: Eu venho do trabalho às seis horas.",
+    "options": [
+      "part",
+      "to wish",
+      "snow",
+      "I come from work at six o'clock."
+    ],
+    "correctAnswer": "I come from work at six o'clock.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_82",
+      "portuguese": "Eu venho do trabalho às seis horas.",
+      "english": "I come from work at six o'clock.",
+      "notes": "vir (eu venho)"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_83",
+    "questionText": "Translate to English: Nós vamos ao cinema amanhã.",
+    "options": [
+      "We are going to the cinema tomorrow.",
+      "still",
+      "I come",
+      "I like to play in the snow."
+    ],
+    "correctAnswer": "We are going to the cinema tomorrow.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_83",
+      "portuguese": "Nós vamos ao cinema amanhã.",
+      "english": "We are going to the cinema tomorrow.",
+      "notes": "ir = to go"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_84",
+    "questionText": "Translate to English: Eu trago o vinho para o jantar.",
+    "options": [
+      "I bring the wine for the dinner.",
+      "dream",
+      "I will go to the beach, even if it rains.",
+      "coat/jacket"
+    ],
+    "correctAnswer": "I bring the wine for the dinner.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_84",
+      "portuguese": "Eu trago o vinho para o jantar.",
+      "english": "I bring the wine for the dinner.",
+      "notes": "trazer (eu trago) = to bring"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_85",
+    "questionText": "Translate to English: Podes trazer os teus amigos?",
+    "options": [
+      "He has a lot of cough and needs a doctor.",
+      "I bring the wine for the dinner.",
+      "Can you bring your friends?",
+      "although"
+    ],
+    "correctAnswer": "Can you bring your friends?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_85",
+      "portuguese": "Podes trazer os teus amigos?",
+      "english": "Can you bring your friends?",
+      "notes": "trazer + a pessoa"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_86",
+    "questionText": "Translate to English: Eu não me lembro do nome dele.",
+    "options": [
+      "I do not remember his name.",
+      "although",
+      "cough \\- first person irregular",
+      "you come?"
+    ],
+    "correctAnswer": "I do not remember his name.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_86",
+      "portuguese": "Eu não me lembro do nome dele.",
+      "english": "I do not remember his name.",
+      "notes": "lembrar-se de = to remember"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_87",
+    "questionText": "Translate to English: Você lembra-se onde deixou o carro?",
+    "options": [
+      "but",
+      "Do you remember where you left the car?",
+      "Ask Ana for the newspaper",
+      "Despite the cold, we went for a walk."
+    ],
+    "correctAnswer": "Do you remember where you left the car?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_87",
+      "portuguese": "Você lembra-se onde deixou o carro?",
+      "english": "Do you remember where you left the car?",
+      "notes": "lembrar-se"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_88",
+    "questionText": "Translate to English: Eu saio de casa muito cedo.",
+    "options": [
+      "I leave home very early.",
+      "people from a country",
+      "Can you understand Portuguese?",
+      "not anymore"
+    ],
+    "correctAnswer": "I leave home very early.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_88",
+      "portuguese": "Eu saio de casa muito cedo.",
+      "english": "I leave home very early.",
+      "notes": "sair (eu saio)"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_exp_89",
+    "questionText": "Translate to English: Eles saem à noite com os amigos.",
+    "options": [
+      "listen/hear",
+      "They go out at night with friends.",
+      "undress \\- me",
+      "I put on my coat because it is cold."
+    ],
+    "correctAnswer": "They go out at night with friends.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "new_src_exp_89",
+      "portuguese": "Eles saem à noite com os amigos.",
+      "english": "They go out at night with friends.",
+      "notes": "sair"
+    },
+    "category": "Vocabulary Practice"
+  },
+  {
+    "id": "new_q_cloze_90",
+    "questionText": "Eu (vestir) ____ o meu casaco de inverno.",
+    "options": [
+      "vesto",
+      "visto",
+      "vestimos",
+      "veste"
+    ],
+    "correctAnswer": "visto",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "new_src_cloze_90",
+      "portuguese": "Eu (vestir) visto o meu casaco de inverno.",
+      "english": "",
+      "notes": "Conjugation practice"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "new_q_cloze_91",
+    "questionText": "Eu não (conseguir) ____ abrir a porta.",
+    "options": [
+      "conselo",
+      "consegue",
+      "conseguo",
+      "consigo"
+    ],
+    "correctAnswer": "consigo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "new_src_cloze_91",
+      "portuguese": "Eu não (conseguir) consigo abrir a porta.",
+      "english": "",
+      "notes": "Conjugation practice"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "new_q_cloze_92",
+    "questionText": "Ela (sentir) ____ muito frio aqui.",
+    "options": [
+      "sente",
+      "sinto",
+      "sentem",
+      "sentis"
+    ],
+    "correctAnswer": "sente",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "new_src_cloze_92",
+      "portuguese": "Ela (sentir) sente muito frio aqui.",
+      "english": "",
+      "notes": "Conjugation practice"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "new_q_cloze_93",
+    "questionText": "Eu (ouvir) ____ a música muito alta.",
+    "options": [
+      "ouve",
+      "ovo",
+      "ouvir",
+      "ouço"
+    ],
+    "correctAnswer": "ouço",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "new_src_cloze_93",
+      "portuguese": "Eu (ouvir) ouço a música muito alta.",
+      "english": "",
+      "notes": "Conjugation practice"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "new_q_cloze_94",
+    "questionText": "Eu (pedir) ____ um café no restaurante.",
+    "options": [
+      "pido",
+      "peço",
+      "pede",
+      "pedo"
+    ],
+    "correctAnswer": "peço",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "new_src_cloze_94",
+      "portuguese": "Eu (pedir) peço um café no restaurante.",
+      "english": "",
+      "notes": "Conjugation practice"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "new_q_cloze_95",
+    "questionText": "Eu (fazer) ____ o jantar para a família.",
+    "options": [
+      "fazemos",
+      "fazo",
+      "faço",
+      "faze"
+    ],
+    "correctAnswer": "faço",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "new_src_cloze_95",
+      "portuguese": "Eu (fazer) faço o jantar para a família.",
+      "english": "",
+      "notes": "Conjugation practice"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "new_q_cloze_96",
+    "questionText": "Eu (trazer) ____ os livros amanhã.",
+    "options": [
+      "traz",
+      "trago",
+      "trazo",
+      "trazer"
+    ],
+    "correctAnswer": "trago",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "new_src_cloze_96",
+      "portuguese": "Eu (trazer) trago os livros amanhã.",
+      "english": "",
+      "notes": "Conjugation practice"
+    },
+    "category": "Grammar"
+  },
+  {
+    "id": "new_q_cloze_97",
+    "questionText": "Nós (ir) ____ ao supermercado hoje.",
+    "options": [
+      "vão",
+      "vo",
+      "vamos",
+      "imos"
+    ],
+    "correctAnswer": "vamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "new_src_cloze_97",
+      "portuguese": "Nós (ir) vamos ao supermercado hoje.",
+      "english": "",
+      "notes": "Conjugation practice"
+    },
+    "category": "Grammar"
+  }
+]
