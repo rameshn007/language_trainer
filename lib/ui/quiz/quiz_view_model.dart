@@ -88,13 +88,13 @@ class QuizViewModel extends Notifier<QuizState> {
 
     final List<Question> finalSelection = [];
 
-    // Group questions by their sourceItem ID (or text if ID missing)
-    // We want to prioritize UNSEEN questions first.
+    // 4. Fill result with prioritize unseen
 
-    // Helper to select from a pool
-    void selectFromPool(List<Question> pool, int remainingCount) {
-      if (remainingCount <= 0 || pool.isEmpty) return;
+    // Helper to select from a pool while avoiding duplicates by sourceItem or questionText
+    void selectFromPool(List<Question> pool) {
+      if (finalSelection.length >= count || pool.isEmpty) return;
 
+      // Group variants to ensure we don't pick two variants of same concept in one quiz
       final Map<String, List<Question>> grouped = {};
       for (var q in pool) {
         final key = !q.sourceItem.isEmpty ? q.sourceItem.id : q.questionText;
@@ -103,63 +103,33 @@ class QuizViewModel extends Notifier<QuizState> {
 
       final keys = grouped.keys.toList()..shuffle();
 
-      // 1. Pick one per concept
       for (var key in keys) {
         if (finalSelection.length >= count) return;
-        final variants = grouped[key]!..shuffle();
 
-        // Helper: check if we already picked a question for this concept in this session
-        // (to avoid duplicates from mixed pools)
+        // Skip if this concept is already in our final selection (e.g. from previous pool)
         bool alreadyPicked = finalSelection.any(
           (q) =>
               (!q.sourceItem.isEmpty && q.sourceItem.id == key) ||
-              (q.questionText ==
-                  variants.first.questionText), // heuristic fallback
+              (q.questionText == key),
         );
+        if (alreadyPicked) continue;
 
-        if (!alreadyPicked) {
-          finalSelection.add(variants.first);
-        }
-      }
-
-      // 2. If still need more, pick seconds
-      if (finalSelection.length < count) {
-        // Simply use the shuffle method below to pick from remainder if needed
-        // The complex logic isn't strictly necessary for the fallback
+        final variants = grouped[key]!..shuffle();
+        finalSelection.add(variants.first);
       }
     }
 
-    // A. Fill with unseen
-    selectFromPool(unseenQuestions, count);
+    // A. First try to fill with unseen concepts
+    unseenQuestions.shuffle();
+    selectFromPool(unseenQuestions);
 
-    // B. Fill remainder with seen if needed
+    // B. If still under count, fill with seen concepts
     if (finalSelection.length < count) {
-      // Only candidates that strictly haven't been picked yet (by ID)
-      // But selectFromPool logic above creates a new selection list.
-      // We need a more robust way to combine.
-
-      // SIMPLIFIED APPROACH:
-      // 1. Shuffle both lists
-      unseenQuestions.shuffle();
       seenQuestions.shuffle();
-
-      // 2. Take all unseen
-      finalSelection.addAll(unseenQuestions);
-
-      // 3. Take seen until count reached
-      for (var q in seenQuestions) {
-        if (finalSelection.length >= count) break;
-        finalSelection.add(q);
-      }
+      selectFromPool(seenQuestions);
     }
 
-    // Cap at count (in case unseen was > count)
-    var resultQuestions = finalSelection.take(count).toList();
-
-    // Final shuffle
-    resultQuestions.shuffle();
-
-    state = QuizState(questions: resultQuestions);
+    state = QuizState(questions: finalSelection);
   }
 
   void answerQuestion(String answer) {

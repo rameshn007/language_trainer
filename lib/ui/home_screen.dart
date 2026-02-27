@@ -54,6 +54,37 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     setState(() => _isLoading = false);
   }
 
+  Future<void> _confirmShuffle() async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Shuffle Questions?'),
+        content: const Text(
+          'This will treat all questions as "new", allowing you to see the entire question pool again. Your learned mastery levels will remain unchanged.',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Shuffle All'),
+          ),
+        ],
+      ),
+    );
+    if (result == true) {
+      final storage = ref.read(storageServiceProvider);
+      await storage.clearSeenQuestions();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('All questions randomized!')),
+        );
+      }
+    }
+  }
+
   Future<void> _confirmReset() async {
     final result = await showDialog<bool>(
       context: context,
@@ -122,6 +153,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             onSelected: (value) {
               if (value == 'refresh') {
                 _loadData();
+              } else if (value == 'shuffle') {
+                _confirmShuffle();
               } else if (value == 'reset') {
                 _confirmReset();
               }
@@ -132,6 +165,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 child: ListTile(
                   leading: Icon(Icons.refresh),
                   title: Text('Refresh Data'),
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'shuffle',
+                child: ListTile(
+                  leading: Icon(Icons.shuffle),
+                  title: Text('Shuffle All Questions'),
                 ),
               ),
               const PopupMenuItem(

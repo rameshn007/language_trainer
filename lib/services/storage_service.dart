@@ -91,6 +91,10 @@ class StorageService {
     return _seenQuestionsBox!.keys.cast<String>().toSet();
   }
 
+  Future<void> clearSeenQuestions() async {
+    await _seenQuestionsBox?.clear();
+  }
+
   Future<void> resetStats() async {
     if (_itemsBox == null) return;
     final allItems = _itemsBox!.values.toList();
