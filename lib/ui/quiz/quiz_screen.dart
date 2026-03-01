@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import '../../models/question.dart';
 import 'quiz_view_model.dart';
 import '../../services/tts_service.dart';
+import '../../main.dart';
 import '../vocabulary/vocabulary_list_screen.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
@@ -17,12 +18,13 @@ class QuizScreen extends ConsumerStatefulWidget {
 
 class _QuizScreenState extends ConsumerState<QuizScreen> {
   final CardSwiperController _swiperController = CardSwiperController();
-  final TtsService _ttsService = TtsService();
+  late final TtsService _ttsService;
   double _speedMultiplier = 0.75; // Default as requested
 
   @override
   void initState() {
     super.initState();
+    _ttsService = ref.read(ttsServiceProvider);
     // Start quiz on load
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref

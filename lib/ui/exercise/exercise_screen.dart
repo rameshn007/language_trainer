@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:animate_do/animate_do.dart';
+import '../../main.dart';
 import '../../services/tts_service.dart';
 import '../quiz/quiz_screen.dart'; // Reuse QuestionCard
 import '../vocabulary/vocabulary_list_screen.dart';
@@ -26,12 +27,13 @@ class ExerciseScreen extends ConsumerStatefulWidget {
 
 class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
   final CardSwiperController _swiperController = CardSwiperController();
-  final TtsService _ttsService = TtsService();
+  late final TtsService _ttsService;
   final double _speedMultiplier = 0.75;
 
   @override
   void initState() {
     super.initState();
+    _ttsService = ref.read(ttsServiceProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref
           .read(exerciseViewModelProvider.notifier)
