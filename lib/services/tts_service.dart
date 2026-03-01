@@ -5,6 +5,7 @@ class TtsService {
   final FlutterTts _flutterTts = FlutterTts();
 
   Map<String, String>? _bestPtVoice;
+  Map<String, String>? _bestEnVoice;
 
   TtsService() {
     _init();
@@ -25,48 +26,15 @@ class TtsService {
       }
 
       // 2. Filter for Portuguese (Portugal)
-      // Note: adjust locale check if needed (e.g., specific to 'pt-PT')
       var ptVoices = voices.where((v) {
         final locale = v['locale'].toString();
         return locale.contains('pt-PT') || locale.contains('pt_PT');
       }).toList();
 
       if (ptVoices.isNotEmpty) {
-        // 3. Try to find a "high quality" voice
-
-        // Strategy:
-        // 1. Look for voices with 'enhanced', 'premium', 'high' in name/identifier/quality
-        // 2. Prefer 'Joana' (common high quality PT voice on iOS)
-
-        // Helper to score voices
-        int scoreVoice(Map<Object?, Object?> v) {
-          int score = 0;
-          final name = (v['name'] ?? '').toString().toLowerCase();
-          final id = (v['identifier'] ?? '').toString().toLowerCase();
-          final quality = (v['quality'] ?? '').toString().toLowerCase();
-
-          if (name.contains('enhanced') ||
-              id.contains('enhanced') ||
-              quality.contains('enhanced')) {
-            score += 10;
-          }
-          if (name.contains('premium') ||
-              id.contains('premium') ||
-              quality.contains('premium')) {
-            score += 10;
-          }
-          if (name.contains('joana')) {
-            score += 5; // Joana is usually good on iOS
-          }
-
-          // Penalize compact
-          if (name.contains('compact') || id.contains('compact')) score -= 5;
-
-          return score;
-        }
-
-        // Sort by score descending
-        ptVoices.sort((a, b) => scoreVoice(b).compareTo(scoreVoice(a)));
+        ptVoices.sort(
+          (a, b) => _scoreVoice(b, 'pt').compareTo(_scoreVoice(a, 'pt')),
+        );
 
         var bestVoice = ptVoices.first;
         _bestPtVoice = {
@@ -74,16 +42,32 @@ class TtsService {
           "locale": (bestVoice["locale"] ?? "") as String,
           "identifier": (bestVoice["identifier"] ?? "") as String,
         };
+        // We do not set the default voice here, we set it individually in speak()
+      }
 
-        await _flutterTts.setVoice(_bestPtVoice!);
-      } else {
-        // Fallback if no specific pt-PT voice found in list (rare)
-        await _flutterTts.setLanguage("pt-PT");
+      // 3. Filter and find best English (US/UK)
+      var enVoices = voices.where((v) {
+        final locale = v['locale'].toString().toLowerCase();
+        return locale.contains('en-us') ||
+            locale.contains('en_us') ||
+            locale.contains('en-gb') ||
+            locale.contains('en_gb');
+      }).toList();
+
+      if (enVoices.isNotEmpty) {
+        enVoices.sort(
+          (a, b) => _scoreVoice(b, 'en').compareTo(_scoreVoice(a, 'en')),
+        );
+
+        var bestVoice = enVoices.first;
+        _bestEnVoice = {
+          "name": (bestVoice["name"] ?? "") as String,
+          "locale": (bestVoice["locale"] ?? "") as String,
+          "identifier": (bestVoice["identifier"] ?? "") as String,
+        };
       }
     } catch (e) {
-      // print("Error setting voice: $e");
-      // Fallback
-      await _flutterTts.setLanguage("pt-PT");
+      // Fallbacks
     }
 
     await _flutterTts.setPitch(1.0);
@@ -123,12 +107,77 @@ class TtsService {
     return "Please check your system Text-to-Speech settings to install high-quality voices.";
   }
 
+  // Helper to score voices
+  int _scoreVoice(Map<Object?, Object?> v, String languageType) {
+    int score = 0;
+    final name = (v['name'] ?? '').toString().toLowerCase();
+    final id = (v['identifier'] ?? '').toString().toLowerCase();
+    final quality = (v['quality'] ?? '').toString().toLowerCase();
+
+    if (name.contains('enhanced') ||
+        id.contains('enhanced') ||
+        quality.contains('enhanced')) {
+      score += 10;
+    }
+    if (name.contains('premium') ||
+        id.contains('premium') ||
+        quality.contains('premium')) {
+      score += 10;
+    }
+
+    // PT Specifics
+    if (languageType == 'pt' && name.contains('joana')) {
+      score += 5; // Joana is usually good on iOS
+    }
+
+    // EN Specifics
+    if (languageType == 'en') {
+      if (name.contains('siri') || id.contains('siri')) {
+        score += 15; // Siri voices are generally the best
+      }
+      if (name.contains('samantha') && !name.contains('compact')) {
+        score += 5; // Samantha is a standard good fallback
+      }
+
+      // EXPLICITLY PENALIZE NOVELTY/ROBOTIC MAC/IOS VOICES
+      // Apple includes several novelty "singing" or "robotic" voices in the en-US pack.
+      if (name.contains('zarvox') ||
+          name.contains('cellos') ||
+          name.contains('trinoids') ||
+          name.contains('bad news') ||
+          name.contains('good news') ||
+          name.contains('bells') ||
+          name.contains('boing') ||
+          name.contains('bubbles') ||
+          name.contains('deranged') ||
+          name.contains('hysterical') ||
+          name.contains('pipe organ') ||
+          name.contains('whisper') ||
+          name.contains('ralph') || // Novelty deep voice
+          name.contains('albert')) {
+        // Novelty raspy voice
+        score -= 1000;
+      }
+    }
+
+    // Penalize low quality
+    if (name.contains('compact') || id.contains('compact')) {
+      score -= 5;
+    }
+
+    return score;
+  }
+
   Future<void> speak(String text, {String? language}) async {
     if (text.isEmpty) return;
 
     if (language != null) {
       if (language.startsWith('en')) {
-        await _flutterTts.setLanguage('en-US');
+        if (_bestEnVoice != null) {
+          await _flutterTts.setVoice(_bestEnVoice!);
+        } else {
+          await _flutterTts.setLanguage('en-US');
+        }
       } else if (language.startsWith('pt')) {
         if (_bestPtVoice != null) {
           await _flutterTts.setVoice(_bestPtVoice!);
