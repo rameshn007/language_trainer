@@ -4,6 +4,7 @@ import '../../models/language_item.dart';
 
 import '../../main.dart'; // for storageServiceProvider
 import '../../services/tts_service.dart';
+import 'word_graph_screen.dart';
 
 enum SortMode { alphabetical, mastery, random }
 
@@ -298,6 +299,19 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
                 } else {
                   _playPlaylist(startFromId: item.id);
                 }
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.hub),
+              title: const Text('Explore in Graph'),
+              onTap: () {
+                Navigator.pop(context); // Close sheet
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WordGraphScreen(initialWord: item),
+                  ),
+                );
               },
             ),
             ListTile(
