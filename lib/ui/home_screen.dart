@@ -10,6 +10,7 @@ import 'voice_trainer_screen.dart';
 import 'phrase_trainer_screen.dart';
 import '../main.dart';
 import 'widgets/word_star_field.dart';
+import 'settings_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -157,9 +158,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 _confirmShuffle();
               } else if (value == 'reset') {
                 _confirmReset();
+              } else if (value == 'settings') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
               }
             },
             itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'settings',
+                child: ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text('Settings'),
+                ),
+              ),
               const PopupMenuItem(
                 value: 'refresh',
                 child: ListTile(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/language_item.dart';
 import '../services/tts_service.dart';
+import '../main.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -19,11 +20,12 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
   bool _isAutoPlaying = false;
   double _speechRate = 0.8;
 
-  final TtsService _ttsService = TtsService();
+  late final TtsService _ttsService;
 
   @override
   void initState() {
     super.initState();
+    _ttsService = ref.read(ttsServiceProvider);
     _loadPhrases();
   }
 

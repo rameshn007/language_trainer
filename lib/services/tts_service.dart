@@ -1,20 +1,36 @@
 import 'dart:io';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'storage_service.dart';
+import '../utils/logger.dart';
 
 class TtsService {
   final FlutterTts _flutterTts = FlutterTts();
+  final StorageService _storageService;
 
   Map<String, String>? _bestPtVoice;
   Map<String, String>? _bestEnVoice;
 
-  TtsService() {
-    _init();
+  List<Map<String, String>> availablePtVoices = [];
+  List<Map<String, String>> availableEnVoices = [];
+
+  Future<void>? initFuture;
+
+  TtsService(this._storageService) {
+    initFuture = _init();
   }
 
   Future<void> _init() async {
-    // 1. Get all available voices
     try {
       var voices = await _flutterTts.getVoices;
+      AppLogger.log(
+        "getVoices returned ${voices?.length} voices",
+        name: "TtsService",
+      );
+
+      if (voices == null || voices.isEmpty) {
+        AppLogger.log("No voices found!", name: "TtsService");
+        return;
+      }
 
       if (Platform.isIOS) {
         await _flutterTts
@@ -26,45 +42,101 @@ class TtsService {
       }
 
       // 2. Filter for Portuguese (Portugal)
-      var ptVoices = voices.where((v) {
-        final locale = v['locale'].toString();
-        return locale.contains('pt-PT') || locale.contains('pt_PT');
+      var ptVoicesRaw = voices.where((v) {
+        try {
+          final locale = v['locale'].toString();
+          return locale.contains('pt-PT') ||
+              locale.contains('pt_PT') ||
+              locale.contains('pt-br'); // loosening to see if anything matches
+        } catch (e) {
+          return false;
+        }
       }).toList();
 
-      if (ptVoices.isNotEmpty) {
-        ptVoices.sort(
+      AppLogger.log(
+        "Found ${ptVoicesRaw.length} PT voices",
+        name: "TtsService",
+      );
+
+      if (ptVoicesRaw.isNotEmpty) {
+        ptVoicesRaw.sort(
           (a, b) => _scoreVoice(b, 'pt').compareTo(_scoreVoice(a, 'pt')),
         );
 
-        var bestVoice = ptVoices.first;
-        _bestPtVoice = {
-          "name": (bestVoice["name"] ?? "") as String,
-          "locale": (bestVoice["locale"] ?? "") as String,
-          "identifier": (bestVoice["identifier"] ?? "") as String,
-        };
-        // We do not set the default voice here, we set it individually in speak()
+        // Store available voices for Settings
+        availablePtVoices = ptVoicesRaw
+            .map(
+              (v) => {
+                "name": (v["name"] ?? "") as String,
+                "locale": (v["locale"] ?? "") as String,
+                "identifier": (v["identifier"] ?? "") as String,
+              },
+            )
+            .toList();
+
+        // Check for saved preference
+        final savedPtId = _storageService.getSetting('tts_voice_pt');
+        if (savedPtId != null) {
+          try {
+            _bestPtVoice = availablePtVoices.firstWhere(
+              (v) => v["identifier"] == savedPtId || v["name"] == savedPtId,
+            );
+          } catch (_) {
+            _bestPtVoice =
+                availablePtVoices.first; // fallback if saved not found
+          }
+        } else {
+          _bestPtVoice = availablePtVoices.first;
+        }
       }
 
       // 3. Filter and find best English (US/UK)
-      var enVoices = voices.where((v) {
-        final locale = v['locale'].toString().toLowerCase();
-        return locale.contains('en-us') ||
-            locale.contains('en_us') ||
-            locale.contains('en-gb') ||
-            locale.contains('en_gb');
+      var enVoicesRaw = voices.where((v) {
+        try {
+          final locale = v['locale'].toString().toLowerCase();
+          return locale.contains('en-us') ||
+              locale.contains('en_us') ||
+              locale.contains('en-gb') ||
+              locale.contains('en_gb');
+        } catch (e) {
+          return false;
+        }
       }).toList();
 
-      if (enVoices.isNotEmpty) {
-        enVoices.sort(
+      AppLogger.log(
+        "Found ${enVoicesRaw.length} EN voices",
+        name: "TtsService",
+      );
+
+      if (enVoicesRaw.isNotEmpty) {
+        enVoicesRaw.sort(
           (a, b) => _scoreVoice(b, 'en').compareTo(_scoreVoice(a, 'en')),
         );
 
-        var bestVoice = enVoices.first;
-        _bestEnVoice = {
-          "name": (bestVoice["name"] ?? "") as String,
-          "locale": (bestVoice["locale"] ?? "") as String,
-          "identifier": (bestVoice["identifier"] ?? "") as String,
-        };
+        // Store available voices for Settings
+        availableEnVoices = enVoicesRaw
+            .map(
+              (v) => {
+                "name": (v["name"] ?? "") as String,
+                "locale": (v["locale"] ?? "") as String,
+                "identifier": (v["identifier"] ?? "") as String,
+              },
+            )
+            .toList();
+
+        // Check for saved preference
+        final savedEnId = _storageService.getSetting('tts_voice_en');
+        if (savedEnId != null) {
+          try {
+            _bestEnVoice = availableEnVoices.firstWhere(
+              (v) => v["identifier"] == savedEnId || v["name"] == savedEnId,
+            );
+          } catch (_) {
+            _bestEnVoice = availableEnVoices.first;
+          }
+        } else {
+          _bestEnVoice = availableEnVoices.first;
+        }
       }
     } catch (e) {
       // Fallbacks
@@ -73,6 +145,24 @@ class TtsService {
     await _flutterTts.setPitch(1.0);
     // 0.5 is standard speed for this lib, but let's make it slightly adjustable if needed.
     await _flutterTts.setSpeechRate(0.5);
+  }
+
+  Future<void> setExplicitVoice(String language, String identifier) async {
+    if (language.startsWith('pt')) {
+      try {
+        _bestPtVoice = availablePtVoices.firstWhere(
+          (v) => v["identifier"] == identifier,
+        );
+        await _storageService.saveSetting('tts_voice_pt', identifier);
+      } catch (_) {}
+    } else if (language.startsWith('en')) {
+      try {
+        _bestEnVoice = availableEnVoices.firstWhere(
+          (v) => v["identifier"] == identifier,
+        );
+        await _storageService.saveSetting('tts_voice_en', identifier);
+      } catch (_) {}
+    }
   }
 
   Future<void> setRate(double multiplier) async {

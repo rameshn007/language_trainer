@@ -20,7 +20,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   List<LanguageItem> _filteredItems = [];
   String _searchQuery = '';
   final TextEditingController _searchController = TextEditingController();
-  final TtsService _ttsService = TtsService();
+  late final TtsService _ttsService;
   double _speedMultiplier = 0.75;
   bool _isTranslationsHidden = false;
   SortMode _sortMode = SortMode.alphabetical;
@@ -33,6 +33,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   void initState() {
     super.initState();
     _loadItems();
+    _ttsService = ref.read(ttsServiceProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _ttsService.setRate(_speedMultiplier);
     });
