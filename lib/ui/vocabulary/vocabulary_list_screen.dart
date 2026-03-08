@@ -502,7 +502,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
               return false;
             },
             child: InkWell(
-              onTap: () {
+              onTap: () async {
                 if (_isTranslationsHidden) {
                   // Temporary reveal
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -513,7 +513,18 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
                     ),
                   );
                 }
-                _ttsService.speak(item.portuguese, language: 'pt-PT');
+                await _ttsService.speak(item.portuguese, language: 'pt-PT');
+
+                // Delay based on length to wait for PT to finish before EN
+                int ptDurationMs =
+                    500 +
+                    (item.portuguese.length * 75 * (1 / _speedMultiplier))
+                        .toInt();
+                await Future.delayed(Duration(milliseconds: ptDurationMs));
+
+                if (mounted) {
+                  await _ttsService.speak(item.english, language: 'en-US');
+                }
               },
               onDoubleTap: () => _showEditDialog(item),
               onLongPress: () => _showContextMenu(item),

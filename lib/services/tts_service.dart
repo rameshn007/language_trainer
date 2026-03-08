@@ -263,11 +263,15 @@ class TtsService {
 
     // EN Specifics
     if (languageType == 'en') {
+      // iOS blocks third-party apps from using Siri voices. Trying to set it falls back to a terrible robotic voice.
       if (name.contains('siri') || id.contains('siri')) {
-        score += 15; // Siri voices are generally the best
+        score -= 1000;
       }
       if (name.contains('samantha') && !name.contains('compact')) {
         score += 5; // Samantha is a standard good fallback
+      }
+      if (name.contains('alex') || name.contains('daniel')) {
+        score += 10; // Alex and Daniel are excellent premium Apple voices
       }
 
       // EXPLICITLY PENALIZE NOVELTY/ROBOTIC MAC/IOS VOICES
@@ -302,17 +306,36 @@ class TtsService {
   Future<void> speak(String text, {String? language}) async {
     if (text.isEmpty) return;
 
+    if (initFuture != null) {
+      await initFuture;
+    }
+
     if (language != null) {
       if (language.startsWith('en')) {
+        bool voiceSet = false;
         if (_bestEnVoice != null) {
-          await _flutterTts.setVoice(_bestEnVoice!);
-        } else {
+          // Extra guard to prevent using a restricted Siri voice even if it was saved prior to the penalty update
+          final name = (_bestEnVoice!['name'] ?? '').toLowerCase();
+          final id = (_bestEnVoice!['identifier'] ?? '').toLowerCase();
+          if (!name.contains('siri') && !id.contains('siri')) {
+            try {
+              final result = await _flutterTts.setVoice(_bestEnVoice!);
+              if (result != 0 && result != false) voiceSet = true;
+            } catch (_) {}
+          }
+        }
+        if (!voiceSet) {
           await _flutterTts.setLanguage('en-US');
         }
       } else if (language.startsWith('pt')) {
+        bool voiceSet = false;
         if (_bestPtVoice != null) {
-          await _flutterTts.setVoice(_bestPtVoice!);
-        } else {
+          try {
+            final result = await _flutterTts.setVoice(_bestPtVoice!);
+            if (result != 0 && result != false) voiceSet = true;
+          } catch (_) {}
+        }
+        if (!voiceSet) {
           await _flutterTts.setLanguage('pt-PT');
         }
       }
