@@ -13,6 +13,27 @@ class TtsService {
   List<Map<String, String>> availablePtVoices = [];
   List<Map<String, String>> availableEnVoices = [];
 
+  bool get isEnhancedPtVoiceAvailable {
+    return availablePtVoices.any((v) {
+      final name = (v['name'] ?? '').toLowerCase();
+      final id = (v['identifier'] ?? '').toLowerCase();
+      return name.contains('enhanced') ||
+          id.contains('enhanced') ||
+          name.contains('premium') ||
+          id.contains('premium');
+    });
+  }
+
+  bool get isEnhancedPtVoiceSelected {
+    if (_bestPtVoice == null) return false;
+    final name = (_bestPtVoice!['name'] ?? '').toLowerCase();
+    final id = (_bestPtVoice!['identifier'] ?? '').toLowerCase();
+    return name.contains('enhanced') ||
+        id.contains('enhanced') ||
+        name.contains('premium') ||
+        id.contains('premium');
+  }
+
   Future<void>? initFuture;
 
   TtsService(this._storageService) {
@@ -21,33 +42,49 @@ class TtsService {
 
   Future<void> _init() async {
     try {
-      var voices = await _flutterTts.getVoices;
-      AppLogger.log(
-        "getVoices returned ${voices?.length} voices",
-        name: "TtsService",
-      );
-
-      if (voices == null || voices.isEmpty) {
-        AppLogger.log("No voices found!", name: "TtsService");
-        return;
-      }
-
       if (Platform.isIOS) {
+        await _flutterTts.setSharedInstance(true);
         await _flutterTts
             .setIosAudioCategory(IosTextToSpeechAudioCategory.playback, [
               IosTextToSpeechAudioCategoryOptions.defaultToSpeaker,
               IosTextToSpeechAudioCategoryOptions.allowBluetooth,
               IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
             ]);
+        // slight delay to let audio session spin up
+        await Future.delayed(const Duration(milliseconds: 50));
       }
 
-      // 2. Filter for Portuguese (Portugal)
+      var voices = await _flutterTts.getVoices;
+
+      // Retry logic for iOS because audio session can take time to spin up
+      int retries = 0;
+      while ((voices == null || voices.isEmpty) && retries < 3) {
+        AppLogger.log(
+          "getVoices returned empty, retrying... ($retries)",
+          name: "TtsService",
+        );
+        await Future.delayed(const Duration(milliseconds: 200));
+        voices = await _flutterTts.getVoices;
+        retries++;
+      }
+
+      AppLogger.log(
+        "getVoices returned ${voices?.length} voices",
+        name: "TtsService",
+      );
+
+      if (voices == null || voices.isEmpty) {
+        AppLogger.log("No voices found after retries!", name: "TtsService");
+        return;
+      }
+
+      // 2. Filter for Portuguese
       var ptVoicesRaw = voices.where((v) {
         try {
-          final locale = v['locale'].toString();
-          return locale.contains('pt-PT') ||
-              locale.contains('pt_PT') ||
-              locale.contains('pt-br'); // loosening to see if anything matches
+          final locale = v['locale'].toString().toLowerCase();
+          return locale.startsWith(
+            'pt',
+          ); // Just match any Portuguese to be safe, e.g. pt-PT, pt-BR, pt_PT
         } catch (e) {
           return false;
         }
@@ -57,6 +94,13 @@ class TtsService {
         "Found ${ptVoicesRaw.length} PT voices",
         name: "TtsService",
       );
+
+      for (var v in ptVoicesRaw) {
+        AppLogger.log(
+          "PT Voice: ${v['name']} - ${v['identifier']} - ${v['quality']}",
+          name: "TtsService",
+        );
+      }
 
       if (ptVoicesRaw.isNotEmpty) {
         ptVoicesRaw.sort(
@@ -90,14 +134,11 @@ class TtsService {
         }
       }
 
-      // 3. Filter and find best English (US/UK)
+      // 3. Filter and find best English
       var enVoicesRaw = voices.where((v) {
         try {
           final locale = v['locale'].toString().toLowerCase();
-          return locale.contains('en-us') ||
-              locale.contains('en_us') ||
-              locale.contains('en-gb') ||
-              locale.contains('en_gb');
+          return locale.startsWith('en'); // Just match any English
         } catch (e) {
           return false;
         }

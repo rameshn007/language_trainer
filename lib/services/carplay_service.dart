@@ -3,11 +3,12 @@ import 'voice_quiz_service.dart';
 import '../models/question.dart';
 import '../models/language_item.dart';
 import 'storage_service.dart';
+import 'tts_service.dart';
 import 'quiz_engine_service.dart';
 import '../utils/logger.dart';
 
 class CarPlayService {
-  final VoiceQuizService _voiceService = VoiceQuizService();
+  late final VoiceQuizService _voiceService;
   bool _isPlaying = false;
 
   // Singleton pattern
@@ -21,9 +22,10 @@ class CarPlayService {
   StorageService? _storageService;
 
   /// Initialise CarPlay
-  void init({StorageService? storageService}) {
+  void init({StorageService? storageService, required TtsService ttsService}) {
     AppLogger.log("init() called", name: 'CarPlay');
     _storageService = storageService;
+    _voiceService = VoiceQuizService(ttsService);
 
     _startQuizItem = CPListItem(
       text: "Start Voice Quiz",

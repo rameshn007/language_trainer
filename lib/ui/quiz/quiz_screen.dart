@@ -254,7 +254,10 @@ class _QuestionCardState extends State<QuestionCard> {
     if (_isCorrect) {
       // Repeat audio if tapping the correct answer again
       if (option == widget.question.correctAnswer) {
-        widget.ttsService.speak(widget.question.sourceItem.portuguese);
+        widget.ttsService.speak(
+          widget.question.sourceItem.portuguese,
+          language: 'pt',
+        );
       }
       return;
     }
@@ -271,12 +274,15 @@ class _QuestionCardState extends State<QuestionCard> {
         _isCorrect = true;
       });
       // Always speak Portuguese source on correct
-      widget.ttsService.speak(widget.question.sourceItem.portuguese);
+      widget.ttsService.speak(
+        widget.question.sourceItem.portuguese,
+        language: 'pt',
+      );
     } else {
       setState(() {
         _wrongAnswers.add(option);
       });
-      widget.ttsService.speak("Incorrecto.");
+      widget.ttsService.speak("Incorrecto.", language: 'pt');
     }
   }
 
@@ -310,6 +316,7 @@ class _QuestionCardState extends State<QuestionCard> {
                       icon: const Icon(Icons.volume_up),
                       onPressed: () => widget.ttsService.speak(
                         widget.question.sourceItem.portuguese,
+                        language: 'pt',
                       ),
                     )
                   else

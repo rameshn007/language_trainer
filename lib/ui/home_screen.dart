@@ -27,7 +27,42 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadData();
+      _checkEnhancedVoice();
     });
+  }
+
+  Future<void> _checkEnhancedVoice() async {
+    final tts = ref.read(ttsServiceProvider);
+    final storage = ref.read(storageServiceProvider);
+
+    if (tts.initFuture != null) {
+      await tts.initFuture;
+    }
+
+    if (!mounted) return;
+
+    final hasSeenPrompt =
+        storage.getSetting('has_seen_enhanced_voice_prompt') ?? false;
+    if (!tts.isEnhancedPtVoiceAvailable && !hasSeenPrompt) {
+      await storage.saveSetting('has_seen_enhanced_voice_prompt', true);
+      if (mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Improve Voice Quality'),
+            content: SingleChildScrollView(
+              child: Text(tts.getVoiceInstallationInstructions()),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    }
   }
 
   Future<void> _loadData() async {
