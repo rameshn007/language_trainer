@@ -47,6 +47,13 @@ class ExerciseListScreen extends StatelessWidget {
       'path': 'assets/data/exercises/unit_7.json',
       'icon': 'book',
     },
+    {
+      'title': 'Unit 8: Monday Mar 9 Vocabulary',
+      'subtitle':
+          'Practice new words and related phrases from mon_mar_9_words.md',
+      'path': 'assets/data/exercises/unit_8.json',
+      'icon': 'book',
+    },
   ];
 
   @override
