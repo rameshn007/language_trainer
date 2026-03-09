@@ -1373,3 +1373,84 @@
 | Ervilhas | green peas |  |
 | Entrecosto | ribs (bone) |  |
 | grão | chickpeas |  |
+
+
+# Mon Mar 9 Words (mon_mar_9_words.md)
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| São duas horas da tarde | 2pm |  |
+| São duas horas da manhã | 2am |  |
+| São catorze horas | 14:00 |  |
+| da manhã | the morning only used with horas |  |
+| de manhã eu vou ao supermercado | In the morning I go to the supermarket |  |
+| é...singular..uma hora/meio-dia/meia-noite | Only for 1, midday and midnight |  |
+| Viseu | Viseu big city in north in the countryside near Porto |  |
+| nesta cidade | in this city |  |
+| em \+ esse \= nesse | nesse,nessa,nesses,nessas \- that |  |
+| aquele,aquela,aqueles,aquelas | far from both |  |
+| em \+ aquela \= naquela | that over there |  |
+| isto | this \- close to you |  |
+| isso | this \- close to other person |  |
+| aquilo | this \- far from both |  |
+| O que é isto? | What is this? |  |
+| Isso é livro | That is a book |  |
+| Esse livro é preto | That book is black |  |
+| Por isso | therefore |  |
+| custumo | from habit (used to do, still are doing) |  |
+| costumo acordar cedo | I’m used to wake up early |  |
+| costumava acordar cedo | I used to wake up early |  |
+| leventar-se | get up |  |
+| deitar-se | lay down (go to sleep) |  |
+| deito-me | me lay down |  |
+| Nunca me | Never me (if negative put the noun before the verb) |  |
+| Nunca me deito cedo | Never lay down early |  |
+| corro | Run |  |
+| O Pedro é de Viseu | Pedro is from Viseu |  |
+| Idade | Age |  |
+| Que idade tem ele? | How old is he? |  |
+| O Pedro vai para a universidade a pé ou de bicicleta | Pedro comes to the university by foot or by bicycle\` |  |
+| com os amigos dele | with his friends |  |
+| vai correr | to run |  |
+| apenas | only |  |
+| nao sempre as vezas | not always only sometimes |  |
+| Ao fim de semana | every weekend |  |
+| à | every |  |
+| à segunda-feira=às segundas-feiras | Every Monday \- both à and às mean the same thing |  |
+| sentar-se | sit down |  |
+| deitar-se | lie down |  |
+| despir-se | undress (take clothes off) |  |
+| vestir-se | dress (put clothes on) |  |
+| me,te,se,nos,se | pronouns I, you, he/she/, us, they |  |
+| não,nunca,ninguém | Negative \- no, never, noone |  |
+| onde, porquê, só, que, como | where,why,only,what,as (what/how) |  |
+| esqueço | forget |  |
+| lembrar-se | to remember |  |
+| esquecer-se | to forget |  |
+| eu não me esqueço | I don’t forget (I no forget) |  |
+
+
+# Related Words & Phrases Expansion
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| É meio-dia e meia | 12:30 PM (Midday and a half) | Time |
+| Faltam dez para as três | It's ten to three (2:50) | Time |
+| De tarde eu trabalho | In the afternoon I work | Routine |
+| De noite eu leio | At night I read | Routine |
+| A que horas te levantas? | What time do you get up? | Routine - Reflexive |
+| Eu lavo-me | I wash myself | Reflexive |
+| Apresse-se! | Hurry up! (yourself) | Reflexive |
+| Este carro é meu | This car is mine | Demonstrative |
+| Essa casa é tua? | Is that house yours? | Demonstrative |
+| Aquela montanha é alta | That mountain (over there) is high | Demonstrative |
+| Neste momento | At this moment | Demonstrative em + este |
+| Nesse dia | On that day | Demonstrative em + esse |
+| Naquela época | At that time (in that era) | Demonstrative em + aquela |
+| O que é isso? | What is that? | Demonstrative |
+| Aquilo é muito bonito | That (over there) is very beautiful | Demonstrative |
+| Eu nunca me atraso | I am never late (I never late myself) | Negative + Reflexive |
+| Sempre nos lembramos | We always remember | Reflexive |
+| Ele esquece-se de tudo | He forgets everything | Reflexive verb |
+| Ela costuma ler à noite | She usually reads at night | Costumar |
+| Por que choras? | Why are you crying? | Interrogative |

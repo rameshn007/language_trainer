@@ -1,0 +1,1313 @@
+[
+  {
+    "id": "unit8_q1",
+    "questionText": "Translate to English: S\u00e3o duas horas da tarde",
+    "options": [
+      "every",
+      "not always only sometimes",
+      "to run",
+      "2pm"
+    ],
+    "correctAnswer": "2pm",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_1",
+      "portuguese": "S\u00e3o duas horas da tarde",
+      "english": "2pm",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q2",
+    "questionText": "Translate to English: S\u00e3o duas horas da manh\u00e3",
+    "options": [
+      "In the morning I go to the supermarket",
+      "2am",
+      "Hurry up! (yourself)",
+      "At this moment"
+    ],
+    "correctAnswer": "2am",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_2",
+      "portuguese": "S\u00e3o duas horas da manh\u00e3",
+      "english": "2am",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q3",
+    "questionText": "Translate to English: S\u00e3o catorze horas",
+    "options": [
+      "14:00",
+      "every",
+      "to remember",
+      "where,why,only,what,as (what/how)"
+    ],
+    "correctAnswer": "14:00",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_3",
+      "portuguese": "S\u00e3o catorze horas",
+      "english": "14:00",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q4",
+    "questionText": "Translate to English: da manh\u00e3",
+    "options": [
+      "Only for 1, midday and midnight",
+      "the morning only used with horas",
+      "get up",
+      "Pedro is from Viseu"
+    ],
+    "correctAnswer": "the morning only used with horas",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_4",
+      "portuguese": "da manh\u00e3",
+      "english": "the morning only used with horas",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q5",
+    "questionText": "Translate to English: de manh\u00e3 eu vou ao supermercado",
+    "options": [
+      "this \\- far from both",
+      "to forget",
+      "In the morning I go to the supermarket",
+      "That book is black"
+    ],
+    "correctAnswer": "In the morning I go to the supermarket",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_5",
+      "portuguese": "de manh\u00e3 eu vou ao supermercado",
+      "english": "In the morning I go to the supermarket",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q6",
+    "questionText": "Translate to English: \u00e9...singular..uma hora/meio-dia/meia-noite",
+    "options": [
+      "me lay down",
+      "That is a book",
+      "Only for 1, midday and midnight",
+      "that over there"
+    ],
+    "correctAnswer": "Only for 1, midday and midnight",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_6",
+      "portuguese": "\u00e9...singular..uma hora/meio-dia/meia-noite",
+      "english": "Only for 1, midday and midnight",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q7",
+    "questionText": "Translate to English: Viseu",
+    "options": [
+      "At that time (in that era)",
+      "That mountain (over there) is high",
+      "me lay down",
+      "Viseu big city in north in the countryside near Porto"
+    ],
+    "correctAnswer": "Viseu big city in north in the countryside near Porto",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_7",
+      "portuguese": "Viseu",
+      "english": "Viseu big city in north in the countryside near Porto",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q8",
+    "questionText": "Translate to English: nesta cidade",
+    "options": [
+      "That (over there) is very beautiful",
+      "in this city",
+      "to forget",
+      "At night I read"
+    ],
+    "correctAnswer": "in this city",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_8",
+      "portuguese": "nesta cidade",
+      "english": "in this city",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q9",
+    "questionText": "Translate to English: em \\+ esse \\= nesse",
+    "options": [
+      "Viseu big city in north in the countryside near Porto",
+      "this \\- far from both",
+      "nesse,nessa,nesses,nessas \\- that",
+      "14:00"
+    ],
+    "correctAnswer": "nesse,nessa,nesses,nessas \\- that",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_9",
+      "portuguese": "em \\+ esse \\= nesse",
+      "english": "nesse,nessa,nesses,nessas \\- that",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q10",
+    "questionText": "Translate to English: aquele,aquela,aqueles,aquelas",
+    "options": [
+      "only",
+      "in this city",
+      "far from both",
+      "from habit (used to do, still are doing)"
+    ],
+    "correctAnswer": "far from both",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_10",
+      "portuguese": "aquele,aquela,aqueles,aquelas",
+      "english": "far from both",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q11",
+    "questionText": "Translate to English: em \\+ aquela \\= naquela",
+    "options": [
+      "What is that?",
+      "How old is he?",
+      "lay down (go to sleep)",
+      "that over there"
+    ],
+    "correctAnswer": "that over there",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_11",
+      "portuguese": "em \\+ aquela \\= naquela",
+      "english": "that over there",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q12",
+    "questionText": "Translate to English: isto",
+    "options": [
+      "She usually reads at night",
+      "the morning only used with horas",
+      "I wash myself",
+      "this \\- close to you"
+    ],
+    "correctAnswer": "this \\- close to you",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_12",
+      "portuguese": "isto",
+      "english": "this \\- close to you",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q13",
+    "questionText": "Translate to English: isso",
+    "options": [
+      "That is a book",
+      "this \\- close to other person",
+      "me lay down",
+      "What is that?"
+    ],
+    "correctAnswer": "this \\- close to other person",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_13",
+      "portuguese": "isso",
+      "english": "this \\- close to other person",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q14",
+    "questionText": "Translate to English: aquilo",
+    "options": [
+      "forget",
+      "We always remember",
+      "from habit (used to do, still are doing)",
+      "this \\- far from both"
+    ],
+    "correctAnswer": "this \\- far from both",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_14",
+      "portuguese": "aquilo",
+      "english": "this \\- far from both",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q15",
+    "questionText": "Translate to English: O que \u00e9 isto?",
+    "options": [
+      "I am never late (I never late myself)",
+      "What is this?",
+      "That book is black",
+      "Never me (if negative put the noun before the verb)"
+    ],
+    "correctAnswer": "What is this?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_15",
+      "portuguese": "O que \u00e9 isto?",
+      "english": "What is this?",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q16",
+    "questionText": "Translate to English: Isso \u00e9 livro",
+    "options": [
+      "That is a book",
+      "On that day",
+      "not always only sometimes",
+      "lie down"
+    ],
+    "correctAnswer": "That is a book",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_16",
+      "portuguese": "Isso \u00e9 livro",
+      "english": "That is a book",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q17",
+    "questionText": "Translate to English: Esse livro \u00e9 preto",
+    "options": [
+      "That book is black",
+      "12:30 PM (Midday and a half)",
+      "Never me (if negative put the noun before the verb)",
+      "this \\- close to other person"
+    ],
+    "correctAnswer": "That book is black",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_17",
+      "portuguese": "Esse livro \u00e9 preto",
+      "english": "That book is black",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q18",
+    "questionText": "Translate to English: Por isso",
+    "options": [
+      "therefore",
+      "every",
+      "That mountain (over there) is high",
+      "I don\u2019t forget (I no forget)"
+    ],
+    "correctAnswer": "therefore",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_18",
+      "portuguese": "Por isso",
+      "english": "therefore",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q19",
+    "questionText": "Translate to English: custumo",
+    "options": [
+      "I\u2019m used to wake up early",
+      "every weekend",
+      "from habit (used to do, still are doing)",
+      "to forget"
+    ],
+    "correctAnswer": "from habit (used to do, still are doing)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_19",
+      "portuguese": "custumo",
+      "english": "from habit (used to do, still are doing)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q20",
+    "questionText": "Translate to English: costumo acordar cedo",
+    "options": [
+      "I\u2019m used to wake up early",
+      "Never lay down early",
+      "the morning only used with horas",
+      "That book is black"
+    ],
+    "correctAnswer": "I\u2019m used to wake up early",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_20",
+      "portuguese": "costumo acordar cedo",
+      "english": "I\u2019m used to wake up early",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q21",
+    "questionText": "Translate to English: costumava acordar cedo",
+    "options": [
+      "lay down (go to sleep)",
+      "forget",
+      "sit down",
+      "I used to wake up early"
+    ],
+    "correctAnswer": "I used to wake up early",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_21",
+      "portuguese": "costumava acordar cedo",
+      "english": "I used to wake up early",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q22",
+    "questionText": "Translate to English: leventar-se",
+    "options": [
+      "Never me (if negative put the noun before the verb)",
+      "get up",
+      "At night I read",
+      "dress (put clothes on)"
+    ],
+    "correctAnswer": "get up",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_22",
+      "portuguese": "leventar-se",
+      "english": "get up",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q23",
+    "questionText": "Translate to English: deitar-se",
+    "options": [
+      "lay down (go to sleep)",
+      "forget",
+      "only",
+      "That (over there) is very beautiful"
+    ],
+    "correctAnswer": "lay down (go to sleep)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_23",
+      "portuguese": "deitar-se",
+      "english": "lay down (go to sleep)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q24",
+    "questionText": "Translate to English: deito-me",
+    "options": [
+      "I wash myself",
+      "I don\u2019t forget (I no forget)",
+      "Is that house yours?",
+      "me lay down"
+    ],
+    "correctAnswer": "me lay down",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_24",
+      "portuguese": "deito-me",
+      "english": "me lay down",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q25",
+    "questionText": "Translate to English: Nunca me",
+    "options": [
+      "Never me (if negative put the noun before the verb)",
+      "undress (take clothes off)",
+      "only",
+      "not always only sometimes"
+    ],
+    "correctAnswer": "Never me (if negative put the noun before the verb)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_25",
+      "portuguese": "Nunca me",
+      "english": "Never me (if negative put the noun before the verb)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q26",
+    "questionText": "Translate to English: Nunca me deito cedo",
+    "options": [
+      "That is a book",
+      "Never lay down early",
+      "2pm",
+      "It's ten to three (2:50)"
+    ],
+    "correctAnswer": "Never lay down early",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_26",
+      "portuguese": "Nunca me deito cedo",
+      "english": "Never lay down early",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q27",
+    "questionText": "Translate to English: corro",
+    "options": [
+      "Only for 1, midday and midnight",
+      "get up",
+      "Viseu big city in north in the countryside near Porto",
+      "Run"
+    ],
+    "correctAnswer": "Run",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_27",
+      "portuguese": "corro",
+      "english": "Run",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q28",
+    "questionText": "Translate to English: O Pedro \u00e9 de Viseu",
+    "options": [
+      "Pedro is from Viseu",
+      "Viseu big city in north in the countryside near Porto",
+      "In the morning I go to the supermarket",
+      "Why are you crying?"
+    ],
+    "correctAnswer": "Pedro is from Viseu",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_28",
+      "portuguese": "O Pedro \u00e9 de Viseu",
+      "english": "Pedro is from Viseu",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q29",
+    "questionText": "Translate to English: Idade",
+    "options": [
+      "Age",
+      "from habit (used to do, still are doing)",
+      "I am never late (I never late myself)",
+      "me lay down"
+    ],
+    "correctAnswer": "Age",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_29",
+      "portuguese": "Idade",
+      "english": "Age",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q30",
+    "questionText": "Translate to English: Que idade tem ele?",
+    "options": [
+      "That is a book",
+      "Hurry up! (yourself)",
+      "How old is he?",
+      "forget"
+    ],
+    "correctAnswer": "How old is he?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_30",
+      "portuguese": "Que idade tem ele?",
+      "english": "How old is he?",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q31",
+    "questionText": "Translate to English: O Pedro vai para a universidade a p\u00e9 ou de bicicleta",
+    "options": [
+      "What time do you get up?",
+      "Pedro is from Viseu",
+      "14:00",
+      "Pedro comes to the university by foot or by bicycle\\`"
+    ],
+    "correctAnswer": "Pedro comes to the university by foot or by bicycle\\`",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_31",
+      "portuguese": "O Pedro vai para a universidade a p\u00e9 ou de bicicleta",
+      "english": "Pedro comes to the university by foot or by bicycle\\`",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q32",
+    "questionText": "Translate to English: com os amigos dele",
+    "options": [
+      "from habit (used to do, still are doing)",
+      "with his friends",
+      "This car is mine",
+      "to remember"
+    ],
+    "correctAnswer": "with his friends",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_32",
+      "portuguese": "com os amigos dele",
+      "english": "with his friends",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q33",
+    "questionText": "Translate to English: vai correr",
+    "options": [
+      "to run",
+      "I am never late (I never late myself)",
+      "That is a book",
+      "Run"
+    ],
+    "correctAnswer": "to run",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_33",
+      "portuguese": "vai correr",
+      "english": "to run",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q34",
+    "questionText": "Translate to English: apenas",
+    "options": [
+      "nesse,nessa,nesses,nessas \\- that",
+      "dress (put clothes on)",
+      "lie down",
+      "only"
+    ],
+    "correctAnswer": "only",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_34",
+      "portuguese": "apenas",
+      "english": "only",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q35",
+    "questionText": "Translate to English: nao sempre as vezas",
+    "options": [
+      "This car is mine",
+      "not always only sometimes",
+      "What is that?",
+      "Pedro comes to the university by foot or by bicycle\\`"
+    ],
+    "correctAnswer": "not always only sometimes",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_35",
+      "portuguese": "nao sempre as vezas",
+      "english": "not always only sometimes",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q36",
+    "questionText": "Translate to English: Ao fim de semana",
+    "options": [
+      "every weekend",
+      "12:30 PM (Midday and a half)",
+      "lie down",
+      "What is that?"
+    ],
+    "correctAnswer": "every weekend",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_36",
+      "portuguese": "Ao fim de semana",
+      "english": "every weekend",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q37",
+    "questionText": "Translate to English: \u00e0",
+    "options": [
+      "2am",
+      "every",
+      "this \\- far from both",
+      "this \\- close to other person"
+    ],
+    "correctAnswer": "every",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_37",
+      "portuguese": "\u00e0",
+      "english": "every",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q38",
+    "questionText": "Translate to English: \u00e0 segunda-feira=\u00e0s segundas-feiras",
+    "options": [
+      "therefore",
+      "Every Monday \\- both \u00e0 and \u00e0s mean the same thing",
+      "That mountain (over there) is high",
+      "Pedro comes to the university by foot or by bicycle\\`"
+    ],
+    "correctAnswer": "Every Monday \\- both \u00e0 and \u00e0s mean the same thing",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_38",
+      "portuguese": "\u00e0 segunda-feira=\u00e0s segundas-feiras",
+      "english": "Every Monday \\- both \u00e0 and \u00e0s mean the same thing",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q39",
+    "questionText": "Translate to English: sentar-se",
+    "options": [
+      "sit down",
+      "every",
+      "every weekend",
+      "Never me (if negative put the noun before the verb)"
+    ],
+    "correctAnswer": "sit down",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_39",
+      "portuguese": "sentar-se",
+      "english": "sit down",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q40",
+    "questionText": "Translate to English: deitar-se",
+    "options": [
+      "12:30 PM (Midday and a half)",
+      "Never lay down early",
+      "That mountain (over there) is high",
+      "lie down"
+    ],
+    "correctAnswer": "lie down",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_40",
+      "portuguese": "deitar-se",
+      "english": "lie down",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q41",
+    "questionText": "Translate to English: despir-se",
+    "options": [
+      "undress (take clothes off)",
+      "At night I read",
+      "sit down",
+      "I don\u2019t forget (I no forget)"
+    ],
+    "correctAnswer": "undress (take clothes off)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_41",
+      "portuguese": "despir-se",
+      "english": "undress (take clothes off)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q42",
+    "questionText": "Translate to English: vestir-se",
+    "options": [
+      "I wash myself",
+      "At that time (in that era)",
+      "dress (put clothes on)",
+      "sit down"
+    ],
+    "correctAnswer": "dress (put clothes on)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_42",
+      "portuguese": "vestir-se",
+      "english": "dress (put clothes on)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q43",
+    "questionText": "Translate to English: me,te,se,nos,se",
+    "options": [
+      "pronouns I, you, he/she/, us, they",
+      "That is a book",
+      "only",
+      "At that time (in that era)"
+    ],
+    "correctAnswer": "pronouns I, you, he/she/, us, they",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_43",
+      "portuguese": "me,te,se,nos,se",
+      "english": "pronouns I, you, he/she/, us, they",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q44",
+    "questionText": "Translate to English: n\u00e3o,nunca,ningu\u00e9m",
+    "options": [
+      "12:30 PM (Midday and a half)",
+      "Negative \\- no, never, noone",
+      "I\u2019m used to wake up early",
+      "2am"
+    ],
+    "correctAnswer": "Negative \\- no, never, noone",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_44",
+      "portuguese": "n\u00e3o,nunca,ningu\u00e9m",
+      "english": "Negative \\- no, never, noone",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q45",
+    "questionText": "Translate to English: onde, porqu\u00ea, s\u00f3, que, como",
+    "options": [
+      "where,why,only,what,as (what/how)",
+      "I wash myself",
+      "It's ten to three (2:50)",
+      "Only for 1, midday and midnight"
+    ],
+    "correctAnswer": "where,why,only,what,as (what/how)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_45",
+      "portuguese": "onde, porqu\u00ea, s\u00f3, que, como",
+      "english": "where,why,only,what,as (what/how)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q46",
+    "questionText": "Translate to English: esque\u00e7o",
+    "options": [
+      "not always only sometimes",
+      "forget",
+      "It's ten to three (2:50)",
+      "Viseu big city in north in the countryside near Porto"
+    ],
+    "correctAnswer": "forget",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_46",
+      "portuguese": "esque\u00e7o",
+      "english": "forget",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q47",
+    "questionText": "Translate to English: lembrar-se",
+    "options": [
+      "from habit (used to do, still are doing)",
+      "to remember",
+      "In the morning I go to the supermarket",
+      "What time do you get up?"
+    ],
+    "correctAnswer": "to remember",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_47",
+      "portuguese": "lembrar-se",
+      "english": "to remember",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q48",
+    "questionText": "Translate to English: esquecer-se",
+    "options": [
+      "12:30 PM (Midday and a half)",
+      "to forget",
+      "in this city",
+      "this \\- close to you"
+    ],
+    "correctAnswer": "to forget",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_48",
+      "portuguese": "esquecer-se",
+      "english": "to forget",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q49",
+    "questionText": "Translate to English: eu n\u00e3o me esque\u00e7o",
+    "options": [
+      "the morning only used with horas",
+      "14:00",
+      "Never me (if negative put the noun before the verb)",
+      "I don\u2019t forget (I no forget)"
+    ],
+    "correctAnswer": "I don\u2019t forget (I no forget)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_49",
+      "portuguese": "eu n\u00e3o me esque\u00e7o",
+      "english": "I don\u2019t forget (I no forget)",
+      "notes": ""
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q50",
+    "questionText": "Translate to English: \u00c9 meio-dia e meia",
+    "options": [
+      "What is that?",
+      "every",
+      "12:30 PM (Midday and a half)",
+      "I am never late (I never late myself)"
+    ],
+    "correctAnswer": "12:30 PM (Midday and a half)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_50",
+      "portuguese": "\u00c9 meio-dia e meia",
+      "english": "12:30 PM (Midday and a half)",
+      "notes": "Time"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q51",
+    "questionText": "Translate to English: Faltam dez para as tr\u00eas",
+    "options": [
+      "It's ten to three (2:50)",
+      "from habit (used to do, still are doing)",
+      "where,why,only,what,as (what/how)",
+      "Hurry up! (yourself)"
+    ],
+    "correctAnswer": "It's ten to three (2:50)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_51",
+      "portuguese": "Faltam dez para as tr\u00eas",
+      "english": "It's ten to three (2:50)",
+      "notes": "Time"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q52",
+    "questionText": "Translate to English: De tarde eu trabalho",
+    "options": [
+      "What is this?",
+      "lay down (go to sleep)",
+      "That mountain (over there) is high",
+      "In the afternoon I work"
+    ],
+    "correctAnswer": "In the afternoon I work",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_52",
+      "portuguese": "De tarde eu trabalho",
+      "english": "In the afternoon I work",
+      "notes": "Routine"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q53",
+    "questionText": "Translate to English: De noite eu leio",
+    "options": [
+      "Why are you crying?",
+      "At this moment",
+      "At night I read",
+      "Only for 1, midday and midnight"
+    ],
+    "correctAnswer": "At night I read",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_53",
+      "portuguese": "De noite eu leio",
+      "english": "At night I read",
+      "notes": "Routine"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q54",
+    "questionText": "Translate to English: A que horas te levantas?",
+    "options": [
+      "What time do you get up?",
+      "That (over there) is very beautiful",
+      "where,why,only,what,as (what/how)",
+      "nesse,nessa,nesses,nessas \\- that"
+    ],
+    "correctAnswer": "What time do you get up?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_54",
+      "portuguese": "A que horas te levantas?",
+      "english": "What time do you get up?",
+      "notes": "Routine - Reflexive"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q55",
+    "questionText": "Translate to English: Eu lavo-me",
+    "options": [
+      "Never me (if negative put the noun before the verb)",
+      "We always remember",
+      "I wash myself",
+      "nesse,nessa,nesses,nessas \\- that"
+    ],
+    "correctAnswer": "I wash myself",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_55",
+      "portuguese": "Eu lavo-me",
+      "english": "I wash myself",
+      "notes": "Reflexive"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q56",
+    "questionText": "Translate to English: Apresse-se!",
+    "options": [
+      "that over there",
+      "undress (take clothes off)",
+      "Hurry up! (yourself)",
+      "Why are you crying?"
+    ],
+    "correctAnswer": "Hurry up! (yourself)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_56",
+      "portuguese": "Apresse-se!",
+      "english": "Hurry up! (yourself)",
+      "notes": "Reflexive"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q57",
+    "questionText": "Translate to English: Este carro \u00e9 meu",
+    "options": [
+      "This car is mine",
+      "to forget",
+      "me lay down",
+      "It's ten to three (2:50)"
+    ],
+    "correctAnswer": "This car is mine",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_57",
+      "portuguese": "Este carro \u00e9 meu",
+      "english": "This car is mine",
+      "notes": "Demonstrative"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q58",
+    "questionText": "Translate to English: Essa casa \u00e9 tua?",
+    "options": [
+      "Is that house yours?",
+      "this \\- close to other person",
+      "sit down",
+      "me lay down"
+    ],
+    "correctAnswer": "Is that house yours?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_58",
+      "portuguese": "Essa casa \u00e9 tua?",
+      "english": "Is that house yours?",
+      "notes": "Demonstrative"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q59",
+    "questionText": "Translate to English: Aquela montanha \u00e9 alta",
+    "options": [
+      "to run",
+      "What time do you get up?",
+      "That mountain (over there) is high",
+      "In the morning I go to the supermarket"
+    ],
+    "correctAnswer": "That mountain (over there) is high",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_59",
+      "portuguese": "Aquela montanha \u00e9 alta",
+      "english": "That mountain (over there) is high",
+      "notes": "Demonstrative"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q60",
+    "questionText": "Translate to English: Neste momento",
+    "options": [
+      "this \\- close to other person",
+      "At this moment",
+      "Never me (if negative put the noun before the verb)",
+      "Pedro comes to the university by foot or by bicycle\\`"
+    ],
+    "correctAnswer": "At this moment",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_60",
+      "portuguese": "Neste momento",
+      "english": "At this moment",
+      "notes": "Demonstrative em + este"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q61",
+    "questionText": "Translate to English: Nesse dia",
+    "options": [
+      "It's ten to three (2:50)",
+      "with his friends",
+      "pronouns I, you, he/she/, us, they",
+      "On that day"
+    ],
+    "correctAnswer": "On that day",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_61",
+      "portuguese": "Nesse dia",
+      "english": "On that day",
+      "notes": "Demonstrative em + esse"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q62",
+    "questionText": "Translate to English: Naquela \u00e9poca",
+    "options": [
+      "In the morning I go to the supermarket",
+      "At that time (in that era)",
+      "that over there",
+      "What is this?"
+    ],
+    "correctAnswer": "At that time (in that era)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_62",
+      "portuguese": "Naquela \u00e9poca",
+      "english": "At that time (in that era)",
+      "notes": "Demonstrative em + aquela"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q63",
+    "questionText": "Translate to English: O que \u00e9 isso?",
+    "options": [
+      "me lay down",
+      "That (over there) is very beautiful",
+      "What is that?",
+      "where,why,only,what,as (what/how)"
+    ],
+    "correctAnswer": "What is that?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_63",
+      "portuguese": "O que \u00e9 isso?",
+      "english": "What is that?",
+      "notes": "Demonstrative"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q64",
+    "questionText": "Translate to English: Aquilo \u00e9 muito bonito",
+    "options": [
+      "from habit (used to do, still are doing)",
+      "In the morning I go to the supermarket",
+      "therefore",
+      "That (over there) is very beautiful"
+    ],
+    "correctAnswer": "That (over there) is very beautiful",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_64",
+      "portuguese": "Aquilo \u00e9 muito bonito",
+      "english": "That (over there) is very beautiful",
+      "notes": "Demonstrative"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q65",
+    "questionText": "Translate to English: Eu nunca me atraso",
+    "options": [
+      "In the afternoon I work",
+      "I am never late (I never late myself)",
+      "not always only sometimes",
+      "12:30 PM (Midday and a half)"
+    ],
+    "correctAnswer": "I am never late (I never late myself)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_65",
+      "portuguese": "Eu nunca me atraso",
+      "english": "I am never late (I never late myself)",
+      "notes": "Negative + Reflexive"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q66",
+    "questionText": "Translate to English: Sempre nos lembramos",
+    "options": [
+      "In the morning I go to the supermarket",
+      "We always remember",
+      "Pedro is from Viseu",
+      "pronouns I, you, he/she/, us, they"
+    ],
+    "correctAnswer": "We always remember",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_66",
+      "portuguese": "Sempre nos lembramos",
+      "english": "We always remember",
+      "notes": "Reflexive"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q67",
+    "questionText": "Translate to English: Ele esquece-se de tudo",
+    "options": [
+      "nesse,nessa,nesses,nessas \\- that",
+      "How old is he?",
+      "He forgets everything",
+      "dress (put clothes on)"
+    ],
+    "correctAnswer": "He forgets everything",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_67",
+      "portuguese": "Ele esquece-se de tudo",
+      "english": "He forgets everything",
+      "notes": "Reflexive verb"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q68",
+    "questionText": "Translate to English: Ela costuma ler \u00e0 noite",
+    "options": [
+      "Is that house yours?",
+      "She usually reads at night",
+      "I am never late (I never late myself)",
+      "Only for 1, midday and midnight"
+    ],
+    "correctAnswer": "She usually reads at night",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_68",
+      "portuguese": "Ela costuma ler \u00e0 noite",
+      "english": "She usually reads at night",
+      "notes": "Costumar"
+    },
+    "category": "Vocabulary"
+  },
+  {
+    "id": "unit8_q69",
+    "questionText": "Translate to English: Por que choras?",
+    "options": [
+      "Why are you crying?",
+      "This car is mine",
+      "this \\- close to you",
+      "12:30 PM (Midday and a half)"
+    ],
+    "correctAnswer": "Why are you crying?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "unit8_src_69",
+      "portuguese": "Por que choras?",
+      "english": "Why are you crying?",
+      "notes": "Interrogative"
+    },
+    "category": "Vocabulary"
+  }
+]
