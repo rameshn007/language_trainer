@@ -5,11 +5,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final tts = FlutterTts();
   final voices = await tts.getVoices;
-  print('==== VOICES ====');
+  debugPrint('==== VOICES ====');
   for (var v in voices) {
     if (v['locale'].toString().contains('pt')) {
-      print('PT Voice: ${v['name']} - ${v['identifier']} - ${v['quality']}');
+      debugPrint(
+        'PT Voice: ${v['name']} - ${v['identifier']} - ${v['quality']}',
+      );
     }
   }
-  print('================');
+  debugPrint('================');
 }
