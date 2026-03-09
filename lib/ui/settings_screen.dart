@@ -77,6 +77,53 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               style: TextStyle(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
+
+            if (!_isLoading &&
+                !ref.read(ttsServiceProvider).isEnhancedPtVoiceAvailable)
+              Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.orange.shade100,
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.orange.shade300),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.info_outline,
+                          color: Colors.orange.shade900,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            "High-quality voice not found",
+                            style: TextStyle(
+                              color: Colors.orange.shade900,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      ref
+                          .read(ttsServiceProvider)
+                          .getVoiceInstallationInstructions(),
+                      style: TextStyle(
+                        color: Colors.orange.shade900,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
             if (_isLoading)
               const CircularProgressIndicator()
             else if (_ptVoices.isEmpty)

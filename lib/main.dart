@@ -23,14 +23,19 @@ void main() async {
   final storageService = StorageService();
   await storageService.init();
 
+  final ttsService = TtsService(storageService);
+
   // CarPlay initialization moved to HomeScreen
   // CarPlayService().init();
   AppLogger.log("main() started", name: 'Main');
-  CarPlayService().init(storageService: storageService);
+  CarPlayService().init(storageService: storageService, ttsService: ttsService);
 
   runApp(
     ProviderScope(
-      overrides: [storageServiceProvider.overrideWithValue(storageService)],
+      overrides: [
+        storageServiceProvider.overrideWithValue(storageService),
+        ttsServiceProvider.overrideWithValue(ttsService),
+      ],
       child: const LanguageTrainerApp(),
     ),
   );

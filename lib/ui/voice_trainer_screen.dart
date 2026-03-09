@@ -16,7 +16,14 @@ class VoiceTrainerScreen extends ConsumerStatefulWidget {
 }
 
 class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
-  final VoiceQuizService _voiceService = VoiceQuizService();
+  late final VoiceQuizService _voiceService;
+
+  @override
+  void initState() {
+    super.initState();
+    _voiceService = VoiceQuizService(ref.read(ttsServiceProvider));
+    _initTrainer();
+  }
 
   List<LanguageItem> _sessionQueue = [];
   LanguageItem? _currentItem;
@@ -36,12 +43,6 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
   // Stats for this session
   int _correctCount = 0;
   int _totalAsked = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _initTrainer();
-  }
 
   Future<void> _initTrainer() async {
     await _voiceService.init();

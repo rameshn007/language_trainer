@@ -1,13 +1,15 @@
 import 'dart:async';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import '../models/question.dart';
 import '../models/language_item.dart';
 import '../utils/logger.dart';
+import 'tts_service.dart';
 
 class VoiceQuizService {
-  final FlutterTts _tts = FlutterTts();
+  final TtsService _ttsService;
   final SpeechToText _stt = SpeechToText();
+
+  VoiceQuizService(this._ttsService);
 
   String _lastRecognizedWords = '';
   final StreamController<double> _soundLevelController =
@@ -15,33 +17,25 @@ class VoiceQuizService {
 
   Stream<double> get soundLevelStream => _soundLevelController.stream;
 
-  // Initialize TTS and STT
   Future<void> init() async {
     AppLogger.log("init() called", name: 'VoiceService');
-    try {
-      await _tts.setLanguage("en-US");
-      await _tts.setSpeechRate(0.5); // Slower for clarity
-      await _tts.setVolume(1.0);
-      await _tts.setPitch(1.0);
-      AppLogger.log("TTS initialized", name: 'VoiceService');
-    } catch (e) {
-      AppLogger.error("Error initializing TTS", name: 'VoiceService', error: e);
-    }
+    // TtsService is assumed to be already initialized by the main app,
+    // but we can ensure rate/volume if we wanted. Relying on TtsService defaults.
+    AppLogger.log("TTS ready via TtsService", name: 'VoiceService');
   }
 
   double _currentRate = 0.5;
 
   Future<void> setSpeechRate(double rate) async {
     _currentRate = rate;
-    await _tts.setSpeechRate(rate);
+    await _ttsService.setRate(rate);
   }
 
   // Play the full question flow
   Future<void> playQuestion(Question q) async {
     // 1. Speak the English part (Context)
-    await _tts.setLanguage("en-US");
-    await _tts.setSpeechRate(_currentRate);
-    await speak("Translate this:");
+    await _ttsService.setRate(_currentRate);
+    await speak("Translate this:", language: "en-US");
 
     // REMOVED: await speak(q.sourceItem.english);
     // Reason: Spoilers if question is PT->EN, and redundancy if EN->PT.
@@ -52,67 +46,42 @@ class VoiceQuizService {
     // Determine language:
     bool isPortuguese = (q.questionText == q.sourceItem.portuguese);
 
-    await _tts.setLanguage(isPortuguese ? "pt-PT" : "en-US");
-    await speak(q.questionText);
+    await speak(q.questionText, language: isPortuguese ? "pt-PT" : "en-US");
 
     // Let's skip complex parsing for now and just read options clearly.
 
-    await speak("Is it?");
+    await speak("Is it?", language: "en-US");
 
     // 3. Read Options
     for (int i = 0; i < q.options.length; i++) {
       final option = q.options[i];
 
-      await _tts.setLanguage("pt-PT");
-      await speak(option);
+      await speak(option, language: "pt-PT");
 
       if (i < q.options.length - 1) {
-        await _tts.setLanguage("pt-PT"); // "ou" is Portuguese
-        await speak("ou");
+        await speak("ou", language: "pt-PT");
       }
     }
   }
 
-  Future<void> speak(String text, {bool waitForCompletion = true}) async {
+  Future<void> speak(
+    String text, {
+    bool waitForCompletion = true,
+    String? language,
+  }) async {
     if (text.isEmpty) return;
     AppLogger.log(
       "Speaking '$text' (wait: $waitForCompletion)...",
       name: 'VoiceService',
     );
 
-    // Create completer only if we need to wait
-    Completer<void>? completer;
+    // TtsService.speak inherently awaits speech completion due to flutter_tts behavior on iOS/Android
+    // if awaitSpeakCompletion is true. We'll simply await it.
+    await _ttsService.speak(text, language: language);
+
+    // Extra buffer if wait is explicitly requested to ensure clear pauses
     if (waitForCompletion) {
-      completer = Completer();
-      _tts.setCompletionHandler(() {
-        AppLogger.log("Finished speaking '$text'", name: 'VoiceService');
-        if (completer != null && !completer.isCompleted) completer.complete();
-      });
-
-      _tts.setErrorHandler((msg) {
-        AppLogger.error("TTS Error: $msg", name: 'VoiceService');
-        if (completer != null && !completer.isCompleted) completer.complete();
-      });
-    } else {
-      // If not waiting, we assume fire-and-forget logic for handlers,
-      // or we rely on the final "wait=true" call to set the handler that matters.
-      // However, to be safe, we might clear handlers or leave them.
-      // Leaving them is fine as long as we don't rely on them.
-    }
-
-    await _tts.speak(text);
-
-    if (waitForCompletion && completer != null) {
-      // Timeout to prevent hanging
-      try {
-        await completer.future.timeout(Duration(seconds: 10));
-      } catch (e) {
-        AppLogger.error(
-          "Timeout waiting for speech completion '$text'",
-          name: 'VoiceService',
-          error: e,
-        );
-      }
+      await Future.delayed(const Duration(milliseconds: 300));
     }
   }
 
@@ -191,22 +160,20 @@ class VoiceQuizService {
     LanguageItem item, {
     bool isPortuguese = true,
   }) async {
-    await _tts.setLanguage("en-US");
-    await _tts.setSpeechRate(_currentRate);
+    await _ttsService.setRate(_currentRate);
 
     if (isPortuguese) {
       // Ask: "What does [Portuguese Word] mean?"
-      await speak("What does", waitForCompletion: false);
+      await speak("What does", waitForCompletion: false, language: "en-US");
 
-      await _tts.setLanguage("pt-PT");
-      await _tts.setSpeechRate(_currentRate);
-      await speak(item.portuguese, waitForCompletion: false);
+      await _ttsService.setRate(_currentRate);
+      await speak(item.portuguese, waitForCompletion: false, language: "pt-PT");
 
-      await _tts.setLanguage("en-US");
-      await _tts.setSpeechRate(_currentRate);
+      await _ttsService.setRate(_currentRate);
       await speak(
         "mean?",
         waitForCompletion: true,
+        language: "en-US",
       ); // Wait only for the last one
     } else {
       // Ask: "How do you say [English Word] in Portuguese?"
@@ -214,6 +181,7 @@ class VoiceQuizService {
       await speak(
         "How do you say ${item.english} in Portuguese?",
         waitForCompletion: true,
+        language: "en-US",
       );
     }
   }
@@ -279,25 +247,24 @@ class VoiceQuizService {
 
   // Setup methods to stop/dispose
   void stop() {
-    _tts.stop();
+    _ttsService.stop();
     _stt.stop();
   }
 
   // Feedback
   Future<void> speakFeedback(bool correct, {String locale = "en-US"}) async {
-    await _tts.setLanguage(locale);
-    await _tts.setSpeechRate(_currentRate); // Re-apply user rate
+    await _ttsService.setRate(_currentRate); // Re-apply user rate
     if (locale == "pt-PT") {
       if (correct) {
-        await speak("Correto!");
+        await speak("Correto!", language: locale);
       } else {
-        await speak("Incorreto.");
+        await speak("Incorreto.", language: locale);
       }
     } else {
       if (correct) {
-        await speak("Correct!");
+        await speak("Correct!", language: locale);
       } else {
-        await speak("Incorrect.");
+        await speak("Incorrect.", language: locale);
       }
     }
   }
