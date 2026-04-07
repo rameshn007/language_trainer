@@ -8,6 +8,7 @@ import 'vocabulary/vocabulary_list_screen.dart';
 import 'exercise/exercise_list_screen.dart';
 import 'voice_trainer_screen.dart';
 import 'phrase_trainer_screen.dart';
+import 'quiz/verb_conjugation_screen.dart';
 import '../main.dart';
 import 'widgets/word_star_field.dart';
 import 'settings_screen.dart';
@@ -402,7 +403,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         const SizedBox(height: 12),
                         Row(
                           children: [
-                            const Spacer(flex: 1),
                             Expanded(
                               flex: 2,
                               child: _buildGridButton(
@@ -436,7 +436,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 },
                               ),
                             ),
-                            const Spacer(flex: 1),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              flex: 2,
+                              child: _buildGridButton(
+                                context: context,
+                                label: 'Verb Trainer',
+                                icon: Icons.school_rounded,
+                                bgColor: Colors.purple,
+                                fgColor: Colors.white,
+                                onPressed: (offset) {
+                                  _pushScreen(
+                                    const VerbConjugationScreen(),
+                                    offset,
+                                  );
+                                },
+                              ),
+                            ),
                           ],
                         ),
                       ],
