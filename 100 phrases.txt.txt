@@ -1,0 +1,101 @@
+
+abrir: Eu abro a janela todas as manhãs. - I open the window every morning.
+acabar: O filme acaba tarde hoje. - The movie finishes late today.
+acelerar: Tu aceleras demasiado na autoestrada. - You accelerate too much on the highway.
+acender: Ela acende a luz da sala. - She turns on the living room light.
+achar: Nós achamos esta cidade muito bonita. - We find this city very beautiful.
+acordar: As minhas filhas acordam cedo para ir para a escola. - My daughters wake up early to go to school.
+adorar: Eu adoro comer legumes frescos. - I love eating fresh vegetables.
+agendar: Você agenda a reunião para amanhã? - Will you schedule the meeting for tomorrow?
+agradecer: Nós agradecemos a vossa ajuda. - We thank you for your help.
+ajudar: Eles ajudam a arrumar a casa de banho. - They help tidy up the bathroom.
+almoçar: Nós almoçamos uma salada deliciosa ao meio-dia. - We eat a delicious salad for lunch at noon.
+amar: Eu amo ler um bom livro à noite. - I love reading a good book at night.
+andar: Tu andas muito rápido! - You walk very fast!
+apagar: Ele apaga o quadro no fim da aula. - He erases the board at the end of the class.
+apanhar: Nós apanhamos o autocarro para o centro. - We catch the bus to the center.
+aprender: Elas aprendem inglês na escola. - They learn English at school.
+apresentar: O diretor apresenta o novo projeto. - The director presents the new project.
+arrumar: Eu arrumo o meu quarto aos sábados. - I tidy up my room on Saturdays.
+aspirar: Tu aspiras o tapete da sala? - Are you vacuuming the living room rug?
+assar: Nós assamos batatas no forno para o jantar. - We roast potatoes in the oven for dinner.
+assinar: Ele assina o contrato de trabalho. - He signs the employment contract.
+assistir: Vocês assistem ao jogo de futebol na televisão? - Are you watching the football game on television?
+bater: Alguém bate à porta. - Someone is knocking at the door.
+beber: Eu bebo muita água durante o dia. - I drink a lot of water during the day.
+beijar: A mãe beija os filhos antes de dormir. - The mother kisses her children before sleeping.
+brincar: Os cães brincam no jardim. - The dogs play in the garden.
+buscar: Eu vou buscar as minhas duas filhas à escola. - I am going to fetch my two daughters from school.
+calçar: Ele calça os sapatos novos. - He puts on the new shoes.
+caminhar: Nós caminhamos no parque ao fim de semana. - We walk in the park on the weekend.
+cancelar: O cliente cancela a encomenda. - The client cancels the order.
+cantar: Tu cantas muito bem! - You sing very well!
+casar: Eles casam no próximo mês. - They are getting married next month.
+chamar: Eu chamo um táxi para ir para o aeroporto. - I call a taxi to go to the airport.
+chegar: O comboio chega às oito horas. - The train arrives at eight o'clock.
+chorar: O bebé chora porque tem fome. - The baby cries because he is hungry.
+cobrar: O banco cobra taxas muito altas. - The bank charges very high fees.
+colocar: Ela coloca os livros na prateleira. - She puts the books on the shelf.
+combinar: Nós combinamos jantar fora no sábado. - We arranged to eat out on Saturday.
+começar: O concerto começa em breve. - The concert starts soon.
+comer: Eu como sopa de legumes todos os dias. - I eat vegetable soup every day.
+comprar: Tu compras fruta fresca no mercado? - Do you buy fresh fruit at the market?
+compreender: Eu não compreendo esta pergunta. - I do not understand this question.
+concordar: Nós concordamos com a tua opinião. - We agree with your opinion.
+conduzir: Ele conduz com muito cuidado. - He drives very carefully.
+conhecer: Tu conheces aquele restaurante vegetariano? - Do you know that vegetarian restaurant?
+conseguir: Vocês conseguem terminar o relatório hoje? - Can you manage to finish the report today?
+consertar: O mecânico conserta o carro antigo. - The mechanic fixes the old car.
+contar: A professora conta uma história aos alunos. - The teacher tells a story to the students.
+continuar: Nós continuamos a trabalhar no projeto. - We continue to work on the project.
+conversar: Elas conversam sobre as férias em Portugal. - They chat about their holidays in Portugal.
+convidar: Eu convido os meus amigos para jantar. - I invite my friends for dinner.
+cortar: Tu cortas o pão para fazer torradas. - You cut the bread to make toast.
+cozinhar: Nós cozinhamos pratos sem carne com muita frequência. - We cook meatless dishes very often.
+criar: O artista cria uma nova escultura. - The artist creates a new sculpture.
+dançar: Vocês dançam muito bem juntos. - You dance very well together.
+debater: Os políticos debatem o novo orçamento. - The politicians debate the new budget.
+deitar: Eu deito o lixo no contentor. - I throw the trash in the dumpster.
+deixar: Ele deixa as chaves em cima da mesa. - He leaves the keys on the table.
+descansar: Nós descansamos no sofá depois do trabalho. - We rest on the couch after work.
+descer: Tu desces as escadas com cuidado. - You go down the stairs carefully.
+desculpar: Eu desculpo o teu erro desta vez. - I excuse your mistake this time.
+desenhar: A adolescente desenha paisagens bonitas. - The teenager draws beautiful landscapes.
+desejar: Eu desejo-te um feliz aniversário! - I wish you a happy birthday!
+despertar: O telemóvel desperta às sete da manhã. - The mobile phone wakes (me) up at seven in the morning.
+dever: Nós devemos estudar mais para o exame. - We must study more for the exam.
+digitalizar: A secretária digitaliza os documentos importantes. - The secretary scans the important documents.
+digitar: Eu digito o correio eletrónico rapidamente. - I type the email quickly.
+ditar: O chefe dita a carta à assistente. - The boss dictates the letter to the assistant.
+dobrar: Ela dobra a roupa lavada. - She folds the washed laundry.
+dormir: As minhas filhas adolescentes dormem até tarde aos domingos. - My teenage daughters sleep late on Sundays.
+embarcar: Os passageiros embarcam no avião. - The passengers board the airplane.
+ensinar: O professor ensina matemática básica. - The teacher teaches basic math.
+entrar: Nós entramos no museu à tarde. - We enter the museum in the afternoon.
+entregar: O carteiro entrega a correspondência de manhã. - The postman delivers the mail in the morning.
+enviar: Eu envio uma mensagem à minha família. - I send a message to my family.
+escovar: Tu escovas os dentes depois de comer. - You brush your teeth after eating.
+escrever: Ele escreve no seu diário todas as noites. - He writes in his diary every night.
+escutar: Nós escutamos as notícias na rádio. - We listen to the news on the radio.
+esperar: Eu espero pelo autocarro na paragem. - I wait for the bus at the bus stop.
+estacionar: Você estaciona o carro na garagem? - Do you park the car in the garage?
+estender: Ela estende a roupa no estendal. - She hangs the clothes on the drying rack.
+estudar: Eles estudam biologia na universidade. - They study biology at the university.
+explicar: Eu explico a matéria de forma simples. - I explain the subject in a simple way.
+falar: Tu falas português fluentemente? - Do you speak Portuguese fluently?
+faturar: A empresa fatura milhares de euros por mês. - The company invoices thousands of euros per month.
+fazer: Nós fazemos um bolo de chocolate delicioso. - We make a delicious chocolate cake.
+fechar: O supermercado fecha às vinte e uma horas. - The supermarket closes at 9 PM.
+ferver: A água ferve na panela. - The water boils in the pot.
+ficar: Eu fico em casa hoje porque está a chover. - I am staying home today because it is raining.
+funcionar: Este computador já não funciona bem. - This computer doesn't work well anymore.
+ganhar: A equipa ganha o jogo decisivo. - The team wins the decisive game.
+gastar: Tu gastas muito dinheiro em roupa! - You spend a lot of money on clothes!
+gostar: Nós gostamos de passear à beira-mar. - We like to stroll by the seaside.
+ir: Eu vou ao supermercado comprar legumes. - I go to the supermarket to buy vegetables.
+jantar: A nossa família de quatro pessoas janta sempre junta. - Our family of four always has dinner together.
+ler: Tu lês o jornal todas as manhãs. - You read the newspaper every morning.
+ouvir: Ela ouve música clássica para relaxar. - She hears/listens to classical music to relax.
+sair: Nós saímos de casa às oito em ponto. - We leave the house at eight on the dot.
+ver: Eles veem um filme no cinema ao fim de semana. - They see a movie at the cinema on the weekend.
+vestir: Eu visto um casaco quente porque está frio. - I put on a warm coat because it is cold.

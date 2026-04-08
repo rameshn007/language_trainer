@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,7 +48,7 @@ class VerbService {
 
       return verbs;
     } catch (e) {
-      print('Error loading verbs: $e');
+      debugPrint('Error loading verbs: $e');
       return [];
     }
   }

@@ -9,6 +9,7 @@ import 'exercise/exercise_list_screen.dart';
 import 'voice_trainer_screen.dart';
 import 'phrase_trainer_screen.dart';
 import 'quiz/verb_conjugation_screen.dart';
+import 'quiz/verb_phrase_trainer_screen.dart';
 import '../main.dart';
 import 'widgets/word_star_field.dart';
 import 'settings_screen.dart';
@@ -448,6 +449,27 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 onPressed: (offset) {
                                   _pushScreen(
                                     const VerbConjugationScreen(),
+                                    offset,
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: _buildGridButton(
+                                context: context,
+                                label: '100 Phrases',
+                                icon: Icons.style_rounded,
+                                bgColor: Colors.teal,
+                                fgColor: Colors.white,
+                                onPressed: (offset) {
+                                  _pushScreen(
+                                    const VerbPhraseTrainerScreen(),
                                     offset,
                                   );
                                 },

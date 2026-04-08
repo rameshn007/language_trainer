@@ -1,0 +1,502 @@
+[
+  {
+    "verb": "abrir",
+    "portuguese": "Eu abro a janela todas as manhãs.",
+    "english": "I open the window every morning."
+  },
+  {
+    "verb": "acabar",
+    "portuguese": "O filme acaba tarde hoje.",
+    "english": "The movie finishes late today."
+  },
+  {
+    "verb": "acelerar",
+    "portuguese": "Tu aceleras demasiado na autoestrada.",
+    "english": "You accelerate too much on the highway."
+  },
+  {
+    "verb": "acender",
+    "portuguese": "Ela acende a luz da sala.",
+    "english": "She turns on the living room light."
+  },
+  {
+    "verb": "achar",
+    "portuguese": "Nós achamos esta cidade muito bonita.",
+    "english": "We find this city very beautiful."
+  },
+  {
+    "verb": "acordar",
+    "portuguese": "As minhas filhas acordam cedo para ir para a escola.",
+    "english": "My daughters wake up early to go to school."
+  },
+  {
+    "verb": "adorar",
+    "portuguese": "Eu adoro comer legumes frescos.",
+    "english": "I love eating fresh vegetables."
+  },
+  {
+    "verb": "agendar",
+    "portuguese": "Você agenda a reunião para amanhã?",
+    "english": "Will you schedule the meeting for tomorrow?"
+  },
+  {
+    "verb": "agradecer",
+    "portuguese": "Nós agradecemos a vossa ajuda.",
+    "english": "We thank you for your help."
+  },
+  {
+    "verb": "ajudar",
+    "portuguese": "Eles ajudam a arrumar a casa de banho.",
+    "english": "They help tidy up the bathroom."
+  },
+  {
+    "verb": "almoçar",
+    "portuguese": "Nós almoçamos uma salada deliciosa ao meio",
+    "english": "dia. - We eat a delicious salad for lunch at noon."
+  },
+  {
+    "verb": "amar",
+    "portuguese": "Eu amo ler um bom livro à noite.",
+    "english": "I love reading a good book at night."
+  },
+  {
+    "verb": "andar",
+    "portuguese": "Tu andas muito rápido!",
+    "english": "You walk very fast!"
+  },
+  {
+    "verb": "apagar",
+    "portuguese": "Ele apaga o quadro no fim da aula.",
+    "english": "He erases the board at the end of the class."
+  },
+  {
+    "verb": "apanhar",
+    "portuguese": "Nós apanhamos o autocarro para o centro.",
+    "english": "We catch the bus to the center."
+  },
+  {
+    "verb": "aprender",
+    "portuguese": "Elas aprendem inglês na escola.",
+    "english": "They learn English at school."
+  },
+  {
+    "verb": "apresentar",
+    "portuguese": "O diretor apresenta o novo projeto.",
+    "english": "The director presents the new project."
+  },
+  {
+    "verb": "arrumar",
+    "portuguese": "Eu arrumo o meu quarto aos sábados.",
+    "english": "I tidy up my room on Saturdays."
+  },
+  {
+    "verb": "aspirar",
+    "portuguese": "Tu aspiras o tapete da sala?",
+    "english": "Are you vacuuming the living room rug?"
+  },
+  {
+    "verb": "assar",
+    "portuguese": "Nós assamos batatas no forno para o jantar.",
+    "english": "We roast potatoes in the oven for dinner."
+  },
+  {
+    "verb": "assinar",
+    "portuguese": "Ele assina o contrato de trabalho.",
+    "english": "He signs the employment contract."
+  },
+  {
+    "verb": "assistir",
+    "portuguese": "Vocês assistem ao jogo de futebol na televisão?",
+    "english": "Are you watching the football game on television?"
+  },
+  {
+    "verb": "bater",
+    "portuguese": "Alguém bate à porta.",
+    "english": "Someone is knocking at the door."
+  },
+  {
+    "verb": "beber",
+    "portuguese": "Eu bebo muita água durante o dia.",
+    "english": "I drink a lot of water during the day."
+  },
+  {
+    "verb": "beijar",
+    "portuguese": "A mãe beija os filhos antes de dormir.",
+    "english": "The mother kisses her children before sleeping."
+  },
+  {
+    "verb": "brincar",
+    "portuguese": "Os cães brincam no jardim.",
+    "english": "The dogs play in the garden."
+  },
+  {
+    "verb": "buscar",
+    "portuguese": "Eu vou buscar as minhas duas filhas à escola.",
+    "english": "I am going to fetch my two daughters from school."
+  },
+  {
+    "verb": "calçar",
+    "portuguese": "Ele calça os sapatos novos.",
+    "english": "He puts on the new shoes."
+  },
+  {
+    "verb": "caminhar",
+    "portuguese": "Nós caminhamos no parque ao fim de semana.",
+    "english": "We walk in the park on the weekend."
+  },
+  {
+    "verb": "cancelar",
+    "portuguese": "O cliente cancela a encomenda.",
+    "english": "The client cancels the order."
+  },
+  {
+    "verb": "cantar",
+    "portuguese": "Tu cantas muito bem!",
+    "english": "You sing very well!"
+  },
+  {
+    "verb": "casar",
+    "portuguese": "Eles casam no próximo mês.",
+    "english": "They are getting married next month."
+  },
+  {
+    "verb": "chamar",
+    "portuguese": "Eu chamo um táxi para ir para o aeroporto.",
+    "english": "I call a taxi to go to the airport."
+  },
+  {
+    "verb": "chegar",
+    "portuguese": "O comboio chega às oito horas.",
+    "english": "The train arrives at eight o'clock."
+  },
+  {
+    "verb": "chorar",
+    "portuguese": "O bebé chora porque tem fome.",
+    "english": "The baby cries because he is hungry."
+  },
+  {
+    "verb": "cobrar",
+    "portuguese": "O banco cobra taxas muito altas.",
+    "english": "The bank charges very high fees."
+  },
+  {
+    "verb": "colocar",
+    "portuguese": "Ela coloca os livros na prateleira.",
+    "english": "She puts the books on the shelf."
+  },
+  {
+    "verb": "combinar",
+    "portuguese": "Nós combinamos jantar fora no sábado.",
+    "english": "We arranged to eat out on Saturday."
+  },
+  {
+    "verb": "começar",
+    "portuguese": "O concerto começa em breve.",
+    "english": "The concert starts soon."
+  },
+  {
+    "verb": "comer",
+    "portuguese": "Eu como sopa de legumes todos os dias.",
+    "english": "I eat vegetable soup every day."
+  },
+  {
+    "verb": "comprar",
+    "portuguese": "Tu compras fruta fresca no mercado?",
+    "english": "Do you buy fresh fruit at the market?"
+  },
+  {
+    "verb": "compreender",
+    "portuguese": "Eu não compreendo esta pergunta.",
+    "english": "I do not understand this question."
+  },
+  {
+    "verb": "concordar",
+    "portuguese": "Nós concordamos com a tua opinião.",
+    "english": "We agree with your opinion."
+  },
+  {
+    "verb": "conduzir",
+    "portuguese": "Ele conduz com muito cuidado.",
+    "english": "He drives very carefully."
+  },
+  {
+    "verb": "conhecer",
+    "portuguese": "Tu conheces aquele restaurante vegetariano?",
+    "english": "Do you know that vegetarian restaurant?"
+  },
+  {
+    "verb": "conseguir",
+    "portuguese": "Vocês conseguem terminar o relatório hoje?",
+    "english": "Can you manage to finish the report today?"
+  },
+  {
+    "verb": "consertar",
+    "portuguese": "O mecânico conserta o carro antigo.",
+    "english": "The mechanic fixes the old car."
+  },
+  {
+    "verb": "contar",
+    "portuguese": "A professora conta uma história aos alunos.",
+    "english": "The teacher tells a story to the students."
+  },
+  {
+    "verb": "continuar",
+    "portuguese": "Nós continuamos a trabalhar no projeto.",
+    "english": "We continue to work on the project."
+  },
+  {
+    "verb": "conversar",
+    "portuguese": "Elas conversam sobre as férias em Portugal.",
+    "english": "They chat about their holidays in Portugal."
+  },
+  {
+    "verb": "convidar",
+    "portuguese": "Eu convido os meus amigos para jantar.",
+    "english": "I invite my friends for dinner."
+  },
+  {
+    "verb": "cortar",
+    "portuguese": "Tu cortas o pão para fazer torradas.",
+    "english": "You cut the bread to make toast."
+  },
+  {
+    "verb": "cozinhar",
+    "portuguese": "Nós cozinhamos pratos sem carne com muita frequência.",
+    "english": "We cook meatless dishes very often."
+  },
+  {
+    "verb": "criar",
+    "portuguese": "O artista cria uma nova escultura.",
+    "english": "The artist creates a new sculpture."
+  },
+  {
+    "verb": "dançar",
+    "portuguese": "Vocês dançam muito bem juntos.",
+    "english": "You dance very well together."
+  },
+  {
+    "verb": "debater",
+    "portuguese": "Os políticos debatem o novo orçamento.",
+    "english": "The politicians debate the new budget."
+  },
+  {
+    "verb": "deitar",
+    "portuguese": "Eu deito o lixo no contentor.",
+    "english": "I throw the trash in the dumpster."
+  },
+  {
+    "verb": "deixar",
+    "portuguese": "Ele deixa as chaves em cima da mesa.",
+    "english": "He leaves the keys on the table."
+  },
+  {
+    "verb": "descansar",
+    "portuguese": "Nós descansamos no sofá depois do trabalho.",
+    "english": "We rest on the couch after work."
+  },
+  {
+    "verb": "descer",
+    "portuguese": "Tu desces as escadas com cuidado.",
+    "english": "You go down the stairs carefully."
+  },
+  {
+    "verb": "desculpar",
+    "portuguese": "Eu desculpo o teu erro desta vez.",
+    "english": "I excuse your mistake this time."
+  },
+  {
+    "verb": "desenhar",
+    "portuguese": "A adolescente desenha paisagens bonitas.",
+    "english": "The teenager draws beautiful landscapes."
+  },
+  {
+    "verb": "desejar",
+    "portuguese": "Eu desejo",
+    "english": "te um feliz aniversário! - I wish you a happy birthday!"
+  },
+  {
+    "verb": "despertar",
+    "portuguese": "O telemóvel desperta às sete da manhã.",
+    "english": "The mobile phone wakes (me) up at seven in the morning."
+  },
+  {
+    "verb": "dever",
+    "portuguese": "Nós devemos estudar mais para o exame.",
+    "english": "We must study more for the exam."
+  },
+  {
+    "verb": "digitalizar",
+    "portuguese": "A secretária digitaliza os documentos importantes.",
+    "english": "The secretary scans the important documents."
+  },
+  {
+    "verb": "digitar",
+    "portuguese": "Eu digito o correio eletrónico rapidamente.",
+    "english": "I type the email quickly."
+  },
+  {
+    "verb": "ditar",
+    "portuguese": "O chefe dita a carta à assistente.",
+    "english": "The boss dictates the letter to the assistant."
+  },
+  {
+    "verb": "dobrar",
+    "portuguese": "Ela dobra a roupa lavada.",
+    "english": "She folds the washed laundry."
+  },
+  {
+    "verb": "dormir",
+    "portuguese": "As minhas filhas adolescentes dormem até tarde aos domingos.",
+    "english": "My teenage daughters sleep late on Sundays."
+  },
+  {
+    "verb": "embarcar",
+    "portuguese": "Os passageiros embarcam no avião.",
+    "english": "The passengers board the airplane."
+  },
+  {
+    "verb": "ensinar",
+    "portuguese": "O professor ensina matemática básica.",
+    "english": "The teacher teaches basic math."
+  },
+  {
+    "verb": "entrar",
+    "portuguese": "Nós entramos no museu à tarde.",
+    "english": "We enter the museum in the afternoon."
+  },
+  {
+    "verb": "entregar",
+    "portuguese": "O carteiro entrega a correspondência de manhã.",
+    "english": "The postman delivers the mail in the morning."
+  },
+  {
+    "verb": "enviar",
+    "portuguese": "Eu envio uma mensagem à minha família.",
+    "english": "I send a message to my family."
+  },
+  {
+    "verb": "escovar",
+    "portuguese": "Tu escovas os dentes depois de comer.",
+    "english": "You brush your teeth after eating."
+  },
+  {
+    "verb": "escrever",
+    "portuguese": "Ele escreve no seu diário todas as noites.",
+    "english": "He writes in his diary every night."
+  },
+  {
+    "verb": "escutar",
+    "portuguese": "Nós escutamos as notícias na rádio.",
+    "english": "We listen to the news on the radio."
+  },
+  {
+    "verb": "esperar",
+    "portuguese": "Eu espero pelo autocarro na paragem.",
+    "english": "I wait for the bus at the bus stop."
+  },
+  {
+    "verb": "estacionar",
+    "portuguese": "Você estaciona o carro na garagem?",
+    "english": "Do you park the car in the garage?"
+  },
+  {
+    "verb": "estender",
+    "portuguese": "Ela estende a roupa no estendal.",
+    "english": "She hangs the clothes on the drying rack."
+  },
+  {
+    "verb": "estudar",
+    "portuguese": "Eles estudam biologia na universidade.",
+    "english": "They study biology at the university."
+  },
+  {
+    "verb": "explicar",
+    "portuguese": "Eu explico a matéria de forma simples.",
+    "english": "I explain the subject in a simple way."
+  },
+  {
+    "verb": "falar",
+    "portuguese": "Tu falas português fluentemente?",
+    "english": "Do you speak Portuguese fluently?"
+  },
+  {
+    "verb": "faturar",
+    "portuguese": "A empresa fatura milhares de euros por mês.",
+    "english": "The company invoices thousands of euros per month."
+  },
+  {
+    "verb": "fazer",
+    "portuguese": "Nós fazemos um bolo de chocolate delicioso.",
+    "english": "We make a delicious chocolate cake."
+  },
+  {
+    "verb": "fechar",
+    "portuguese": "O supermercado fecha às vinte e uma horas.",
+    "english": "The supermarket closes at 9 PM."
+  },
+  {
+    "verb": "ferver",
+    "portuguese": "A água ferve na panela.",
+    "english": "The water boils in the pot."
+  },
+  {
+    "verb": "ficar",
+    "portuguese": "Eu fico em casa hoje porque está a chover.",
+    "english": "I am staying home today because it is raining."
+  },
+  {
+    "verb": "funcionar",
+    "portuguese": "Este computador já não funciona bem.",
+    "english": "This computer doesn't work well anymore."
+  },
+  {
+    "verb": "ganhar",
+    "portuguese": "A equipa ganha o jogo decisivo.",
+    "english": "The team wins the decisive game."
+  },
+  {
+    "verb": "gastar",
+    "portuguese": "Tu gastas muito dinheiro em roupa!",
+    "english": "You spend a lot of money on clothes!"
+  },
+  {
+    "verb": "gostar",
+    "portuguese": "Nós gostamos de passear à beira",
+    "english": "mar. - We like to stroll by the seaside."
+  },
+  {
+    "verb": "ir",
+    "portuguese": "Eu vou ao supermercado comprar legumes.",
+    "english": "I go to the supermarket to buy vegetables."
+  },
+  {
+    "verb": "jantar",
+    "portuguese": "A nossa família de quatro pessoas janta sempre junta.",
+    "english": "Our family of four always has dinner together."
+  },
+  {
+    "verb": "ler",
+    "portuguese": "Tu lês o jornal todas as manhãs.",
+    "english": "You read the newspaper every morning."
+  },
+  {
+    "verb": "ouvir",
+    "portuguese": "Ela ouve música clássica para relaxar.",
+    "english": "She hears/listens to classical music to relax."
+  },
+  {
+    "verb": "sair",
+    "portuguese": "Nós saímos de casa às oito em ponto.",
+    "english": "We leave the house at eight on the dot."
+  },
+  {
+    "verb": "ver",
+    "portuguese": "Eles veem um filme no cinema ao fim de semana.",
+    "english": "They see a movie at the cinema on the weekend."
+  },
+  {
+    "verb": "vestir",
+    "portuguese": "Eu visto um casaco quente porque está frio.",
+    "english": "I put on a warm coat because it is cold."
+  }
+]
