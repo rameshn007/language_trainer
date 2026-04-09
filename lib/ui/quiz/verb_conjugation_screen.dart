@@ -205,20 +205,26 @@ class _MatchButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final selectedColor = isDark ? theme.colorScheme.primary : theme.primaryColor;
+    final onSelectedColor = isDark ? theme.colorScheme.onPrimary : Colors.white;
+
     final color = isMatched
         ? Colors.green.withValues(alpha: 0.8)
-        : (isSelected ? theme.primaryColor : theme.cardColor);
+        : (isSelected ? selectedColor : theme.cardColor);
 
-    final textColor = isMatched || isSelected
+    final textColor = isMatched
         ? Colors.white
-        : theme.textTheme.bodyLarge?.color ?? Colors.black;
+        : (isSelected 
+            ? onSelectedColor 
+            : (theme.textTheme.bodyLarge?.color ?? Colors.black));
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Material(
         color: color,
         borderRadius: BorderRadius.circular(12),
-        elevation: isMatched ? 1 : 4,
+        elevation: isMatched ? 1 : (isDark ? 0 : 4),
         child: InkWell(
           onTap: isMatched ? null : onTap,
           borderRadius: BorderRadius.circular(12),
@@ -228,7 +234,9 @@ class _MatchButton extends StatelessWidget {
               border: Border.all(
                 color: isMatched
                     ? Colors.green
-                    : (isSelected ? theme.primaryColor : Colors.grey.withValues(alpha: 0.3)),
+                    : (isSelected 
+                        ? selectedColor 
+                        : (isDark ? theme.colorScheme.outlineVariant : Colors.grey.withValues(alpha: 0.3))),
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(12),

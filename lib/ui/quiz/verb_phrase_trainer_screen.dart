@@ -9,6 +9,7 @@ import 'package:animate_do/animate_do.dart';
 import '../../main.dart';
 import '../../models/verb_phrase.dart';
 import '../../services/tts_service.dart';
+import 'single_verb_conjugation_screen.dart';
 
 class VerbPhraseTrainerScreen extends ConsumerStatefulWidget {
   const VerbPhraseTrainerScreen({super.key});
@@ -240,6 +241,8 @@ class _VerbPhraseTrainerScreenState
   }
 
   Widget _buildFrontCard(VerbPhrase phrase, {required Key key}) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       key: key,
       height: 420,
@@ -248,14 +251,17 @@ class _VerbPhraseTrainerScreenState
         color: Theme.of(context).cardColor,
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
+          if (!isDark)
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              blurRadius: 20,
+              offset: const Offset(0, 10),
+            ),
         ],
         border: Border.all(
-          color: Theme.of(context).primaryColor.withValues(alpha: 0.2),
+          color: isDark
+              ? Theme.of(context).colorScheme.outlineVariant
+              : Theme.of(context).primaryColor.withValues(alpha: 0.2),
           width: 2,
         ),
       ),
@@ -263,18 +269,46 @@ class _VerbPhraseTrainerScreenState
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
               borderRadius: BorderRadius.circular(20),
-            ),
-            child: Text(
-              phrase.verb.toUpperCase(),
-              style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.5,
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => SingleVerbConjugationScreen(
+                      verbInfinitive: phrase.verb,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: isDark 
+                      ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.2) 
+                      : Theme.of(context).primaryColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      phrase.verb.toUpperCase(),
+                      style: TextStyle(
+                        color: isDark ? Theme.of(context).colorScheme.primary : Theme.of(context).primaryColor,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.5,
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Icon(
+                      Icons.touch_app,
+                      size: 14,
+                      color: isDark ? Theme.of(context).colorScheme.primary : Theme.of(context).primaryColor,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -311,22 +345,26 @@ class _VerbPhraseTrainerScreenState
       height: 420,
       width: double.infinity,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Theme.of(context).primaryColor,
-            Theme.of(context).colorScheme.secondary,
+            Color(0xFF6A11CB), // Vibrant Purple
+            Color(0xFF2575FC), // Vibrant Blue
           ],
         ),
         borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+            color: const Color(0xFF6A11CB).withValues(alpha: 0.4),
+            blurRadius: 24,
+            offset: const Offset(0, 12),
           ),
         ],
+        border: Border.all(
+          color: Colors.white.withValues(alpha: 0.2), // Subtle inner shine
+          width: 1.5,
+        ),
       ),
       padding: const EdgeInsets.all(24),
       child: Column(
