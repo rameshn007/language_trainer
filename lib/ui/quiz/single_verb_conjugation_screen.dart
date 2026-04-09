@@ -140,38 +140,41 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
               const SizedBox(height: 20),
 
               // Footer (Translation & Next Button when all matched)
-              if (state.isAllMatched)
-                FadeInUp(
-                  child: Column(
-                    children: [
-                      Text(
-                        verb.translation,
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
+              SizedBox(
+                height: 120, // fixed height to avoid layout jump
+                child: state.isAllMatched
+                    ? FadeInUp(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              verb.translation,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(height: 16),
+                            ElevatedButton.icon(
+                              onPressed: () => Navigator.of(context).pop(),
+                              icon: const Icon(Icons.check_circle),
+                              label: const Text('Return to Flashcards'),
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(double.infinity, 50),
+                                backgroundColor: Colors.green,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 16),
-                      ElevatedButton.icon(
-                        onPressed: () => Navigator.of(context).pop(),
-                        icon: const Icon(Icons.check_circle),
-                        label: const Text('Return to Flashcards'),
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          backgroundColor: Colors.green,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              else
-                const SizedBox(height: 90), // Placeholder to avoid jump
+                      )
+                    : const SizedBox(),
+              ),
             ],
           ),
         ),

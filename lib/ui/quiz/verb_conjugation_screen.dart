@@ -108,37 +108,40 @@ class _VerbConjugationScreenState extends ConsumerState<VerbConjugationScreen> {
 
                 const SizedBox(height: 20),
 
-                // Footer (Translation & Next Button when all matched)
-                if (state.isAllMatched)
-                  FadeInUp(
-                    child: Column(
-                      children: [
-                        Text(
-                          verb.translation,
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 16),
-                        ElevatedButton.icon(
-                          onPressed: () => viewModel.nextVerb(),
-                          icon: const Icon(Icons.arrow_forward),
-                          label: const Text('Next Verb'),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(double.infinity, 50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+              // Footer (Translation & Next Button when all matched)
+              SizedBox(
+                height: 120, // fixed height to avoid layout jump
+                child: state.isAllMatched
+                    ? FadeInUp(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              verb.translation,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                          ),
+                            const SizedBox(height: 16),
+                            ElevatedButton.icon(
+                              onPressed: () => viewModel.nextVerb(),
+                              icon: const Icon(Icons.arrow_forward),
+                              label: const Text('Next Verb'),
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(double.infinity, 50),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )
-                else
-                  const SizedBox(height: 90), // Placeholder to avoid jump
+                      )
+                    : const SizedBox(),
+              ),
               ],
             ),
           ),
