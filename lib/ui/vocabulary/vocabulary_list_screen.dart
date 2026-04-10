@@ -5,6 +5,7 @@ import '../../models/language_item.dart';
 import '../../main.dart'; // for storageServiceProvider
 import '../../services/tts_service.dart';
 import 'word_graph_screen.dart';
+import 'vocabulary_item_dialog.dart';
 
 enum SortMode { alphabetical, mastery, random }
 
@@ -589,85 +590,3 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   }
 }
 
-class VocabularyItemDialog extends StatefulWidget {
-  final LanguageItem? item;
-  final Function(LanguageItem newItem, String? oldId) onSave;
-
-  const VocabularyItemDialog({super.key, this.item, required this.onSave});
-
-  @override
-  State<VocabularyItemDialog> createState() => _VocabularyItemDialogState();
-}
-
-class _VocabularyItemDialogState extends State<VocabularyItemDialog> {
-  late TextEditingController _portugueseController;
-  late TextEditingController _englishController;
-
-  @override
-  void initState() {
-    super.initState();
-    _portugueseController = TextEditingController(
-      text: widget.item?.portuguese ?? '',
-    );
-    _englishController = TextEditingController(
-      text: widget.item?.english ?? '',
-    );
-  }
-
-  @override
-  void dispose() {
-    _portugueseController.dispose();
-    _englishController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(widget.item == null ? 'Add Word' : 'Edit Word'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            controller: _portugueseController,
-            decoration: const InputDecoration(labelText: 'Portuguese'),
-            autofocus: true,
-          ),
-          const SizedBox(height: 16),
-          TextField(
-            controller: _englishController,
-            decoration: const InputDecoration(labelText: 'English'),
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            final pt = _portugueseController.text.trim();
-            final en = _englishController.text.trim();
-            if (pt.isEmpty || en.isEmpty) return;
-
-            // Create new item
-            // If editing, preserve mastery and lastReviewed
-            final newItem = LanguageItem(
-              id: '${pt}_$en'.replaceAll(' ', '_'),
-              portuguese: pt,
-              english: en,
-              masteryLevel: widget.item?.masteryLevel ?? 0,
-              lastReviewed: widget.item?.lastReviewed,
-              notes: widget.item?.notes ?? '',
-            );
-
-            widget.onSave(newItem, widget.item?.id);
-            Navigator.pop(context);
-          },
-          child: const Text('Save'),
-        ),
-      ],
-    );
-  }
-}

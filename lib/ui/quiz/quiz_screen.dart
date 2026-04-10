@@ -7,6 +7,7 @@ import 'quiz_view_model.dart';
 import '../../services/tts_service.dart';
 import '../../main.dart';
 import '../vocabulary/vocabulary_list_screen.dart';
+import '../common/long_press_word_text.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final String? category;
@@ -324,14 +325,23 @@ class _QuestionCardState extends State<QuestionCard> {
                 ],
               ),
               const SizedBox(height: 20),
-              Text(
-                widget.question.questionText,
-                style: const TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              widget.question.questionText == widget.question.sourceItem.portuguese || widget.question.type == QuestionType.cloze
+                  ? LongPressWordText(
+                      text: widget.question.questionText,
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    )
+                  : Text(
+                      widget.question.questionText,
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
               const SizedBox(height: 30),
               ...widget.question.options.map((option) {
                 final isCorrectAnswer = option == widget.question.correctAnswer;

@@ -9,6 +9,7 @@ import 'package:animate_do/animate_do.dart';
 import '../../main.dart';
 import '../../models/verb_phrase.dart';
 import '../../services/tts_service.dart';
+import '../common/long_press_word_text.dart';
 import 'single_verb_conjugation_screen.dart';
 
 class VerbPhraseTrainerScreen extends ConsumerStatefulWidget {
@@ -313,11 +314,17 @@ class _VerbPhraseTrainerScreenState
             ),
           ),
           const SizedBox(height: 40),
-          Text(
-            _isEnglishFront ? phrase.english : phrase.portuguese,
-            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
-            textAlign: TextAlign.center,
-          ),
+          _isEnglishFront
+              ? Text(
+                  phrase.english,
+                  style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.center,
+                )
+              : LongPressWordText(
+                  text: phrase.portuguese,
+                  style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.center,
+                ),
           const SizedBox(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -370,27 +377,47 @@ class _VerbPhraseTrainerScreenState
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            _isEnglishFront ? phrase.portuguese : phrase.english,
-            style: const TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            textAlign: TextAlign.center,
-          ),
+          _isEnglishFront
+              ? LongPressWordText(
+                  text: phrase.portuguese,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                )
+              : Text(
+                  phrase.english,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
           const SizedBox(height: 20),
           Divider(color: Colors.white.withValues(alpha: 0.3), thickness: 1),
           const SizedBox(height: 20),
-          Text(
-            _isEnglishFront ? phrase.english : phrase.portuguese,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white.withValues(alpha: 0.8),
-              fontStyle: FontStyle.italic,
-            ),
-            textAlign: TextAlign.center,
-          ),
+          _isEnglishFront
+              ? Text(
+                  phrase.english,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white.withValues(alpha: 0.8),
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
+                )
+              : LongPressWordText(
+                  text: phrase.portuguese,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white.withValues(alpha: 0.8),
+                    fontStyle: FontStyle.italic,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
           const SizedBox(height: 40),
           IconButton(
             icon: const Icon(Icons.volume_up, size: 36),
