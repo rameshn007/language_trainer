@@ -1,0 +1,652 @@
+[
+  {
+    "id": "v50_q1",
+    "questionText": "Fill in the blank: 'Eu ______ a janela todas as manhãs.' (abrir)",
+    "options": ["abro", "abres", "abre", "abrimos"],
+    "correctAnswer": "abro",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_1",
+      "portuguese": "abrir",
+      "english": "to open"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q2",
+    "questionText": "Fill in the blank: 'O filme ______ tarde hoje.' (acabar)",
+    "options": ["acabo", "acabas", "acaba", "acabamos"],
+    "correctAnswer": "acaba",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_2",
+      "portuguese": "acabar",
+      "english": "to finish"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q3",
+    "questionText": "Fill in the blank: 'Tu ______ demasiado na autoestrada.' (acelerar)",
+    "options": ["acelero", "aceleras", "acelera", "aceleramos"],
+    "correctAnswer": "aceleras",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_3",
+      "portuguese": "acelerar",
+      "english": "to accelerate"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q4",
+    "questionText": "Fill in the blank: 'Ela ______ a luz da sala.' (acender)",
+    "options": ["acendo", "acendes", "acende", "acendemos"],
+    "correctAnswer": "acende",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_4",
+      "portuguese": "acender",
+      "english": "to turn on (light)"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q5",
+    "questionText": "Fill in the blank: 'Nós ______ esta cidade muito bonita.' (achar)",
+    "options": ["acho", "achas", "acha", "achamos"],
+    "correctAnswer": "achamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_5",
+      "portuguese": "achar",
+      "english": "to think / to find"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q6",
+    "questionText": "Fill in the blank: 'As minhas filhas ______ cedo para ir para a escola.' (acordar)",
+    "options": ["acordo", "acorda", "acordamos", "acordam"],
+    "correctAnswer": "acordam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_6",
+      "portuguese": "acordar",
+      "english": "to wake up"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q7",
+    "questionText": "Fill in the blank: 'Eu ______ comer legumes frescos.' (adorar)",
+    "options": ["adoro", "adoras", "adora", "adoramos"],
+    "correctAnswer": "adoro",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_7",
+      "portuguese": "adorar",
+      "english": "to adore / to love"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q8",
+    "questionText": "Fill in the blank: 'Você ______ a reunião para amanhã?' (agendar)",
+    "options": ["agendo", "agendas", "agenda", "agendamos"],
+    "correctAnswer": "agenda",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_8",
+      "portuguese": "agendar",
+      "english": "to schedule"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q9",
+    "questionText": "Fill in the blank: 'Nós ______ a vossa ajuda.' (agradecer)",
+    "options": ["agradeço", "agradeces", "agradece", "agradecemos"],
+    "correctAnswer": "agradecemos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_9",
+      "portuguese": "agradecer",
+      "english": "to thank"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q10",
+    "questionText": "Fill in the blank: 'Eles ______ a arrumar a casa de banho.' (ajudar)",
+    "options": ["ajudo", "ajudas", "ajuda", "ajudam"],
+    "correctAnswer": "ajudam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_10",
+      "portuguese": "ajudar",
+      "english": "to help"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q11",
+    "questionText": "Fill in the blank: 'Nós ______ uma salada deliciosa ao meio-dia.' (almoçar)",
+    "options": ["almoço", "almoças", "almoça", "almoçamos"],
+    "correctAnswer": "almoçamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_11",
+      "portuguese": "almoçar",
+      "english": "to have lunch"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q12",
+    "questionText": "Fill in the blank: 'Eu ______ ler um bom livro à noite.' (amar)",
+    "options": ["amo", "amas", "ama", "amam"],
+    "correctAnswer": "amo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_12",
+      "portuguese": "amar",
+      "english": "to love"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q13",
+    "questionText": "Fill in the blank: 'Tu ______ muito rápido!' (andar)",
+    "options": ["ando", "andas", "anda", "andam"],
+    "correctAnswer": "andas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_13",
+      "portuguese": "andar",
+      "english": "to walk"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q14",
+    "questionText": "Fill in the blank: 'Ele ______ o quadro no fim da aula.' (apagar)",
+    "options": ["apago", "apagas", "apaga", "apagam"],
+    "correctAnswer": "apaga",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_14",
+      "portuguese": "apagar",
+      "english": "to erase / to turn off"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q15",
+    "questionText": "Fill in the blank: 'Nós ______ o autocarro para o centro.' (apanhar)",
+    "options": ["apanho", "apanhas", "apanha", "apanhamos"],
+    "correctAnswer": "apanhamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_15",
+      "portuguese": "apanhar",
+      "english": "to catch (transport/objects)"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q16",
+    "questionText": "Fill in the blank: 'Elas ______ inglês na escola.' (aprender)",
+    "options": ["aprendo", "aprende", "aprendemos", "aprendem"],
+    "correctAnswer": "aprendem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_16",
+      "portuguese": "aprender",
+      "english": "to learn"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q17",
+    "questionText": "Fill in the blank: 'O diretor ______ o novo projeto.' (apresentar)",
+    "options": ["apresento", "apresentas", "apresenta", "apresentam"],
+    "correctAnswer": "apresenta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_17",
+      "portuguese": "apresentar",
+      "english": "to present / to introduce"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q18",
+    "questionText": "Fill in the blank: 'Eu ______ o meu quarto aos sábados.' (arrumar)",
+    "options": ["arrumo", "arrumas", "arruma", "arrumamos"],
+    "correctAnswer": "arrumo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_18",
+      "portuguese": "arrumar",
+      "english": "to tidy up / to pack"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q19",
+    "questionText": "Fill in the blank: 'Tu ______ o tapete da sala?' (aspirar)",
+    "options": ["aspiro", "aspira", "aspiramos", "aspiras"],
+    "correctAnswer": "aspiras",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_19",
+      "portuguese": "aspirar",
+      "english": "to vacuum"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q20",
+    "questionText": "Fill in the blank: 'Nós ______ batatas no forno para o jantar.' (assar)",
+    "options": ["asso", "assas", "assa", "assamos"],
+    "correctAnswer": "assamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_20",
+      "portuguese": "assar",
+      "english": "to bake / to roast"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q21",
+    "questionText": "Fill in the blank: 'Ele ______ o contrato de trabalho.' (assinar)",
+    "options": ["assino", "assinas", "assina", "assinam"],
+    "correctAnswer": "assina",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_21",
+      "portuguese": "assinar",
+      "english": "to sign"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q22",
+    "questionText": "Fill in the blank: 'Vocês ______ ao jogo de futebol na televisão?' (assistir)",
+    "options": ["assisto", "assistes", "assiste", "assistem"],
+    "correctAnswer": "assistem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_22",
+      "portuguese": "assistir",
+      "english": "to watch / to attend"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q23",
+    "questionText": "Fill in the blank: 'Alguém ______ à porta.' (bater)",
+    "options": ["bato", "bates", "bate", "batemos"],
+    "correctAnswer": "bate",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_23",
+      "portuguese": "bater",
+      "english": "to hit / to beat"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q24",
+    "questionText": "Fill in the blank: 'Eu ______ muita água durante o dia.' (beber)",
+    "options": ["bebo", "bebes", "bebe", "bebem"],
+    "correctAnswer": "bebo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_24",
+      "portuguese": "beber",
+      "english": "to drink"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q25",
+    "questionText": "Fill in the blank: 'A mãe ______ os filhos antes de dormir.' (beijar)",
+    "options": ["beijo", "beijas", "beija", "beijam"],
+    "correctAnswer": "beija",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_25",
+      "portuguese": "beijar",
+      "english": "to kiss"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q26",
+    "questionText": "Fill in the blank: 'Os cães ______ no jardim.' (brincar)",
+    "options": ["brinco", "brincas", "brinca", "brincam"],
+    "correctAnswer": "brincam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_26",
+      "portuguese": "brincar",
+      "english": "to play / to joke"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q27",
+    "questionText": "Fill in the blank: 'Ele ______ os sapatos novos.' (calçar)",
+    "options": ["calço", "calças", "calça", "calçam"],
+    "correctAnswer": "calça",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_27",
+      "portuguese": "calçar",
+      "english": "to put on shoes"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q28",
+    "questionText": "Fill in the blank: 'Nós ______ no parque ao fim de semana.' (caminhar)",
+    "options": ["caminho", "caminhas", "caminha", "caminhamos"],
+    "correctAnswer": "caminhamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_28",
+      "portuguese": "caminhar",
+      "english": "to walk / to hike"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q29",
+    "questionText": "Fill in the blank: 'O cliente ______ a encomenda.' (cancelar)",
+    "options": ["cancelo", "cancelas", "cancela", "cancelam"],
+    "correctAnswer": "cancela",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_29",
+      "portuguese": "cancelar",
+      "english": "to cancel"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q30",
+    "questionText": "Fill in the blank: 'Tu ______ muito bem!' (cantar)",
+    "options": ["canto", "cantas", "canta", "cantam"],
+    "correctAnswer": "cantas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_30",
+      "portuguese": "cantar",
+      "english": "to sing"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q31",
+    "questionText": "Fill in the blank: 'Eles ______ no próximo mês.' (casar)",
+    "options": ["caso", "casas", "casa", "casam"],
+    "correctAnswer": "casam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_31",
+      "portuguese": "casar",
+      "english": "to marry"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q32",
+    "questionText": "Fill in the blank: 'Eu ______ um táxi para ir para o aeroporto.' (chamar)",
+    "options": ["chamo", "chamas", "chama", "chamam"],
+    "correctAnswer": "chamo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_32",
+      "portuguese": "chamar",
+      "english": "to call"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q33",
+    "questionText": "Fill in the blank: 'O comboio ______ às oito horas.' (chegar)",
+    "options": ["chego", "chegas", "chega", "chegam"],
+    "correctAnswer": "chega",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_33",
+      "portuguese": "chegar",
+      "english": "to arrive"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q34",
+    "questionText": "Fill in the blank: 'O bebé ______ porque tem fome.' (chorar)",
+    "options": ["choro", "choras", "chora", "choram"],
+    "correctAnswer": "chora",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_34",
+      "portuguese": "chorar",
+      "english": "to cry"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q35",
+    "questionText": "Fill in the blank: 'O banco ______ taxas muito altas.' (cobrar)",
+    "options": ["cobro", "cobras", "cobra", "cobram"],
+    "correctAnswer": "cobra",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_35",
+      "portuguese": "cobrar",
+      "english": "to charge"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q36",
+    "questionText": "Fill in the blank: 'Ela ______ os livros na prateleira.' (colocar)",
+    "options": ["coloco", "colocas", "coloca", "colocam"],
+    "correctAnswer": "coloca",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_36",
+      "portuguese": "colocar",
+      "english": "to put / to place"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q37",
+    "questionText": "Fill in the blank: 'Nós ______ jantar fora no sábado.' (combinar)",
+    "options": ["combino", "combinas", "combina", "combinamos"],
+    "correctAnswer": "combinamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_37",
+      "portuguese": "combinar",
+      "english": "to arrange / to match"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q38",
+    "questionText": "Fill in the blank: 'O concerto ______ em breve.' (começar)",
+    "options": ["começo", "começas", "começa", "começais"],
+    "correctAnswer": "começa",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_38",
+      "portuguese": "começar",
+      "english": "to begin / to start"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q39",
+    "questionText": "Fill in the blank: 'Eu ______ sopa de legumes todos os dias.' (comer)",
+    "options": ["como", "comes", "come", "comem"],
+    "correctAnswer": "como",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_39",
+      "portuguese": "comer",
+      "english": "to eat"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q40",
+    "questionText": "Fill in the blank: 'Tu ______ fruta fresca no mercado?' (comprar)",
+    "options": ["compro", "compra", "compramos", "compras"],
+    "correctAnswer": "compras",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_40",
+      "portuguese": "comprar",
+      "english": "to buy"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q41",
+    "questionText": "Fill in the blank: 'Eu não ______ esta pergunta.' (compreender)",
+    "options": ["compreendo", "compreendes", "compreende", "compreendem"],
+    "correctAnswer": "compreendo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_41",
+      "portuguese": "compreender",
+      "english": "to understand"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q42",
+    "questionText": "Fill in the blank: 'Nós ______ com a tua opinião.' (concordar)",
+    "options": ["concordo", "concordas", "concorda", "concordamos"],
+    "correctAnswer": "concordamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_42",
+      "portuguese": "concordar",
+      "english": "to agree"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q43",
+    "questionText": "Fill in the blank: 'Ele ______ com muito cuidado.' (conduzir)",
+    "options": ["conduzo", "conduzes", "conduz", "conduzimos"],
+    "correctAnswer": "conduz",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_43",
+      "portuguese": "conduzir",
+      "english": "to drive"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q44",
+    "questionText": "Fill in the blank: 'Tu ______ aquele restaurante vegetariano?' (conhecer)",
+    "options": ["conheço", "conhece", "conhecemos", "conheces"],
+    "correctAnswer": "conheces",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_44",
+      "portuguese": "conhecer",
+      "english": "to know (someone) / to meet"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q45",
+    "questionText": "Fill in the blank: 'Vocês ______ terminar o relatório hoje?' (conseguir)",
+    "options": ["consigo", "consegues", "consegue", "conseguem"],
+    "correctAnswer": "conseguem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_45",
+      "portuguese": "conseguir",
+      "english": "to manage / to be able to"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q46",
+    "questionText": "Fill in the blank: 'O mecânico ______ o carro antigo.' (consertar)",
+    "options": ["conserto", "consertas", "conserta", "consertam"],
+    "correctAnswer": "conserta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_46",
+      "portuguese": "consertar",
+      "english": "to fix / to repair"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q47",
+    "questionText": "Fill in the blank: 'A professora ______ uma história aos alunos.' (contar)",
+    "options": ["conto", "contas", "conta", "contam"],
+    "correctAnswer": "conta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_47",
+      "portuguese": "contar",
+      "english": "to count / to tell"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q48",
+    "questionText": "Fill in the blank: 'Nós ______ a trabalhar no projeto.' (continuar)",
+    "options": ["continuo", "continuas", "continua", "continuamos"],
+    "correctAnswer": "continuamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_48",
+      "portuguese": "continuar",
+      "english": "to continue"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q49",
+    "questionText": "Fill in the blank: 'Elas ______ sobre as férias em Portugal.' (conversar)",
+    "options": ["converso", "conversa", "conversamos", "conversam"],
+    "correctAnswer": "conversam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_49",
+      "portuguese": "conversar",
+      "english": "to converse / to chat"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v50_q50",
+    "questionText": "Fill in the blank: 'Eu ______ os meus amigos para jantar.' (convidar)",
+    "options": ["convido", "convidas", "convida", "convidamos"],
+    "correctAnswer": "convido",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v50_src_50",
+      "portuguese": "convidar",
+      "english": "to invite"
+    },
+    "category": "Grammar & Verbs"
+  }
+]

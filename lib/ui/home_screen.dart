@@ -13,6 +13,8 @@ import 'quiz/verb_phrase_trainer_screen.dart';
 import '../main.dart';
 import 'widgets/word_star_field.dart';
 import 'settings_screen.dart';
+import '../services/verb_service.dart';
+import '../models/language_item.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -87,7 +89,37 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       }
       await storage.clearItems();
       await storage.saveItems(freshItems);
-    } catch (_) {}
+
+      // --- Also load verbs and add as vocabulary items ---
+      final verbService = ref.read(verbServiceProvider);
+      final verbs = await verbService.loadVerbs();
+      final List<LanguageItem> verbItems = [];
+
+      // Existing Portuguese words from source.md for deduplication
+      final sourceWords = freshItems.map((i) => i.portuguese.toLowerCase().trim()).toSet();
+
+      for (var v in verbs) {
+        final ptWord = v.infinitive.toLowerCase().trim();
+        if (!sourceWords.contains(ptWord)) {
+          verbItems.add(
+            LanguageItem(
+              id: 'verb_${v.infinitive}',
+              portuguese: v.infinitive,
+              english: v.translation,
+              notes: 'Verb conjugation exercise available',
+            ),
+          );
+          sourceWords.add(ptWord);
+        }
+      }
+
+      if (verbItems.isNotEmpty) {
+        await storage.saveItems(verbItems);
+        debugPrint('Added ${verbItems.length} new verbs to vocabulary storage.');
+      }
+    } catch (e) {
+      debugPrint('Error loading data: $e');
+    }
     if (!mounted) return;
     setState(() => _isLoading = false);
   }

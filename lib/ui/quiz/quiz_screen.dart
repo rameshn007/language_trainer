@@ -274,9 +274,40 @@ class _QuestionCardState extends State<QuestionCard> {
       setState(() {
         _isCorrect = true;
       });
-      // Always speak Portuguese source on correct
+
+      String textToSpeak = widget.question.sourceItem.portuguese;
+
+      // For cloze (fill in the blank) questions, reconstruct the full sentence
+      if (widget.question.type == QuestionType.cloze) {
+        String baseText = widget.question.questionText;
+
+        // 1. Handle "Fill in the blank: '...'" format
+        if (baseText.contains("Fill in the blank: '")) {
+          final start = baseText.indexOf("'") + 1;
+          final end = baseText.lastIndexOf("'");
+          if (start < end) {
+            baseText = baseText.substring(start, end);
+          }
+        }
+
+        // 2. Remove trailing (infinitive) like "(abrir)"
+        if (baseText.contains(" (")) {
+          baseText = baseText.split(" (").first;
+        }
+
+        // 3. Replace blanks (______ or ____) with the correct answer
+        if (baseText.contains("______")) {
+          textToSpeak = baseText.replaceAll("______", widget.question.correctAnswer);
+        } else if (baseText.contains("____")) {
+          textToSpeak = baseText.replaceAll("____", widget.question.correctAnswer);
+        } else {
+          // Fallback: just use what we have
+          textToSpeak = baseText;
+        }
+      }
+
       widget.ttsService.speak(
-        widget.question.sourceItem.portuguese,
+        textToSpeak,
         language: 'pt',
       );
     } else {
