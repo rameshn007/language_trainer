@@ -10,6 +10,7 @@ import 'voice_trainer_screen.dart';
 import 'phrase_trainer_screen.dart';
 import 'quiz/verb_conjugation_screen.dart';
 import 'quiz/verb_phrase_trainer_screen.dart';
+import 'quiz/quiz_screen.dart';
 import '../main.dart';
 import 'widgets/word_star_field.dart';
 import 'settings_screen.dart';
@@ -526,6 +527,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     offset,
                                   );
                                 },
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: _buildGridButton(
+                                context: context,
+                                label: 'Vocab Quiz',
+                                icon: Icons.local_fire_department_rounded,
+                                bgColor: Colors.amber.shade700,
+                                fgColor: Colors.white,
+                                onPressed: items.isEmpty || _isLoading
+                                    ? null
+                                    : (offset) {
+                                        _pushScreen(
+                                          const QuizScreen(isVocabularyQuiz: true),
+                                          offset,
+                                        ).then((_) => setState(() {}));
+                                      },
                               ),
                             ),
                           ],
