@@ -19,6 +19,7 @@ class QuizScreen extends ConsumerStatefulWidget {
 
 class _QuizScreenState extends ConsumerState<QuizScreen> {
   final CardSwiperController _swiperController = CardSwiperController();
+  final GlobalKey<QuestionCardState> _currentCardKey = GlobalKey<QuestionCardState>();
   late final TtsService _ttsService;
   double _speedMultiplier = 0.75; // Default as requested
 
@@ -75,6 +76,24 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     final viewModel = ref.read(quizViewModelProvider.notifier);
     _swiperController.swipe(CardSwiperDirection.left);
     viewModel.nextQuestion();
+  }
+
+  void _showVoiceSettings() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Improve Voice Quality'),
+        content: SingleChildScrollView(
+          child: Text(_ttsService.getVoiceInstallationInstructions()),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
@@ -150,37 +169,55 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
             tooltip: 'Toggle Speed',
             onPressed: _toggleSpeed,
           ),
-          IconButton(
-            icon: const Icon(Icons.list_alt),
-            tooltip: 'Vocabulary List',
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const VocabularyListScreen(),
-                ),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.record_voice_over), // or help_outline
-            tooltip: 'Voice Settings',
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text('Improve Voice Quality'),
-                  content: SingleChildScrollView(
-                    child: Text(_ttsService.getVoiceInstallationInstructions()),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert),
+            onSelected: (value) {
+              if (value == 'vocabulary') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VocabularyListScreen(),
                   ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: const Text('OK'),
-                    ),
-                  ],
+                );
+              } else if (value == 'voice_settings') {
+                _showVoiceSettings();
+              } else if (value == 'show_answer') {
+                _currentCardKey.currentState?.revealAnswer();
+              }
+            },
+            itemBuilder: (BuildContext context) {
+              return const [
+                PopupMenuItem<String>(
+                  value: 'show_answer',
+                  child: Row(
+                    children: [
+                      Icon(Icons.visibility),
+                      SizedBox(width: 8),
+                      Text('Show Answer'),
+                    ],
+                  ),
                 ),
-              );
+                PopupMenuItem<String>(
+                  value: 'vocabulary',
+                  child: Row(
+                    children: [
+                      Icon(Icons.book),
+                      SizedBox(width: 8),
+                      Text('Vocabulary'),
+                    ],
+                  ),
+                ),
+                PopupMenuItem<String>(
+                  value: 'voice_settings',
+                  child: Row(
+                    children: [
+                      Icon(Icons.record_voice_over),
+                      SizedBox(width: 8),
+                      Text('Voice Settings'),
+                    ],
+                  ),
+                ),
+              ];
             },
           ),
           IconButton(
@@ -211,7 +248,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     (context, index, percentThresholdX, percentThresholdY) {
                       final question = quizState.questions[index];
                       return QuestionCard(
-                        key: ValueKey(question.id),
+                        key: index == quizState.currentIndex ? _currentCardKey : ValueKey(question.id),
                         question: question,
                         onAnswer: (option) => _handleAnswer(option, question),
                         onNext: _handleNext,
@@ -243,10 +280,10 @@ class QuestionCard extends StatefulWidget {
   });
 
   @override
-  State<QuestionCard> createState() => _QuestionCardState();
+  State<QuestionCard> createState() => QuestionCardState();
 }
 
-class _QuestionCardState extends State<QuestionCard> {
+class QuestionCardState extends State<QuestionCard> {
   final Set<String> _wrongAnswers = {};
   bool _isCorrect = false;
   bool _hasAttempted = false;
@@ -320,6 +357,10 @@ class _QuestionCardState extends State<QuestionCard> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.question.type == QuestionType.reorderAndConjugate) {
+      return _buildReorderAndConjugateBody(context);
+    }
+
     return Card(
       elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -456,5 +497,228 @@ class _QuestionCardState extends State<QuestionCard> {
         ),
       ),
     );
+  }
+
+  // --- Reorder and Conjugate View ---
+
+  List<String>? _availableWords;
+  List<String>? _selectedWords;
+  String? _selectedVerbForm;
+  String? _originalVerb;
+
+  void _initReorderData() {
+    if (_availableWords != null) return;
+    final words = widget.question.questionText.split('/').map((s) => s.trim()).toList();
+    _availableWords = List.from(words);
+    // Find the reflexive verb (ends in -se or -me etc, or has a hypthen)
+    _originalVerb = _availableWords!.firstWhere(
+      (w) => w.contains('-se') || w.contains('-me') || w.contains('-te') || w.contains('-nos') || w.contains('-vos'),
+      orElse: () => "",
+    );
+    _selectedWords = [];
+  }
+
+  Widget _buildReorderAndConjugateBody(BuildContext context) {
+    _initReorderData();
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Card(
+      elevation: 8,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Text(
+              "Reorder words & Conjugate verb",
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.outline,
+                fontSize: 12,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              widget.question.sourceItem.english,
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              textAlign: TextAlign.center,
+            ),
+            const Divider(height: 40),
+            
+            // Answer Area
+            Container(
+              constraints: const BoxConstraints(minHeight: 120),
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: isDark ? Colors.black26 : Colors.grey.shade100,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: isDark ? Colors.white10 : Colors.grey.shade300),
+              ),
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: _selectedWords!.map((word) {
+                  return ActionChip(
+                    label: Text(word, style: const TextStyle(fontSize: 16)),
+                    onPressed: () {
+                      if (_isCorrect) return;
+                      setState(() {
+                        _selectedWords!.remove(word);
+                        if (word == _selectedVerbForm) {
+                           _availableWords!.add(_originalVerb!);
+                           _selectedVerbForm = null;
+                        } else {
+                           _availableWords!.add(word);
+                        }
+                      });
+                    },
+                    backgroundColor: isDark 
+                        ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.2)
+                        : Colors.deepPurple.shade50,
+                    labelStyle: TextStyle(
+                      color: isDark ? Theme.of(context).colorScheme.primary : Colors.deepPurple.shade900,
+                    ),
+                    side: BorderSide(
+                      color: isDark ? Theme.of(context).colorScheme.primary : Colors.deepPurple,
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            
+            const SizedBox(height: 30),
+            
+            // Word bank
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: _availableWords!.map((word) {
+                return ActionChip(
+                  label: Text(word, style: const TextStyle(fontSize: 16)),
+                  onPressed: () {
+                    if (_isCorrect) return;
+                    if (word == _originalVerb) {
+                      _showVerbPicker(context);
+                    } else {
+                      setState(() {
+                        _availableWords!.remove(word);
+                        _selectedWords!.add(word);
+                      });
+                    }
+                  },
+                  backgroundColor: isDark ? Colors.white10 : Colors.white,
+                  side: BorderSide(color: isDark ? Colors.white24 : Colors.grey.shade300),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                );
+              }).toList(),
+            ),
+            
+            const Spacer(),
+            
+            // Validation button
+            if (!_isCorrect)
+              ElevatedButton(
+                onPressed: _selectedWords!.isEmpty ? null : _checkReorderAnswer,
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50),
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                ),
+                child: const Text("Check Answer"),
+              )
+            else
+              FadeInUp(
+                 child: ElevatedButton.icon(
+                    onPressed: widget.onNext,
+                    icon: const Icon(Icons.arrow_forward),
+                    label: const Text("Next Question"),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 50),
+                      backgroundColor: Colors.green,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                  ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showVerbPicker(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Conjugate: $_originalVerb",
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              Wrap(
+                spacing: 12,
+                children: widget.question.options.map((option) {
+                  return ChoiceChip(
+                    label: Text(option),
+                    selected: false,
+                    onSelected: (_) {
+                      Navigator.pop(context);
+                      setState(() {
+                        _selectedVerbForm = option;
+                        _availableWords!.remove(_originalVerb);
+                        _selectedWords!.add(option);
+                      });
+                    },
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _checkReorderAnswer() {
+    final userAnswer = _selectedWords!.join(' ');
+    // Simple normalization: remove trailing punctuation if needed or just exact match
+    if (userAnswer.trim() == widget.question.correctAnswer.trim() || 
+        userAnswer.trim() == widget.question.correctAnswer.replaceAll('.', '').trim()) {
+      setState(() {
+        _isCorrect = true;
+      });
+      widget.ttsService.speak(widget.question.correctAnswer, language: 'pt');
+    } else {
+      widget.ttsService.speak("Tenta de novo.", language: 'pt');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Incorrect order or conjugation. Try again!"), duration: Duration(seconds: 1)),
+      );
+    }
+  }
+
+  void revealAnswer() {
+    if (_isCorrect) return;
+
+    setState(() {
+      _isCorrect = true;
+      _hasAttempted = true;
+
+      if (widget.question.type == QuestionType.reorderAndConjugate) {
+        _selectedWords = widget.question.correctAnswer.split(' ').map((s) => s.trim()).toList();
+        _availableWords = [];
+      }
+    });
+
+    widget.ttsService.speak(widget.question.correctAnswer, language: 'pt');
   }
 }

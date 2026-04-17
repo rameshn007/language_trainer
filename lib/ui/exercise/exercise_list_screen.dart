@@ -60,6 +60,12 @@ class ExerciseListScreen extends StatelessWidget {
       'path': 'assets/data/exercises/verb_conjugation_50.json',
       'icon': 'school',
     },
+    {
+      'title': 'Unit 10: Word Order & Pronouns',
+      'subtitle': 'Reorder elements and conjugate reflexive verbs',
+      'path': 'assets/data/exercises/unit_10.json',
+      'icon': 'school',
+    },
   ];
 
   @override
@@ -99,7 +105,7 @@ class ExerciseListScreen extends StatelessWidget {
           final unit = units[index];
           return FadeInUp(
             duration: const Duration(milliseconds: 300),
-            delay: Duration(milliseconds: index * 100),
+            delay: Duration(milliseconds: (index % 6) * 100),
             child: Card(
               elevation: 4,
               margin: const EdgeInsets.only(bottom: 16),

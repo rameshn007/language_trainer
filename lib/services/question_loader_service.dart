@@ -97,6 +97,8 @@ class QuestionLoaderService {
         return QuestionType.trueFalse;
       case 'jumble':
         return QuestionType.jumble;
+      case 'reorderAndConjugate':
+        return QuestionType.reorderAndConjugate;
       default:
         return QuestionType.multipleChoice;
     }

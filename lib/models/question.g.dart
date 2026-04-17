@@ -73,6 +73,8 @@ class QuestionTypeAdapter extends TypeAdapter<QuestionType> {
         return QuestionType.jumble;
       case 3:
         return QuestionType.trueFalse;
+      case 4:
+        return QuestionType.reorderAndConjugate;
       default:
         return QuestionType.multipleChoice;
     }
@@ -92,6 +94,9 @@ class QuestionTypeAdapter extends TypeAdapter<QuestionType> {
         break;
       case QuestionType.trueFalse:
         writer.writeByte(3);
+        break;
+      case QuestionType.reorderAndConjugate:
+        writer.writeByte(4);
         break;
     }
   }

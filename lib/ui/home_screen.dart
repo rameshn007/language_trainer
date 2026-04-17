@@ -15,6 +15,7 @@ import 'widgets/word_star_field.dart';
 import 'settings_screen.dart';
 import '../services/verb_service.dart';
 import '../models/language_item.dart';
+import 'exercise/exercise_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -491,6 +492,26 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         const SizedBox(height: 12),
                         Row(
                           children: [
+                            Expanded(
+                              flex: 2,
+                              child: _buildGridButton(
+                                context: context,
+                                label: 'Sentence Builder',
+                                icon: Icons.reorder_rounded,
+                                bgColor: Colors.indigo,
+                                fgColor: Colors.white,
+                                onPressed: (offset) {
+                                  _pushScreen(
+                                    const ExerciseScreen(
+                                      unitName: 'Unit 10: Word Order & Pronouns',
+                                      unitPath: 'assets/data/exercises/unit_10.json',
+                                    ),
+                                    offset,
+                                  );
+                                },
+                              ),
+                            ),
+                            const SizedBox(width: 12),
                             Expanded(
                               flex: 2,
                               child: _buildGridButton(

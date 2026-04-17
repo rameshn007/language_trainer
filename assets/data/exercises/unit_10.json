@@ -1,0 +1,402 @@
+[
+  {
+    "id": "u10_1",
+    "type": "reorderAndConjugate",
+    "questionText": "cedo / levantar-se / Eu",
+    "options": ["levanto-me", "me levanto", "levanta-se"],
+    "correctAnswer": "Eu levanto-me cedo",
+    "sourceItem": { "portuguese": "Eu levanto-me cedo", "english": "I get up early", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_2",
+    "type": "reorderAndConjugate",
+    "questionText": "não / Eu / cedo / levantar-se",
+    "options": ["levanto-me", "me levanto", "levanta-se"],
+    "correctAnswer": "Eu não me levanto cedo",
+    "sourceItem": { "portuguese": "Eu não me levanto cedo", "english": "I don't get up early", "notes": "Negative (Proclisis)" }
+  },
+  {
+    "id": "u10_3",
+    "type": "reorderAndConjugate",
+    "questionText": "rapidamente / vestir-se / Nós",
+    "options": ["vestimos-nos", "vestimo-nos", "nos vestimos"],
+    "correctAnswer": "Nós vestimo-nos rapidamente",
+    "sourceItem": { "portuguese": "Nós vestimo-nos rapidamente", "english": "We dress quickly", "notes": "Positive statement (Enclisis - Note: -os dropped in vestimo-nos)" }
+  },
+  {
+    "id": "u10_4",
+    "type": "reorderAndConjugate",
+    "questionText": "se / vestir-se / Eles / para a festa / bem",
+    "options": ["vestem-se", "se vestem", "vestis-vos"],
+    "correctAnswer": "Eles vestem-se bem para a festa",
+    "sourceItem": { "portuguese": "Eles vestem-se bem para a festa", "english": "They dress well for the party", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_5",
+    "type": "reorderAndConjugate",
+    "questionText": "é que / sentar-se / Onde / você / ?",
+    "options": ["senta-se", "se senta", "sentas-te"],
+    "correctAnswer": "Onde é que você se senta ?",
+    "sourceItem": { "portuguese": "Onde é que você se senta?", "english": "Where do you sit?", "notes": "Question with 'é que' (Proclisis)" }
+  },
+  {
+    "id": "u10_6",
+    "type": "reorderAndConjugate",
+    "questionText": "tarde / deitar-se / Ela / sempre",
+    "options": ["deita-se", "se deita", "deito-me"],
+    "correctAnswer": "Ela deita-se sempre tarde",
+    "sourceItem": { "portuguese": "Ela deita-se sempre tarde", "english": "She always goes to bed late", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_7",
+    "type": "reorderAndConjugate",
+    "questionText": "não / deitar-se / Eu / tarde",
+    "options": ["deito-me", "me deito", "deita-se"],
+    "correctAnswer": "Eu não me deito tarde",
+    "sourceItem": { "portuguese": "Eu não me deito tarde", "english": "I don't go to bed late", "notes": "Negative (Proclisis)" }
+  },
+  {
+    "id": "u10_8",
+    "type": "reorderAndConjugate",
+    "questionText": "chamar-se / Como / você / ?",
+    "options": ["chama-se", "se chama", "chamas-te"],
+    "correctAnswer": "Como se chama você ?",
+    "sourceItem": { "portuguese": "Como se chama você?", "english": "What is your name?", "notes": "Question with interrogative word (Proclisis)" }
+  },
+  {
+    "id": "u10_9",
+    "type": "reorderAndConjugate",
+    "questionText": "João / chamar-se / Ele",
+    "options": ["chama-se", "se chama", "chamo-me"],
+    "correctAnswer": "Ele chama-se João",
+    "sourceItem": { "portuguese": "Ele chama-se João", "english": "His name is João", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_10",
+    "type": "reorderAndConjugate",
+    "questionText": "antes de sair / lavar-se / Tu",
+    "options": ["lavas-te", "te lavas", "lava-se"],
+    "correctAnswer": "Tu lavas-te antes de sair",
+    "sourceItem": { "portuguese": "Tu lavas-te antes de sair", "english": "You wash before leaving", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_11",
+    "type": "reorderAndConjugate",
+    "questionText": "pentear-se / O menino / devagar",
+    "options": ["penteia-se", "se penteia", "penteio-me"],
+    "correctAnswer": "O menino penteia-se devagar",
+    "sourceItem": { "portuguese": "O menino penteia-se devagar", "english": "The boy combs his hair slowly", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_12",
+    "type": "reorderAndConjugate",
+    "questionText": "nunca / esquecer-se / Nós / disso",
+    "options": ["esquecemo-nos", "nos esquecemos", "esquecem-se"],
+    "correctAnswer": "Nós nunca nos esquecemos disso",
+    "sourceItem": { "portuguese": "Nós nunca nos esquecemos disso", "english": "We never forget that", "notes": "Negative/Adverb 'nunca' (Proclisis)" }
+  },
+  {
+    "id": "u10_13",
+    "type": "reorderAndConjugate",
+    "questionText": "lembrar-se / Vocês / daquele dia / ?",
+    "options": ["lembram-se", "se lembram", "lembra-se"],
+    "correctAnswer": "Vocês lembram-se daquele dia ?",
+    "sourceItem": { "portuguese": "Vocês lembram-se daquele dia?", "english": "Do you remember that day?", "notes": "Positive question (Enclisis)" }
+  },
+  {
+    "id": "u10_14",
+    "type": "reorderAndConjugate",
+    "questionText": "facilmente / zangar-se / Eu",
+    "options": ["zango-me", "me zango", "zanga-se"],
+    "correctAnswer": "Eu zango-me facilmente",
+    "sourceItem": { "portuguese": "Eu zango-me facilmente", "english": "I get angry easily", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_15",
+    "type": "reorderAndConjugate",
+    "questionText": "com o teste / preocupar-se / Ela",
+    "options": ["preocupa-se", "se preocupa", "preocupo-me"],
+    "correctAnswer": "Ela preocupa-se com o teste",
+    "sourceItem": { "portuguese": "Ela preocupa-se com o teste", "english": "She worries about the test", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_16",
+    "type": "reorderAndConjugate",
+    "questionText": "apaixonar-se / Eles / à primeira vista",
+    "options": ["apaixonam-se", "se apaixonam", "apaixona-se"],
+    "correctAnswer": "Eles apaixonam-se à primeira vista",
+    "sourceItem": { "portuguese": "Eles apaixonam-se à primeira vista", "english": "They fall in love at first sight", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_17",
+    "type": "reorderAndConjugate",
+    "questionText": "com frequência / ver-se / Nós",
+    "options": ["vemo-nos", "nos vemos", "veem-se"],
+    "correctAnswer": "Nós vemo-nos com frequência",
+    "sourceItem": { "portuguese": "Nós vemo-nos com frequência", "english": "We see each other frequently", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_18",
+    "type": "reorderAndConjugate",
+    "questionText": "para o exame / preparar-se / Vocês",
+    "options": ["preparam-se", "se preparam", "prepara-se"],
+    "correctAnswer": "Vocês preparam-se para o exame",
+    "sourceItem": { "portuguese": "Vocês preparam-se para o exame", "english": "You [pl] prepare for the exam", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_19",
+    "type": "reorderAndConjugate",
+    "questionText": "não / queixar-se / Tu / muito",
+    "options": ["queixas-te", "te queixas", "queixa-se"],
+    "correctAnswer": "Tu não te queixas muito",
+    "sourceItem": { "portuguese": "Tu não te queixas muito", "english": "You don't complain much", "notes": "Negative (Proclisis)" }
+  },
+  {
+    "id": "u10_20",
+    "type": "reorderAndConjugate",
+    "questionText": "de nada / arrepender-se / Eu",
+    "options": ["arrependo-me", "me arrependo", "arrepende-se"],
+    "correctAnswer": "Eu arrependo-me de nada",
+    "sourceItem": { "portuguese": "Eu arrependo-me de nada", "english": "I regret nothing", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_21",
+    "type": "reorderAndConjugate",
+    "questionText": "divertir-se / Nós / no parque",
+    "options": ["divertimo-nos", "nos divertimos", "divertem-se"],
+    "correctAnswer": "Nós divertimo-nos no parque",
+    "sourceItem": { "portuguese": "Nós divertimo-nos no parque", "english": "We have fun in the park", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_22",
+    "type": "reorderAndConjugate",
+    "questionText": "de rir / fartar-se / Ela",
+    "options": ["farta-se", "se farta", "farto-me"],
+    "correctAnswer": "Ela farta-se de rir",
+    "sourceItem": { "portuguese": "Ela farta-se de rir", "english": "She gets tired [sick] of laughing / laughs a lot", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_23",
+    "type": "reorderAndConjugate",
+    "questionText": "sentar-se / Onde / você / ?",
+    "options": ["senta-se", "se senta", "sentas-te"],
+    "correctAnswer": "Onde se senta você ?",
+    "sourceItem": { "portuguese": "Onde se senta você?", "english": "Where do you sit?", "notes": "Question with interrogative word (Proclisis)" }
+  },
+  {
+    "id": "u10_24",
+    "type": "reorderAndConjugate",
+    "questionText": "sentar-se / Eu / aqui",
+    "options": ["sento-me", "me sento", "senta-se"],
+    "correctAnswer": "Eu sento-me aqui",
+    "sourceItem": { "portuguese": "Eu sento-me aqui", "english": "I sit here", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_25",
+    "type": "reorderAndConjugate",
+    "questionText": "levantar-se / A que horas / você / ?",
+    "options": ["levanta-se", "se levanta", "levantas-te"],
+    "correctAnswer": "A que horas se levanta você ?",
+    "sourceItem": { "portuguese": "A que horas se levanta você?", "english": "What time do you get up?", "notes": "Question with interrogative phrase (Proclisis)" }
+  },
+  {
+    "id": "u10_26",
+    "type": "reorderAndConjugate",
+    "questionText": "levantar-se / Eu / às 8h",
+    "options": ["levanto-me", "me levanto", "levanta-se"],
+    "correctAnswer": "Eu levanto-me às 8h",
+    "sourceItem": { "portuguese": "Eu levanto-me às 8h", "english": "I get up at 8am", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_27",
+    "type": "reorderAndConjugate",
+    "questionText": "não / vestir-se / Ela / sozinha",
+    "options": ["veste-se", "se veste", "vestem-se"],
+    "correctAnswer": "Ela não se veste sozinha",
+    "sourceItem": { "portuguese": "Ela não se veste sozinha", "english": "She doesn't dress herself", "notes": "Negative (Proclisis)" }
+  },
+  {
+    "id": "u10_28",
+    "type": "reorderAndConjugate",
+    "questionText": "é que / vestir-se / Como / você / ?",
+    "options": ["veste-se", "se veste", "vestes-te"],
+    "correctAnswer": "Como é que você se veste ?",
+    "sourceItem": { "portuguese": "Como é que você se veste?", "english": "How do you dress?", "notes": "Question with 'é que' (Proclisis)" }
+  },
+  {
+    "id": "u10_29",
+    "type": "reorderAndConjugate",
+    "questionText": "lavar-se / Onde / vocês / ?",
+    "options": ["lavam-se", "se lavam", "lava-se"],
+    "correctAnswer": "Onde se lavam vocês ?",
+    "sourceItem": { "portuguese": "Onde se lavam vocês?", "english": "Where do you wash?", "notes": "Question with interrogative word (Proclisis)" }
+  },
+  {
+    "id": "u10_30",
+    "type": "reorderAndConjugate",
+    "questionText": "lavar-se / Nós / no rio",
+    "options": ["lavamo-nos", "nos lavamos", "lavam-se"],
+    "correctAnswer": "Nós lavamo-nos no rio",
+    "sourceItem": { "portuguese": "Nós lavamo-nos no rio", "english": "We wash in the river", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_31",
+    "type": "reorderAndConjugate",
+    "questionText": "não / pentear-se / Tu / hoje",
+    "options": ["penteias-te", "te penteias", "penteia-se"],
+    "correctAnswer": "Tu não te penteias hoje",
+    "sourceItem": { "portuguese": "Tu não te penteias hoje", "english": "You don't comb your hair today", "notes": "Negative (Proclisis)" }
+  },
+  {
+    "id": "u10_32",
+    "type": "reorderAndConjugate",
+    "questionText": "sempre / pentear-se / Eu / de manhã",
+    "options": ["penteio-me", "me penteio", "penteia-se"],
+    "correctAnswer": "Eu penteio-me sempre de manhã",
+    "sourceItem": { "portuguese": "Eu penteio-me sempre de manhã", "english": "I always comb my hair in the morning", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_33",
+    "type": "reorderAndConjugate",
+    "questionText": "lembrar-se / O que é que / você / ?",
+    "options": ["lembra-se", "se lembra", "lembras-te"],
+    "correctAnswer": "O que é que você se lembra ?",
+    "sourceItem": { "portuguese": "O que é que você se lembra?", "english": "What do you remember?", "notes": "Question with 'é que' (Proclisis)" }
+  },
+  {
+    "id": "u10_34",
+    "type": "reorderAndConjugate",
+    "questionText": "esquecer-se / Quem / ?",
+    "options": ["esquece-se", "se esquece", "esqueces-te"],
+    "correctAnswer": "Quem se esquece ?",
+    "sourceItem": { "portuguese": "Quem se esquece?", "english": "Who forgets?", "notes": "Question with 'Quem' (Proclisis)" }
+  },
+  {
+    "id": "u10_35",
+    "type": "reorderAndConjugate",
+    "questionText": "zangar-se / Por que / você / ?",
+    "options": ["zanga-se", "se zanga", "zangas-te"],
+    "correctAnswer": "Por que se zanga você ?",
+    "sourceItem": { "portuguese": "Por que se zanga você?", "english": "Why do you get angry?", "notes": "Question with 'Por que' (Proclisis)" }
+  },
+  {
+    "id": "u10_36",
+    "type": "reorderAndConjugate",
+    "questionText": "não / zangar-se / Eu / nunca",
+    "options": ["zango-me", "me zango", "zanga-se"],
+    "correctAnswer": "Eu não me zango nunca",
+    "sourceItem": { "portuguese": "Eu não me zango nunca", "english": "I never get angry", "notes": "Negative (Proclisis)" }
+  },
+  {
+    "id": "u10_37",
+    "type": "reorderAndConjugate",
+    "questionText": "preocupar-se / O que / te / ?",
+    "options": ["preocupa", "se preocupa", "preocupas"],
+    "correctAnswer": "O que te preocupa ?",
+    "sourceItem": { "portuguese": "O que te preocupa?", "english": "What worries you?", "notes": "Question with 'O que' (Direct object clitic, but similar logic)" }
+  },
+  {
+    "id": "u10_38",
+    "type": "reorderAndConjugate",
+    "questionText": "preocupar-se / Nada / me",
+    "options": ["preocupa", "me preocupa", "preocupas"],
+    "correctAnswer": "Nada me preocupa",
+    "sourceItem": { "portuguese": "Nada me preocupa", "english": "Nothing worries me", "notes": "Negative 'Nada' (Proclisis)" }
+  },
+  {
+    "id": "u10_39",
+    "type": "reorderAndConjugate",
+    "questionText": "apaixonar-se / Por quem / você / ?",
+    "options": ["apaixona-se", "se apaixona", "apaixonas-te"],
+    "correctAnswer": "Por quem se apaixona você ?",
+    "sourceItem": { "portuguese": "Por quem se apaixona você?", "english": "Who do you fall in love with?", "notes": "Question with 'Por quem' (Proclisis)" }
+  },
+  {
+    "id": "u10_40",
+    "type": "reorderAndConjugate",
+    "questionText": "apaixonar-se / Tu / por ela",
+    "options": ["apaixonas-te", "te apaixonas", "apaixona-se"],
+    "correctAnswer": "Tu apaixonas-te por ela",
+    "sourceItem": { "portuguese": "Tu apaixonas-te por ela", "english": "You fall in love with her", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_41",
+    "type": "reorderAndConjugate",
+    "questionText": "divertir-se / Como / vocês / ?",
+    "options": ["divertem-se", "se divertem", "divertimo-nos"],
+    "correctAnswer": "Como se divertem vocês ?",
+    "sourceItem": { "portuguese": "Como se divertem vocês?", "english": "How do you [pl] have fun?", "notes": "Question with 'Como' (Proclisis)" }
+  },
+  {
+    "id": "u10_42",
+    "type": "reorderAndConjugate",
+    "questionText": "divertir-se / Eu / com música",
+    "options": ["divirto-me", "me divirto", "diverte-se"],
+    "correctAnswer": "Eu divirto-me com música",
+    "sourceItem": { "portuguese": "Eu divirto-me com música", "english": "I have fun with music", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_43",
+    "type": "reorderAndConjugate",
+    "questionText": "não / arrepender-se / Tu / hoje",
+    "options": ["arrependes-te", "te arrependes", "arrepende-se"],
+    "correctAnswer": "Tu não te arrependes hoje",
+    "sourceItem": { "portuguese": "Tu não te arrependes hoje", "english": "You don't regret it today", "notes": "Negative (Proclisis)" }
+  },
+  {
+    "id": "u10_44",
+    "type": "reorderAndConjugate",
+    "questionText": "arrepender-se / Eu / amanhã",
+    "options": ["arrependo-me", "me arrependo", "arrepende-se"],
+    "correctAnswer": "Eu arrependo-me amanhã",
+    "sourceItem": { "portuguese": "Eu arrependo-me amanhã", "english": "I regret it tomorrow", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_45",
+    "type": "reorderAndConjugate",
+    "questionText": "queixar-se / Do que / você / ?",
+    "options": ["queixa-se", "se queixa", "queixas-te"],
+    "correctAnswer": "Do que se queixa você ?",
+    "sourceItem": { "portuguese": "Do que se queixa você?", "english": "What do you complain about?", "notes": "Question with 'Do que' (Proclisis)" }
+  },
+  {
+    "id": "u10_46",
+    "type": "reorderAndConjugate",
+    "questionText": "também / queixar-se / Eu",
+    "options": ["queixo-me", "me queixo", "queixa-se"],
+    "correctAnswer": "Eu também me queixo",
+    "sourceItem": { "portuguese": "Eu também me queixo", "english": "I also complain", "notes": "Adverb 'também' triggers Proclisis in many contexts, but especially in statements like this" }
+  },
+  {
+    "id": "u10_47",
+    "type": "reorderAndConjugate",
+    "questionText": "preparar-se / Vocês / para o jantar / ?",
+    "options": ["preparam-se", "se preparam", "prepara-se"],
+    "correctAnswer": "Vocês preparam-se para o jantar ?",
+    "sourceItem": { "portuguese": "Vocês preparam-se para o jantar?", "english": "Do you [pl] prepare for dinner?", "notes": "Positive question (Enclisis)" }
+  },
+  {
+    "id": "u10_48",
+    "type": "reorderAndConjugate",
+    "questionText": "preparar-se / Nós / de pressa",
+    "options": ["preparamo-nos", "nos preparamos", "preparam-se"],
+    "correctAnswer": "Nós preparamo-nos de pressa",
+    "sourceItem": { "portuguese": "Nós preparamo-nos de pressa", "english": "We prepare quickly", "notes": "Positive statement (Enclisis)" }
+  },
+  {
+    "id": "u10_49",
+    "type": "reorderAndConjugate",
+    "questionText": "é que / rir-se / De que / você / ?",
+    "options": ["ri-se", "se ri", "ris-te"],
+    "correctAnswer": "De que é que você se ri ?",
+    "sourceItem": { "portuguese": "De que é que você se ri?", "english": "What are you laughing at?", "notes": "Question with 'é que' (Proclisis)" }
+  },
+  {
+    "id": "u10_50",
+    "type": "reorderAndConjugate",
+    "questionText": "rir-se / Eu / de tudo",
+    "options": ["rio-me", "me rio", "ri-se"],
+    "correctAnswer": "Eu rio-me de tudo",
+    "sourceItem": { "portuguese": "Eu rio-me de tudo", "english": "I laugh at everything", "notes": "Positive statement (Enclisis)" }
+  }
+]

@@ -13,6 +13,8 @@ enum QuestionType {
   jumble,
   @HiveField(3)
   trueFalse,
+  @HiveField(4)
+  reorderAndConjugate,
 }
 
 @HiveType(typeId: 2)
