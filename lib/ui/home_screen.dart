@@ -17,6 +17,7 @@ import 'settings_screen.dart';
 import '../services/verb_service.dart';
 import '../models/language_item.dart';
 import 'exercise/exercise_screen.dart';
+import 'quiz/interrogative_quiz_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -547,6 +548,29 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       },
                               ),
                             ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: _buildGridButton(
+                                context: context,
+                                label: 'Interrogatives',
+                                icon: Icons.contact_support_rounded,
+                                bgColor: Colors.cyan.shade700,
+                                fgColor: Colors.white,
+                                onPressed: (offset) {
+                                  _pushScreen(
+                                    const InterrogativeQuizScreen(),
+                                    offset,
+                                  );
+                                },
+                              ),
+                            ),
+                            const Expanded(flex: 2, child: SizedBox()),
+                            const Expanded(flex: 2, child: SizedBox()),
                           ],
                         ),
                       ],

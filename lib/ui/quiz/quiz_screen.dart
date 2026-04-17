@@ -12,7 +12,15 @@ import '../common/long_press_word_text.dart';
 class QuizScreen extends ConsumerStatefulWidget {
   final String? category;
   final bool isVocabularyQuiz;
-  const QuizScreen({super.key, this.category, this.isVocabularyQuiz = false});
+  final bool isInterrogativeQuiz;
+  final String? interrogativeCategory;
+  const QuizScreen({
+    super.key,
+    this.category,
+    this.isVocabularyQuiz = false,
+    this.isInterrogativeQuiz = false,
+    this.interrogativeCategory,
+  });
 
   @override
   ConsumerState<QuizScreen> createState() => _QuizScreenState();
@@ -30,7 +38,11 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     _ttsService = ref.read(ttsServiceProvider);
     // Start quiz on load
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (widget.isVocabularyQuiz) {
+      if (widget.isInterrogativeQuiz) {
+        await ref.read(quizViewModelProvider.notifier).startInterrogativeQuiz(
+          category: widget.interrogativeCategory,
+        );
+      } else if (widget.isVocabularyQuiz) {
         await ref.read(quizViewModelProvider.notifier).startVocabularyQuiz();
       } else {
         await ref
@@ -401,7 +413,9 @@ class QuestionCardState extends State<QuestionCard> {
                         const SizedBox(width: 48), // Balance
                         Expanded(
                           child: Text(
-                            "Translate this",
+                            widget.question.type == QuestionType.interrogativeMatch
+                                ? "What does this mean?"
+                                : "Translate this",
                             style: TextStyle(
                               color: Theme.of(context).colorScheme.outline,
                               fontSize: 12,

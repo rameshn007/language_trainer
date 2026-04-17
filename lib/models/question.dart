@@ -17,6 +17,8 @@ enum QuestionType {
   reorderAndConjugate,
   @HiveField(5)
   vocabularyMatch,
+  @HiveField(6)
+  interrogativeMatch,
 }
 
 @HiveType(typeId: 2)

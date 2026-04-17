@@ -147,6 +147,17 @@ class QuizViewModel extends Notifier<QuizState> {
     state = QuizState(questions: vocabularyQuestions);
   }
 
+  Future<void> startInterrogativeQuiz({int count = 20, String? category}) async {
+    final storage = ref.read(storageServiceProvider);
+    final seenIds = storage.getSeenQuestionIds();
+    final questions = await _engine.generateInterrogativeQuiz(
+      count: count,
+      category: category,
+      seenIds: seenIds.toList(),
+    );
+    state = QuizState(questions: questions);
+  }
+
   void answerQuestion(String answer) {
     if (state.isFinished || state.currentQuestion == null) return;
 

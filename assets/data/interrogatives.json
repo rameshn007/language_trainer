@@ -1,0 +1,423 @@
+[
+  {
+    "interrogative": "O que",
+    "portuguese": "O que é isso?",
+    "english": "What is this?",
+    "category": "what"
+  },
+  {
+    "interrogative": "O que",
+    "portuguese": "O que você está fazendo?",
+    "english": "What are you doing?",
+    "category": "what"
+  },
+  {
+    "interrogative": "O que",
+    "portuguese": "O que aconteceu?",
+    "english": "What happened?",
+    "category": "what"
+  },
+  {
+    "interrogative": "O que",
+    "portuguese": "O que você quer comer?",
+    "english": "What do you want to eat?",
+    "category": "what"
+  },
+  {
+    "interrogative": "O que",
+    "portuguese": "O que significa esta palavra?",
+    "english": "What does this word mean?",
+    "category": "what"
+  },
+  {
+    "interrogative": "O que",
+    "portuguese": "O que você acha?",
+    "english": "What do you think?",
+    "category": "what"
+  },
+  {
+    "interrogative": "O que",
+    "portuguese": "O que você fez ontem?",
+    "english": "What did you do yesterday?",
+    "category": "what"
+  },
+  {
+    "interrogative": "O que",
+    "portuguese": "O que há para o jantar?",
+    "english": "What is there for dinner?",
+    "category": "what"
+  },
+  {
+    "interrogative": "O que",
+    "portuguese": "O que você precisa?",
+    "english": "What do you need?",
+    "category": "what"
+  },
+
+  {
+    "interrogative": "Por que",
+    "portuguese": "Por que você está triste?",
+    "english": "Why are you sad?",
+    "category": "why"
+  },
+  {
+    "interrogative": "Por que",
+    "portuguese": "Por que você não veio?",
+    "english": "Why didn't you come?",
+    "category": "why"
+  },
+  {
+    "interrogative": "Por que",
+    "portuguese": "Por que é importante?",
+    "english": "Why is it important?",
+    "category": "why"
+  },
+  {
+    "interrogative": "Por que",
+    "portuguese": "Por que você está rindo?",
+    "english": "Why are you laughing?",
+    "category": "why"
+  },
+  {
+    "interrogative": "Por que",
+    "portuguese": "Por que ele saiu?",
+    "english": "Why did he leave?",
+    "category": "why"
+  },
+  {
+    "interrogative": "Por que",
+    "portuguese": "Por que você escolheu isso?",
+    "english": "Why did you choose that?",
+    "category": "why"
+  },
+  {
+    "interrogative": "Por que",
+    "portuguese": "Por que estamos atrasados?",
+    "english": "Why are we late?",
+    "category": "why"
+  },
+  {
+    "interrogative": "Por que",
+    "portuguese": "Por que você não gosta?",
+    "english": "Why don't you like it?",
+    "category": "why"
+  },
+  {
+    "interrogative": "Por que",
+    "portuguese": "Por que isso é tão caro?",
+    "english": "Why is this so expensive?",
+    "category": "why"
+  },
+
+  {
+    "interrogative": "Quem",
+    "portuguese": "Quem é ela?",
+    "english": "Who is she?",
+    "category": "who"
+  },
+  {
+    "interrogative": "Quem",
+    "portuguese": "Quem disse isso?",
+    "english": "Who said that?",
+    "category": "who"
+  },
+  {
+    "interrogative": "Quem",
+    "portuguese": "Quem está na porta?",
+    "english": "Who is at the door?",
+    "category": "who"
+  },
+  {
+    "interrogative": "Quem",
+    "portuguese": "Quem vai comigo?",
+    "english": "Who is coming with me?",
+    "category": "who"
+  },
+  {
+    "interrogative": "Quem",
+    "portuguese": "Quem fez este bolo?",
+    "english": "Who made this cake?",
+    "category": "who"
+  },
+  {
+    "interrogative": "Quem",
+    "portuguese": "Quem é o professor?",
+    "english": "Who is the teacher?",
+    "category": "who"
+  },
+  {
+    "interrogative": "Quem",
+    "portuguese": "Quem te ligou?",
+    "english": "Who called you?",
+    "category": "who"
+  },
+  {
+    "interrogative": "Quem",
+    "portuguese": "Quem você conhece aqui?",
+    "english": "Who do you know here?",
+    "category": "who"
+  },
+
+  {
+    "interrogative": "Quando",
+    "portuguese": "Quando é o seu aniversário?",
+    "english": "When is your birthday?",
+    "category": "when"
+  },
+  {
+    "interrogative": "Quando",
+    "portuguese": "Quando você chega?",
+    "english": "When do you arrive?",
+    "category": "when"
+  },
+  {
+    "interrogative": "Quando",
+    "portuguese": "Quando começa a aula?",
+    "english": "When does the class start?",
+    "category": "when"
+  },
+  {
+    "interrogative": "Quando",
+    "portuguese": "Quando vamos sair?",
+    "english": "When are we going out?",
+    "category": "when"
+  },
+  {
+    "interrogative": "Quando",
+    "portuguese": "Quando ele vai voltar?",
+    "english": "When is he coming back?",
+    "category": "when"
+  },
+  {
+    "interrogative": "Quando",
+    "portuguese": "Quando você nasceu?",
+    "english": "When were you born?",
+    "category": "when"
+  },
+  {
+    "interrogative": "Quando",
+    "portuguese": "Quando termina o filme?",
+    "english": "When does the movie end?",
+    "category": "when"
+  },
+  {
+    "interrogative": "Quando",
+    "portuguese": "Quando podemos visitar?",
+    "english": "When can we visit?",
+    "category": "when"
+  },
+
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde fica a estação?",
+    "english": "Where is the station?",
+    "category": "where"
+  },
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde você mora?",
+    "english": "Where do you live?",
+    "category": "where"
+  },
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde é o banheiro?",
+    "english": "Where is the bathroom?",
+    "category": "where"
+  },
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde está o meu telefone?",
+    "english": "Where is my phone?",
+    "category": "where"
+  },
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde você trabalha?",
+    "english": "Where do you work?",
+    "category": "where"
+  },
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde posso encontrar isso?",
+    "english": "Where can I find this?",
+    "category": "where"
+  },
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde vamos jantar?",
+    "english": "Where are we going for dinner?",
+    "category": "where"
+  },
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde fica o hospital?",
+    "english": "Where is the hospital?",
+    "category": "where"
+  },
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde você nasceu?",
+    "english": "Where were you born?",
+    "category": "where"
+  },
+
+  {
+    "interrogative": "Como",
+    "portuguese": "Como se chama?",
+    "english": "What is your name?",
+    "category": "how"
+  },
+  {
+    "interrogative": "Como",
+    "portuguese": "Como você está?",
+    "english": "How are you?",
+    "category": "how"
+  },
+  {
+    "interrogative": "Como",
+    "portuguese": "Como faço isso?",
+    "english": "How do I do this?",
+    "category": "how"
+  },
+  {
+    "interrogative": "Como",
+    "portuguese": "Como se diz em português?",
+    "english": "How do you say it in Portuguese?",
+    "category": "how"
+  },
+  {
+    "interrogative": "Como",
+    "portuguese": "Como foi o seu dia?",
+    "english": "How was your day?",
+    "category": "how"
+  },
+  {
+    "interrogative": "Como",
+    "portuguese": "Como chego ao centro?",
+    "english": "How do I get to the centre?",
+    "category": "how"
+  },
+  {
+    "interrogative": "Como",
+    "portuguese": "Como está o tempo?",
+    "english": "How is the weather?",
+    "category": "how"
+  },
+  {
+    "interrogative": "Como",
+    "portuguese": "Como funciona isto?",
+    "english": "How does this work?",
+    "category": "how"
+  },
+  {
+    "interrogative": "Como",
+    "portuguese": "Como posso ajudar?",
+    "english": "How can I help?",
+    "category": "how"
+  },
+
+  {
+    "interrogative": "Qual",
+    "portuguese": "Qual é o seu nome?",
+    "english": "What is your name?",
+    "category": "which"
+  },
+  {
+    "interrogative": "Qual",
+    "portuguese": "Qual é o seu favorito?",
+    "english": "Which is your favourite?",
+    "category": "which"
+  },
+  {
+    "interrogative": "Qual",
+    "portuguese": "Qual é a diferença?",
+    "english": "What is the difference?",
+    "category": "which"
+  },
+  {
+    "interrogative": "Qual",
+    "portuguese": "Qual filme você quer ver?",
+    "english": "Which movie do you want to watch?",
+    "category": "which"
+  },
+  {
+    "interrogative": "Qual",
+    "portuguese": "Qual é o caminho certo?",
+    "english": "Which is the right way?",
+    "category": "which"
+  },
+  {
+    "interrogative": "Qual",
+    "portuguese": "Qual livro você recomenda?",
+    "english": "Which book do you recommend?",
+    "category": "which"
+  },
+  {
+    "interrogative": "Qual",
+    "portuguese": "Qual é a sua cor preferida?",
+    "english": "What is your favourite colour?",
+    "category": "which"
+  },
+  {
+    "interrogative": "Qual",
+    "portuguese": "Qual é o problema?",
+    "english": "What is the problem?",
+    "category": "which"
+  },
+
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quanto custa isto?",
+    "english": "How much does this cost?",
+    "category": "how_much"
+  },
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quanto tempo demora?",
+    "english": "How long does it take?",
+    "category": "how_much"
+  },
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quantos anos você tem?",
+    "english": "How old are you?",
+    "category": "how_much"
+  },
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quantas pessoas vêm?",
+    "english": "How many people are coming?",
+    "category": "how_much"
+  },
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quanto dinheiro você tem?",
+    "english": "How much money do you have?",
+    "category": "how_much"
+  },
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quantos irmãos você tem?",
+    "english": "How many siblings do you have?",
+    "category": "how_much"
+  },
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quanto é a conta?",
+    "english": "How much is the bill?",
+    "category": "how_much"
+  },
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quantas vezes por semana?",
+    "english": "How many times a week?",
+    "category": "how_much"
+  },
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quanto falta para chegar?",
+    "english": "How much longer until we arrive?",
+    "category": "how_much"
+  }
+]

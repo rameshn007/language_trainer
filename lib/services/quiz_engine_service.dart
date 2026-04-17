@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:math';
+import 'package:flutter/services.dart' show rootBundle;
 import '../models/language_item.dart';
 import '../models/question.dart';
 
@@ -166,5 +168,115 @@ class QuizEngineService {
       type: QuestionType.multipleChoice,
       sourceItem: target,
     );
+  }
+
+  /// Generates a quiz from Portuguese interrogative phrases.
+  /// Questions show a Portuguese question; options are English translations.
+  Future<List<Question>> generateInterrogativeQuiz({
+    int count = 20,
+    String? category,
+    List<String>? seenIds,
+  }) async {
+    // 1. Load data
+    final String content = await rootBundle.loadString(
+      'assets/data/interrogatives.json',
+    );
+    final List<dynamic> jsonList = jsonDecode(content);
+
+    // 2. Parse all entries
+    final List<Map<String, String>> allEntries = jsonList.map((e) {
+      return {
+        'interrogative': (e['interrogative'] ?? '') as String,
+        'portuguese': (e['portuguese'] ?? '') as String,
+        'english': (e['english'] ?? '') as String,
+        'category': (e['category'] ?? '') as String,
+      };
+    }).toList();
+
+    // 3. Filter by category if specified
+    final filtered = category != null
+        ? allEntries.where((e) => e['category'] == category).toList()
+        : List<Map<String, String>>.from(allEntries);
+
+    if (filtered.isEmpty) return [];
+
+    // 4. Prioritize unseen
+    final unseen = <Map<String, String>>[];
+    final seen = <Map<String, String>>[];
+
+    for (var entry in filtered) {
+      final qId = 'interrog_${entry['portuguese']!.hashCode}';
+      if (seenIds != null && seenIds.contains(qId)) {
+        seen.add(entry);
+      } else {
+        unseen.add(entry);
+      }
+    }
+
+    unseen.shuffle(_random);
+    seen.shuffle(_random);
+
+    final selection = [...unseen, ...seen].take(count).toList();
+
+    // 5. Build questions
+    final List<Question> questions = [];
+    for (var entry in selection) {
+      final correctAnswer = entry['english']!;
+      final entryCategory = entry['category']!;
+      final qId = 'interrog_${entry['portuguese']!.hashCode}';
+
+      // Build distractors: prefer entries from DIFFERENT categories
+      final differentCategory = allEntries
+          .where((e) => e['category'] != entryCategory && e['english'] != correctAnswer)
+          .toList();
+      final sameCategory = allEntries
+          .where((e) => e['category'] == entryCategory && e['english'] != correctAnswer)
+          .toList();
+
+      differentCategory.shuffle(_random);
+      sameCategory.shuffle(_random);
+
+      final List<String> options = [correctAnswer];
+      final Set<String> used = {correctAnswer.toLowerCase().trim()};
+
+      // Take from different categories first
+      for (var d in differentCategory) {
+        if (options.length >= 4) break;
+        final eng = d['english']!;
+        if (!used.contains(eng.toLowerCase().trim())) {
+          options.add(eng);
+          used.add(eng.toLowerCase().trim());
+        }
+      }
+
+      // Fill remaining from same category if needed
+      for (var d in sameCategory) {
+        if (options.length >= 4) break;
+        final eng = d['english']!;
+        if (!used.contains(eng.toLowerCase().trim())) {
+          options.add(eng);
+          used.add(eng.toLowerCase().trim());
+        }
+      }
+
+      options.shuffle(_random);
+
+      questions.add(Question(
+        id: qId,
+        questionText: entry['portuguese']!,
+        options: options,
+        correctAnswer: correctAnswer,
+        type: QuestionType.interrogativeMatch,
+        sourceItem: LanguageItem(
+          id: qId,
+          portuguese: entry['portuguese']!,
+          english: entry['english']!,
+          notes: 'Interrogative: ${entry['interrogative']}',
+        ),
+        category: entryCategory,
+      ));
+    }
+
+    return questions;
   }
 }
