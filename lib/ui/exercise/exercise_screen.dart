@@ -6,6 +6,7 @@ import '../../main.dart';
 import '../../services/tts_service.dart';
 import '../quiz/quiz_screen.dart'; // Reuse QuestionCard
 import '../vocabulary/vocabulary_list_screen.dart';
+import '../widgets/xp_popup.dart';
 
 import 'exercise_view_model.dart';
 
@@ -52,7 +53,14 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
 
   void _handleAnswer(String option) async {
     final viewModel = ref.read(exerciseViewModelProvider.notifier);
-    await viewModel.answerQuestion(option);
+    final xp = await viewModel.answerQuestion(option);
+    if (xp > 0 && mounted) {
+      _showXPPopup(xp);
+    }
+  }
+
+  void _showXPPopup(int xp) {
+    XPPopup.show(context, xp);
   }
 
   void _handleNext() async {

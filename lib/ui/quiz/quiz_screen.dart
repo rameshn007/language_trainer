@@ -10,6 +10,7 @@ import '../../services/progress_service.dart';
 import '../../main.dart';
 import '../vocabulary/vocabulary_list_screen.dart';
 import '../common/long_press_word_text.dart';
+import '../widgets/xp_popup.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final String? category;
@@ -95,15 +96,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   }
 
   void _showXPPopup(int xp) {
-    final overlay = Overlay.of(context);
-    late OverlayEntry entry;
-    entry = OverlayEntry(
-      builder: (context) => _XPPopup(
-        xp: xp,
-        onDone: () => entry.remove(),
-      ),
-    );
-    overlay.insert(entry);
+    XPPopup.show(context, xp);
   }
 
   void _handleNext() {
@@ -991,9 +984,15 @@ class QuestionCardState extends State<QuestionCard> {
 
   void _checkReorderAnswer() {
     final userAnswer = _selectedWords!.join(' ');
-    // Simple normalization: remove trailing punctuation if needed or just exact match
-    if (userAnswer.trim() == widget.question.correctAnswer.trim() || 
-        userAnswer.trim() == widget.question.correctAnswer.replaceAll('.', '').trim()) {
+    final isCorrect = userAnswer.trim() == widget.question.correctAnswer.trim() || 
+        userAnswer.trim() == widget.question.correctAnswer.replaceAll('.', '').trim();
+
+    if (!_hasAttempted) {
+      widget.onAnswer(isCorrect ? widget.question.correctAnswer : "incorrect");
+      _hasAttempted = true;
+    }
+
+    if (isCorrect) {
       setState(() {
         _isCorrect = true;
       });
@@ -1023,100 +1022,6 @@ class QuestionCardState extends State<QuestionCard> {
   }
 }
 
-// ─── XP Pop-up Overlay ───────────────────────────────────────────────────────
-
-class _XPPopup extends StatefulWidget {
-  final int xp;
-  final VoidCallback onDone;
-
-  const _XPPopup({required this.xp, required this.onDone});
-
-  @override
-  State<_XPPopup> createState() => _XPPopupState();
-}
-
-class _XPPopupState extends State<_XPPopup> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _opacity;
-  late Animation<Offset> _position;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 1200),
-      vsync: this,
-    );
-    _opacity = Tween(begin: 1.0, end: 0.0).animate(
-      CurvedAnimation(parent: _controller, curve: const Interval(0.6, 1.0)),
-    );
-    _position = Tween(
-      begin: const Offset(0, 0),
-      end: const Offset(0, -80),
-    ).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
-    _controller.forward().then((_) => widget.onDone());
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: MediaQuery.of(context).size.height * 0.35,
-      left: 0,
-      right: 0,
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return Transform.translate(
-            offset: _position.value,
-            child: Opacity(
-              opacity: _opacity.value,
-              child: child,
-            ),
-          );
-        },
-        child: Center(
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            decoration: BoxDecoration(
-              color: Colors.amber.shade700,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.amber.withValues(alpha: 0.4),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(Icons.bolt, color: Colors.white, size: 24),
-                const SizedBox(width: 6),
-                Text(
-                  '+${widget.xp} XP',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 // ─── Result Stat Card ────────────────────────────────────────────────────────
 
