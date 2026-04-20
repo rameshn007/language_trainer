@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import '../models/language_item.dart';
+import '../models/progress_data.dart';
 import '../services/voice_quiz_service.dart';
+import '../services/progress_service.dart';
 import '../main.dart';
 import 'dart:math';
 import 'vocabulary/vocabulary_list_screen.dart';
@@ -34,6 +36,8 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
 
   double _speechRate = 0.5; // 0.5 is often "normal" on iOS
   double _soundLevel = 0.0;
+  DateTime? _sessionStartTime;
+  int _sessionXP = 0;
   StreamSubscription<double>? _levelSubscription;
 
   bool _isPlaying = false;
@@ -150,6 +154,8 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         _isPlaying = true;
         _correctCount = 0;
         _totalAsked = 0;
+        _sessionXP = 0;
+        _sessionStartTime = DateTime.now();
       });
       await _nextItem();
     }
@@ -159,6 +165,8 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
     if (!mounted) return;
 
     if (_sessionQueue.isEmpty) {
+      // Record session completion with the new progress system
+      await _recordSessionComplete();
       setState(() {
         _statusText = "Session Complete!";
         _isPlaying = false;
@@ -253,6 +261,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
     }
 
     final storage = ref.read(storageServiceProvider);
+    final progressService = ref.read(progressServiceProvider.notifier);
 
     if (!mounted) return;
 
@@ -279,8 +288,14 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         // await _voiceService.setSpeechRate(_speechRate); // Restore
       }
 
-      // Update Stats
-      await storage.updateMastery(_currentItem!.id, true);
+      // Record via progress service for XP + mastery
+      final xp = await progressService.recordQuizAnswer(
+        storage: storage,
+        itemId: _currentItem!.id,
+        correct: true,
+        firstAttempt: true,
+      );
+      _sessionXP += xp;
     } else {
       setState(() {
         _statusText = "Incorrect. It was: ${_currentItem!.english}";
@@ -300,8 +315,13 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         // await _voiceService.setSpeechRate(_speechRate);
       }
 
-      // Update Stats
-      await storage.updateMastery(_currentItem!.id, false);
+      // Record incorrect via progress service
+      final xp = await progressService.recordQuizAnswer(
+        storage: storage,
+        itemId: _currentItem!.id,
+        correct: false,
+      );
+      _sessionXP += xp;
 
       // RETRY LOGIC: Add back to queue (random position or simple append?)
       // Append for now to retry at end of session (or sooner?)
@@ -324,12 +344,33 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
 
   Future<void> _stopSession() async {
     _voiceService.stop();
+    // Record partial session if any questions were answered
+    if (_totalAsked > 0) {
+      await _recordSessionComplete();
+    }
     if (mounted) {
       setState(() {
         _isPlaying = false;
         _statusText = "Stopped";
       });
     }
+  }
+
+  Future<void> _recordSessionComplete() async {
+    final storage = ref.read(storageServiceProvider);
+    final progressService = ref.read(progressServiceProvider.notifier);
+    final durationSec = _sessionStartTime != null
+        ? DateTime.now().difference(_sessionStartTime!).inSeconds
+        : 0;
+
+    await progressService.recordSessionComplete(
+      storage: storage,
+      activityType: ActivityType.voiceTrainer,
+      score: _correctCount,
+      total: _totalAsked,
+      durationSeconds: durationSec,
+      sessionXP: _sessionXP,
+    );
   }
 
   @override
@@ -363,8 +404,22 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
             if (_isPlaying)
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: LinearProgressIndicator(
-                  value: _totalAsked > 0 ? _correctCount / _totalAsked : 0,
+                child: Column(
+                  children: [
+                    LinearProgressIndicator(
+                      value: _totalAsked > 0 ? _correctCount / _totalAsked : 0,
+                    ),
+                    const SizedBox(height: 8),
+                    if (_totalAsked > 0)
+                      Text(
+                        '$_correctCount / $_totalAsked correct  •  $_sessionXP XP',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                  ],
                 ),
               ),
 

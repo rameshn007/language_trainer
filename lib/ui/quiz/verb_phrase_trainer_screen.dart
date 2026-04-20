@@ -8,7 +8,9 @@ import 'package:animate_do/animate_do.dart';
 
 import '../../main.dart';
 import '../../models/verb_phrase.dart';
+import '../../models/progress_data.dart';
 import '../../services/tts_service.dart';
+import '../../services/progress_service.dart';
 import '../common/long_press_word_text.dart';
 import 'single_verb_conjugation_screen.dart';
 
@@ -27,6 +29,13 @@ class _VerbPhraseTrainerScreenState
   int _currentIndex = 0;
   bool _isFlipped = false;
   late bool _isEnglishFront;
+  bool _hasRated = false;
+
+  // Scoring state
+  int _correctCount = 0;
+  int _totalRated = 0;
+  int _sessionXP = 0;
+  DateTime? _sessionStartTime;
 
   late final TtsService _ttsService;
   final _random = Random();
@@ -53,6 +62,7 @@ class _VerbPhraseTrainerScreenState
         _currentIndex = 0;
         _isEnglishFront = _random.nextBool();
         _isLoading = false;
+        _sessionStartTime = DateTime.now();
       });
     } catch (e) {
       if (!mounted) return;
@@ -70,15 +80,22 @@ class _VerbPhraseTrainerScreenState
       setState(() {
         _currentIndex++;
         _isFlipped = false;
+        _hasRated = false;
         _isEnglishFront = _random.nextBool();
       });
     } else {
-      // Re-shuffle when finished
+      // Session complete — record it, then reshuffle
+      _recordSessionComplete();
       setState(() {
         _phrases.shuffle(_random);
         _currentIndex = 0;
         _isFlipped = false;
+        _hasRated = false;
         _isEnglishFront = _random.nextBool();
+        _correctCount = 0;
+        _totalRated = 0;
+        _sessionXP = 0;
+        _sessionStartTime = DateTime.now();
       });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Reshuffled! Starting again.')),
@@ -91,6 +108,7 @@ class _VerbPhraseTrainerScreenState
       setState(() {
         _currentIndex--;
         _isFlipped = false;
+        _hasRated = false;
         _isEnglishFront = _random.nextBool();
       });
     }
@@ -104,10 +122,49 @@ class _VerbPhraseTrainerScreenState
     if (_isFlipped) {
       // Speak the Portuguese side automatically when revealed
       final phrase = _phrases[_currentIndex];
-      // If the back is portuguese or the front is portuguese, speak the pt phrase.
-      // Usually, it's good to just speak the portuguese phrase whenever it is revealed or shown.
       _ttsService.speak(phrase.portuguese, language: 'pt');
     }
+  }
+
+  Future<void> _rateAnswer(bool correct) async {
+    if (_hasRated) return;
+
+    final phrase = _phrases[_currentIndex];
+    final itemId = 'verbphrase_${phrase.verb}_$_currentIndex';
+    final storage = ref.read(storageServiceProvider);
+    final progressService = ref.read(progressServiceProvider.notifier);
+
+    final xp = await progressService.recordQuizAnswer(
+      storage: storage,
+      itemId: itemId,
+      correct: correct,
+      firstAttempt: correct,
+    );
+
+    setState(() {
+      _hasRated = true;
+      _totalRated++;
+      _sessionXP += xp;
+      if (correct) _correctCount++;
+    });
+  }
+
+  Future<void> _recordSessionComplete() async {
+    if (_totalRated == 0) return;
+    final storage = ref.read(storageServiceProvider);
+    final progressService = ref.read(progressServiceProvider.notifier);
+    final durationSec = _sessionStartTime != null
+        ? DateTime.now().difference(_sessionStartTime!).inSeconds
+        : 0;
+
+    await progressService.recordSessionComplete(
+      storage: storage,
+      activityType: ActivityType.phraseTrainer,
+      score: _correctCount,
+      total: _totalRated,
+      durationSeconds: durationSec,
+      sessionXP: _sessionXP,
+    );
   }
 
   @override
@@ -206,6 +263,50 @@ class _VerbPhraseTrainerScreenState
               ),
 
               const Spacer(),
+
+              // Self-assessment buttons (appear after flip)
+              if (_isFlipped)
+                FadeInUp(
+                  duration: const Duration(milliseconds: 300),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _buildRatingButton(
+                          label: 'Missed it',
+                          icon: Icons.close,
+                          color: Colors.red.shade400,
+                          isSelected: _hasRated && _totalRated > 0 && !(_correctCount == _totalRated),
+                          onPressed: _hasRated ? null : () => _rateAnswer(false),
+                        ),
+                        const SizedBox(width: 16),
+                        _buildRatingButton(
+                          label: 'Got it!',
+                          icon: Icons.check,
+                          color: Colors.green.shade400,
+                          isSelected: _hasRated,
+                          onPressed: _hasRated ? null : () => _rateAnswer(true),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+              // Score indicator
+              if (_totalRated > 0)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    '$_correctCount / $_totalRated correct  •  $_sessionXP XP',
+                    style: TextStyle(
+                      color: Colors.grey.shade500,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -428,6 +529,29 @@ class _VerbPhraseTrainerScreenState
             },
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildRatingButton({
+    required String label,
+    required IconData icon,
+    required Color color,
+    required bool isSelected,
+    required VoidCallback? onPressed,
+  }) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon, size: 20),
+      label: Text(label),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? color.withValues(alpha: 0.8) : null,
+        foregroundColor: isSelected ? Colors.white : color,
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+          side: BorderSide(color: color, width: 1.5),
+        ),
       ),
     );
   }

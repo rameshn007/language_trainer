@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/language_item.dart';
+import '../models/progress_data.dart';
 import '../services/tts_service.dart';
+import '../services/progress_service.dart';
 import '../main.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
@@ -20,6 +22,11 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
   bool _isAutoPlaying = false;
   double _speechRate = 0.8;
 
+  // Scoring state
+  int _phrasesReviewed = 0;
+  int _sessionXP = 0;
+  DateTime? _sessionStartTime;
+
   late final TtsService _ttsService;
 
   @override
@@ -31,6 +38,9 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
 
   @override
   void dispose() {
+    if (_isAutoPlaying) {
+      _recordSessionComplete();
+    }
     _isAutoPlaying = false;
     _ttsService.stop();
     super.dispose();
@@ -101,9 +111,13 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
     });
 
     if (_isAutoPlaying) {
+      _sessionStartTime = DateTime.now();
+      _phrasesReviewed = 0;
+      _sessionXP = 0;
       _runAutoPlayLoop();
     } else {
       _ttsService.stop();
+      _recordSessionComplete();
     }
   }
 
@@ -143,8 +157,13 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
       // Move to next
       if (!_isAutoPlaying || !mounted) break;
       if (_currentIndex < _phrases.length - 1) {
+        // Award XP for the completed phrase
+        await _awardPhraseXP();
         setState(() => _currentIndex++);
       } else {
+        // Last phrase — award XP and record session
+        await _awardPhraseXP();
+        await _recordSessionComplete();
         // Stop if at end
         setState(() => _isAutoPlaying = false);
       }
@@ -153,6 +172,7 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
 
   void _nextPhrase() {
     if (_currentIndex < _phrases.length - 1) {
+      _awardPhraseXP();
       setState(() => _currentIndex++);
     }
   }
@@ -161,6 +181,42 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
     if (_currentIndex > 0) {
       setState(() => _currentIndex--);
     }
+  }
+
+  Future<void> _awardPhraseXP() async {
+    final phrase = _phrases[_currentIndex];
+    final storage = ref.read(storageServiceProvider);
+    final progressService = ref.read(progressServiceProvider.notifier);
+
+    final xp = await progressService.recordQuizAnswer(
+      storage: storage,
+      itemId: phrase.id,
+      correct: true,
+      firstAttempt: true,
+    );
+
+    setState(() {
+      _phrasesReviewed++;
+      _sessionXP += xp;
+    });
+  }
+
+  Future<void> _recordSessionComplete() async {
+    if (_phrasesReviewed == 0) return;
+    final storage = ref.read(storageServiceProvider);
+    final progressService = ref.read(progressServiceProvider.notifier);
+    final durationSec = _sessionStartTime != null
+        ? DateTime.now().difference(_sessionStartTime!).inSeconds
+        : 0;
+
+    await progressService.recordSessionComplete(
+      storage: storage,
+      activityType: ActivityType.phraseTrainer,
+      score: _phrasesReviewed,
+      total: _phrasesReviewed,
+      durationSeconds: durationSec,
+      sessionXP: _sessionXP,
+    );
   }
 
   void _cycleSpeed() {
@@ -241,6 +297,21 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
               ),
             ),
             const SizedBox(height: 30),
+
+            // Score indicator
+            if (_phrasesReviewed > 0)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Text(
+                  '$_phrasesReviewed phrases reviewed  •  $_sessionXP XP',
+                  style: TextStyle(
+                    color: Colors.grey.shade500,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

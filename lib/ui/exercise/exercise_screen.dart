@@ -52,13 +52,13 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
 
   void _handleAnswer(String option) async {
     final viewModel = ref.read(exerciseViewModelProvider.notifier);
-    viewModel.answerQuestion(option);
+    await viewModel.answerQuestion(option);
   }
 
-  void _handleNext() {
+  void _handleNext() async {
     final viewModel = ref.read(exerciseViewModelProvider.notifier);
     _swiperController.swipe(CardSwiperDirection.left);
-    viewModel.nextQuestion();
+    await viewModel.nextQuestion();
   }
 
   void _showHint() {
@@ -136,10 +136,33 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
-              Text(
-                'Score: ${quizState.score}/${quizState.questions.length}',
+               Text(
+                'Correct: ${quizState.score}/${quizState.questions.length}',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
+              const SizedBox(height: 8),
+              Text(
+                '+${quizState.totalXPEarned} XP earned',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.amber,
+                ),
+              ),
+              if (quizState.dailyGoalJustMet)
+                Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: FadeIn(
+                    child: const Text(
+                      'Daily Goal Met! 🎯',
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
               const SizedBox(height: 40),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
@@ -217,7 +240,19 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
               minHeight: 10,
               borderRadius: BorderRadius.circular(5),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
+            if (quizState.sessionXP > 0 || quizState.score > 0)
+              FadeIn(
+                child: Text(
+                  '${quizState.score} correct  •  ${quizState.sessionXP} XP',
+                  style: TextStyle(
+                    color: Colors.grey.shade600,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                ),
+              ),
+            const SizedBox(height: 8),
             Expanded(
               child: CardSwiper(
                 controller: _swiperController,

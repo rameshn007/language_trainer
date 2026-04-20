@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/verb.dart';
+import '../../models/progress_data.dart';
 import '../../services/verb_service.dart';
+import '../../services/progress_service.dart';
 import '../../main.dart';
 
 final verbConjugationViewModelProvider =
@@ -18,6 +20,10 @@ class VerbConjugationState {
   final List<String> shuffledConjugations;
   final String? selectedPronoun;
   final String? selectedConjugation;
+  final int sessionScore;
+  final int sessionTotal;
+  final int sessionXP;
+  final int verbsCompleted;
 
   VerbConjugationState({
     required this.verbs,
@@ -27,6 +33,10 @@ class VerbConjugationState {
     this.shuffledConjugations = const [],
     this.selectedPronoun,
     this.selectedConjugation,
+    this.sessionScore = 0,
+    this.sessionTotal = 0,
+    this.sessionXP = 0,
+    this.verbsCompleted = 0,
   });
 
   VerbConjugationState copyWith({
@@ -38,6 +48,10 @@ class VerbConjugationState {
     String? selectedPronoun,
     String? selectedConjugation,
     bool clearSelections = false,
+    int? sessionScore,
+    int? sessionTotal,
+    int? sessionXP,
+    int? verbsCompleted,
   }) {
     return VerbConjugationState(
       verbs: verbs ?? this.verbs,
@@ -47,6 +61,10 @@ class VerbConjugationState {
       shuffledConjugations: shuffledConjugations ?? this.shuffledConjugations,
       selectedPronoun: clearSelections ? null : (selectedPronoun ?? this.selectedPronoun),
       selectedConjugation: clearSelections ? null : (selectedConjugation ?? this.selectedConjugation),
+      sessionScore: sessionScore ?? this.sessionScore,
+      sessionTotal: sessionTotal ?? this.sessionTotal,
+      sessionXP: sessionXP ?? this.sessionXP,
+      verbsCompleted: verbsCompleted ?? this.verbsCompleted,
     );
   }
 
@@ -64,6 +82,7 @@ class VerbConjugationState {
 
 class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
   final _random = Random();
+  DateTime? _sessionStartTime;
 
   @override
   VerbConjugationState build() {
@@ -73,6 +92,7 @@ class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
 
   Future<void> loadVerbs() async {
     state = state.copyWith(isLoading: true);
+    _sessionStartTime = DateTime.now();
     final verbService = ref.read(verbServiceProvider);
     final verbs = await verbService.loadVerbs();
     verbs.shuffle(_random);
@@ -80,6 +100,10 @@ class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
       verbs: verbs,
       currentVerbIndex: 0,
       isLoading: false,
+      sessionScore: 0,
+      sessionTotal: 0,
+      sessionXP: 0,
+      verbsCompleted: 0,
     );
     _setupCurrentVerb();
   }
@@ -128,6 +152,11 @@ class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
       final verb = state.currentVerb;
       if (verb == null) return;
 
+      final storage = ref.read(storageServiceProvider);
+      final progressService = ref.read(progressServiceProvider.notifier);
+      // Use the verb infinitive as the item id for progress tracking
+      final itemId = 'verb_${verb.infinitive}';
+
       if (verb.conjugations[pronoun] == conjugation) {
         // Match!
         final newMatches = Map<String, String>.from(state.matchedPairs);
@@ -135,13 +164,44 @@ class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
         state = state.copyWith(
           matchedPairs: newMatches,
           clearSelections: true,
+          sessionScore: state.sessionScore + 1,
+          sessionTotal: state.sessionTotal + 1,
         );
+
+        // Record correct via progress service
+        progressService.recordQuizAnswer(
+          storage: storage,
+          itemId: itemId,
+          correct: true,
+          firstAttempt: true,
+        ).then((xp) {
+          state = state.copyWith(sessionXP: state.sessionXP + xp);
+        });
         
         // Speak the combo
         ref.read(ttsServiceProvider).speak('$pronoun $conjugation', language: 'pt');
+
+        // Check if all pairs matched → record verb completed
+        if (newMatches.length == verb.conjugations.length) {
+          state = state.copyWith(
+            verbsCompleted: state.verbsCompleted + 1,
+          );
+        }
       } else {
         // Mismatch, reset selections
-        state = state.copyWith(clearSelections: true);
+        state = state.copyWith(
+          clearSelections: true,
+          sessionTotal: state.sessionTotal + 1,
+        );
+
+        // Record incorrect via progress service
+        progressService.recordQuizAnswer(
+          storage: storage,
+          itemId: itemId,
+          correct: false,
+        ).then((xp) {
+          state = state.copyWith(sessionXP: state.sessionXP + xp);
+        });
       }
     }
   }
@@ -151,15 +211,43 @@ class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
     
     int nextIndex = state.currentVerbIndex + 1;
     if (nextIndex >= state.verbs.length) {
+      // Record session completion before reshuffling
+      _recordSessionComplete();
       // Loop back or end, here we loop back
       nextIndex = 0;
       // Reshuffle if repeating
       final newVerbs = List<Verb>.from(state.verbs)..shuffle(_random);
-      state = state.copyWith(verbs: newVerbs, currentVerbIndex: nextIndex);
+      state = state.copyWith(
+        verbs: newVerbs,
+        currentVerbIndex: nextIndex,
+        sessionScore: 0,
+        sessionTotal: 0,
+        sessionXP: 0,
+        verbsCompleted: 0,
+      );
+      _sessionStartTime = DateTime.now();
     } else {
       state = state.copyWith(currentVerbIndex: nextIndex);
     }
     
     _setupCurrentVerb();
+  }
+
+  Future<void> _recordSessionComplete() async {
+    if (state.sessionTotal == 0) return;
+    final storage = ref.read(storageServiceProvider);
+    final progressService = ref.read(progressServiceProvider.notifier);
+    final durationSec = _sessionStartTime != null
+        ? DateTime.now().difference(_sessionStartTime!).inSeconds
+        : 0;
+
+    await progressService.recordSessionComplete(
+      storage: storage,
+      activityType: ActivityType.verbConjugation,
+      score: state.sessionScore,
+      total: state.sessionTotal,
+      durationSeconds: durationSec,
+      sessionXP: state.sessionXP,
+    );
   }
 }

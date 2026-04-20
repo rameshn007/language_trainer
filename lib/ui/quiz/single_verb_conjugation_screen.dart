@@ -139,6 +139,22 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
 
               const SizedBox(height: 20),
 
+              // Score indicator
+              if (state.sessionTotal > 0)
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Text(
+                      '${state.sessionScore} / ${state.sessionTotal} correct  •  ${state.sessionXP} XP',
+                      style: TextStyle(
+                        color: Colors.grey.shade500,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ),
+
               // Footer (Translation & Next Button when all matched)
               SizedBox(
                 height: 120, // fixed height to avoid layout jump

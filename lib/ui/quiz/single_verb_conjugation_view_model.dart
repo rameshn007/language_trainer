@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/verb.dart';
+import '../../models/progress_data.dart';
 import '../../services/verb_service.dart';
+import '../../services/progress_service.dart';
 import '../../main.dart';
 
 class SingleVerbConjugationState {
@@ -13,6 +15,9 @@ class SingleVerbConjugationState {
   final List<String> shuffledConjugations;
   final String? selectedPronoun;
   final String? selectedConjugation;
+  final int sessionScore;
+  final int sessionTotal;
+  final int sessionXP;
 
   const SingleVerbConjugationState({
     this.verb,
@@ -22,6 +27,9 @@ class SingleVerbConjugationState {
     this.shuffledConjugations = const [],
     this.selectedPronoun,
     this.selectedConjugation,
+    this.sessionScore = 0,
+    this.sessionTotal = 0,
+    this.sessionXP = 0,
   });
 
   SingleVerbConjugationState copyWith({
@@ -33,6 +41,9 @@ class SingleVerbConjugationState {
     String? selectedPronoun,
     String? selectedConjugation,
     bool clearSelections = false,
+    int? sessionScore,
+    int? sessionTotal,
+    int? sessionXP,
   }) {
     return SingleVerbConjugationState(
       verb: verb ?? this.verb,
@@ -42,6 +53,9 @@ class SingleVerbConjugationState {
       shuffledConjugations: shuffledConjugations ?? this.shuffledConjugations,
       selectedPronoun: clearSelections ? null : (selectedPronoun ?? this.selectedPronoun),
       selectedConjugation: clearSelections ? null : (selectedConjugation ?? this.selectedConjugation),
+      sessionScore: sessionScore ?? this.sessionScore,
+      sessionTotal: sessionTotal ?? this.sessionTotal,
+      sessionXP: sessionXP ?? this.sessionXP,
     );
   }
 
@@ -124,17 +138,65 @@ class SingleVerbConjugationViewModel extends Notifier<SingleVerbConjugationState
       final verb = state.verb;
       if (verb == null) return;
 
+      final storage = ref.read(storageServiceProvider);
+      final progressService = ref.read(progressServiceProvider.notifier);
+      final itemId = 'verb_${verb.infinitive}';
+
       if (verb.conjugations[pronoun] == conjugation) {
         final newMatches = Map<String, String>.from(state.matchedPairs);
         newMatches[pronoun] = conjugation;
         state = state.copyWith(
           matchedPairs: newMatches,
           clearSelections: true,
+          sessionScore: state.sessionScore + 1,
+          sessionTotal: state.sessionTotal + 1,
         );
+
+        // Record correct via progress service
+        progressService.recordQuizAnswer(
+          storage: storage,
+          itemId: itemId,
+          correct: true,
+          firstAttempt: true,
+        ).then((xp) {
+          state = state.copyWith(sessionXP: state.sessionXP + xp);
+        });
+
         ref.read(ttsServiceProvider).speak('$pronoun $conjugation', language: 'pt');
+
+        // Check if finished
+        if (newMatches.length == verb.conjugations.length) {
+          _recordSessionComplete();
+        }
       } else {
-        state = state.copyWith(clearSelections: true);
+        state = state.copyWith(
+          clearSelections: true,
+          sessionTotal: state.sessionTotal + 1,
+        );
+
+        // Record incorrect
+        progressService.recordQuizAnswer(
+          storage: storage,
+          itemId: itemId,
+          correct: false,
+        ).then((xp) {
+          state = state.copyWith(sessionXP: state.sessionXP + xp);
+        });
       }
     }
+  }
+
+  Future<void> _recordSessionComplete() async {
+    if (state.sessionTotal == 0) return;
+    final storage = ref.read(storageServiceProvider);
+    final progressService = ref.read(progressServiceProvider.notifier);
+
+    await progressService.recordSessionComplete(
+      storage: storage,
+      activityType: ActivityType.verbConjugation,
+      score: state.sessionScore,
+      total: state.sessionTotal,
+      sessionXP: state.sessionXP,
+    );
   }
 }
