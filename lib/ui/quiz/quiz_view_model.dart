@@ -53,6 +53,9 @@ class QuizViewModel extends Notifier<QuizState> {
     final items = storage.getAllItems();
     if (items.isEmpty) return;
 
+    // Get mastery distribution for adaptive learning
+    final masteryDistribution = storage.getMasteryDistribution();
+    
     // Load JSON questions
     var jsonQuestions = await _loader.loadQuestions(
       'assets/data/questions.json',
@@ -67,7 +70,11 @@ class QuizViewModel extends Notifier<QuizState> {
     }
 
     final algoQuestions = (category == null)
-        ? _engine.generateQuiz(items, count: count)
+        ? _engine.generateAdaptiveQuiz(
+            items,
+            count: count,
+            masteryDistribution: masteryDistribution,
+          )
         : <Question>[];
 
     // Combine all potential questions
@@ -137,9 +144,13 @@ class QuizViewModel extends Notifier<QuizState> {
     final items = storage.getAllItems();
     if (items.isEmpty) return;
 
+    final masteryDistribution = storage.getMasteryDistribution();
     final seenIds = storage.getSeenQuestionIds();
-    final vocabularyQuestions = _engine.generateVocabularyQuiz(
+    
+    // Use adaptive version with mastery data
+    final vocabularyQuestions = _engine.generateAdaptiveVocabularyQuiz(
       items,
+      masteryDistribution: masteryDistribution,
       count: count,
       seenIds: seenIds.toList(),
     );
@@ -149,8 +160,12 @@ class QuizViewModel extends Notifier<QuizState> {
 
   Future<void> startInterrogativeQuiz({int count = 20, String? category}) async {
     final storage = ref.read(storageServiceProvider);
+    final masteryDistribution = storage.getMasteryDistribution();
     final seenIds = storage.getSeenQuestionIds();
-    final questions = await _engine.generateInterrogativeQuiz(
+    
+    // Use adaptive version if we have mastery data
+    final questions = await _engine.generateAdaptiveInterrogativeQuiz(
+      masteryDistribution: masteryDistribution,
       count: count,
       category: category,
       seenIds: seenIds.toList(),
@@ -175,7 +190,12 @@ class QuizViewModel extends Notifier<QuizState> {
       _updateMastery(state.currentQuestion!.sourceItem, false);
     }
 
-    state = state.copyWith(score: newScore);
+    // Update state with score and current index
+    final newIndex = state.currentIndex + 1;
+    state = state.copyWith(
+      score: newScore,
+      currentIndex: newIndex,
+    );
   }
 
   void nextQuestion() {

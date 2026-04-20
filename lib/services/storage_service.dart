@@ -125,6 +125,40 @@ class StorageService {
     await updateItem(item);
   }
 
-  // Helper to check if we have data seeded
+  /// Gets mastery distribution statistics for adaptive learning
+  Map<int, int> getMasteryDistribution() {
+    final distro = <int, int>{};
+    if (_itemsBox == null) return distro;
+    
+    for (var item in _itemsBox!.values) {
+      distro[item.masteryLevel] = (distro[item.masteryLevel] ?? 0) + 1;
+    }
+    return distro;
+  }
+
+  /// Gets items grouped by mastery level for adaptive question selection
+  Map<int, List<LanguageItem>> getItemsByMastery() {
+    final result = <int, List<LanguageItem>>{};
+    if (_itemsBox == null) return result;
+    
+    for (var item in _itemsBox!.values) {
+      result.putIfAbsent(item.masteryLevel, () => []).add(item);
+    }
+    return result;
+  }
+
+  /// Gets average mastery level across all items
+  double getAverageMastery() {
+    final items = getAllItems();
+    if (items.isEmpty) return 0.0;
+    
+    double sum = 0;
+    for (var item in items) {
+      sum += item.masteryLevel;
+    }
+    return sum / items.length;
+  }
+
+  /// Helper to check if we have data seeded
   bool get hasData => _itemsBox?.isNotEmpty ?? false;
 }

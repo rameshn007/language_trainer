@@ -11,3 +11,4 @@ assets/.DS_Store
 opencode.json
 opencode.json~
 .opencode.json.un~
+pubspec.lock
