@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/question.dart';
-import '../../models/language_item.dart';
+import '../../models/progress_data.dart';
 import '../../services/quiz_engine_service.dart';
+import '../../services/progress_service.dart';
 
 import '../../services/question_loader_service.dart';
 import '../../main.dart'; // for storageServiceProvider
@@ -11,12 +12,20 @@ class QuizState {
   final int currentIndex;
   final int score;
   final bool isFinished;
+  final int sessionXP;
+  final int sessionBonusXP; // Completion + daily goal bonus
+  final bool dailyGoalJustMet;
+  final Map<String, bool> firstAttemptTracker; // questionId -> was first attempt correct
 
   QuizState({
     required this.questions,
     this.currentIndex = 0,
     this.score = 0,
     this.isFinished = false,
+    this.sessionXP = 0,
+    this.sessionBonusXP = 0,
+    this.dailyGoalJustMet = false,
+    this.firstAttemptTracker = const {},
   });
 
   Question? get currentQuestion =>
@@ -24,17 +33,27 @@ class QuizState {
       ? questions[currentIndex]
       : null;
 
+  int get totalXPEarned => sessionXP + sessionBonusXP;
+
   QuizState copyWith({
     List<Question>? questions,
     int? currentIndex,
     int? score,
     bool? isFinished,
+    int? sessionXP,
+    int? sessionBonusXP,
+    bool? dailyGoalJustMet,
+    Map<String, bool>? firstAttemptTracker,
   }) {
     return QuizState(
       questions: questions ?? this.questions,
       currentIndex: currentIndex ?? this.currentIndex,
       score: score ?? this.score,
       isFinished: isFinished ?? this.isFinished,
+      sessionXP: sessionXP ?? this.sessionXP,
+      sessionBonusXP: sessionBonusXP ?? this.sessionBonusXP,
+      dailyGoalJustMet: dailyGoalJustMet ?? this.dailyGoalJustMet,
+      firstAttemptTracker: firstAttemptTracker ?? this.firstAttemptTracker,
     );
   }
 }
@@ -42,6 +61,7 @@ class QuizState {
 class QuizViewModel extends Notifier<QuizState> {
   final QuizEngineService _engine = QuizEngineService();
   final QuestionLoaderService _loader = QuestionLoaderService();
+  DateTime? _sessionStartTime;
 
   @override
   QuizState build() {
@@ -49,6 +69,7 @@ class QuizViewModel extends Notifier<QuizState> {
   }
 
   Future<void> startQuiz({int count = 20, String? category}) async {
+    _sessionStartTime = DateTime.now();
     final storage = ref.read(storageServiceProvider);
     final items = storage.getAllItems();
     if (items.isEmpty) return;
@@ -133,6 +154,7 @@ class QuizViewModel extends Notifier<QuizState> {
   }
 
   Future<void> startVocabularyQuiz({int count = 20}) async {
+    _sessionStartTime = DateTime.now();
     final storage = ref.read(storageServiceProvider);
     final items = storage.getAllItems();
     if (items.isEmpty) return;
@@ -148,6 +170,7 @@ class QuizViewModel extends Notifier<QuizState> {
   }
 
   Future<void> startInterrogativeQuiz({int count = 20, String? category}) async {
+    _sessionStartTime = DateTime.now();
     final storage = ref.read(storageServiceProvider);
     final seenIds = storage.getSeenQuestionIds();
     final questions = await _engine.generateInterrogativeQuiz(
@@ -158,45 +181,90 @@ class QuizViewModel extends Notifier<QuizState> {
     state = QuizState(questions: questions);
   }
 
-  void answerQuestion(String answer) {
-    if (state.isFinished || state.currentQuestion == null) return;
+  /// Answers the current question and records XP via ProgressService.
+  /// Returns the XP awarded for this answer.
+  Future<int> answerQuestion(String answer) async {
+    if (state.isFinished || state.currentQuestion == null) return 0;
 
     final isCorrect = answer == state.currentQuestion!.correctAnswer;
-
     final newScore = isCorrect ? state.score + 1 : state.score;
+    final questionId = state.currentQuestion!.id;
+
+    // Track first attempt
+    final tracker = Map<String, bool>.from(state.firstAttemptTracker);
+    final isFirstAttempt = !tracker.containsKey(questionId);
+    if (isFirstAttempt) {
+      tracker[questionId] = isCorrect;
+    }
 
     // Mark as seen immediately
     final storage = ref.read(storageServiceProvider);
-    storage.markQuestionAsSeen(state.currentQuestion!.id);
+    storage.markQuestionAsSeen(questionId);
 
-    if (isCorrect) {
-      _updateMastery(state.currentQuestion!.sourceItem, true);
-    } else {
-      _updateMastery(state.currentQuestion!.sourceItem, false);
-    }
+    // Record via progress service for XP + mastery
+    final progressService = ref.read(progressServiceProvider.notifier);
+    final xpAwarded = await progressService.recordQuizAnswer(
+      storage: storage,
+      itemId: state.currentQuestion!.sourceItem.id,
+      correct: isCorrect,
+      firstAttempt: isFirstAttempt && isCorrect,
+    );
 
-    state = state.copyWith(score: newScore);
+    state = state.copyWith(
+      score: newScore,
+      sessionXP: state.sessionXP + xpAwarded,
+      firstAttemptTracker: tracker,
+    );
+
+    return xpAwarded;
   }
 
-  void nextQuestion() {
-    final storage = ref.read(storageServiceProvider);
+  Future<void> nextQuestion() async {
     if (state.currentIndex < state.questions.length - 1) {
       state = state.copyWith(currentIndex: state.currentIndex + 1);
     } else {
-      state = state.copyWith(isFinished: true);
+      // Quiz complete — record session
+      final storage = ref.read(storageServiceProvider);
+      final progressService = ref.read(progressServiceProvider.notifier);
+
+      // Determine activity type
+      ActivityType activityType = ActivityType.quiz;
+      if (state.questions.isNotEmpty) {
+        final firstType = state.questions.first.type;
+        if (firstType == QuestionType.vocabularyMatch) {
+          activityType = ActivityType.vocabularyQuiz;
+        } else if (firstType == QuestionType.interrogativeMatch) {
+          activityType = ActivityType.interrogativeQuiz;
+        }
+      }
+
+      final durationSec = _sessionStartTime != null
+          ? DateTime.now().difference(_sessionStartTime!).inSeconds
+          : 0;
+
+      // Check if daily goal was met before this session
+      final wasGoalMet = storage.getTodayXP() >= storage.getDailyXPGoal();
+
+      final bonusXP = await progressService.recordSessionComplete(
+        storage: storage,
+        activityType: activityType,
+        score: state.score,
+        total: state.questions.length,
+        durationSeconds: durationSec,
+        sessionXP: state.sessionXP,
+      );
+
+      final isGoalNowMet = storage.getTodayXP() >= storage.getDailyXPGoal();
+
+      state = state.copyWith(
+        isFinished: true,
+        sessionBonusXP: bonusXP,
+        dailyGoalJustMet: !wasGoalMet && isGoalNowMet,
+      );
+
+      // Also save legacy high score for backward compat
       storage.saveHighScore(state.score);
     }
-  }
-
-  void _updateMastery(LanguageItem item, bool correct) {
-    final storage = ref.read(storageServiceProvider);
-    if (correct) {
-      item.masteryLevel = (item.masteryLevel + 1).clamp(0, 5);
-      item.lastReviewed = DateTime.now();
-    } else {
-      item.masteryLevel = (item.masteryLevel - 1).clamp(0, 5);
-    }
-    storage.updateItem(item);
   }
 }
 

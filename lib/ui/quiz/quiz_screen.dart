@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:animate_do/animate_do.dart';
 import '../../models/question.dart';
+import '../../models/progress_data.dart';
 import 'quiz_view_model.dart';
 import '../../services/tts_service.dart';
+import '../../services/progress_service.dart';
 import '../../main.dart';
 import '../vocabulary/vocabulary_list_screen.dart';
 import '../common/long_press_word_text.dart';
@@ -86,7 +88,22 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
 
   void _handleAnswer(String option, Question question) async {
     final viewModel = ref.read(quizViewModelProvider.notifier);
-    viewModel.answerQuestion(option);
+    final xp = await viewModel.answerQuestion(option);
+    if (xp > 0 && mounted) {
+      _showXPPopup(xp);
+    }
+  }
+
+  void _showXPPopup(int xp) {
+    final overlay = Overlay.of(context);
+    late OverlayEntry entry;
+    entry = OverlayEntry(
+      builder: (context) => _XPPopup(
+        xp: xp,
+        onDone: () => entry.remove(),
+      ),
+    );
+    overlay.insert(entry);
   }
 
   void _handleNext() {
@@ -139,36 +156,201 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     }
 
     if (quizState.isFinished) {
+      final progress = ref.watch(progressServiceProvider);
       return Scaffold(
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FadeInDown(
-                child: const Icon(
-                  Icons.emoji_events,
-                  size: 100,
-                  color: Colors.amber,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+            child: Column(
+              children: [
+                FadeInDown(
+                  child: Icon(
+                    quizState.dailyGoalJustMet ? Icons.local_fire_department : Icons.emoji_events,
+                    size: 80,
+                    color: quizState.dailyGoalJustMet ? Colors.deepOrange : Colors.amber,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              FadeInUp(
-                child: Text(
-                  'Quiz Complete!',
-                  style: Theme.of(context).textTheme.headlineMedium,
+                const SizedBox(height: 16),
+                FadeInUp(
+                  child: Text(
+                    quizState.dailyGoalJustMet ? 'Daily Goal Met! 🎉' : 'Quiz Complete!',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
-              Text(
-                'Score: ${quizState.score}/${quizState.questions.length}',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () =>
-                    Navigator.of(context).popUntil((route) => route.isFirst),
-                child: const Text('Back to Home'),
-              ),
-            ],
+                const SizedBox(height: 24),
+                // Score + XP cards
+                FadeInUp(
+                  delay: const Duration(milliseconds: 100),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _ResultStatCard(
+                          icon: Icons.check_circle,
+                          iconColor: Colors.green,
+                          label: 'Score',
+                          value: '${quizState.score}/${quizState.questions.length}',
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _ResultStatCard(
+                          icon: Icons.bolt,
+                          iconColor: Colors.amber.shade700,
+                          label: 'XP Earned',
+                          value: '+${quizState.totalXPEarned}',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 12),
+                FadeInUp(
+                  delay: const Duration(milliseconds: 200),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _ResultStatCard(
+                          icon: Icons.local_fire_department,
+                          iconColor: Colors.deepOrange,
+                          label: 'Streak',
+                          value: '${progress.currentStreak} day${progress.currentStreak == 1 ? '' : 's'}',
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _ResultStatCard(
+                          icon: Icons.trending_up,
+                          iconColor: Colors.blue,
+                          label: 'Total XP',
+                          value: '${progress.totalXP}',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Daily goal progress
+                FadeInUp(
+                  delay: const Duration(milliseconds: 300),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Daily Goal',
+                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              '${progress.todayXP} / ${progress.dailyGoal} XP',
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: LinearProgressIndicator(
+                            value: progress.dailyGoalProgress,
+                            minHeight: 12,
+                            backgroundColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              progress.dailyGoalMet ? Colors.green : Colors.deepPurple,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // Mastery distribution
+                FadeInUp(
+                  delay: const Duration(milliseconds: 400),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Vocabulary Mastery',
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: List.generate(5, (tier) {
+                            final count = progress.masteryDistribution[tier] ?? 0;
+                            final colors = [
+                              Colors.grey, Colors.blue, Colors.cyan,
+                              Colors.orange, Colors.green,
+                            ];
+                            return Column(
+                              children: [
+                                Text(
+                                  '$count',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: colors[tier],
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  WordProgress.tierName(tier),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Theme.of(context).colorScheme.outline,
+                                  ),
+                                ),
+                              ],
+                            );
+                          }),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 32),
+                FadeInUp(
+                  delay: const Duration(milliseconds: 500),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton.icon(
+                      onPressed: () =>
+                          Navigator.of(context).popUntil((route) => route.isFirst),
+                      icon: const Icon(Icons.home),
+                      label: const Text('Back to Home'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -838,5 +1020,148 @@ class QuestionCardState extends State<QuestionCard> {
     });
 
     widget.ttsService.speak(widget.question.correctAnswer, language: 'pt');
+  }
+}
+
+// ─── XP Pop-up Overlay ───────────────────────────────────────────────────────
+
+class _XPPopup extends StatefulWidget {
+  final int xp;
+  final VoidCallback onDone;
+
+  const _XPPopup({required this.xp, required this.onDone});
+
+  @override
+  State<_XPPopup> createState() => _XPPopupState();
+}
+
+class _XPPopupState extends State<_XPPopup> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacity;
+  late Animation<Offset> _position;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1200),
+      vsync: this,
+    );
+    _opacity = Tween(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _controller, curve: const Interval(0.6, 1.0)),
+    );
+    _position = Tween(
+      begin: const Offset(0, 0),
+      end: const Offset(0, -80),
+    ).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    );
+    _controller.forward().then((_) => widget.onDone());
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      top: MediaQuery.of(context).size.height * 0.35,
+      left: 0,
+      right: 0,
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          return Transform.translate(
+            offset: _position.value,
+            child: Opacity(
+              opacity: _opacity.value,
+              child: child,
+            ),
+          );
+        },
+        child: Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            decoration: BoxDecoration(
+              color: Colors.amber.shade700,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.amber.withValues(alpha: 0.4),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.bolt, color: Colors.white, size: 24),
+                const SizedBox(width: 6),
+                Text(
+                  '+${widget.xp} XP',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ─── Result Stat Card ────────────────────────────────────────────────────────
+
+class _ResultStatCard extends StatelessWidget {
+  final IconData icon;
+  final Color iconColor;
+  final String label;
+  final String value;
+
+  const _ResultStatCard({
+    required this.icon,
+    required this.iconColor,
+    required this.label,
+    required this.value,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
+          Icon(icon, color: iconColor, size: 28),
+          const SizedBox(height: 8),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.outline,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

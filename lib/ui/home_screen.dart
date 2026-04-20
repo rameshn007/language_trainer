@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
 
 import '../services/markdown_parser.dart';
+import '../services/progress_service.dart';
+import '../models/progress_data.dart';
 import 'quiz/category_selection_screen.dart';
 import 'vocabulary/vocabulary_list_screen.dart';
 import 'exercise/exercise_list_screen.dart';
@@ -14,6 +16,7 @@ import 'quiz/quiz_screen.dart';
 import '../main.dart';
 import 'widgets/word_star_field.dart';
 import 'settings_screen.dart';
+import 'stats_screen.dart';
 import '../services/verb_service.dart';
 import '../models/language_item.dart';
 import 'exercise/exercise_screen.dart';
@@ -124,6 +127,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       debugPrint('Error loading data: $e');
     }
     if (!mounted) return;
+    // Refresh the progress snapshot so dashboard updates
+    ref.read(progressServiceProvider.notifier).refresh(ref.read(storageServiceProvider));
     setState(() => _isLoading = false);
   }
 
@@ -162,9 +167,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Reset Statistics?'),
+        title: const Text('Reset All Progress?'),
         content: const Text(
-          'This will reset your "Learned" count and High Score to zero. This action cannot be undone.',
+          'This will reset all XP, streaks, mastery levels, and session history. This action cannot be undone.',
         ),
         actions: [
           TextButton(
@@ -180,9 +185,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
     );
     if (result == true) {
-      final storage = ref.read(storageServiceProvider);
-      await storage.resetStats();
-      await storage.resetHighScore();
+      final progressService = ref.read(progressServiceProvider.notifier);
+      await progressService.resetAll(ref.read(storageServiceProvider));
       setState(() {});
     }
   }
@@ -214,7 +218,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final storage = ref.watch(storageServiceProvider);
     final items = storage.getAllItems();
-    final highScore = storage.getHighScore();
+    final progress = ref.watch(progressServiceProvider);
     final learnedCount = items.where((i) => i.masteryLevel > 0).length;
 
     return Scaffold(
@@ -296,53 +300,159 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   FadeInDown(
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.deepPurple.shade400.withValues(
-                              alpha: 0.9,
-                            ),
-                            Colors.deepPurple.shade700.withValues(
-                              alpha: 0.9,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const StatsScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.deepPurple.shade400.withValues(alpha: 0.9),
+                              Colors.deepPurple.shade700.withValues(alpha: 0.9),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: Colors.white.withValues(alpha: 0.2),
+                            width: 1.5,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.15),
+                              blurRadius: 15,
+                              offset: const Offset(0, 8),
                             ),
                           ],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
                         ),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: Colors.white.withValues(alpha: 0.2),
-                          width: 1.5,
+                        child: Column(
+                          children: [
+                            // Row 1: Streak + Today's XP
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.local_fire_department,
+                                      color: progress.currentStreak > 0
+                                          ? Colors.deepOrange.shade300
+                                          : Colors.white38,
+                                      size: 22,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      '${progress.currentStreak}-day streak',
+                                      style: TextStyle(
+                                        color: progress.currentStreak > 0
+                                            ? Colors.white
+                                            : Colors.white54,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  '${progress.todayXP}/${progress.dailyGoal} XP',
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            // Daily goal progress bar
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(5),
+                              child: LinearProgressIndicator(
+                                value: progress.dailyGoalProgress,
+                                minHeight: 8,
+                                backgroundColor: Colors.white.withValues(alpha: 0.15),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  progress.dailyGoalMet
+                                      ? Colors.greenAccent.shade400
+                                      : Colors.amber.shade300,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            // Row 2: Mastery tier buckets
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: List.generate(5, (tier) {
+                                final count = progress.masteryDistribution[tier] ?? 0;
+                                final tierColors = [
+                                  Colors.white38,
+                                  Colors.blue.shade200,
+                                  Colors.cyan.shade200,
+                                  Colors.orange.shade200,
+                                  Colors.greenAccent.shade200,
+                                ];
+                                return Column(
+                                  children: [
+                                    Text(
+                                      '$count',
+                                      style: TextStyle(
+                                        color: tierColors[tier],
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      WordProgress.tierName(tier),
+                                      style: TextStyle(
+                                        color: tierColors[tier].withValues(alpha: 0.7),
+                                        fontSize: 9,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }),
+                            ),
+                            const SizedBox(height: 10),
+                            // Row 3: Total XP + Sessions Today
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Total XP: ${progress.totalXP}',
+                                  style: const TextStyle(
+                                    color: Colors.white54,
+                                    fontSize: 11,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Sessions today: ${progress.todaySessions}',
+                                      style: const TextStyle(
+                                        color: Colors.white54,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    const Icon(
+                                      Icons.chevron_right,
+                                      color: Colors.white38,
+                                      size: 16,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.15),
-                            blurRadius: 15,
-                            offset: const Offset(0, 8),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          _buildStatItem(
-                            'Words',
-                            '${items.length}',
-                            Icons.book,
-                          ),
-                          _buildStatItem(
-                            'Learned',
-                            '$learnedCount',
-                            Icons.check_circle_outline,
-                          ),
-                          _buildStatItem(
-                            'High Score',
-                            '$highScore',
-                            Icons.emoji_events,
-                          ),
-                        ],
                       ),
                     ),
                   ),
@@ -531,26 +641,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildStatItem(String label, String value, IconData icon) {
-    return Column(
-      children: [
-        Icon(icon, color: Colors.white70, size: 30),
-        const SizedBox(height: 5),
-        Text(
-          value,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        Text(
-          label,
-          style: const TextStyle(color: Colors.white70, fontSize: 12),
-        ),
-      ],
-    );
-  }
+  // _buildStatItem removed — replaced by progress dashboard
 
   Widget _buildGridButton({
     required BuildContext context,
