@@ -6,6 +6,7 @@ import '../models/language_item.dart';
 import '../models/progress_data.dart';
 import '../services/voice_quiz_service.dart';
 import '../services/progress_service.dart';
+import '../services/storage_service.dart';
 import '../main.dart';
 import 'dart:math';
 import 'vocabulary/vocabulary_list_screen.dart';
@@ -19,11 +20,15 @@ class VoiceTrainerScreen extends ConsumerStatefulWidget {
 
 class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
   late final VoiceQuizService _voiceService;
+  late final StorageService _storageService;
+  late final ProgressService _progressService;
 
   @override
   void initState() {
     super.initState();
     _voiceService = VoiceQuizService(ref.read(ttsServiceProvider));
+    _storageService = ref.read(storageServiceProvider);
+    _progressService = ref.read(progressServiceProvider.notifier);
     _initTrainer();
   }
 
@@ -260,9 +265,6 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       }
     }
 
-    final storage = ref.read(storageServiceProvider);
-    final progressService = ref.read(progressServiceProvider.notifier);
-
     if (!mounted) return;
 
     if (correct) {
@@ -289,13 +291,15 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       }
 
       // Record via progress service for XP + mastery
-      final xp = await progressService.recordQuizAnswer(
-        storage: storage,
+      final int xp = await _progressService.recordQuizAnswer(
+        storage: _storageService,
         itemId: _currentItem!.id,
         correct: true,
         firstAttempt: true,
       );
-      _sessionXP += xp;
+      setState(() {
+        _sessionXP += xp;
+      });
     } else {
       setState(() {
         _statusText = "Incorrect. It was: ${_currentItem!.english}";
@@ -316,12 +320,14 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       }
 
       // Record incorrect via progress service
-      final xp = await progressService.recordQuizAnswer(
-        storage: storage,
+      final int xp = await _progressService.recordQuizAnswer(
+        storage: _storageService,
         itemId: _currentItem!.id,
         correct: false,
       );
-      _sessionXP += xp;
+      setState(() {
+        _sessionXP += xp;
+      });
 
       // RETRY LOGIC: Add back to queue (random position or simple append?)
       // Append for now to retry at end of session (or sooner?)

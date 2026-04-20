@@ -4,6 +4,7 @@ import '../models/language_item.dart';
 import '../models/progress_data.dart';
 import '../services/tts_service.dart';
 import '../services/progress_service.dart';
+import '../services/storage_service.dart';
 import '../main.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
@@ -28,17 +29,22 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
   DateTime? _sessionStartTime;
 
   late final TtsService _ttsService;
+  late final StorageService _storageService;
+  late final ProgressService _progressService;
 
   @override
   void initState() {
     super.initState();
     _ttsService = ref.read(ttsServiceProvider);
+    _storageService = ref.read(storageServiceProvider);
+    _progressService = ref.read(progressServiceProvider.notifier);
     _loadPhrases();
   }
 
   @override
   void dispose() {
     if (_isAutoPlaying) {
+      // Use locally captured services because 'ref' is invalid after dispose
       _recordSessionComplete();
     }
     _isAutoPlaying = false;
@@ -185,11 +191,9 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
 
   Future<void> _awardPhraseXP() async {
     final phrase = _phrases[_currentIndex];
-    final storage = ref.read(storageServiceProvider);
-    final progressService = ref.read(progressServiceProvider.notifier);
 
-    final xp = await progressService.recordQuizAnswer(
-      storage: storage,
+    final xp = await _progressService.recordQuizAnswer(
+      storage: _storageService,
       itemId: phrase.id,
       correct: true,
       firstAttempt: true,
@@ -203,14 +207,12 @@ class _PhraseTrainerScreenState extends ConsumerState<PhraseTrainerScreen> {
 
   Future<void> _recordSessionComplete() async {
     if (_phrasesReviewed == 0) return;
-    final storage = ref.read(storageServiceProvider);
-    final progressService = ref.read(progressServiceProvider.notifier);
     final durationSec = _sessionStartTime != null
         ? DateTime.now().difference(_sessionStartTime!).inSeconds
         : 0;
 
-    await progressService.recordSessionComplete(
-      storage: storage,
+    await _progressService.recordSessionComplete(
+      storage: _storageService,
       activityType: ActivityType.phraseTrainer,
       score: _phrasesReviewed,
       total: _phrasesReviewed,

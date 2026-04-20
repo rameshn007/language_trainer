@@ -11,6 +11,7 @@ import '../../models/verb_phrase.dart';
 import '../../models/progress_data.dart';
 import '../../services/tts_service.dart';
 import '../../services/progress_service.dart';
+import '../../services/storage_service.dart';
 import '../common/long_press_word_text.dart';
 import 'single_verb_conjugation_screen.dart';
 
@@ -38,13 +39,23 @@ class _VerbPhraseTrainerScreenState
   DateTime? _sessionStartTime;
 
   late final TtsService _ttsService;
+  late final StorageService _storageService;
+  late final ProgressService _progressService;
   final _random = Random();
 
   @override
   void initState() {
     super.initState();
     _ttsService = ref.read(ttsServiceProvider);
+    _storageService = ref.read(storageServiceProvider);
+    _progressService = ref.read(progressServiceProvider.notifier);
     _loadPhrases();
+  }
+
+  @override
+  void dispose() {
+    _recordSessionComplete();
+    super.dispose();
   }
 
   Future<void> _loadPhrases() async {
@@ -131,34 +142,32 @@ class _VerbPhraseTrainerScreenState
 
     final phrase = _phrases[_currentIndex];
     final itemId = 'verbphrase_${phrase.verb}_$_currentIndex';
-    final storage = ref.read(storageServiceProvider);
-    final progressService = ref.read(progressServiceProvider.notifier);
 
-    final xp = await progressService.recordQuizAnswer(
-      storage: storage,
+    final xp = await _progressService.recordQuizAnswer(
+      storage: _storageService,
       itemId: itemId,
       correct: correct,
       firstAttempt: correct,
     );
 
-    setState(() {
-      _hasRated = true;
-      _totalRated++;
-      _sessionXP += xp;
-      if (correct) _correctCount++;
-    });
+    if (mounted) {
+      setState(() {
+        _hasRated = true;
+        _totalRated++;
+        _sessionXP += xp;
+        if (correct) _correctCount++;
+      });
+    }
   }
 
   Future<void> _recordSessionComplete() async {
     if (_totalRated == 0) return;
-    final storage = ref.read(storageServiceProvider);
-    final progressService = ref.read(progressServiceProvider.notifier);
     final durationSec = _sessionStartTime != null
         ? DateTime.now().difference(_sessionStartTime!).inSeconds
         : 0;
 
-    await progressService.recordSessionComplete(
-      storage: storage,
+    await _progressService.recordSessionComplete(
+      storage: _storageService,
       activityType: ActivityType.phraseTrainer,
       score: _correctCount,
       total: _totalRated,
