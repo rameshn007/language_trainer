@@ -498,5 +498,55 @@
     "verb": "vestir",
     "portuguese": "Eu visto um casaco quente porque está frio.",
     "english": "I put on a warm coat because it is cold."
+  },
+  {
+    "verb": "respirar",
+    "portuguese": "Eu respiro o ar fresco da manhã.",
+    "english": "I breathe the fresh morning air."
+  },
+  {
+    "verb": "vestir",
+    "portuguese": "Ela veste um vestido novo hoje.",
+    "english": "She wears a new dress today."
+  },
+  {
+    "verb": "lavar",
+    "portuguese": "Nós lavamos o carro todos os domingos.",
+    "english": "We wash the car every Sunday."
+  },
+  {
+    "verb": "despir",
+    "portuguese": "Tu despes o casaco quando entras em casa.",
+    "english": "You take off your coat when you enter the house."
+  },
+  {
+    "verb": "sentir",
+    "portuguese": "Eu sinto falta do verão.",
+    "english": "I miss summer (feel lack of)."
+  },
+  {
+    "verb": "sentar",
+    "portuguese": "Vocês sentam-se na primeira fila.",
+    "english": "You sit in the first row."
+  },
+  {
+    "verb": "levantar",
+    "portuguese": "Ele levanta-se às 10 horas ao fim de semana.",
+    "english": "He gets up at 10 AM on the weekend."
+  },
+  {
+    "verb": "deitar",
+    "portuguese": "Nós deitamo-nos tarde no sábado.",
+    "english": "We go to bed late on Saturday."
+  },
+  {
+    "verb": "resumir",
+    "portuguese": "O aluno resume o texto perfeitamente.",
+    "english": "The student summarizes the text perfectly."
+  },
+  {
+    "verb": "estimar",
+    "portuguese": "Eu estimo muito a minha bicicleta antiga.",
+    "english": "I greatly value my old bicycle."
   }
 ]

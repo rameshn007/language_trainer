@@ -1454,3 +1454,206 @@
 | Ele esquece-se de tudo | He forgets everything | Reflexive verb |
 | Ela costuma ler à noite | She usually reads at night | Costumar |
 | Por que choras? | Why are you crying? | Interrogative |
+
+# Vocabulary Expansion: more_words_1.md
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| macacos | Monkey | New Vocabulary |
+| Os macacos saltam entre as árvores. | Monkeys jump between the trees. | Expansion |
+| O macaco come uma banana. | The monkey eats a banana. | Expansion |
+| Vimos vários macacos no jardim zoológico. | We saw several monkeys at the zoo. | Expansion |
+| Aquele macaco é muito engraçado. | That monkey is very funny. | Expansion |
+| Os macacos são animais espertos. | Monkeys are clever animals. | Expansion |
+| preguiça | sloth | New Vocabulary |
+| O bicho-preguiça move-se muito devagar. | The sloth moves very slowly. | Expansion |
+| Hoje sinto uma preguiça enorme. | Today I feel an enormous laziness. | Expansion |
+| Não tenhas preguiça, vamos caminhar! | Don't be lazy, let's go for a walk! | Expansion |
+| A preguiça vive na floresta tropical. | The sloth lives in the tropical forest. | Expansion |
+| Dormir até tarde é a minha preguiça favorita. | Sleeping late is my favorite laziness. | Expansion |
+| sapos | frog | New Vocabulary |
+| Os sapos saltam para o lago. | The frogs jump into the lake. | Expansion |
+| O sapo é verde e rugoso. | The frog is green and rough. | Expansion |
+| Ouvimos os sapos a coaxar à noite. | We heard the frogs croaking at night. | Expansion |
+| Há muitos sapos no jardim depois da chuva. | There are many frogs in the garden after the rain. | Expansion |
+| O príncipe transformou-se num sapo. | The prince turned into a frog. | Expansion |
+| barata | Cockroach | New Vocabulary |
+| Vi uma barata na cozinha hoje. | I saw a cockroach in the kitchen today. | Expansion |
+| Esta camisola é muito barata. | This sweater is very cheap. | Expansion |
+| As baratas saem à noite. | Cockroaches come out at night. | Expansion |
+| É melhor comprar fruta barata no mercado. | It's better to buy cheap fruit at the market. | Expansion |
+| Tens medo de baratas? | Are you afraid of cockroaches? | Expansion |
+| barata | cheap | New Vocabulary |
+| Vi uma barata na cozinha hoje. | I saw a cockroach in the kitchen today. | Expansion |
+| Esta camisola é muito barata. | This sweater is very cheap. | Expansion |
+| As baratas saem à noite. | Cockroaches come out at night. | Expansion |
+| É melhor comprar fruta barata no mercado. | It's better to buy cheap fruit at the market. | Expansion |
+| Tens medo de baratas? | Are you afraid of cockroaches? | Expansion |
+| Montanha | Mountain | New Vocabulary |
+| A montanha é muito alta. | The mountain is very high. | Expansion |
+| Vamos subir a montanha amanhã. | We are going to climb the mountain tomorrow. | Expansion |
+| O topo da montanha está coberto de neve. | The top of the mountain is covered with snow. | Expansion |
+| Gosto de ver o nascer do sol na montanha. | I like to see the sunrise in the mountain. | Expansion |
+| O ar na montanha é puro. | The air in the mountain is pure. | Expansion |
+| Serra | Smaller Mountain | New Vocabulary |
+| colina | Hills | New Vocabulary |
+| sete colinas | seven hills | New Vocabulary |
+| cabos de aço | ziplining | New Vocabulary |
+| Moto quattro | ATV | New Vocabulary |
+| vulcão | Volcano | New Vocabulary |
+| Iguana | Iguana | New Vocabulary |
+| lagarto | Lizard | New Vocabulary |
+| pirquito | Parqueet | New Vocabulary |
+| morcego | Bat | New Vocabulary |
+| chinelos | flip flops | New Vocabulary |
+| Visto os meus chinelos quando chego a casa. | I put on my flip flops when I get home. | Expansion |
+| Perdi os meus chinelos na praia. | I lost my flip flops at the beach. | Expansion |
+| Onde estão os meus chinelos de quarto? | Where are my house slippers? | Expansion |
+| Estes chinelos são muito confortáveis. | These flip flops are very comfortable. | Expansion |
+| Vou comprar uns chinelos novos para o verão. | I'm going to buy new flip flops for the summer. | Expansion |
+| chinelos de quarto | house slippers | New Vocabulary |
+| chinelos de praia | flip flops (shoes for the beach) | New Vocabulary |
+| curto dos lados e atrás | short in the side and behind | New Vocabulary |
+| máquina dois | machine number 2 | New Vocabulary |
+| à tesoura no topo | scissors on top | New Vocabulary |
+| tesouro | treasure | New Vocabulary |
+| pirâmides | Pyramids | New Vocabulary |
+| esfinge | sphinx | New Vocabulary |
+| narcisista | Narcissist | New Vocabulary |
+| demência | dementia | New Vocabulary |
+| lufada de ar fresco | breath of fresh air | New Vocabulary |
+| lufada | breeze | New Vocabulary |
+| respirar | to breathe | New Vocabulary |
+| Respirar ar puro faz bem à saúde. | Breathing fresh air is good for your health. | Expansion |
+| Respiro fundo para relaxar. | I breathe deeply to relax. | Expansion |
+| Estava difícil respirar com tanto fumo. | It was hard to breathe with so much smoke. | Expansion |
+| O mergulhador consegue respirar debaixo de água. | The diver can breathe underwater. | Expansion |
+| Tenta respirar devagar. | Try to breathe slowly. | Expansion |
+| xis | X | New Vocabulary |
+| zê | Z | New Vocabulary |
+| ipslon | y | New Vocabulary |
+| duplo vê | w | New Vocabulary |
+| vê | v | New Vocabulary |
+| agá | h | New Vocabulary |
+| jota | j | New Vocabulary |
+| kapa | k | New Vocabulary |
+| nh | n | New Vocabulary |
+| éle | l | New Vocabulary |
+| éme | m | New Vocabulary |
+| éne | n | New Vocabulary |
+| bê | b | New Vocabulary |
+| ó | o | New Vocabulary |
+| pê | p | New Vocabulary |
+| quê | q | New Vocabulary |
+| érre | r | New Vocabulary |
+| ésse | s | New Vocabulary |
+| u | u | New Vocabulary |
+| é | e | New Vocabulary |
+| êfe | f | New Vocabulary |
+| gê | g | New Vocabulary |
+| i | i | New Vocabulary |
+| vogais | vowels | New Vocabulary |
+| consoantes | consonants | New Vocabulary |
+| \~ | til | New Vocabulary |
+| sinónimo | synonym | New Vocabulary |
+| antónimo | antonymn | New Vocabulary |
+| verão | summer | New Vocabulary |
+| O verão é a minha estação favorita. | Summer is my favorite season. | Expansion |
+| No verão faz muito calor. | In summer it is very hot. | Expansion |
+| Vamos de férias no próximo verão. | We are going on holiday next summer. | Expansion |
+| As noites de verão são agradáveis. | Summer nights are pleasant. | Expansion |
+| Eu gosto de comer gelados no verão. | I like to eat ice cream in summer. | Expansion |
+| deitar-se | lay down | New Vocabulary |
+| cozidas | boiled | New Vocabulary |
+| assados | roasted | New Vocabulary |
+| fritas | fried | New Vocabulary |
+| costelata | ribs | New Vocabulary |
+| uma fatia de bolo de chocolate | a slice of chocolate cake | New Vocabulary |
+| ovos cozidos | boiled eggs | New Vocabulary |
+| ovo mexidos | scrambled eggs | New Vocabulary |
+| ovo estrelado | fried egg | New Vocabulary |
+| ovo escalfado | poached egg | New Vocabulary |
+| ovo cru | cru | New Vocabulary |
+| galinha | hen | New Vocabulary |
+| frango | chicken | New Vocabulary |
+| galo | rooster | New Vocabulary |
+| avental | apron | New Vocabulary |
+| comer fora | eat out | New Vocabulary |
+| alto | high | New Vocabulary |
+| cumprer | follow | New Vocabulary |
+| cumpre as regras | follow the rules | New Vocabulary |
+| animais de estimação | pets | New Vocabulary |
+| estimar | care / esteemed \- dear | New Vocabulary |
+| Lamento | I’m sorry (unfortunately) | New Vocabulary |
+| amável | kind | New Vocabulary |
+| resumir | summarize | New Vocabulary |
+| resumemos | us/we summarize | New Vocabulary |
+| sentir | feel | New Vocabulary |
+| sentar | sit | New Vocabulary |
+| vestir | dress | New Vocabulary |
+| Vou vestir um casaco quente. | I'm going to put on a warm coat. | Expansion |
+| Preciso de me vestir para sair. | I need to get dressed to go out. | Expansion |
+| Ele veste sempre roupas azuis. | He always wears blue clothes. | Expansion |
+| Ela veste-se muito bem. | She dresses very well. | Expansion |
+| Ajuda a criança a vestir a camisola. | Help the child put on the sweater. | Expansion |
+| lavar | wash | New Vocabulary |
+| Vou lavar as mãos antes de jantar. | I'm going to wash my hands before dinner. | Expansion |
+| Ela lava a roupa aos sábados. | She washes the clothes on Saturdays. | Expansion |
+| Tens de lavar o teu carro. | You have to wash your car. | Expansion |
+| Nós lavamos a loiça juntos. | We wash the dishes together. | Expansion |
+| Onde posso lavar o rosto? | Where can I wash my face? | Expansion |
+| despir | undress | New Vocabulary |
+| levantar | get up | New Vocabulary |
+| Levanto-me cedo todos os dias. | I get up early every day. | Expansion |
+| Podes levantar a caixa, por favor? | Can you pick up the box, please? | Expansion |
+| O sol levanta-se às seis da manhã. | The sun rises at six in the morning. | Expansion |
+| Vou levantar dinheiro no banco. | I'm going to withdraw money from the bank. | Expansion |
+| Cuidado ao levantar pesos. | Be careful when lifting weights. | Expansion |
+| deitar | lie dow | New Vocabulary |
+| Vou deitar-me agora, boa noite. | I'm going to lie down now, good night. | Expansion |
+| Ela deita o lixo fora. | She throws the trash away. | Expansion |
+| Não te deites tarde hoje. | Don't go to bed late today. | Expansion |
+| Onde posso deitar este papel? | Where can I throw this paper? | Expansion |
+| O gato deita-se no sofá. | The cat lies on the sofa. | Expansion |
+| antes | before | New Vocabulary |
+| Lava as mãos antes de comer. | Wash your hands before eating. | Expansion |
+| Cheguei antes de ti. | I arrived before you. | Expansion |
+| Ele faz exercício antes do trabalho. | He exercises before work. | Expansion |
+| Telefona-me antes de saíres. | Call me before you leave. | Expansion |
+| Antes era tudo diferente. | Before, everything was different. | Expansion |
+| depois | after | New Vocabulary |
+| Vamos ao cinema depois do jantar. | Let's go to the cinema after dinner. | Expansion |
+| Depois de amanhã é feriado. | The day after tomorrow is a holiday. | Expansion |
+| Vemo-nos depois! | See you later! | Expansion |
+| Eles chegaram depois da festa acabar. | They arrived after the party finished. | Expansion |
+| Primeiro estudas, depois jogas. | First you study, then you play. | Expansion |
+| comboio | train | New Vocabulary |
+| Vou para o trabalho de comboio. | I go to work by train. | Expansion |
+| O comboio parte às oito horas. | The train departs at eight o'clock. | Expansion |
+| O bilhete de comboio é caro. | The train ticket is expensive. | Expansion |
+| Apanhei o comboio errado hoje. | I caught the wrong train today. | Expansion |
+| A viagem de comboio demora duas horas. | The train trip takes two hours. | Expansion |
+| metro | metro | New Vocabulary |
+| Vou de metro para a escola. | I go by metro to school. | Transport Expansion |
+| Onde fica a paragem de metro? | Where is the metro stop? | Transport Expansion |
+| elétrico | tram | New Vocabulary |
+| Vou de elétrico para a escola. | I go by elétrico to school. | Transport Expansion |
+| Onde fica a paragem de elétrico? | Where is the elétrico stop? | Transport Expansion |
+| barco | boat | New Vocabulary |
+| Vou de barco para a escola. | I go by barco to school. | Transport Expansion |
+| Onde fica a paragem de barco? | Where is the barco stop? | Transport Expansion |
+| avião | airplane | New Vocabulary |
+| Vou de avião para a escola. | I go by avião to school. | Transport Expansion |
+| Onde fica a paragem de avião? | Where is the avião stop? | Transport Expansion |
+| táxi | taxi | New Vocabulary |
+| Vou de táxi para a escola. | I go by táxi to school. | Transport Expansion |
+| Onde fica a paragem de táxi? | Where is the táxi stop? | Transport Expansion |
+| bicicleta | bicycle | New Vocabulary |
+| Vou de bicicleta para a escola. | I go by bicicleta to school. | Transport Expansion |
+| Onde fica a paragem de bicicleta? | Where is the bicicleta stop? | Transport Expansion |
+| mota | motorcycle | New Vocabulary |
+| Vou de mota para a escola. | I go by mota to school. | Transport Expansion |
+| Onde fica a paragem de mota? | Where is the mota stop? | Transport Expansion |
+| autocarro | bus | New Vocabulary |
+| Vou de autocarro para a escola. | I go by autocarro to school. | Transport Expansion |
+| Onde fica a paragem de autocarro? | Where is the autocarro stop? | Transport Expansion |
