@@ -567,31 +567,32 @@ class QuestionCardState extends State<QuestionCard> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            Visibility(
-              visible: _isCorrect,
-              maintainSize: true,
-              maintainAnimation: true,
-              maintainState: true,
-              child: SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+            const SizedBox(height: 10),
+            // Bottom Action Area
+            SizedBox(
+              height: 60,
+              width: double.infinity,
+              child: _isCorrect 
+                ? FadeInUp(
+                    duration: const Duration(milliseconds: 400),
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple,
+                        foregroundColor: Colors.white,
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed: widget.onNext,
+                      icon: const Icon(Icons.arrow_forward),
+                      label: const Text(
+                        "Next Question",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
-                  onPressed: widget.onNext,
-                  icon: const Icon(Icons.arrow_forward),
-                  label: const Text(
-                    "Next Question",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+                  )
+                : const SizedBox.shrink(),
             ),
           ],
         ),
@@ -724,34 +725,37 @@ class QuestionCardState extends State<QuestionCard> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             
-            // Validation button
-            if (!_isCorrect)
-              ElevatedButton(
-                onPressed: _selectedWords!.isEmpty ? null : _checkReorderAnswer,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  backgroundColor: Colors.deepPurple,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                ),
-                child: const Text("Check Answer"),
-              )
-            else
-              FadeInUp(
-                 child: ElevatedButton.icon(
-                    onPressed: widget.onNext,
-                    icon: const Icon(Icons.arrow_forward),
-                    label: const Text("Next Question"),
+            // Bottom Action Area
+            SizedBox(
+              height: 60,
+              width: double.infinity,
+              child: _isCorrect 
+                ? FadeInUp(
+                    duration: const Duration(milliseconds: 400),
+                    child: ElevatedButton.icon(
+                      onPressed: widget.onNext,
+                      icon: const Icon(Icons.arrow_forward),
+                      label: const Text("Next Question"),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.white,
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                      ),
+                    ),
+                  )
+                : ElevatedButton(
+                    onPressed: _selectedWords!.isEmpty ? null : _checkReorderAnswer,
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 50),
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.deepPurple,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
+                    child: const Text("Check Answer"),
                   ),
-              ),
+            ),
           ],
         ),
       ),
