@@ -59,7 +59,15 @@ class InterrogativeReferenceScreen extends ConsumerWidget {
               final ptColor = isDark ? Colors.cyan.shade200 : Colors.cyan.shade800;
 
               return InkWell(
-                onTap: () => ttsService.speak(item['pt']!, language: 'pt'),
+                onTap: () async {
+                  await ttsService.speak(item['pt']!, language: 'pt');
+                  await Future.delayed(const Duration(milliseconds: 800));
+                  await ttsService.speak(item['en']!, language: 'en');
+                  if (item['note']!.isNotEmpty) {
+                    await Future.delayed(const Duration(milliseconds: 500));
+                    await ttsService.speak(item['note']!, language: 'en');
+                  }
+                },
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
                   decoration: BoxDecoration(
