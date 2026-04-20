@@ -290,294 +290,240 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
           SafeArea(
-            child: Column(
-              children: [
-                SingleChildScrollView(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      FadeInDown(
-                        child: Container(
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.deepPurple.shade400.withValues(
-                                  alpha: 0.9,
-                                ),
-                                Colors.deepPurple.shade700.withValues(
-                                  alpha: 0.9,
-                                ),
-                              ],
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  FadeInDown(
+                    child: Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.deepPurple.shade400.withValues(
+                              alpha: 0.9,
                             ),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: Colors.white.withValues(alpha: 0.2),
-                              width: 1.5,
+                            Colors.deepPurple.shade700.withValues(
+                              alpha: 0.9,
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withValues(alpha: 0.15),
-                                blurRadius: 15,
-                                offset: const Offset(0, 8),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              _buildStatItem(
-                                'Words',
-                                '${items.length}',
-                                Icons.book,
-                              ),
-                              _buildStatItem(
-                                'Learned',
-                                '$learnedCount',
-                                Icons.check_circle_outline,
-                              ),
-                              _buildStatItem(
-                                'High Score',
-                                '$highScore',
-                                Icons.emoji_events,
-                              ),
-                            ],
-                          ),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
                         ),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: 0.2),
+                          width: 1.5,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.15),
+                            blurRadius: 15,
+                            offset: const Offset(0, 8),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 10),
-                    ],
-                  ),
-                ),
-                const Spacer(),
-                if (_isLoading)
-                  const Center(child: CircularProgressIndicator())
-                else if (items.isEmpty)
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.warning_amber_rounded,
-                          size: 50,
-                          color: Colors.orange,
-                        ),
-                        const SizedBox(height: 10),
-                        const Text('No vocabulary loaded.'),
-                        TextButton(
-                          onPressed: _loadData,
-                          child: const Text('Tap here to load initial data'),
-                        ),
-                      ],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          _buildStatItem(
+                            'Words',
+                            '${items.length}',
+                            Icons.book,
+                          ),
+                          _buildStatItem(
+                            'Learned',
+                            '$learnedCount',
+                            Icons.check_circle_outline,
+                          ),
+                          _buildStatItem(
+                            'High Score',
+                            '$highScore',
+                            Icons.emoji_events,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                if (items.isEmpty) const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
-                  child: FadeInUp(
+                  const SizedBox(height: 20),
+                  if (_isLoading)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 40),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  else if (items.isEmpty)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 40),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.warning_amber_rounded,
+                            size: 50,
+                            color: Colors.orange,
+                          ),
+                          const SizedBox(height: 10),
+                          const Text('No vocabulary loaded.'),
+                          TextButton(
+                            onPressed: _loadData,
+                            child: const Text('Tap here to load initial data'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  FadeInUp(
                     delay: const Duration(milliseconds: 200),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: 1.1,
                       children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _buildGridButton(
-                                context: context,
-                                label: 'Start Quiz',
-                                icon: Icons.quiz_rounded,
-                                bgColor: Theme.of(context).colorScheme.primary,
-                                fgColor: Colors.white,
-                                onPressed: items.isEmpty || _isLoading
-                                    ? null
-                                    : (offset) {
-                                        _pushScreen(
-                                          const CategorySelectionScreen(),
-                                          offset,
-                                        ).then((_) => setState(() {}));
-                                      },
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: _buildGridButton(
-                                context: context,
-                                label: 'Vocabulary',
-                                icon: Icons.book_rounded,
-                                bgColor: Colors.blue.shade600,
-                                fgColor: Colors.white,
-                                onPressed: (offset) {
+                        _buildGridButton(
+                          context: context,
+                          label: 'Start Quiz',
+                          icon: Icons.quiz_rounded,
+                          bgColor: Theme.of(context).colorScheme.primary,
+                          fgColor: Colors.white,
+                          onPressed: items.isEmpty || _isLoading
+                              ? null
+                              : (offset) {
                                   _pushScreen(
-                                    const VocabularyListScreen(),
+                                    const CategorySelectionScreen(),
                                     offset,
-                                  );
+                                  ).then((_) => setState(() {}));
                                 },
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: _buildGridButton(
-                                context: context,
-                                label: 'Exercises',
-                                icon: Icons.assignment_rounded,
-                                bgColor: Theme.of(
-                                  context,
-                                ).colorScheme.secondary,
-                                fgColor: Colors.white,
-                                onPressed: (offset) {
-                                  _pushScreen(
-                                    const ExerciseListScreen(),
-                                    offset,
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
                         ),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: _buildGridButton(
-                                context: context,
-                                label: 'Voice Trainer',
-                                icon: Icons.mic_rounded,
-                                bgColor: Colors.deepOrange,
-                                fgColor: Colors.white,
-                                onPressed: (offset) {
-                                  _pushScreen(
-                                    const VoiceTrainerScreen(),
-                                    offset,
-                                  );
-                                },
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              flex: 2,
-                              child: _buildGridButton(
-                                context: context,
-                                label: 'Phrase Trainer',
-                                icon: Icons.translate_rounded,
-                                bgColor: Colors.green,
-                                fgColor: Colors.white,
-                                onPressed: (offset) {
-                                  _pushScreen(
-                                    const PhraseTrainerScreen(),
-                                    offset,
-                                  );
-                                },
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              flex: 2,
-                              child: _buildGridButton(
-                                context: context,
-                                label: 'Verb Trainer',
-                                icon: Icons.school_rounded,
-                                bgColor: Colors.purple,
-                                fgColor: Colors.white,
-                                onPressed: (offset) {
-                                  _pushScreen(
-                                    const VerbConjugationScreen(),
-                                    offset,
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
+                        _buildGridButton(
+                          context: context,
+                          label: 'Vocabulary',
+                          icon: Icons.book_rounded,
+                          bgColor: Colors.blue.shade600,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const VocabularyListScreen(),
+                              offset,
+                            );
+                          },
                         ),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: _buildGridButton(
-                                context: context,
-                                label: 'Sentence Builder',
-                                icon: Icons.reorder_rounded,
-                                bgColor: Colors.indigo,
-                                fgColor: Colors.white,
-                                onPressed: (offset) {
-                                  _pushScreen(
-                                    const ExerciseScreen(
-                                      unitName: 'Unit 10: Word Order & Pronouns',
-                                      unitPath: 'assets/data/exercises/unit_10.json',
-                                    ),
-                                    offset,
-                                  );
-                                },
-                              ),
-                            ),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              flex: 2,
-                              child: _buildGridButton(
-                                context: context,
-                                label: '100 Phrases',
-                                icon: Icons.style_rounded,
-                                bgColor: Colors.teal,
-                                fgColor: Colors.white,
-                                onPressed: (offset) {
-                                  _pushScreen(
-                                    const VerbPhraseTrainerScreen(),
-                                    offset,
-                                  );
-                                },
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: _buildGridButton(
-                                context: context,
-                                label: 'Vocab Quiz',
-                                icon: Icons.local_fire_department_rounded,
-                                bgColor: Colors.amber.shade700,
-                                fgColor: Colors.white,
-                                onPressed: items.isEmpty || _isLoading
-                                    ? null
-                                    : (offset) {
-                                        _pushScreen(
-                                          const QuizScreen(isVocabularyQuiz: true),
-                                          offset,
-                                        ).then((_) => setState(() {}));
-                                      },
-                              ),
-                            ),
-                          ],
+                        _buildGridButton(
+                          context: context,
+                          label: 'Exercises',
+                          icon: Icons.assignment_rounded,
+                          bgColor: Theme.of(context).colorScheme.secondary,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const ExerciseListScreen(),
+                              offset,
+                            );
+                          },
                         ),
-                        const SizedBox(height: 12),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: _buildGridButton(
-                                context: context,
-                                label: 'Interrogatives',
-                                icon: Icons.contact_support_rounded,
-                                bgColor: Colors.cyan.shade700,
-                                fgColor: Colors.white,
-                                onPressed: (offset) {
-                                  _pushScreen(
-                                    const InterrogativeQuizScreen(),
-                                    offset,
-                                  );
-                                },
+                        _buildGridButton(
+                          context: context,
+                          label: 'Voice Trainer',
+                          icon: Icons.mic_rounded,
+                          bgColor: Colors.deepOrange,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const VoiceTrainerScreen(),
+                              offset,
+                            );
+                          },
+                        ),
+                        _buildGridButton(
+                          context: context,
+                          label: 'Phrase Trainer',
+                          icon: Icons.translate_rounded,
+                          bgColor: Colors.green,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const PhraseTrainerScreen(),
+                              offset,
+                            );
+                          },
+                        ),
+                        _buildGridButton(
+                          context: context,
+                          label: 'Verb Trainer',
+                          icon: Icons.school_rounded,
+                          bgColor: Colors.purple,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const VerbConjugationScreen(),
+                              offset,
+                            );
+                          },
+                        ),
+                        _buildGridButton(
+                          context: context,
+                          label: 'Sentence Builder',
+                          icon: Icons.reorder_rounded,
+                          bgColor: Colors.indigo,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const ExerciseScreen(
+                                unitName: 'Unit 10: Word Order & Pronouns',
+                                unitPath: 'assets/data/exercises/unit_10.json',
                               ),
-                            ),
-                            const Expanded(flex: 2, child: SizedBox()),
-                            const Expanded(flex: 2, child: SizedBox()),
-                          ],
+                              offset,
+                            );
+                          },
+                        ),
+                        _buildGridButton(
+                          context: context,
+                          label: '100 Phrases',
+                          icon: Icons.style_rounded,
+                          bgColor: Colors.teal,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const VerbPhraseTrainerScreen(),
+                              offset,
+                            );
+                          },
+                        ),
+                        _buildGridButton(
+                          context: context,
+                          label: 'Vocab Quiz',
+                          icon: Icons.local_fire_department_rounded,
+                          bgColor: Colors.amber.shade700,
+                          fgColor: Colors.white,
+                          onPressed: items.isEmpty || _isLoading
+                              ? null
+                              : (offset) {
+                                  _pushScreen(
+                                    const QuizScreen(isVocabularyQuiz: true),
+                                    offset,
+                                  ).then((_) => setState(() {}));
+                                },
+                        ),
+                        _buildGridButton(
+                          context: context,
+                          label: 'Interrogatives',
+                          icon: Icons.contact_support_rounded,
+                          bgColor: Colors.cyan.shade700,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const InterrogativeQuizScreen(),
+                              offset,
+                            );
+                          },
                         ),
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
@@ -614,17 +560,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required Color fgColor,
     void Function(Offset offset)? onPressed,
   }) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxHeight: 110),
-      child: Card(
-        elevation: 2,
-        color: Colors.transparent,
-        shadowColor: Colors.black.withValues(alpha: 0.1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: null, // We handle tap via GestureDetector below
-          child: GestureDetector(
+    return Card(
+      elevation: 2,
+      color: Colors.transparent,
+      shadowColor: Colors.black.withValues(alpha: 0.1),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: null, // We handle tap via GestureDetector below
+        child: GestureDetector(
             onTapUp: (details) {
               if (onPressed != null) {
                 onPressed(details.globalPosition);
@@ -672,7 +616,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 }
