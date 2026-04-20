@@ -53,7 +53,6 @@
     "english": "What do you need?",
     "category": "what"
   },
-
   {
     "interrogative": "Por que",
     "portuguese": "Por que você está triste?",
@@ -108,7 +107,6 @@
     "english": "Why is this so expensive?",
     "category": "why"
   },
-
   {
     "interrogative": "Quem",
     "portuguese": "Quem é ela?",
@@ -157,7 +155,6 @@
     "english": "Who do you know here?",
     "category": "who"
   },
-
   {
     "interrogative": "Quando",
     "portuguese": "Quando é o seu aniversário?",
@@ -206,7 +203,6 @@
     "english": "When can we visit?",
     "category": "when"
   },
-
   {
     "interrogative": "Onde",
     "portuguese": "Onde fica a estação?",
@@ -261,7 +257,6 @@
     "english": "Where were you born?",
     "category": "where"
   },
-
   {
     "interrogative": "Como",
     "portuguese": "Como se chama?",
@@ -316,7 +311,6 @@
     "english": "How can I help?",
     "category": "how"
   },
-
   {
     "interrogative": "Qual",
     "portuguese": "Qual é o seu nome?",
@@ -365,7 +359,6 @@
     "english": "What is the problem?",
     "category": "which"
   },
-
   {
     "interrogative": "Quanto",
     "portuguese": "Quanto custa isto?",
@@ -419,5 +412,23 @@
     "portuguese": "Quanto falta para chegar?",
     "english": "How much longer until we arrive?",
     "category": "how_much"
+  },
+  {
+    "interrogative": "Quanto",
+    "portuguese": "Quanto custa o bilhete de comboio?",
+    "english": "How much does the train ticket cost?",
+    "category": "how_much"
+  },
+  {
+    "interrogative": "Quando",
+    "portuguese": "Quando começa o verão?",
+    "english": "When does summer start?",
+    "category": "when"
+  },
+  {
+    "interrogative": "Onde",
+    "portuguese": "Onde estão os meus chinelos?",
+    "english": "Where are my flip flops?",
+    "category": "where"
   }
 ]
