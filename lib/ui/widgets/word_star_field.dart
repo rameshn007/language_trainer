@@ -106,6 +106,7 @@ class _WordStarFieldState extends State<WordStarField>
             final double h = constraints.maxHeight;
 
             return Stack(
+              clipBehavior: Clip.none,
               children: _stars.map((star) {
                 // Update star logic (simple function, no persistent state change in build normally,
                 // but for simple animation loop it's okay-ish, or use a Ticker separately.

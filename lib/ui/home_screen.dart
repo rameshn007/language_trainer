@@ -222,6 +222,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final learnedCount = items.where((i) => i.masteryLevel > 0).length;
 
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         title: const Text('Language Trainer'),
         centerTitle: true,
