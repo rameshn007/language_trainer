@@ -1657,3 +1657,50 @@
 | autocarro | bus | New Vocabulary |
 | Vou de autocarro para a escola. | I go by autocarro to school. | Transport Expansion |
 | Onde fica a paragem de autocarro? | Where is the autocarro stop? | Transport Expansion |
+
+# Batch 2 Expansion (April 2026)
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| nublado | cloudy | Batch 2 New |
+| O dia hoje está muito nublado | The day today is very cloudy | Batch 2 Expansion |
+| Prefiro dias de sol a dias nublados | I prefer sunny days to cloudy days | Batch 2 Expansion |
+| nevoeiro | fog | Batch 2 New |
+| Há muito nevoeiro na estrada | There is a lot of fog on the road | Batch 2 Expansion |
+| O nevoeiro está muito cerrado | The fog is very thick | Batch 2 Expansion |
+| neblina | misty | Batch 2 New |
+| ventoso | windy | Batch 2 New |
+| O tempo está ventoso hoje | The weather is windy today | Batch 2 Expansion |
+| No outono o tempo fica mais ventoso | In autumn the weather gets windier | Batch 2 Expansion |
+| chuvoso | rainy | Batch 2 New |
+| está a nevar | it is snowing | Batch 2 New |
+| nós fizemos | we did | Batch 2 New |
+| nós estamos a fazer | we are doing | Batch 2 New |
+| nós vamos fazer | we are going to do | Batch 2 New |
+| vemos | we see | Batch 2 New |
+| veem | they see | Batch 2 New |
+| gravação | recording | Batch 2 New |
+| gravar | to record | Batch 2 New |
+| Vou gravar a nossa conversa | I'm going to record our conversation | Batch 2 Expansion |
+| Podes gravar este vídeo para mim? | Can you record this video for me? | Batch 2 Expansion |
+| pôr do sol | sunset | Batch 2 New |
+| O pôr do sol na praia é lindo | The sunset at the beach is beautiful | Batch 2 Expansion |
+| Vamos ver o pôr do sol? | Shall we watch the sunset? | Batch 2 Expansion |
+| nascer do sol | sunrise | Batch 2 New |
+| pôr | put | Batch 2 New |
+| receitas | recipes | Batch 2 New |
+| Eu gosto de experimentar novas receitas | I like to try new recipes | Batch 2 Expansion |
+| Tenho muitas receitas de família | I have many family recipes | Batch 2 Expansion |
+| prometo | I promise | Batch 2 New |
+| Prometo que chego a horas | I promise I'll arrive on time | Batch 2 Expansion |
+| Eu prometo ajudar-te amanhã | I promise to help you tomorrow | Batch 2 Expansion |
+| por volta | around | Batch 2 New |
+| Chego a casa por volta das oito | I arrive home around eight | Batch 2 Expansion |
+| O filme começa por volta das nove | The movie starts around nine | Batch 2 Expansion |
+| apareces | you appear / you show up | Batch 2 New |
+| aterra | it lands | Batch 2 New |
+| O avião aterra daqui a pouco | The plane lands in a bit | Batch 2 Expansion |
+| Onde é que o avião aterra? | Where does the plane land? | Batch 2 Expansion |
+| descolar | to take off | Batch 2 New |
+| O avião vai descolar agora | The plane is going to take off now | Batch 2 Expansion |
+| A que horas descola o voo? | What time does the flight take off? | Batch 2 Expansion |

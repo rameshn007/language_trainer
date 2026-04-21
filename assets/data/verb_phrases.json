@@ -548,5 +548,35 @@
     "verb": "estimar",
     "portuguese": "Eu estimo muito a minha bicicleta antiga.",
     "english": "I greatly value my old bicycle."
+  },
+  {
+    "verb": "gravar",
+    "portuguese": "Eu gravo o áudio.",
+    "english": "I record the audio."
+  },
+  {
+    "verb": "pôr",
+    "portuguese": "Eu ponho o livro na mesa.",
+    "english": "I put the book on the table."
+  },
+  {
+    "verb": "prometer",
+    "portuguese": "Eu prometo estudar mais.",
+    "english": "I promise to study more."
+  },
+  {
+    "verb": "aparecer",
+    "portuguese": "Tu apareces sempre tarde.",
+    "english": "You always show up late."
+  },
+  {
+    "verb": "aterrar",
+    "portuguese": "O avião aterra em Lisboa.",
+    "english": "The plane lands in Lisbon."
+  },
+  {
+    "verb": "descolar",
+    "portuguese": "Nós descolamos ao meio-dia.",
+    "english": "We take off at midday."
   }
 ]
