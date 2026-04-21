@@ -1,0 +1,387 @@
+[
+  {
+    "id": "prep_001",
+    "portuguese": "Ele sai às 17:00.",
+    "english": "He leaves at 17:00.",
+    "category": "preposition_a",
+    "usage": "hours"
+  },
+  {
+    "id": "prep_002",
+    "portuguese": "À noite, ele ouve música.",
+    "english": "At night, he listens to music.",
+    "category": "preposition_a",
+    "usage": "parts of day"
+  },
+  {
+    "id": "prep_003",
+    "portuguese": "À segunda-feira, ele tem aula de português.",
+    "english": "On Mondays, he has Portuguese class.",
+    "category": "preposition_a",
+    "usage": "days of week (routines)"
+  },
+  {
+    "id": "prep_004",
+    "portuguese": "Ao sábado de manhã, a Joana tem aula de ballet.",
+    "english": "On Saturday morning, Joana has ballet class.",
+    "category": "preposition_de",
+    "usage": "parts of day"
+  },
+  {
+    "id": "prep_005",
+    "portuguese": "Ele chega às cinco da tarde.",
+    "english": "He arrives at five in the afternoon.",
+    "category": "preposition_de",
+    "usage": "hours + parts of day"
+  },
+  {
+    "id": "prep_006",
+    "portuguese": "No domingo, vamos ao Porto?",
+    "english": "On Sunday, are we going to Porto?",
+    "category": "preposition_em",
+    "usage": "days of week (specific actions)"
+  },
+  {
+    "id": "prep_007",
+    "portuguese": "Ela vai ao cinema às nove da noite.",
+    "english": "She goes to the cinema at nine at night.",
+    "category": "preposition_a_de",
+    "usage": "hours + parts of day"
+  },
+  {
+    "id": "prep_008",
+    "portuguese": "Na segunda-feira, vou trabalhar.",
+    "english": "On Monday, I'm going to work.",
+    "category": "preposition_em",
+    "usage": "days of week (specific actions)"
+  },
+  {
+    "id": "prep_009",
+    "portuguese": "Eles chegam ao meio-dia.",
+    "english": "They arrive at noon.",
+    "category": "preposition_a",
+    "usage": "hours"
+  },
+  {
+    "id": "prep_010",
+    "portuguese": "À tarde, eu estudo português.",
+    "english": "In the afternoon, I study Portuguese.",
+    "category": "preposition_a",
+    "usage": "parts of day"
+  },
+  {
+    "id": "prep_011",
+    "portuguese": "De manhã, bebo café.",
+    "english": "In the morning, I drink coffee.",
+    "category": "preposition_de",
+    "usage": "parts of day"
+  },
+  {
+    "id": "prep_012",
+    "portuguese": "No sábado, vou à festa.",
+    "english": "On Saturday, I'm going to the party.",
+    "category": "preposition_em",
+    "usage": "days of week (specific actions)"
+  },
+  {
+    "id": "prep_013",
+    "portuguese": "Às quartas-feiras, jogo futebol.",
+    "english": "On Wednesdays, I play football.",
+    "category": "preposition_a",
+    "usage": "days of week (routines)"
+  },
+  {
+    "id": "prep_014",
+    "portuguese": "O comboio parte às dez da manhã.",
+    "english": "The train leaves at ten in the morning.",
+    "category": "preposition_a_de",
+    "usage": "hours + parts of day"
+  },
+  {
+    "id": "prep_015",
+    "portuguese": "Nas férias, vamos viajar.",
+    "english": "On vacation, we are going to travel.",
+    "category": "preposition_em",
+    "usage": "general time"
+  },
+  {
+    "id": "prep_016",
+    "portuguese": "Às oito horas, tomo o pequeno-almoço.",
+    "english": "At eight o'clock, I eat breakfast.",
+    "category": "preposition_a",
+    "usage": "hours"
+  },
+  {
+    "id": "prep_017",
+    "portuguese": "Vou ao ginásio à terça-feira.",
+    "english": "I go to the gym on Tuesdays.",
+    "category": "preposition_a",
+    "usage": "days of week (routines)"
+  },
+  {
+    "id": "prep_018",
+    "portuguese": "Eles saem de casa às sete da manhã.",
+    "english": "They leave the house at seven in the morning.",
+    "category": "preposition_de",
+    "usage": "hours + parts of day"
+  },
+  {
+    "id": "prep_019",
+    "portuguese": "No inverno, neva muito.",
+    "english": "In winter, it snows a lot.",
+    "category": "preposition_em",
+    "usage": "seasons"
+  },
+  {
+    "id": "prep_020",
+    "portuguese": "Às quintas-feiras, visito os meus avós.",
+    "english": "On Thursdays, I visit my grandparents.",
+    "category": "preposition_a",
+    "usage": "days of week (routines)"
+  },
+  {
+    "id": "prep_021",
+    "portuguese": "O jantar é às oito da noite.",
+    "english": "Dinner is at eight in the evening.",
+    "category": "preposition_de",
+    "usage": "hours + parts of day"
+  },
+  {
+    "id": "prep_022",
+    "portuguese": "Na próxima semana, tenho um exame.",
+    "english": "Next week, I have an exam.",
+    "category": "preposition_em",
+    "usage": "general time"
+  },
+  {
+    "id": "prep_023",
+    "portuguese": "Às sextas-feiras, saímos mais cedo.",
+    "english": "On Fridays, we leave earlier.",
+    "category": "preposition_a",
+    "usage": "days of week (routines)"
+  },
+  {
+    "id": "prep_024",
+    "portuguese": "De noite, as estrelas brilham.",
+    "english": "At night, the stars shine.",
+    "category": "preposition_de",
+    "usage": "parts of day"
+  },
+  {
+    "id": "prep_025",
+    "portuguese": "No verão, vamos à praia.",
+    "english": "In summer, we go to the beach.",
+    "category": "preposition_em",
+    "usage": "seasons"
+  },
+  {
+    "id": "prep_026",
+    "portuguese": "O avião aterra às três da tarde.",
+    "english": "The plane lands at three in the afternoon.",
+    "category": "preposition_de",
+    "usage": "hours + parts of day"
+  },
+  {
+    "id": "prep_027",
+    "portuguese": "Às segundas-feiras, estou muito cansado.",
+    "english": "On Mondays, I am very tired.",
+    "category": "preposition_a",
+    "usage": "days of week (routines)"
+  },
+  {
+    "id": "prep_028",
+    "portuguese": "Na primavera, as flores crescem.",
+    "english": "In spring, the flowers grow.",
+    "category": "preposition_em",
+    "usage": "seasons"
+  },
+  {
+    "id": "prep_029",
+    "portuguese": "Ele trabalha das nove às seis.",
+    "english": "He works from nine to six.",
+    "category": "preposition_de_a",
+    "usage": "hours range"
+  },
+  {
+    "id": "prep_030",
+    "portuguese": "Às vezes, vou caminhar ao parque.",
+    "english": "Sometimes, I go walking in the park.",
+    "category": "preposition_a",
+    "usage": "frequency"
+  },
+  {
+    "id": "prep_031",
+    "portuguese": "No outono, as folhas caem.",
+    "english": "In autumn, the leaves fall.",
+    "category": "preposition_em",
+    "usage": "seasons"
+  },
+  {
+    "id": "prep_032",
+    "portuguese": "A reunião começa às dez horas.",
+    "english": "The meeting starts at ten o'clock.",
+    "category": "preposition_a",
+    "usage": "hours"
+  },
+  {
+    "id": "prep_033",
+    "portuguese": "No Natal, comemos muito.",
+    "english": "At Christmas, we eat a lot.",
+    "category": "preposition_em",
+    "usage": "holidays"
+  },
+  {
+    "id": "prep_034",
+    "portuguese": "De tarde, vou ler um livro.",
+    "english": "In the afternoon, I'm going to read a book.",
+    "category": "preposition_de",
+    "usage": "parts of day"
+  },
+  {
+    "id": "prep_035",
+    "portuguese": "No meu aniversário, recebo prendas.",
+    "english": "On my birthday, I receive gifts.",
+    "category": "preposition_em",
+    "usage": "special days"
+  },
+  {
+    "id": "prep_036",
+    "portuguese": "À meia-noite, tudo fica calmo.",
+    "english": "At midnight, everything becomes calm.",
+    "category": "preposition_a",
+    "usage": "hours"
+  },
+  {
+    "id": "prep_037",
+    "portuguese": "No próximo mês, vou de férias.",
+    "english": "Next month, I'm going on vacation.",
+    "category": "preposition_em",
+    "usage": "general time"
+  },
+  {
+    "id": "prep_038",
+    "portuguese": "De manhã cedo, o ar é fresco.",
+    "english": "Early in the morning, the air is fresh.",
+    "category": "preposition_de",
+    "usage": "parts of day"
+  },
+  {
+    "id": "prep_039",
+    "portuguese": "No fim de semana, descansamos.",
+    "english": "On the weekend, we rest.",
+    "category": "preposition_em",
+    "usage": "general time"
+  },
+  {
+    "id": "prep_040",
+    "portuguese": "Às vezes, como pizza ao jantar.",
+    "english": "Sometimes, I eat pizza for dinner.",
+    "category": "preposition_a",
+    "usage": "frequency"
+  },
+  {
+    "id": "prep_041",
+    "portuguese": "No ano passado, viajei para a Grécia.",
+    "english": "Last year, I traveled to Greece.",
+    "category": "preposition_em",
+    "usage": "general time"
+  },
+  {
+    "id": "prep_042",
+    "portuguese": "Das duas às quatro, tenho reuniões.",
+    "english": "From two to four, I have meetings.",
+    "category": "preposition_de_a",
+    "usage": "hours range"
+  },
+  {
+    "id": "prep_043",
+    "portuguese": "Às segundas, vou ao mercado.",
+    "english": "On Mondays, I go to the market.",
+    "category": "preposition_a",
+    "usage": "days of week (routines)"
+  },
+  {
+    "id": "prep_044",
+    "portuguese": "No dia 1 de janeiro, é feriado.",
+    "english": "On January 1st, it is a holiday.",
+    "category": "preposition_em",
+    "usage": "specific date"
+  },
+  {
+    "id": "prep_045",
+    "portuguese": "De tarde, vou ao médico.",
+    "english": "In the afternoon, I'm going to the doctor.",
+    "category": "preposition_de",
+    "usage": "parts of day"
+  },
+  {
+    "id": "prep_046",
+    "portuguese": "No sábado à noite, vou sair.",
+    "english": "On Saturday night, I'm going out.",
+    "category": "preposition_em",
+    "usage": "specific actions"
+  },
+  {
+    "id": "prep_047",
+    "portuguese": "Às quartas, tenho treino.",
+    "english": "On Wednesdays, I have training.",
+    "category": "preposition_a",
+    "usage": "days of week (routines)"
+  },
+  {
+    "id": "prep_048",
+    "portuguese": "No domingo de manhã, vou à missa.",
+    "english": "On Sunday morning, I go to mass.",
+    "category": "preposition_em",
+    "usage": "specific actions"
+  },
+  {
+    "id": "prep_049",
+    "portuguese": "Das nove às cinco, estou no escritório.",
+    "english": "From nine to five, I am in the office.",
+    "category": "preposition_de_a",
+    "usage": "hours range"
+  },
+  {
+    "id": "prep_050",
+    "portuguese": "Às vezes, perco o autocarro das oito.",
+    "english": "Sometimes, I miss the eight o'clock bus.",
+    "category": "preposition_a",
+    "usage": "frequency"
+  },
+  {
+    "id": "prep_051",
+    "portuguese": "No próximo sábado, vou jogar ténis.",
+    "english": "Next Saturday, I'm going to play tennis.",
+    "category": "preposition_em",
+    "usage": "specific actions"
+  },
+  {
+    "id": "prep_052",
+    "portuguese": "De manhã, o trânsito é horrível.",
+    "english": "In the morning, the traffic is horrible.",
+    "category": "preposition_de",
+    "usage": "parts of day"
+  },
+  {
+    "id": "prep_053",
+    "portuguese": "No domingo, fico em casa.",
+    "english": "On Sunday, I stay at home.",
+    "category": "preposition_em",
+    "usage": "specific actions"
+  },
+  {
+    "id": "prep_054",
+    "portuguese": "Às terças, vou à aula de yoga.",
+    "english": "On Tuesdays, I go to yoga class.",
+    "category": "preposition_a",
+    "usage": "days of week (routines)"
+  },
+  {
+    "id": "prep_055",
+    "portuguese": "Das sete às oito, jantamos.",
+    "english": "From seven to eight, we have dinner.",
+    "category": "preposition_de_a",
+    "usage": "hours range"
+  }
+]

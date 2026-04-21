@@ -19,6 +19,8 @@ enum QuestionType {
   vocabularyMatch,
   @HiveField(6)
   interrogativeMatch,
+  @HiveField(7)
+  prepositionFill,
 }
 
 @HiveType(typeId: 2)

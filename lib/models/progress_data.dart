@@ -19,6 +19,8 @@ enum ActivityType {
   voiceTrainer,
   @HiveField(6)
   sentenceBuilder,
+  @HiveField(7)
+  prepositionQuiz,
 }
 
 /// A record of XP and activity for a single calendar day.

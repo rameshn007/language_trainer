@@ -279,4 +279,132 @@ class QuizEngineService {
 
     return questions;
   }
+
+  /// Generates a quiz for prepositions.
+  /// Questions show a Portuguese sentence with a blank; options are prepositions.
+  Future<List<Question>> generatePrepositionQuiz({
+    int count = 20,
+    String? category,
+    List<String>? seenIds,
+  }) async {
+    // 1. Load data
+    final String content = await rootBundle.loadString(
+      'assets/data/prepositions.json',
+    );
+    final List<dynamic> jsonList = jsonDecode(content);
+
+    // 2. Parse all entries
+    final List<Map<String, String>> allEntries = jsonList.map((e) {
+      return {
+        'id': (e['id'] ?? '') as String,
+        'portuguese': (e['portuguese'] ?? '') as String,
+        'english': (e['english'] ?? '') as String,
+        'category': (e['category'] ?? '') as String,
+      };
+    }).toList();
+
+    // 3. Filter by category if specified
+    final filtered = category != null
+        ? allEntries.where((e) => e['category'] == category).toList()
+        : List<Map<String, String>>.from(allEntries);
+
+    if (filtered.isEmpty) return [];
+
+    // 4. Prioritize unseen
+    final unseen = <Map<String, String>>[];
+    final seen = <Map<String, String>>[];
+
+    for (var entry in filtered) {
+      final qId = 'prep_${entry['id']}';
+      if (seenIds != null && seenIds.contains(qId)) {
+        seen.add(entry);
+      } else {
+        unseen.add(entry);
+      }
+    }
+
+    unseen.shuffle(_random);
+    seen.shuffle(_random);
+
+    final selection = [...unseen, ...seen].take(count).toList();
+
+    // Common prepositions for options
+    const allPreps = [
+      'ao', 'à', 'aos', 'às',
+      'do', 'da', 'dos', 'das',
+      'no', 'na', 'nos', 'nas',
+      'de', 'a', 'em'
+    ];
+
+    // 5. Build questions
+    final List<Question> questions = [];
+    for (var entry in selection) {
+      final fullText = entry['portuguese']!;
+      final english = entry['english']!;
+      final qId = 'prep_${entry['id']}';
+
+      // Find which preposition is used in the sentence
+      String? foundPrep;
+      for (var p in allPreps) {
+        // Look for the preposition as a whole word, case insensitive
+        // But we need to be careful with "a" and "de" and "em" which are parts of other words
+        final regex = RegExp('\\b$p\\b', caseSensitive: false);
+        if (regex.hasMatch(fullText)) {
+          // If we found a longer preposition (like "ao"), don't let "a" match it
+          if (foundPrep == null || p.length > foundPrep.length) {
+            foundPrep = p;
+          }
+        }
+      }
+
+      // If we can't find the prep (shouldn't happen with good data), skip
+      if (foundPrep == null) continue;
+
+      // Replace the found preposition with a blank
+      // Use the exact case of the preposition in the text for the correctAnswer
+      final match = RegExp('\\b$foundPrep\\b', caseSensitive: false).firstMatch(fullText);
+      final actualPrep = match!.group(0)!;
+      final questionText = fullText.replaceRange(match.start, match.end, '____');
+
+      // Options: the correct one + 3 others from the list
+      final List<String> options = [actualPrep];
+      final Set<String> used = {actualPrep.toLowerCase()};
+      final bool isCapitalized = actualPrep.isNotEmpty && actualPrep[0] == actualPrep[0].toUpperCase() && actualPrep[0] != actualPrep[0].toLowerCase();
+
+      final otherPreps = allPreps
+          .where((p) => p.toLowerCase() != actualPrep.toLowerCase())
+          .toList()
+        ..shuffle(_random);
+
+      for (var p in otherPreps) {
+        if (options.length >= 4) break;
+        if (!used.contains(p.toLowerCase())) {
+          String distractor = p;
+          if (isCapitalized && distractor.isNotEmpty) {
+            distractor = distractor[0].toUpperCase() + distractor.substring(1);
+          }
+          options.add(distractor);
+          used.add(p.toLowerCase());
+        }
+      }
+
+      options.shuffle(_random);
+
+      questions.add(Question(
+        id: qId,
+        questionText: questionText,
+        options: options,
+        correctAnswer: actualPrep,
+        type: QuestionType.prepositionFill,
+        sourceItem: LanguageItem(
+          id: qId,
+          portuguese: fullText, // Store full text here so TTS can read it
+          english: english,
+        ),
+        category: entry['category'],
+      ));
+    }
+
+    return questions;
+  }
 }

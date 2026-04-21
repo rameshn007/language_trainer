@@ -17,12 +17,14 @@ class QuizScreen extends ConsumerStatefulWidget {
   final bool isVocabularyQuiz;
   final bool isInterrogativeQuiz;
   final String? interrogativeCategory;
+  final bool isPrepositionQuiz;
   const QuizScreen({
     super.key,
     this.category,
     this.isVocabularyQuiz = false,
     this.isInterrogativeQuiz = false,
     this.interrogativeCategory,
+    this.isPrepositionQuiz = false,
   });
 
   @override
@@ -47,6 +49,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         );
       } else if (widget.isVocabularyQuiz) {
         await ref.read(quizViewModelProvider.notifier).startVocabularyQuiz();
+      } else if (widget.isPrepositionQuiz) {
+        await ref.read(quizViewModelProvider.notifier).startPrepositionQuiz(
+          category: widget.category,
+        );
       } else {
         await ref
             .read(quizViewModelProvider.notifier)
@@ -570,6 +576,8 @@ class QuestionCardState extends State<QuestionCard> {
       return _buildReorderAndConjugateBody(context);
     }
 
+    final isPrepositionFill = widget.question.type == QuestionType.prepositionFill;
+
     return Card(
       elevation: 8,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -598,7 +606,15 @@ class QuestionCardState extends State<QuestionCard> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        if (widget.question.type != QuestionType.cloze)
+                        if (widget.question.type != QuestionType.cloze && !isPrepositionFill)
+                          IconButton(
+                            icon: const Icon(Icons.volume_up),
+                            onPressed: () => widget.ttsService.speak(
+                              widget.question.sourceItem.portuguese,
+                              language: 'pt',
+                            ),
+                          )
+                        else if (isPrepositionFill && _isCorrect)
                           IconButton(
                             icon: const Icon(Icons.volume_up),
                             onPressed: () => widget.ttsService.speak(
@@ -607,13 +623,17 @@ class QuestionCardState extends State<QuestionCard> {
                             ),
                           )
                         else
-                          const SizedBox(width: 48), // Maintain balance
+                          const SizedBox(width: 48, height: 48), // Maintain balance
                       ],
                     ),
                     const SizedBox(height: 20),
-                    widget.question.questionText == widget.question.sourceItem.portuguese || widget.question.type == QuestionType.cloze
+                    (widget.question.questionText == widget.question.sourceItem.portuguese || 
+                     widget.question.type == QuestionType.cloze || 
+                     (isPrepositionFill && _isCorrect))
                         ? LongPressWordText(
-                            text: widget.question.questionText,
+                            text: ((isPrepositionFill || widget.question.type == QuestionType.cloze) && _isCorrect) 
+                                ? widget.question.sourceItem.portuguese 
+                                : widget.question.questionText,
                             style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
@@ -628,8 +648,19 @@ class QuestionCardState extends State<QuestionCard> {
                             ),
                             textAlign: TextAlign.center,
                           ),
+                    const SizedBox(height: 10),
+                    if (isPrepositionFill)
+                      Text(
+                        widget.question.sourceItem.english,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.outline,
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     const SizedBox(height: 30),
-                    widget.question.type == QuestionType.vocabularyMatch
+                    (widget.question.type == QuestionType.vocabularyMatch || isPrepositionFill)
                         ? Center(
                           child: Wrap(
                               spacing: 12,

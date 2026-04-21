@@ -21,6 +21,7 @@ import '../services/verb_service.dart';
 import '../models/language_item.dart';
 import 'exercise/exercise_screen.dart';
 import 'quiz/interrogative_quiz_screen.dart';
+import 'quiz/preposition_quiz_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -626,6 +627,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           onPressed: (offset) {
                             _pushScreen(
                               const InterrogativeQuizScreen(),
+                              offset,
+                            );
+                          },
+                        ),
+                        _buildGridButton(
+                          context: context,
+                          label: 'Prepositions',
+                          icon: Icons.link_rounded,
+                          bgColor: Colors.pink.shade700,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const PrepositionQuizScreen(),
                               offset,
                             );
                           },

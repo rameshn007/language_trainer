@@ -79,6 +79,8 @@ class QuestionTypeAdapter extends TypeAdapter<QuestionType> {
         return QuestionType.vocabularyMatch;
       case 6:
         return QuestionType.interrogativeMatch;
+      case 7:
+        return QuestionType.prepositionFill;
       default:
         return QuestionType.multipleChoice;
     }
@@ -107,6 +109,9 @@ class QuestionTypeAdapter extends TypeAdapter<QuestionType> {
         break;
       case QuestionType.interrogativeMatch:
         writer.writeByte(6);
+        break;
+      case QuestionType.prepositionFill:
+        writer.writeByte(7);
         break;
     }
   }

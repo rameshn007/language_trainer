@@ -181,6 +181,18 @@ class QuizViewModel extends Notifier<QuizState> {
     state = QuizState(questions: questions);
   }
 
+  Future<void> startPrepositionQuiz({int count = 20, String? category}) async {
+    _sessionStartTime = DateTime.now();
+    final storage = ref.read(storageServiceProvider);
+    final seenIds = storage.getSeenQuestionIds();
+    final questions = await _engine.generatePrepositionQuiz(
+      count: count,
+      category: category,
+      seenIds: seenIds.toList(),
+    );
+    state = QuizState(questions: questions);
+  }
+
   /// Answers the current question and records XP via ProgressService.
   /// Returns the XP awarded for this answer.
   Future<int> answerQuestion(String answer) async {
@@ -235,6 +247,8 @@ class QuizViewModel extends Notifier<QuizState> {
           activityType = ActivityType.vocabularyQuiz;
         } else if (firstType == QuestionType.interrogativeMatch) {
           activityType = ActivityType.interrogativeQuiz;
+        } else if (firstType == QuestionType.prepositionFill) {
+          activityType = ActivityType.prepositionQuiz;
         }
       }
 
