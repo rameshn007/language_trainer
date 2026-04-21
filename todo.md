@@ -37,6 +37,11 @@
 - **Files involved**: `lib/models/language_item.dart`, `lib/services/storage_service.dart`
 - **Priority**: High
 
+### 8. CarPlay Provider Interface Improvement
+- **Description**: Update the provider interface to include a `nextChallenge()` method, avoiding reliance on `startSession()`.
+- **Files involved**: `lib/services/carplay_service.dart`, `lib/services/carplay/carplay_drill_provider.dart`
+- **Priority**: Medium
+
 ## Bugs to Fix
 
 ### 1. Voice Recognition Errors in Quiz Mode
@@ -64,6 +69,11 @@
 - **Files involved**: `assets/data/exercises/*.json`, `lib/models/question.dart`
 - **Priority**: Low
 
+### 6. Empty Logic Block in CarPlay Service Update Template
+- **Description**: The `replace` parameter in `_updateStatusTemplate` does nothing when set to true.
+- **Files involved**: `lib/services/carplay_service.dart`
+- **Priority**: Medium
+
 ## Technical Debt
 
 ### 1. Code Duplication in UI Components
@@ -80,6 +90,11 @@
 - **Description**: Error handling is inconsistent across the application, leading to crashes or poor user experience.
 - **Files involved**: All service files in `lib/services/`
 - **Priority**: Medium
+
+### 4. Leftover Commented Code in Home Screen
+- **Description**: Remove unused comment about `_buildStatItem`.
+- **Files involved**: `lib/ui/home_screen.dart`
+- **Priority**: Low
 
 ## Documentation Improvements
 
