@@ -1,0 +1,3026 @@
+[
+  {
+    "id": "v_quiz_1",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (abrir)",
+    "options": [
+      "abre",
+      "abrem",
+      "abres",
+      "abro"
+    ],
+    "correctAnswer": "abro",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_1",
+      "portuguese": "abrir",
+      "english": "to open"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_2",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (acabar)",
+    "options": [
+      "acabas",
+      "acabamos",
+      "acabo",
+      "acabam"
+    ],
+    "correctAnswer": "acabas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_2",
+      "portuguese": "acabar",
+      "english": "to finish"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_3",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (acelerar)",
+    "options": [
+      "aceleras",
+      "acelero",
+      "acelera",
+      "aceleram"
+    ],
+    "correctAnswer": "aceleras",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_3",
+      "portuguese": "acelerar",
+      "english": "to accelerate"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_4",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (acender)",
+    "options": [
+      "acendemos",
+      "acendem",
+      "acende",
+      "acendes"
+    ],
+    "correctAnswer": "acendes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_4",
+      "portuguese": "acender",
+      "english": "to turn on (light) / to light"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_5",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (achar)",
+    "options": [
+      "achas",
+      "acho",
+      "acha",
+      "acham"
+    ],
+    "correctAnswer": "acho",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_5",
+      "portuguese": "achar",
+      "english": "to think / to find"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_6",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (acordar)",
+    "options": [
+      "acordo",
+      "acordam",
+      "acordas",
+      "acorda"
+    ],
+    "correctAnswer": "acordam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_6",
+      "portuguese": "acordar",
+      "english": "to wake up"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_7",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (adorar)",
+    "options": [
+      "adoramos",
+      "adoras",
+      "adora",
+      "adoram"
+    ],
+    "correctAnswer": "adoramos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_7",
+      "portuguese": "adorar",
+      "english": "to adore / to love"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_8",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (agendar)",
+    "options": [
+      "agendo",
+      "agenda",
+      "agendas",
+      "agendamos"
+    ],
+    "correctAnswer": "agendas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_8",
+      "portuguese": "agendar",
+      "english": "to schedule"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_9",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (agradecer)",
+    "options": [
+      "agradecem",
+      "agradeces",
+      "agradeço",
+      "agradecemos"
+    ],
+    "correctAnswer": "agradecem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_9",
+      "portuguese": "agradecer",
+      "english": "to thank"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_10",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (ajudar)",
+    "options": [
+      "ajudas",
+      "ajudamos",
+      "ajudo",
+      "ajudam"
+    ],
+    "correctAnswer": "ajudamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_10",
+      "portuguese": "ajudar",
+      "english": "to help"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_11",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (almoçar)",
+    "options": [
+      "almoço",
+      "almoçam",
+      "almoçamos",
+      "almoça"
+    ],
+    "correctAnswer": "almoçamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_11",
+      "portuguese": "almoçar",
+      "english": "to have lunch"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_12",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (amar)",
+    "options": [
+      "amam",
+      "amamos",
+      "ama",
+      "amas"
+    ],
+    "correctAnswer": "amas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_12",
+      "portuguese": "amar",
+      "english": "to love"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_13",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (andar)",
+    "options": [
+      "anda",
+      "ando",
+      "andamos",
+      "andam"
+    ],
+    "correctAnswer": "ando",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_13",
+      "portuguese": "andar",
+      "english": "to walk"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_14",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (apagar)",
+    "options": [
+      "apagam",
+      "apagas",
+      "apaga",
+      "apago"
+    ],
+    "correctAnswer": "apago",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_14",
+      "portuguese": "apagar",
+      "english": "to erase / to turn off"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_15",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (apanhar)",
+    "options": [
+      "apanha",
+      "apanham",
+      "apanhamos",
+      "apanho"
+    ],
+    "correctAnswer": "apanha",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_15",
+      "portuguese": "apanhar",
+      "english": "to catch (transport/objects)"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_16",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (aprender)",
+    "options": [
+      "aprende",
+      "aprendes",
+      "aprendemos",
+      "aprendem"
+    ],
+    "correctAnswer": "aprendem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_16",
+      "portuguese": "aprender",
+      "english": "to learn"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_17",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (apresentar)",
+    "options": [
+      "apresento",
+      "apresentamos",
+      "apresenta",
+      "apresentas"
+    ],
+    "correctAnswer": "apresento",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_17",
+      "portuguese": "apresentar",
+      "english": "to present / to introduce"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_18",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (arrumar)",
+    "options": [
+      "arruma",
+      "arrumamos",
+      "arrumo",
+      "arrumam"
+    ],
+    "correctAnswer": "arrumamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_18",
+      "portuguese": "arrumar",
+      "english": "to tidy up / to pack"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_19",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (aspirar)",
+    "options": [
+      "aspira",
+      "aspiro",
+      "aspiramos",
+      "aspiras"
+    ],
+    "correctAnswer": "aspiras",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_19",
+      "portuguese": "aspirar",
+      "english": "to vacuum"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_20",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (assar)",
+    "options": [
+      "asso",
+      "assas",
+      "assamos",
+      "assa"
+    ],
+    "correctAnswer": "assas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_20",
+      "portuguese": "assar",
+      "english": "to bake / to roast"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_21",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (assinar)",
+    "options": [
+      "assina",
+      "assinam",
+      "assino",
+      "assinamos"
+    ],
+    "correctAnswer": "assinam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_21",
+      "portuguese": "assinar",
+      "english": "to sign"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_22",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (assistir)",
+    "options": [
+      "assiste",
+      "assisto",
+      "assistes",
+      "assistem"
+    ],
+    "correctAnswer": "assistes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_22",
+      "portuguese": "assistir",
+      "english": "to watch / to attend"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_23",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (bater)",
+    "options": [
+      "bates",
+      "batem",
+      "bate",
+      "bato"
+    ],
+    "correctAnswer": "bate",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_23",
+      "portuguese": "bater",
+      "english": "to hit / to beat"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_24",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (beber)",
+    "options": [
+      "bebemos",
+      "bebes",
+      "bebe",
+      "bebem"
+    ],
+    "correctAnswer": "bebe",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_24",
+      "portuguese": "beber",
+      "english": "to drink"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_25",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (beijar)",
+    "options": [
+      "beijo",
+      "beija",
+      "beijam",
+      "beijamos"
+    ],
+    "correctAnswer": "beijam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_25",
+      "portuguese": "beijar",
+      "english": "to kiss"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_26",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (brincar)",
+    "options": [
+      "brincas",
+      "brincam",
+      "brinco",
+      "brincamos"
+    ],
+    "correctAnswer": "brincas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_26",
+      "portuguese": "brincar",
+      "english": "to play / to joke"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_27",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (buscar)",
+    "options": [
+      "buscam",
+      "buscamos",
+      "buscas",
+      "busca"
+    ],
+    "correctAnswer": "buscas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_27",
+      "portuguese": "buscar",
+      "english": "to fetch"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_28",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (calçar)",
+    "options": [
+      "calçamos",
+      "calças",
+      "calço",
+      "calçam"
+    ],
+    "correctAnswer": "calçamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_28",
+      "portuguese": "calçar",
+      "english": "to put on shoes"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_29",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (caminhar)",
+    "options": [
+      "caminhas",
+      "caminhamos",
+      "caminho",
+      "caminha"
+    ],
+    "correctAnswer": "caminha",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_29",
+      "portuguese": "caminhar",
+      "english": "to walk / to hike"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_30",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (cancelar)",
+    "options": [
+      "cancelam",
+      "cancelas",
+      "cancela",
+      "cancelamos"
+    ],
+    "correctAnswer": "cancela",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_30",
+      "portuguese": "cancelar",
+      "english": "to cancel"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_31",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (cantar)",
+    "options": [
+      "canta",
+      "cantas",
+      "cantamos",
+      "canto"
+    ],
+    "correctAnswer": "cantas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_31",
+      "portuguese": "cantar",
+      "english": "to sing"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_32",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (casar)",
+    "options": [
+      "casamos",
+      "caso",
+      "casa",
+      "casas"
+    ],
+    "correctAnswer": "caso",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_32",
+      "portuguese": "casar",
+      "english": "to marry"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_33",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (chamar)",
+    "options": [
+      "chama",
+      "chamo",
+      "chamas",
+      "chamam"
+    ],
+    "correctAnswer": "chamam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_33",
+      "portuguese": "chamar",
+      "english": "to call"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_34",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (chegar)",
+    "options": [
+      "chego",
+      "chegas",
+      "chegamos",
+      "chega"
+    ],
+    "correctAnswer": "chegamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_34",
+      "portuguese": "chegar",
+      "english": "to arrive"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_35",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (chorar)",
+    "options": [
+      "choramos",
+      "choro",
+      "choram",
+      "choras"
+    ],
+    "correctAnswer": "choro",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_35",
+      "portuguese": "chorar",
+      "english": "to cry"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_36",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (cobrar)",
+    "options": [
+      "cobra",
+      "cobras",
+      "cobram",
+      "cobro"
+    ],
+    "correctAnswer": "cobra",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_36",
+      "portuguese": "cobrar",
+      "english": "to charge"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_37",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (colocar)",
+    "options": [
+      "coloco",
+      "colocas",
+      "coloca",
+      "colocam"
+    ],
+    "correctAnswer": "coloca",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_37",
+      "portuguese": "colocar",
+      "english": "to put / to place"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_38",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (combinar)",
+    "options": [
+      "combino",
+      "combinamos",
+      "combina",
+      "combinam"
+    ],
+    "correctAnswer": "combina",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_38",
+      "portuguese": "combinar",
+      "english": "to arrange / to match"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_39",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (começar)",
+    "options": [
+      "começas",
+      "começamos",
+      "começo",
+      "começa"
+    ],
+    "correctAnswer": "começas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_39",
+      "portuguese": "começar",
+      "english": "to begin / to start"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_40",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (comer)",
+    "options": [
+      "comem",
+      "come",
+      "comemos",
+      "como"
+    ],
+    "correctAnswer": "como",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_40",
+      "portuguese": "comer",
+      "english": "to eat"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_41",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (comprar)",
+    "options": [
+      "compra",
+      "compram",
+      "compras",
+      "compramos"
+    ],
+    "correctAnswer": "compra",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_41",
+      "portuguese": "comprar",
+      "english": "to buy"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_42",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (compreender)",
+    "options": [
+      "compreendo",
+      "compreendemos",
+      "compreendes",
+      "compreendem"
+    ],
+    "correctAnswer": "compreendo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_42",
+      "portuguese": "compreender",
+      "english": "to understand"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_43",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (concordar)",
+    "options": [
+      "concordam",
+      "concordo",
+      "concorda",
+      "concordas"
+    ],
+    "correctAnswer": "concordo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_43",
+      "portuguese": "concordar",
+      "english": "to agree"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_44",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (conduzir)",
+    "options": [
+      "conduzimos",
+      "conduzes",
+      "conduzem",
+      "conduzo"
+    ],
+    "correctAnswer": "conduzo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_44",
+      "portuguese": "conduzir",
+      "english": "to drive"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_45",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (conhecer)",
+    "options": [
+      "conhecem",
+      "conhecemos",
+      "conhece",
+      "conheces"
+    ],
+    "correctAnswer": "conhece",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_45",
+      "portuguese": "conhecer",
+      "english": "to know (someone) / to meet"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_46",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (conseguir)",
+    "options": [
+      "conseguem",
+      "conseguimos",
+      "consegues",
+      "consegue"
+    ],
+    "correctAnswer": "conseguimos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_46",
+      "portuguese": "conseguir",
+      "english": "to manage / to be able to"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_47",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (consertar)",
+    "options": [
+      "consertamos",
+      "consertam",
+      "consertas",
+      "conserta"
+    ],
+    "correctAnswer": "consertamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_47",
+      "portuguese": "consertar",
+      "english": "to fix / to repair"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_48",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (contar)",
+    "options": [
+      "contas",
+      "conto",
+      "conta",
+      "contamos"
+    ],
+    "correctAnswer": "conto",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_48",
+      "portuguese": "contar",
+      "english": "to count / to tell"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_49",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (continuar)",
+    "options": [
+      "continua",
+      "continuam",
+      "continuas",
+      "continuamos"
+    ],
+    "correctAnswer": "continuas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_49",
+      "portuguese": "continuar",
+      "english": "to continue"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_50",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (conversar)",
+    "options": [
+      "conversa",
+      "conversas",
+      "conversam",
+      "conversamos"
+    ],
+    "correctAnswer": "conversamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_50",
+      "portuguese": "conversar",
+      "english": "to converse / to chat"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_51",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (convidar)",
+    "options": [
+      "convidamos",
+      "convidam",
+      "convidas",
+      "convida"
+    ],
+    "correctAnswer": "convidam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_51",
+      "portuguese": "convidar",
+      "english": "to invite"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_52",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (cortar)",
+    "options": [
+      "corta",
+      "cortas",
+      "cortamos",
+      "corto"
+    ],
+    "correctAnswer": "corta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_52",
+      "portuguese": "cortar",
+      "english": "to cut"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_53",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (cozinhar)",
+    "options": [
+      "cozinho",
+      "cozinhamos",
+      "cozinha",
+      "cozinham"
+    ],
+    "correctAnswer": "cozinhamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_53",
+      "portuguese": "cozinhar",
+      "english": "to cook"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_54",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (criar)",
+    "options": [
+      "criamos",
+      "criam",
+      "crio",
+      "cria"
+    ],
+    "correctAnswer": "criamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_54",
+      "portuguese": "criar",
+      "english": "to create"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_55",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (dançar)",
+    "options": [
+      "danço",
+      "dança",
+      "danças",
+      "dançam"
+    ],
+    "correctAnswer": "danças",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_55",
+      "portuguese": "dançar",
+      "english": "to dance"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_56",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (debater)",
+    "options": [
+      "debatem",
+      "debato",
+      "debatemos",
+      "debates"
+    ],
+    "correctAnswer": "debatem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_56",
+      "portuguese": "debater",
+      "english": "to debate"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_57",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (deitar)",
+    "options": [
+      "deitamos",
+      "deitas",
+      "deita",
+      "deitam"
+    ],
+    "correctAnswer": "deitamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_57",
+      "portuguese": "deitar",
+      "english": "to lay down / to throw away"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_58",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (deixar)",
+    "options": [
+      "deixamos",
+      "deixam",
+      "deixo",
+      "deixas"
+    ],
+    "correctAnswer": "deixas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_58",
+      "portuguese": "deixar",
+      "english": "to leave / to let"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_59",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (descansar)",
+    "options": [
+      "descanso",
+      "descansas",
+      "descansa",
+      "descansam"
+    ],
+    "correctAnswer": "descanso",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_59",
+      "portuguese": "descansar",
+      "english": "to rest"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_60",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (descer)",
+    "options": [
+      "descem",
+      "descemos",
+      "desce",
+      "desço"
+    ],
+    "correctAnswer": "desce",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_60",
+      "portuguese": "descer",
+      "english": "to go down / to get off"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_61",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (desculpar)",
+    "options": [
+      "desculpo",
+      "desculpam",
+      "desculpas",
+      "desculpa"
+    ],
+    "correctAnswer": "desculpo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_61",
+      "portuguese": "desculpar",
+      "english": "to apologize / to excuse"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_62",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (desenhar)",
+    "options": [
+      "desenhamos",
+      "desenhas",
+      "desenha",
+      "desenho"
+    ],
+    "correctAnswer": "desenha",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_62",
+      "portuguese": "desenhar",
+      "english": "to draw"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_63",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (desejar)",
+    "options": [
+      "desejas",
+      "deseja",
+      "desejam",
+      "desejamos"
+    ],
+    "correctAnswer": "deseja",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_63",
+      "portuguese": "desejar",
+      "english": "to wish / to desire"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_64",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (despertar)",
+    "options": [
+      "despertam",
+      "desperta",
+      "despertas",
+      "desperto"
+    ],
+    "correctAnswer": "despertam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_64",
+      "portuguese": "despertar",
+      "english": "to awaken"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_65",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (despir)",
+    "options": [
+      "dispo",
+      "despe",
+      "despimos",
+      "despes"
+    ],
+    "correctAnswer": "dispo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_65",
+      "portuguese": "despir",
+      "english": "to undress"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_66",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (dever)",
+    "options": [
+      "devo",
+      "deve",
+      "deves",
+      "devem"
+    ],
+    "correctAnswer": "devo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_66",
+      "portuguese": "dever",
+      "english": "to owe / must"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_67",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (digitalizar)",
+    "options": [
+      "digitalizas",
+      "digitaliza",
+      "digitalizam",
+      "digitalizo"
+    ],
+    "correctAnswer": "digitalizas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_67",
+      "portuguese": "digitalizar",
+      "english": "to scan"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_68",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (digitar)",
+    "options": [
+      "digita",
+      "digito",
+      "digitas",
+      "digitamos"
+    ],
+    "correctAnswer": "digitas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_68",
+      "portuguese": "digitar",
+      "english": "to type"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_69",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (ditar)",
+    "options": [
+      "ditam",
+      "ditamos",
+      "ditas",
+      "dita"
+    ],
+    "correctAnswer": "ditam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_69",
+      "portuguese": "ditar",
+      "english": "to dictate"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_70",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (dobrar)",
+    "options": [
+      "dobras",
+      "dobram",
+      "dobro",
+      "dobramos"
+    ],
+    "correctAnswer": "dobras",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_70",
+      "portuguese": "dobrar",
+      "english": "to fold"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_71",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (dormir)",
+    "options": [
+      "dormes",
+      "durmo",
+      "dormimos",
+      "dorme"
+    ],
+    "correctAnswer": "dormimos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_71",
+      "portuguese": "dormir",
+      "english": "to sleep"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_72",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (embarcar)",
+    "options": [
+      "embarca",
+      "embarco",
+      "embarcamos",
+      "embarcam"
+    ],
+    "correctAnswer": "embarcam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_72",
+      "portuguese": "embarcar",
+      "english": "to board"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_73",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (ensinar)",
+    "options": [
+      "ensinas",
+      "ensinam",
+      "ensina",
+      "ensino"
+    ],
+    "correctAnswer": "ensina",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_73",
+      "portuguese": "ensinar",
+      "english": "to teach"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_74",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (entrar)",
+    "options": [
+      "entro",
+      "entras",
+      "entram",
+      "entramos"
+    ],
+    "correctAnswer": "entramos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_74",
+      "portuguese": "entrar",
+      "english": "to enter"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_75",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (entregar)",
+    "options": [
+      "entregas",
+      "entregamos",
+      "entrego",
+      "entrega"
+    ],
+    "correctAnswer": "entregas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_75",
+      "portuguese": "entregar",
+      "english": "to deliver"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_76",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (enviar)",
+    "options": [
+      "envias",
+      "envio",
+      "envia",
+      "enviamos"
+    ],
+    "correctAnswer": "envias",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_76",
+      "portuguese": "enviar",
+      "english": "to send"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_77",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (escovar)",
+    "options": [
+      "escovo",
+      "escova",
+      "escovam",
+      "escovamos"
+    ],
+    "correctAnswer": "escova",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_77",
+      "portuguese": "escovar",
+      "english": "to brush"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_78",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (escrever)",
+    "options": [
+      "escreves",
+      "escrevemos",
+      "escrevo",
+      "escreve"
+    ],
+    "correctAnswer": "escrevemos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_78",
+      "portuguese": "escrever",
+      "english": "to write"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_79",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (escutar)",
+    "options": [
+      "escuta",
+      "escutamos",
+      "escutam",
+      "escuto"
+    ],
+    "correctAnswer": "escutamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_79",
+      "portuguese": "escutar",
+      "english": "to listen"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_80",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (esperar)",
+    "options": [
+      "esperamos",
+      "espero",
+      "esperam",
+      "espera"
+    ],
+    "correctAnswer": "esperam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_80",
+      "portuguese": "esperar",
+      "english": "to wait / to hope"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_81",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (estacionar)",
+    "options": [
+      "estacionas",
+      "estaciono",
+      "estacionamos",
+      "estacionam"
+    ],
+    "correctAnswer": "estacionamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_81",
+      "portuguese": "estacionar",
+      "english": "to park"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_82",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (estender)",
+    "options": [
+      "estendes",
+      "estendem",
+      "estendo",
+      "estende"
+    ],
+    "correctAnswer": "estendo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_82",
+      "portuguese": "estender",
+      "english": "to hang out (laundry)"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_83",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (estudar)",
+    "options": [
+      "estudas",
+      "estudo",
+      "estuda",
+      "estudam"
+    ],
+    "correctAnswer": "estudas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_83",
+      "portuguese": "estudar",
+      "english": "to study"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_84",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (explicar)",
+    "options": [
+      "explicas",
+      "explicamos",
+      "explica",
+      "explico"
+    ],
+    "correctAnswer": "explico",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_84",
+      "portuguese": "explicar",
+      "english": "to explain"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_85",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (falar)",
+    "options": [
+      "falamos",
+      "falas",
+      "falam",
+      "fala"
+    ],
+    "correctAnswer": "falamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_85",
+      "portuguese": "falar",
+      "english": "to speak / to talk"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_86",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (faturar)",
+    "options": [
+      "faturam",
+      "faturas",
+      "fatura",
+      "faturo"
+    ],
+    "correctAnswer": "faturas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_86",
+      "portuguese": "faturar",
+      "english": "to invoice"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_87",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (fazer)",
+    "options": [
+      "faz",
+      "faço",
+      "fazem",
+      "fazemos"
+    ],
+    "correctAnswer": "faço",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_87",
+      "portuguese": "fazer",
+      "english": "to do / to make"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_88",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (fechar)",
+    "options": [
+      "fecho",
+      "fechamos",
+      "fechas",
+      "fecham"
+    ],
+    "correctAnswer": "fechas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_88",
+      "portuguese": "fechar",
+      "english": "to close"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_89",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (ferver)",
+    "options": [
+      "ferve",
+      "ferves",
+      "fervem",
+      "fervemos"
+    ],
+    "correctAnswer": "fervemos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_89",
+      "portuguese": "ferver",
+      "english": "to boil"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_90",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (ficar)",
+    "options": [
+      "fica",
+      "ficam",
+      "ficas",
+      "fico"
+    ],
+    "correctAnswer": "fico",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_90",
+      "portuguese": "ficar",
+      "english": "to stay / to remain"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_91",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (fumar)",
+    "options": [
+      "fuma",
+      "fumam",
+      "fumamos",
+      "fumo"
+    ],
+    "correctAnswer": "fuma",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_91",
+      "portuguese": "fumar",
+      "english": "to smoke"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_92",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (funcionar)",
+    "options": [
+      "funciona",
+      "funcionas",
+      "funcionamos",
+      "funcionam"
+    ],
+    "correctAnswer": "funcionam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_92",
+      "portuguese": "funcionar",
+      "english": "to function / to work"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_93",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (ganhar)",
+    "options": [
+      "ganhas",
+      "ganho",
+      "ganha",
+      "ganham"
+    ],
+    "correctAnswer": "ganha",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_93",
+      "portuguese": "ganhar",
+      "english": "to win / to earn"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_94",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (gastar)",
+    "options": [
+      "gastamos",
+      "gasto",
+      "gastam",
+      "gastas"
+    ],
+    "correctAnswer": "gastam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_94",
+      "portuguese": "gastar",
+      "english": "to spend"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_95",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (gostar)",
+    "options": [
+      "gostam",
+      "gostas",
+      "gosta",
+      "gostamos"
+    ],
+    "correctAnswer": "gosta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_95",
+      "portuguese": "gostar",
+      "english": "to like"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_96",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (gravar)",
+    "options": [
+      "gravas",
+      "grava",
+      "gravamos",
+      "gravo"
+    ],
+    "correctAnswer": "grava",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_96",
+      "portuguese": "gravar",
+      "english": "to record"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_97",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (gritar)",
+    "options": [
+      "grito",
+      "grita",
+      "gritas",
+      "gritam"
+    ],
+    "correctAnswer": "gritam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_97",
+      "portuguese": "gritar",
+      "english": "to shout / to yell"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_98",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (imprimir)",
+    "options": [
+      "imprimimos",
+      "imprime",
+      "imprimem",
+      "imprimes"
+    ],
+    "correctAnswer": "imprimem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_98",
+      "portuguese": "imprimir",
+      "english": "to print"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_99",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (ir)",
+    "options": [
+      "vou",
+      "vais",
+      "vai",
+      "vão"
+    ],
+    "correctAnswer": "vais",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_99",
+      "portuguese": "ir",
+      "english": "to go"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_100",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (jantar)",
+    "options": [
+      "janta",
+      "jantam",
+      "janto",
+      "jantas"
+    ],
+    "correctAnswer": "jantas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_100",
+      "portuguese": "jantar",
+      "english": "to have dinner"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_101",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (lanchar)",
+    "options": [
+      "lancha",
+      "lanchamos",
+      "lanchas",
+      "lancham"
+    ],
+    "correctAnswer": "lancham",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_101",
+      "portuguese": "lanchar",
+      "english": "to have a snack"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_102",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (lavar)",
+    "options": [
+      "lavam",
+      "lavamos",
+      "lava",
+      "lavas"
+    ],
+    "correctAnswer": "lava",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_102",
+      "portuguese": "lavar",
+      "english": "to wash"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_103",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (ler)",
+    "options": [
+      "lemos",
+      "leem",
+      "lê",
+      "lês"
+    ],
+    "correctAnswer": "lês",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_103",
+      "portuguese": "ler",
+      "english": "to read"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_104",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (levantar)",
+    "options": [
+      "levanta",
+      "levanto",
+      "levantamos",
+      "levantam"
+    ],
+    "correctAnswer": "levanto",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_104",
+      "portuguese": "levantar",
+      "english": "to raise / to get up"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_105",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (levar)",
+    "options": [
+      "levas",
+      "leva",
+      "levo",
+      "levam"
+    ],
+    "correctAnswer": "levas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_105",
+      "portuguese": "levar",
+      "english": "to take / to carry"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_106",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (ligar)",
+    "options": [
+      "liga",
+      "ligamos",
+      "ligas",
+      "ligam"
+    ],
+    "correctAnswer": "ligamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_106",
+      "portuguese": "ligar",
+      "english": "to connect / to turn on / to call"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_107",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (limpar)",
+    "options": [
+      "limpam",
+      "limpo",
+      "limpamos",
+      "limpas"
+    ],
+    "correctAnswer": "limpamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_107",
+      "portuguese": "limpar",
+      "english": "to clean"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_108",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (mandar)",
+    "options": [
+      "mandam",
+      "mandamos",
+      "mando",
+      "mandas"
+    ],
+    "correctAnswer": "mandas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_108",
+      "portuguese": "mandar",
+      "english": "to send / to order"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_109",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (maquilhar)",
+    "options": [
+      "maquilham",
+      "maquilha",
+      "maquilhamos",
+      "maquilhas"
+    ],
+    "correctAnswer": "maquilha",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_109",
+      "portuguese": "maquilhar",
+      "english": "to put on makeup"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_110",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (marcar)",
+    "options": [
+      "marca",
+      "marcas",
+      "marcam",
+      "marcamos"
+    ],
+    "correctAnswer": "marca",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_110",
+      "portuguese": "marcar",
+      "english": "to mark / to schedule"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_111",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (meter)",
+    "options": [
+      "metemos",
+      "metem",
+      "mete",
+      "meto"
+    ],
+    "correctAnswer": "metemos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_111",
+      "portuguese": "meter",
+      "english": "to put / to insert"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_112",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (morar)",
+    "options": [
+      "moramos",
+      "moram",
+      "moro",
+      "mora"
+    ],
+    "correctAnswer": "moramos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_112",
+      "portuguese": "morar",
+      "english": "to live / to reside"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_113",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (mostrar)",
+    "options": [
+      "mostra",
+      "mostro",
+      "mostras",
+      "mostram"
+    ],
+    "correctAnswer": "mostro",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_113",
+      "portuguese": "mostrar",
+      "english": "to show"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_114",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (mudar)",
+    "options": [
+      "mudamos",
+      "mudam",
+      "muda",
+      "mudo"
+    ],
+    "correctAnswer": "mudo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_114",
+      "portuguese": "mudar",
+      "english": "to change / to move"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_115",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (nadar)",
+    "options": [
+      "nadas",
+      "nadamos",
+      "nadam",
+      "nada"
+    ],
+    "correctAnswer": "nadamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_115",
+      "portuguese": "nadar",
+      "english": "to swim"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_116",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (necessitar)",
+    "options": [
+      "necessito",
+      "necessita",
+      "necessitamos",
+      "necessitas"
+    ],
+    "correctAnswer": "necessito",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_116",
+      "portuguese": "necessitar",
+      "english": "to need"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_117",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (negociar)",
+    "options": [
+      "negocias",
+      "negociam",
+      "negocio",
+      "negocia"
+    ],
+    "correctAnswer": "negocias",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_117",
+      "portuguese": "negociar",
+      "english": "to negotiate"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_118",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (oferecer)",
+    "options": [
+      "oferece",
+      "ofereces",
+      "oferecemos",
+      "ofereço"
+    ],
+    "correctAnswer": "oferecemos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_118",
+      "portuguese": "oferecer",
+      "english": "to offer / to give"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_119",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (olhar)",
+    "options": [
+      "olham",
+      "olhas",
+      "olha",
+      "olho"
+    ],
+    "correctAnswer": "olhas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_119",
+      "portuguese": "olhar",
+      "english": "to look"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_120",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (organizar)",
+    "options": [
+      "organizas",
+      "organizam",
+      "organizamos",
+      "organiza"
+    ],
+    "correctAnswer": "organizamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_120",
+      "portuguese": "organizar",
+      "english": "to organize"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_121",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (ouvir)",
+    "options": [
+      "ouvem",
+      "ouves",
+      "ouve",
+      "ouvimos"
+    ],
+    "correctAnswer": "ouves",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_121",
+      "portuguese": "ouvir",
+      "english": "to hear"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_122",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (pagar)",
+    "options": [
+      "pagam",
+      "pagamos",
+      "pago",
+      "paga"
+    ],
+    "correctAnswer": "pago",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_122",
+      "portuguese": "pagar",
+      "english": "to pay"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_123",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (parar)",
+    "options": [
+      "param",
+      "paramos",
+      "paras",
+      "para"
+    ],
+    "correctAnswer": "para",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_123",
+      "portuguese": "parar",
+      "english": "to stop"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_124",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (passar)",
+    "options": [
+      "passa",
+      "passas",
+      "passam",
+      "passamos"
+    ],
+    "correctAnswer": "passam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_124",
+      "portuguese": "passar",
+      "english": "to pass / to iron"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_125",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (pedalar)",
+    "options": [
+      "pedalam",
+      "pedalas",
+      "pedalo",
+      "pedala"
+    ],
+    "correctAnswer": "pedala",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_125",
+      "portuguese": "pedalar",
+      "english": "to pedal / to cycle"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_126",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (pedir)",
+    "options": [
+      "pede",
+      "peço",
+      "pedes",
+      "pedimos"
+    ],
+    "correctAnswer": "pedes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_126",
+      "portuguese": "pedir",
+      "english": "to ask for / to request"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_127",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (pensar)",
+    "options": [
+      "pensas",
+      "penso",
+      "pensa",
+      "pensamos"
+    ],
+    "correctAnswer": "pensa",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_127",
+      "portuguese": "pensar",
+      "english": "to think"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_128",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (pentear)",
+    "options": [
+      "penteiam",
+      "penteamos",
+      "penteias",
+      "penteia"
+    ],
+    "correctAnswer": "penteias",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_128",
+      "portuguese": "pentear",
+      "english": "to comb"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_129",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (perguntar)",
+    "options": [
+      "perguntas",
+      "pergunta",
+      "perguntam",
+      "perguntamos"
+    ],
+    "correctAnswer": "perguntas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_129",
+      "portuguese": "perguntar",
+      "english": "to ask"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_130",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (pintar)",
+    "options": [
+      "pinto",
+      "pintam",
+      "pintas",
+      "pinta"
+    ],
+    "correctAnswer": "pinto",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_130",
+      "portuguese": "pintar",
+      "english": "to paint"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_131",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (planear)",
+    "options": [
+      "planeia",
+      "planeamos",
+      "planeio",
+      "planeiam"
+    ],
+    "correctAnswer": "planeio",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_131",
+      "portuguese": "planear",
+      "english": "to plan"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_132",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (precisar)",
+    "options": [
+      "precisamos",
+      "preciso",
+      "precisas",
+      "precisam"
+    ],
+    "correctAnswer": "precisamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_132",
+      "portuguese": "precisar",
+      "english": "to need"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_133",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (preparar)",
+    "options": [
+      "preparam",
+      "preparamos",
+      "preparo",
+      "preparas"
+    ],
+    "correctAnswer": "preparamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_133",
+      "portuguese": "preparar",
+      "english": "to prepare"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_134",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (procurar)",
+    "options": [
+      "procura",
+      "procuram",
+      "procuro",
+      "procuras"
+    ],
+    "correctAnswer": "procuro",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_134",
+      "portuguese": "procurar",
+      "english": "to look for / to search"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_135",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (provar)",
+    "options": [
+      "provo",
+      "provam",
+      "provamos",
+      "provas"
+    ],
+    "correctAnswer": "provas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_135",
+      "portuguese": "provar",
+      "english": "to taste / to prove"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_136",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (quebrar)",
+    "options": [
+      "quebra",
+      "quebro",
+      "quebramos",
+      "quebram"
+    ],
+    "correctAnswer": "quebra",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_136",
+      "portuguese": "quebrar",
+      "english": "to break"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_137",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (receber)",
+    "options": [
+      "recebe",
+      "recebo",
+      "recebemos",
+      "recebes"
+    ],
+    "correctAnswer": "recebes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_137",
+      "portuguese": "receber",
+      "english": "to receive"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_138",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (recusar)",
+    "options": [
+      "recusas",
+      "recusa",
+      "recusam",
+      "recusamos"
+    ],
+    "correctAnswer": "recusas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_138",
+      "portuguese": "recusar",
+      "english": "to refuse"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_139",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (relaxar)",
+    "options": [
+      "relaxam",
+      "relaxa",
+      "relaxo",
+      "relaxamos"
+    ],
+    "correctAnswer": "relaxa",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_139",
+      "portuguese": "relaxar",
+      "english": "to relax"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_140",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (responder)",
+    "options": [
+      "respondem",
+      "respondo",
+      "respondemos",
+      "responde"
+    ],
+    "correctAnswer": "respondem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_140",
+      "portuguese": "responder",
+      "english": "to answer / to respond"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_141",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (reunir)",
+    "options": [
+      "reúne",
+      "reúnem",
+      "reúnes",
+      "reúno"
+    ],
+    "correctAnswer": "reúnem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_141",
+      "portuguese": "reunir",
+      "english": "to gather / to meet"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_142",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (sair)",
+    "options": [
+      "saem",
+      "sais",
+      "sai",
+      "saio"
+    ],
+    "correctAnswer": "saio",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_142",
+      "portuguese": "sair",
+      "english": "to go out / to leave"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_143",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (saltar)",
+    "options": [
+      "saltas",
+      "salta",
+      "saltamos",
+      "salto"
+    ],
+    "correctAnswer": "salta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_143",
+      "portuguese": "saltar",
+      "english": "to jump"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_144",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (subir)",
+    "options": [
+      "subo",
+      "sobe",
+      "sobes",
+      "sobem"
+    ],
+    "correctAnswer": "sobem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_144",
+      "portuguese": "subir",
+      "english": "to go up / to get on"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_145",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (telefonar)",
+    "options": [
+      "telefonamos",
+      "telefono",
+      "telefona",
+      "telefonam"
+    ],
+    "correctAnswer": "telefonam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_145",
+      "portuguese": "telefonar",
+      "english": "to call (on the phone)"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_146",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (tentar)",
+    "options": [
+      "tentas",
+      "tentam",
+      "tentamos",
+      "tenta"
+    ],
+    "correctAnswer": "tentam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_146",
+      "portuguese": "tentar",
+      "english": "to try"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_147",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (tomar)",
+    "options": [
+      "tomo",
+      "tomam",
+      "toma",
+      "tomas"
+    ],
+    "correctAnswer": "toma",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_147",
+      "portuguese": "tomar",
+      "english": "to take (a shower/breakfast)"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_148",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (trabalhar)",
+    "options": [
+      "trabalho",
+      "trabalhamos",
+      "trabalha",
+      "trabalhas"
+    ],
+    "correctAnswer": "trabalhas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_148",
+      "portuguese": "trabalhar",
+      "english": "to work"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_149",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (usar)",
+    "options": [
+      "usamos",
+      "usam",
+      "uso",
+      "usa"
+    ],
+    "correctAnswer": "usamos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_149",
+      "portuguese": "usar",
+      "english": "to use"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_150",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (vender)",
+    "options": [
+      "vendem",
+      "vende",
+      "vendemos",
+      "vendes"
+    ],
+    "correctAnswer": "vendes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_150",
+      "portuguese": "vender",
+      "english": "to sell"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_151",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (ver)",
+    "options": [
+      "vês",
+      "veem",
+      "vemos",
+      "vejo"
+    ],
+    "correctAnswer": "vemos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_151",
+      "portuguese": "ver",
+      "english": "to see"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_152",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (vestir)",
+    "options": [
+      "visto",
+      "vestes",
+      "vestem",
+      "vestimos"
+    ],
+    "correctAnswer": "vestes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_152",
+      "portuguese": "vestir",
+      "english": "to get dressed / to wear"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_153",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (viajar)",
+    "options": [
+      "viajas",
+      "viajam",
+      "viajamos",
+      "viajo"
+    ],
+    "correctAnswer": "viajo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_153",
+      "portuguese": "viajar",
+      "english": "to travel"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_154",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (visitar)",
+    "options": [
+      "visitam",
+      "visito",
+      "visita",
+      "visitamos"
+    ],
+    "correctAnswer": "visito",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_154",
+      "portuguese": "visitar",
+      "english": "to visit"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_155",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (viver)",
+    "options": [
+      "vives",
+      "vive",
+      "vivo",
+      "vivem"
+    ],
+    "correctAnswer": "vivo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_155",
+      "portuguese": "viver",
+      "english": "to live"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_156",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (acreditar)",
+    "options": [
+      "acreditas",
+      "acredita",
+      "acreditam",
+      "acredito"
+    ],
+    "correctAnswer": "acredito",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_156",
+      "portuguese": "acreditar",
+      "english": "to believe"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_157",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (correr)",
+    "options": [
+      "correm",
+      "corremos",
+      "corro",
+      "corres"
+    ],
+    "correctAnswer": "corremos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_157",
+      "portuguese": "correr",
+      "english": "to run"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_158",
+    "questionText": "Fill in the blank: 'Ela ______ todos os dias.' (dar)",
+    "options": [
+      "dás",
+      "dá",
+      "dão",
+      "damos"
+    ],
+    "correctAnswer": "dá",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_158",
+      "portuguese": "dar",
+      "english": "to give"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_159",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (jogar)",
+    "options": [
+      "jogas",
+      "jogo",
+      "joga",
+      "jogam"
+    ],
+    "correctAnswer": "jogas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_159",
+      "portuguese": "jogar",
+      "english": "to play (games/sports)"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_160",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (odiar)",
+    "options": [
+      "odeio",
+      "odeias",
+      "odeiam",
+      "odiamos"
+    ],
+    "correctAnswer": "odeiam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_160",
+      "portuguese": "odiar",
+      "english": "to hate"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_161",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (partir)",
+    "options": [
+      "partes",
+      "parto",
+      "partimos",
+      "partem"
+    ],
+    "correctAnswer": "partimos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_161",
+      "portuguese": "partir",
+      "english": "to leave / to depart"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_162",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (perder)",
+    "options": [
+      "perde",
+      "perdem",
+      "perdes",
+      "perco"
+    ],
+    "correctAnswer": "perdes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_162",
+      "portuguese": "perder",
+      "english": "to lose"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_163",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (poder)",
+    "options": [
+      "pode",
+      "posso",
+      "podes",
+      "podem"
+    ],
+    "correctAnswer": "posso",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_163",
+      "portuguese": "poder",
+      "english": "to be able to / can"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_164",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (querer)",
+    "options": [
+      "queremos",
+      "querem",
+      "quer",
+      "queres"
+    ],
+    "correctAnswer": "queremos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_164",
+      "portuguese": "querer",
+      "english": "to want"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_165",
+    "questionText": "Fill in the blank: 'Eu ______ agora.' (saber)",
+    "options": [
+      "sabes",
+      "sabemos",
+      "sabe",
+      "sei"
+    ],
+    "correctAnswer": "sei",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_165",
+      "portuguese": "saber",
+      "english": "to know (facts)"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_166",
+    "questionText": "Fill in the blank: 'Tu ______ bem?' (sentir)",
+    "options": [
+      "sentes",
+      "sentimos",
+      "sentem",
+      "sinto"
+    ],
+    "correctAnswer": "sentes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_166",
+      "portuguese": "sentir",
+      "english": "to feel"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_167",
+    "questionText": "Fill in the blank: 'Eles ______ muito.' (tocar)",
+    "options": [
+      "tocas",
+      "toca",
+      "tocamos",
+      "tocam"
+    ],
+    "correctAnswer": "tocam",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_167",
+      "portuguese": "tocar",
+      "english": "to touch / to play (instrument)"
+    },
+    "category": "Grammar & Verbs"
+  },
+  {
+    "id": "v_quiz_168",
+    "questionText": "Fill in the blank: 'Nós ______ juntos.' (trazer)",
+    "options": [
+      "trazem",
+      "trazemos",
+      "traz",
+      "trago"
+    ],
+    "correctAnswer": "trazemos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "v_src_168",
+      "portuguese": "trazer",
+      "english": "to bring"
+    },
+    "category": "Grammar & Verbs"
+  }
+]

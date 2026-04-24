@@ -56,8 +56,8 @@ class ExerciseListScreen extends StatelessWidget {
     },
     {
       'title': 'Verb Conjugation Quiz',
-      'subtitle': '50 questions to test your verb conjugation skills',
-      'path': 'assets/data/exercises/verb_conjugation_50.json',
+      'subtitle': 'Practice all verbs from your vocabulary',
+      'path': 'assets/data/exercises/verb_conjugation_quiz.json',
       'icon': 'school',
     },
     {
