@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/language_item.dart';
+import '../../services/translation_service.dart';
 
-class VocabularyItemDialog extends StatefulWidget {
+class VocabularyItemDialog extends ConsumerStatefulWidget {
   final LanguageItem? item;
   final bool focusEnglish;
   final Function(LanguageItem newItem, String? oldId) onSave;
@@ -14,14 +16,17 @@ class VocabularyItemDialog extends StatefulWidget {
   });
 
   @override
-  State<VocabularyItemDialog> createState() => _VocabularyItemDialogState();
+  ConsumerState<VocabularyItemDialog> createState() => _VocabularyItemDialogState();
 }
 
-class _VocabularyItemDialogState extends State<VocabularyItemDialog> {
+class _VocabularyItemDialogState extends ConsumerState<VocabularyItemDialog> {
   late TextEditingController _portugueseController;
   late TextEditingController _englishController;
   late FocusNode _portugueseFocusNode;
   late FocusNode _englishFocusNode;
+
+  bool _isTranslatingPt = false;
+  bool _isTranslatingEn = false;
 
   @override
   void initState() {
@@ -55,6 +60,42 @@ class _VocabularyItemDialogState extends State<VocabularyItemDialog> {
     super.dispose();
   }
 
+  Future<void> _translate(bool fromPortuguese) async {
+    final sourceController = fromPortuguese ? _portugueseController : _englishController;
+    final targetController = fromPortuguese ? _englishController : _portugueseController;
+    
+    final text = sourceController.text.trim();
+    if (text.isEmpty) return;
+
+    setState(() {
+      if (fromPortuguese) {
+        _isTranslatingPt = true;
+      } else {
+        _isTranslatingEn = true;
+      }
+    });
+
+    try {
+      final translationService = ref.read(translationServiceProvider);
+      final result = await translationService.translate(text, fromEn: !fromPortuguese);
+
+      if (result != null && mounted) {
+        targetController.text = result;
+      } else if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Translation failed. Please try again.')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isTranslatingPt = false;
+          _isTranslatingEn = false;
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -65,13 +106,45 @@ class _VocabularyItemDialogState extends State<VocabularyItemDialog> {
           TextField(
             controller: _portugueseController,
             focusNode: _portugueseFocusNode,
-            decoration: const InputDecoration(labelText: 'Portuguese'),
+            decoration: InputDecoration(
+              labelText: 'Portuguese',
+              suffixIcon: _isTranslatingPt 
+                ? const SizedBox(
+                    width: 20, 
+                    height: 20, 
+                    child: Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  )
+                : IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () => _translate(true),
+                    tooltip: 'Translate to English',
+                  ),
+            ),
           ),
           const SizedBox(height: 16),
           TextField(
             controller: _englishController,
             focusNode: _englishFocusNode,
-            decoration: const InputDecoration(labelText: 'English'),
+            decoration: InputDecoration(
+              labelText: 'English',
+              suffixIcon: _isTranslatingEn
+                ? const SizedBox(
+                    width: 20, 
+                    height: 20, 
+                    child: Padding(
+                      padding: EdgeInsets.all(12.0),
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  )
+                : IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () => _translate(false),
+                    tooltip: 'Translate to Portuguese',
+                  ),
+            ),
           ),
         ],
       ),

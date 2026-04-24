@@ -45,6 +45,7 @@ dependencies:
   flutter_carplay: ^1.2.10
   speech_to_text: ^7.3.0
   avatar_glow: ^3.0.1
+  http: ^1.6.0
 
 
 dev_dependencies:

@@ -232,10 +232,21 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   }
 
   Future<void> _showEditDialog(LanguageItem? item) async {
+    final bool isNew = item == null;
+    final LanguageItem? initialItem = isNew && _searchQuery.isNotEmpty
+        ? LanguageItem(
+            id: 'temp',
+            portuguese: _searchQuery,
+            english: '',
+            masteryLevel: 0,
+          )
+        : item;
+
     await showDialog(
       context: context,
       builder: (context) => VocabularyItemDialog(
-        item: item,
+        item: initialItem,
+        focusEnglish: isNew && _searchQuery.isNotEmpty,
         onSave: (newItem, oldId) async {
           final storage = ref.read(storageServiceProvider);
 
