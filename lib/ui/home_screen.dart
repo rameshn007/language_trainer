@@ -656,7 +656,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  // _buildStatItem removed — replaced by progress dashboard
 
   Widget _buildGridButton({
     required BuildContext context,
