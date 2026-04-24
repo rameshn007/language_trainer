@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final translationServiceProvider = Provider<TranslationService>((ref) {
@@ -34,7 +35,7 @@ class TranslationService {
         }
       }
     } catch (e) {
-      print('Translation error: $e');
+      debugPrint('Translation error: $e');
     }
 
     return null;

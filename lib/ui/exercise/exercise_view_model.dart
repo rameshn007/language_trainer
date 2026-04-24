@@ -73,10 +73,18 @@ class ExerciseViewModel extends Notifier<QuizState> {
       firstAttempt: isFirstAttempt && isCorrect,
     );
 
+    final newWrongAnswers = Set<String>.from(state.currentWrongAnswers);
+    if (!isCorrect) {
+      newWrongAnswers.add(answer);
+    }
+
     state = state.copyWith(
       score: newScore,
       sessionXP: state.sessionXP + xpAwarded,
       firstAttemptTracker: tracker,
+      isCurrentQuestionCorrect: isCorrect,
+      hasAttemptedCurrent: true,
+      currentWrongAnswers: newWrongAnswers,
     );
 
     return xpAwarded;
@@ -84,7 +92,12 @@ class ExerciseViewModel extends Notifier<QuizState> {
 
   Future<void> nextQuestion() async {
     if (state.currentIndex < state.questions.length - 1) {
-      state = state.copyWith(currentIndex: state.currentIndex + 1);
+      state = state.copyWith(
+        currentIndex: state.currentIndex + 1,
+        isCurrentQuestionCorrect: false,
+        hasAttemptedCurrent: false,
+        currentWrongAnswers: {},
+      );
     } else {
       // Exercise complete — record session
       final storage = ref.read(storageServiceProvider);

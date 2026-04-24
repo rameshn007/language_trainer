@@ -1,0 +1,402 @@
+[
+  {
+    "id": "qb_1",
+    "type": "reorderAndConjugate",
+    "questionText": "horas / *ser* / Que / ?",
+    "options": ["são", "é", "somos"],
+    "correctAnswer": "Que horas são ?",
+    "sourceItem": { "portuguese": "Que horas são ?", "english": "Answer: É uma e meia." }
+  },
+  {
+    "id": "qb_2",
+    "type": "reorderAndConjugate",
+    "questionText": "A / horas / que / te / *costumar* / levantar / ?",
+    "options": ["costumas", "costuma", "costumam"],
+    "correctAnswer": "A que horas te costumas levantar ?",
+    "sourceItem": { "portuguese": "A que horas te costumas levantar ?", "english": "Answer: Eu costumo levantar-me antes das 8:00." }
+  },
+  {
+    "id": "qb_3",
+    "type": "reorderAndConjugate",
+    "questionText": "vocês / Onde / *ouvir* / música / ?",
+    "options": ["ouvem", "ouvimos", "ouve"],
+    "correctAnswer": "Onde vocês ouvem música ?",
+    "sourceItem": { "portuguese": "Onde vocês ouvem música ?", "english": "Answer: Nós ouvimos música em casa." }
+  },
+  {
+    "id": "qb_4",
+    "type": "reorderAndConjugate",
+    "questionText": "com / *sair* / os teus amigos / à sexta-feira à noite / ?",
+    "options": ["Sais", "Sai", "Saímos"],
+    "correctAnswer": "Sais com os teus amigos à sexta-feira à noite ?",
+    "sourceItem": { "portuguese": "Sais com os teus amigos à sexta-feira à noite ?", "english": "Answer: Não, eu nunca saio com os meus amigos à sexta-feira à noite." }
+  },
+  {
+    "id": "qb_5",
+    "type": "reorderAndConjugate",
+    "questionText": "Vocês / *conseguir* / tomar o pequeno-almoço / em casa / ?",
+    "options": ["conseguem", "consegue", "conseguimos"],
+    "correctAnswer": "Vocês conseguem tomar o pequeno-almoço em casa ?",
+    "sourceItem": { "portuguese": "Vocês conseguem tomar o pequeno-almoço em casa ?", "english": "Answer: Sim, nós conseguimos tomar o pequeno-almoço em casa." }
+  },
+  {
+    "id": "qb_6",
+    "type": "reorderAndConjugate",
+    "questionText": "A tua filha / *ver* / televisão / depois do jantar / ?",
+    "options": ["vê", "vês", "vemos"],
+    "correctAnswer": "A tua filha vê televisão depois do jantar ?",
+    "sourceItem": { "portuguese": "A tua filha vê televisão depois do jantar ?", "english": "Answer: Não, a minha filha não vê televisão depois do jantar." }
+  },
+  {
+    "id": "qb_7",
+    "type": "reorderAndConjugate",
+    "questionText": "O que / normalmente / ao pequeno-almoço / *comer* / ?",
+    "options": ["comes", "come", "como"],
+    "correctAnswer": "O que comes normalmente ao pequeno-almoço ?",
+    "sourceItem": { "portuguese": "O que comes normalmente ao pequeno-almoço ?", "english": "Answer: Normalmente, ao pequeno-almoço como papas de aveia com fruta." }
+  },
+  {
+    "id": "qb_8",
+    "type": "reorderAndConjugate",
+    "questionText": "o banco / *ficar* / Onde / ?",
+    "options": ["fica", "ficas", "ficam"],
+    "correctAnswer": "Onde fica o banco ?",
+    "sourceItem": { "portuguese": "Onde fica o banco ?", "english": "Answer: O banco fica na esquina." }
+  },
+  {
+    "id": "qb_9",
+    "type": "reorderAndConjugate",
+    "questionText": "Como / te / *chamar* / ?",
+    "options": ["chamas", "chama", "chamo"],
+    "correctAnswer": "Como te chamas ?",
+    "sourceItem": { "portuguese": "Como te chamas ?", "english": "Answer: Eu chamo-me Maria." }
+  },
+  {
+    "id": "qb_10",
+    "type": "reorderAndConjugate",
+    "questionText": "Onde / *morar* / ?",
+    "options": ["moras", "mora", "moram"],
+    "correctAnswer": "Onde moras ?",
+    "sourceItem": { "portuguese": "Onde moras ?", "english": "Answer: Eu moro em Lisboa." }
+  },
+  {
+    "id": "qb_11",
+    "type": "reorderAndConjugate",
+    "questionText": "eles / *ser* / De onde / ?",
+    "options": ["são", "é", "sois"],
+    "correctAnswer": "De onde são eles ?",
+    "sourceItem": { "portuguese": "De onde são eles ?", "english": "Answer: Eles são de Londres." }
+  },
+  {
+    "id": "qb_12",
+    "type": "reorderAndConjugate",
+    "questionText": "Quando / o teu aniversário / *ser* / ?",
+    "options": ["é", "são", "és"],
+    "correctAnswer": "Quando é o teu aniversário ?",
+    "sourceItem": { "portuguese": "Quando é o teu aniversário ?", "english": "Answer: O meu aniversário é amanhã." }
+  },
+  {
+    "id": "qb_13",
+    "type": "reorderAndConjugate",
+    "questionText": "Quantos / anos / *ter* / ?",
+    "options": ["tens", "tem", "têm"],
+    "correctAnswer": "Quantos anos tens ?",
+    "sourceItem": { "portuguese": "Quantos anos tens ?", "english": "Answer: Eu tenho 30 anos." }
+  },
+  {
+    "id": "qb_14",
+    "type": "reorderAndConjugate",
+    "questionText": "A / horas / que / a aula / *começar* / ?",
+    "options": ["começa", "começas", "começam"],
+    "correctAnswer": "A que horas começa a aula ?",
+    "sourceItem": { "portuguese": "A que horas começa a aula ?", "english": "Answer: A aula começa às 9:00." }
+  },
+  {
+    "id": "qb_15",
+    "type": "reorderAndConjugate",
+    "questionText": "*falar* / inglês / ?",
+    "options": ["Falas", "Fala", "Falam"],
+    "correctAnswer": "Falas inglês ?",
+    "sourceItem": { "portuguese": "Falas inglês ?", "english": "Answer: Sim, eu falo inglês." }
+  },
+  {
+    "id": "qb_16",
+    "type": "reorderAndConjugate",
+    "questionText": "para o trabalho / Como / *ir* / ?",
+    "options": ["vais", "vai", "vão"],
+    "correctAnswer": "Como vais para o trabalho ?",
+    "sourceItem": { "portuguese": "Como vais para o trabalho ?", "english": "Answer: Eu vou para o trabalho de comboio." }
+  },
+  {
+    "id": "qb_17",
+    "type": "reorderAndConjugate",
+    "questionText": "Quanto / tempo / a viagem / *demorar* / ?",
+    "options": ["demora", "demoram", "demoras"],
+    "correctAnswer": "Quanto tempo demora a viagem ?",
+    "sourceItem": { "portuguese": "Quanto tempo demora a viagem ?", "english": "Answer: A viagem demora duas horas." }
+  },
+  {
+    "id": "qb_18",
+    "type": "reorderAndConjugate",
+    "questionText": "Do que / de fazer / *gostar* / ?",
+    "options": ["gostas", "gosta", "gostam"],
+    "correctAnswer": "Do que gostas de fazer ?",
+    "sourceItem": { "portuguese": "Do que gostas de fazer ?", "english": "Answer: Eu gosto muito de ler." }
+  },
+  {
+    "id": "qb_19",
+    "type": "reorderAndConjugate",
+    "questionText": "*conhecer* / o João / ?",
+    "options": ["Conheces", "Conhece", "Conhecem"],
+    "correctAnswer": "Conheces o João ?",
+    "sourceItem": { "portuguese": "Conheces o João ?", "english": "Answer: Sim, eu conheço o João." }
+  },
+  {
+    "id": "qb_20",
+    "type": "reorderAndConjugate",
+    "questionText": "Quanto / o livro / *custar* / ?",
+    "options": ["custa", "custam", "custas"],
+    "correctAnswer": "Quanto custa o livro ?",
+    "sourceItem": { "portuguese": "Quanto custa o livro ?", "english": "Answer: O livro custa 15 euros." }
+  },
+  {
+    "id": "qb_21",
+    "type": "reorderAndConjugate",
+    "questionText": "hoje / Onde / *ir* / ?",
+    "options": ["vais", "vai", "vão"],
+    "correctAnswer": "Onde vais hoje ?",
+    "sourceItem": { "portuguese": "Onde vais hoje ?", "english": "Answer: Eu vou ao supermercado hoje." }
+  },
+  {
+    "id": "qb_22",
+    "type": "reorderAndConjugate",
+    "questionText": "*preferir* / café / ou chá / ?",
+    "options": ["Preferes", "Prefere", "Preferem"],
+    "correctAnswer": "Preferes café ou chá ?",
+    "sourceItem": { "portuguese": "Preferes café ou chá ?", "english": "Answer: Eu prefiro chá." }
+  },
+  {
+    "id": "qb_23",
+    "type": "reorderAndConjugate",
+    "questionText": "eles / *estudar* / Onde / ?",
+    "options": ["estudam", "estuda", "estudas"],
+    "correctAnswer": "Onde estudam eles ?",
+    "sourceItem": { "portuguese": "Onde estudam eles ?", "english": "Answer: Eles estudam na universidade." }
+  },
+  {
+    "id": "qb_24",
+    "type": "reorderAndConjugate",
+    "questionText": "A / horas / que / *acordar* / ?",
+    "options": ["acordas", "acorda", "acordam"],
+    "correctAnswer": "A que horas acordas ?",
+    "sourceItem": { "portuguese": "A que horas acordas ?", "english": "Answer: Eu acordo às 7:00." }
+  },
+  {
+    "id": "qb_25",
+    "type": "reorderAndConjugate",
+    "questionText": "Onde / jantar / *ir* / ?",
+    "options": ["vão", "vai", "ides"],
+    "correctAnswer": "Onde vão jantar ?",
+    "sourceItem": { "portuguese": "Onde vão jantar ?", "english": "Answer: Nós vamos jantar num restaurante." }
+  },
+  {
+    "id": "qb_26",
+    "type": "reorderAndConjugate",
+    "questionText": "Onde / *nascer* / ?",
+    "options": ["nasceste", "nasceu", "nasceram"],
+    "correctAnswer": "Onde nasceste ?",
+    "sourceItem": { "portuguese": "Onde nasceste ?", "english": "Answer: Eu nasci no Brasil." }
+  },
+  {
+    "id": "qb_27",
+    "type": "reorderAndConjugate",
+    "questionText": "Quando / *chegar* / ?",
+    "options": ["chegaste", "chegou", "chegaram"],
+    "correctAnswer": "Quando chegaste ?",
+    "sourceItem": { "portuguese": "Quando chegaste ?", "english": "Answer: Eu cheguei ontem." }
+  },
+  {
+    "id": "qb_28",
+    "type": "reorderAndConjugate",
+    "questionText": "a chave / *estar* / Onde / ?",
+    "options": ["está", "estão", "estás"],
+    "correctAnswer": "Onde está a chave ?",
+    "sourceItem": { "portuguese": "Onde está a chave ?", "english": "Answer: A chave está na gaveta." }
+  },
+  {
+    "id": "qb_29",
+    "type": "reorderAndConjugate",
+    "questionText": "Onde / *trabalhar* / ?",
+    "options": ["trabalhas", "trabalha", "trabalham"],
+    "correctAnswer": "Onde trabalhas ?",
+    "sourceItem": { "portuguese": "Onde trabalhas ?", "english": "Answer: Eu trabalho num escritório." }
+  },
+  {
+    "id": "qb_30",
+    "type": "reorderAndConjugate",
+    "questionText": "eles / *chegar* / Quando / ?",
+    "options": ["chegam", "chega", "chegas"],
+    "correctAnswer": "Quando chegam eles ?",
+    "sourceItem": { "portuguese": "Quando chegam eles ?", "english": "Answer: Eles chegam amanhã de manhã." }
+  },
+  {
+    "id": "qb_31",
+    "type": "reorderAndConjugate",
+    "questionText": "Para onde / de férias / *ir* / ?",
+    "options": ["vão", "vais", "vai"],
+    "correctAnswer": "Para onde vão de férias ?",
+    "sourceItem": { "portuguese": "Para onde vão de férias ?", "english": "Answer: Nós vamos de férias para o Algarve." }
+  },
+  {
+    "id": "qb_32",
+    "type": "reorderAndConjugate",
+    "questionText": "O que / ao pequeno-almoço / *beber* / ?",
+    "options": ["bebes", "bebe", "bebem"],
+    "correctAnswer": "O que bebes ao pequeno-almoço ?",
+    "sourceItem": { "portuguese": "O que bebes ao pequeno-almoço ?", "english": "Answer: Eu bebo café com leite." }
+  },
+  {
+    "id": "qb_33",
+    "type": "reorderAndConjugate",
+    "questionText": "Quando / o filme / *começar* / ?",
+    "options": ["começa", "começam", "começas"],
+    "correctAnswer": "Quando começa o filme ?",
+    "sourceItem": { "portuguese": "Quando começa o filme ?", "english": "Answer: O filme começa em 10 minutos." }
+  },
+  {
+    "id": "qb_34",
+    "type": "reorderAndConjugate",
+    "questionText": "A / horas / que / eles / *almoçar* / ?",
+    "options": ["almoçam", "almoça", "almoças"],
+    "correctAnswer": "A que horas almoçam eles ?",
+    "sourceItem": { "portuguese": "A que horas almoçam eles ?", "english": "Answer: Eles almoçam ao meio-dia." }
+  },
+  {
+    "id": "qb_35",
+    "type": "reorderAndConjugate",
+    "questionText": "O que / beber / *querer* / ?",
+    "options": ["queres", "quer", "querem"],
+    "correctAnswer": "O que queres beber ?",
+    "sourceItem": { "portuguese": "O que queres beber ?", "english": "Answer: Eu quero um sumo de laranja." }
+  },
+  {
+    "id": "qb_36",
+    "type": "reorderAndConjugate",
+    "questionText": "viajar / Como / *preferir* / ?",
+    "options": ["preferes", "prefere", "preferem"],
+    "correctAnswer": "Como preferes viajar ?",
+    "sourceItem": { "portuguese": "Como preferes viajar ?", "english": "Answer: Eu prefiro ir de autocarro." }
+  },
+  {
+    "id": "qb_37",
+    "type": "reorderAndConjugate",
+    "questionText": "o João / *trabalhar* / Onde / ?",
+    "options": ["trabalha", "trabalhas", "trabalham"],
+    "correctAnswer": "Onde trabalha o João ?",
+    "sourceItem": { "portuguese": "Onde trabalha o João ?", "english": "Answer: O João trabalha num banco." }
+  },
+  {
+    "id": "qb_38",
+    "type": "reorderAndConjugate",
+    "questionText": "O que / fazer / *ir* / ?",
+    "options": ["vais", "vai", "vão"],
+    "correctAnswer": "O que vais fazer ?",
+    "sourceItem": { "portuguese": "O que vais fazer ?", "english": "Answer: Eu vou ler um livro." }
+  },
+  {
+    "id": "qb_39",
+    "type": "reorderAndConjugate",
+    "questionText": "eles / *morar* / Onde / ?",
+    "options": ["moram", "mora", "moras"],
+    "correctAnswer": "Onde moram eles ?",
+    "sourceItem": { "portuguese": "Onde moram eles ?", "english": "Answer: Eles moram em Paris." }
+  },
+  {
+    "id": "qb_40",
+    "type": "reorderAndConjugate",
+    "questionText": "Onde / ficar / *ir* / ?",
+    "options": ["vais", "vai", "vão"],
+    "correctAnswer": "Onde vais ficar ?",
+    "sourceItem": { "portuguese": "Onde vais ficar ?", "english": "Answer: Eu vou ficar em casa." }
+  },
+  {
+    "id": "qb_41",
+    "type": "reorderAndConjugate",
+    "questionText": "o gato / *estar* / Onde / ?",
+    "options": ["está", "estão", "estás"],
+    "correctAnswer": "Onde está o gato ?",
+    "sourceItem": { "portuguese": "Onde está o gato ?", "english": "Answer: O gato está no sofá." }
+  },
+  {
+    "id": "qb_42",
+    "type": "reorderAndConjugate",
+    "questionText": "a reunião / *ser* / Onde / ?",
+    "options": ["é", "são", "és"],
+    "correctAnswer": "Onde é a reunião ?",
+    "sourceItem": { "portuguese": "Onde é a reunião ?", "english": "Answer: A reunião é na sala dois." }
+  },
+  {
+    "id": "qb_43",
+    "type": "reorderAndConjugate",
+    "questionText": "Como / eles / *chegar* / ?",
+    "options": ["chegam", "chega", "chegas"],
+    "correctAnswer": "Como chegam eles ?",
+    "sourceItem": { "portuguese": "Como chegam eles ?", "english": "Answer: Eles chegam de comboio." }
+  },
+  {
+    "id": "qb_44",
+    "type": "reorderAndConjugate",
+    "questionText": "A / horas / que / jantar / *costumar* / ?",
+    "options": ["costumas", "costuma", "costumam"],
+    "correctAnswer": "A que horas costumas jantar ?",
+    "sourceItem": { "portuguese": "A que horas costumas jantar ?", "english": "Answer: Eu costumo jantar às 20:00." }
+  },
+  {
+    "id": "qb_45",
+    "type": "reorderAndConjugate",
+    "questionText": "Do que / eles / de fazer / *gostar* / ?",
+    "options": ["gostam", "gosta", "gostas"],
+    "correctAnswer": "Do que gostam eles de fazer ?",
+    "sourceItem": { "portuguese": "Do que gostam eles de fazer ?", "english": "Answer: Eles gostam de jogar futebol." }
+  },
+  {
+    "id": "qb_46",
+    "type": "reorderAndConjugate",
+    "questionText": "A / horas / que / o comboio / *partir* / ?",
+    "options": ["parte", "partem", "partes"],
+    "correctAnswer": "A que horas parte o comboio ?",
+    "sourceItem": { "portuguese": "A que horas parte o comboio ?", "english": "Answer: O comboio parte às 10:30." }
+  },
+  {
+    "id": "qb_47",
+    "type": "reorderAndConjugate",
+    "questionText": "O que / ver / *ir* / ?",
+    "options": ["vais", "vai", "vão"],
+    "correctAnswer": "O que vais ver ?",
+    "sourceItem": { "portuguese": "O que vais ver ?", "english": "Answer: Eu vou ver um filme." }
+  },
+  {
+    "id": "qb_48",
+    "type": "reorderAndConjugate",
+    "questionText": "O que / a ler / *estar* / ?",
+    "options": ["estás", "está", "estão"],
+    "correctAnswer": "O que estás a ler ?",
+    "sourceItem": { "portuguese": "O que estás a ler ?", "english": "Answer: Eu estou a ler um romance." }
+  },
+  {
+    "id": "qb_49",
+    "type": "reorderAndConjugate",
+    "questionText": "Onde / no domingo / *ir* / ?",
+    "options": ["vão", "vais", "vai"],
+    "correctAnswer": "Onde vão no domingo ?",
+    "sourceItem": { "portuguese": "Onde vão no domingo ?", "english": "Answer: Nós vamos à praia no domingo." }
+  },
+  {
+    "id": "qb_50",
+    "type": "reorderAndConjugate",
+    "questionText": "De que / cor / o teu carro / *ser* / ?",
+    "options": ["é", "são", "és"],
+    "correctAnswer": "De que cor é o teu carro ?",
+    "sourceItem": { "portuguese": "De que cor é o teu carro ?", "english": "Answer: O meu carro é vermelho." }
+  }
+]

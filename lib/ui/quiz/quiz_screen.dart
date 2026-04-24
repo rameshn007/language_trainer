@@ -451,6 +451,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                         onAnswer: (option) => _handleAnswer(option, question),
                         onNext: _handleNext,
                         ttsService: _ttsService,
+                        isCorrect: quizState.isCurrentQuestionCorrect,
+                        wrongAnswers: quizState.currentWrongAnswers,
                       );
                     },
               ),
@@ -468,6 +470,8 @@ class QuestionCard extends ConsumerStatefulWidget {
   final Function(String) onAnswer;
   final VoidCallback onNext;
   final TtsService ttsService;
+  final bool isCorrect;
+  final Set<String> wrongAnswers;
 
   const QuestionCard({
     super.key,
@@ -475,6 +479,8 @@ class QuestionCard extends ConsumerStatefulWidget {
     required this.onAnswer,
     required this.onNext,
     required this.ttsService,
+    required this.isCorrect,
+    required this.wrongAnswers,
   });
 
   @override
@@ -498,9 +504,8 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
   }
 
   void _onOptionTap(String option) {
-    final quizState = ref.read(quizViewModelProvider);
-    final isCorrectNow = quizState.isCurrentQuestionCorrect;
-    final wrongAnswersNow = quizState.currentWrongAnswers;
+    final isCorrectNow = widget.isCorrect;
+    final wrongAnswersNow = widget.wrongAnswers;
 
     if (isCorrectNow) {
       // Repeat audio if tapping the correct answer again
@@ -562,9 +567,8 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
 
   @override
   Widget build(BuildContext context) {
-    final quizState = ref.watch(quizViewModelProvider);
-    final isCorrect = quizState.isCurrentQuestionCorrect;
-    final wrongAnswers = quizState.currentWrongAnswers;
+    final isCorrect = widget.isCorrect;
+    final wrongAnswers = widget.wrongAnswers;
 
     if (widget.question.type == QuestionType.reorderAndConjugate) {
       return _buildReorderAndConjugateBody(context, isCorrect);
@@ -810,12 +814,28 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
   void _initReorderData() {
     if (_availableWords != null) return;
     final words = widget.question.questionText.split('/').map((s) => s.trim()).toList();
-    _availableWords = List.from(words);
-    // Find the reflexive verb (ends in -se or -me etc, or has a hypthen)
-    _originalVerb = _availableWords!.firstWhere(
-      (w) => w.contains('-se') || w.contains('-me') || w.contains('-te') || w.contains('-nos') || w.contains('-vos'),
-      orElse: () => "",
-    );
+    
+    _availableWords = [];
+    _originalVerb = "";
+    
+    for (var w in words) {
+      if (w.startsWith('*') && w.endsWith('*') && w.length > 2) {
+        final cleanWord = w.substring(1, w.length - 1);
+        _availableWords!.add(cleanWord);
+        _originalVerb = cleanWord;
+      } else {
+        _availableWords!.add(w);
+      }
+    }
+
+    // Fallback for older reflexive verb format
+    if (_originalVerb == "") {
+      _originalVerb = _availableWords!.firstWhere(
+        (w) => w.contains('-se') || w.contains('-me') || w.contains('-te') || w.contains('-nos') || w.contains('-vos'),
+        orElse: () => "",
+      );
+    }
+    
     _selectedWords = [];
   }
 
@@ -842,8 +862,8 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Text(
-                      widget.question.sourceItem.english,
+                    LongPressWordText(
+                      text: widget.question.sourceItem.english,
                       style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
@@ -1025,8 +1045,7 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
   }
 
   void revealAnswer() {
-    final viewModel = ref.read(quizViewModelProvider.notifier);
-    viewModel.answerQuestion(widget.question.correctAnswer);
+    widget.onAnswer(widget.question.correctAnswer);
 
     if (widget.question.type == QuestionType.reorderAndConjugate) {
       setState(() {

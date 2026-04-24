@@ -276,6 +276,8 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
                         onAnswer: (option) => _handleAnswer(option),
                         onNext: _handleNext,
                         ttsService: _ttsService,
+                        isCorrect: quizState.isCurrentQuestionCorrect,
+                        wrongAnswers: quizState.currentWrongAnswers,
                       );
                     },
               ),

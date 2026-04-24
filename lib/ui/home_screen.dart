@@ -644,6 +644,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             );
                           },
                         ),
+                        _buildGridButton(
+                          context: context,
+                          label: 'Question Builder',
+                          icon: Icons.chat_rounded,
+                          bgColor: Colors.lightBlue.shade600,
+                          fgColor: Colors.white,
+                          onPressed: (offset) {
+                            _pushScreen(
+                              const ExerciseScreen(
+                                unitName: 'Question Builder: Make the Question',
+                                unitPath: 'assets/data/exercises/question_builder.json',
+                              ),
+                              offset,
+                            );
+                          },
+                        ),
                       ],
                     ),
                   ),
