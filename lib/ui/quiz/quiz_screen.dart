@@ -463,7 +463,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
   }
 }
 
-class QuestionCard extends StatefulWidget {
+class QuestionCard extends ConsumerStatefulWidget {
   final Question question;
   final Function(String) onAnswer;
   final VoidCallback onNext;
@@ -478,22 +478,16 @@ class QuestionCard extends StatefulWidget {
   });
 
   @override
-  State<QuestionCard> createState() => QuestionCardState();
+  ConsumerState<QuestionCard> createState() => QuestionCardState();
 }
 
-class QuestionCardState extends State<QuestionCard> {
-  Set<String> _wrongAnswers = {};
-  bool _isCorrect = false;
-  bool _hasAttempted = false;
+class QuestionCardState extends ConsumerState<QuestionCard> {
 
   @override
   void didUpdateWidget(QuestionCard oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.question.id != oldWidget.question.id) {
       setState(() {
-        _wrongAnswers = {};
-        _isCorrect = false;
-        _hasAttempted = false;
         // Reset reorder data
         _availableWords = null;
         _selectedWords = null;
@@ -504,7 +498,11 @@ class QuestionCardState extends State<QuestionCard> {
   }
 
   void _onOptionTap(String option) {
-    if (_isCorrect) {
+    final quizState = ref.read(quizViewModelProvider);
+    final isCorrectNow = quizState.isCurrentQuestionCorrect;
+    final wrongAnswersNow = quizState.currentWrongAnswers;
+
+    if (isCorrectNow) {
       // Repeat audio if tapping the correct answer again
       if (option == widget.question.correctAnswer) {
         widget.ttsService.speak(
@@ -515,17 +513,12 @@ class QuestionCardState extends State<QuestionCard> {
       return;
     }
 
-    if (_wrongAnswers.contains(option)) return; // Already tried this wrong one
+    if (wrongAnswersNow.contains(option)) return; // Already tried this wrong one
 
-    if (!_hasAttempted) {
-      widget.onAnswer(option);
-      _hasAttempted = true;
-    }
+    // Call onAnswer for ALL attempts now, ViewModel handles logic
+    widget.onAnswer(option);
 
     if (option == widget.question.correctAnswer) {
-      setState(() {
-        _isCorrect = true;
-      });
 
       String textToSpeak = widget.question.sourceItem.portuguese;
 
@@ -563,17 +556,18 @@ class QuestionCardState extends State<QuestionCard> {
         language: 'pt',
       );
     } else {
-      setState(() {
-        _wrongAnswers.add(option);
-      });
       widget.ttsService.speak("Incorrecto.", language: 'pt');
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final quizState = ref.watch(quizViewModelProvider);
+    final isCorrect = quizState.isCurrentQuestionCorrect;
+    final wrongAnswers = quizState.currentWrongAnswers;
+
     if (widget.question.type == QuestionType.reorderAndConjugate) {
-      return _buildReorderAndConjugateBody(context);
+      return _buildReorderAndConjugateBody(context, isCorrect);
     }
 
     final isPrepositionFill = widget.question.type == QuestionType.prepositionFill;
@@ -614,7 +608,7 @@ class QuestionCardState extends State<QuestionCard> {
                               language: 'pt',
                             ),
                           )
-                        else if (isPrepositionFill && _isCorrect)
+                        else if (isPrepositionFill && isCorrect)
                           IconButton(
                             icon: const Icon(Icons.volume_up),
                             onPressed: () => widget.ttsService.speak(
@@ -629,9 +623,9 @@ class QuestionCardState extends State<QuestionCard> {
                     const SizedBox(height: 20),
                     (widget.question.questionText == widget.question.sourceItem.portuguese || 
                      widget.question.type == QuestionType.cloze || 
-                     (isPrepositionFill && _isCorrect))
+                     (isPrepositionFill && isCorrect))
                         ? LongPressWordText(
-                            text: ((isPrepositionFill || widget.question.type == QuestionType.cloze) && _isCorrect) 
+                            text: ((isPrepositionFill || widget.question.type == QuestionType.cloze) && isCorrect) 
                                 ? widget.question.sourceItem.portuguese 
                                 : widget.question.questionText,
                             style: const TextStyle(
@@ -669,12 +663,12 @@ class QuestionCardState extends State<QuestionCard> {
                               children: [
                                 ...widget.question.options.map((option) {
                                   final isCorrectAnswer = option == widget.question.correctAnswer;
-                                  final isWrongAnswer = _wrongAnswers.contains(option);
+                                  final isWrongAnswer = wrongAnswers.contains(option);
 
                                   Color? color;
                                   Color? textColor;
 
-                                  if (_isCorrect && isCorrectAnswer) {
+                                  if (isCorrect && isCorrectAnswer) {
                                     color = Colors.green.shade100;
                                     textColor = Colors.green.shade900;
                                   } else if (isWrongAnswer) {
@@ -699,7 +693,7 @@ class QuestionCardState extends State<QuestionCard> {
                                     onPressed: () => _onOptionTap(option),
                                     backgroundColor: color,
                                     side: BorderSide(
-                                      color: (_isCorrect && isCorrectAnswer) || isWrongAnswer
+                                      color: (isCorrect && isCorrectAnswer) || isWrongAnswer
                                           ? textColor
                                           : Colors.grey.shade300,
                                       width: 1.5,
@@ -716,12 +710,12 @@ class QuestionCardState extends State<QuestionCard> {
                             children: [
                               ...widget.question.options.map((option) {
                                 final isCorrectAnswer = option == widget.question.correctAnswer;
-                                final isWrongAnswer = _wrongAnswers.contains(option);
+                                final isWrongAnswer = wrongAnswers.contains(option);
 
                                 Color? color;
                                 Color? textColor;
 
-                                if (_isCorrect && isCorrectAnswer) {
+                                if (isCorrect && isCorrectAnswer) {
                                   color = Colors.green.shade100;
                                   textColor = Colors.green.shade900;
                                 } else if (isWrongAnswer) {
@@ -744,11 +738,11 @@ class QuestionCardState extends State<QuestionCard> {
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: color,
                                         foregroundColor: textColor,
-                                        elevation: (_isCorrect || isWrongAnswer) ? 0 : 2,
+                                        elevation: (isCorrect || isWrongAnswer) ? 0 : 2,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(12),
                                           side: BorderSide(
-                                            color: (_isCorrect && isCorrectAnswer) || isWrongAnswer
+                                            color: (isCorrect && isCorrectAnswer) || isWrongAnswer
                                                 ? textColor
                                                 : Colors.transparent,
                                             width: 2,
@@ -778,7 +772,7 @@ class QuestionCardState extends State<QuestionCard> {
             SizedBox(
               height: 60,
               width: double.infinity,
-              child: _isCorrect 
+              child: isCorrect 
                 ? FadeInUp(
                     duration: const Duration(milliseconds: 400),
                     child: ElevatedButton.icon(
@@ -825,7 +819,7 @@ class QuestionCardState extends State<QuestionCard> {
     _selectedWords = [];
   }
 
-  Widget _buildReorderAndConjugateBody(BuildContext context) {
+  Widget _buildReorderAndConjugateBody(BuildContext context, bool isCorrect) {
     _initReorderData();
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -873,7 +867,7 @@ class QuestionCardState extends State<QuestionCard> {
                             return ActionChip(
                               label: Text(word, style: const TextStyle(fontSize: 16)),
                               onPressed: () {
-                                if (_isCorrect) return;
+                                if (isCorrect) return;
                                 setState(() {
                                   _selectedWords!.remove(word);
                                   if (word == _selectedVerbForm) {
@@ -910,7 +904,7 @@ class QuestionCardState extends State<QuestionCard> {
                           return ActionChip(
                             label: Text(word, style: const TextStyle(fontSize: 16)),
                             onPressed: () {
-                              if (_isCorrect) return;
+                              if (isCorrect) return;
                               if (word == _originalVerb) {
                                 _showVerbPicker(context);
                               } else {
@@ -937,7 +931,7 @@ class QuestionCardState extends State<QuestionCard> {
             SizedBox(
               height: 60,
               width: double.infinity,
-              child: _isCorrect 
+              child: isCorrect 
                 ? FadeInUp(
                     duration: const Duration(milliseconds: 400),
                     child: ElevatedButton.icon(
@@ -1018,15 +1012,9 @@ class QuestionCardState extends State<QuestionCard> {
     final isCorrect = userAnswer.trim() == widget.question.correctAnswer.trim() || 
         userAnswer.trim() == widget.question.correctAnswer.replaceAll('.', '').trim();
 
-    if (!_hasAttempted) {
-      widget.onAnswer(isCorrect ? widget.question.correctAnswer : "incorrect");
-      _hasAttempted = true;
-    }
+    widget.onAnswer(isCorrect ? widget.question.correctAnswer : "incorrect");
 
     if (isCorrect) {
-      setState(() {
-        _isCorrect = true;
-      });
       widget.ttsService.speak(widget.question.correctAnswer, language: 'pt');
     } else {
       widget.ttsService.speak("Tenta de novo.", language: 'pt');
@@ -1037,17 +1025,15 @@ class QuestionCardState extends State<QuestionCard> {
   }
 
   void revealAnswer() {
-    if (_isCorrect) return;
+    final viewModel = ref.read(quizViewModelProvider.notifier);
+    viewModel.answerQuestion(widget.question.correctAnswer);
 
-    setState(() {
-      _isCorrect = true;
-      _hasAttempted = true;
-
-      if (widget.question.type == QuestionType.reorderAndConjugate) {
+    if (widget.question.type == QuestionType.reorderAndConjugate) {
+      setState(() {
         _selectedWords = widget.question.correctAnswer.split(' ').map((s) => s.trim()).toList();
         _availableWords = [];
-      }
-    });
+      });
+    }
 
     widget.ttsService.speak(widget.question.correctAnswer, language: 'pt');
   }

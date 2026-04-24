@@ -47,10 +47,11 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
     _total = _sessionItems.length;
     _isFinished = false;
 
-    return _nextChallenge();
+    return nextChallenge();
   }
 
-  DrillChallenge? _nextChallenge() {
+  @override
+  DrillChallenge? nextChallenge() {
     if (_currentIndex >= _sessionItems.length) {
       _isFinished = true;
       return null;
@@ -86,7 +87,6 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
     }
 
     _currentIndex++;
-    _nextChallenge(); 
     return isCorrect;
   }
 

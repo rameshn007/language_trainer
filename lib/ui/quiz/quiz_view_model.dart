@@ -16,6 +16,9 @@ class QuizState {
   final int sessionBonusXP; // Completion + daily goal bonus
   final bool dailyGoalJustMet;
   final Map<String, bool> firstAttemptTracker; // questionId -> was first attempt correct
+  final bool isCurrentQuestionCorrect;
+  final bool hasAttemptedCurrent;
+  final Set<String> currentWrongAnswers;
 
   QuizState({
     required this.questions,
@@ -26,6 +29,9 @@ class QuizState {
     this.sessionBonusXP = 0,
     this.dailyGoalJustMet = false,
     this.firstAttemptTracker = const {},
+    this.isCurrentQuestionCorrect = false,
+    this.hasAttemptedCurrent = false,
+    this.currentWrongAnswers = const {},
   });
 
   Question? get currentQuestion =>
@@ -44,6 +50,9 @@ class QuizState {
     int? sessionBonusXP,
     bool? dailyGoalJustMet,
     Map<String, bool>? firstAttemptTracker,
+    bool? isCurrentQuestionCorrect,
+    bool? hasAttemptedCurrent,
+    Set<String>? currentWrongAnswers,
   }) {
     return QuizState(
       questions: questions ?? this.questions,
@@ -54,6 +63,9 @@ class QuizState {
       sessionBonusXP: sessionBonusXP ?? this.sessionBonusXP,
       dailyGoalJustMet: dailyGoalJustMet ?? this.dailyGoalJustMet,
       firstAttemptTracker: firstAttemptTracker ?? this.firstAttemptTracker,
+      isCurrentQuestionCorrect: isCurrentQuestionCorrect ?? this.isCurrentQuestionCorrect,
+      hasAttemptedCurrent: hasAttemptedCurrent ?? this.hasAttemptedCurrent,
+      currentWrongAnswers: currentWrongAnswers ?? this.currentWrongAnswers,
     );
   }
 }
@@ -197,35 +209,46 @@ class QuizViewModel extends Notifier<QuizState> {
   /// Returns the XP awarded for this answer.
   Future<int> answerQuestion(String answer) async {
     if (state.isFinished || state.currentQuestion == null) return 0;
+    if (state.isCurrentQuestionCorrect) return 0; // Already correct
 
     final isCorrect = answer == state.currentQuestion!.correctAnswer;
-    final newScore = isCorrect ? state.score + 1 : state.score;
     final questionId = state.currentQuestion!.id;
 
-    // Track first attempt
+    int xpAwarded = 0;
     final tracker = Map<String, bool>.from(state.firstAttemptTracker);
-    final isFirstAttempt = !tracker.containsKey(questionId);
+    final isFirstAttempt = !state.hasAttemptedCurrent;
+
     if (isFirstAttempt) {
       tracker[questionId] = isCorrect;
+
+      // Mark as seen immediately
+      final storage = ref.read(storageServiceProvider);
+      storage.markQuestionAsSeen(questionId);
+
+      // Record via progress service for XP + mastery
+      final progressService = ref.read(progressServiceProvider.notifier);
+      xpAwarded = await progressService.recordQuizAnswer(
+        storage: storage,
+        itemId: state.currentQuestion!.sourceItem.id,
+        correct: isCorrect,
+        firstAttempt: isCorrect,
+      );
     }
 
-    // Mark as seen immediately
-    final storage = ref.read(storageServiceProvider);
-    storage.markQuestionAsSeen(questionId);
-
-    // Record via progress service for XP + mastery
-    final progressService = ref.read(progressServiceProvider.notifier);
-    final xpAwarded = await progressService.recordQuizAnswer(
-      storage: storage,
-      itemId: state.currentQuestion!.sourceItem.id,
-      correct: isCorrect,
-      firstAttempt: isFirstAttempt && isCorrect,
-    );
+    final newScore = (isFirstAttempt && isCorrect) ? state.score + 1 : state.score;
+    
+    final newWrongAnswers = Set<String>.from(state.currentWrongAnswers);
+    if (!isCorrect) {
+      newWrongAnswers.add(answer);
+    }
 
     state = state.copyWith(
       score: newScore,
       sessionXP: state.sessionXP + xpAwarded,
       firstAttemptTracker: tracker,
+      isCurrentQuestionCorrect: isCorrect,
+      hasAttemptedCurrent: true,
+      currentWrongAnswers: newWrongAnswers,
     );
 
     return xpAwarded;
@@ -233,7 +256,12 @@ class QuizViewModel extends Notifier<QuizState> {
 
   Future<void> nextQuestion() async {
     if (state.currentIndex < state.questions.length - 1) {
-      state = state.copyWith(currentIndex: state.currentIndex + 1);
+      state = state.copyWith(
+        currentIndex: state.currentIndex + 1,
+        isCurrentQuestionCorrect: false,
+        hasAttemptedCurrent: false,
+        currentWrongAnswers: {},
+      );
     } else {
       // Quiz complete — record session
       final storage = ref.read(storageServiceProvider);

@@ -13,6 +13,7 @@ abstract class CarPlayDrillProvider {
   });
 
   Future<DrillChallenge?> startSession();
+  DrillChallenge? nextChallenge();
 
   Future<bool> processAnswer(String answer);
 

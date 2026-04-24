@@ -104,9 +104,7 @@ class CarPlayService {
         // Check if finished before getting next
         if (provider.isFinished) break;
         
-        // Note: We are still using startSession() here because the provider interface
-        // currently lacks a nextChallenge() method. This will be improved in a future update.
-        currentChallenge = await provider.startSession(); 
+        currentChallenge = provider.nextChallenge(); 
       }
 
       _updateStatusTemplate(
@@ -128,9 +126,9 @@ class CarPlayService {
 
   void _updateStatusTemplate(String title, String detail, {bool replace = true, List<String> options = const []}) {
     if (replace) {
-      // Note: FlutterCarplay doesn't always handle pop well if it's the root or already popping
-      // Better to use setRoot or handle navigation stack carefully.
-      // For now, let's keep it simple or use push.
+      // We pop the current template before pushing the new one to "replace" it
+      // This prevents the navigation stack from growing indefinitely during a drill
+      FlutterCarplay.pop(animated: false);
     }
 
     final List<CPListItem> allItems = [
