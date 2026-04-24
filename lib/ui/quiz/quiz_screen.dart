@@ -499,6 +499,7 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
         _selectedWords = null;
         _selectedVerbForm = null;
         _originalVerb = null;
+        _previousWrongUserAnswer = null;
       });
     }
   }
@@ -810,6 +811,7 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
   List<String>? _selectedWords;
   String? _selectedVerbForm;
   String? _originalVerb;
+  String? _previousWrongUserAnswer;
 
   void _initReorderData() {
     if (_availableWords != null) return;
@@ -913,6 +915,18 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                       ),
                     ),
                     
+                    if (isCorrect && _previousWrongUserAnswer != null) ...[
+                      const SizedBox(height: 16),
+                      Text(
+                        "Your answer: $_previousWrongUserAnswer",
+                        style: TextStyle(
+                          color: isDark ? Colors.red.shade300 : Colors.red.shade700,
+                          fontSize: 16,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
+
                     const SizedBox(height: 30),
                     
                     // Word bank
@@ -1049,6 +1063,14 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
 
     if (widget.question.type == QuestionType.reorderAndConjugate) {
       setState(() {
+        if (_selectedWords != null && _selectedWords!.isNotEmpty) {
+          final userAnswer = _selectedWords!.join(' ');
+          final normalizedUser = userAnswer.trim().replaceAll('.', '');
+          final normalizedCorrect = widget.question.correctAnswer.trim().replaceAll('.', '');
+          if (normalizedUser != normalizedCorrect) {
+            _previousWrongUserAnswer = userAnswer;
+          }
+        }
         _selectedWords = widget.question.correctAnswer.split(' ').map((s) => s.trim()).toList();
         _availableWords = [];
       });
