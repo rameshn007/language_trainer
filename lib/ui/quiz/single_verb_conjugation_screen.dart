@@ -8,8 +8,13 @@ import '../../models/verb.dart';
 
 class SingleVerbConjugationScreen extends ConsumerStatefulWidget {
   final String verbInfinitive;
+  final String returnText;
 
-  const SingleVerbConjugationScreen({super.key, required this.verbInfinitive});
+  const SingleVerbConjugationScreen({
+    super.key,
+    required this.verbInfinitive,
+    this.returnText = 'Return to Flashcards',
+  });
 
   @override
   ConsumerState<SingleVerbConjugationScreen> createState() =>
@@ -56,7 +61,7 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
                 const SizedBox(height: 24),
                 ElevatedButton(
                   onPressed: () => Navigator.of(context).pop(),
-                  child: const Text('Return to Flashcards'),
+                  child: Text(widget.returnText),
                 )
               ],
             ),
@@ -176,7 +181,7 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
                             ElevatedButton.icon(
                               onPressed: () => Navigator.of(context).pop(),
                               icon: const Icon(Icons.check_circle),
-                              label: const Text('Return to Flashcards'),
+                              label: Text(widget.returnText),
                               style: ElevatedButton.styleFrom(
                                 minimumSize: const Size(double.infinity, 50),
                                 backgroundColor: Colors.green,

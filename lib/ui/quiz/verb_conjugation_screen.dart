@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import '../../main.dart';
 import 'verb_conjugation_view_model.dart';
 import '../../models/verb.dart';
+import '../vocabulary/vocabulary_list_screen.dart';
 
 class VerbConjugationScreen extends ConsumerStatefulWidget {
   const VerbConjugationScreen({super.key});
@@ -39,6 +40,34 @@ class _VerbConjugationScreenState extends ConsumerState<VerbConjugationScreen> {
       appBar: AppBar(
         title: const Text('Verb Conjugator'),
         centerTitle: true,
+        actions: [
+          PopupMenuButton<String>(
+            onSelected: (value) {
+              if (value == 'vocab') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const VocabularyListScreen(
+                      filterVerbsOnly: true,
+                    ),
+                  ),
+                );
+              }
+            },
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: 'vocab',
+                child: Row(
+                  children: [
+                    Icon(Icons.list),
+                    SizedBox(width: 8),
+                    Text('Vocabulary List'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       body: GestureDetector(
         onHorizontalDragEnd: (details) {

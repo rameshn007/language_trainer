@@ -6,11 +6,17 @@ import '../../main.dart'; // for storageServiceProvider
 import '../../services/tts_service.dart';
 import 'word_graph_screen.dart';
 import 'vocabulary_item_dialog.dart';
+import '../quiz/single_verb_conjugation_screen.dart';
 
 enum SortMode { alphabetical, mastery, random }
 
 class VocabularyListScreen extends ConsumerStatefulWidget {
-  const VocabularyListScreen({super.key});
+  final bool filterVerbsOnly;
+
+  const VocabularyListScreen({
+    super.key,
+    this.filterVerbsOnly = false,
+  });
 
   @override
   ConsumerState<VocabularyListScreen> createState() =>
@@ -94,10 +100,18 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   }
 
   void _filterItems() {
+    Iterable<LanguageItem> items = _items;
+
+    if (widget.filterVerbsOnly) {
+      items = items.where((item) =>
+          item.english.toLowerCase().startsWith('to ') ||
+          item.notes.toLowerCase().contains('verb'));
+    }
+
     if (_searchQuery.isEmpty) {
-      _filteredItems = List.from(_items);
+      _filteredItems = items.toList();
     } else {
-      _filteredItems = _items.where((item) {
+      _filteredItems = items.where((item) {
         return item.portuguese.toLowerCase().contains(
               _searchQuery.toLowerCase(),
             ) ||
@@ -326,6 +340,24 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
                 );
               },
             ),
+            if (item.english.toLowerCase().startsWith('to ') ||
+                item.notes.toLowerCase().contains('verb'))
+              ListTile(
+                leading: const Icon(Icons.extension),
+                title: const Text('Conjugate Verb'),
+                onTap: () {
+                  Navigator.pop(context); // Close sheet
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SingleVerbConjugationScreen(
+                        verbInfinitive: item.portuguese,
+                        returnText: 'Return to vocabulary list',
+                      ),
+                    ),
+                  );
+                },
+              ),
             ListTile(
               leading: const Icon(Icons.edit),
               title: const Text('Edit word'),
