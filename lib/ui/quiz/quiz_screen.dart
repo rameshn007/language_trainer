@@ -884,21 +884,25 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    if (isCorrect && widget.question.sourceItem.english.isNotEmpty)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: LongPressWordText(
-                          text: widget.question.sourceItem.english,
-                          style: TextStyle(
-                            fontSize: 22, 
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green.shade400,
+                    if (widget.question.sourceItem.english.isNotEmpty)
+                      () {
+                        final bool isAnswerFeedback = widget.question.sourceItem.english.startsWith('Answer:');
+                        if (isAnswerFeedback && !isCorrect) {
+                          return const SizedBox(height: 30);
+                        }
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: LongPressWordText(
+                            text: widget.question.sourceItem.english,
+                            style: TextStyle(
+                              fontSize: 22, 
+                              fontWeight: FontWeight.bold,
+                              color: isCorrect && isAnswerFeedback ? Colors.green.shade400 : null,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      )
-                    else
-                      const SizedBox(height: 30),
+                        );
+                      }(),
                     const Divider(height: 40),
                     
                     // Answer Area
