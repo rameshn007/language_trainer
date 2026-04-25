@@ -18,6 +18,7 @@ class QuizScreen extends ConsumerStatefulWidget {
   final bool isInterrogativeQuiz;
   final String? interrogativeCategory;
   final bool isPrepositionQuiz;
+  final bool isLuckyQuiz;
   const QuizScreen({
     super.key,
     this.category,
@@ -25,6 +26,7 @@ class QuizScreen extends ConsumerStatefulWidget {
     this.isInterrogativeQuiz = false,
     this.interrogativeCategory,
     this.isPrepositionQuiz = false,
+    this.isLuckyQuiz = false,
   });
 
   @override
@@ -53,6 +55,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         await ref.read(quizViewModelProvider.notifier).startPrepositionQuiz(
           category: widget.category,
         );
+      } else if (widget.isLuckyQuiz) {
+        await ref.read(quizViewModelProvider.notifier).startLuckyQuiz();
       } else {
         await ref
             .read(quizViewModelProvider.notifier)
@@ -430,11 +434,26 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         child: Column(
           children: [
             // Progress Bar
-            LinearProgressIndicator(
-              value: (quizState.currentIndex + 1) / quizState.questions.length,
-              minHeight: 10,
-              borderRadius: BorderRadius.circular(5),
-            ),
+            quizState.isInfinite
+              ? Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.auto_awesome, size: 16, color: Colors.amber),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Marathon Mode: ${quizState.currentIndex + 1} questions',
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.amber),
+                      ),
+                    ],
+                  ),
+                )
+              : LinearProgressIndicator(
+                  value: (quizState.currentIndex + 1) / quizState.questions.length,
+                  minHeight: 10,
+                  borderRadius: BorderRadius.circular(5),
+                ),
             const SizedBox(height: 20),
             Expanded(
               child: CardSwiper(
@@ -648,13 +667,14 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                             textAlign: TextAlign.center,
                           ),
                     const SizedBox(height: 10),
-                    if (isPrepositionFill)
+                    if (isPrepositionFill || (isCorrect && widget.question.sourceItem.english.isNotEmpty))
                       Text(
                         widget.question.sourceItem.english,
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.outline,
-                          fontSize: 16,
+                          color: isCorrect ? Colors.green.shade400 : Theme.of(context).colorScheme.outline,
+                          fontSize: 18,
                           fontStyle: FontStyle.italic,
+                          fontWeight: isCorrect ? FontWeight.bold : FontWeight.normal,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -864,11 +884,21 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    LongPressWordText(
-                      text: widget.question.sourceItem.english,
-                      style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
+                    if (isCorrect && widget.question.sourceItem.english.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: LongPressWordText(
+                          text: widget.question.sourceItem.english,
+                          style: TextStyle(
+                            fontSize: 22, 
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green.shade400,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    else
+                      const SizedBox(height: 30),
                     const Divider(height: 40),
                     
                     // Answer Area

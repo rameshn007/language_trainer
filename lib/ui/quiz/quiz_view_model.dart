@@ -5,6 +5,7 @@ import '../../services/quiz_engine_service.dart';
 import '../../services/progress_service.dart';
 
 import '../../services/question_loader_service.dart';
+import '../../services/verb_service.dart';
 import '../../main.dart'; // for storageServiceProvider
 
 class QuizState {
@@ -19,6 +20,7 @@ class QuizState {
   final bool isCurrentQuestionCorrect;
   final bool hasAttemptedCurrent;
   final Set<String> currentWrongAnswers;
+  final bool isInfinite;
 
   QuizState({
     required this.questions,
@@ -32,6 +34,7 @@ class QuizState {
     this.isCurrentQuestionCorrect = false,
     this.hasAttemptedCurrent = false,
     this.currentWrongAnswers = const {},
+    this.isInfinite = false,
   });
 
   Question? get currentQuestion =>
@@ -53,6 +56,7 @@ class QuizState {
     bool? isCurrentQuestionCorrect,
     bool? hasAttemptedCurrent,
     Set<String>? currentWrongAnswers,
+    bool? isInfinite,
   }) {
     return QuizState(
       questions: questions ?? this.questions,
@@ -66,6 +70,7 @@ class QuizState {
       isCurrentQuestionCorrect: isCurrentQuestionCorrect ?? this.isCurrentQuestionCorrect,
       hasAttemptedCurrent: hasAttemptedCurrent ?? this.hasAttemptedCurrent,
       currentWrongAnswers: currentWrongAnswers ?? this.currentWrongAnswers,
+      isInfinite: isInfinite ?? this.isInfinite,
     );
   }
 }
@@ -204,6 +209,104 @@ class QuizViewModel extends Notifier<QuizState> {
     );
     state = QuizState(questions: questions);
   }
+  Future<void> startLuckyQuiz() async {
+    _sessionStartTime = DateTime.now();
+    final storage = ref.read(storageServiceProvider);
+    final items = storage.getAllItems();
+    final verbService = ref.read(verbServiceProvider);
+    final verbs = await verbService.loadVerbs();
+
+    // 1. Gather all potential questions from each "Bucket"
+    final List<Question> vocabPool = _engine.generateVocabularyQuiz(items, count: 40);
+    
+    // Separate builders from other JSON questions
+    final List<Question> builderPool = [];
+    builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/unit_10.json', items));
+    builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/question_builder.json', items));
+    
+    final List<Question> generalJsonPool = await _loader.loadQuestions('assets/data/questions.json', items);
+    
+    final List<Question> interrogPool = await _engine.generateInterrogativeQuiz(count: 40);
+    final List<Question> prepPool = await _engine.generatePrepositionQuiz(count: 40);
+    final List<Question> verbPool = _engine.generateVerbConjugationQuestions(verbs: verbs, count: 40);
+
+    // 2. Shuffle each bucket
+    vocabPool.shuffle();
+    builderPool.shuffle();
+    generalJsonPool.shuffle();
+    interrogPool.shuffle();
+    prepPool.shuffle();
+    verbPool.shuffle();
+
+    // 3. Create a balanced starting pool by interleaving
+    final List<Question> initialMix = [];
+    while (initialMix.length < 60 && (vocabPool.isNotEmpty || builderPool.isNotEmpty || interrogPool.isNotEmpty || prepPool.isNotEmpty || verbPool.isNotEmpty)) {
+      if (prepPool.isNotEmpty) initialMix.add(prepPool.removeAt(0));
+      if (verbPool.isNotEmpty) initialMix.add(verbPool.removeAt(0));
+      if (builderPool.isNotEmpty) initialMix.add(builderPool.removeAt(0)); // Sentence/Question Builders
+      if (vocabPool.isNotEmpty) initialMix.add(vocabPool.removeAt(0));
+      if (interrogPool.isNotEmpty) initialMix.add(interrogPool.removeAt(0));
+      if (generalJsonPool.isNotEmpty) initialMix.add(generalJsonPool.removeAt(0));
+    }
+
+    // 4. Add remaining to a backup pool
+    final List<Question> remaining = [...vocabPool, ...builderPool, ...generalJsonPool, ...interrogPool, ...prepPool, ...verbPool];
+    remaining.shuffle();
+
+    state = QuizState(
+      questions: [...initialMix, ...remaining],
+      isInfinite: true,
+    );
+  }
+
+  Future<void> finishSession() async {
+    if (state.isFinished) return;
+
+    // Quiz complete — record session
+    final storage = ref.read(storageServiceProvider);
+    final progressService = ref.read(progressServiceProvider.notifier);
+
+    // Determine activity type
+    ActivityType activityType = state.isInfinite ? ActivityType.quiz : ActivityType.quiz; // lucky mix
+    if (state.questions.isNotEmpty && !state.isInfinite) {
+      final firstType = state.questions.first.type;
+      if (firstType == QuestionType.vocabularyMatch) {
+        activityType = ActivityType.vocabularyQuiz;
+      } else if (firstType == QuestionType.interrogativeMatch) {
+        activityType = ActivityType.interrogativeQuiz;
+      } else if (firstType == QuestionType.prepositionFill) {
+        activityType = ActivityType.prepositionQuiz;
+      }
+    }
+
+    final durationSec = _sessionStartTime != null
+        ? DateTime.now().difference(_sessionStartTime!).inSeconds
+        : 0;
+
+    // Check if daily goal was met before this session
+    final wasGoalMet = storage.getTodayXP() >= storage.getDailyXPGoal();
+
+    final bonusXP = await progressService.recordSessionComplete(
+      storage: storage,
+      activityType: activityType,
+      score: state.score,
+      total: state.currentIndex + 1, // Number of questions actually reached
+      durationSeconds: durationSec,
+      sessionXP: state.sessionXP,
+    );
+
+    final isGoalNowMet = storage.getTodayXP() >= storage.getDailyXPGoal();
+
+    state = state.copyWith(
+      isFinished: true,
+      sessionBonusXP: bonusXP,
+      dailyGoalJustMet: !wasGoalMet && isGoalNowMet,
+    );
+
+    // Also save legacy high score for backward compat
+    storage.saveHighScore(state.score);
+  }
+
 
   /// Answers the current question and records XP via ProgressService.
   /// Returns the XP awarded for this answer.
@@ -255,6 +358,13 @@ class QuizViewModel extends Notifier<QuizState> {
   }
 
   Future<void> nextQuestion() async {
+    // Check if we need more questions for infinite mode
+    if (state.isInfinite && state.currentIndex >= state.questions.length - 3) {
+       // We'll just reshuffle the current pool and append it to keep it infinite
+       final extra = List<Question>.from(state.questions)..shuffle();
+       state = state.copyWith(questions: [...state.questions, ...extra]);
+    }
+
     if (state.currentIndex < state.questions.length - 1) {
       state = state.copyWith(
         currentIndex: state.currentIndex + 1,
@@ -262,50 +372,9 @@ class QuizViewModel extends Notifier<QuizState> {
         hasAttemptedCurrent: false,
         currentWrongAnswers: {},
       );
-    } else {
-      // Quiz complete — record session
-      final storage = ref.read(storageServiceProvider);
-      final progressService = ref.read(progressServiceProvider.notifier);
-
-      // Determine activity type
-      ActivityType activityType = ActivityType.quiz;
-      if (state.questions.isNotEmpty) {
-        final firstType = state.questions.first.type;
-        if (firstType == QuestionType.vocabularyMatch) {
-          activityType = ActivityType.vocabularyQuiz;
-        } else if (firstType == QuestionType.interrogativeMatch) {
-          activityType = ActivityType.interrogativeQuiz;
-        } else if (firstType == QuestionType.prepositionFill) {
-          activityType = ActivityType.prepositionQuiz;
-        }
-      }
-
-      final durationSec = _sessionStartTime != null
-          ? DateTime.now().difference(_sessionStartTime!).inSeconds
-          : 0;
-
-      // Check if daily goal was met before this session
-      final wasGoalMet = storage.getTodayXP() >= storage.getDailyXPGoal();
-
-      final bonusXP = await progressService.recordSessionComplete(
-        storage: storage,
-        activityType: activityType,
-        score: state.score,
-        total: state.questions.length,
-        durationSeconds: durationSec,
-        sessionXP: state.sessionXP,
-      );
-
-      final isGoalNowMet = storage.getTodayXP() >= storage.getDailyXPGoal();
-
-      state = state.copyWith(
-        isFinished: true,
-        sessionBonusXP: bonusXP,
-        dailyGoalJustMet: !wasGoalMet && isGoalNowMet,
-      );
-
-      // Also save legacy high score for backward compat
-      storage.saveHighScore(state.score);
+    } else if (!state.isInfinite) {
+      // Auto-finish only for non-infinite quizzes
+      await finishSession();
     }
   }
 }

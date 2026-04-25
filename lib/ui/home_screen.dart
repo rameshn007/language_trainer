@@ -33,6 +33,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   bool _isLoading = true;
+  final GlobalKey _fabKey = GlobalKey();
 
   @override
   void initState() {
@@ -576,6 +577,24 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        key: _fabKey,
+        onPressed: () {
+          final RenderBox? renderBox = _fabKey.currentContext?.findRenderObject() as RenderBox?;
+          Offset? center;
+          if (renderBox != null) {
+            final position = renderBox.localToGlobal(Offset.zero);
+            center = position + Offset(renderBox.size.width / 2, renderBox.size.height / 2);
+          }
+          _pushScreen(
+            const QuizScreen(isLuckyQuiz: true),
+            center,
+          );
+        },
+        backgroundColor: Colors.amber.shade700,
+        foregroundColor: Colors.white,
+        child: const Icon(Icons.auto_awesome),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/services.dart' show rootBundle;
+import '../models/verb.dart';
 import '../models/language_item.dart';
 import '../models/question.dart';
 
@@ -402,6 +403,75 @@ class QuizEngineService {
           english: english,
         ),
         category: entry['category'],
+      ));
+    }
+
+    return questions;
+  }
+
+  /// Generates a set of multiple-choice verb conjugation questions.
+  List<Question> generateVerbConjugationQuestions({
+    required List<Verb> verbs,
+    int count = 10,
+    List<String>? seenIds,
+  }) {
+    if (verbs.isEmpty) return [];
+
+    final List<Question> questions = [];
+    final List<Verb> shuffledVerbs = List.from(verbs)..shuffle(_random);
+    final selection = shuffledVerbs.take(count).toList();
+
+    final pronouns = ['eu', 'tu', 'você, ela, ele', 'nós', 'vocês, elas, eles'];
+
+    for (var verb in selection) {
+      final pronoun = pronouns[_random.nextInt(pronouns.length)];
+      final correctAnswer = verb.conjugations[pronoun];
+      if (correctAnswer == null || correctAnswer.isEmpty) continue;
+
+      final qId = 'verb_conj_${verb.infinitive}_${pronoun.hashCode}';
+
+      // Distractors: other conjugations of the SAME verb + some from other verbs
+      final List<String> options = [correctAnswer];
+      final Set<String> used = {correctAnswer.toLowerCase().trim()};
+
+      // Add other conjugations of same verb as distractors
+      final otherConjs = verb.conjugations.values
+          .where((c) => c != correctAnswer && c.isNotEmpty)
+          .toList();
+      otherConjs.shuffle(_random);
+      for (var c in otherConjs) {
+        if (options.length >= 4) break;
+        if (!used.contains(c.toLowerCase().trim())) {
+          options.add(c);
+          used.add(c.toLowerCase().trim());
+        }
+      }
+
+      // If still need more, take from other random verbs
+      int attempts = 0;
+      while (options.length < 4 && attempts < 50) {
+        final randomVerb = verbs[_random.nextInt(verbs.length)];
+        final randomConj = randomVerb.conjugations.values.elementAt(_random.nextInt(randomVerb.conjugations.length));
+        if (!used.contains(randomConj.toLowerCase().trim()) && randomConj.isNotEmpty) {
+          options.add(randomConj);
+          used.add(randomConj.toLowerCase().trim());
+        }
+        attempts++;
+      }
+
+      options.shuffle(_random);
+
+      questions.add(Question(
+        id: qId,
+        questionText: "Conjugate '${verb.infinitive}' for '$pronoun'",
+        options: options,
+        correctAnswer: correctAnswer,
+        type: QuestionType.multipleChoice,
+        sourceItem: LanguageItem(
+          id: 'verb_${verb.infinitive}',
+          portuguese: '$pronoun $correctAnswer',
+          english: "${verb.translation} ($pronoun)",
+        ),
       ));
     }
 
