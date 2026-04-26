@@ -203,18 +203,103 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     _saveSelection('en', val);
 
                     // Play a quick test
-                    ref
-                        .read(ttsServiceProvider)
-                        .speak(
+                    ref.read(ttsServiceProvider).speak(
                           "Hello, and testing one two three.",
                           language: 'en',
                         );
                   }
                 },
               ),
+
+            const SizedBox(height: 40),
+
+            // Practice Reminders Section
+            const Text(
+              "Practice Reminders",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              "Receive a daily notification to keep your learning streak alive.",
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            const SizedBox(height: 16),
+
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text("Daily Reminder", style: TextStyle(fontWeight: FontWeight.w600)),
+              subtitle: Text(
+                _remindersEnabled
+                    ? "Scheduled for ${_formatTime(_reminderHour, _reminderMinute)}"
+                    : "Notifications are currently disabled",
+              ),
+              trailing: Switch(
+                value: _remindersEnabled,
+                onChanged: (val) => _toggleReminders(val),
+              ),
+            ),
+
+            if (_remindersEnabled)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: OutlinedButton.icon(
+                  onPressed: _pickTime,
+                  icon: const Icon(Icons.access_time_rounded),
+                  label: const Text("Change Reminder Time"),
+                  style: OutlinedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
     );
+  }
+
+  bool get _remindersEnabled => ref.read(storageServiceProvider).remindersEnabled;
+  int get _reminderHour => ref.read(storageServiceProvider).reminderHour;
+  int get _reminderMinute => ref.read(storageServiceProvider).reminderMinute;
+
+  String _formatTime(int hour, int minute) {
+    final time = TimeOfDay(hour: hour, minute: minute);
+    return time.format(context);
+  }
+
+  Future<void> _toggleReminders(bool enabled) async {
+    final storage = ref.read(storageServiceProvider);
+    final notifications = ref.read(notificationServiceProvider);
+
+    if (enabled) {
+      final granted = await notifications.requestPermissions();
+      if (!granted) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Notification permissions are required for reminders.")),
+          );
+        }
+        return;
+      }
+    }
+
+    await storage.setRemindersEnabled(enabled);
+    await notifications.updateReminders();
+    setState(() {});
+  }
+
+  Future<void> _pickTime() async {
+    final storage = ref.read(storageServiceProvider);
+    final notifications = ref.read(notificationServiceProvider);
+
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay(hour: _reminderHour, minute: _reminderMinute),
+    );
+
+    if (picked != null) {
+      await storage.setReminderTime(picked.hour, picked.minute);
+      await notifications.updateReminders();
+      setState(() {});
+    }
   }
 }

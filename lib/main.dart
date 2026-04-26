@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'services/storage_service.dart';
 import 'services/tts_service.dart';
 import 'services/carplay_service.dart';
+import 'services/notification_service.dart';
 import 'ui/home_screen.dart';
 import 'utils/logger.dart';
 
@@ -17,6 +18,15 @@ final ttsServiceProvider = Provider<TtsService>((ref) {
   return TtsService(storage);
 });
 
+// Global navigator key for deep linking from notifications
+final navigatorKey = GlobalKey<NavigatorState>();
+
+// Global provider for notification service
+final notificationServiceProvider = Provider<NotificationService>((ref) {
+  final storage = ref.watch(storageServiceProvider);
+  return NotificationService(storage);
+});
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -24,17 +34,24 @@ void main() async {
   await storageService.init();
 
   final ttsService = TtsService(storageService);
+  final notificationService = NotificationService(storageService);
 
   // CarPlay initialization moved to HomeScreen
   // CarPlayService().init();
   AppLogger.log("main() started", name: 'Main');
   CarPlayService().init(storageService: storageService, ttsService: ttsService);
+  try {
+    await notificationService.init();
+  } catch (e) {
+    AppLogger.log("Failed to initialize notification service: $e", name: 'Main');
+  }
 
   runApp(
     ProviderScope(
       overrides: [
         storageServiceProvider.overrideWithValue(storageService),
         ttsServiceProvider.overrideWithValue(ttsService),
+        notificationServiceProvider.overrideWithValue(notificationService),
       ],
       child: const LanguageTrainerApp(),
     ),
@@ -47,6 +64,7 @@ class LanguageTrainerApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Language Trainer',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

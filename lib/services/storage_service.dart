@@ -102,6 +102,19 @@ class StorageService {
   Future<void> resetHighScore() async {
     await _settingsBox?.delete('high_score');
   }
+  
+  // --- Notification Settings ---
+  bool get remindersEnabled => getSetting('reminders_enabled', defaultValue: true);
+  int get reminderHour => getSetting('reminder_hour', defaultValue: 9);
+  int get reminderMinute => getSetting('reminder_minute', defaultValue: 0);
+  bool get hasRequestedNotifications => getSetting('has_requested_notifications', defaultValue: false);
+
+  Future<void> setRemindersEnabled(bool enabled) async => saveSetting('reminders_enabled', enabled);
+  Future<void> setReminderTime(int hour, int minute) async {
+    await saveSetting('reminder_hour', hour);
+    await saveSetting('reminder_minute', minute);
+  }
+  Future<void> markNotificationsRequested() async => saveSetting('has_requested_notifications', true);
 
   // --- Seen Questions Tracking ---
   bool isQuestionSeen(String id) {

@@ -41,6 +41,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _loadData();
       _checkEnhancedVoice();
+      final notificationService = ref.read(notificationServiceProvider);
+      notificationService.requestPermissionsIfFirstTime();
+      notificationService.handlePendingNotification();
     });
   }
 
@@ -238,6 +241,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 _confirmShuffle();
               } else if (value == 'reset') {
                 _confirmReset();
+              } else if (value == 'test_notif') {
+                ref.read(notificationServiceProvider).showTestNotification();
               } else if (value == 'settings') {
                 Navigator.push(
                   context,
@@ -253,6 +258,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 child: ListTile(
                   leading: Icon(Icons.settings),
                   title: Text('Settings'),
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'test_notif',
+                child: ListTile(
+                  leading: Icon(Icons.notifications_active),
+                  title: Text('Test Notification'),
                 ),
               ),
               const PopupMenuItem(
