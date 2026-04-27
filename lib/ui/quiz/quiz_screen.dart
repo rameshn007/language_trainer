@@ -886,14 +886,17 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                     const SizedBox(height: 10),
                     if (widget.question.sourceItem.english.isNotEmpty)
                       () {
-                        final bool isAnswerFeedback = widget.question.sourceItem.english.startsWith('Answer:');
-                        if (isAnswerFeedback && !isCorrect) {
-                          return const SizedBox(height: 30);
+                        String displayText = widget.question.sourceItem.english;
+                        final bool isAnswerFeedback = displayText.startsWith('Answer:');
+                        
+                        if (isAnswerFeedback) {
+                          displayText = displayText.replaceFirst('Answer:', '').trim();
                         }
+
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: LongPressWordText(
-                            text: widget.question.sourceItem.english,
+                            text: displayText,
                             style: TextStyle(
                               fontSize: 22, 
                               fontWeight: FontWeight.bold,
