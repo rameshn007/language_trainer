@@ -383,5 +383,180 @@
     "english": "From seven to eight, we have dinner.",
     "category": "preposition_de_a",
     "usage": "hours range"
+  },
+  {
+    "id": "prep_056",
+    "portuguese": "Hoje, depois das aulas, vou a casa.",
+    "english": "Today, after classes, I go home.",
+    "category": "preposition_para_a",
+    "usage": "destination (short stay)"
+  },
+  {
+    "id": "prep_057",
+    "portuguese": "Queres ir connosco a um bar?",
+    "english": "Do you want to go with us to a bar?",
+    "category": "preposition_para_a",
+    "usage": "destination"
+  },
+  {
+    "id": "prep_058",
+    "portuguese": "Vou à biblioteca entregar este livro.",
+    "english": "I'm going to the library to return this book.",
+    "category": "preposition_para_a",
+    "usage": "destination"
+  },
+  {
+    "id": "prep_059",
+    "portuguese": "No sábado de manhã, vamos à praia?",
+    "english": "On Saturday morning, are we going to the beach?",
+    "category": "preposition_para_a",
+    "usage": "destination"
+  },
+  {
+    "id": "prep_060",
+    "portuguese": "O irmão do Pedro vai estudar para Lisboa.",
+    "english": "Pedro's brother is going to study in Lisbon.",
+    "category": "preposition_para_a",
+    "usage": "destination (long stay)"
+  },
+  {
+    "id": "prep_061",
+    "portuguese": "Amanhã, vou ao Porto visitar a minha amiga.",
+    "english": "Tomorrow, I'm going to Porto to visit my friend.",
+    "category": "preposition_para_a",
+    "usage": "destination"
+  },
+  {
+    "id": "prep_062",
+    "portuguese": "Tenho de ir à farmácia.",
+    "english": "I have to go to the pharmacy.",
+    "category": "preposition_para_a",
+    "usage": "destination"
+  },
+  {
+    "id": "prep_063",
+    "portuguese": "Este autocarro vai para a universidade.",
+    "english": "This bus goes to the university.",
+    "category": "preposition_para_a",
+    "usage": "direction/destination"
+  },
+  {
+    "id": "prep_064",
+    "portuguese": "Ela vai sempre para a universidade de bicicleta.",
+    "english": "She always goes to the university by bicycle.",
+    "category": "preposition_transport",
+    "usage": "generic transport"
+  },
+  {
+    "id": "prep_065",
+    "portuguese": "Posso ir à livraria na tua bicicleta?",
+    "english": "Can I go to the bookstore on your bicycle?",
+    "category": "preposition_transport",
+    "usage": "specific transport"
+  },
+  {
+    "id": "prep_066",
+    "portuguese": "Vou para Londres no avião da TAP.",
+    "english": "I'm going to London on the TAP plane.",
+    "category": "preposition_transport",
+    "usage": "specific transport"
+  },
+  {
+    "id": "prep_067",
+    "portuguese": "Nunca vou de carro para o centro da cidade.",
+    "english": "I never go by car to the city center.",
+    "category": "preposition_transport",
+    "usage": "generic transport"
+  },
+  {
+    "id": "prep_068",
+    "portuguese": "Porque é que hoje vens no carro da tua mãe?",
+    "english": "Why are you coming in your mother's car today?",
+    "category": "preposition_transport",
+    "usage": "specific transport"
+  },
+  {
+    "id": "prep_069",
+    "portuguese": "Às vezes, eles vão a pé para a universidade.",
+    "english": "Sometimes, they go on foot to the university.",
+    "category": "preposition_transport",
+    "usage": "on foot"
+  },
+  {
+    "id": "prep_070",
+    "portuguese": "Prefiro ir ao Porto de comboio.",
+    "english": "I prefer to go to Porto by train.",
+    "category": "preposition_transport",
+    "usage": "generic transport"
+  },
+  {
+    "id": "prep_071",
+    "portuguese": "Também vais no comboio das 17:45?",
+    "english": "Are you also going on the 5:45 PM train?",
+    "category": "preposition_transport",
+    "usage": "specific transport"
+  },
+  {
+    "id": "prep_072",
+    "portuguese": "Vou para o Algarve passar as férias.",
+    "english": "I'm going to the Algarve to spend the holidays.",
+    "category": "preposition_para_a",
+    "usage": "destination (long stay)"
+  },
+  {
+    "id": "prep_073",
+    "portuguese": "Vou ao Algarve este fim de semana.",
+    "english": "I'm going to the Algarve this weekend.",
+    "category": "preposition_para_a",
+    "usage": "destination (short stay)"
+  },
+  {
+    "id": "prep_074",
+    "portuguese": "Ele vai de autocarro para o trabalho.",
+    "english": "He goes by bus to work.",
+    "category": "preposition_transport",
+    "usage": "generic transport"
+  },
+  {
+    "id": "prep_075",
+    "portuguese": "Ela vem no autocarro das 08:30.",
+    "english": "She comes on the 8:30 AM bus.",
+    "category": "preposition_transport",
+    "usage": "specific transport"
+  },
+  {
+    "id": "prep_076",
+    "portuguese": "Eles vão a pé para a escola todos os dias.",
+    "english": "They go on foot to school every day.",
+    "category": "preposition_transport",
+    "usage": "on foot"
+  },
+  {
+    "id": "prep_077",
+    "portuguese": "Nós vamos de metro para a baixa.",
+    "english": "We go by metro to downtown.",
+    "category": "preposition_transport",
+    "usage": "generic transport"
+  },
+  {
+    "id": "prep_078",
+    "portuguese": "Queres ir na minha mota?",
+    "english": "Do you want to go on my motorcycle?",
+    "category": "preposition_transport",
+    "usage": "specific transport"
+  },
+  {
+    "id": "prep_079",
+    "portuguese": "Vou ao supermercado comprar pão.",
+    "english": "I'm going to the supermarket to buy bread.",
+    "category": "preposition_para_a",
+    "usage": "destination (short stay)"
+  },
+  {
+    "id": "prep_080",
+    "portuguese": "Ele mudou-se para Londres.",
+    "english": "He moved to London.",
+    "category": "preposition_para_a",
+    "usage": "destination (permanent)"
   }
 ]

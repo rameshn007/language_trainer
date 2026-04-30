@@ -334,7 +334,7 @@ class QuizEngineService {
       'ao', 'à', 'aos', 'às',
       'do', 'da', 'dos', 'das',
       'no', 'na', 'nos', 'nas',
-      'de', 'a', 'em'
+      'de', 'a', 'em', 'para'
     ];
 
     // 5. Build questions
