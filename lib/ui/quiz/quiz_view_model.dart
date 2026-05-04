@@ -209,52 +209,69 @@ class QuizViewModel extends Notifier<QuizState> {
     );
     state = QuizState(questions: questions);
   }
-  Future<void> startLuckyQuiz() async {
-    _sessionStartTime = DateTime.now();
+  Future<List<Question>> _generateLuckyBatch({int count = 80}) async {
     final storage = ref.read(storageServiceProvider);
     final items = storage.getAllItems();
     final verbService = ref.read(verbServiceProvider);
     final verbs = await verbService.loadVerbs();
+    final seenIds = storage.getSeenQuestionIds();
 
-    // 1. Gather all potential questions from each "Bucket"
-    final List<Question> vocabPool = _engine.generateVocabularyQuiz(items, count: 40);
+    // 1. Gather potential questions from each "Bucket"
+    // We sample a larger pool than we need to ensure variety even if some are already seen
+    final List<Question> vocabPool = _engine.generateVocabularyQuiz(items, count: 50, seenIds: seenIds.toList());
     
-    // Separate builders from other JSON questions
     final List<Question> builderPool = [];
     builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/unit_10.json', items));
     builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/question_builder.json', items));
     
     final List<Question> generalJsonPool = await _loader.loadQuestions('assets/data/questions.json', items);
     
-    final List<Question> interrogPool = await _engine.generateInterrogativeQuiz(count: 40);
-    final List<Question> prepPool = await _engine.generatePrepositionQuiz(count: 40);
-    final List<Question> verbPool = _engine.generateVerbConjugationQuestions(verbs: verbs, count: 40);
+    final List<Question> interrogPool = await _engine.generateInterrogativeQuiz(count: 50, seenIds: seenIds.toList());
+    final List<Question> prepPool = await _engine.generatePrepositionQuiz(count: 50, seenIds: seenIds.toList());
+    final List<Question> verbPool = _engine.generateVerbConjugationQuestions(verbs: verbs, count: 50, seenIds: seenIds.toList());
 
-    // 2. Shuffle each bucket
-    vocabPool.shuffle();
-    builderPool.shuffle();
-    generalJsonPool.shuffle();
-    interrogPool.shuffle();
-    prepPool.shuffle();
-    verbPool.shuffle();
-
-    // 3. Create a balanced starting pool by interleaving
-    final List<Question> initialMix = [];
-    while (initialMix.length < 60 && (vocabPool.isNotEmpty || builderPool.isNotEmpty || interrogPool.isNotEmpty || prepPool.isNotEmpty || verbPool.isNotEmpty)) {
-      if (prepPool.isNotEmpty) initialMix.add(prepPool.removeAt(0));
-      if (verbPool.isNotEmpty) initialMix.add(verbPool.removeAt(0));
-      if (builderPool.isNotEmpty) initialMix.add(builderPool.removeAt(0)); // Sentence/Question Builders
-      if (vocabPool.isNotEmpty) initialMix.add(vocabPool.removeAt(0));
-      if (interrogPool.isNotEmpty) initialMix.add(interrogPool.removeAt(0));
-      if (generalJsonPool.isNotEmpty) initialMix.add(generalJsonPool.removeAt(0));
+    // 2. Prioritize unseen for JSON-loaded pools (which don't have built-in unseen filtering)
+    List<Question> prioritizeUnseen(List<Question> pool) {
+      final unseen = pool.where((q) => !seenIds.contains(q.id)).toList()..shuffle();
+      final seen = pool.where((q) => seenIds.contains(q.id)).toList()..shuffle();
+      return [...unseen, ...seen];
     }
 
-    // 4. Add remaining to a backup pool
-    final List<Question> remaining = [...vocabPool, ...builderPool, ...generalJsonPool, ...interrogPool, ...prepPool, ...verbPool];
-    remaining.shuffle();
+    final shuffledBuilders = prioritizeUnseen(builderPool);
+    final shuffledGeneral = prioritizeUnseen(generalJsonPool);
+
+    // 3. Prepare all pools
+    final allPools = [
+      vocabPool, 
+      shuffledBuilders, 
+      shuffledGeneral, 
+      interrogPool, 
+      prepPool, 
+      verbPool
+    ];
+
+    // 4. Balanced interleaving with random bucket order per pick
+    final List<Question> batch = [];
+    while (batch.length < count && allPools.any((p) => p.isNotEmpty)) {
+      final activePools = allPools.where((p) => p.isNotEmpty).toList()..shuffle();
+      for (var pool in activePools) {
+        if (batch.length < count) {
+          batch.add(pool.removeAt(0));
+        }
+      }
+    }
+
+    return batch;
+  }
+
+  Future<void> startLuckyQuiz() async {
+    _sessionStartTime = DateTime.now();
+    
+    // Generate a fresh balanced batch
+    final initialBatch = await _generateLuckyBatch(count: 100);
 
     state = QuizState(
-      questions: [...initialMix, ...remaining],
+      questions: initialBatch,
       isInfinite: true,
     );
   }
@@ -359,10 +376,10 @@ class QuizViewModel extends Notifier<QuizState> {
 
   Future<void> nextQuestion() async {
     // Check if we need more questions for infinite mode
-    if (state.isInfinite && state.currentIndex >= state.questions.length - 3) {
-       // We'll just reshuffle the current pool and append it to keep it infinite
-       final extra = List<Question>.from(state.questions)..shuffle();
-       state = state.copyWith(questions: [...state.questions, ...extra]);
+    if (state.isInfinite && state.currentIndex >= state.questions.length - 5) {
+       // Generate another fresh batch instead of reshuffling history
+       final freshBatch = await _generateLuckyBatch(count: 60);
+       state = state.copyWith(questions: [...state.questions, ...freshBatch]);
     }
 
     if (state.currentIndex < state.questions.length - 1) {

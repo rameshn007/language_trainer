@@ -418,9 +418,26 @@ class QuizEngineService {
     if (verbs.isEmpty) return [];
 
     final List<Question> questions = [];
-    final List<Verb> shuffledVerbs = List.from(verbs)..shuffle(_random);
-    final selection = shuffledVerbs.take(count).toList();
+    
+    // 1. Partition into unseen and seen
+    final unseenVerbs = <Verb>[];
+    final seenVerbs = <Verb>[];
 
+    for (var verb in verbs) {
+      // Use a sample pronoun to check if this verb has been practiced
+      // In the future, we could check ALL pronouns, but this is a good heuristic
+      final qId = 'verb_conj_${verb.infinitive}_${'eu'.hashCode}';
+      if (seenIds != null && seenIds.contains(qId)) {
+        seenVerbs.add(verb);
+      } else {
+        unseenVerbs.add(verb);
+      }
+    }
+
+    unseenVerbs.shuffle(_random);
+    seenVerbs.shuffle(_random);
+
+    final selection = [...unseenVerbs, ...seenVerbs].take(count).toList();
     final pronouns = ['eu', 'tu', 'você, ela, ele', 'nós', 'vocês, elas, eles'];
 
     for (var verb in selection) {

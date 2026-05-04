@@ -34,6 +34,13 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   bool _isLoading = true;
   final GlobalKey _fabKey = GlobalKey();
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -333,26 +340,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
           CustomScrollView(
+            controller: _scrollController,
             slivers: [
-              SliverSafeArea(
-                top: true,
-                bottom: false,
-                sliver: SliverPersistentHeader(
-                  pinned: true,
-                  delegate: _StatsCardDelegate(
-                    progress: progress,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const StatsScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+              SliverPadding(
+                padding: EdgeInsets.only(top: 180.0 + MediaQuery.paddingOf(context).top),
               ),
-                SliverToBoxAdapter(
+              SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 80),
                     child: Column(
@@ -587,6 +580,40 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
               ],
             ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: AnimatedBuilder(
+                animation: _scrollController,
+                builder: (context, child) {
+                  double offset = 0.0;
+                  if (_scrollController.hasClients) {
+                    offset = _scrollController.offset;
+                  }
+                  final topPadding = MediaQuery.paddingOf(context).top;
+                  final minExtent = 85.0 + topPadding;
+                  final maxExtent = 180.0 + topPadding;
+                  final currentHeight = (maxExtent - offset).clamp(minExtent, maxExtent);
+                  final shrinkPercentage = (offset / (maxExtent - minExtent)).clamp(0.0, 1.0);
+
+                  return _PinnedStatsCard(
+                    progress: progress,
+                    topPadding: topPadding,
+                    shrinkPercentage: shrinkPercentage,
+                    currentHeight: currentHeight,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const StatsScreen(),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -739,35 +766,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 }
 
 
-class _StatsCardDelegate extends SliverPersistentHeaderDelegate {
+class _PinnedStatsCard extends StatelessWidget {
   final ProgressSnapshot progress;
   final VoidCallback onTap;
+  final double topPadding;
+  final double shrinkPercentage;
+  final double currentHeight;
 
-  _StatsCardDelegate({required this.progress, required this.onTap});
-
-  @override
-  double get maxExtent => 180.0;
-
-  @override
-  double get minExtent => 85.0;
-
-  @override
-  bool shouldRebuild(covariant _StatsCardDelegate oldDelegate) {
-    return progress != oldDelegate.progress;
-  }
+  const _PinnedStatsCard({
+    required this.progress,
+    required this.onTap,
+    required this.topPadding,
+    required this.shrinkPercentage,
+    required this.currentHeight,
+  });
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    final shrinkPercentage = shrinkOffset / (maxExtent - minExtent);
+  Widget build(BuildContext context) {
     final clampedShrink = shrinkPercentage.clamp(0.0, 1.0);
 
     final expandedOpacity = (1.0 - clampedShrink * 2).clamp(0.0, 1.0);
     final collapsedOpacity = ((clampedShrink - 0.5) * 2).clamp(0.0, 1.0);
 
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-          margin: EdgeInsets.fromLTRB(20, 20 * (1 - clampedShrink), 20, 10),
+    return SizedBox(
+      height: currentHeight,
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+            margin: EdgeInsets.fromLTRB(20, topPadding + 20 * (1 - clampedShrink), 20, 10),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -797,7 +823,7 @@ class _StatsCardDelegate extends SliverPersistentHeaderDelegate {
                 Opacity(
                   opacity: expandedOpacity,
                   child: OverflowBox(
-                    maxHeight: maxExtent,
+                    maxHeight: 180.0 + topPadding,
                     alignment: Alignment.topCenter,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -997,6 +1023,7 @@ class _StatsCardDelegate extends SliverPersistentHeaderDelegate {
             ],
           ),
         ),
+      ),
     );
   }
 }
