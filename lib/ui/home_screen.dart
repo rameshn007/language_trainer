@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
 
@@ -92,10 +94,43 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     setState(() => _isLoading = true);
     try {
       final storage = ref.read(storageServiceProvider);
+      final bool vocabOnly = storage.getSetting('vocab_only_mode', defaultValue: false) == true;
       final parser = MarkdownParser();
-      final freshItems = await parser.loadAndParseRawData(
-        'assets/data/source.md',
-      );
+      final List<LanguageItem> freshItems = [];
+      
+      if (!vocabOnly) {
+        freshItems.addAll(await parser.loadAndParseRawData(
+          'assets/data/source.md',
+        ));
+      }
+
+      try {
+        final String jsonContent = await rootBundle.loadString('assets/vocabulary.json');
+        final List<dynamic> jsonList = jsonDecode(jsonContent);
+        
+        for (var item in jsonList) {
+          freshItems.add(
+            LanguageItem(
+              id: 'vocab_${item['id'] ?? item.hashCode}',
+              portuguese: item['portuguese']?.toString() ?? '',
+              english: item['english']?.toString() ?? '',
+              pronunciation: item['pronunciation']?.toString(),
+              wordType: item['word_type']?.toString(),
+              cefrLevel: item['cefr_level']?.toString(),
+              topicCategory: item['topic_category']?.toString(),
+              exampleSentencePt: item['example_sentence_pt']?.toString(),
+              exampleSentenceEn: item['example_sentence_en']?.toString(),
+              gender: item['gender']?.toString(),
+              plural: item['plural']?.toString(),
+              irregular: item['irregular'] == true,
+              verbClass: item['verb_class']?.toString(),
+            )
+          );
+        }
+      } catch (e) {
+        debugPrint('Error loading vocabulary.json in HomeScreen: $e');
+      }
+
       // merge logic similar to previous implementation
       final existingItems = storage.getAllItems();
       final masteryMap = {for (var i in existingItems) i.id: i.masteryLevel};

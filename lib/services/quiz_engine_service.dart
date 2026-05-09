@@ -494,4 +494,108 @@ class QuizEngineService {
 
     return questions;
   }
+
+  /// Generates a set of cloze (fill-in-the-blank) questions from example sentences.
+  List<Question> generateClozeQuestionsFromExamples(
+    List<LanguageItem> items, {
+    int count = 10,
+    List<String>? seenIds,
+  }) {
+    if (items.isEmpty) return [];
+
+    final validItems = items.where((item) => 
+      item.exampleSentencePt != null && 
+      item.exampleSentencePt!.isNotEmpty &&
+      item.portuguese.isNotEmpty &&
+      // Check if the portuguese word is actually in the sentence (case insensitive)
+      item.exampleSentencePt!.toLowerCase().contains(item.portuguese.toLowerCase())
+    ).toList();
+
+    if (validItems.isEmpty) return [];
+
+    final unseenItems = <LanguageItem>[];
+    final seenItems = <LanguageItem>[];
+
+    for (var item in validItems) {
+      final qId = 'cloze_${item.id}';
+      if (seenIds != null && seenIds.contains(qId)) {
+        seenItems.add(item);
+      } else {
+        unseenItems.add(item);
+      }
+    }
+
+    unseenItems.shuffle(_random);
+    seenItems.shuffle(_random);
+
+    final selection = [...unseenItems, ...seenItems].take(count).toList();
+    final List<Question> questions = [];
+
+    for (var item in selection) {
+      final String ptWord = item.portuguese;
+      final String sentence = item.exampleSentencePt!;
+      
+      // Find the word in the sentence to preserve the original casing in the correct answer
+      final regex = RegExp(RegExp.escape(ptWord), caseSensitive: false);
+      final match = regex.firstMatch(sentence);
+      
+      if (match == null) continue;
+      
+      final actualWord = sentence.substring(match.start, match.end);
+      final questionText = sentence.replaceRange(match.start, match.end, '____');
+      final qId = 'cloze_${item.id}';
+
+      // Generate distractors
+      final List<String> options = [actualWord];
+      final Set<String> used = {actualWord.toLowerCase()};
+      
+      // Try to find distractors from the same word_type or just random items
+      final pool = validItems.where((i) => i.wordType == item.wordType && i.id != item.id).toList();
+      if (pool.isEmpty) pool.addAll(validItems);
+      
+      pool.shuffle(_random);
+
+      for (var distractorItem in pool) {
+        if (options.length >= 4) break;
+        final String distractor = distractorItem.portuguese.toLowerCase();
+        
+        if (!used.contains(distractor)) {
+          // Try to match casing if the actual word is capitalized
+          bool isCapitalized = actualWord.isNotEmpty && actualWord[0] == actualWord[0].toUpperCase() && actualWord[0] != actualWord[0].toLowerCase();
+          String finalDistractor = distractor;
+          if (isCapitalized && distractor.isNotEmpty) {
+            finalDistractor = distractor[0].toUpperCase() + distractor.substring(1);
+          }
+          
+          options.add(finalDistractor);
+          used.add(distractor);
+        }
+      }
+
+      // If we couldn't find enough distractors, fill with something else
+      if (options.length < 4) {
+        final List<String> backups = ['o', 'a', 'um', 'uma', 'é', 'não', 'sim'];
+        for (var b in backups) {
+          if (options.length >= 4) break;
+          if (!used.contains(b)) {
+            options.add(b);
+            used.add(b);
+          }
+        }
+      }
+
+      options.shuffle(_random);
+
+      questions.add(Question(
+        id: qId,
+        questionText: questionText,
+        options: options,
+        correctAnswer: actualWord,
+        type: QuestionType.cloze,
+        sourceItem: item,
+      ));
+    }
+
+    return questions;
+  }
 }

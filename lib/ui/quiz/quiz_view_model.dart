@@ -216,19 +216,27 @@ class QuizViewModel extends Notifier<QuizState> {
     final verbs = await verbService.loadVerbs();
     final seenIds = storage.getSeenQuestionIds();
 
+    final bool vocabOnly = storage.getSetting('vocab_only_mode', defaultValue: false) == true;
+
     // 1. Gather potential questions from each "Bucket"
     // We sample a larger pool than we need to ensure variety even if some are already seen
     final List<Question> vocabPool = _engine.generateVocabularyQuiz(items, count: 50, seenIds: seenIds.toList());
     
     final List<Question> builderPool = [];
-    builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/unit_10.json', items));
-    builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/question_builder.json', items));
+    final List<Question> generalJsonPool = [];
+    final List<Question> interrogPool = [];
+    final List<Question> prepPool = [];
     
-    final List<Question> generalJsonPool = await _loader.loadQuestions('assets/data/questions.json', items);
+    if (!vocabOnly) {
+      builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/unit_10.json', items));
+      builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/question_builder.json', items));
+      generalJsonPool.addAll(await _loader.loadQuestions('assets/data/questions.json', items));
+      interrogPool.addAll(await _engine.generateInterrogativeQuiz(count: 50, seenIds: seenIds.toList()));
+      prepPool.addAll(await _engine.generatePrepositionQuiz(count: 50, seenIds: seenIds.toList()));
+    }
     
-    final List<Question> interrogPool = await _engine.generateInterrogativeQuiz(count: 50, seenIds: seenIds.toList());
-    final List<Question> prepPool = await _engine.generatePrepositionQuiz(count: 50, seenIds: seenIds.toList());
     final List<Question> verbPool = _engine.generateVerbConjugationQuestions(verbs: verbs, count: 50, seenIds: seenIds.toList());
+    final List<Question> clozePool = _engine.generateClozeQuestionsFromExamples(items, count: 30, seenIds: seenIds.toList());
 
     // 2. Prioritize unseen for JSON-loaded pools (which don't have built-in unseen filtering)
     List<Question> prioritizeUnseen(List<Question> pool) {
@@ -247,7 +255,8 @@ class QuizViewModel extends Notifier<QuizState> {
       shuffledGeneral, 
       interrogPool, 
       prepPool, 
-      verbPool
+      verbPool,
+      clozePool
     ];
 
     // 4. Balanced interleaving with random bucket order per pick

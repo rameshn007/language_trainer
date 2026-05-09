@@ -88,6 +88,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/vocabulary.json
     - assets/data/
     - assets/data/exercises/
     - assets/images/

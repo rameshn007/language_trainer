@@ -22,6 +22,36 @@ class LanguageItem {
   @HiveField(5)
   DateTime? lastReviewed;
 
+  @HiveField(6)
+  final String? pronunciation;
+
+  @HiveField(7)
+  final String? wordType;
+
+  @HiveField(8)
+  final String? cefrLevel;
+
+  @HiveField(9)
+  final String? topicCategory;
+
+  @HiveField(10)
+  final String? exampleSentencePt;
+
+  @HiveField(11)
+  final String? exampleSentenceEn;
+
+  @HiveField(12)
+  final String? gender;
+
+  @HiveField(13)
+  final String? plural;
+
+  @HiveField(14)
+  final bool? irregular;
+
+  @HiveField(15)
+  final String? verbClass;
+
   LanguageItem({
     required this.id,
     required this.portuguese,
@@ -29,6 +59,16 @@ class LanguageItem {
     this.notes = '',
     this.masteryLevel = 0,
     this.lastReviewed,
+    this.pronunciation,
+    this.wordType,
+    this.cefrLevel,
+    this.topicCategory,
+    this.exampleSentencePt,
+    this.exampleSentenceEn,
+    this.gender,
+    this.plural,
+    this.irregular,
+    this.verbClass,
   });
 
   factory LanguageItem.fromMap(Map<String, String> map) {
