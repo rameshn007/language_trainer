@@ -272,6 +272,38 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                 ),
               ),
+
+            const SizedBox(height: 40),
+
+            // Content Source Section
+            const Text(
+              "Content Source",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              "Control which data is loaded into the app. Changes require refreshing data from the home screen.",
+              style: TextStyle(fontSize: 14, color: Colors.grey),
+            ),
+            const SizedBox(height: 16),
+
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text("Use Only New Vocabulary", style: TextStyle(fontWeight: FontWeight.w600)),
+              subtitle: const Text("Skip merging with existing content (Beta/Test)"),
+              trailing: Switch(
+                value: ref.read(storageServiceProvider).getSetting('vocab_only_mode', defaultValue: false) == true,
+                onChanged: (val) async {
+                  await ref.read(storageServiceProvider).saveSetting('vocab_only_mode', val);
+                  setState(() {});
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Setting saved. Please return Home and tap 'Refresh Data'.")),
+                    );
+                  }
+                },
+              ),
+            ),
           ],
         ),
       ),
