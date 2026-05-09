@@ -523,6 +523,30 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
     }
   }
 
+  bool showHintUpfront(Question q) {
+    if (q.sourceItem.english.isEmpty) return false;
+    
+    final hint = q.sourceItem.english.toLowerCase().trim();
+    final question = q.questionText.toLowerCase().trim();
+    
+    // Never show upfront if it's redundant (same as question)
+    if (hint == question) return false;
+    
+    // For cloze questions, we always want the hint for sentence context,
+    // even if it contains the answer word.
+    if (q.type == QuestionType.cloze) return true;
+    
+    // Check if the hint is too similar to the correct answer (spoiler)
+    final answer = q.correctAnswer.toLowerCase().trim();
+    
+    // If the answer is exactly the hint, or contained within it (like "to be" vs "to be (permanent)"), don't show it
+    if (hint == answer || hint.contains(answer) || answer.contains(hint)) {
+      return false;
+    }
+    
+    return true;
+  }
+
   void _onOptionTap(String option) {
     final isCorrectNow = widget.isCorrect;
     final wrongAnswersNow = widget.wrongAnswers;
@@ -667,17 +691,24 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                             textAlign: TextAlign.center,
                           ),
                     const SizedBox(height: 10),
-                    if (isPrepositionFill || (isCorrect && widget.question.sourceItem.english.isNotEmpty))
-                      Text(
-                        widget.question.sourceItem.english,
-                        style: TextStyle(
-                          color: isCorrect ? Colors.green.shade400 : Theme.of(context).colorScheme.outline,
-                          fontSize: 18,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: isCorrect ? FontWeight.bold : FontWeight.normal,
+                    if (isPrepositionFill || 
+                        widget.question.type == QuestionType.vocabularyMatch ||
+                        widget.question.type == QuestionType.cloze ||
+                        (isCorrect && widget.question.sourceItem.english.isNotEmpty))
+                      // Only show hint upfront if it doesn't reveal the answer (i.e. hint != answer)
+                      // And don't show at all if it's redundant (identical to the question prompt)
+                      if ((showHintUpfront(widget.question) || isCorrect) && 
+                          widget.question.sourceItem.english.toLowerCase().trim() != widget.question.questionText.toLowerCase().trim())
+                        Text(
+                          widget.question.sourceItem.english,
+                          style: TextStyle(
+                            color: isCorrect ? Colors.green.shade400 : Theme.of(context).colorScheme.outline,
+                            fontSize: 18,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: isCorrect ? FontWeight.bold : FontWeight.normal,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
                     const SizedBox(height: 30),
                     (widget.question.type == QuestionType.vocabularyMatch || isPrepositionFill)
                         ? Center(

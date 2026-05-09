@@ -92,8 +92,10 @@ class QuizEngineService {
     LanguageItem target,
     List<LanguageItem> pool,
   ) {
-    String questionText = target.portuguese;
-    String correctAnswer = target.english;
+    // Randomly choose direction: PT->EN or EN->PT
+    bool ptToEn = _random.nextBool();
+    String questionText = ptToEn ? target.portuguese : target.english;
+    String correctAnswer = ptToEn ? target.english : target.portuguese;
 
     // Generate distractors
     final List<String> options = [correctAnswer];
@@ -104,7 +106,7 @@ class QuizEngineService {
     int attempts = 0;
     while (options.length < 4 && attempts < 100) {
       final randomItem = pool[_random.nextInt(pool.length)];
-      String distractor = randomItem.english;
+      String distractor = ptToEn ? randomItem.english : randomItem.portuguese;
 
       if (!used.contains(distractor.toLowerCase().trim()) && distractor.isNotEmpty) {
         options.add(distractor);
@@ -116,7 +118,8 @@ class QuizEngineService {
     // Shuffle options
     options.shuffle(_random);
 
-    final qId = 'vocab_${target.id}_pt_en';
+    final variantSuffix = ptToEn ? 'pt_en' : 'en_pt';
+    final qId = 'vocab_${target.id}_$variantSuffix';
 
     return Question(
       id: qId,
@@ -592,7 +595,12 @@ class QuizEngineService {
         options: options,
         correctAnswer: actualWord,
         type: QuestionType.cloze,
-        sourceItem: item,
+        sourceItem: LanguageItem(
+          id: item.id,
+          portuguese: item.exampleSentencePt!,
+          english: item.exampleSentenceEn!,
+          notes: item.notes,
+        ),
       ));
     }
 
