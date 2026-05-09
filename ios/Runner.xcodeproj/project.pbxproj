@@ -201,6 +201,7 @@
 			buildPhases = (
 				051D48F45F7343BC8BA54778 /* [CP] Check Pods Manifest.lock */,
 				9740EEB61CF901F6004384FC /* Run Script */,
+				DE5C232F2F815A1A00D2DEDE /* Auto increment build number */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
@@ -372,6 +373,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DE5C232F2F815A1A00D2DEDE /* Auto increment build number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Auto increment build number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${ACTION}\" = \"install\" ]; then\n  echo \"Archiving: Incrementing build number...\"\n  cd \"${PROJECT_DIR}/..\"\n  ./scripts/increment_build.py\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
