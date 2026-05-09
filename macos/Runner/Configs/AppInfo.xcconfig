@@ -8,7 +8,7 @@
 PRODUCT_NAME = language_trainer
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.ramesh.languagetrainer.languageTrainer
+PRODUCT_BUNDLE_IDENTIFIER = com.rameshn007.languageTrainer
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 com.ramesh.language_trainer. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 com.rameshn007. All rights reserved.
