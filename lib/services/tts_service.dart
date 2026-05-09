@@ -57,13 +57,20 @@ class TtsService {
       var voices = await _flutterTts.getVoices;
 
       // Retry logic for iOS because audio session can take time to spin up
+      // iOS 17+ also sometimes requires speaking an empty string to wake up the engine
+      if (Platform.isIOS) {
+        try {
+          await _flutterTts.speak("");
+        } catch (_) {}
+      }
+
       int retries = 0;
-      while ((voices == null || voices.isEmpty) && retries < 3) {
+      while ((voices == null || voices.isEmpty) && retries < 10) {
         AppLogger.log(
           "getVoices returned empty, retrying... ($retries)",
           name: "TtsService",
         );
-        await Future.delayed(const Duration(milliseconds: 200));
+        await Future.delayed(const Duration(milliseconds: 300));
         voices = await _flutterTts.getVoices;
         retries++;
       }
@@ -82,9 +89,8 @@ class TtsService {
       var ptVoicesRaw = voices.where((v) {
         try {
           final locale = v['locale'].toString().toLowerCase();
-          return locale.startsWith(
-            'pt',
-          ); // Just match any Portuguese to be safe, e.g. pt-PT, pt-BR, pt_PT
+          final name = v['name'].toString().toLowerCase();
+          return locale.startsWith('pt') || name.contains('joana') || name.contains('luciana');
         } catch (e) {
           return false;
         }
@@ -138,7 +144,8 @@ class TtsService {
       var enVoicesRaw = voices.where((v) {
         try {
           final locale = v['locale'].toString().toLowerCase();
-          return locale.startsWith('en'); // Just match any English
+          final name = v['name'].toString().toLowerCase();
+          return locale.startsWith('en') || name.contains('fred') || name.contains('samantha') || name.contains('daniel');
         } catch (e) {
           return false;
         }
@@ -148,6 +155,13 @@ class TtsService {
         "Found ${enVoicesRaw.length} EN voices",
         name: "TtsService",
       );
+
+      for (var v in enVoicesRaw) {
+        AppLogger.log(
+          "EN Voice: ${v['name']} - ${v['identifier']} - ${v['quality']}",
+          name: "TtsService",
+        );
+      }
 
       if (enVoicesRaw.isNotEmpty) {
         enVoicesRaw.sort(
@@ -217,22 +231,21 @@ class TtsService {
 
   String getVoiceInstallationInstructions() {
     if (Platform.isIOS) {
-      return "To get the best quality Portuguese voice:\n\n"
+      return "To get the best quality voices:\n\n"
           "1. Open device **Settings**.\n"
-          "2. Go to **Accessibility** -> **Spoken Content**.\n"
-          "3. Tap **Voices**.\n"
-          "4. Select **Portuguese**.\n"
-          "5. Select **Joana (Enhanced)**.\n"
-          "   (You may need to download it nearby if not installed).\n\n"
+          "2. Go to **Accessibility** -> **Live Speech**.\n"
+          "3. Under **Preferred Voices**, tap **Add Preferred Voice...**\n"
+          "4. For Portuguese, select **Joana**.\n"
+          "5. For English, select **Samantha**, **Alex**, or **Daniel**.\n"
+          "   (You may need to download them if not installed).\n\n"
           "Once downloaded, restart this app.";
     } else if (Platform.isAndroid) {
-      return "To get the best quality Portuguese voice:\n\n"
+      return "To get the best quality voices:\n\n"
           "1. Open device **Settings**.\n"
           "2. Search for **Text-to-speech output**.\n"
-          "3. Tap the **Gear icon** next to the preferred engine (usually Google).\n"
+          "3. Tap the **Gear icon** next to the preferred engine.\n"
           "4. Tap **Install voice data**.\n"
-          "5. Select **Portuguese (Portugal)**.\n"
-          "6. Download a high-quality voice pack if available.\n\n"
+          "5. Download high-quality voice packs for Portuguese and English.\n\n"
           "Note: Some Android devices might use Samsung TTS engine which has its own store.";
     }
     return "Please check your system Text-to-Speech settings to install high-quality voices.";
@@ -258,7 +271,7 @@ class TtsService {
 
     // PT Specifics
     if (languageType == 'pt' && name.contains('joana')) {
-      score += 5; // Joana is usually good on iOS
+      score += 20; // Joana is our recommended preferred voice
     }
 
     // EN Specifics
@@ -273,7 +286,6 @@ class TtsService {
       if (name.contains('alex') || name.contains('daniel')) {
         score += 10; // Alex and Daniel are excellent premium Apple voices
       }
-
       // EXPLICITLY PENALIZE NOVELTY/ROBOTIC MAC/IOS VOICES
       // Apple includes several novelty "singing" or "robotic" voices in the en-US pack.
       if (name.contains('zarvox') ||
@@ -288,6 +300,7 @@ class TtsService {
           name.contains('hysterical') ||
           name.contains('pipe organ') ||
           name.contains('whisper') ||
+          name.contains('fred') || // Classic Mac robot voice
           name.contains('ralph') || // Novelty deep voice
           name.contains('albert')) {
         // Novelty raspy voice
@@ -303,6 +316,46 @@ class TtsService {
     return score;
   }
 
+  /// Dynamically find the best available voice for a language by querying
+  /// the system at speak-time. This avoids stale cached data and guessed identifiers.
+  Future<Map<String, String>?> _findBestAvailableVoice(String langPrefix) async {
+    try {
+      final voices = await _flutterTts.getVoices;
+      if (voices == null || voices.isEmpty) return null;
+
+      final matching = voices.where((v) {
+        try {
+          final locale = v['locale'].toString().toLowerCase();
+          return locale.startsWith(langPrefix);
+        } catch (_) {
+          return false;
+        }
+      }).toList();
+
+      if (matching.isEmpty) return null;
+
+      // Sort by score to pick the best
+      matching.sort(
+        (a, b) => _scoreVoice(b, langPrefix).compareTo(_scoreVoice(a, langPrefix)),
+      );
+
+      final best = matching.first;
+      AppLogger.log(
+        "Dynamic voice pick for '$langPrefix': ${best['name']} (${best['identifier']}) quality=${best['quality']} score=${_scoreVoice(best, langPrefix)}",
+        name: "TtsService",
+      );
+
+      return {
+        "name": (best["name"] ?? "") as String,
+        "locale": (best["locale"] ?? "") as String,
+        "identifier": (best["identifier"] ?? "") as String,
+      };
+    } catch (e) {
+      AppLogger.log("Error finding voice for $langPrefix: $e", name: "TtsService");
+      return null;
+    }
+  }
+
   Future<void> speak(String text, {String? language}) async {
     if (text.isEmpty) return;
 
@@ -312,31 +365,80 @@ class TtsService {
 
     if (language != null) {
       if (language.startsWith('en')) {
+        // Always set language first as a baseline — this ensures we never
+        // fall through to the device's default language (which might be
+        // Portuguese or something else entirely).
+        await _flutterTts.setLanguage('en-US');
+
         bool voiceSet = false;
+
+        // 1. Try the cached best voice (from init or user selection)
         if (_bestEnVoice != null) {
-          // Extra guard to prevent using a restricted Siri voice even if it was saved prior to the penalty update
           final name = (_bestEnVoice!['name'] ?? '').toLowerCase();
           final id = (_bestEnVoice!['identifier'] ?? '').toLowerCase();
           if (!name.contains('siri') && !id.contains('siri')) {
             try {
+              AppLogger.log(
+                "EN: Trying cached voice: ${_bestEnVoice!['name']} (${_bestEnVoice!['identifier']})",
+                name: "TtsService",
+              );
               final result = await _flutterTts.setVoice(_bestEnVoice!);
-              if (result != 0 && result != false) voiceSet = true;
+              if (result == 1) voiceSet = true;
             } catch (_) {}
           }
         }
+
+        // 2. If cached voice failed, dynamically query available voices
         if (!voiceSet) {
-          await _flutterTts.setLanguage('en-US');
+          AppLogger.log("EN: Cached voice failed, querying system voices dynamically...", name: "TtsService");
+          final dynamicVoice = await _findBestAvailableVoice('en');
+          if (dynamicVoice != null) {
+            try {
+              final result = await _flutterTts.setVoice(dynamicVoice);
+              if (result == 1) {
+                voiceSet = true;
+                AppLogger.log("EN: Dynamic voice set successfully: ${dynamicVoice['name']}", name: "TtsService");
+              }
+            } catch (_) {}
+          }
         }
+
+        if (!voiceSet) {
+          AppLogger.log("EN: All voice attempts failed, using setLanguage('en-US') only", name: "TtsService");
+        }
+
       } else if (language.startsWith('pt')) {
+        await _flutterTts.setLanguage('pt-PT');
+
         bool voiceSet = false;
+
         if (_bestPtVoice != null) {
           try {
+            AppLogger.log(
+              "PT: Trying cached voice: ${_bestPtVoice!['name']} (${_bestPtVoice!['identifier']})",
+              name: "TtsService",
+            );
             final result = await _flutterTts.setVoice(_bestPtVoice!);
-            if (result != 0 && result != false) voiceSet = true;
+            if (result == 1) voiceSet = true;
           } catch (_) {}
         }
+
         if (!voiceSet) {
-          await _flutterTts.setLanguage('pt-PT');
+          AppLogger.log("PT: Cached voice failed, querying system voices dynamically...", name: "TtsService");
+          final dynamicVoice = await _findBestAvailableVoice('pt');
+          if (dynamicVoice != null) {
+            try {
+              final result = await _flutterTts.setVoice(dynamicVoice);
+              if (result == 1) {
+                voiceSet = true;
+                AppLogger.log("PT: Dynamic voice set successfully: ${dynamicVoice['name']}", name: "TtsService");
+              }
+            } catch (_) {}
+          }
+        }
+
+        if (!voiceSet) {
+          AppLogger.log("PT: All voice attempts failed, using setLanguage('pt-PT') only", name: "TtsService");
         }
       }
     }

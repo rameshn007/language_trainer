@@ -60,7 +60,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,58 +78,67 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             ),
             const SizedBox(height: 8),
 
-            if (!_isLoading &&
-                !ref.read(ttsServiceProvider).isEnhancedPtVoiceAvailable)
-              Container(
-                margin: const EdgeInsets.only(bottom: 12),
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.orange.shade100,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.orange.shade300),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.info_outline,
-                          color: Colors.orange.shade900,
-                          size: 20,
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            "High-quality voice not found",
-                            style: TextStyle(
-                              color: Colors.orange.shade900,
-                              fontWeight: FontWeight.bold,
-                            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.info_outline,
+                        color: Theme.of(context).colorScheme.primary,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          "Voice Setup Instructions",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      ref
-                          .read(ttsServiceProvider)
-                          .getVoiceInstallationInstructions(),
-                      style: TextStyle(
-                        color: Colors.orange.shade900,
-                        fontSize: 13,
                       ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    ref
+                        .read(ttsServiceProvider)
+                        .getVoiceInstallationInstructions(),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      fontSize: 13,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+            ),
 
             if (_isLoading)
               const CircularProgressIndicator()
             else if (_ptVoices.isEmpty)
-              const Text(
-                "No valid Portuguese voices found.",
-                style: TextStyle(color: Colors.red),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      "Using system preferred voice.",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      ref.read(ttsServiceProvider).speak("Olá, como estás?", language: 'pt');
+                    },
+                    child: const Text("Test Voice"),
+                  ),
+                ],
               )
             else
               DropdownButtonFormField<String>(
@@ -174,9 +183,21 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             if (_isLoading)
               const CircularProgressIndicator()
             else if (_enVoices.isEmpty)
-              const Text(
-                "No valid English voices found.",
-                style: TextStyle(color: Colors.red),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      "Using system preferred voice.",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                  OutlinedButton(
+                    onPressed: () {
+                      ref.read(ttsServiceProvider).speak("Hello, testing one two three.", language: 'en');
+                    },
+                    child: const Text("Test Voice"),
+                  ),
+                ],
               )
             else
               DropdownButtonFormField<String>(
