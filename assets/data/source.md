@@ -1704,3 +1704,185 @@
 | descolar | to take off | Batch 2 New |
 | O avião vai descolar agora | The plane is going to take off now | Batch 2 Expansion |
 | A que horas descola o voo? | What time does the flight take off? | Batch 2 Expansion |
+
+
+# Added from more_words_5.md
+
+
+| Portugues | English |
+| :---- | :---- |
+| está sol | there is sunny |
+| nublado | cloudy |
+| neveoeiro | fog |
+| neblina | misty |
+| ventoso | windy |
+| especialmente estou moro | especially where I live |
+| chuvoso | rainy |
+| está a chover | it is raining |
+| está a nevar | it is snowing |
+| está calor/frio | it is hot/cold |
+| nós fizemos | we did |
+| nós fazemos | we do |
+| nós estamos a fazer | we are doing |
+| nós vamos fazer | we are going to do |
+| vemos | we see |
+| vamos | going |
+| veem | they see |
+| gravação | recording |
+| gravar | to record |
+| gravação de voz | voice recording |
+| gravação de video | video recording |
+| pôr do sol | sunset |
+| nascer do sol | sunrise |
+| pôr | put |
+| com atenção | with attention |
+| A Susana e eu saimos | Susana and I go (together \- us) |
+| receitas | recipes |
+| vou fazer uma nova receita | I will try a new recipe |
+| o médico passou uma receita | the doctor gave me a perscription |
+| ao meio-dia | at midday (masculine) |
+| à meia-noite | at midnight feminine |
+| De manhã | The morning,,,,If the manha comes after an hour then da else always de |
+| à tarde | the afternoon or da tarde, but after a time it is de tarde |
+| à noite | the night |
+| Prometo | I promisè |
+| por volta | around |
+| apareces | will you come//appear |
+| aterra | land (airplane) |
+| descolar | take off |
+| partidas | departures |
+| chegadas | arrivals |
+| não ventoso | not windy (no wind) |
+| acentos | accents  |
+| assistir  | to attend (concert) |
+| uma peça | a play |
+| São vinte para as duas | 1:40 am |
+| é uma hora e quinze | 1:15 am |
+| meia de leite | (cappuccino) half of the milk |
+| correm | running (together) |
+| deitam-se | lie down |
+| Noun and then adjective |  |
+| que horas são? | What time is it? |
+| a que horas te levantas?  | At what time do you get up? |
+| onde ouvem música?  | Where do you listen to music? |
+| conseguem tomar.  | Do you (collective) have/take |
+| o que tomas ao pequeno-almoço?  | what do you eat/take for breakfast |
+| vou,vais,vai,vamos,vão  | onde vão \- where are you going plural |
+| Eles também se levantam às 6:30 | they also get up at 6:30 |
+| Eu repito o exercicio | I repeat the exercise |
+| tenho a certeza  | I have the certainty |
+| logo à noite | later tonight |
+| vossa  | your |
+| minha  | mine |
+| tua  | your informal |
+| sua  | your formal |
+| Eu tenho sorte | I have luck/I am lucky |
+| Posso vir a pé | I possibly come by foot |
+| eu andou de bicicleta | I went cycling |
+| eu foi tomar brunch com a minha mulher e a minha filha mais nova | I went/I was had brunch with my wife and youngest daughter |
+| bom recomendações | good recommendations |
+| para | destination / to stay for a period |
+| ao | short period (masculine) |
+| á | short period (feminine) |
+| a+um | stays as a even though it is um |
+| a+uma | Same rule as above |
+| de | general reference to transport |
+| no/na | specific vehicle number/time/possession/colour/ |
+| a pé | exception when traveling by foot |
+| No dia seguinte | The following day |
+| ida e volta | go and return |
+| ida | past participle of go  |
+| virar | turn |
+| atravessar | cross |
+| ir ate a rua | until the street |
+| a passadeira | pedestrian crossing |
+| ir direção norte | go direction north |
+| sair na segunda saída | exit the second exit |
+| seguir em direção \<place\> | follow the direction to \<place\>  |
+| e passámos um momento agradável | We spent a nice time |
+| comemos e fizemos compras | We ate and we did shopping |
+| limpeza de primavera | spring cleaning |
+| sala de estar | living room |
+| sala de jantar | dining room |
+| segundo andar | 2nd floor |
+| rés-do-chão | very close to the floor |
+| r/c | shorthand for ground floor |
+| águas furtadas | attic (building/apartment) |
+| cave | basement |
+| sotão | attic (house) |
+| lojas | shops |
+| antigo | old |
+| moderno/moderna | new |
+| sala de espetáculos | room with showroom |
+| muito conhecida | well known |
+| tempos livres | free time |
+| passar | spend |
+| mais tempo | more time |
+| lugares interessantes | interesting places |
+| o lava-loiça | sink (kitchen) |
+| as cadeiras | chairs |
+| a banheira | bath |
+| a estante | bookshelf |
+| prateleira | shelf |
+| as mesas de cabeceira | bedside table |
+| o espelho | mirror |
+| o lavatorio | sink (bathroom) |
+| a sanita | toilet |
+| bidet | bidet |
+| duche | shower |
+| mobilado | furnished |
+| mobilia | furniture |
+| tipologia | Number of bedrooms |
+| um custa mais | one costs more |
+| o valor da renda é diferente | one rent costs more |
+| comum | common |
+| ambos/ambas | both |
+| e ambos são mobilados | and both are furnished |
+| o premeiro | the first |
+| prefiro o segundo o apartamento | prefer the second apartment |
+| nao muito grande jardim | not a very big garden |
+| muito tranquila | very calm/quiet |
+| muito verde | more green (surroundings) |
+| fica  | stay (referring to a place) |
+| temos que usar o carro a maior parte do tempo | we have to use the car the majority of the time |
+| lavandaria | laundromat |
+| mais \+ adjetivo \+ (do) que | more \<\> than |
+| mais bonito (do) que | more beautiful than |
+| grande \-\> maior do que | bigger |
+| bom/boa \-\> melhor do que | better |
+| mau/má \-\> pior do que | worse |
+| arredores | outskirts (opposite of center) |
+| nova | new |
+| velha | old |
+| alto | high |
+| baixos | low |
+| almoinhas | small vegetable gardens (closed vegetable garden) |
+| cem | 100 |
+| cento e doze | 112 |
+| cento e sessenta e seis | 166 |
+| mil cento e cinquenta | 1150 |
+| mil e duzentos | 1200 |
+| mil duzentos e trinta | 1230 |
+| cem mil | 100,000 |
+| seis, sete | six, seven |
+| seiscentos, setecentos | 600,700 |
+| o rato roeu a rolha da garrafa do rei da rússia | the rat is gnawing the cork of the bottle of the king of russia |
+| Pedro Paulo pinto Peixoto pinta portas e painéis por pouco preço | Pedro Paulo pinto Peixoto paints doors and panels or little price |
+| um pinto | chicks |
+| caneta e lapis | pen and pencil |
+| papelaria | newsagents |
+| caixa | box |
+| conta à ordem/a prazo | account normal/savings |
+| tamanho | size |
+| no tamanho medio | medium size |
+| quarto de casal | couple room |
+| antes/depois de | before/after the |
+| eu venho | I come |
+| nós podemos ir à festa no próximo fim de semana | we can go to the party next weekend |
+| ela sabe onde fica/é o restaurante | she knows where the restaurant is |
+| eu venho à escola de manhã cedo | I come to the school early |
+| nós dizemos sempre a verdade | we always say the truth |
+| eu quero viajar no verão | I want to travel in the summer |
+| eles sabem tocar guitarra | they know how to play guitar |
+| nós vimos ao mercado ao sábado de manhã | We go to the market every saturday morning |
+
