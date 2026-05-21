@@ -209,7 +209,7 @@ class QuizViewModel extends Notifier<QuizState> {
     );
     state = QuizState(questions: questions);
   }
-  Future<List<Question>> _generateLuckyBatch({int count = 80}) async {
+  Future<List<Question>> _generateLuckyBatch({int count = 80, bool isRetry = false}) async {
     final storage = ref.read(storageServiceProvider);
     final items = storage.getAllItems();
     final verbService = ref.read(verbServiceProvider);
@@ -218,9 +218,11 @@ class QuizViewModel extends Notifier<QuizState> {
 
     final bool vocabOnly = storage.getSetting('vocab_only_mode', defaultValue: false) == true;
 
+    // Use a larger pool size to ensure we find enough unseen questions even if we filter out seen ones
+    final int poolSize = count * 2;
+
     // 1. Gather potential questions from each "Bucket"
-    // We sample a larger pool than we need to ensure variety even if some are already seen
-    final List<Question> vocabPool = _engine.generateVocabularyQuiz(items, count: 50, seenIds: seenIds.toList());
+    final List<Question> vocabPool = _engine.generateVocabularyQuiz(items, count: poolSize, seenIds: seenIds.toList());
     
     final List<Question> builderPool = [];
     final List<Question> generalJsonPool = [];
@@ -231,33 +233,41 @@ class QuizViewModel extends Notifier<QuizState> {
       builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/unit_10.json', items));
       builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/question_builder.json', items));
       generalJsonPool.addAll(await _loader.loadQuestions('assets/data/questions.json', items));
-      interrogPool.addAll(await _engine.generateInterrogativeQuiz(count: 50, seenIds: seenIds.toList()));
-      prepPool.addAll(await _engine.generatePrepositionQuiz(count: 50, seenIds: seenIds.toList()));
+      interrogPool.addAll(await _engine.generateInterrogativeQuiz(count: poolSize, seenIds: seenIds.toList()));
+      prepPool.addAll(await _engine.generatePrepositionQuiz(count: poolSize, seenIds: seenIds.toList()));
     }
     
-    final List<Question> verbPool = _engine.generateVerbConjugationQuestions(verbs: verbs, count: 50, seenIds: seenIds.toList());
-    final List<Question> clozePool = _engine.generateClozeQuestionsFromExamples(items, count: 30, seenIds: seenIds.toList());
+    final List<Question> verbPool = _engine.generateVerbConjugationQuestions(verbs: verbs, count: poolSize, seenIds: seenIds.toList());
+    final List<Question> clozePool = _engine.generateClozeQuestionsFromExamples(items, count: poolSize, seenIds: seenIds.toList());
 
-    // 2. Prioritize unseen for JSON-loaded pools (which don't have built-in unseen filtering)
-    List<Question> prioritizeUnseen(List<Question> pool) {
-      final unseen = pool.where((q) => !seenIds.contains(q.id)).toList()..shuffle();
-      final seen = pool.where((q) => seenIds.contains(q.id)).toList()..shuffle();
-      return [...unseen, ...seen];
+    // 2. Filter pools to ONLY keep unseen questions for a strict no-repeat policy
+    List<Question> onlyUnseen(List<Question> pool) {
+      return pool.where((q) => !seenIds.contains(q.id)).toList()..shuffle();
     }
-
-    final shuffledBuilders = prioritizeUnseen(builderPool);
-    final shuffledGeneral = prioritizeUnseen(generalJsonPool);
 
     // 3. Prepare all pools
     final allPools = [
-      vocabPool, 
-      shuffledBuilders, 
-      shuffledGeneral, 
-      interrogPool, 
-      prepPool, 
-      verbPool,
-      clozePool
+      onlyUnseen(vocabPool), 
+      onlyUnseen(verbPool),
+      onlyUnseen(clozePool)
     ];
+
+    if (!vocabOnly) {
+      allPools.addAll([
+        onlyUnseen(builderPool), 
+        onlyUnseen(generalJsonPool), 
+        onlyUnseen(interrogPool), 
+        onlyUnseen(prepPool), 
+      ]);
+    }
+
+    int totalUnseen = allPools.fold(0, (sum, pool) => sum + pool.length);
+
+    // If we have very few unseen questions left, clear the seen history and start over!
+    if (totalUnseen < (count ~/ 2) && !isRetry) {
+      await storage.clearSeenQuestions();
+      return _generateLuckyBatch(count: count, isRetry: true);
+    }
 
     // 4. Balanced interleaving with random bucket order per pick
     final List<Question> batch = [];
