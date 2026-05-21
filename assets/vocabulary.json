@@ -17553,5 +17553,148 @@
     "word_type": "phrase",
     "cefr_level": "A1",
     "id": 858
+  },
+  {
+    "portuguese": "comigo",
+    "english": "with me",
+    "pronunciation": "koo-MEE-goo",
+    "word_type": "pronoun",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Queres ir ao cinema comigo hoje?",
+    "example_sentence_en": "Do you want to go to the cinema with me today?",
+    "id": 859
+  },
+  {
+    "portuguese": "contigo",
+    "english": "with you (informal singular)",
+    "pronunciation": "koon-TEE-goo",
+    "word_type": "pronoun",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Eu gosto de estar contigo.",
+    "example_sentence_en": "I like to be with you.",
+    "id": 860
+  },
+  {
+    "portuguese": "consigo",
+    "english": "with you (formal) / with himself / with herself",
+    "pronunciation": "koon-SEE-goo",
+    "word_type": "pronoun",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Eu gostava de falar consigo, senhor Pedro.",
+    "example_sentence_en": "I would like to speak with you, Mr. Pedro.",
+    "id": 861
+  },
+  {
+    "portuguese": "connosco",
+    "english": "with us",
+    "pronunciation": "koo-NOS-koo",
+    "word_type": "pronoun",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Queres jantar connosco hoje à noite?",
+    "example_sentence_en": "Do you want to have dinner with us tonight?",
+    "id": 862
+  },
+  {
+    "portuguese": "convosco",
+    "english": "with you (informal plural)",
+    "pronunciation": "koon-VOS-koo",
+    "word_type": "pronoun",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Nós gostamos muito de trabalhar convosco.",
+    "example_sentence_en": "We really like to work with you.",
+    "id": 863
+  },
+  {
+    "portuguese": "com ele",
+    "english": "with him",
+    "pronunciation": "kohm EH-leh",
+    "word_type": "phrase",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Eu vou ao cinema com ele.",
+    "example_sentence_en": "I am going to the cinema with him.",
+    "id": 864
+  },
+  {
+    "portuguese": "com ela",
+    "english": "with her",
+    "pronunciation": "kohm EH-lah",
+    "word_type": "phrase",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "O João foi almoçar com ela.",
+    "example_sentence_en": "João went to have lunch with her.",
+    "id": 865
+  },
+  {
+    "portuguese": "com eles",
+    "english": "with them (masculine)",
+    "pronunciation": "kohm EH-leesh",
+    "word_type": "phrase",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Nós vamos ao restaurante com eles.",
+    "example_sentence_en": "We are going to the restaurant with them.",
+    "id": 866
+  },
+  {
+    "portuguese": "com elas",
+    "english": "with them (feminine)",
+    "pronunciation": "kohm EH-lahsh",
+    "word_type": "phrase",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Eu vou viajar para a Grécia com elas.",
+    "example_sentence_en": "I am going to travel to Greece with them.",
+    "id": 867
+  },
+  {
+    "portuguese": "com vocês",
+    "english": "with you (plural)",
+    "pronunciation": "kohm voo-SAYS",
+    "word_type": "phrase",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Eu vou ao mercado com vocês.",
+    "example_sentence_en": "I am going to the market with you.",
+    "id": 868
+  },
+  {
+    "portuguese": "com o senhor",
+    "english": "with you (formal masculine)",
+    "pronunciation": "kohm oo se-NYOR",
+    "word_type": "phrase",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Vou ao banco com o senhor.",
+    "example_sentence_en": "I am going to the bank with you.",
+    "id": 869
+  },
+  {
+    "portuguese": "com a senhora",
+    "english": "with you (formal feminine)",
+    "pronunciation": "kohm ah se-NYO-rah",
+    "word_type": "phrase",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Queria falar com a senhora.",
+    "example_sentence_en": "I would like to speak with you.",
+    "id": 870
+  },
+  {
+    "portuguese": "com quem",
+    "english": "with whom / who ... with",
+    "pronunciation": "kohm kaym",
+    "word_type": "phrase",
+    "cefr_level": "A1",
+    "topic_category": "Grammar - Prepositions",
+    "example_sentence_pt": "Com quem vais ao cinema?",
+    "example_sentence_en": "Who are you going to the cinema with?",
+    "id": 871
   }
 ]

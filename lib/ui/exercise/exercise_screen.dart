@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import '../../main.dart';
 import '../../services/tts_service.dart';
 import '../quiz/quiz_screen.dart'; // Reuse QuestionCard
+import '../quiz/preposition_reference_screen.dart';
 import '../vocabulary/vocabulary_list_screen.dart';
 import '../widgets/xp_popup.dart';
 
@@ -189,11 +190,24 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          if (widget.hintPath != null)
+          if (widget.hintPath != null || widget.unitPath.contains('prepositional_pronouns'))
             IconButton(
               icon: const Icon(Icons.lightbulb_outline), // Requested icon
-              tooltip: 'Show Hint',
-              onPressed: _showHint,
+              tooltip: widget.unitPath.contains('prepositional_pronouns')
+                  ? 'Show Reference'
+                  : 'Show Hint',
+              onPressed: () {
+                if (widget.unitPath.contains('prepositional_pronouns')) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const PrepositionReferenceScreen(),
+                    ),
+                  );
+                } else {
+                  _showHint();
+                }
+              },
             ),
           PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert),

@@ -75,6 +75,39 @@ class PrepositionReferenceScreen extends ConsumerWidget {
                 ttsService: ttsService,
               ),
             ),
+            const SizedBox(height: 24),
+            FadeInUp(
+              delay: const Duration(milliseconds: 600),
+              child: _ReferenceSection(
+                title: 'Preposição "com" (Pronomes Preposicionais)',
+                color: Colors.pink,
+                combinations: [
+                  {'formula': 'com + mim', 'result': 'comigo'},
+                  {'formula': 'com + ti', 'result': 'contigo'},
+                  {'formula': 'com + si', 'result': 'consigo'},
+                  {'formula': 'com + nós', 'result': 'connosco'},
+                  {'formula': 'com + vós', 'result': 'convosco'},
+                  {'formula': 'com + ele/ela', 'result': 'com ele/ela'},
+                  {'formula': 'com + eles/elas', 'result': 'com eles/elas'},
+                  {'formula': 'com + vocês', 'result': 'com vocês'},
+                ],
+                rules: [
+                  {'context': 'with me', 'example': 'Queres ir ao cinema comigo hoje?'},
+                  {'context': 'with you (informal)', 'example': 'Eu gosto muito de estar contigo.'},
+                  {'context': 'with you (formal / reflexive)', 'example': 'Queria falar consigo, senhor Pedro.'},
+                  {'context': 'with us', 'example': 'Queres jantar connosco hoje à noite?'},
+                  {'context': 'with you (plural informal)', 'example': 'Nós gostamos de trabalhar convosco.'},
+                  {'context': 'with him / her', 'example': 'O João foi almoçar com ela.'},
+                  {'context': 'with them', 'example': 'Nós vamos ao restaurante com eles.'},
+                  {'context': 'with you (plural)', 'example': 'Eu vou ao mercado com vocês.'},
+                ],
+                ttsService: ttsService,
+                noteText: '• contigo is for friends/family (informal).\n'
+                    '• consigo is for formal "you" (addressing the listener directly) or reflexive "with oneself" (e.g. "Ele levou a mala consigo").\n'
+                    '• com ele/ela is for a third person (him/her) and NOT reflexive.\n'
+                    '• com vocês is the general plural "with you", while convosco is used in regional/formal Portugal.',
+              ),
+            ),
           ],
         ),
       ),
@@ -88,6 +121,7 @@ class _ReferenceSection extends StatelessWidget {
   final List<Map<String, String>> combinations;
   final List<Map<String, String>> rules;
   final dynamic ttsService;
+  final String? noteText;
 
   const _ReferenceSection({
     required this.title,
@@ -95,6 +129,7 @@ class _ReferenceSection extends StatelessWidget {
     required this.combinations,
     required this.rules,
     required this.ttsService,
+    this.noteText,
   });
 
   @override
@@ -114,12 +149,14 @@ class _ReferenceSection extends StatelessWidget {
               children: [
                 Icon(Icons.info_outline, color: color),
                 const SizedBox(width: 8),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: color,
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
                   ),
                 ),
               ],
@@ -178,6 +215,36 @@ class _ReferenceSection extends StatelessWidget {
                     ),
                   ),
                 )),
+                if (noteText != null) ...[
+                  const SizedBox(height: 10),
+                  const Divider(),
+                  const SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.05),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: color.withValues(alpha: 0.15)),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(Icons.lightbulb_outline, size: 20, color: color),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            noteText!,
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.85),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

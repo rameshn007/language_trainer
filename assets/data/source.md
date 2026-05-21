@@ -1886,3 +1886,49 @@
 | eles sabem tocar guitarra | they know how to play guitar |
 | nós vimos ao mercado ao sábado de manhã | We go to the market every saturday morning |
 
+# Thu 21 May 2026 (Prepositional Pronouns Expansion)
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| comigo | with me | Grammar - Prepositional Pronoun |
+| contigo | with you (informal singular) | Grammar - Prepositional Pronoun |
+| consigo | with you (formal) / with himself / with herself | Grammar - Prepositional Pronoun |
+| connosco | with us | Grammar - Prepositional Pronoun |
+| convosco | with you (informal plural) | Grammar - Prepositional Pronoun |
+| com ele | with him | Grammar - Prepositional Pronoun |
+| com ela | with her | Grammar - Prepositional Pronoun |
+| com eles | with them (masculine) | Grammar - Prepositional Pronoun |
+| com elas | with them (feminine) | Grammar - Prepositional Pronoun |
+| com vocês | with you (plural) | Grammar - Prepositional Pronoun |
+| com o senhor | with you (formal masculine) | Grammar - Prepositional Pronoun |
+| com a senhora | with you (formal feminine) | Grammar - Prepositional Pronoun |
+| com quem | with whom | Grammar - Prepositional Pronoun |
+| Queres ir ao cinema comigo hoje? | Do you want to go to the cinema with me today? | Grammar - Practice |
+| Ele vai jogar ténis comigo amanhã | He is going to play tennis with me tomorrow | Grammar - Practice |
+| Podes vir falar comigo, por favor? | Can you come talk with me, please? | Grammar - Practice |
+| Eu gosto de estar contigo | I like to be with you | Grammar - Practice |
+| Ela quer falar contigo agora | She wants to talk with you now | Grammar - Practice |
+| Posso ir contigo ao supermercado? | Can I go with you to the supermarket? | Grammar - Practice |
+| Eu gostava de falar consigo, senhor Pedro | I would like to speak with you, Mr. Pedro | Grammar - Practice |
+| Ele levou a mala consigo | He took the suitcase with him | Grammar - Practice |
+| Posso ir consigo para o escritório? | Can I go with you to the office? | Grammar - Practice |
+| Queres jantar connosco hoje à noite? | Do you want to have dinner with us tonight? | Grammar - Practice |
+| Eles vão de férias connosco no verão | They are going on vacation with us in the summer | Grammar - Practice |
+| Vem connosco à praia no sábado! | Come with us to the beach on Saturday! | Grammar - Practice |
+| Nós gostamos muito de trabalhar convosco | We really like to work with you | Grammar - Practice |
+| Eu gostava de ir convosco ao concerto | I would like to go with you to the concert | Grammar - Practice |
+| Ela quer falar convosco depois das aulas | She wants to speak with you after classes | Grammar - Practice |
+| Eu vou ao cinema com ele | I am going to the cinema with him | Grammar - Practice |
+| A Maria quer casar com ele | Maria wants to marry him | Grammar - Practice |
+| O João foi almoçar com ela | João went to have lunch with her | Grammar - Practice |
+| Eu gosto de jogar ténis com ela | I like to play tennis with her | Grammar - Practice |
+| Nós vamos ao restaurante com eles | We are going to the restaurant with them | Grammar - Practice |
+| Eles querem falar com eles | They want to speak with them | Grammar - Practice |
+| Eu vou viajar para a Grécia com elas | I am going to travel to Greece with them | Grammar - Practice |
+| Ela está a falar com elas no jardim | She is talking with them in the garden | Grammar - Practice |
+| Eu vou ao mercado com vocês | I am going to the market with you | Grammar - Practice |
+| Nós queremos jantar com vocês | We want to have dinner with you | Grammar - Practice |
+| Vou ao banco com o senhor | I am going to the bank with you | Grammar - Practice |
+| Queria falar com a senhora | I would like to speak with you | Grammar - Practice |
+| Com quem vais ao cinema? | Who are you going to the cinema with? | Grammar - Practice |
+

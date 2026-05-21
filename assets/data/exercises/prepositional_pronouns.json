@@ -1,0 +1,212 @@
+[
+  {
+    "id": "prep_pron_q1",
+    "questionText": "Queres ir ao cinema ____ hoje? (with me)",
+    "options": ["comigo", "contigo", "consigo", "connosco"],
+    "correctAnswer": "comigo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_comigo",
+      "portuguese": "comigo",
+      "english": "with me",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q2",
+    "questionText": "Eu gosto muito de estar ____. (with you - informal)",
+    "options": ["contigo", "comigo", "connosco", "convosco"],
+    "correctAnswer": "contigo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_contigo",
+      "portuguese": "contigo",
+      "english": "with you (informal singular)",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q3",
+    "questionText": "Doutor Pedro, eu gostava de falar ____ amanhã. (with you - formal)",
+    "options": ["consigo", "contigo", "comigo", "connosco"],
+    "correctAnswer": "consigo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_consigo",
+      "portuguese": "consigo",
+      "english": "with you (formal)",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q4",
+    "questionText": "Nós vamos ao restaurante. Queres vir ____? (with us)",
+    "options": ["connosco", "convosco", "comigo", "com eles"],
+    "correctAnswer": "connosco",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_connosco",
+      "portuguese": "connosco",
+      "english": "with us",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q5",
+    "questionText": "Meus amigos, nós gostamos muito de trabalhar ____. (with you - plural)",
+    "options": ["convosco", "connosco", "consigo", "com vocês"],
+    "correctAnswer": "convosco",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_convosco",
+      "portuguese": "convosco",
+      "english": "with you (informal plural)",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q6",
+    "questionText": "O João é muito simpático. Eu vou ao cinema ____. (with him)",
+    "options": ["com ele", "comigo", "consigo", "com ela"],
+    "correctAnswer": "com ele",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_com_ele",
+      "portuguese": "com ele",
+      "english": "with him",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q7",
+    "questionText": "A Ana vai almoçar. O Pedro foi ____. (with her)",
+    "options": ["com ela", "com ele", "contigo", "comigo"],
+    "correctAnswer": "com ela",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_com_ela",
+      "portuguese": "com ela",
+      "english": "with her",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q8",
+    "questionText": "Os meus pais estão na sala. Eu vou falar ____. (with them - masculine)",
+    "options": ["com eles", "com elas", "connosco", "convosco"],
+    "correctAnswer": "com eles",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_com_eles",
+      "portuguese": "com eles",
+      "english": "with them (masculine)",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q9",
+    "questionText": "As minhas irmãs vão viajar. Eu vou ____ para a Grécia. (with them - feminine)",
+    "options": ["com elas", "com eles", "com vocês", "connosco"],
+    "correctAnswer": "com elas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_com_elas",
+      "portuguese": "com elas",
+      "english": "with them (feminine)",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q10",
+    "questionText": "Meus filhos, eu vou ao parque ____. (with you - plural)",
+    "options": ["com vocês", "connosco", "convosco", "consigo"],
+    "correctAnswer": "com vocês",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_com_voces",
+      "portuguese": "com vocês",
+      "english": "with you (plural)",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q11",
+    "questionText": "Senhor Silva, eu vou ao banco ____. (with you - formal masculine)",
+    "options": ["com o senhor", "com a senhora", "consigo", "contigo"],
+    "correctAnswer": "com o senhor",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_com_o_senhor",
+      "portuguese": "com o senhor",
+      "english": "with you (formal masculine)",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q12",
+    "questionText": "Dona Maria, eu queria falar ____. (with you - formal feminine)",
+    "options": ["com a senhora", "com o senhor", "contigo", "consigo"],
+    "correctAnswer": "com a senhora",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_com_a_senhora",
+      "portuguese": "com a senhora",
+      "english": "with you (formal feminine)",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q13",
+    "questionText": "____ vais ao cinema hoje? (With whom)",
+    "options": ["Com quem", "Comigo", "Contigo", "Consigo"],
+    "correctAnswer": "Com quem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_com_quem",
+      "portuguese": "com quem",
+      "english": "with whom",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q14",
+    "questionText": "Ele vai jogar ténis ____ amanhã. (with me)",
+    "options": ["comigo", "contigo", "consigo", "connosco"],
+    "correctAnswer": "comigo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_comigo_2",
+      "portuguese": "comigo",
+      "english": "with me",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_q15",
+    "questionText": "Vem ____ à praia no sábado! (with us)",
+    "options": ["connosco", "convosco", "comigo", "com eles"],
+    "correctAnswer": "connosco",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_connosco_2",
+      "portuguese": "connosco",
+      "english": "with us",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  }
+]

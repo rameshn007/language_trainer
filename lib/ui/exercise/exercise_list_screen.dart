@@ -66,6 +66,12 @@ class ExerciseListScreen extends StatelessWidget {
       'path': 'assets/data/exercises/unit_10.json',
       'icon': 'school',
     },
+    {
+      'title': 'Prepositional Pronouns',
+      'subtitle': 'Practice comigo, contigo, connosco, etc.',
+      'path': 'assets/data/exercises/prepositional_pronouns.json',
+      'icon': 'chat',
+    },
   ];
 
   @override
