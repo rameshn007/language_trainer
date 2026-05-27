@@ -142,6 +142,11 @@ class ExerciseViewModel extends Notifier<QuizState> {
     }
   }
 
+  void reset() {
+    state = QuizState(questions: []);
+    _sessionStartTime = null;
+  }
+
 
 }
 

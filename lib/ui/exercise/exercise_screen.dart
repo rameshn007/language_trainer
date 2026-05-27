@@ -36,6 +36,7 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
   @override
   void initState() {
     super.initState();
+    ref.read(exerciseViewModelProvider.notifier).reset();
     _ttsService = ref.read(ttsServiceProvider);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref
