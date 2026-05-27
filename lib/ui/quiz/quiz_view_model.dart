@@ -413,6 +413,11 @@ class QuizViewModel extends Notifier<QuizState> {
       await finishSession();
     }
   }
+
+  void reset() {
+    state = QuizState(questions: []);
+    _sessionStartTime = null;
+  }
 }
 
 final quizViewModelProvider = NotifierProvider<QuizViewModel, QuizState>(

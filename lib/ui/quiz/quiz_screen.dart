@@ -45,6 +45,7 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     _ttsService = ref.read(ttsServiceProvider);
     // Start quiz on load
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ref.read(quizViewModelProvider.notifier).reset();
       if (widget.isInterrogativeQuiz) {
         await ref.read(quizViewModelProvider.notifier).startInterrogativeQuiz(
           category: widget.interrogativeCategory,
