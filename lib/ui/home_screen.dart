@@ -271,6 +271,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Scaffold(
       extendBody: true,
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? Colors.black
+          : const Color(0xFFF5F7FA),
       appBar: AppBar(
         title: const Text('Language Trainer'),
         centerTitle: true,
@@ -340,7 +343,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           if (items.isNotEmpty)
             Positioned.fill(
               child: Opacity(
-                opacity: 0.6,
+                opacity: Theme.of(context).brightness == Brightness.dark ? 0.6 : 0.5,
                 child: WordStarField(
                   words: learnedCount > 25
                       ? items
@@ -353,27 +356,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ),
           // Bottom Scrim for readability and safe area
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: 150,
-            child: IgnorePointer(
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.transparent,
-                      Colors.black.withValues(alpha: 0.7),
-                      Colors.black,
-                    ],
+          if (Theme.of(context).brightness == Brightness.dark)
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 150,
+              child: IgnorePointer(
+                child: Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black.withValues(alpha: 0.7),
+                        Colors.black,
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
           CustomScrollView(
             controller: _scrollController,
             slivers: [
@@ -679,54 +683,77 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required List<Widget> children,
     bool initiallyExpanded = false,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Card(
-      elevation: 0,
-      color: Colors.black.withValues(alpha: 0.3),
+      elevation: 4,
+      color: isDark ? Colors.black.withValues(alpha: 0.3) : Colors.white.withValues(alpha: 0.85),
+      shadowColor: isDark ? Colors.transparent : Colors.black26,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: Colors.white.withValues(alpha: 0.2), width: 1),
+        side: BorderSide(
+          color: isDark ? Colors.white.withValues(alpha: 0.2) : Colors.grey.shade300,
+          width: 1.5,
+        ),
       ),
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.only(bottom: 8),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            dividerColor: Colors.transparent,
-            listTileTheme: const ListTileThemeData(
-              dense: true,
-              visualDensity: VisualDensity.compact,
-            ),
-          ),
-          child: ExpansionTile(
-            initiallyExpanded: initiallyExpanded,
-            tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-            iconColor: Colors.white,
-            collapsedIconColor: Colors.white70,
-            leading: Icon(icon, color: Colors.white),
-            title: Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
-            ),
-            childrenPadding: EdgeInsets.zero,
-            children: [
-              GridView.count(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-                crossAxisCount: 3,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 1.1,
-                children: children,
-              ),
-            ],
+        filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+        child: _buildSectionContent(
+          title: title,
+          icon: icon,
+          children: children,
+          initiallyExpanded: initiallyExpanded,
+          isDark: isDark,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionContent({
+    required String title,
+    required IconData icon,
+    required List<Widget> children,
+    required bool initiallyExpanded,
+    required bool isDark,
+  }) {
+    return Theme(
+      data: Theme.of(context).copyWith(
+        dividerColor: Colors.transparent,
+        listTileTheme: ListTileThemeData(
+          dense: true,
+          visualDensity: VisualDensity.compact,
+          iconColor: isDark ? Colors.white : Colors.black87,
+        ),
+      ),
+      child: ExpansionTile(
+        initiallyExpanded: initiallyExpanded,
+        tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+        iconColor: isDark ? Colors.white : Colors.black87,
+        collapsedIconColor: isDark ? Colors.white70 : Colors.black54,
+        leading: Icon(icon, color: isDark ? Colors.white : Colors.black87),
+        title: Text(
+          title,
+          style: TextStyle(
+            color: isDark ? Colors.white : Colors.black87,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
           ),
         ),
+        childrenPadding: EdgeInsets.zero,
+        children: [
+          GridView.count(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+            crossAxisCount: 3,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+            childAspectRatio: 1.1,
+            children: children,
+          ),
+        ],
       ),
     );
   }
