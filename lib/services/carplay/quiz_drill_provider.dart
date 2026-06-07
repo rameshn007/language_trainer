@@ -3,6 +3,7 @@ import '../../services/storage_service.dart';
 import '../../services/tts_service.dart';
 import '../../services/quiz_engine_service.dart';
 import '../../services/voice_quiz_service.dart';
+import '../../services/verb_service.dart';
 import 'carplay_drill_provider.dart';
 
 class QuizDrillProvider implements CarPlayDrillProvider {
@@ -16,6 +17,7 @@ class QuizDrillProvider implements CarPlayDrillProvider {
   late final TtsService _tts;
   late final QuizEngineService _quizEngine;
   late final VoiceQuizService _voiceService;
+  late final VerbService _verbService;
 
   bool _isFinished = true;
   int _score = 0;
@@ -35,6 +37,7 @@ class QuizDrillProvider implements CarPlayDrillProvider {
     _tts = ttsService;
     _quizEngine = quizEngine;
     _voiceService = VoiceQuizService(ttsService);
+    _verbService = VerbService(storageService);
   }
 
   @override
@@ -56,8 +59,7 @@ class QuizDrillProvider implements CarPlayDrillProvider {
     );
     
     // Load verbs for conjugation questions
-    final verbService = _getVerbService();
-    final verbs = await verbService.loadVerbs();
+    final verbs = await _verbService.loadVerbs();
     final verbQuestions = _quizEngine.generateVerbConjugationQuestions(
       verbs: verbs,
       count: 3,
@@ -80,12 +82,6 @@ class QuizDrillProvider implements CarPlayDrillProvider {
     _seenQuestionIds = _storage.getSeenQuestionIds();
 
     return nextChallenge();
-  }
-
-  dynamic _getVerbService() {
-    // Access verb service from the quiz engine or create a minimal version
-    // For now, we'll use a simple approach
-    return null;
   }
 
   @override
@@ -154,7 +150,7 @@ class QuizDrillProvider implements CarPlayDrillProvider {
       
       if (xp > 0) {
         await _storage.addXP(xp);
-        await _tts.speak(isFirstAttempt ? "Correct! +$xp XP" : "Correct! +$xp XP");
+        await _tts.speak("Correct! +$xp XP");
       } else {
         await _tts.speak("Correct!");
       }

@@ -14,6 +14,10 @@ import 'carplay/phrase_drill_provider.dart';
 import 'carplay/interrogative_drill_provider.dart';
 import 'storage_service.dart';
 
+// Static connection state accessible without a Riverpod ref
+bool _carplayConnected = false;
+bool get isCarplayConnected => _carplayConnected;
+
 // Provider for CarPlay connection status
 final carplayConnectionProvider = StateNotifierProvider<CarPlayConnectionNotifier, bool>((ref) {
   return CarPlayConnectionNotifier();
@@ -23,9 +27,12 @@ class CarPlayConnectionNotifier extends StateNotifier<bool> {
   CarPlayConnectionNotifier() : super(false);
 
   void setConnected(bool value) {
+    _carplayConnected = value;
     state = value;
   }
 }
+
+final carplayConnectionNotifier = CarPlayConnectionNotifier();
 
 class CarPlayService {
   late final VoiceQuizService _voiceService;
@@ -35,7 +42,6 @@ class CarPlayService {
   late final InterrogativeDrillProvider _interrogativeProvider;
   bool _isPlaying = false;
   bool _hasSetRoot = false;
-  bool _isInDrillSession = false;
   
   // Session state for resume
   String? _sessionProviderId;
@@ -96,6 +102,7 @@ class CarPlayService {
     _flutterCarplay.addListenerOnConnectionChange((status) {
       final isConnected = status.toString().toLowerCase().contains('connected');
       AppLogger.log("CarPlay connection status: $status", name: 'CarPlay');
+      carplayConnectionNotifier.setConnected(isConnected);
       
       if (isConnected) {
         _isCarplayConnected = true;
@@ -115,6 +122,10 @@ class CarPlayService {
   }
 
   void _checkForResume() {
+    // Load any saved session state from previous connection
+    _loadSessionState();
+    
+    // Always show root template on connect
     _setupRootTemplate();
   }
 
@@ -164,6 +175,7 @@ class CarPlayService {
     _storageService?.saveSetting('carplay_session_seen_ids', null);
   }
 
+  int _pushedTemplateCount = 0;
   bool get isConnected => _isCarplayConnected;
 
   void _setupRootTemplate() {
@@ -207,7 +219,6 @@ class CarPlayService {
       _loadSessionState();
       
       _isPlaying = true;
-      _isInDrillSession = true;
       AppLogger.log('Starting drill session: ${provider.displayName}', name: 'CarPlay');
       
       // Save current session info
@@ -294,7 +305,6 @@ class CarPlayService {
       clearSessionState();
     } finally {
       _isPlaying = false;
-      _isInDrillSession = false;
       // Pop back to root
       _popToRoot();
     }
@@ -315,6 +325,7 @@ class CarPlayService {
         ),
         animated: true,
       );
+      _pushedTemplateCount++;
     } catch (e) {
       AppLogger.error('Error pushing template', name: 'CarPlay', error: e);
     }
@@ -322,11 +333,13 @@ class CarPlayService {
 
   void _popToRoot() {
     try {
-      while (_hasSetRoot && !_isInDrillSession) {
+      while (_pushedTemplateCount > 0) {
         FlutterCarplay.pop(animated: false);
+        _pushedTemplateCount--;
       }
     } catch (e) {
       AppLogger.error('Error popping to root', name: 'CarPlay', error: e);
+      _pushedTemplateCount = 0;
     }
   }
 }

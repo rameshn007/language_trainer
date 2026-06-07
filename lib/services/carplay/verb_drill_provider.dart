@@ -130,7 +130,7 @@ class VerbConjugationDrillProvider implements CarPlayDrillProvider {
       
       if (xp > 0) {
         await _storage.addXP(xp);
-        await _tts.speak(isFirstAttempt ? "Correct! +$xp XP" : "Correct! +$xp XP");
+        await _tts.speak("Correct! +$xp XP");
       } else {
         await _tts.speak("Correct!");
       }
