@@ -1,4 +1,5 @@
 import Flutter
+import CarPlay
 import UIKit
 
 @main
@@ -19,6 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        // Handle CarPlay scenes - let flutter_carplay package handle them
+        if scene is CPTemplateApplicationScene {
+            return
+        }
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate

@@ -7,6 +7,7 @@ import 'package:animate_do/animate_do.dart';
 
 import '../services/markdown_parser.dart';
 import '../services/progress_service.dart';
+import '../services/carplay_service.dart';
 import '../models/progress_data.dart';
 import 'quiz/category_selection_screen.dart';
 import 'vocabulary/vocabulary_list_screen.dart';
@@ -278,6 +279,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         title: const Text('Language Trainer'),
         centerTitle: true,
         actions: [
+          Consumer(
+            builder: (context, ref, child) {
+              final isCarplayConnected = ref.watch(carplayConnectionProvider);
+              if (!isCarplayConnected) return const SizedBox.shrink();
+              
+              return Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  Icons.car_repair,
+                  color: Colors.green,
+                  size: 24,
+                ),
+              );
+            },
+          ),
           PopupMenuButton<String>(
             onSelected: (value) {
               if (value == 'refresh') {

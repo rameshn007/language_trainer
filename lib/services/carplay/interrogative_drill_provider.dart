@@ -1,25 +1,26 @@
-import '../../models/language_item.dart';
+import '../../models/question.dart';
 import '../../services/storage_service.dart';
 import '../../services/tts_service.dart';
 import '../../services/quiz_engine_service.dart';
 import '../../services/voice_quiz_service.dart';
 import 'carplay_drill_provider.dart';
 
-class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
+class InterrogativeDrillProvider implements CarPlayDrillProvider {
   @override
-  String get displayName => "Vocabulary Flashcards";
+  String get displayName => "Interrogative Quiz";
 
   @override
-  String get description => "Listen to a word and repeat it.";
+  String get description => "Practice interrogative questions";
 
   late final StorageService _storage;
   late final TtsService _tts;
+  late final QuizEngineService _quizEngine;
   late final VoiceQuizService _voiceService;
 
   bool _isFinished = true;
   int _score = 0;
   int _total = 0;
-  List<LanguageItem> _sessionItems = [];
+  List<Question> _questions = [];
   int _currentIndex = 0;
   Set<String> _seenQuestionIds = {};
   DrillChallenge? _currentChallenge;
@@ -32,23 +33,25 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
   }) async {
     _storage = storageService;
     _tts = ttsService;
+    _quizEngine = quizEngine;
     _voiceService = VoiceQuizService(ttsService);
   }
 
   @override
   Future<DrillChallenge?> startSession() async {
-    final allItems = _storage.getAllItems();
-    if (allItems.isEmpty) {
+    // Generate interrogative quiz questions
+    _questions = await _quizEngine.generateInterrogativeQuiz(
+      count: 10,
+    );
+
+    if (_questions.isEmpty) {
       _isFinished = true;
       return null;
     }
 
-    final shuffled = List<LanguageItem>.from(allItems)..shuffle();
-    _sessionItems = shuffled.take(5).toList();
-
     _currentIndex = 0;
     _score = 0;
-    _total = _sessionItems.length;
+    _total = _questions.length;
     _isFinished = false;
 
     // Load seen question IDs
@@ -59,15 +62,16 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
 
   @override
   DrillChallenge? nextChallenge() {
-    if (_currentIndex >= _sessionItems.length) {
+    if (_currentIndex >= _questions.length) {
       _isFinished = true;
       return null;
     }
 
-    final item = _sessionItems[_currentIndex];
+    final question = _questions[_currentIndex];
     _currentChallenge = DrillChallenge(
-      promptText: item.portuguese,
-      detailText: item.english,
+      promptText: question.questionText,
+      detailText: question.correctAnswer,
+      options: List<String>.from(question.options),
       isVoiceOnly: false,
     );
 
@@ -78,33 +82,43 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
   Future<bool> processAnswer(String answer) async {
     if (_currentChallenge == null) return false;
 
-    final currentItem = _sessionItems[_currentIndex];
+    final question = _questions[_currentIndex];
     final normalizedAnswer = answer.toLowerCase().trim();
-    final normalizedTarget = currentItem.portuguese.toLowerCase().trim();
+    final normalizedCorrect = question.correctAnswer.toLowerCase().trim();
 
     bool isCorrect = false;
 
-    // Direct match
-    if (normalizedAnswer == normalizedTarget) {
-      isCorrect = true;
-    }
-    // Fuzzy match using VoiceQuizService logic
-    else if (_voiceService.isCorrect(answer, currentItem.portuguese)) {
-      isCorrect = true;
-    }
-    // Contains match
-    else if (normalizedAnswer.contains(normalizedTarget) || 
-             normalizedTarget.contains(normalizedAnswer)) {
-      isCorrect = true;
+    // Check if answer matches any option
+    for (var option in question.options) {
+      final normalizedOption = option.toLowerCase().trim();
+      
+      // Direct match
+      if (normalizedAnswer == normalizedOption) {
+        isCorrect = true;
+        break;
+      }
+      
+      // Fuzzy match using VoiceQuizService logic
+      if (_voiceService.isCorrect(answer, option)) {
+        isCorrect = true;
+        break;
+      }
     }
 
+    // Also check if answer contains the correct answer or vice versa
+    if (!isCorrect) {
+      isCorrect = normalizedAnswer.contains(normalizedCorrect) || 
+                  normalizedCorrect.contains(normalizedAnswer);
+    }
+
+    // Award XP and update mastery
     if (isCorrect) {
       _score++;
       
-      final isFirstAttempt = !_seenQuestionIds.contains(currentItem.id);
+      final isFirstAttempt = !_seenQuestionIds.contains(question.id);
       
       final xp = await _storage.updateWordProgress(
-        currentItem.id,
+        question.id,
         true,
         firstAttempt: isFirstAttempt,
       );
@@ -115,14 +129,14 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
       } else {
         await _tts.speak("Correct!");
       }
-      
-      // Mark question as seen
-      _storage.markQuestionAsSeen(currentItem.id);
-      _seenQuestionIds.add(currentItem.id);
     } else {
-      await _storage.updateWordProgress(currentItem.id, false);
-      await _tts.speak("Incorrect. It was ${currentItem.portuguese}");
+      await _storage.updateWordProgress(question.id, false);
+      await _tts.speak("Incorrect. It was ${question.correctAnswer}");
     }
+
+    // Mark question as seen
+    _storage.markQuestionAsSeen(question.id);
+    _seenQuestionIds.add(question.id);
 
     _currentIndex++;
     return isCorrect;

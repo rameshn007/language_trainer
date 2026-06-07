@@ -2,7 +2,7 @@
 .flutter-plugins-dependencies
 /.idea
 /android/.gradle
-/build
+build
 /macos
 /ios/Pods
 .DS_Store

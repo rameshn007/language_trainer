@@ -5,12 +5,12 @@ import '../../services/quiz_engine_service.dart';
 import '../../services/voice_quiz_service.dart';
 import 'carplay_drill_provider.dart';
 
-class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
+class PhraseTrainerDrillProvider implements CarPlayDrillProvider {
   @override
-  String get displayName => "Vocabulary Flashcards";
+  String get displayName => "Phrase Trainer";
 
   @override
-  String get description => "Listen to a word and repeat it.";
+  String get description => "Practice Portuguese phrases";
 
   late final StorageService _storage;
   late final TtsService _tts;
@@ -21,7 +21,6 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
   int _total = 0;
   List<LanguageItem> _sessionItems = [];
   int _currentIndex = 0;
-  Set<String> _seenQuestionIds = {};
   DrillChallenge? _currentChallenge;
 
   @override
@@ -43,16 +42,25 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
       return null;
     }
 
-    final shuffled = List<LanguageItem>.from(allItems)..shuffle();
-    _sessionItems = shuffled.take(5).toList();
+    // Filter for phrases (3+ tokens)
+    final phrases = allItems.where((item) {
+      final tokenCount = item.portuguese.trim().split(RegExp(r'\s+')).length;
+      return tokenCount >= 3;
+    }).toList();
+
+    if (phrases.isEmpty) {
+      // Fallback to all items if no phrases found
+      _sessionItems = List<LanguageItem>.from(allItems)..shuffle();
+      _sessionItems = _sessionItems.take(10).toList();
+    } else {
+      _sessionItems = List<LanguageItem>.from(phrases)..shuffle();
+      _sessionItems = _sessionItems.take(10).toList();
+    }
 
     _currentIndex = 0;
     _score = 0;
     _total = _sessionItems.length;
     _isFinished = false;
-
-    // Load seen question IDs
-    _seenQuestionIds = _storage.getSeenQuestionIds();
 
     return nextChallenge();
   }
@@ -66,8 +74,9 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
 
     final item = _sessionItems[_currentIndex];
     _currentChallenge = DrillChallenge(
-      promptText: item.portuguese,
-      detailText: item.english,
+      promptText: "What does '${item.portuguese}' mean in English?",
+      detailText: item.portuguese,
+      options: [item.english],
       isVoiceOnly: false,
     );
 
@@ -80,7 +89,7 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
 
     final currentItem = _sessionItems[_currentIndex];
     final normalizedAnswer = answer.toLowerCase().trim();
-    final normalizedTarget = currentItem.portuguese.toLowerCase().trim();
+    final normalizedTarget = currentItem.english.toLowerCase().trim();
 
     bool isCorrect = false;
 
@@ -89,7 +98,7 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
       isCorrect = true;
     }
     // Fuzzy match using VoiceQuizService logic
-    else if (_voiceService.isCorrect(answer, currentItem.portuguese)) {
+    else if (_voiceService.isCorrect(answer, currentItem.english)) {
       isCorrect = true;
     }
     // Contains match
@@ -98,30 +107,25 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
       isCorrect = true;
     }
 
+    // Award XP and update mastery
     if (isCorrect) {
       _score++;
-      
-      final isFirstAttempt = !_seenQuestionIds.contains(currentItem.id);
       
       final xp = await _storage.updateWordProgress(
         currentItem.id,
         true,
-        firstAttempt: isFirstAttempt,
+        firstAttempt: true, // Phrases are always new in this context
       );
       
       if (xp > 0) {
         await _storage.addXP(xp);
-        await _tts.speak(isFirstAttempt ? "Correct! +$xp XP" : "Correct! +$xp XP");
+        await _tts.speak("Correct! +$xp XP");
       } else {
         await _tts.speak("Correct!");
       }
-      
-      // Mark question as seen
-      _storage.markQuestionAsSeen(currentItem.id);
-      _seenQuestionIds.add(currentItem.id);
     } else {
       await _storage.updateWordProgress(currentItem.id, false);
-      await _tts.speak("Incorrect. It was ${currentItem.portuguese}");
+      await _tts.speak("Incorrect. It was '${currentItem.english}'");
     }
 
     _currentIndex++;
