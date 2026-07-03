@@ -6,8 +6,8 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<flutter_carplay/FlutterCarplayPlugin.h>)
-#import <flutter_carplay/FlutterCarplayPlugin.h>
+#if __has_include(<flutter_carplay/SwiftFlutterCarplayPlugin.h>)
+#import <flutter_carplay/SwiftFlutterCarplayPlugin.h>
 #else
 @import flutter_carplay;
 #endif
@@ -39,7 +39,7 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [FlutterCarplayPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterCarplayPlugin"]];
+  [SwiftFlutterCarplayPlugin registerWithRegistrar:[registry registrarForPlugin:@"SwiftFlutterCarplayPlugin"]];
   [FlutterLocalNotificationsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterLocalNotificationsPlugin"]];
   [FlutterTimezonePlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterTimezonePlugin"]];
   [FlutterTtsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterTtsPlugin"]];

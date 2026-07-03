@@ -1,0 +1,830 @@
+[
+  {
+    "id": "gram_pronouns_001",
+    "questionText": "In Portugal, which pronoun is often considered blunt or slightly rude?",
+    "options": ["Tu", "Você", "O senhor", "A senhora"],
+    "correctAnswer": "Você",
+    "type": "multipleChoice",
+    "category": "pronouns",
+    "sourceItem": {
+      "portuguese": "Você",
+      "english": "You (semi-formal - often blunt in Portugal)"
+    }
+  },
+  {
+    "id": "gram_pronouns_002",
+    "questionText": "Which pronoun would you use to address an older person or stranger in Portugal?",
+    "options": ["Tu", "Você", "O senhor / A senhora", "Ele / Ela"],
+    "correctAnswer": "O senhor / A senhora",
+    "type": "multipleChoice",
+    "category": "pronouns",
+    "sourceItem": {
+      "portuguese": "O senhor / A senhora",
+      "english": "You (formal - older people, strangers)"
+    }
+  },
+  {
+    "id": "gram_pronouns_003",
+    "questionText": "Which pronoun is used for friends, family, and colleagues of similar age in Portugal?",
+    "options": ["Você", "Tu", "O senhor", "Nós"],
+    "correctAnswer": "Tu",
+    "type": "multipleChoice",
+    "category": "pronouns",
+    "sourceItem": {
+      "portuguese": "Tu",
+      "english": "You (informal - friends, family)"
+    }
+  },
+  {
+    "id": "gram_pronouns_004",
+    "questionText": "In European Portuguese, which pronoun is rarely used formally for 'we'?",
+    "options": ["Nós", "A gente", "Eles", "Vocês"],
+    "correctAnswer": "A gente",
+    "type": "multipleChoice",
+    "category": "pronouns",
+    "sourceItem": {
+      "portuguese": "Nós",
+      "english": "We (pt-PT rarely uses 'a gente' formally)"
+    }
+  },
+  {
+    "id": "gram_continuous_001",
+    "questionText": "What is the correct structure for present continuous in European Portuguese?",
+    "options": ["Estar + -ando/-endo", "Estar + a + infinitive", "Ir + infinitive", "Estar + com + infinitive"],
+    "correctAnswer": "Estar + a + infinitive",
+    "type": "multipleChoice",
+    "category": "present_continuous",
+    "sourceItem": {
+      "portuguese": "Estou a comer",
+      "english": "I am eating (European Portuguese)"
+    }
+  },
+  {
+    "id": "gram_continuous_002",
+    "questionText": "How do you say 'She is working' in European Portuguese?",
+    "options": ["Ela está trabalhando", "Ela está a trabalhar", "Ela vai trabalhar", "Ela trabalha agora"],
+    "correctAnswer": "Ela está a trabalhar",
+    "type": "multipleChoice",
+    "category": "present_continuous",
+    "sourceItem": {
+      "portuguese": "Ela está a trabalhar",
+      "english": "She is working"
+    }
+  },
+  {
+    "id": "gram_continuous_003",
+    "questionText": "'Eu estou a falar' translates to:",
+    "options": ["I speak", "I spoke", "I am speaking", "I will speak"],
+    "correctAnswer": "I am speaking",
+    "type": "multipleChoice",
+    "category": "present_continuous",
+    "sourceItem": {
+      "portuguese": "Eu estou a falar",
+      "english": "I am speaking"
+    }
+  },
+  {
+    "id": "gram_regular_001",
+    "questionText": "What is the 'eu' (I) form of 'falar' (to speak) in present tense?",
+    "options": ["falo", "falas", "fala", "falamos"],
+    "correctAnswer": "falo",
+    "type": "multipleChoice",
+    "category": "regular_verbs",
+    "sourceItem": {
+      "portuguese": "Eu falo",
+      "english": "I speak"
+    }
+  },
+  {
+    "id": "gram_regular_002",
+    "questionText": "What is the 'tu' (you informal) form of 'comer' (to eat) in present tense?",
+    "options": ["comio", "comes", "comes", "comas"],
+    "correctAnswer": "comes",
+    "type": "multipleChoice",
+    "category": "regular_verbs",
+    "sourceItem": {
+      "portuguese": "Tu comes",
+      "english": "You eat (informal)"
+    }
+  },
+  {
+    "id": "gram_regular_003",
+    "questionText": "What is the 'eles' (they) form of 'partir' (to leave) in present tense?",
+    "options": ["partem", "partis", "partem", "partem"],
+    "correctAnswer": "partem",
+    "type": "multipleChoice",
+    "category": "regular_verbs",
+    "sourceItem": {
+      "portuguese": "Eles partem",
+      "english": "They leave"
+    }
+  },
+  {
+    "id": "gram_regular_004",
+    "questionText": "What is the 'nós' (we) form of 'falar' (to speak) in present tense?",
+    "options": ["falamos", "falam", "falamos", "falamos"],
+    "correctAnswer": "falamos",
+    "type": "multipleChoice",
+    "category": "regular_verbs",
+    "sourceItem": {
+      "portuguese": "Nós falamos",
+      "english": "We speak"
+    }
+  },
+  {
+    "id": "gram_regular_005",
+    "questionText": "What is the 'ele/ela' (he/she) form of 'comer' (to eat) in present tense?",
+    "options": ["comem", "come", "comem", "comem"],
+    "correctAnswer": "come",
+    "type": "multipleChoice",
+    "category": "regular_verbs",
+    "sourceItem": {
+      "portuguese": "Ele come",
+      "english": "He eats"
+    }
+  },
+  {
+    "id": "gram_pronoun_placement_001",
+    "questionText": "In Portugal, where do object pronouns normally attach to the verb?",
+    "options": ["Before the verb", "After the verb with a hyphen", "In the middle of the verb", "Pronouns are not used"],
+    "correctAnswer": "After the verb with a hyphen",
+    "type": "multipleChoice",
+    "category": "pronoun_placement",
+    "sourceItem": {
+      "portuguese": "Chamo-me João.",
+      "english": "I call myself João. (Enclisis - default in Portugal)"
+    }
+  },
+  {
+    "id": "gram_pronoun_placement_002",
+    "questionText": "Which sentence uses the correct pronoun placement (enclisis) for European Portuguese?",
+    "options": ["Não me chamo João.", "Chamo-me João.", "Eu chamo-me João.", "Como me chamas?"],
+    "correctAnswer": "Chamo-me João.",
+    "type": "multipleChoice",
+    "category": "pronoun_placement",
+    "sourceItem": {
+      "portuguese": "Chamo-me João.",
+      "english": "I call myself João. (Default enclisis)"
+    }
+  },
+  {
+    "id": "gram_pronoun_placement_003",
+    "questionText": "When does the pronoun jump BEFORE the verb (proclisis) in European Portuguese?",
+    "options": ["Always", "Never", "With negative words, question words, and certain adverbs", "Only with 'eu'"],
+    "correctAnswer": "With negative words, question words, and certain adverbs",
+    "type": "multipleChoice",
+    "category": "pronoun_placement",
+    "sourceItem": {
+      "portuguese": "Não me chamo João.",
+      "english": "My name is not João. (Proclisis after 'não')"
+    }
+  },
+  {
+    "id": "gram_pronoun_placement_004",
+    "questionText": "'Dá-me o livro' means:",
+    "options": ["Give me the book", "Give the book to you", "Give him the book", "Give us the book"],
+    "correctAnswer": "Give me the book",
+    "type": "multipleChoice",
+    "category": "pronoun_placement",
+    "sourceItem": {
+      "portuguese": "Dá-me o livro.",
+      "english": "Give me the book. (Enclisis - default in Portugal)"
+    }
+  },
+  {
+    "id": "gram_pronoun_placement_005",
+    "questionText": "Choose the correct form: '___ me disseste.' (You already told me)",
+    "options": ["Já", "Não", "O", "A"],
+    "correctAnswer": "Já",
+    "type": "multipleChoice",
+    "category": "pronoun_placement",
+    "sourceItem": {
+      "portuguese": "Já me disseste.",
+      "english": "You already told me. (Proclisis after 'já')"
+    }
+  },
+  {
+    "id": "gram_contractions_001",
+    "questionText": "What is the contraction of 'de + o' (of/from + the masculine)?",
+    "options": ["no", "do", "ao", "pelo"],
+    "correctAnswer": "do",
+    "type": "multipleChoice",
+    "category": "preposition_contractions",
+    "sourceItem": {
+      "portuguese": "O livro do João",
+      "english": "João's book (de + o = do)"
+    }
+  },
+  {
+    "id": "gram_contractions_002",
+    "questionText": "What is the contraction of 'em + a' (in/on/at + the feminine)?",
+    "options": ["na", "no", "à", "pela"],
+    "correctAnswer": "na",
+    "type": "multipleChoice",
+    "category": "preposition_contractions",
+    "sourceItem": {
+      "portuguese": "Moro na cidade",
+      "english": "I live in the city (em + a = na)"
+    }
+  },
+  {
+    "id": "gram_contractions_003",
+    "questionText": "What is the contraction of 'a + o' (to + the masculine)?",
+    "options": ["na", "da", "ao", "pelo"],
+    "correctAnswer": "ao",
+    "type": "multipleChoice",
+    "category": "preposition_contractions",
+    "sourceItem": {
+      "portuguese": "Vou ao mercado",
+      "english": "I go to the market (a + o = ao)"
+    }
+  },
+  {
+    "id": "gram_contractions_004",
+    "questionText": "What is the contraction of 'de + a' (of/from + the feminine)?",
+    "options": ["no", "da", "ao", "pela"],
+    "correctAnswer": "da",
+    "type": "multipleChoice",
+    "category": "preposition_contractions",
+    "sourceItem": {
+      "portuguese": "A casa da mãe",
+      "english": "The mother's house (de + a = da)"
+    }
+  },
+  {
+    "id": "gram_contractions_005",
+    "questionText": "What is the contraction of 'por + a' (by/for + the feminine)?",
+    "options": ["pelo", "pela", "na", "à"],
+    "correctAnswer": "pela",
+    "type": "multipleChoice",
+    "category": "preposition_contractions",
+    "sourceItem": {
+      "portuguese": "Vou pela praia",
+      "english": "I go by the beach (por + a = pela)"
+    }
+  },
+  {
+    "id": "gram_contractions_006",
+    "questionText": "'Moro ___ cidade' (I live in the city). Which contraction fills the blank?",
+    "options": ["no", "na", "ao", "à"],
+    "correctAnswer": "na",
+    "type": "multipleChoice",
+    "category": "preposition_contractions",
+    "sourceItem": {
+      "portuguese": "Moro na cidade",
+      "english": "I live in the city (em + a = na)"
+    }
+  },
+  {
+    "id": "gram_gender_001",
+    "questionText": "Words ending in '-o' are usually what gender in Portuguese?",
+    "options": ["Feminine", "Masculine", "Neutral", "Plural"],
+    "correctAnswer": "Masculine",
+    "type": "multipleChoice",
+    "category": "gender_plural",
+    "sourceItem": {
+      "portuguese": "um homem",
+      "english": "a man (masculine, ends in -m but follows -o pattern)"
+    }
+  },
+  {
+    "id": "gram_gender_002",
+    "questionText": "Words ending in '-ção' or '-dade' are usually what gender in Portuguese?",
+    "options": ["Masculine", "Feminine", "Neutral", "Plural"],
+    "correctAnswer": "Feminine",
+    "type": "multipleChoice",
+    "category": "gender_plural",
+    "sourceItem": {
+      "portuguese": "a cidade",
+      "english": "the city (feminine, ends in -dade)"
+    }
+  },
+  {
+    "id": "gram_gender_003",
+    "questionText": "How do you form the plural of a word ending in a vowel in Portuguese?",
+    "options": ["Add -ões", "Add -s", "Add -ns", "Add -es"],
+    "correctAnswer": "Add -s",
+    "type": "multipleChoice",
+    "category": "gender_plural",
+    "sourceItem": {
+      "portuguese": "um livro -> livros",
+      "english": "a book -> books (add -s)"
+    }
+  },
+  {
+    "id": "gram_gender_004",
+    "questionText": "How do you form the plural of a word ending in '-m' in Portuguese?",
+    "options": ["Add -s", "Add -es", "Change -m to -ns", "Add -ões"],
+    "correctAnswer": "Change -m to -ns",
+    "type": "multipleChoice",
+    "category": "gender_plural",
+    "sourceItem": {
+      "portuguese": "um homem -> uns homens",
+      "english": "a man -> men (-m becomes -ns)"
+    }
+  },
+  {
+    "id": "gram_irregular_present_001",
+    "questionText": "What is the 'eu' form of 'ser' (to be - permanent)?",
+    "options": ["estou", "sou", "tenho", "vou"],
+    "correctAnswer": "sou",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Eu sou de Portugal.",
+      "english": "I am from Portugal. (ser - permanent/identity)"
+    }
+  },
+  {
+    "id": "gram_irregular_present_002",
+    "questionText": "What is the 'eles' (they) form of 'ter' (to have)?",
+    "options": ["tem", "têm", "tenho", "tens"],
+    "correctAnswer": "têm",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Eles têm",
+      "english": "They have (circumflex on plural 'têm')"
+    }
+  },
+  {
+    "id": "gram_irregular_present_003",
+    "questionText": "What is the 'eu' form of 'ir' (to go)?",
+    "options": ["vou", "vou", "vai", "vamos"],
+    "correctAnswer": "vou",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Eu vou a casa.",
+      "english": "I go home."
+    }
+  },
+  {
+    "id": "gram_irregular_present_004",
+    "questionText": "What is the 'eu' form of 'fazer' (to do/make)?",
+    "options": ["fazo", "faço", "fazes", "faz"],
+    "correctAnswer": "faço",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Eu faço o jantar.",
+      "english": "I make dinner."
+    }
+  },
+  {
+    "id": "gram_irregular_present_005",
+    "questionText": "What is the 'tu' form of 'ser' (to be - permanent)?",
+    "options": ["és", "es", "é", "somos"],
+    "correctAnswer": "és",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Tu és",
+      "english": "You are (informal, permanent)"
+    }
+  },
+  {
+    "id": "gram_irregular_present_006",
+    "questionText": "'Tenho 40 anos' means:",
+    "options": ["I have 40 books", "I am 40 years old", "I need 40 things", "I want 40 years"],
+    "correctAnswer": "I am 40 years old",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Tenho 40 anos.",
+      "english": "I am 40 years old (ter for age in Portuguese)"
+    }
+  },
+  {
+    "id": "gram_irregular_present_007",
+    "questionText": "What is the difference between 'ser' and 'estar' (both 'to be')?",
+    "options": ["No difference", "Ser = temporary, Estar = permanent", "Ser = permanent/identity, Estar = temporary/state", "Ser = location, Estar = identity"],
+    "correctAnswer": "Ser = permanent/identity, Estar = temporary/state",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Ser (permanent) vs Estar (temporary)",
+      "english": "Ser = origin, profession, traits. Estar = location, emotions, weather."
+    }
+  },
+  {
+    "id": "gram_irregular_present_008",
+    "questionText": "'Tenho de ir ao supermercado' means:",
+    "options": ["I have a supermarket", "I have to go to the supermarket", "I want to go to the supermarket", "I can go to the supermarket"],
+    "correctAnswer": "I have to go to the supermarket",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Tenho de ir ao supermercado.",
+      "english": "I have to go to the supermarket (ter de = have to in Portugal)"
+    }
+  },
+  {
+    "id": "gram_irregular_present_009",
+    "questionText": "'Vou cozinhar' uses 'ir' + infinitive. What does it mean?",
+    "options": ["I went to cook", "I am going to cook", "I cook", "I like to cook"],
+    "correctAnswer": "I am going to cook",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Vou cozinhar.",
+      "english": "I am going to cook (near future: ir + infinitive)"
+    }
+  },
+  {
+    "id": "gram_irregular_present_010",
+    "questionText": "What is the 'nós' (we) form of 'ser' (to be - permanent)?",
+    "options": ["somos", "somos", "são", "é"],
+    "correctAnswer": "somos",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Nós somos",
+      "english": "We are (permanent)"
+    }
+  },
+  {
+    "id": "gram_irregular_present_011",
+    "questionText": "What is the 'eles' (they) form of 'ser' (to be - permanent)?",
+    "options": ["são", "são", "são", "são"],
+    "correctAnswer": "são",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Eles são",
+      "english": "They are (permanent)"
+    }
+  },
+  {
+    "id": "gram_irregular_present_012",
+    "questionText": "What is the 'eu' form of 'estar' (to be - temporary)?",
+    "options": ["sou", "estou", "tenho", "estamos"],
+    "correctAnswer": "estou",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Estou cansado.",
+      "english": "I am tired. (estar - temporary state)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_001",
+    "questionText": "What is the 'eu' form of 'ser/ir' (to be/to go) in the simple past?",
+    "options": ["fui", "foste", "foi", "fomos"],
+    "correctAnswer": "fui",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Fui a Lisboa ontem.",
+      "english": "I went to Lisbon yesterday. (ir - past)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_002",
+    "questionText": "What is the 'tu' form of 'estar' (to be - temporary) in the simple past?",
+    "options": ["estive", "estiveste", "esteve", "estivemos"],
+    "correctAnswer": "estiveste",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Onde é que estiveste?",
+      "english": "Where were you? (estar - past, tu form)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_003",
+    "questionText": "What is the 'ele/ela' form of 'ter' (to have) in the simple past?",
+    "options": ["tive", "tiveste", "teve", "tiveram"],
+    "correctAnswer": "teve",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Ontem o meu filho teve febre.",
+      "english": "Yesterday my son had a fever. (ter - past, ele form)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_004",
+    "questionText": "What is the 'nós' (we) form of 'fazer' (to do/make) in the simple past?",
+    "options": ["fiz", "fizeste", "fez", "fizemos"],
+    "correctAnswer": "fizemos",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Nós fizemos",
+      "english": "We did/made (fazer - past, nós form)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_005",
+    "questionText": "What is the 'eles' (they) form of 'ser/ir' (to be/to go) in the simple past?",
+    "options": ["fui", "foste", "foi", "foram"],
+    "correctAnswer": "foram",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Eles foram a Lisboa.",
+      "english": "They went to Lisbon. (ir - past, eles form)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_006",
+    "questionText": "What is the 'eu' form of 'fazer' (to do/make) in the simple past?",
+    "options": ["faz", "fazes", "fiz", "fez"],
+    "correctAnswer": "fiz",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "O que é que fizeste?",
+      "english": "What did you do? (fazer - past context)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_007",
+    "questionText": "What is the 'nós' form of 'ser/ir' in the simple past?",
+    "options": ["fomos", "fomos", "foram", "somos"],
+    "correctAnswer": "fomos",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Nós fomos",
+      "english": "We went / We were (ser/ir share past conjugations)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_008",
+    "questionText": "What is the 'eles' (they) form of 'estar' (to be - temporary) in the simple past?",
+    "options": ["esteve", "estiveram", "estiveram", "estivemos"],
+    "correctAnswer": "estiveram",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Eles estiveram",
+      "english": "They were (estar - past, eles form)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_009",
+    "questionText": "What is the 'eles' (they) form of 'ter' (to have) in the simple past?",
+    "options": ["teve", "tiveram", "tiveram", "tivemos"],
+    "correctAnswer": "tiveram",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Eles tiveram",
+      "english": "They had (ter - past, eles form)"
+    }
+  },
+  {
+    "id": "gram_irregular_past_010",
+    "questionText": "In the simple past, which two verbs share the exact same conjugations?",
+    "options": ["ter and fazer", "ser and ir", "estar and ter", "fazer and ir"],
+    "correctAnswer": "ser and ir",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Ser/Ir past tense",
+      "english": "Ser and Ir share the same conjugations. Context determines meaning."
+    }
+  },
+  {
+    "id": "gram_mixed_001",
+    "questionText": "'Faz sol' means:",
+    "options": ["It's cold", "It's sunny", "It's raining", "It's windy"],
+    "correctAnswer": "It's sunny",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Faz sol.",
+      "english": "It's sunny. (fazer for weather)"
+    }
+  },
+  {
+    "id": "gram_mixed_002",
+    "questionText": "'Faz dois anos que moro aqui' means:",
+    "options": ["It's two years since I lived here", "It's been two years that I live here", "I moved here two years ago", "I will live here for two years"],
+    "correctAnswer": "It's been two years that I live here",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Faz dois anos que moro aqui.",
+      "english": "It's been two years that I live here. (fazer for time)"
+    }
+  },
+  {
+    "id": "gram_mixed_003",
+    "questionText": "What does 'O jantar foi excelente' use 'foi' for?",
+    "options": ["He went to dinner", "The dinner was excellent", "He is going to dinner", "The dinner will be excellent"],
+    "correctAnswer": "The dinner was excellent",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "O jantar foi excelente.",
+      "english": "The dinner was excellent. (foi = ser - past)"
+    }
+  },
+  {
+    "id": "gram_mixed_004",
+    "questionText": "What is the contraction 'à' made from?",
+    "options": ["de + a", "em + a", "a + a", "por + a"],
+    "correctAnswer": "a + a",
+    "type": "multipleChoice",
+    "category": "preposition_contractions",
+    "sourceItem": {
+      "portuguese": "Vou à escola.",
+      "english": "I go to school (a + a = à)"
+    }
+  },
+  {
+    "id": "gram_mixed_005",
+    "questionText": "'Como te chamas?' uses proclisis because of:",
+    "options": ["A negative word", "A question word", "An adverb", "A conjunction"],
+    "correctAnswer": "A question word",
+    "type": "multipleChoice",
+    "category": "pronoun_placement",
+    "sourceItem": {
+      "portuguese": "Como te chamas?",
+      "english": "What is your name? (Proclisis after question word 'como')"
+    }
+  },
+  {
+    "id": "gram_mixed_006",
+    "questionText": "What is the 'tu' form of 'ir' (to go) in present tense?",
+    "options": ["vou", "vais", "vai", "vamos"],
+    "correctAnswer": "vais",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Tu vais",
+      "english": "You go (ir - present, tu form)"
+    }
+  },
+  {
+    "id": "gram_mixed_007",
+    "questionText": "What is the 'ele/ela' form of 'estar' (to be - temporary) in present tense?",
+    "options": ["estou", "estás", "está", "estão"],
+    "correctAnswer": "está",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Ela está",
+      "english": "She is (estar - present, ela form)"
+    }
+  },
+  {
+    "id": "gram_mixed_008",
+    "questionText": "What is the 'nós' form of 'estarm' (to be - temporary) in present tense?",
+    "options": ["estamos", "estamos", "estamos", "estamos"],
+    "correctAnswer": "estamos",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Nós estamos a comer",
+      "english": "We are eating (estar - present, nós form)"
+    }
+  },
+  {
+    "id": "gram_mixed_009",
+    "questionText": "What is the 'nós' form of 'ter' (to have) in present tense?",
+    "options": ["tenho", "tens", "tem", "temos"],
+    "correctAnswer": "temos",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Nós temos",
+      "english": "We have (ter - present, nós form)"
+    }
+  },
+  {
+    "id": "gram_mixed_010",
+    "questionText": "What is the 'nós' form of 'ir' (to go) in present tense?",
+    "options": ["vamos", "vamos", "vão", "vais"],
+    "correctAnswer": "vamos",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Nós vamos",
+      "english": "We go (ir - present, nós form)"
+    }
+  },
+  {
+    "id": "gram_mixed_011",
+    "questionText": "What is the 'nós' form of 'fazer' (to do/make) in present tense?",
+    "options": ["faço", "fazemos", "faz", "fazem"],
+    "correctAnswer": "fazemos",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Nós fazemos",
+      "english": "We do/make (fazer - present, nós form)"
+    }
+  },
+  {
+    "id": "gram_mixed_012",
+    "questionText": "What is the 'nós' form of 'estar' (to be - temporary) in present tense?",
+    "options": ["estamos", "estamos", "estamos", "estamos"],
+    "correctAnswer": "estamos",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Nós estamos",
+      "english": "We are (estar - present, nós form)"
+    }
+  },
+  {
+    "id": "gram_mixed_013",
+    "questionText": "What is the 'eles' form of 'fazer' (to do/make) in present tense?",
+    "options": ["faço", "fazem", "fazem", "fazem"],
+    "correctAnswer": "fazem",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Eles fazem",
+      "english": "They do/make (fazer - present, eles form)"
+    }
+  },
+  {
+    "id": "gram_mixed_014",
+    "questionText": "What is the 'eles' form of 'ir' (to go) in present tense?",
+    "options": ["vamos", "vão", "vão", "vão"],
+    "correctAnswer": "vão",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Eles vão",
+      "english": "They go (ir - present, eles form)"
+    }
+  },
+  {
+    "id": "gram_mixed_015",
+    "questionText": "What is the 'eles' form of 'estar' (to be - temporary) in present tense?",
+    "options": ["estamos", "estão", "estão", "estão"],
+    "correctAnswer": "estão",
+    "type": "multipleChoice",
+    "category": "irregular_present",
+    "sourceItem": {
+      "portuguese": "Eles estão",
+      "english": "They are (estar - present, eles form)"
+    }
+  },
+  {
+    "id": "gram_mixed_016",
+    "questionText": "What is the 'nós' form of 'ter' (to have) in the simple past?",
+    "options": ["tive", "tivemos", "tivemos", "tiveram"],
+    "correctAnswer": "tivemos",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Nós tivemos",
+      "english": "We had (ter - past, nós form)"
+    }
+  },
+  {
+    "id": "gram_mixed_017",
+    "questionText": "What is the 'nós' form of 'estar' (to be - temporary) in the simple past?",
+    "options": ["estive", "estivemos", "estivemos", "estiveram"],
+    "correctAnswer": "estivemos",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Nós estivemos",
+      "english": "We were (estar - past, nós form)"
+    }
+  },
+  {
+    "id": "gram_mixed_018",
+    "questionText": "What is the 'nós' form of 'fazer' (to do/make) in the simple past?",
+    "options": ["fiz", "fizemos", "fez", "fizemos"],
+    "correctAnswer": "fizemos",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Nós fizemos",
+      "english": "We did/made (fazer - past, nós form)"
+    }
+  },
+  {
+    "id": "gram_mixed_019",
+    "questionText": "What is the 'tu' form of 'ter' (to have) in the simple past?",
+    "options": ["tive", "tiveste", "teve", "tivemos"],
+    "correctAnswer": "tiveste",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Tu tiveste",
+      "english": "You had (ter - past, tu form). Note: 'e' is silent in Portugal."
+    }
+  },
+  {
+    "id": "gram_mixed_020",
+    "questionText": "What is the 'tu' form of 'fazer' (to do/make) in the simple past?",
+    "options": ["fiz", "fizeste", "fez", "fizemos"],
+    "correctAnswer": "fizeste",
+    "type": "multipleChoice",
+    "category": "irregular_past",
+    "sourceItem": {
+      "portuguese": "Tu fizeste",
+      "english": "You did/made (fazer - past, tu form). Sibilant 's' in Portugal."
+    }
+  }
+]

@@ -412,6 +412,107 @@ class QuizEngineService {
     return questions;
   }
 
+  /// Generates a grammar rules quiz from grammar_rules.json.
+  /// Questions are multiple-choice about European Portuguese grammar rules.
+  Future<List<Question>> generateGrammarQuiz({
+    int count = 20,
+    String? category,
+    List<String>? seenIds,
+  }) async {
+    // 1. Load data
+    final String content = await rootBundle.loadString(
+      'assets/data/grammar_rules.json',
+    );
+    final List<dynamic> jsonList = jsonDecode(content);
+
+    // 2. Parse all entries
+    final List<Map<String, dynamic>> allEntries = jsonList.map((e) {
+      return {
+        'id': (e['id'] ?? '').toString(),
+        'questionText': (e['questionText'] ?? '').toString(),
+        'correctAnswer': (e['correctAnswer'] ?? '').toString(),
+        'category': (e['category'] ?? '').toString(),
+        'sourcePortuguese': (e['sourceItem'] as Map?)?['portuguese']?.toString() ?? '',
+        'sourceEnglish': (e['sourceItem'] as Map?)?['english']?.toString() ?? '',
+      };
+    }).toList();
+
+    // 3. Filter by category if specified
+    final filtered = category != null
+        ? allEntries.where((e) => e['category'] == category).toList()
+        : List<Map<String, String>>.from(allEntries);
+
+    if (filtered.isEmpty) return [];
+
+    // 4. Prioritize unseen
+    final unseen = <Map<String, dynamic>>[];
+    final seen = <Map<String, dynamic>>[];
+
+    for (var entry in filtered) {
+      final qId = entry['id']!;
+      if (seenIds != null && seenIds.contains(qId)) {
+        seen.add(entry);
+      } else {
+        unseen.add(entry);
+      }
+    }
+
+    unseen.shuffle(_random);
+    seen.shuffle(_random);
+
+    final selection = [...unseen, ...seen].take(count).toList();
+
+    // 5. Build questions
+    final List<Question> questions = [];
+    for (var entry in selection) {
+      final questionText = entry['questionText']!;
+      final correctAnswer = entry['correctAnswer']!;
+      final category = entry['category']!;
+      final qId = entry['id']!;
+
+      // Parse options from the JSON
+      final rawOptions = jsonList.firstWhere(
+        (e) => e['id'] == qId,
+        orElse: () => <String, dynamic>{},
+      )['options'] as List<dynamic>?;
+
+      final List<String> options = rawOptions?.map((o) => o.toString()).toList() ?? [];
+
+      // If options not found in JSON, generate from all entries with same question
+      if (options.isEmpty || options.length < 2) {
+        // This shouldn't happen with proper data, but fallback
+        options.addAll([correctAnswer, 'Unknown', 'Unknown']);
+      }
+
+      // Ensure correct answer is in options
+      if (!options.contains(correctAnswer)) {
+        options.insert(0, correctAnswer);
+      }
+
+      // Shuffle options
+      options.shuffle(_random);
+
+      final sourcePortuguese = entry['sourcePortuguese'] ?? questionText;
+      final sourceEnglish = entry['sourceEnglish'] ?? correctAnswer;
+
+      questions.add(Question(
+        id: qId,
+        questionText: questionText,
+        options: options,
+        correctAnswer: correctAnswer,
+        type: QuestionType.multipleChoice,
+        sourceItem: LanguageItem(
+          id: qId,
+          portuguese: sourcePortuguese,
+          english: sourceEnglish,
+        ),
+        category: category,
+      ));
+    }
+
+    return questions;
+  }
+
   /// Generates a set of multiple-choice verb conjugation questions.
   List<Question> generateVerbConjugationQuestions({
     required List<Verb> verbs,

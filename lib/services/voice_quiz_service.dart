@@ -137,9 +137,12 @@ class VoiceQuizService {
           complete(_lastRecognizedWords);
         }
       },
-      localeId: localeId, // Dynamic locale
-      listenFor: duration,
-      pauseFor: const Duration(seconds: 3),
+      listenOptions: SpeechListenOptions(
+        localeId: localeId, // Dynamic locale
+        listenFor: duration,
+        pauseFor: const Duration(seconds: 3),
+        listenMode: ListenMode.confirmation,
+      ),
       onSoundLevelChange: (level) {
         _soundLevelController.add(level);
       },

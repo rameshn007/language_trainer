@@ -1,0 +1,110 @@
+[
+  {
+    "category": "Grammar",
+    "correctAnswer": "Eu estou a comer",
+    "id": "gp_rule_1",
+    "options": [
+      "Eu estou comendo",
+      "Eu estou a comer",
+      "Eu a de comer",
+      "Eu fico comendo"
+    ],
+    "questionText": "How do you say 'I am eating' in European Portuguese?",
+    "sourceItem": {
+      "english": "I am eating",
+      "id": "gp_src_1",
+      "portuguese": "Eu estou a comer"
+    },
+    "type": "multiple_choice"
+  },
+  {
+    "category": "Grammar",
+    "correctAnswer": "Estar + a + Infinitive",
+    "id": "gp_rule_2",
+    "options": [
+      "Estar + Gerundio",
+      "Estar + Infinitive",
+      "Estar + a + Infinitive",
+      "Ir + Infinitive"
+    ],
+    "questionText": "What is the standard structure for the present continuous in Portugal?",
+    "sourceItem": {
+      "english": "Estar a + Infinitive",
+      "id": "gp_src_2",
+      "portuguese": "Estar a + Infinitive"
+    },
+    "type": "multiple_choice"
+  },
+  {
+    "category": "Grammar",
+    "correctAnswer": "Você",
+    "id": "gp_rule_3",
+    "options": [
+      "Tu",
+      "Nós",
+      "Você",
+      "O senhor"
+    ],
+    "questionText": "Which pronoun is often considered blunt or slightly rude in Portugal?",
+    "sourceItem": {
+      "english": "You (semi-formal)",
+      "id": "gp_src_3",
+      "portuguese": "Você"
+    },
+    "type": "multiple_choice"
+  },
+  {
+    "category": "Grammar",
+    "correctAnswer": "At the end of the verb with a hyphen (Enclisis)",
+    "id": "gp_rule_4",
+    "options": [
+      "Before the verb (Proclisis)",
+      "At the end of the verb with a hyphen (Enclisis)",
+      "Only in negative sentences",
+      "Never after the verb"
+    ],
+    "questionText": "Where are object pronouns usually placed by default in European Portuguese?",
+    "sourceItem": {
+      "english": "Enclisis",
+      "id": "gp_src_4",
+      "portuguese": "Enclisis"
+    },
+    "type": "multiple_choice"
+  },
+  {
+    "category": "Grammar",
+    "correctAnswer": "do",
+    "id": "gp_rule_5",
+    "options": [
+      "da",
+      "no",
+      "do",
+      "pelo"
+    ],
+    "questionText": "What is the contraction of 'De' (of/from) + 'o' (the - masc)?",
+    "sourceItem": {
+      "english": "of the",
+      "id": "gp_src_5",
+      "portuguese": "do"
+    },
+    "type": "multiple_choice"
+  },
+  {
+    "category": "Grammar",
+    "correctAnswer": "Ter de",
+    "id": "gp_rule_6",
+    "options": [
+      "Ter que",
+      "Ter de",
+      "Dever a",
+      "Ir para"
+    ],
+    "questionText": "In Portugal, which phrase is used for 'to have to'?",
+    "sourceItem": {
+      "english": "To have to",
+      "id": "gp_src_6",
+      "portuguese": "Ter de"
+    },
+    "type": "multiple_choice"
+  }
+]

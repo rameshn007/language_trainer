@@ -24,6 +24,7 @@ import '../services/verb_service.dart';
 import '../models/language_item.dart';
 import 'exercise/exercise_screen.dart';
 import 'quiz/interrogative_quiz_screen.dart';
+import 'quiz/grammar_quiz_screen.dart';
 import 'quiz/preposition_quiz_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -508,6 +509,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     onPressed: (offset) {
                                       _pushScreen(
                                         const PrepositionQuizScreen(),
+                                        offset,
+                                      );
+                                    },
+                                  ),
+                                  _buildGridButton(
+                                    context: context,
+                                    label: 'Grammar Rules',
+                                    icon: Icons.menu_book_rounded,
+                                    bgColor: Colors.blue.shade700,
+                                    fgColor: Colors.white,
+                                    onPressed: (offset) {
+                                      _pushScreen(
+                                        const GrammarQuizScreen(),
                                         offset,
                                       );
                                     },
