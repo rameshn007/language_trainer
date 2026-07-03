@@ -620,6 +620,7 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
   Widget build(BuildContext context) {
     final isCorrect = widget.isCorrect;
     final wrongAnswers = widget.wrongAnswers;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (widget.question.type == QuestionType.reorderAndConjugate) {
       return _buildReorderAndConjugateBody(context, isCorrect);
@@ -680,20 +681,26 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                      widget.question.type == QuestionType.cloze || 
                      (isPrepositionFill && isCorrect))
                         ? LongPressWordText(
-                            text: ((isPrepositionFill || widget.question.type == QuestionType.cloze) && isCorrect) 
-                                ? widget.question.sourceItem.portuguese 
+                            text: ((isPrepositionFill || widget.question.type == QuestionType.cloze) && isCorrect)
+                                ? widget.question.sourceItem.portuguese
                                 : widget.question.questionText,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
+                              color: isDark
+                                  ? Theme.of(context).colorScheme.onSurface
+                                  : Colors.black87,
                             ),
                             textAlign: TextAlign.center,
                           )
                         : Text(
                             widget.question.questionText,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
+                              color: isDark
+                                  ? Theme.of(context).colorScheme.onSurface
+                                  : Colors.black87,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -936,9 +943,13 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                           child: LongPressWordText(
                             text: displayText,
                             style: TextStyle(
-                              fontSize: 22, 
+                              fontSize: 22,
                               fontWeight: FontWeight.bold,
-                              color: isCorrect && isAnswerFeedback ? Colors.green.shade400 : null,
+                              color: isCorrect && isAnswerFeedback
+                                  ? Colors.green.shade400
+                                  : isDark
+                                      ? Theme.of(context).colorScheme.onSurface
+                                      : Colors.black87,
                             ),
                             textAlign: TextAlign.center,
                           ),

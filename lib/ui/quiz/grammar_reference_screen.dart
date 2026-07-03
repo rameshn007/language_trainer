@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:animate_do/animate_do.dart';
 import '../../main.dart';
 
 class GrammarReferenceScreen extends ConsumerWidget {
@@ -20,44 +19,21 @@ class GrammarReferenceScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            FadeInDown(
-              child: _PronounsSection(ttsService: ttsService),
-            ),
+            _PronounsSection(ttsService: ttsService),
             const SizedBox(height: 24),
-            FadeInUp(
-              delay: const Duration(milliseconds: 100),
-              child: _PresentContinuousSection(ttsService: ttsService),
-            ),
+            _PresentContinuousSection(ttsService: ttsService),
             const SizedBox(height: 24),
-            FadeInUp(
-              delay: const Duration(milliseconds: 200),
-              child: _RegularVerbsSection(ttsService: ttsService),
-            ),
+            _RegularVerbsSection(ttsService: ttsService),
             const SizedBox(height: 24),
-            FadeInUp(
-              delay: const Duration(milliseconds: 300),
-              child: _PronounPlacementSection(ttsService: ttsService),
-            ),
+            _PronounPlacementSection(ttsService: ttsService),
             const SizedBox(height: 24),
-            FadeInUp(
-              delay: const Duration(milliseconds: 400),
-              child: _ContractionsSection(ttsService: ttsService),
-            ),
+            _ContractionsSection(ttsService: ttsService),
             const SizedBox(height: 24),
-            FadeInUp(
-              delay: const Duration(milliseconds: 500),
-              child: _GenderPluralSection(ttsService: ttsService),
-            ),
+            _GenderPluralSection(ttsService: ttsService),
             const SizedBox(height: 24),
-            FadeInUp(
-              delay: const Duration(milliseconds: 600),
-              child: _IrregularPresentSection(ttsService: ttsService),
-            ),
+            _IrregularPresentSection(ttsService: ttsService),
             const SizedBox(height: 24),
-            FadeInUp(
-              delay: const Duration(milliseconds: 700),
-              child: _IrregularPastSection(ttsService: ttsService),
-            ),
+            _IrregularPastSection(ttsService: ttsService),
           ],
         ),
       ),
@@ -486,14 +462,19 @@ class _PronounPlacementSection extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          InkWell(
-            onTap: () => ttsService.speak(example, language: 'pt'),
-            child: Row(
-              children: [
-                Icon(Icons.volume_up, size: 14, color: Colors.red.withValues(alpha: 0.4)),
-                const SizedBox(width: 4),
-                Expanded(child: Text(example, style: const TextStyle(fontSize: 13))),
-              ],
+          Flexible(
+            child: InkWell(
+              onTap: () => ttsService.speak(example, language: 'pt'),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.volume_up, size: 14, color: Colors.red.withValues(alpha: 0.4)),
+                  const SizedBox(width: 4),
+                  Flexible(
+                    child: Text(example, style: const TextStyle(fontSize: 13)),
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -608,14 +589,19 @@ class _ContractionsSection extends StatelessWidget {
             style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.teal),
           ),
           const SizedBox(width: 12),
-          InkWell(
-            onTap: () => ttsService.speak(example, language: 'pt'),
-            child: Row(
-              children: [
-                Icon(Icons.volume_up, size: 14, color: Colors.teal.withValues(alpha: 0.4)),
-                const SizedBox(width: 4),
-                Expanded(child: Text(example, style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.outline))),
-              ],
+          Flexible(
+            child: InkWell(
+              onTap: () => ttsService.speak(example, language: 'pt'),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.volume_up, size: 14, color: Colors.teal.withValues(alpha: 0.4)),
+                  const SizedBox(width: 4),
+                  Flexible(
+                    child: Text(example, style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.outline)),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

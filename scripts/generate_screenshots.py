@@ -24,9 +24,7 @@ def resize_screenshots():
         print(f"📁 Created {raw_dir}. Please place your high-res screenshots there.")
         return
 
-    # Find all PNG files (case-insensitive)
-    screenshots = [os.path.join(raw_dir, f) for f in os.listdir(raw_dir) 
-                   if f.lower().endswith('.png')]
+    screenshots = glob.glob(os.path.join(raw_dir, "*.png"))
     if not screenshots:
         print(f"⚠️ No PNG files found in {raw_dir}. Please add some screenshots first.")
         return
