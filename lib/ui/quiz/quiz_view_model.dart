@@ -209,6 +209,19 @@ class QuizViewModel extends Notifier<QuizState> {
     );
     state = QuizState(questions: questions);
   }
+
+  Future<void> startGrammarQuiz({int count = 20, String? category}) async {
+    _sessionStartTime = DateTime.now();
+    final storage = ref.read(storageServiceProvider);
+    final seenIds = storage.getSeenQuestionIds();
+    final questions = await _engine.generateGrammarQuiz(
+      count: count,
+      category: category,
+      seenIds: seenIds.toList(),
+    );
+    state = QuizState(questions: questions);
+  }
+
   Future<List<Question>> _generateLuckyBatch({int count = 80, bool isRetry = false}) async {
     final storage = ref.read(storageServiceProvider);
     final items = storage.getAllItems();
@@ -295,6 +308,20 @@ class QuizViewModel extends Notifier<QuizState> {
     );
   }
 
+  bool _isGrammarCategory(String category) {
+    const grammarCategories = [
+      'pronouns',
+      'present_continuous',
+      'regular_verbs',
+      'pronoun_placement',
+      'preposition_contractions',
+      'gender_plural',
+      'irregular_present',
+      'irregular_past',
+    ];
+    return grammarCategories.contains(category);
+  }
+
   Future<void> finishSession() async {
     if (state.isFinished) return;
 
@@ -312,6 +339,8 @@ class QuizViewModel extends Notifier<QuizState> {
         activityType = ActivityType.interrogativeQuiz;
       } else if (firstType == QuestionType.prepositionFill) {
         activityType = ActivityType.prepositionQuiz;
+      } else if (firstType == QuestionType.multipleChoice && state.questions.isNotEmpty && state.questions.first.category != null && _isGrammarCategory(state.questions.first.category!)) {
+        activityType = ActivityType.grammarQuiz;
       }
     }
 

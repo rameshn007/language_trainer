@@ -545,6 +545,8 @@ class _SessionTile extends StatelessWidget {
         return 'Sentence Builder';
       case ActivityType.prepositionQuiz:
         return 'Prepositions';
+      case ActivityType.grammarQuiz:
+        return 'Grammar Rules';
     }
   }
 
@@ -566,6 +568,8 @@ class _SessionTile extends StatelessWidget {
         return Icons.reorder_rounded;
       case ActivityType.prepositionQuiz:
         return Icons.link_rounded;
+      case ActivityType.grammarQuiz:
+        return Icons.menu_book_rounded;
     }
   }
 

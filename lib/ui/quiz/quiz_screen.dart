@@ -18,6 +18,7 @@ class QuizScreen extends ConsumerStatefulWidget {
   final bool isInterrogativeQuiz;
   final String? interrogativeCategory;
   final bool isPrepositionQuiz;
+  final bool isGrammarQuiz;
   final bool isLuckyQuiz;
   const QuizScreen({
     super.key,
@@ -26,6 +27,7 @@ class QuizScreen extends ConsumerStatefulWidget {
     this.isInterrogativeQuiz = false,
     this.interrogativeCategory,
     this.isPrepositionQuiz = false,
+    this.isGrammarQuiz = false,
     this.isLuckyQuiz = false,
   });
 
@@ -54,6 +56,10 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         await ref.read(quizViewModelProvider.notifier).startVocabularyQuiz();
       } else if (widget.isPrepositionQuiz) {
         await ref.read(quizViewModelProvider.notifier).startPrepositionQuiz(
+          category: widget.category,
+        );
+      } else if (widget.isGrammarQuiz) {
+        await ref.read(quizViewModelProvider.notifier).startGrammarQuiz(
           category: widget.category,
         );
       } else if (widget.isLuckyQuiz) {
