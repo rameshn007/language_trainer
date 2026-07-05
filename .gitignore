@@ -13,3 +13,5 @@ opencode.json~
 .opencode.json.un~
 Language trainer app.csv
 /ios/build
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
