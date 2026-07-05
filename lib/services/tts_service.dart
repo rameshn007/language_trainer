@@ -49,6 +49,8 @@ class TtsService {
               IosTextToSpeechAudioCategoryOptions.defaultToSpeaker,
               IosTextToSpeechAudioCategoryOptions.allowBluetooth,
               IosTextToSpeechAudioCategoryOptions.allowBluetoothA2DP,
+              IosTextToSpeechAudioCategoryOptions.mixWithOthers,
+              IosTextToSpeechAudioCategoryOptions.allowAirPlay,
             ]);
         // slight delay to let audio session spin up
         await Future.delayed(const Duration(milliseconds: 50));
@@ -200,6 +202,8 @@ class TtsService {
     await _flutterTts.setPitch(1.0);
     // 0.5 is standard speed for this lib, but let's make it slightly adjustable if needed.
     await _flutterTts.setSpeechRate(0.5);
+    // Ensure speak() actually waits for audio to finish before returning
+    await _flutterTts.awaitSpeakCompletion(true);
   }
 
   Future<void> setExplicitVoice(String language, String identifier) async {

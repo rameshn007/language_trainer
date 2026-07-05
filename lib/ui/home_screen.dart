@@ -26,6 +26,7 @@ import 'exercise/exercise_screen.dart';
 import 'quiz/interrogative_quiz_screen.dart';
 import 'quiz/grammar_quiz_screen.dart';
 import 'quiz/preposition_quiz_screen.dart';
+import 'listen_repeat/listen_repeat_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -103,6 +104,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         freshItems.addAll(await parser.loadAndParseRawData(
           'assets/data/source.md',
         ));
+        // Also load combined class notes
+        try {
+          freshItems.addAll(await parser.loadAndParseRawData(
+            'assets/Combined_Portuguese_Class_Notes.md',
+          ));
+        } catch (e) {
+          debugPrint('Error loading Combined notes: $e');
+        }
       }
 
       try {
@@ -670,23 +679,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        key: _fabKey,
-        onPressed: () {
-          final RenderBox? renderBox = _fabKey.currentContext?.findRenderObject() as RenderBox?;
-          Offset? center;
-          if (renderBox != null) {
-            final position = renderBox.localToGlobal(Offset.zero);
-            center = position + Offset(renderBox.size.width / 2, renderBox.size.height / 2);
-          }
-          _pushScreen(
-            const QuizScreen(isLuckyQuiz: true),
-            center,
-          );
-        },
-        backgroundColor: Colors.amber.shade700,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.auto_awesome),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            heroTag: 'listenRepeat',
+            onPressed: () {
+              final RenderBox? renderBox = _fabKey.currentContext?.findRenderObject() as RenderBox?;
+              Offset? center;
+              if (renderBox != null) {
+                final position = renderBox.localToGlobal(Offset.zero);
+                center = position + Offset(renderBox.size.width / 2, renderBox.size.height / 2);
+              }
+              _pushScreen(const ListenRepeatScreen(), center);
+            },
+            backgroundColor: Colors.indigo.shade600,
+            foregroundColor: Colors.white,
+            child: const Icon(Icons.headset_rounded),
+          ),
+          const SizedBox(height: 16),
+          FloatingActionButton(
+            key: _fabKey,
+            onPressed: () {
+              final RenderBox? renderBox = _fabKey.currentContext?.findRenderObject() as RenderBox?;
+              Offset? center;
+              if (renderBox != null) {
+                final position = renderBox.localToGlobal(Offset.zero);
+                center = position + Offset(renderBox.size.width / 2, renderBox.size.height / 2);
+              }
+              _pushScreen(
+                const QuizScreen(isLuckyQuiz: true),
+                center,
+              );
+            },
+            backgroundColor: Colors.amber.shade700,
+            foregroundColor: Colors.white,
+            child: const Icon(Icons.auto_awesome),
+          ),
+        ],
       ),
     );
   }
