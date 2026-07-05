@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/question.dart';
 import '../../models/progress_data.dart';
@@ -96,6 +97,16 @@ class QuizViewModel extends Notifier<QuizState> {
       'assets/data/questions.json',
       items,
     );
+    // Also load combined class notes questions
+    try {
+      final combinedQuestions = await _loader.loadQuestions(
+        'assets/data/combined_questions.json',
+        items,
+      );
+      jsonQuestions.addAll(combinedQuestions);
+    } catch (e) {
+      debugPrint('Warning: Could not load combined_questions.json: $e');
+    }
 
     // Filter by category if specified
     if (category != null) {
@@ -246,6 +257,7 @@ class QuizViewModel extends Notifier<QuizState> {
       builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/unit_10.json', items));
       builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/question_builder.json', items));
       generalJsonPool.addAll(await _loader.loadQuestions('assets/data/questions.json', items));
+      generalJsonPool.addAll(await _loader.loadQuestions('assets/data/combined_questions.json', items));
       interrogPool.addAll(await _engine.generateInterrogativeQuiz(count: poolSize, seenIds: seenIds.toList()));
       prepPool.addAll(await _engine.generatePrepositionQuiz(count: poolSize, seenIds: seenIds.toList()));
     }
