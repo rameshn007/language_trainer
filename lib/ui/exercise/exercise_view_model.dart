@@ -107,7 +107,7 @@ class ExerciseViewModel extends Notifier<QuizState> {
       ActivityType activityType = ActivityType.quiz; // fallback
       if (state.questions.isNotEmpty) {
         final firstType = state.questions.first.type;
-        if (firstType == QuestionType.reorderAndConjugate || 
+        if (firstType == QuestionType.reorderAndConjugate ||
             firstType == QuestionType.jumble ||
             firstType == QuestionType.cloze) {
           activityType = ActivityType.sentenceBuilder;
@@ -146,8 +146,6 @@ class ExerciseViewModel extends Notifier<QuizState> {
     state = QuizState(questions: []);
     _sessionStartTime = null;
   }
-
-
 }
 
 final exerciseViewModelProvider =

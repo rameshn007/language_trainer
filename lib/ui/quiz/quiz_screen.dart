@@ -37,7 +37,8 @@ class QuizScreen extends ConsumerStatefulWidget {
 
 class _QuizScreenState extends ConsumerState<QuizScreen> {
   final CardSwiperController _swiperController = CardSwiperController();
-  final GlobalKey<QuestionCardState> _currentCardKey = GlobalKey<QuestionCardState>();
+  final GlobalKey<QuestionCardState> _currentCardKey =
+      GlobalKey<QuestionCardState>();
   late final TtsService _ttsService;
   double _speedMultiplier = 0.75; // Default as requested
 
@@ -49,19 +50,19 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       ref.read(quizViewModelProvider.notifier).reset();
       if (widget.isInterrogativeQuiz) {
-        await ref.read(quizViewModelProvider.notifier).startInterrogativeQuiz(
-          category: widget.interrogativeCategory,
-        );
+        await ref
+            .read(quizViewModelProvider.notifier)
+            .startInterrogativeQuiz(category: widget.interrogativeCategory);
       } else if (widget.isVocabularyQuiz) {
         await ref.read(quizViewModelProvider.notifier).startVocabularyQuiz();
       } else if (widget.isPrepositionQuiz) {
-        await ref.read(quizViewModelProvider.notifier).startPrepositionQuiz(
-          category: widget.category,
-        );
+        await ref
+            .read(quizViewModelProvider.notifier)
+            .startPrepositionQuiz(category: widget.category);
       } else if (widget.isGrammarQuiz) {
-        await ref.read(quizViewModelProvider.notifier).startGrammarQuiz(
-          category: widget.category,
-        );
+        await ref
+            .read(quizViewModelProvider.notifier)
+            .startGrammarQuiz(category: widget.category);
       } else if (widget.isLuckyQuiz) {
         await ref.read(quizViewModelProvider.notifier).startLuckyQuiz();
       } else {
@@ -175,15 +176,21 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
               children: [
                 FadeInDown(
                   child: Icon(
-                    quizState.dailyGoalJustMet ? Icons.local_fire_department : Icons.emoji_events,
+                    quizState.dailyGoalJustMet
+                        ? Icons.local_fire_department
+                        : Icons.emoji_events,
                     size: 80,
-                    color: quizState.dailyGoalJustMet ? Colors.deepOrange : Colors.amber,
+                    color: quizState.dailyGoalJustMet
+                        ? Colors.deepOrange
+                        : Colors.amber,
                   ),
                 ),
                 const SizedBox(height: 16),
                 FadeInUp(
                   child: Text(
-                    quizState.dailyGoalJustMet ? 'Daily Goal Met! 🎉' : 'Quiz Complete!',
+                    quizState.dailyGoalJustMet
+                        ? 'Daily Goal Met! 🎉'
+                        : 'Quiz Complete!',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -200,7 +207,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                           icon: Icons.check_circle,
                           iconColor: Colors.green,
                           label: 'Score',
-                          value: '${quizState.score}/${quizState.questions.length}',
+                          value:
+                              '${quizState.score}/${quizState.questions.length}',
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -225,7 +233,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                           icon: Icons.local_fire_department,
                           iconColor: Colors.deepOrange,
                           label: 'Streak',
-                          value: '${progress.currentStreak} day${progress.currentStreak == 1 ? '' : 's'}',
+                          value:
+                              '${progress.currentStreak} day${progress.currentStreak == 1 ? '' : 's'}',
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -247,7 +256,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Column(
@@ -258,9 +269,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                           children: [
                             Text(
                               'Daily Goal',
-                              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: Theme.of(context).textTheme.titleSmall
+                                  ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                             Text(
                               '${progress.todayXP} / ${progress.dailyGoal} XP',
@@ -274,9 +284,13 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                           child: LinearProgressIndicator(
                             value: progress.dailyGoalProgress,
                             minHeight: 12,
-                            backgroundColor: Theme.of(context).colorScheme.outline.withValues(alpha: 0.2),
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.outline.withValues(alpha: 0.2),
                             valueColor: AlwaysStoppedAnimation<Color>(
-                              progress.dailyGoalMet ? Colors.green : Colors.deepPurple,
+                              progress.dailyGoalMet
+                                  ? Colors.green
+                                  : Colors.deepPurple,
                             ),
                           ),
                         ),
@@ -291,7 +305,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: Column(
@@ -299,18 +315,21 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                       children: [
                         Text(
                           'Vocabulary Mastery',
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                         const SizedBox(height: 12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: List.generate(5, (tier) {
-                            final count = progress.masteryDistribution[tier] ?? 0;
+                            final count =
+                                progress.masteryDistribution[tier] ?? 0;
                             final colors = [
-                              Colors.grey, Colors.blue, Colors.cyan,
-                              Colors.orange, Colors.green,
+                              Colors.grey,
+                              Colors.blue,
+                              Colors.cyan,
+                              Colors.orange,
+                              Colors.green,
                             ];
                             return Column(
                               children: [
@@ -327,7 +346,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                                   WordProgress.tierName(tier),
                                   style: TextStyle(
                                     fontSize: 10,
-                                    color: Theme.of(context).colorScheme.outline,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.outline,
                                   ),
                                 ),
                               ],
@@ -345,8 +366,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     width: double.infinity,
                     height: 50,
                     child: ElevatedButton.icon(
-                      onPressed: () =>
-                          Navigator.of(context).popUntil((route) => route.isFirst),
+                      onPressed: () => Navigator.of(
+                        context,
+                      ).popUntil((route) => route.isFirst),
                       icon: const Icon(Icons.home),
                       label: const Text('Back to Home'),
                       style: ElevatedButton.styleFrom(
@@ -442,25 +464,37 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
           children: [
             // Progress Bar
             quizState.isInfinite
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(Icons.auto_awesome, size: 16, color: Colors.amber),
-                      const SizedBox(width: 8),
-                      Text(
-                        'Marathon Mode: ${quizState.currentIndex + 1} questions',
-                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.amber),
-                      ),
-                    ],
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 8,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.auto_awesome,
+                          size: 16,
+                          color: Colors.amber,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Marathon Mode: ${quizState.currentIndex + 1} questions',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.amber,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : LinearProgressIndicator(
+                    value:
+                        (quizState.currentIndex + 1) /
+                        quizState.questions.length,
+                    minHeight: 10,
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                )
-              : LinearProgressIndicator(
-                  value: (quizState.currentIndex + 1) / quizState.questions.length,
-                  minHeight: 10,
-                  borderRadius: BorderRadius.circular(5),
-                ),
             const SizedBox(height: 20),
             Expanded(
               child: CardSwiper(
@@ -472,7 +506,9 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
                     (context, index, percentThresholdX, percentThresholdY) {
                       final question = quizState.questions[index];
                       return QuestionCard(
-                        key: index == quizState.currentIndex ? _currentCardKey : ValueKey(question.id),
+                        key: index == quizState.currentIndex
+                            ? _currentCardKey
+                            : ValueKey(question.id),
                         question: question,
                         onAnswer: (option) => _handleAnswer(option, question),
                         onNext: _handleNext,
@@ -514,7 +550,6 @@ class QuestionCard extends ConsumerStatefulWidget {
 }
 
 class QuestionCardState extends ConsumerState<QuestionCard> {
-
   @override
   void didUpdateWidget(QuestionCard oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -532,25 +567,25 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
 
   bool showHintUpfront(Question q) {
     if (q.sourceItem.english.isEmpty) return false;
-    
+
     final hint = q.sourceItem.english.toLowerCase().trim();
     final question = q.questionText.toLowerCase().trim();
-    
+
     // Never show upfront if it's redundant (same as question)
     if (hint == question) return false;
-    
+
     // For cloze questions, we always want the hint for sentence context,
     // even if it contains the answer word.
     if (q.type == QuestionType.cloze) return true;
-    
+
     // Check if the hint is too similar to the correct answer (spoiler)
     final answer = q.correctAnswer.toLowerCase().trim();
-    
+
     // If the answer is exactly the hint, or contained within it (like "to be" vs "to be (permanent)"), don't show it
     if (hint == answer || hint.contains(answer) || answer.contains(hint)) {
       return false;
     }
-    
+
     return true;
   }
 
@@ -569,13 +604,13 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
       return;
     }
 
-    if (wrongAnswersNow.contains(option)) return; // Already tried this wrong one
+    if (wrongAnswersNow.contains(option))
+      return; // Already tried this wrong one
 
     // Call onAnswer for ALL attempts now, ViewModel handles logic
     widget.onAnswer(option);
 
     if (option == widget.question.correctAnswer) {
-
       String textToSpeak = widget.question.sourceItem.portuguese;
 
       // For cloze (fill in the blank) questions, reconstruct the full sentence
@@ -598,19 +633,22 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
 
         // 3. Replace blanks (______ or ____) with the correct answer
         if (baseText.contains("______")) {
-          textToSpeak = baseText.replaceAll("______", widget.question.correctAnswer);
+          textToSpeak = baseText.replaceAll(
+            "______",
+            widget.question.correctAnswer,
+          );
         } else if (baseText.contains("____")) {
-          textToSpeak = baseText.replaceAll("____", widget.question.correctAnswer);
+          textToSpeak = baseText.replaceAll(
+            "____",
+            widget.question.correctAnswer,
+          );
         } else {
           // Fallback: just use what we have
           textToSpeak = baseText;
         }
       }
 
-      widget.ttsService.speak(
-        textToSpeak,
-        language: 'pt',
-      );
+      widget.ttsService.speak(textToSpeak, language: 'pt');
     } else {
       widget.ttsService.speak("Incorrecto.", language: 'pt');
     }
@@ -626,7 +664,8 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
       return _buildReorderAndConjugateBody(context, isCorrect);
     }
 
-    final isPrepositionFill = widget.question.type == QuestionType.prepositionFill;
+    final isPrepositionFill =
+        widget.question.type == QuestionType.prepositionFill;
 
     return Card(
       elevation: 8,
@@ -646,7 +685,8 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                         const SizedBox(width: 48), // Balance
                         Expanded(
                           child: Text(
-                            widget.question.type == QuestionType.interrogativeMatch
+                            widget.question.type ==
+                                    QuestionType.interrogativeMatch
                                 ? "What does this mean?"
                                 : "Translate this",
                             style: TextStyle(
@@ -656,7 +696,8 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                             textAlign: TextAlign.center,
                           ),
                         ),
-                        if (widget.question.type != QuestionType.cloze && !isPrepositionFill)
+                        if (widget.question.type != QuestionType.cloze &&
+                            !isPrepositionFill)
                           IconButton(
                             icon: const Icon(Icons.volume_up),
                             onPressed: () => widget.ttsService.speak(
@@ -673,15 +714,23 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                             ),
                           )
                         else
-                          const SizedBox(width: 48, height: 48), // Maintain balance
+                          const SizedBox(
+                            width: 48,
+                            height: 48,
+                          ), // Maintain balance
                       ],
                     ),
                     const SizedBox(height: 20),
-                    (widget.question.questionText == widget.question.sourceItem.portuguese || 
-                     widget.question.type == QuestionType.cloze || 
-                     (isPrepositionFill && isCorrect))
+                    (widget.question.questionText ==
+                                widget.question.sourceItem.portuguese ||
+                            widget.question.type == QuestionType.cloze ||
+                            (isPrepositionFill && isCorrect))
                         ? LongPressWordText(
-                            text: ((isPrepositionFill || widget.question.type == QuestionType.cloze) && isCorrect)
+                            text:
+                                ((isPrepositionFill ||
+                                        widget.question.type ==
+                                            QuestionType.cloze) &&
+                                    isCorrect)
                                 ? widget.question.sourceItem.portuguese
                                 : widget.question.questionText,
                             style: TextStyle(
@@ -705,35 +754,47 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                             textAlign: TextAlign.center,
                           ),
                     const SizedBox(height: 10),
-                    if (isPrepositionFill || 
+                    if (isPrepositionFill ||
                         widget.question.type == QuestionType.vocabularyMatch ||
                         widget.question.type == QuestionType.cloze ||
-                        (isCorrect && widget.question.sourceItem.english.isNotEmpty))
+                        (isCorrect &&
+                            widget.question.sourceItem.english.isNotEmpty))
                       // Only show hint upfront if it doesn't reveal the answer (i.e. hint != answer)
                       // And don't show at all if it's redundant (identical to the question prompt)
-                      if ((showHintUpfront(widget.question) || isCorrect) && 
-                          widget.question.sourceItem.english.toLowerCase().trim() != widget.question.questionText.toLowerCase().trim())
+                      if ((showHintUpfront(widget.question) || isCorrect) &&
+                          widget.question.sourceItem.english
+                                  .toLowerCase()
+                                  .trim() !=
+                              widget.question.questionText.toLowerCase().trim())
                         Text(
                           widget.question.sourceItem.english,
                           style: TextStyle(
-                            color: isCorrect ? Colors.green.shade400 : Theme.of(context).colorScheme.outline,
+                            color: isCorrect
+                                ? Colors.green.shade400
+                                : Theme.of(context).colorScheme.outline,
                             fontSize: 18,
                             fontStyle: FontStyle.italic,
-                            fontWeight: isCorrect ? FontWeight.bold : FontWeight.normal,
+                            fontWeight: isCorrect
+                                ? FontWeight.bold
+                                : FontWeight.normal,
                           ),
                           textAlign: TextAlign.center,
                         ),
                     const SizedBox(height: 30),
-                    (widget.question.type == QuestionType.vocabularyMatch || isPrepositionFill)
+                    (widget.question.type == QuestionType.vocabularyMatch ||
+                            isPrepositionFill)
                         ? Center(
-                          child: Wrap(
+                            child: Wrap(
                               spacing: 12,
                               runSpacing: 12,
                               alignment: WrapAlignment.center,
                               children: [
                                 ...widget.question.options.map((option) {
-                                  final isCorrectAnswer = option == widget.question.correctAnswer;
-                                  final isWrongAnswer = wrongAnswers.contains(option);
+                                  final isCorrectAnswer =
+                                      option == widget.question.correctAnswer;
+                                  final isWrongAnswer = wrongAnswers.contains(
+                                    option,
+                                  );
 
                                   Color? color;
                                   Color? textColor;
@@ -745,10 +806,16 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                                     color = Colors.red.shade100;
                                     textColor = Colors.red.shade900;
                                   } else {
-                                    color = Theme.of(context).brightness == Brightness.dark
-                                        ? Theme.of(context).colorScheme.surfaceContainerHighest
+                                    color =
+                                        Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Theme.of(
+                                            context,
+                                          ).colorScheme.surfaceContainerHighest
                                         : Colors.grey.shade100;
-                                    textColor = Theme.of(context).colorScheme.onSurface;
+                                    textColor = Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface;
                                   }
 
                                   return ActionChip(
@@ -759,11 +826,16 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                                         color: textColor,
                                       ),
                                     ),
-                                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 12,
+                                    ),
                                     onPressed: () => _onOptionTap(option),
                                     backgroundColor: color,
                                     side: BorderSide(
-                                      color: (isCorrect && isCorrectAnswer) || isWrongAnswer
+                                      color:
+                                          (isCorrect && isCorrectAnswer) ||
+                                              isWrongAnswer
                                           ? textColor
                                           : Colors.grey.shade300,
                                       width: 1.5,
@@ -775,12 +847,15 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                                 }),
                               ],
                             ),
-                        )
+                          )
                         : Column(
                             children: [
                               ...widget.question.options.map((option) {
-                                final isCorrectAnswer = option == widget.question.correctAnswer;
-                                final isWrongAnswer = wrongAnswers.contains(option);
+                                final isCorrectAnswer =
+                                    option == widget.question.correctAnswer;
+                                final isWrongAnswer = wrongAnswers.contains(
+                                  option,
+                                );
 
                                 Color? color;
                                 Color? textColor;
@@ -793,10 +868,16 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                                   textColor = Colors.red.shade900;
                                 } else {
                                   // Default state
-                                  color = Theme.of(context).brightness == Brightness.dark
-                                      ? Theme.of(context).colorScheme.surfaceContainerHighest
+                                  color =
+                                      Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? Theme.of(
+                                          context,
+                                        ).colorScheme.surfaceContainerHighest
                                       : Colors.white;
-                                  textColor = Theme.of(context).colorScheme.onSurface;
+                                  textColor = Theme.of(
+                                    context,
+                                  ).colorScheme.onSurface;
                                 }
 
                                 return Padding(
@@ -808,11 +889,18 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                                       style: ElevatedButton.styleFrom(
                                         backgroundColor: color,
                                         foregroundColor: textColor,
-                                        elevation: (isCorrect || isWrongAnswer) ? 0 : 2,
+                                        elevation: (isCorrect || isWrongAnswer)
+                                            ? 0
+                                            : 2,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(12),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
                                           side: BorderSide(
-                                            color: (isCorrect && isCorrectAnswer) || isWrongAnswer
+                                            color:
+                                                (isCorrect &&
+                                                        isCorrectAnswer) ||
+                                                    isWrongAnswer
                                                 ? textColor
                                                 : Colors.transparent,
                                             width: 2,
@@ -842,27 +930,30 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
             SizedBox(
               height: 60,
               width: double.infinity,
-              child: isCorrect 
-                ? FadeInUp(
-                    duration: const Duration(milliseconds: 400),
-                    child: ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple,
-                        foregroundColor: Colors.white,
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+              child: isCorrect
+                  ? FadeInUp(
+                      duration: const Duration(milliseconds: 400),
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          foregroundColor: Colors.white,
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        onPressed: widget.onNext,
+                        icon: const Icon(Icons.arrow_forward),
+                        label: const Text(
+                          "Next Question",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                      onPressed: widget.onNext,
-                      icon: const Icon(Icons.arrow_forward),
-                      label: const Text(
-                        "Next Question",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  )
-                : const SizedBox.shrink(),
+                    )
+                  : const SizedBox.shrink(),
             ),
           ],
         ),
@@ -880,11 +971,14 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
 
   void _initReorderData() {
     if (_availableWords != null) return;
-    final words = widget.question.questionText.split('/').map((s) => s.trim()).toList();
-    
+    final words = widget.question.questionText
+        .split('/')
+        .map((s) => s.trim())
+        .toList();
+
     _availableWords = [];
     _originalVerb = "";
-    
+
     for (var w in words) {
       if (w.startsWith('*') && w.endsWith('*') && w.length > 2) {
         final cleanWord = w.substring(1, w.length - 1);
@@ -898,11 +992,16 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
     // Fallback for older reflexive verb format
     if (_originalVerb == "") {
       _originalVerb = _availableWords!.firstWhere(
-        (w) => w.contains('-se') || w.contains('-me') || w.contains('-te') || w.contains('-nos') || w.contains('-vos'),
+        (w) =>
+            w.contains('-se') ||
+            w.contains('-me') ||
+            w.contains('-te') ||
+            w.contains('-nos') ||
+            w.contains('-vos'),
         orElse: () => "",
       );
     }
-    
+
     _selectedWords = [];
   }
 
@@ -932,10 +1031,14 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                     if (widget.question.sourceItem.english.isNotEmpty)
                       () {
                         String displayText = widget.question.sourceItem.english;
-                        final bool isAnswerFeedback = displayText.startsWith('Answer:');
-                        
+                        final bool isAnswerFeedback = displayText.startsWith(
+                          'Answer:',
+                        );
+
                         if (isAnswerFeedback) {
-                          displayText = displayText.replaceFirst('Answer:', '').trim();
+                          displayText = displayText
+                              .replaceFirst('Answer:', '')
+                              .trim();
                         }
 
                         return Padding(
@@ -948,15 +1051,15 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                               color: isCorrect && isAnswerFeedback
                                   ? Colors.green.shade400
                                   : isDark
-                                      ? Theme.of(context).colorScheme.onSurface
-                                      : Colors.black87,
+                                  ? Theme.of(context).colorScheme.onSurface
+                                  : Colors.black87,
                             ),
                             textAlign: TextAlign.center,
                           ),
                         );
                       }(),
                     const Divider(height: 40),
-                    
+
                     // Answer Area
                     Container(
                       constraints: const BoxConstraints(minHeight: 120),
@@ -965,7 +1068,9 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                       decoration: BoxDecoration(
                         color: isDark ? Colors.black26 : Colors.grey.shade100,
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: isDark ? Colors.white10 : Colors.grey.shade300),
+                        border: Border.all(
+                          color: isDark ? Colors.white10 : Colors.grey.shade300,
+                        ),
                       ),
                       child: Wrap(
                         spacing: 8,
@@ -973,7 +1078,10 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                         children: [
                           ..._selectedWords!.map((word) {
                             return ActionChip(
-                              label: Text(word, style: const TextStyle(fontSize: 16)),
+                              label: Text(
+                                word,
+                                style: const TextStyle(fontSize: 16),
+                              ),
                               onPressed: () {
                                 if (isCorrect) return;
                                 setState(() {
@@ -986,27 +1094,35 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                                   }
                                 });
                               },
-                              backgroundColor: isDark 
-                                  ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.2)
+                              backgroundColor: isDark
+                                  ? Theme.of(
+                                      context,
+                                    ).colorScheme.primary.withValues(alpha: 0.2)
                                   : Colors.deepPurple.shade50,
                               labelStyle: TextStyle(
-                                color: isDark ? Theme.of(context).colorScheme.primary : Colors.deepPurple.shade900,
+                                color: isDark
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Colors.deepPurple.shade900,
                               ),
                               side: BorderSide(
-                                color: isDark ? Theme.of(context).colorScheme.primary : Colors.deepPurple,
+                                color: isDark
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Colors.deepPurple,
                               ),
                             );
                           }),
                         ],
                       ),
                     ),
-                    
+
                     if (isCorrect && _previousWrongUserAnswer != null) ...[
                       const SizedBox(height: 16),
                       Text(
                         "Your answer: $_previousWrongUserAnswer",
                         style: TextStyle(
-                          color: isDark ? Colors.red.shade300 : Colors.red.shade700,
+                          color: isDark
+                              ? Colors.red.shade300
+                              : Colors.red.shade700,
                           fontSize: 16,
                           fontStyle: FontStyle.italic,
                         ),
@@ -1014,7 +1130,7 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                     ],
 
                     const SizedBox(height: 30),
-                    
+
                     // Word bank
                     Wrap(
                       spacing: 8,
@@ -1022,7 +1138,10 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                       children: [
                         ..._availableWords!.map((word) {
                           return ActionChip(
-                            label: Text(word, style: const TextStyle(fontSize: 16)),
+                            label: Text(
+                              word,
+                              style: const TextStyle(fontSize: 16),
+                            ),
                             onPressed: () {
                               if (isCorrect) return;
                               if (word == _originalVerb) {
@@ -1034,9 +1153,17 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
                                 });
                               }
                             },
-                            backgroundColor: isDark ? Colors.white10 : Colors.white,
-                            side: BorderSide(color: isDark ? Colors.white24 : Colors.grey.shade300),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            backgroundColor: isDark
+                                ? Colors.white10
+                                : Colors.white,
+                            side: BorderSide(
+                              color: isDark
+                                  ? Colors.white24
+                                  : Colors.grey.shade300,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                           );
                         }),
                       ],
@@ -1046,35 +1173,41 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
               ),
             ),
             const SizedBox(height: 10),
-            
+
             // Bottom Action Area
             SizedBox(
               height: 60,
               width: double.infinity,
-              child: isCorrect 
-                ? FadeInUp(
-                    duration: const Duration(milliseconds: 400),
-                    child: ElevatedButton.icon(
-                      onPressed: widget.onNext,
-                      icon: const Icon(Icons.arrow_forward),
-                      label: const Text("Next Question"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                        foregroundColor: Colors.white,
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              child: isCorrect
+                  ? FadeInUp(
+                      duration: const Duration(milliseconds: 400),
+                      child: ElevatedButton.icon(
+                        onPressed: widget.onNext,
+                        icon: const Icon(Icons.arrow_forward),
+                        label: const Text("Next Question"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white,
+                          elevation: 4,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                       ),
+                    )
+                  : ElevatedButton(
+                      onPressed: _selectedWords!.isEmpty
+                          ? null
+                          : _checkReorderAnswer,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text("Check Answer"),
                     ),
-                  )
-                : ElevatedButton(
-                    onPressed: _selectedWords!.isEmpty ? null : _checkReorderAnswer,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.deepPurple,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    ),
-                    child: const Text("Check Answer"),
-                  ),
             ),
           ],
         ),
@@ -1096,7 +1229,10 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
             children: [
               Text(
                 "Conjugate: $_originalVerb",
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 20),
               Wrap(
@@ -1129,8 +1265,10 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
 
   void _checkReorderAnswer() {
     final userAnswer = _selectedWords!.join(' ');
-    final isCorrect = userAnswer.trim() == widget.question.correctAnswer.trim() || 
-        userAnswer.trim() == widget.question.correctAnswer.replaceAll('.', '').trim();
+    final isCorrect =
+        userAnswer.trim() == widget.question.correctAnswer.trim() ||
+        userAnswer.trim() ==
+            widget.question.correctAnswer.replaceAll('.', '').trim();
 
     widget.onAnswer(isCorrect ? widget.question.correctAnswer : "incorrect");
 
@@ -1139,7 +1277,10 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
     } else {
       widget.ttsService.speak("Tenta de novo.", language: 'pt');
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Incorrect order or conjugation. Try again!"), duration: Duration(seconds: 1)),
+        const SnackBar(
+          content: Text("Incorrect order or conjugation. Try again!"),
+          duration: Duration(seconds: 1),
+        ),
       );
     }
   }
@@ -1152,12 +1293,17 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
         if (_selectedWords != null && _selectedWords!.isNotEmpty) {
           final userAnswer = _selectedWords!.join(' ');
           final normalizedUser = userAnswer.trim().replaceAll('.', '');
-          final normalizedCorrect = widget.question.correctAnswer.trim().replaceAll('.', '');
+          final normalizedCorrect = widget.question.correctAnswer
+              .trim()
+              .replaceAll('.', '');
           if (normalizedUser != normalizedCorrect) {
             _previousWrongUserAnswer = userAnswer;
           }
         }
-        _selectedWords = widget.question.correctAnswer.split(' ').map((s) => s.trim()).toList();
+        _selectedWords = widget.question.correctAnswer
+            .split(' ')
+            .map((s) => s.trim())
+            .toList();
         _availableWords = [];
       });
     }
@@ -1165,7 +1311,6 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
     widget.ttsService.speak(widget.question.correctAnswer, language: 'pt');
   }
 }
-
 
 // ─── Result Stat Card ────────────────────────────────────────────────────────
 
@@ -1196,10 +1341,7 @@ class _ResultStatCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             value,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 2),
           Text(

@@ -29,7 +29,8 @@ class ExerciseScreen extends ConsumerStatefulWidget {
 
 class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
   final CardSwiperController _swiperController = CardSwiperController();
-  final GlobalKey<QuestionCardState> _currentCardKey = GlobalKey<QuestionCardState>();
+  final GlobalKey<QuestionCardState> _currentCardKey =
+      GlobalKey<QuestionCardState>();
   late final TtsService _ttsService;
   final double _speedMultiplier = 0.75;
 
@@ -146,7 +147,7 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
-               Text(
+              Text(
                 'Correct: ${quizState.score}/${quizState.questions.length}',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
@@ -191,7 +192,8 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          if (widget.hintPath != null || widget.unitPath.contains('prepositional_pronouns'))
+          if (widget.hintPath != null ||
+              widget.unitPath.contains('prepositional_pronouns'))
             IconButton(
               icon: const Icon(Icons.lightbulb_outline), // Requested icon
               tooltip: widget.unitPath.contains('prepositional_pronouns')
@@ -286,7 +288,9 @@ class _ExerciseScreenState extends ConsumerState<ExerciseScreen> {
                     (context, index, percentThresholdX, percentThresholdY) {
                       final question = quizState.questions[index];
                       return QuestionCard(
-                        key: index == quizState.currentIndex ? _currentCardKey : ValueKey(question.id),
+                        key: index == quizState.currentIndex
+                            ? _currentCardKey
+                            : ValueKey(question.id),
                         question: question,
                         onAnswer: (option) => _handleAnswer(option),
                         onNext: _handleNext,

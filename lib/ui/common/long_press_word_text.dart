@@ -42,13 +42,15 @@ class _LongPressWordTextState extends ConsumerState<LongPressWordText> {
 
   void _handleWordPress(String word) {
     final cleanWord = word.trim().toLowerCase();
-    
+
     // Look up in storage
     final storage = ref.read(storageServiceProvider);
     final allItems = storage.getAllItems();
-    
-    final exactMatch = allItems.where((item) => item.portuguese.toLowerCase() == cleanWord).firstOrNull;
-    
+
+    final exactMatch = allItems
+        .where((item) => item.portuguese.toLowerCase() == cleanWord)
+        .firstOrNull;
+
     if (exactMatch != null) {
       _showTranslationCallout(exactMatch);
     } else {
@@ -66,7 +68,9 @@ class _LongPressWordTextState extends ConsumerState<LongPressWordText> {
           child: Dialog(
             backgroundColor: Theme.of(context).cardColor,
             elevation: 16,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(28),
+            ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
               child: Column(
@@ -86,7 +90,9 @@ class _LongPressWordTextState extends ConsumerState<LongPressWordText> {
                     height: 2,
                     width: 40,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.3),
                       borderRadius: BorderRadius.circular(1),
                     ),
                   ),
@@ -103,11 +109,19 @@ class _LongPressWordTextState extends ConsumerState<LongPressWordText> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 40,
+                        vertical: 16,
+                      ),
                     ),
                     onPressed: () => Navigator.pop(context),
-                    child: const Text('Got it', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: const Text(
+                      'Got it',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
@@ -147,27 +161,28 @@ class _LongPressWordTextState extends ConsumerState<LongPressWordText> {
     }
     _recognizers.clear();
 
-    final RegExp wordRegex = RegExp(r"[\p{L}\p{M}]+(?:[-'][\p{L}\p{M}]+)*", unicode: true);
+    final RegExp wordRegex = RegExp(
+      r"[\p{L}\p{M}]+(?:[-'][\p{L}\p{M}]+)*",
+      unicode: true,
+    );
     final List<TextSpan> spans = [];
 
     int lastMatchEnd = 0;
     for (var match in wordRegex.allMatches(widget.text)) {
       if (match.start > lastMatchEnd) {
-        spans.add(TextSpan(
-          text: widget.text.substring(lastMatchEnd, match.start),
-        ));
+        spans.add(
+          TextSpan(text: widget.text.substring(lastMatchEnd, match.start)),
+        );
       }
 
       final word = match.group(0)!;
-      final recognizer = LongPressGestureRecognizer()..onLongPress = () {
-        _handleWordPress(word);
-      };
+      final recognizer = LongPressGestureRecognizer()
+        ..onLongPress = () {
+          _handleWordPress(word);
+        };
       _recognizers.add(recognizer);
 
-      spans.add(TextSpan(
-        text: word,
-        recognizer: recognizer,
-      ));
+      spans.add(TextSpan(text: word, recognizer: recognizer));
 
       lastMatchEnd = match.end;
     }

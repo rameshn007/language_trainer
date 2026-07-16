@@ -51,8 +51,12 @@ class SingleVerbConjugationState {
       error: error ?? this.error,
       matchedPairs: matchedPairs ?? this.matchedPairs,
       shuffledConjugations: shuffledConjugations ?? this.shuffledConjugations,
-      selectedPronoun: clearSelections ? null : (selectedPronoun ?? this.selectedPronoun),
-      selectedConjugation: clearSelections ? null : (selectedConjugation ?? this.selectedConjugation),
+      selectedPronoun: clearSelections
+          ? null
+          : (selectedPronoun ?? this.selectedPronoun),
+      selectedConjugation: clearSelections
+          ? null
+          : (selectedConjugation ?? this.selectedConjugation),
       sessionScore: sessionScore ?? this.sessionScore,
       sessionTotal: sessionTotal ?? this.sessionTotal,
       sessionXP: sessionXP ?? this.sessionXP,
@@ -66,11 +70,13 @@ class SingleVerbConjugationState {
 }
 
 final singleVerbConjugationViewModelProvider =
-    NotifierProvider<SingleVerbConjugationViewModel, SingleVerbConjugationState>(
-  SingleVerbConjugationViewModel.new,
-);
+    NotifierProvider<
+      SingleVerbConjugationViewModel,
+      SingleVerbConjugationState
+    >(SingleVerbConjugationViewModel.new);
 
-class SingleVerbConjugationViewModel extends Notifier<SingleVerbConjugationState> {
+class SingleVerbConjugationViewModel
+    extends Notifier<SingleVerbConjugationState> {
   final _random = Random();
 
   @override
@@ -81,11 +87,11 @@ class SingleVerbConjugationViewModel extends Notifier<SingleVerbConjugationState
   Future<void> loadVerb(String verbInfinitive) async {
     // Reset state freshly every time a new verb is requested
     state = const SingleVerbConjugationState(isLoading: true);
-    
+
     try {
       final verbService = ref.read(verbServiceProvider);
       final allVerbs = await verbService.loadVerbs();
-      
+
       final normalizedTarget = verbInfinitive.trim().toLowerCase();
       final verb = allVerbs.firstWhere(
         (v) => v.infinitive.trim().toLowerCase() == normalizedTarget,
@@ -153,16 +159,20 @@ class SingleVerbConjugationViewModel extends Notifier<SingleVerbConjugationState
         );
 
         // Record correct via progress service
-        progressService.recordQuizAnswer(
-          storage: storage,
-          itemId: itemId,
-          correct: true,
-          firstAttempt: true,
-        ).then((xp) {
-          state = state.copyWith(sessionXP: state.sessionXP + xp);
-        });
+        progressService
+            .recordQuizAnswer(
+              storage: storage,
+              itemId: itemId,
+              correct: true,
+              firstAttempt: true,
+            )
+            .then((xp) {
+              state = state.copyWith(sessionXP: state.sessionXP + xp);
+            });
 
-        ref.read(ttsServiceProvider).speak('$pronoun $conjugation', language: 'pt');
+        ref
+            .read(ttsServiceProvider)
+            .speak('$pronoun $conjugation', language: 'pt');
 
         // Check if finished
         if (newMatches.length == verb.conjugations.length) {
@@ -175,13 +185,11 @@ class SingleVerbConjugationViewModel extends Notifier<SingleVerbConjugationState
         );
 
         // Record incorrect
-        progressService.recordQuizAnswer(
-          storage: storage,
-          itemId: itemId,
-          correct: false,
-        ).then((xp) {
-          state = state.copyWith(sessionXP: state.sessionXP + xp);
-        });
+        progressService
+            .recordQuizAnswer(storage: storage, itemId: itemId, correct: false)
+            .then((xp) {
+              state = state.copyWith(sessionXP: state.sessionXP + xp);
+            });
       }
     }
   }

@@ -286,8 +286,13 @@ class _VerbPhraseTrainerScreenState
                           label: 'Missed it',
                           icon: Icons.close,
                           color: Colors.red.shade400,
-                          isSelected: _hasRated && _totalRated > 0 && !(_correctCount == _totalRated),
-                          onPressed: _hasRated ? null : () => _rateAnswer(false),
+                          isSelected:
+                              _hasRated &&
+                              _totalRated > 0 &&
+                              !(_correctCount == _totalRated),
+                          onPressed: _hasRated
+                              ? null
+                              : () => _rateAnswer(false),
                         ),
                         const SizedBox(width: 16),
                         _buildRatingButton(
@@ -394,10 +399,15 @@ class _VerbPhraseTrainerScreenState
                 );
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
-                  color: isDark 
-                      ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.2) 
+                  color: isDark
+                      ? Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.2)
                       : Theme.of(context).primaryColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -407,7 +417,9 @@ class _VerbPhraseTrainerScreenState
                     Text(
                       phrase.verb.toUpperCase(),
                       style: TextStyle(
-                        color: isDark ? Theme.of(context).colorScheme.primary : Theme.of(context).primaryColor,
+                        color: isDark
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.5,
                       ),
@@ -416,7 +428,9 @@ class _VerbPhraseTrainerScreenState
                     Icon(
                       Icons.touch_app,
                       size: 14,
-                      color: isDark ? Theme.of(context).colorScheme.primary : Theme.of(context).primaryColor,
+                      color: isDark
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).primaryColor,
                     ),
                   ],
                 ),
@@ -427,12 +441,18 @@ class _VerbPhraseTrainerScreenState
           _isEnglishFront
               ? Text(
                   phrase.english,
-                  style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
+                  ),
                   textAlign: TextAlign.center,
                 )
               : LongPressWordText(
                   text: phrase.portuguese,
-                  style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
+                  ),
                   textAlign: TextAlign.center,
                 ),
           const SizedBox(height: 40),

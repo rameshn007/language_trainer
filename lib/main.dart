@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'services/storage_service.dart';
 import 'services/tts_service.dart';
@@ -30,6 +31,12 @@ final notificationServiceProvider = Provider<NotificationService>((ref) {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.example.language_trainer.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
+
   final storageService = StorageService();
   await storageService.init();
 
@@ -43,7 +50,10 @@ void main() async {
   try {
     await notificationService.init();
   } catch (e) {
-    AppLogger.log("Failed to initialize notification service: $e", name: 'Main');
+    AppLogger.log(
+      "Failed to initialize notification service: $e",
+      name: 'Main',
+    );
   }
 
   runApp(

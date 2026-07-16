@@ -16,7 +16,8 @@ class VocabularyItemDialog extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<VocabularyItemDialog> createState() => _VocabularyItemDialogState();
+  ConsumerState<VocabularyItemDialog> createState() =>
+      _VocabularyItemDialogState();
 }
 
 class _VocabularyItemDialogState extends ConsumerState<VocabularyItemDialog> {
@@ -37,7 +38,7 @@ class _VocabularyItemDialogState extends ConsumerState<VocabularyItemDialog> {
     _englishController = TextEditingController(
       text: widget.item?.english ?? '',
     );
-    
+
     _portugueseFocusNode = FocusNode();
     _englishFocusNode = FocusNode();
 
@@ -61,9 +62,13 @@ class _VocabularyItemDialogState extends ConsumerState<VocabularyItemDialog> {
   }
 
   Future<void> _translate(bool fromPortuguese) async {
-    final sourceController = fromPortuguese ? _portugueseController : _englishController;
-    final targetController = fromPortuguese ? _englishController : _portugueseController;
-    
+    final sourceController = fromPortuguese
+        ? _portugueseController
+        : _englishController;
+    final targetController = fromPortuguese
+        ? _englishController
+        : _portugueseController;
+
     final text = sourceController.text.trim();
     if (text.isEmpty) return;
 
@@ -77,13 +82,18 @@ class _VocabularyItemDialogState extends ConsumerState<VocabularyItemDialog> {
 
     try {
       final translationService = ref.read(translationServiceProvider);
-      final result = await translationService.translate(text, fromEn: !fromPortuguese);
+      final result = await translationService.translate(
+        text,
+        fromEn: !fromPortuguese,
+      );
 
       if (result != null && mounted) {
         targetController.text = result;
       } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Translation failed. Please try again.')),
+          const SnackBar(
+            content: Text('Translation failed. Please try again.'),
+          ),
         );
       }
     } finally {
@@ -99,7 +109,11 @@ class _VocabularyItemDialogState extends ConsumerState<VocabularyItemDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(widget.item == null || widget.item!.id == 'temp' ? 'Add Word' : 'Edit Word'),
+      title: Text(
+        widget.item == null || widget.item!.id == 'temp'
+            ? 'Add Word'
+            : 'Edit Word',
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -108,20 +122,20 @@ class _VocabularyItemDialogState extends ConsumerState<VocabularyItemDialog> {
             focusNode: _portugueseFocusNode,
             decoration: InputDecoration(
               labelText: 'Portuguese',
-              suffixIcon: _isTranslatingPt 
-                ? const SizedBox(
-                    width: 20, 
-                    height: 20, 
-                    child: Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: CircularProgressIndicator(strokeWidth: 2),
+              suffixIcon: _isTranslatingPt
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
                     )
-                  )
-                : IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () => _translate(true),
-                    tooltip: 'Translate to English',
-                  ),
+                  : IconButton(
+                      icon: const Icon(Icons.search),
+                      onPressed: () => _translate(true),
+                      tooltip: 'Translate to English',
+                    ),
             ),
           ),
           const SizedBox(height: 16),
@@ -131,19 +145,19 @@ class _VocabularyItemDialogState extends ConsumerState<VocabularyItemDialog> {
             decoration: InputDecoration(
               labelText: 'English',
               suffixIcon: _isTranslatingEn
-                ? const SizedBox(
-                    width: 20, 
-                    height: 20, 
-                    child: Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: CircularProgressIndicator(strokeWidth: 2),
+                  ? const SizedBox(
+                      width: 20,
+                      height: 20,
+                      child: Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      ),
                     )
-                  )
-                : IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () => _translate(false),
-                    tooltip: 'Translate to Portuguese',
-                  ),
+                  : IconButton(
+                      icon: const Icon(Icons.search),
+                      onPressed: () => _translate(false),
+                      tooltip: 'Translate to Portuguese',
+                    ),
             ),
           ),
         ],
@@ -170,7 +184,10 @@ class _VocabularyItemDialogState extends ConsumerState<VocabularyItemDialog> {
               notes: widget.item?.notes ?? '',
             );
 
-            widget.onSave(newItem, widget.item?.id == 'temp' ? null : widget.item?.id);
+            widget.onSave(
+              newItem,
+              widget.item?.id == 'temp' ? null : widget.item?.id,
+            );
             Navigator.pop(context);
           },
           child: const Text('Save'),

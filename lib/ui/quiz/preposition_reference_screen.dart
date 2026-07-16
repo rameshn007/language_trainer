@@ -9,7 +9,7 @@ class PrepositionReferenceScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final ttsService = ref.read(ttsServiceProvider);
-    
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Prepositions Reference'),
@@ -32,8 +32,14 @@ class PrepositionReferenceScreen extends ConsumerWidget {
                 ],
                 rules: [
                   {'context': 'horas', 'example': 'Ele sai às 17:00.'},
-                  {'context': 'partes do dia', 'example': 'À noite, ele ouve música.'},
-                  {'context': 'dias da semana (rotinas)', 'example': 'À segunda-feira, ele tem aula de português.'},
+                  {
+                    'context': 'partes do dia',
+                    'example': 'À noite, ele ouve música.',
+                  },
+                  {
+                    'context': 'dias da semana (rotinas)',
+                    'example': 'À segunda-feira, ele tem aula de português.',
+                  },
                 ],
                 ttsService: ttsService,
               ),
@@ -51,8 +57,15 @@ class PrepositionReferenceScreen extends ConsumerWidget {
                   {'formula': 'de + as', 'result': 'das'},
                 ],
                 rules: [
-                  {'context': 'partes do dia', 'example': 'Ao sábado de manhã, a Joana tem aula de ballet mas, de tarde, sai com os amigos.'},
-                  {'context': 'horas + partes do dia', 'example': 'Ele chega às cinco da tarde.'},
+                  {
+                    'context': 'partes do dia',
+                    'example':
+                        'Ao sábado de manhã, a Joana tem aula de ballet mas, de tarde, sai com os amigos.',
+                  },
+                  {
+                    'context': 'horas + partes do dia',
+                    'example': 'Ele chega às cinco da tarde.',
+                  },
                 ],
                 ttsService: ttsService,
               ),
@@ -70,7 +83,10 @@ class PrepositionReferenceScreen extends ConsumerWidget {
                   {'formula': 'em + as', 'result': 'nas'},
                 ],
                 rules: [
-                  {'context': 'dias da semana (ações pontuais)', 'example': 'No domingo, vamos ao Porto?'},
+                  {
+                    'context': 'dias da semana (ações pontuais)',
+                    'example': 'No domingo, vamos ao Porto?',
+                  },
                 ],
                 ttsService: ttsService,
               ),
@@ -92,17 +108,42 @@ class PrepositionReferenceScreen extends ConsumerWidget {
                   {'formula': 'com + vocês', 'result': 'com vocês'},
                 ],
                 rules: [
-                  {'context': 'with me', 'example': 'Queres ir ao cinema comigo hoje?'},
-                  {'context': 'with you (informal)', 'example': 'Eu gosto muito de estar contigo.'},
-                  {'context': 'with you (formal / reflexive)', 'example': 'Queria falar consigo, senhor Pedro.'},
-                  {'context': 'with us', 'example': 'Queres jantar connosco hoje à noite?'},
-                  {'context': 'with you (plural informal)', 'example': 'Nós gostamos de trabalhar convosco.'},
-                  {'context': 'with him / her', 'example': 'O João foi almoçar com ela.'},
-                  {'context': 'with them', 'example': 'Nós vamos ao restaurante com eles.'},
-                  {'context': 'with you (plural)', 'example': 'Eu vou ao mercado com vocês.'},
+                  {
+                    'context': 'with me',
+                    'example': 'Queres ir ao cinema comigo hoje?',
+                  },
+                  {
+                    'context': 'with you (informal)',
+                    'example': 'Eu gosto muito de estar contigo.',
+                  },
+                  {
+                    'context': 'with you (formal / reflexive)',
+                    'example': 'Queria falar consigo, senhor Pedro.',
+                  },
+                  {
+                    'context': 'with us',
+                    'example': 'Queres jantar connosco hoje à noite?',
+                  },
+                  {
+                    'context': 'with you (plural informal)',
+                    'example': 'Nós gostamos de trabalhar convosco.',
+                  },
+                  {
+                    'context': 'with him / her',
+                    'example': 'O João foi almoçar com ela.',
+                  },
+                  {
+                    'context': 'with them',
+                    'example': 'Nós vamos ao restaurante com eles.',
+                  },
+                  {
+                    'context': 'with you (plural)',
+                    'example': 'Eu vou ao mercado com vocês.',
+                  },
                 ],
                 ttsService: ttsService,
-                noteText: '• contigo is for friends/family (informal).\n'
+                noteText:
+                    '• contigo is for friends/family (informal).\n'
                     '• consigo is for formal "you" (addressing the listener directly) or reflexive "with oneself" (e.g. "Ele levou a mala consigo").\n'
                     '• com ele/ela is for a third person (him/her) and NOT reflexive.\n'
                     '• com vocês is the general plural "with you", while convosco is used in regional/formal Portugal.',
@@ -171,50 +212,61 @@ class _ReferenceSection extends StatelessWidget {
                 Wrap(
                   spacing: 12,
                   runSpacing: 12,
-                  children: combinations.map((combo) => _CombinationChip(
-                    formula: combo['formula']!,
-                    result: combo['result']!,
-                    color: color,
-                  )).toList(),
+                  children: combinations
+                      .map(
+                        (combo) => _CombinationChip(
+                          formula: combo['formula']!,
+                          result: combo['result']!,
+                          color: color,
+                        ),
+                      )
+                      .toList(),
                 ),
                 const SizedBox(height: 20),
                 const Divider(),
                 const SizedBox(height: 10),
                 // Rules table
-                ...rules.map((rule) => Padding(
-                  padding: const EdgeInsets.only(bottom: 12.0),
-                  child: InkWell(
-                    onTap: () => ttsService.speak(rule['example']!, language: 'pt'),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            rule['context']!,
-                            style: TextStyle(
-                              fontSize: 13,
-                              color: Theme.of(context).colorScheme.outline,
-                              fontStyle: FontStyle.italic,
+                ...rules.map(
+                  (rule) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12.0),
+                    child: InkWell(
+                      onTap: () =>
+                          ttsService.speak(rule['example']!, language: 'pt'),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Text(
+                              rule['context']!,
+                              style: TextStyle(
+                                fontSize: 13,
+                                color: Theme.of(context).colorScheme.outline,
+                                fontStyle: FontStyle.italic,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            rule['example']!,
-                            style: const TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                          const SizedBox(width: 12),
+                          Expanded(
+                            flex: 3,
+                            child: Text(
+                              rule['example']!,
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
-                        ),
-                        Icon(Icons.volume_up, size: 18, color: color.withValues(alpha: 0.5)),
-                      ],
+                          Icon(
+                            Icons.volume_up,
+                            size: 18,
+                            color: color.withValues(alpha: 0.5),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                )),
+                ),
                 if (noteText != null) ...[
                   const SizedBox(height: 10),
                   const Divider(),
@@ -237,7 +289,9 @@ class _ReferenceSection extends StatelessWidget {
                             noteText!,
                             style: TextStyle(
                               fontSize: 13,
-                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.85),
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurface.withValues(alpha: 0.85),
                             ),
                           ),
                         ),
@@ -279,7 +333,10 @@ class _CombinationChip extends StatelessWidget {
         children: [
           Text(
             formula,
-            style: TextStyle(fontSize: 14, color: Theme.of(context).colorScheme.onSurface),
+            style: TextStyle(
+              fontSize: 14,
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
           ),
           const SizedBox(width: 6),
           const Text('=', style: TextStyle(color: Colors.grey)),

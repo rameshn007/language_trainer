@@ -10,10 +10,7 @@ class GrammarReferenceScreen extends ConsumerWidget {
     final ttsService = ref.read(ttsServiceProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Grammar Reference'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Grammar Reference'), centerTitle: true),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -80,12 +77,48 @@ class _PronounsSection extends StatelessWidget {
             child: Column(
               children: [
                 _pronounRow('Eu', 'I', 'Always used', context, ttsService),
-                _pronounRow('Tu', 'You (informal)', 'Friends, family, colleagues of similar age', context, ttsService),
-                _pronounRow('Você', 'You (semi-formal)', 'Caution: Often considered blunt or slightly rude in Portugal', context, ttsService),
-                _pronounRow('O senhor / A senhora', 'You (formal)', 'Older people, strangers, formal service encounters', context, ttsService),
-                _pronounRow('Ele / Ela', 'He / She', '3rd person singular', context, ttsService),
-                _pronounRow('Nós', 'We', 'Standard for "we" (pt-PT rarely uses "a gente" formally)', context, ttsService),
-                _pronounRow('Eles / Elas', 'They', '3rd person plural', context, ttsService),
+                _pronounRow(
+                  'Tu',
+                  'You (informal)',
+                  'Friends, family, colleagues of similar age',
+                  context,
+                  ttsService,
+                ),
+                _pronounRow(
+                  'Você',
+                  'You (semi-formal)',
+                  'Caution: Often considered blunt or slightly rude in Portugal',
+                  context,
+                  ttsService,
+                ),
+                _pronounRow(
+                  'O senhor / A senhora',
+                  'You (formal)',
+                  'Older people, strangers, formal service encounters',
+                  context,
+                  ttsService,
+                ),
+                _pronounRow(
+                  'Ele / Ela',
+                  'He / She',
+                  '3rd person singular',
+                  context,
+                  ttsService,
+                ),
+                _pronounRow(
+                  'Nós',
+                  'We',
+                  'Standard for "we" (pt-PT rarely uses "a gente" formally)',
+                  context,
+                  ttsService,
+                ),
+                _pronounRow(
+                  'Eles / Elas',
+                  'They',
+                  '3rd person plural',
+                  context,
+                  ttsService,
+                ),
               ],
             ),
           ),
@@ -94,7 +127,13 @@ class _PronounsSection extends StatelessWidget {
     );
   }
 
-  Widget _pronounRow(String pronoun, String meaning, String usage, BuildContext context, dynamic ttsService) {
+  Widget _pronounRow(
+    String pronoun,
+    String meaning,
+    String usage,
+    BuildContext context,
+    dynamic ttsService,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
@@ -108,10 +147,7 @@ class _PronounsSection extends StatelessWidget {
             ),
             child: Text(
               pronoun,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
           ),
           const SizedBox(width: 12),
@@ -186,7 +222,9 @@ class _PresentContinuousSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.green.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.green.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.green.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,19 +249,35 @@ class _PresentContinuousSection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                _exampleRow('Eu estou a comer', 'I am eating', context, ttsService),
-                _exampleRow('Ela está a trabalhar', 'She is working', context, ttsService),
+                _exampleRow(
+                  'Eu estou a comer',
+                  'I am eating',
+                  context,
+                  ttsService,
+                ),
+                _exampleRow(
+                  'Ela está a trabalhar',
+                  'She is working',
+                  context,
+                  ttsService,
+                ),
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: Colors.red.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.red.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.red.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.warning_amber_rounded, size: 20, color: Colors.red),
+                      const Icon(
+                        Icons.warning_amber_rounded,
+                        size: 20,
+                        color: Colors.red,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
@@ -246,16 +300,27 @@ class _PresentContinuousSection extends StatelessWidget {
     );
   }
 
-  Widget _exampleRow(String pt, String en, BuildContext context, dynamic ttsService) {
+  Widget _exampleRow(
+    String pt,
+    String en,
+    BuildContext context,
+    dynamic ttsService,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         onTap: () => ttsService.speak(pt, language: 'pt'),
         child: Row(
           children: [
-            Icon(Icons.volume_up, size: 18, color: Colors.green.withValues(alpha: 0.5)),
+            Icon(
+              Icons.volume_up,
+              size: 18,
+              color: Colors.green.withValues(alpha: 0.5),
+            ),
             const SizedBox(width: 8),
-            Expanded(child: Text('$pt — $en', style: const TextStyle(fontSize: 15))),
+            Expanded(
+              child: Text('$pt — $en', style: const TextStyle(fontSize: 15)),
+            ),
           ],
         ),
       ),
@@ -303,11 +368,23 @@ class _RegularVerbsSection extends StatelessWidget {
               children: [
                 _verbTableHeader(context),
                 const SizedBox(height: 4),
-                _verbRow('Eu', 'falo (-ar)', 'como (-er)', 'parto (-ir)', context),
+                _verbRow(
+                  'Eu',
+                  'falo (-ar)',
+                  'como (-er)',
+                  'parto (-ir)',
+                  context,
+                ),
                 _verbRow('Tu', 'falas', 'comes', 'partes', context),
                 _verbRow('Ele/Ela/Senhor', 'fala', 'come', 'parte', context),
                 _verbRow('Nós', 'falamos', 'comemos', 'partimos', context),
-                _verbRow('Eles/Elas/Senhores', 'falam', 'comem', 'partem', context),
+                _verbRow(
+                  'Eles/Elas/Senhores',
+                  'falam',
+                  'comem',
+                  'partem',
+                  context,
+                ),
                 const SizedBox(height: 12),
                 Text(
                   'Examples: falar (to speak), comer (to eat), partir (to leave)',
@@ -328,23 +405,72 @@ class _RegularVerbsSection extends StatelessWidget {
   Widget _verbTableHeader(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: 80, child: Text('Subject', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Theme.of(context).colorScheme.outline))),
+        SizedBox(
+          width: 80,
+          child: Text(
+            'Subject',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+              color: Theme.of(context).colorScheme.outline,
+            ),
+          ),
+        ),
         const SizedBox(width: 12),
-        Expanded(child: Text('-AR (Falar)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.orange))),
+        Expanded(
+          child: Text(
+            '-AR (Falar)',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+              color: Colors.orange,
+            ),
+          ),
+        ),
         const SizedBox(width: 12),
-        Expanded(child: Text('-ER (Comer)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.orange))),
+        Expanded(
+          child: Text(
+            '-ER (Comer)',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+              color: Colors.orange,
+            ),
+          ),
+        ),
         const SizedBox(width: 12),
-        Expanded(child: Text('-IR (Partir)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.orange))),
+        Expanded(
+          child: Text(
+            '-IR (Partir)',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+              color: Colors.orange,
+            ),
+          ),
+        ),
       ],
     );
   }
 
-  Widget _verbRow(String subject, String ar, String er, String ir, BuildContext context) {
+  Widget _verbRow(
+    String subject,
+    String ar,
+    String er,
+    String ir,
+    BuildContext context,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
         children: [
-          SizedBox(width: 80, child: Text(subject, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500))),
+          SizedBox(
+            width: 80,
+            child: Text(
+              subject,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+            ),
+          ),
           const SizedBox(width: 12),
           Expanded(child: Text(ar, style: const TextStyle(fontSize: 13))),
           const SizedBox(width: 12),
@@ -400,25 +526,58 @@ class _PronounPlacementSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.purple.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.purple.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.purple.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Text(
                     'Default (Enclisis): Pronoun attaches to the END of the verb with a hyphen',
-                    style: TextStyle(fontSize: 14, color: Colors.purple.shade700),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.purple.shade700,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 12),
-                _exampleRow('Chamo-me João.', 'I call myself João.', context, ttsService),
-                _exampleRow('Dá-me o livro.', 'Give me the book.', context, ttsService),
+                _exampleRow(
+                  'Chamo-me João.',
+                  'I call myself João.',
+                  context,
+                  ttsService,
+                ),
+                _exampleRow(
+                  'Dá-me o livro.',
+                  'Give me the book.',
+                  context,
+                  ttsService,
+                ),
                 const SizedBox(height: 16),
                 Text(
                   'Exceptions (Proclisis) — pronoun jumps BEFORE the verb:',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
                 ),
                 const SizedBox(height: 8),
-                _exceptionRow('Negative words', 'Não me chamo João.', context, ttsService),
-                _exceptionRow('Question words', 'Como te chamas?', context, ttsService),
-                _exceptionRow('Certain adverbs', 'Já me disseste.', context, ttsService),
+                _exceptionRow(
+                  'Negative words',
+                  'Não me chamo João.',
+                  context,
+                  ttsService,
+                ),
+                _exceptionRow(
+                  'Question words',
+                  'Como te chamas?',
+                  context,
+                  ttsService,
+                ),
+                _exceptionRow(
+                  'Certain adverbs',
+                  'Já me disseste.',
+                  context,
+                  ttsService,
+                ),
               ],
             ),
           ),
@@ -427,23 +586,39 @@ class _PronounPlacementSection extends StatelessWidget {
     );
   }
 
-  Widget _exampleRow(String pt, String en, BuildContext context, dynamic ttsService) {
+  Widget _exampleRow(
+    String pt,
+    String en,
+    BuildContext context,
+    dynamic ttsService,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         onTap: () => ttsService.speak(pt, language: 'pt'),
         child: Row(
           children: [
-            Icon(Icons.volume_up, size: 18, color: Colors.purple.withValues(alpha: 0.5)),
+            Icon(
+              Icons.volume_up,
+              size: 18,
+              color: Colors.purple.withValues(alpha: 0.5),
+            ),
             const SizedBox(width: 8),
-            Expanded(child: Text('$pt — $en', style: const TextStyle(fontSize: 14))),
+            Expanded(
+              child: Text('$pt — $en', style: const TextStyle(fontSize: 14)),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _exceptionRow(String condition, String example, BuildContext context, dynamic ttsService) {
+  Widget _exceptionRow(
+    String condition,
+    String example,
+    BuildContext context,
+    dynamic ttsService,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
@@ -468,7 +643,11 @@ class _PronounPlacementSection extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.volume_up, size: 14, color: Colors.red.withValues(alpha: 0.4)),
+                  Icon(
+                    Icons.volume_up,
+                    size: 14,
+                    color: Colors.red.withValues(alpha: 0.4),
+                  ),
                   const SizedBox(width: 4),
                   Flexible(
                     child: Text(example, style: const TextStyle(fontSize: 13)),
@@ -521,25 +700,77 @@ class _ContractionsSection extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                _contractionGroup('De (of/from)', [
-                  {'formula': 'de + o', 'result': 'do', 'example': 'O livro do João'},
-                  {'formula': 'de + a', 'result': 'da', 'example': 'A casa da mãe'},
-                ], context, ttsService),
+                _contractionGroup(
+                  'De (of/from)',
+                  [
+                    {
+                      'formula': 'de + o',
+                      'result': 'do',
+                      'example': 'O livro do João',
+                    },
+                    {
+                      'formula': 'de + a',
+                      'result': 'da',
+                      'example': 'A casa da mãe',
+                    },
+                  ],
+                  context,
+                  ttsService,
+                ),
                 const SizedBox(height: 16),
-                _contractionGroup('Em (in/on/at)', [
-                  {'formula': 'em + o', 'result': 'no', 'example': 'Moro no Porto'},
-                  {'formula': 'em + a', 'result': 'na', 'example': 'Moro na cidade'},
-                ], context, ttsService),
+                _contractionGroup(
+                  'Em (in/on/at)',
+                  [
+                    {
+                      'formula': 'em + o',
+                      'result': 'no',
+                      'example': 'Moro no Porto',
+                    },
+                    {
+                      'formula': 'em + a',
+                      'result': 'na',
+                      'example': 'Moro na cidade',
+                    },
+                  ],
+                  context,
+                  ttsService,
+                ),
                 const SizedBox(height: 16),
-                _contractionGroup('A (to/at)', [
-                  {'formula': 'a + o', 'result': 'ao', 'example': 'Vou ao mercado'},
-                  {'formula': 'a + a', 'result': 'à', 'example': 'Vou à escola'},
-                ], context, ttsService),
+                _contractionGroup(
+                  'A (to/at)',
+                  [
+                    {
+                      'formula': 'a + o',
+                      'result': 'ao',
+                      'example': 'Vou ao mercado',
+                    },
+                    {
+                      'formula': 'a + a',
+                      'result': 'à',
+                      'example': 'Vou à escola',
+                    },
+                  ],
+                  context,
+                  ttsService,
+                ),
                 const SizedBox(height: 16),
-                _contractionGroup('Por (by/for)', [
-                  {'formula': 'por + o', 'result': 'pelo', 'example': 'Vou pelo parque'},
-                  {'formula': 'por + a', 'result': 'pela', 'example': 'Vou pela praia'},
-                ], context, ttsService),
+                _contractionGroup(
+                  'Por (by/for)',
+                  [
+                    {
+                      'formula': 'por + o',
+                      'result': 'pelo',
+                      'example': 'Vou pelo parque',
+                    },
+                    {
+                      'formula': 'por + a',
+                      'result': 'pela',
+                      'example': 'Vou pela praia',
+                    },
+                  ],
+                  context,
+                  ttsService,
+                ),
               ],
             ),
           ),
@@ -548,7 +779,12 @@ class _ContractionsSection extends StatelessWidget {
     );
   }
 
-  Widget _contractionGroup(String title, List<Map<String, String>> items, BuildContext context, dynamic ttsService) {
+  Widget _contractionGroup(
+    String title,
+    List<Map<String, String>> items,
+    BuildContext context,
+    dynamic ttsService,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -557,18 +793,26 @@ class _ContractionsSection extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
         ),
         const SizedBox(height: 8),
-        ...items.map((item) => _contractionRow(
-          item['formula']!,
-          item['result']!,
-          item['example']!,
-          context,
-          ttsService,
-        )),
+        ...items.map(
+          (item) => _contractionRow(
+            item['formula']!,
+            item['result']!,
+            item['example']!,
+            context,
+            ttsService,
+          ),
+        ),
       ],
     );
   }
 
-  Widget _contractionRow(String formula, String result, String example, BuildContext context, dynamic ttsService) {
+  Widget _contractionRow(
+    String formula,
+    String result,
+    String example,
+    BuildContext context,
+    dynamic ttsService,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: Row(
@@ -579,14 +823,21 @@ class _ContractionsSection extends StatelessWidget {
               color: Colors.teal.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(6),
             ),
-            child: Text(formula, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+            child: Text(
+              formula,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+            ),
           ),
           const SizedBox(width: 8),
           const Text('=', style: TextStyle(color: Colors.grey)),
           const SizedBox(width: 8),
           Text(
             result,
-            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.teal),
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Colors.teal,
+            ),
           ),
           const SizedBox(width: 12),
           Flexible(
@@ -595,10 +846,20 @@ class _ContractionsSection extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.volume_up, size: 14, color: Colors.teal.withValues(alpha: 0.4)),
+                  Icon(
+                    Icons.volume_up,
+                    size: 14,
+                    color: Colors.teal.withValues(alpha: 0.4),
+                  ),
                   const SizedBox(width: 4),
                   Flexible(
-                    child: Text(example, style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.outline)),
+                    child: Text(
+                      example,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -653,14 +914,20 @@ class _GenderPluralSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.blue.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.blue.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.blue.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Gender',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.blue),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.blue,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -680,14 +947,20 @@ class _GenderPluralSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.purple.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.purple.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.purple.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Plurals',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: Colors.purple),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                          color: Colors.purple,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -702,9 +975,24 @@ class _GenderPluralSection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
-                _exampleRow('um homem → uns homens', '-m changes to -ns', context, ttsService),
-                _exampleRow('um livro → livros', 'add -s to vowel-ending words', context, ttsService),
-                _exampleRow('a cidade → as cidades', '-dade is feminine, add -s', context, ttsService),
+                _exampleRow(
+                  'um homem → uns homens',
+                  '-m changes to -ns',
+                  context,
+                  ttsService,
+                ),
+                _exampleRow(
+                  'um livro → livros',
+                  'add -s to vowel-ending words',
+                  context,
+                  ttsService,
+                ),
+                _exampleRow(
+                  'a cidade → as cidades',
+                  '-dade is feminine, add -s',
+                  context,
+                  ttsService,
+                ),
               ],
             ),
           ),
@@ -713,21 +1001,35 @@ class _GenderPluralSection extends StatelessWidget {
     );
   }
 
-  Widget _exampleRow(String pt, String note, BuildContext context, dynamic ttsService) {
+  Widget _exampleRow(
+    String pt,
+    String note,
+    BuildContext context,
+    dynamic ttsService,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: InkWell(
-        onTap: () => ttsService.speak(pt.split('→').first.trim(), language: 'pt'),
+        onTap: () =>
+            ttsService.speak(pt.split('→').first.trim(), language: 'pt'),
         child: Row(
           children: [
-            Icon(Icons.volume_up, size: 18, color: Colors.amber.withValues(alpha: 0.5)),
+            Icon(
+              Icons.volume_up,
+              size: 18,
+              color: Colors.amber.withValues(alpha: 0.5),
+            ),
             const SizedBox(width: 8),
             Expanded(child: Text(pt, style: const TextStyle(fontSize: 14))),
             const SizedBox(width: 8),
             Expanded(
               child: Text(
                 note,
-                style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.outline, fontStyle: FontStyle.italic),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Theme.of(context).colorScheme.outline,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
           ],
@@ -777,8 +1079,15 @@ class _IrregularPresentSection extends StatelessWidget {
               children: [
                 _verbConjugationTable(
                   context: context,
-                  title: 'Ser (to be - permanent) / Estar (to be - temp) / Ter (to have) / Ir (to go) / Fazer (to do/make)',
-                  pronouns: ['Eu', 'Tu', 'Ele/Ela/Senhor', 'Nós', 'Eles/Elas/Senhores'],
+                  title:
+                      'Ser (to be - permanent) / Estar (to be - temp) / Ter (to have) / Ir (to go) / Fazer (to do/make)',
+                  pronouns: [
+                    'Eu',
+                    'Tu',
+                    'Ele/Ela/Senhor',
+                    'Nós',
+                    'Eles/Elas/Senhores',
+                  ],
                   conjugations: [
                     ['sou', 'estou', 'tenho', 'vou', 'faço'],
                     ['és', 'estás', 'tens', 'vais', 'fazas'],
@@ -786,7 +1095,13 @@ class _IrregularPresentSection extends StatelessWidget {
                     ['somos', 'estamos', 'temos', 'vamos', 'fazemos'],
                     ['são', 'estão', 'têm', 'vão', 'fazem'],
                   ],
-                  colors: [Colors.blue, Colors.green, Colors.orange, Colors.purple, Colors.teal],
+                  colors: [
+                    Colors.blue,
+                    Colors.green,
+                    Colors.orange,
+                    Colors.purple,
+                    Colors.teal,
+                  ],
                 ),
                 const SizedBox(height: 16),
                 Container(
@@ -794,14 +1109,20 @@ class _IrregularPresentSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.amber.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.amber.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.amber.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Ser vs Estar',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.amber),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Colors.amber,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -821,14 +1142,20 @@ class _IrregularPresentSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.cyan.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.cyan.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.cyan.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Ter (Hidden Uses)',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.cyan),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Colors.cyan,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       Text(
@@ -848,23 +1175,39 @@ class _IrregularPresentSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.pink.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.pink.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.pink.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Near Future Hack: Ir + Infinitive',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.pink),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Colors.pink,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       InkWell(
-                        onTap: () => ttsService.speak('Vou cozinhar.', language: 'pt'),
+                        onTap: () =>
+                            ttsService.speak('Vou cozinhar.', language: 'pt'),
                         child: Row(
                           children: [
-                            Icon(Icons.volume_up, size: 14, color: Colors.pink.withValues(alpha: 0.5)),
+                            Icon(
+                              Icons.volume_up,
+                              size: 14,
+                              color: Colors.pink.withValues(alpha: 0.5),
+                            ),
                             const SizedBox(width: 4),
-                            Expanded(child: Text('Vou cozinhar. = I am going to cook', style: const TextStyle(fontSize: 13))),
+                            Expanded(
+                              child: Text(
+                                'Vou cozinhar. = I am going to cook',
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -877,33 +1220,61 @@ class _IrregularPresentSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.red.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.red.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.red.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Fazer (Weather/Time)',
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.red),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                          color: Colors.red,
+                        ),
                       ),
                       const SizedBox(height: 4),
                       InkWell(
-                        onTap: () => ttsService.speak('Faz sol.', language: 'pt'),
+                        onTap: () =>
+                            ttsService.speak('Faz sol.', language: 'pt'),
                         child: Row(
                           children: [
-                            Icon(Icons.volume_up, size: 14, color: Colors.red.withValues(alpha: 0.5)),
+                            Icon(
+                              Icons.volume_up,
+                              size: 14,
+                              color: Colors.red.withValues(alpha: 0.5),
+                            ),
                             const SizedBox(width: 4),
-                            Expanded(child: Text('Faz sol. = It\'s sunny', style: const TextStyle(fontSize: 13))),
+                            Expanded(
+                              child: Text(
+                                'Faz sol. = It\'s sunny',
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ),
                           ],
                         ),
                       ),
                       InkWell(
-                        onTap: () => ttsService.speak('Faz dois anos que moro aqui.', language: 'pt'),
+                        onTap: () => ttsService.speak(
+                          'Faz dois anos que moro aqui.',
+                          language: 'pt',
+                        ),
                         child: Row(
                           children: [
-                            Icon(Icons.volume_up, size: 14, color: Colors.red.withValues(alpha: 0.5)),
+                            Icon(
+                              Icons.volume_up,
+                              size: 14,
+                              color: Colors.red.withValues(alpha: 0.5),
+                            ),
                             const SizedBox(width: 4),
-                            Expanded(child: Text('Faz dois anos que moro aqui. = It\'s been two years...', style: const TextStyle(fontSize: 13))),
+                            Expanded(
+                              child: Text(
+                                'Faz dois anos que moro aqui. = It\'s been two years...',
+                                style: const TextStyle(fontSize: 13),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -916,16 +1287,27 @@ class _IrregularPresentSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.blue.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.blue.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.blue.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.record_voice_over, size: 20, color: Colors.blue),
+                      const Icon(
+                        Icons.record_voice_over,
+                        size: 20,
+                        color: Colors.blue,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'Pronunciation Tip: "têm" (they have) sounds like nasal "tãym" vs "tem" (he has) sounds like nasal "tãing". The circumflex makes the difference!',
-                          style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.85)),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: 0.85),
+                          ),
                         ),
                       ),
                     ],
@@ -951,23 +1333,86 @@ class _IrregularPresentSection extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.outline),
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).colorScheme.outline,
+          ),
         ),
         const SizedBox(height: 8),
         // Header row
         Row(
           children: [
-            SizedBox(width: 80, child: Text('Pronoun', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Theme.of(context).colorScheme.outline))),
+            SizedBox(
+              width: 80,
+              child: Text(
+                'Pronoun',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                  color: Theme.of(context).colorScheme.outline,
+                ),
+              ),
+            ),
             const SizedBox(width: 6),
-            Expanded(child: Text('Ser', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: colors[0]), overflow: TextOverflow.ellipsis)),
+            Expanded(
+              child: Text(
+                'Ser',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                  color: colors[0],
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             const SizedBox(width: 6),
-            Expanded(child: Text('Estar', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: colors[1]), overflow: TextOverflow.ellipsis)),
+            Expanded(
+              child: Text(
+                'Estar',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                  color: colors[1],
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             const SizedBox(width: 6),
-            Expanded(child: Text('Ter', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: colors[2]), overflow: TextOverflow.ellipsis)),
+            Expanded(
+              child: Text(
+                'Ter',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                  color: colors[2],
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             const SizedBox(width: 6),
-            Expanded(child: Text('Ir', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: colors[3]), overflow: TextOverflow.ellipsis)),
+            Expanded(
+              child: Text(
+                'Ir',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                  color: colors[3],
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
             const SizedBox(width: 6),
-            Expanded(child: Text('Fazer', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: colors[4]), overflow: TextOverflow.ellipsis)),
+            Expanded(
+              child: Text(
+                'Fazer',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                  color: colors[4],
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
           ],
         ),
         const Divider(height: 20),
@@ -977,17 +1422,56 @@ class _IrregularPresentSection extends StatelessWidget {
             padding: const EdgeInsets.only(bottom: 6),
             child: Row(
               children: [
-                SizedBox(width: 80, child: Text(pronouns[i], style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500))),
+                SizedBox(
+                  width: 80,
+                  child: Text(
+                    pronouns[i],
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
                 const SizedBox(width: 6),
-                Expanded(child: Text(conjugations[i][0], style: TextStyle(fontSize: 12, color: colors[0]), overflow: TextOverflow.ellipsis)),
+                Expanded(
+                  child: Text(
+                    conjugations[i][0],
+                    style: TextStyle(fontSize: 12, color: colors[0]),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 const SizedBox(width: 6),
-                Expanded(child: Text(conjugations[i][1], style: TextStyle(fontSize: 12, color: colors[1]), overflow: TextOverflow.ellipsis)),
+                Expanded(
+                  child: Text(
+                    conjugations[i][1],
+                    style: TextStyle(fontSize: 12, color: colors[1]),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 const SizedBox(width: 6),
-                Expanded(child: Text(conjugations[i][2], style: TextStyle(fontSize: 12, color: colors[2]), overflow: TextOverflow.ellipsis)),
+                Expanded(
+                  child: Text(
+                    conjugations[i][2],
+                    style: TextStyle(fontSize: 12, color: colors[2]),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 const SizedBox(width: 6),
-                Expanded(child: Text(conjugations[i][3], style: TextStyle(fontSize: 12, color: colors[3]), overflow: TextOverflow.ellipsis)),
+                Expanded(
+                  child: Text(
+                    conjugations[i][3],
+                    style: TextStyle(fontSize: 12, color: colors[3]),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 const SizedBox(width: 6),
-                Expanded(child: Text(conjugations[i][4], style: TextStyle(fontSize: 12, color: colors[4]), overflow: TextOverflow.ellipsis)),
+                Expanded(
+                  child: Text(
+                    conjugations[i][4],
+                    style: TextStyle(fontSize: 12, color: colors[4]),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
               ],
             ),
           );
@@ -1040,18 +1524,30 @@ class _IrregularPastSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.indigo.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.indigo.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.indigo.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Text(
                     'Use for completed actions in the past with a clear beginning and end.',
-                    style: TextStyle(fontSize: 14, color: Colors.indigo.shade700),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.indigo.shade700,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 12),
                 _pastTenseTable(
                   context: context,
-                  title: 'Ser / Ir (To be / To go) — share the SAME conjugations',
-                  pronouns: ['Eu', 'Tu', 'Ele/Ela/Senhor', 'Nós', 'Eles/Elas/Senhores'],
+                  title:
+                      'Ser / Ir (To be / To go) — share the SAME conjugations',
+                  pronouns: [
+                    'Eu',
+                    'Tu',
+                    'Ele/Ela/Senhor',
+                    'Nós',
+                    'Eles/Elas/Senhores',
+                  ],
                   conjugations: ['fui', 'foste', 'foi', 'fomos', 'foram'],
                   color: Colors.blue,
                 ),
@@ -1059,48 +1555,114 @@ class _IrregularPastSection extends StatelessWidget {
                 _pastTenseTable(
                   context: context,
                   title: 'Estar (To be - temporary)',
-                  pronouns: ['Eu', 'Tu', 'Ele/Ela/Senhor', 'Nós', 'Eles/Elas/Senhores'],
-                  conjugations: ['estive', 'estiveste', 'esteve', 'estivemos', 'estiveram'],
+                  pronouns: [
+                    'Eu',
+                    'Tu',
+                    'Ele/Ela/Senhor',
+                    'Nós',
+                    'Eles/Elas/Senhores',
+                  ],
+                  conjugations: [
+                    'estive',
+                    'estiveste',
+                    'esteve',
+                    'estivemos',
+                    'estiveram',
+                  ],
                   color: Colors.green,
                 ),
                 const SizedBox(height: 12),
                 _pastTenseTable(
                   context: context,
                   title: 'Ter (To have)',
-                  pronouns: ['Eu', 'Tu', 'Ele/Ela/Senhor', 'Nós', 'Eles/Elas/Senhores'],
-                  conjugations: ['tive', 'tiveste', 'teve', 'tivemos', 'tiveram'],
+                  pronouns: [
+                    'Eu',
+                    'Tu',
+                    'Ele/Ela/Senhor',
+                    'Nós',
+                    'Eles/Elas/Senhores',
+                  ],
+                  conjugations: [
+                    'tive',
+                    'tiveste',
+                    'teve',
+                    'tivemos',
+                    'tiveram',
+                  ],
                   color: Colors.orange,
                 ),
                 const SizedBox(height: 12),
                 _pastTenseTable(
                   context: context,
                   title: 'Fazer (To do/make)',
-                  pronouns: ['Eu', 'Tu', 'Ele/Ela/Senhor', 'Nós', 'Eles/Elas/Senhores'],
+                  pronouns: [
+                    'Eu',
+                    'Tu',
+                    'Ele/Ela/Senhor',
+                    'Nós',
+                    'Eles/Elas/Senhores',
+                  ],
                   conjugations: ['fiz', 'fizeste', 'fez', 'fizemos', 'fizeram'],
                   color: Colors.purple,
                 ),
                 const SizedBox(height: 16),
-                _exampleRow('O jantar foi excelente.', 'The dinner was excellent. (ser - past)', context, ttsService),
-                _exampleRow('Ela foi a Lisboa ontem.', 'She went to Lisbon yesterday. (ir - past)', context, ttsService),
-                _exampleRow('Onde é que estiveste?', 'Where were you? (estar - past)', context, ttsService),
-                _exampleRow('Ontem o meu filho teve febre.', 'Yesterday my son had a fever. (ter - past)', context, ttsService),
-                _exampleRow('O que é que fizeste?', 'What did you do? (fazer - past)', context, ttsService),
+                _exampleRow(
+                  'O jantar foi excelente.',
+                  'The dinner was excellent. (ser - past)',
+                  context,
+                  ttsService,
+                ),
+                _exampleRow(
+                  'Ela foi a Lisboa ontem.',
+                  'She went to Lisbon yesterday. (ir - past)',
+                  context,
+                  ttsService,
+                ),
+                _exampleRow(
+                  'Onde é que estiveste?',
+                  'Where were you? (estar - past)',
+                  context,
+                  ttsService,
+                ),
+                _exampleRow(
+                  'Ontem o meu filho teve febre.',
+                  'Yesterday my son had a fever. (ter - past)',
+                  context,
+                  ttsService,
+                ),
+                _exampleRow(
+                  'O que é que fizeste?',
+                  'What did you do? (fazer - past)',
+                  context,
+                  ttsService,
+                ),
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: Colors.red.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.red.withValues(alpha: 0.2)),
+                    border: Border.all(
+                      color: Colors.red.withValues(alpha: 0.2),
+                    ),
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.record_voice_over, size: 20, color: Colors.red),
+                      const Icon(
+                        Icons.record_voice_over,
+                        size: 20,
+                        color: Colors.red,
+                      ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'European Portuguese Pronunciation: The "e" at the end of "tu" conjugations (foste, estiveste, tiveste, fizeste) is almost entirely swallowed or silent in Portugal. The "s" before "t" sounds like an English "sh" (fosh-te, shtivesh-te, fihzesh-te).',
-                          style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.85)),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.onSurface.withValues(alpha: 0.85),
+                          ),
                         ),
                       ),
                     ],
@@ -1126,7 +1688,10 @@ class _IrregularPastSection extends StatelessWidget {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.outline),
+          style: TextStyle(
+            fontSize: 12,
+            color: Theme.of(context).colorScheme.outline,
+          ),
         ),
         const SizedBox(height: 4),
         Row(
@@ -1136,18 +1701,29 @@ class _IrregularPastSection extends StatelessWidget {
                 children: [
                   Text(
                     pronouns[i],
-                    style: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, color: color),
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500,
+                      color: color,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: color.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Text(
                       conjugations[i],
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: color),
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: color,
+                      ),
                     ),
                   ),
                 ],
@@ -1159,21 +1735,34 @@ class _IrregularPastSection extends StatelessWidget {
     );
   }
 
-  Widget _exampleRow(String pt, String en, BuildContext context, dynamic ttsService) {
+  Widget _exampleRow(
+    String pt,
+    String en,
+    BuildContext context,
+    dynamic ttsService,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 6),
       child: InkWell(
         onTap: () => ttsService.speak(pt, language: 'pt'),
         child: Row(
           children: [
-            Icon(Icons.volume_up, size: 18, color: Colors.indigo.withValues(alpha: 0.5)),
+            Icon(
+              Icons.volume_up,
+              size: 18,
+              color: Colors.indigo.withValues(alpha: 0.5),
+            ),
             const SizedBox(width: 8),
             Expanded(child: Text(pt, style: const TextStyle(fontSize: 14))),
             const SizedBox(width: 8),
             Expanded(
               child: Text(
                 en,
-                style: TextStyle(fontSize: 11, color: Theme.of(context).colorScheme.outline, fontStyle: FontStyle.italic),
+                style: TextStyle(
+                  fontSize: 11,
+                  color: Theme.of(context).colorScheme.outline,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
           ],

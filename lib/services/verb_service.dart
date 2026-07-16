@@ -19,11 +19,14 @@ class VerbService {
 
   Future<List<Verb>> loadVerbs() async {
     final Map<String, Verb> verbsMap = {};
-    final bool vocabOnly = storage.getSetting('vocab_only_mode', defaultValue: false) == true;
-    
+    final bool vocabOnly =
+        storage.getSetting('vocab_only_mode', defaultValue: false) == true;
+
     if (!vocabOnly) {
       try {
-        final String content = await rootBundle.loadString('assets/data/verbs.csv');
+        final String content = await rootBundle.loadString(
+          'assets/data/verbs.csv',
+        );
         final lines = content.split('\n');
 
         // Skip the header row
@@ -61,10 +64,13 @@ class VerbService {
     }
 
     try {
-      final String jsonContent = await rootBundle.loadString('assets/vocabulary.json');
+      final String jsonContent = await rootBundle.loadString(
+        'assets/vocabulary.json',
+      );
       final List<dynamic> jsonList = jsonDecode(jsonContent);
       for (var item in jsonList) {
-        if (item['word_type'] == 'verb' || item['word_type'] == 'verbs / food and meals') {
+        if (item['word_type'] == 'verb' ||
+            item['word_type'] == 'verbs / food and meals') {
           final infinitive = item['portuguese']?.toString() ?? '';
           if (infinitive.isEmpty) continue;
 
@@ -114,14 +120,17 @@ class VerbService {
 
             final key = infinitive.toLowerCase();
             final existingVerb = verbsMap[key];
-            
+
             if (existingVerb != null) {
               // Merge: Prefer JSON data as it's often more complete
               verbsMap[key] = Verb(
-                infinitive: existingVerb.infinitive, // keep original case if possible
-                translation: item['english']?.toString() ?? existingVerb.translation,
+                infinitive:
+                    existingVerb.infinitive, // keep original case if possible
+                translation:
+                    item['english']?.toString() ?? existingVerb.translation,
                 conjugations: conjugations,
-                pastConjugations: pastConjugations ?? existingVerb.pastConjugations,
+                pastConjugations:
+                    pastConjugations ?? existingVerb.pastConjugations,
               );
             } else {
               verbsMap[key] = Verb(
@@ -146,17 +155,17 @@ class VerbService {
     final result = <String>[];
     var current = StringBuffer();
     var inQuotes = false;
-    
+
     for (int i = 0; i < row.length; i++) {
-        var char = row[i];
-        if (char == '"') {
-            inQuotes = !inQuotes;
-        } else if (char == ',' && !inQuotes) {
-            result.add(current.toString().trim());
-            current.clear();
-        } else {
-            current.write(char);
-        }
+      var char = row[i];
+      if (char == '"') {
+        inQuotes = !inQuotes;
+      } else if (char == ',' && !inQuotes) {
+        result.add(current.toString().trim());
+        current.clear();
+      } else {
+        current.write(char);
+      }
     }
     result.add(current.toString().trim());
     return result;

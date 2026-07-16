@@ -18,7 +18,7 @@ class CarPlayService {
   final FlutterCarplay _flutterCarplay = FlutterCarplay();
   final QuizEngineService _quizEngine = QuizEngineService();
   TtsService? _ttsService;
-  
+
   final List<CarPlayDrillProvider> _drillProviders = [];
 
   void init({
@@ -49,22 +49,23 @@ class CarPlayService {
 
   void _setupRootTemplate() {
     try {
-      final List<CPListItem> drillItems = _drillProviders.map((p) => CPListItem(
-        text: p.displayName,
-        detailText: p.description,
-        onPress: (complete, setItem) async {
-          complete();
-          _runDrillSession(p);
-        },
-      )).toList();
+      final List<CPListItem> drillItems = _drillProviders
+          .map(
+            (p) => CPListItem(
+              text: p.displayName,
+              detailText: p.description,
+              onPress: (complete, setItem) async {
+                complete();
+                _runDrillSession(p);
+              },
+            ),
+          )
+          .toList();
 
       FlutterCarplay.setRootTemplate(
         rootTemplate: CPListTemplate(
           sections: [
-            CPListSection(
-              items: drillItems,
-              header: 'Available Drills',
-            ),
+            CPListSection(items: drillItems, header: 'Available Drills'),
           ],
           title: 'Language Trainer',
           systemIcon: 'house.fill',
@@ -79,7 +80,10 @@ class CarPlayService {
   Future<void> _runDrillSession(CarPlayDrillProvider provider) async {
     try {
       _isPlaying = true;
-      AppLogger.log('Starting drill session: ${provider.displayName}', name: 'CarPlay');
+      AppLogger.log(
+        'Starting drill session: ${provider.displayName}',
+        name: 'CarPlay',
+      );
 
       DrillChallenge? currentChallenge = await provider.startSession();
 
@@ -92,19 +96,22 @@ class CarPlayService {
         );
 
         if (currentChallenge.isVoiceOnly || currentChallenge.options.isEmpty) {
-          if (_ttsService != null) await _ttsService!.speak(currentChallenge.promptText);
+          if (_ttsService != null)
+            await _ttsService!.speak(currentChallenge.promptText);
         }
 
-        String? answer = await _voiceService.listenForAnswer(const Duration(seconds: 10));
+        String? answer = await _voiceService.listenForAnswer(
+          const Duration(seconds: 10),
+        );
 
         if (answer != null) {
           await provider.processAnswer(answer);
         }
-        
+
         // Check if finished before getting next
         if (provider.isFinished) break;
-        
-        currentChallenge = provider.nextChallenge(); 
+
+        currentChallenge = provider.nextChallenge();
       }
 
       _updateStatusTemplate(
@@ -112,8 +119,11 @@ class CarPlayService {
         provider.completionSummary ?? 'Done!',
         replace: true,
       );
-        
-      if (_ttsService != null) await _ttsService!.speak(provider.completionSummary ?? 'Session complete.');
+
+      if (_ttsService != null)
+        await _ttsService!.speak(
+          provider.completionSummary ?? 'Session complete.',
+        );
       await Future.delayed(const Duration(seconds: 5));
       FlutterCarplay.pop();
     } catch (e) {
@@ -124,7 +134,12 @@ class CarPlayService {
     }
   }
 
-  void _updateStatusTemplate(String title, String detail, {bool replace = true, List<String> options = const []}) {
+  void _updateStatusTemplate(
+    String title,
+    String detail, {
+    bool replace = true,
+    List<String> options = const [],
+  }) {
     if (replace) {
       // We pop the current template before pushing the new one to "replace" it
       // This prevents the navigation stack from growing indefinitely during a drill

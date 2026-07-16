@@ -48,7 +48,7 @@ class QuizEngineService {
     // 2. Prioritize unseen items within each pool
     List<LanguageItem> getPrioritized(List<LanguageItem> pool, int limit) {
       if (pool.isEmpty) return [];
-      
+
       final unseen = <LanguageItem>[];
       final seen = <LanguageItem>[];
 
@@ -72,7 +72,7 @@ class QuizEngineService {
     final int targetWordsCount = (count / 2).floor();
 
     final selectedWords = getPrioritized(words, targetWordsCount);
-    
+
     // If we didn't get enough words, take more phrases
     final int remainingCount = count - selectedWords.length;
     final selectedPhrases = getPrioritized(phrases, remainingCount);
@@ -108,7 +108,8 @@ class QuizEngineService {
       final randomItem = pool[_random.nextInt(pool.length)];
       String distractor = ptToEn ? randomItem.english : randomItem.portuguese;
 
-      if (!used.contains(distractor.toLowerCase().trim()) && distractor.isNotEmpty) {
+      if (!used.contains(distractor.toLowerCase().trim()) &&
+          distractor.isNotEmpty) {
         options.add(distractor);
         used.add(distractor.toLowerCase().trim());
       }
@@ -231,10 +232,16 @@ class QuizEngineService {
 
       // Build distractors: prefer entries from DIFFERENT categories
       final differentCategory = allEntries
-          .where((e) => e['category'] != entryCategory && e['english'] != correctAnswer)
+          .where(
+            (e) =>
+                e['category'] != entryCategory && e['english'] != correctAnswer,
+          )
           .toList();
       final sameCategory = allEntries
-          .where((e) => e['category'] == entryCategory && e['english'] != correctAnswer)
+          .where(
+            (e) =>
+                e['category'] == entryCategory && e['english'] != correctAnswer,
+          )
           .toList();
 
       differentCategory.shuffle(_random);
@@ -265,20 +272,22 @@ class QuizEngineService {
 
       options.shuffle(_random);
 
-      questions.add(Question(
-        id: qId,
-        questionText: entry['portuguese']!,
-        options: options,
-        correctAnswer: correctAnswer,
-        type: QuestionType.interrogativeMatch,
-        sourceItem: LanguageItem(
+      questions.add(
+        Question(
           id: qId,
-          portuguese: entry['portuguese']!,
-          english: entry['english']!,
-          notes: 'Interrogative: ${entry['interrogative']}',
+          questionText: entry['portuguese']!,
+          options: options,
+          correctAnswer: correctAnswer,
+          type: QuestionType.interrogativeMatch,
+          sourceItem: LanguageItem(
+            id: qId,
+            portuguese: entry['portuguese']!,
+            english: entry['english']!,
+            notes: 'Interrogative: ${entry['interrogative']}',
+          ),
+          category: entryCategory,
         ),
-        category: entryCategory,
-      ));
+      );
     }
 
     return questions;
@@ -334,10 +343,22 @@ class QuizEngineService {
 
     // Common prepositions for options
     const allPreps = [
-      'ao', 'à', 'aos', 'às',
-      'do', 'da', 'dos', 'das',
-      'no', 'na', 'nos', 'nas',
-      'de', 'a', 'em', 'para'
+      'ao',
+      'à',
+      'aos',
+      'às',
+      'do',
+      'da',
+      'dos',
+      'das',
+      'no',
+      'na',
+      'nos',
+      'nas',
+      'de',
+      'a',
+      'em',
+      'para',
     ];
 
     // 5. Build questions
@@ -366,19 +387,30 @@ class QuizEngineService {
 
       // Replace the found preposition with a blank
       // Use the exact case of the preposition in the text for the correctAnswer
-      final match = RegExp('\\b$foundPrep\\b', caseSensitive: false).firstMatch(fullText);
+      final match = RegExp(
+        '\\b$foundPrep\\b',
+        caseSensitive: false,
+      ).firstMatch(fullText);
       final actualPrep = match!.group(0)!;
-      final questionText = fullText.replaceRange(match.start, match.end, '____');
+      final questionText = fullText.replaceRange(
+        match.start,
+        match.end,
+        '____',
+      );
 
       // Options: the correct one + 3 others from the list
       final List<String> options = [actualPrep];
       final Set<String> used = {actualPrep.toLowerCase()};
-      final bool isCapitalized = actualPrep.isNotEmpty && actualPrep[0] == actualPrep[0].toUpperCase() && actualPrep[0] != actualPrep[0].toLowerCase();
+      final bool isCapitalized =
+          actualPrep.isNotEmpty &&
+          actualPrep[0] == actualPrep[0].toUpperCase() &&
+          actualPrep[0] != actualPrep[0].toLowerCase();
 
-      final otherPreps = allPreps
-          .where((p) => p.toLowerCase() != actualPrep.toLowerCase())
-          .toList()
-        ..shuffle(_random);
+      final otherPreps =
+          allPreps
+              .where((p) => p.toLowerCase() != actualPrep.toLowerCase())
+              .toList()
+            ..shuffle(_random);
 
       for (var p in otherPreps) {
         if (options.length >= 4) break;
@@ -394,19 +426,21 @@ class QuizEngineService {
 
       options.shuffle(_random);
 
-      questions.add(Question(
-        id: qId,
-        questionText: questionText,
-        options: options,
-        correctAnswer: actualPrep,
-        type: QuestionType.prepositionFill,
-        sourceItem: LanguageItem(
+      questions.add(
+        Question(
           id: qId,
-          portuguese: fullText, // Store full text here so TTS can read it
-          english: english,
+          questionText: questionText,
+          options: options,
+          correctAnswer: actualPrep,
+          type: QuestionType.prepositionFill,
+          sourceItem: LanguageItem(
+            id: qId,
+            portuguese: fullText, // Store full text here so TTS can read it
+            english: english,
+          ),
+          category: entry['category'],
         ),
-        category: entry['category'],
-      ));
+      );
     }
 
     return questions;
@@ -432,8 +466,10 @@ class QuizEngineService {
         'questionText': (e['questionText'] ?? '').toString(),
         'correctAnswer': (e['correctAnswer'] ?? '').toString(),
         'category': (e['category'] ?? '').toString(),
-        'sourcePortuguese': (e['sourceItem'] as Map?)?['portuguese']?.toString() ?? '',
-        'sourceEnglish': (e['sourceItem'] as Map?)?['english']?.toString() ?? '',
+        'sourcePortuguese':
+            (e['sourceItem'] as Map?)?['portuguese']?.toString() ?? '',
+        'sourceEnglish':
+            (e['sourceItem'] as Map?)?['english']?.toString() ?? '',
       };
     }).toList();
 
@@ -471,12 +507,15 @@ class QuizEngineService {
       final qId = entry['id']!;
 
       // Parse options from the JSON
-      final rawOptions = jsonList.firstWhere(
-        (e) => e['id'] == qId,
-        orElse: () => <String, dynamic>{},
-      )['options'] as List<dynamic>?;
+      final rawOptions =
+          jsonList.firstWhere(
+                (e) => e['id'] == qId,
+                orElse: () => <String, dynamic>{},
+              )['options']
+              as List<dynamic>?;
 
-      final List<String> options = rawOptions?.map((o) => o.toString()).toList() ?? [];
+      final List<String> options =
+          rawOptions?.map((o) => o.toString()).toList() ?? [];
 
       // If options not found in JSON, generate from all entries with same question
       if (options.isEmpty || options.length < 2) {
@@ -495,19 +534,21 @@ class QuizEngineService {
       final sourcePortuguese = entry['sourcePortuguese'] ?? questionText;
       final sourceEnglish = entry['sourceEnglish'] ?? correctAnswer;
 
-      questions.add(Question(
-        id: qId,
-        questionText: questionText,
-        options: options,
-        correctAnswer: correctAnswer,
-        type: QuestionType.multipleChoice,
-        sourceItem: LanguageItem(
+      questions.add(
+        Question(
           id: qId,
-          portuguese: sourcePortuguese,
-          english: sourceEnglish,
+          questionText: questionText,
+          options: options,
+          correctAnswer: correctAnswer,
+          type: QuestionType.multipleChoice,
+          sourceItem: LanguageItem(
+            id: qId,
+            portuguese: sourcePortuguese,
+            english: sourceEnglish,
+          ),
+          category: category,
         ),
-        category: category,
-      ));
+      );
     }
 
     return questions;
@@ -522,7 +563,7 @@ class QuizEngineService {
     if (verbs.isEmpty) return [];
 
     final List<Question> questions = [];
-    
+
     // 1. Partition into unseen and seen
     final unseenVerbs = <Verb>[];
     final seenVerbs = <Verb>[];
@@ -572,8 +613,11 @@ class QuizEngineService {
       int attempts = 0;
       while (options.length < 4 && attempts < 50) {
         final randomVerb = verbs[_random.nextInt(verbs.length)];
-        final randomConj = randomVerb.conjugations.values.elementAt(_random.nextInt(randomVerb.conjugations.length));
-        if (!used.contains(randomConj.toLowerCase().trim()) && randomConj.isNotEmpty) {
+        final randomConj = randomVerb.conjugations.values.elementAt(
+          _random.nextInt(randomVerb.conjugations.length),
+        );
+        if (!used.contains(randomConj.toLowerCase().trim()) &&
+            randomConj.isNotEmpty) {
           options.add(randomConj);
           used.add(randomConj.toLowerCase().trim());
         }
@@ -582,18 +626,20 @@ class QuizEngineService {
 
       options.shuffle(_random);
 
-      questions.add(Question(
-        id: qId,
-        questionText: "Conjugate '${verb.infinitive}' for '$pronoun'",
-        options: options,
-        correctAnswer: correctAnswer,
-        type: QuestionType.multipleChoice,
-        sourceItem: LanguageItem(
-          id: 'verb_${verb.infinitive}',
-          portuguese: '$pronoun $correctAnswer',
-          english: "${verb.translation} ($pronoun)",
+      questions.add(
+        Question(
+          id: qId,
+          questionText: "Conjugate '${verb.infinitive}' for '$pronoun'",
+          options: options,
+          correctAnswer: correctAnswer,
+          type: QuestionType.multipleChoice,
+          sourceItem: LanguageItem(
+            id: 'verb_${verb.infinitive}',
+            portuguese: '$pronoun $correctAnswer',
+            english: "${verb.translation} ($pronoun)",
+          ),
         ),
-      ));
+      );
     }
 
     return questions;
@@ -607,13 +653,18 @@ class QuizEngineService {
   }) {
     if (items.isEmpty) return [];
 
-    final validItems = items.where((item) => 
-      item.exampleSentencePt != null && 
-      item.exampleSentencePt!.isNotEmpty &&
-      item.portuguese.isNotEmpty &&
-      // Check if the portuguese word is actually in the sentence (case insensitive)
-      item.exampleSentencePt!.toLowerCase().contains(item.portuguese.toLowerCase())
-    ).toList();
+    final validItems = items
+        .where(
+          (item) =>
+              item.exampleSentencePt != null &&
+              item.exampleSentencePt!.isNotEmpty &&
+              item.portuguese.isNotEmpty &&
+              // Check if the portuguese word is actually in the sentence (case insensitive)
+              item.exampleSentencePt!.toLowerCase().contains(
+                item.portuguese.toLowerCase(),
+              ),
+        )
+        .toList();
 
     if (validItems.isEmpty) return [];
 
@@ -638,39 +689,49 @@ class QuizEngineService {
     for (var item in selection) {
       final String ptWord = item.portuguese;
       final String sentence = item.exampleSentencePt!;
-      
+
       // Find the word in the sentence to preserve the original casing in the correct answer
       final regex = RegExp(RegExp.escape(ptWord), caseSensitive: false);
       final match = regex.firstMatch(sentence);
-      
+
       if (match == null) continue;
-      
+
       final actualWord = sentence.substring(match.start, match.end);
-      final questionText = sentence.replaceRange(match.start, match.end, '____');
+      final questionText = sentence.replaceRange(
+        match.start,
+        match.end,
+        '____',
+      );
       final qId = 'cloze_${item.id}';
 
       // Generate distractors
       final List<String> options = [actualWord];
       final Set<String> used = {actualWord.toLowerCase()};
-      
+
       // Try to find distractors from the same word_type or just random items
-      final pool = validItems.where((i) => i.wordType == item.wordType && i.id != item.id).toList();
+      final pool = validItems
+          .where((i) => i.wordType == item.wordType && i.id != item.id)
+          .toList();
       if (pool.isEmpty) pool.addAll(validItems);
-      
+
       pool.shuffle(_random);
 
       for (var distractorItem in pool) {
         if (options.length >= 4) break;
         final String distractor = distractorItem.portuguese.toLowerCase();
-        
+
         if (!used.contains(distractor)) {
           // Try to match casing if the actual word is capitalized
-          bool isCapitalized = actualWord.isNotEmpty && actualWord[0] == actualWord[0].toUpperCase() && actualWord[0] != actualWord[0].toLowerCase();
+          bool isCapitalized =
+              actualWord.isNotEmpty &&
+              actualWord[0] == actualWord[0].toUpperCase() &&
+              actualWord[0] != actualWord[0].toLowerCase();
           String finalDistractor = distractor;
           if (isCapitalized && distractor.isNotEmpty) {
-            finalDistractor = distractor[0].toUpperCase() + distractor.substring(1);
+            finalDistractor =
+                distractor[0].toUpperCase() + distractor.substring(1);
           }
-          
+
           options.add(finalDistractor);
           used.add(distractor);
         }
@@ -690,19 +751,21 @@ class QuizEngineService {
 
       options.shuffle(_random);
 
-      questions.add(Question(
-        id: qId,
-        questionText: questionText,
-        options: options,
-        correctAnswer: actualWord,
-        type: QuestionType.cloze,
-        sourceItem: LanguageItem(
-          id: item.id,
-          portuguese: item.exampleSentencePt!,
-          english: item.exampleSentenceEn!,
-          notes: item.notes,
+      questions.add(
+        Question(
+          id: qId,
+          questionText: questionText,
+          options: options,
+          correctAnswer: actualWord,
+          type: QuestionType.cloze,
+          sourceItem: LanguageItem(
+            id: item.id,
+            portuguese: item.exampleSentencePt!,
+            english: item.exampleSentenceEn!,
+            notes: item.notes,
+          ),
         ),
-      ));
+      );
     }
 
     return questions;

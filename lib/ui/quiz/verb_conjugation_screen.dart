@@ -47,9 +47,8 @@ class _VerbConjugationScreenState extends ConsumerState<VerbConjugationScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const VocabularyListScreen(
-                      filterVerbsOnly: true,
-                    ),
+                    builder: (context) =>
+                        const VocabularyListScreen(filterVerbsOnly: true),
                   ),
                 );
               }
@@ -94,10 +93,10 @@ class _VerbConjugationScreenState extends ConsumerState<VerbConjugationScreen> {
                       Expanded(
                         child: Column(
                           children: verb.conjugations.keys.map((pronoun) {
-                            final isMatched =
-                                state.matchedPairs.containsKey(pronoun);
-                            final isSelected =
-                                state.selectedPronoun == pronoun;
+                            final isMatched = state.matchedPairs.containsKey(
+                              pronoun,
+                            );
+                            final isSelected = state.selectedPronoun == pronoun;
                             return Expanded(
                               child: _MatchButton(
                                 text: pronoun,
@@ -113,10 +112,12 @@ class _VerbConjugationScreenState extends ConsumerState<VerbConjugationScreen> {
                       // Conjugation Column
                       Expanded(
                         child: Column(
-                          children:
-                              state.shuffledConjugations.map((conjugation) {
-                            final isMatched =
-                                state.matchedPairs.containsValue(conjugation);
+                          children: state.shuffledConjugations.map((
+                            conjugation,
+                          ) {
+                            final isMatched = state.matchedPairs.containsValue(
+                              conjugation,
+                            );
                             final isSelected =
                                 state.selectedConjugation == conjugation;
                             return Expanded(
@@ -153,40 +154,40 @@ class _VerbConjugationScreenState extends ConsumerState<VerbConjugationScreen> {
                     ),
                   ),
 
-              // Footer (Translation & Next Button when all matched)
-              SizedBox(
-                height: 120, // fixed height to avoid layout jump
-                child: state.isAllMatched
-                    ? FadeInUp(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              verb.translation,
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.green,
+                // Footer (Translation & Next Button when all matched)
+                SizedBox(
+                  height: 120, // fixed height to avoid layout jump
+                  child: state.isAllMatched
+                      ? FadeInUp(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                verb.translation,
+                                style: const TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green,
+                                ),
+                                textAlign: TextAlign.center,
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 16),
-                            ElevatedButton.icon(
-                              onPressed: () => viewModel.nextVerb(),
-                              icon: const Icon(Icons.arrow_forward),
-                              label: const Text('Next Verb'),
-                              style: ElevatedButton.styleFrom(
-                                minimumSize: const Size(double.infinity, 50),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                              const SizedBox(height: 16),
+                              ElevatedButton.icon(
+                                onPressed: () => viewModel.nextVerb(),
+                                icon: const Icon(Icons.arrow_forward),
+                                label: const Text('Next Verb'),
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size(double.infinity, 50),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : const SizedBox(),
-              ),
+                            ],
+                          ),
+                        )
+                      : const SizedBox(),
+                ),
               ],
             ),
           ),
@@ -210,24 +211,20 @@ class _VerbConjugationScreenState extends ConsumerState<VerbConjugationScreen> {
           children: [
             Text(
               verb.infinitive,
-              style: const TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             const SizedBox(width: 8),
             IconButton(
               icon: const Icon(Icons.volume_up, size: 28),
-              color: Theme.of(context).brightness == Brightness.dark 
-                  ? Colors.deepPurple.shade100 
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.deepPurple.shade100
                   : Theme.of(context).primaryColor,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               onPressed: () {
-                ref.read(ttsServiceProvider).speak(
-                      verb.infinitive,
-                      language: 'pt',
-                    );
+                ref
+                    .read(ttsServiceProvider)
+                    .speak(verb.infinitive, language: 'pt');
               },
             ),
           ],
@@ -254,7 +251,9 @@ class _MatchButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final selectedColor = isDark ? theme.colorScheme.primary : theme.primaryColor;
+    final selectedColor = isDark
+        ? theme.colorScheme.primary
+        : theme.primaryColor;
     final onSelectedColor = isDark ? theme.colorScheme.onPrimary : Colors.white;
 
     final color = isMatched
@@ -263,9 +262,9 @@ class _MatchButton extends StatelessWidget {
 
     final textColor = isMatched
         ? Colors.white
-        : (isSelected 
-            ? onSelectedColor 
-            : (theme.textTheme.bodyLarge?.color ?? Colors.black));
+        : (isSelected
+              ? onSelectedColor
+              : (theme.textTheme.bodyLarge?.color ?? Colors.black));
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
@@ -282,9 +281,11 @@ class _MatchButton extends StatelessWidget {
               border: Border.all(
                 color: isMatched
                     ? Colors.green
-                    : (isSelected 
-                        ? selectedColor 
-                        : (isDark ? theme.colorScheme.outlineVariant : Colors.grey.withValues(alpha: 0.3))),
+                    : (isSelected
+                          ? selectedColor
+                          : (isDark
+                                ? theme.colorScheme.outlineVariant
+                                : Colors.grey.withValues(alpha: 0.3))),
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(12),

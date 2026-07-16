@@ -96,28 +96,33 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     setState(() => _isLoading = true);
     try {
       final storage = ref.read(storageServiceProvider);
-      final bool vocabOnly = storage.getSetting('vocab_only_mode', defaultValue: false) == true;
+      final bool vocabOnly =
+          storage.getSetting('vocab_only_mode', defaultValue: false) == true;
       final parser = MarkdownParser();
       final List<LanguageItem> freshItems = [];
-      
+
       if (!vocabOnly) {
-        freshItems.addAll(await parser.loadAndParseRawData(
-          'assets/data/source.md',
-        ));
+        freshItems.addAll(
+          await parser.loadAndParseRawData('assets/data/source.md'),
+        );
         // Also load combined class notes
         try {
-          freshItems.addAll(await parser.loadAndParseRawData(
-            'assets/Combined_Portuguese_Class_Notes.md',
-          ));
+          freshItems.addAll(
+            await parser.loadAndParseRawData(
+              'assets/Combined_Portuguese_Class_Notes.md',
+            ),
+          );
         } catch (e) {
           debugPrint('Error loading Combined notes: $e');
         }
       }
 
       try {
-        final String jsonContent = await rootBundle.loadString('assets/vocabulary.json');
+        final String jsonContent = await rootBundle.loadString(
+          'assets/vocabulary.json',
+        );
         final List<dynamic> jsonList = jsonDecode(jsonContent);
-        
+
         for (var item in jsonList) {
           freshItems.add(
             LanguageItem(
@@ -134,7 +139,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               plural: item['plural']?.toString(),
               irregular: item['irregular'] == true,
               verbClass: item['verb_class']?.toString(),
-            )
+            ),
           );
         }
       } catch (e) {
@@ -160,7 +165,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       final List<LanguageItem> verbItems = [];
 
       // Existing Portuguese words from source.md for deduplication
-      final sourceWords = freshItems.map((i) => i.portuguese.toLowerCase().trim()).toSet();
+      final sourceWords = freshItems
+          .map((i) => i.portuguese.toLowerCase().trim())
+          .toSet();
 
       for (var v in verbs) {
         final ptWord = v.infinitive.toLowerCase().trim();
@@ -179,14 +186,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
       if (verbItems.isNotEmpty) {
         await storage.saveItems(verbItems);
-        debugPrint('Added ${verbItems.length} new verbs to vocabulary storage.');
+        debugPrint(
+          'Added ${verbItems.length} new verbs to vocabulary storage.',
+        );
       }
     } catch (e) {
       debugPrint('Error loading data: $e');
     }
     if (!mounted) return;
     // Refresh the progress snapshot so dashboard updates
-    ref.read(progressServiceProvider.notifier).refresh(ref.read(storageServiceProvider));
+    ref
+        .read(progressServiceProvider.notifier)
+        .refresh(ref.read(storageServiceProvider));
     setState(() => _isLoading = false);
   }
 
@@ -349,52 +360,56 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       body: SizedBox.expand(
         child: Stack(
-        children: [
-          if (items.isNotEmpty)
-            Positioned.fill(
-              child: Opacity(
-                opacity: Theme.of(context).brightness == Brightness.dark ? 0.6 : 0.5,
-                child: WordStarField(
-                  words: learnedCount > 25
-                      ? items
-                            .where((i) => i.masteryLevel > 0)
-                            .map((i) => i.portuguese)
-                            .toList()
-                      : items.map((i) => i.portuguese).toList(),
-                  wordCount: 25,
+          children: [
+            if (items.isNotEmpty)
+              Positioned.fill(
+                child: Opacity(
+                  opacity: Theme.of(context).brightness == Brightness.dark
+                      ? 0.6
+                      : 0.5,
+                  child: WordStarField(
+                    words: learnedCount > 25
+                        ? items
+                              .where((i) => i.masteryLevel > 0)
+                              .map((i) => i.portuguese)
+                              .toList()
+                        : items.map((i) => i.portuguese).toList(),
+                    wordCount: 25,
+                  ),
                 ),
               ),
-            ),
-          // Bottom Scrim for readability and safe area
-          if (Theme.of(context).brightness == Brightness.dark)
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: 150,
-              child: IgnorePointer(
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Colors.transparent,
-                        Colors.black.withValues(alpha: 0.7),
-                        Colors.black,
-                      ],
+            // Bottom Scrim for readability and safe area
+            if (Theme.of(context).brightness == Brightness.dark)
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                height: 150,
+                child: IgnorePointer(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          Colors.black.withValues(alpha: 0.7),
+                          Colors.black,
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          CustomScrollView(
-            controller: _scrollController,
-            slivers: [
-              SliverPadding(
-                padding: EdgeInsets.only(top: 180.0 + MediaQuery.paddingOf(context).top),
-              ),
-              SliverToBoxAdapter(
+            CustomScrollView(
+              controller: _scrollController,
+              slivers: [
+                SliverPadding(
+                  padding: EdgeInsets.only(
+                    top: 180.0 + MediaQuery.paddingOf(context).top,
+                  ),
+                ),
+                SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 10, 20, 80),
                     child: Column(
@@ -420,7 +435,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 const Text('No vocabulary loaded.'),
                                 TextButton(
                                   onPressed: _loadData,
-                                  child: const Text('Tap here to load initial data'),
+                                  child: const Text(
+                                    'Tap here to load initial data',
+                                  ),
                                 ),
                               ],
                             ),
@@ -451,7 +468,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     context: context,
                                     label: 'Start Quiz',
                                     icon: Icons.quiz_rounded,
-                                    bgColor: Theme.of(context).colorScheme.primary,
+                                    bgColor: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
                                     fgColor: Colors.white,
                                     onPressed: items.isEmpty || _isLoading
                                         ? null
@@ -472,7 +491,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         ? null
                                         : (offset) {
                                             _pushScreen(
-                                              const QuizScreen(isVocabularyQuiz: true),
+                                              const QuizScreen(
+                                                isVocabularyQuiz: true,
+                                              ),
                                               offset,
                                             ).then((_) => setState(() {}));
                                           },
@@ -545,7 +566,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     context: context,
                                     label: 'Exercises',
                                     icon: Icons.assignment_rounded,
-                                    bgColor: Theme.of(context).colorScheme.secondary,
+                                    bgColor: Theme.of(
+                                      context,
+                                    ).colorScheme.secondary,
                                     fgColor: Colors.white,
                                     onPressed: (offset) {
                                       _pushScreen(
@@ -563,8 +586,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     onPressed: (offset) {
                                       _pushScreen(
                                         const ExerciseScreen(
-                                          unitName: 'Unit 10: Word Order & Pronouns',
-                                          unitPath: 'assets/data/exercises/unit_10.json',
+                                          unitName:
+                                              'Unit 10: Word Order & Pronouns',
+                                          unitPath:
+                                              'assets/data/exercises/unit_10.json',
                                         ),
                                         offset,
                                       );
@@ -579,8 +604,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     onPressed: (offset) {
                                       _pushScreen(
                                         const ExerciseScreen(
-                                          unitName: 'Question Builder: Make the Question',
-                                          unitPath: 'assets/data/exercises/question_builder.json',
+                                          unitName:
+                                              'Question Builder: Make the Question',
+                                          unitPath:
+                                              'assets/data/exercises/question_builder.json',
                                         ),
                                         offset,
                                       );
@@ -656,8 +683,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   final topPadding = MediaQuery.paddingOf(context).top;
                   final minExtent = 85.0 + topPadding;
                   final maxExtent = 180.0 + topPadding;
-                  final currentHeight = (maxExtent - offset).clamp(minExtent, maxExtent);
-                  final shrinkPercentage = (offset / (maxExtent - minExtent)).clamp(0.0, 1.0);
+                  final currentHeight = (maxExtent - offset).clamp(
+                    minExtent,
+                    maxExtent,
+                  );
+                  final shrinkPercentage = (offset / (maxExtent - minExtent))
+                      .clamp(0.0, 1.0);
 
                   return _PinnedStatsCard(
                     progress: progress,
@@ -686,11 +717,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           FloatingActionButton(
             heroTag: 'listenRepeat',
             onPressed: () {
-              final RenderBox? renderBox = _fabKey.currentContext?.findRenderObject() as RenderBox?;
+              final RenderBox? renderBox =
+                  _fabKey.currentContext?.findRenderObject() as RenderBox?;
               Offset? center;
               if (renderBox != null) {
                 final position = renderBox.localToGlobal(Offset.zero);
-                center = position + Offset(renderBox.size.width / 2, renderBox.size.height / 2);
+                center =
+                    position +
+                    Offset(renderBox.size.width / 2, renderBox.size.height / 2);
               }
               _pushScreen(const ListenRepeatScreen(), center);
             },
@@ -702,16 +736,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           FloatingActionButton(
             key: _fabKey,
             onPressed: () {
-              final RenderBox? renderBox = _fabKey.currentContext?.findRenderObject() as RenderBox?;
+              final RenderBox? renderBox =
+                  _fabKey.currentContext?.findRenderObject() as RenderBox?;
               Offset? center;
               if (renderBox != null) {
                 final position = renderBox.localToGlobal(Offset.zero);
-                center = position + Offset(renderBox.size.width / 2, renderBox.size.height / 2);
+                center =
+                    position +
+                    Offset(renderBox.size.width / 2, renderBox.size.height / 2);
               }
-              _pushScreen(
-                const QuizScreen(isLuckyQuiz: true),
-                center,
-              );
+              _pushScreen(const QuizScreen(isLuckyQuiz: true), center);
             },
             backgroundColor: Colors.amber.shade700,
             foregroundColor: Colors.white,
@@ -732,12 +766,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     return Card(
       elevation: 4,
-      color: isDark ? Colors.black.withValues(alpha: 0.3) : Colors.white.withValues(alpha: 0.85),
+      color: isDark
+          ? Colors.black.withValues(alpha: 0.3)
+          : Colors.white.withValues(alpha: 0.85),
       shadowColor: isDark ? Colors.transparent : Colors.black26,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
         side: BorderSide(
-          color: isDark ? Colors.white.withValues(alpha: 0.2) : Colors.grey.shade300,
+          color: isDark
+              ? Colors.white.withValues(alpha: 0.2)
+              : Colors.grey.shade300,
           width: 1.5,
         ),
       ),
@@ -821,57 +859,56 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: InkWell(
         onTap: null, // We handle tap via GestureDetector below
         child: GestureDetector(
-            onTapUp: (details) {
-              if (onPressed != null) {
-                onPressed(details.globalPosition);
-              }
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    onPressed == null
-                        ? Colors.grey.shade300.withValues(alpha: 0.7)
-                        : bgColor.withValues(alpha: 0.85),
-                    onPressed == null
-                        ? Colors.grey.shade400.withValues(alpha: 0.7)
-                        : bgColor.withValues(alpha: 0.95),
-                  ],
-                ),
-                border: Border.all(
-                  color: Colors.white.withValues(alpha: 0.2),
-                  width: 1.2,
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    icon,
-                    size: 28,
-                    color: onPressed == null ? Colors.white70 : fgColor,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    label,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: onPressed == null ? Colors.white70 : fgColor,
-                    ),
-                  ),
+          onTapUp: (details) {
+            if (onPressed != null) {
+              onPressed(details.globalPosition);
+            }
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  onPressed == null
+                      ? Colors.grey.shade300.withValues(alpha: 0.7)
+                      : bgColor.withValues(alpha: 0.85),
+                  onPressed == null
+                      ? Colors.grey.shade400.withValues(alpha: 0.7)
+                      : bgColor.withValues(alpha: 0.95),
                 ],
               ),
+              border: Border.all(
+                color: Colors.white.withValues(alpha: 0.2),
+                width: 1.2,
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  icon,
+                  size: 28,
+                  color: onPressed == null ? Colors.white70 : fgColor,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: onPressed == null ? Colors.white70 : fgColor,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
+      ),
     );
   }
 }
-
 
 class _PinnedStatsCard extends StatelessWidget {
   final ProgressSnapshot progress;
@@ -900,13 +937,22 @@ class _PinnedStatsCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-            margin: EdgeInsets.fromLTRB(20, topPadding + 20 * (1 - clampedShrink), 20, 10),
+          margin: EdgeInsets.fromLTRB(
+            20,
+            topPadding + 20 * (1 - clampedShrink),
+            20,
+            10,
+          ),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.deepPurple.shade400.withValues(alpha: 0.9 + 0.1 * clampedShrink),
-                Colors.deepPurple.shade700.withValues(alpha: 0.9 + 0.1 * clampedShrink),
+                Colors.deepPurple.shade400.withValues(
+                  alpha: 0.9 + 0.1 * clampedShrink,
+                ),
+                Colors.deepPurple.shade700.withValues(
+                  alpha: 0.9 + 0.1 * clampedShrink,
+                ),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -918,7 +964,9 @@ class _PinnedStatsCard extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.15 + 0.2 * clampedShrink),
+                color: Colors.black.withValues(
+                  alpha: 0.15 + 0.2 * clampedShrink,
+                ),
                 blurRadius: 15 - 5 * clampedShrink,
                 offset: Offset(0, 8 - 4 * clampedShrink),
               ),
@@ -975,7 +1023,9 @@ class _PinnedStatsCard extends StatelessWidget {
                           child: LinearProgressIndicator(
                             value: progress.dailyGoalProgress,
                             minHeight: 8,
-                            backgroundColor: Colors.white.withValues(alpha: 0.15),
+                            backgroundColor: Colors.white.withValues(
+                              alpha: 0.15,
+                            ),
                             valueColor: AlwaysStoppedAnimation<Color>(
                               progress.dailyGoalMet
                                   ? Colors.greenAccent.shade400
@@ -987,7 +1037,8 @@ class _PinnedStatsCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: List.generate(5, (tier) {
-                            final count = progress.masteryDistribution[tier] ?? 0;
+                            final count =
+                                progress.masteryDistribution[tier] ?? 0;
                             final tierColors = [
                               Colors.white38,
                               Colors.blue.shade200,
@@ -1009,7 +1060,9 @@ class _PinnedStatsCard extends StatelessWidget {
                                 Text(
                                   WordProgress.tierName(tier),
                                   style: TextStyle(
-                                    color: tierColors[tier].withValues(alpha: 0.7),
+                                    color: tierColors[tier].withValues(
+                                      alpha: 0.7,
+                                    ),
                                     fontSize: 9,
                                   ),
                                 ),
@@ -1103,7 +1156,9 @@ class _PinnedStatsCard extends StatelessWidget {
                                   child: LinearProgressIndicator(
                                     value: progress.dailyGoalProgress,
                                     minHeight: 6,
-                                    backgroundColor: Colors.white.withValues(alpha: 0.15),
+                                    backgroundColor: Colors.white.withValues(
+                                      alpha: 0.15,
+                                    ),
                                     valueColor: AlwaysStoppedAnimation<Color>(
                                       progress.dailyGoalMet
                                           ? Colors.greenAccent.shade400

@@ -19,10 +19,7 @@ class StatsScreen extends ConsumerWidget {
     final recentSessions = storage.getRecentSessions(10);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Progress & Stats'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Progress & Stats'), centerTitle: true),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -46,7 +43,8 @@ class StatsScreen extends ConsumerWidget {
                       icon: Icons.local_fire_department,
                       iconColor: Colors.deepOrange,
                       label: 'Streak',
-                      value: '${progress.currentStreak} day${progress.currentStreak == 1 ? '' : 's'}',
+                      value:
+                          '${progress.currentStreak} day${progress.currentStreak == 1 ? '' : 's'}',
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -107,10 +105,9 @@ class StatsScreen extends ConsumerWidget {
                       child: LinearProgressIndicator(
                         value: progress.dailyGoalProgress,
                         minHeight: 14,
-                        backgroundColor: Theme.of(context)
-                            .colorScheme
-                            .outline
-                            .withValues(alpha: 0.15),
+                        backgroundColor: Theme.of(
+                          context,
+                        ).colorScheme.outline.withValues(alpha: 0.15),
                         valueColor: AlwaysStoppedAnimation<Color>(
                           progress.dailyGoalMet
                               ? Colors.green
@@ -124,8 +121,11 @@ class StatsScreen extends ConsumerWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.check_circle,
-                                color: Colors.green.shade400, size: 18),
+                            Icon(
+                              Icons.check_circle,
+                              color: Colors.green.shade400,
+                              size: 18,
+                            ),
                             const SizedBox(width: 6),
                             Text(
                               'Goal complete!',
@@ -225,10 +225,7 @@ class _SummaryCard extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             value,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 2),
           Text(
@@ -265,9 +262,9 @@ class _SectionCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 12),
           child,
@@ -417,7 +414,8 @@ class _StreakCalendar extends StatelessWidget {
         final isToday = i == 29;
 
         return Tooltip(
-          message: '${day.day}/${day.month} — ${isActive ? "Active" : "Inactive"}',
+          message:
+              '${day.day}/${day.month} — ${isActive ? "Active" : "Inactive"}',
           child: Container(
             width: 28,
             height: 28,
@@ -425,8 +423,8 @@ class _StreakCalendar extends StatelessWidget {
               color: isActive
                   ? Colors.green.withValues(alpha: 0.8)
                   : (isDark
-                      ? Colors.white.withValues(alpha: 0.08)
-                      : Colors.grey.shade200),
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.grey.shade200),
               borderRadius: BorderRadius.circular(6),
               border: isToday
                   ? Border.all(color: Colors.deepPurple, width: 2)
@@ -491,10 +489,9 @@ class _MasteryBreakdown extends StatelessWidget {
                   child: LinearProgressIndicator(
                     value: fraction,
                     minHeight: 10,
-                    backgroundColor: Theme.of(context)
-                        .colorScheme
-                        .outline
-                        .withValues(alpha: 0.1),
+                    backgroundColor: Theme.of(
+                      context,
+                    ).colorScheme.outline.withValues(alpha: 0.1),
                     valueColor: AlwaysStoppedAnimation(colors[tier]),
                   ),
                 ),

@@ -75,9 +75,10 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
     final normalizedAnswer = answer.toLowerCase().trim();
     final normalizedTarget = currentItem.portuguese.toLowerCase().trim();
 
-    bool isCorrect = normalizedAnswer == normalizedTarget || 
-                     normalizedAnswer.contains(normalizedTarget) ||
-                     normalizedTarget.contains(normalizedAnswer);
+    bool isCorrect =
+        normalizedAnswer == normalizedTarget ||
+        normalizedAnswer.contains(normalizedTarget) ||
+        normalizedTarget.contains(normalizedAnswer);
 
     if (isCorrect) {
       _score++;
@@ -91,7 +92,7 @@ class VocabularyFlashcardDrillProvider implements CarPlayDrillProvider {
   }
 
   @override
-  String? get completionSummary => 
+  String? get completionSummary =>
       _isFinished ? "You got $_score out of $_total correct." : null;
 
   @override

@@ -123,7 +123,8 @@ class ProgressService extends Notifier<ProgressSnapshot> {
     await storage.incrementDailySessions();
 
     // Check if daily goal was just met
-    final wasGoalMet = (storage.getTodayXP() - completionBonus) >= storage.getDailyXPGoal();
+    final wasGoalMet =
+        (storage.getTodayXP() - completionBonus) >= storage.getDailyXPGoal();
     int dailyGoalBonus = 0;
     if (!wasGoalMet && storage.getTodayXP() >= storage.getDailyXPGoal()) {
       dailyGoalBonus = 10;
@@ -131,14 +132,16 @@ class ProgressService extends Notifier<ProgressSnapshot> {
     }
 
     // Save session record
-    await storage.saveSession(SessionRecord(
-      timestamp: DateTime.now(),
-      activityType: activityType,
-      score: score,
-      total: total,
-      xpEarned: totalSessionXP + dailyGoalBonus,
-      durationSeconds: durationSeconds,
-    ));
+    await storage.saveSession(
+      SessionRecord(
+        timestamp: DateTime.now(),
+        activityType: activityType,
+        score: score,
+        total: total,
+        xpEarned: totalSessionXP + dailyGoalBonus,
+        durationSeconds: durationSeconds,
+      ),
+    );
 
     // Refresh snapshot
     refresh(storage);

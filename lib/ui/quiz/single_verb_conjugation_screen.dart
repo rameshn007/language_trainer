@@ -21,12 +21,15 @@ class SingleVerbConjugationScreen extends ConsumerStatefulWidget {
       _SingleVerbConjugationScreenState();
 }
 
-class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugationScreen> {
+class _SingleVerbConjugationScreenState
+    extends ConsumerState<SingleVerbConjugationScreen> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(singleVerbConjugationViewModelProvider.notifier).loadVerb(widget.verbInfinitive);
+      ref
+          .read(singleVerbConjugationViewModelProvider.notifier)
+          .loadVerb(widget.verbInfinitive);
     });
   }
 
@@ -51,7 +54,11 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.error_outline, size: 64, color: Colors.grey.shade400),
+                Icon(
+                  Icons.error_outline,
+                  size: 64,
+                  color: Colors.grey.shade400,
+                ),
                 const SizedBox(height: 16),
                 Text(
                   state.error!,
@@ -62,7 +69,7 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
                 ElevatedButton(
                   onPressed: () => Navigator.of(context).pop(),
                   child: Text(widget.returnText),
-                )
+                ),
               ],
             ),
           ),
@@ -101,10 +108,10 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
                     Expanded(
                       child: Column(
                         children: verb.conjugations.keys.map((pronoun) {
-                          final isMatched =
-                              state.matchedPairs.containsKey(pronoun);
-                          final isSelected =
-                              state.selectedPronoun == pronoun;
+                          final isMatched = state.matchedPairs.containsKey(
+                            pronoun,
+                          );
+                          final isSelected = state.selectedPronoun == pronoun;
                           return Expanded(
                             child: _MatchButton(
                               text: pronoun,
@@ -120,10 +127,10 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
                     // Conjugation Column
                     Expanded(
                       child: Column(
-                        children:
-                            state.shuffledConjugations.map((conjugation) {
-                          final isMatched =
-                              state.matchedPairs.containsValue(conjugation);
+                        children: state.shuffledConjugations.map((conjugation) {
+                          final isMatched = state.matchedPairs.containsValue(
+                            conjugation,
+                          );
                           final isSelected =
                               state.selectedConjugation == conjugation;
                           return Expanded(
@@ -209,8 +216,8 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         decoration: BoxDecoration(
-          color: isDark 
-              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.2) 
+          color: isDark
+              ? Theme.of(context).colorScheme.primary.withValues(alpha: 0.2)
               : Theme.of(context).primaryColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(16),
         ),
@@ -224,22 +231,23 @@ class _SingleVerbConjugationScreenState extends ConsumerState<SingleVerbConjugat
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: isDark ? Theme.of(context).colorScheme.primary : Theme.of(context).primaryColor,
+                color: isDark
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).primaryColor,
               ),
             ),
             const SizedBox(width: 8),
             IconButton(
               icon: const Icon(Icons.volume_up, size: 28),
-              color: isDark 
-                  ? Theme.of(context).colorScheme.primary 
+              color: isDark
+                  ? Theme.of(context).colorScheme.primary
                   : Theme.of(context).primaryColor,
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               onPressed: () {
-                ref.read(ttsServiceProvider).speak(
-                      verb.infinitive,
-                      language: 'pt',
-                    );
+                ref
+                    .read(ttsServiceProvider)
+                    .speak(verb.infinitive, language: 'pt');
               },
             ),
           ],
@@ -266,7 +274,9 @@ class _MatchButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final selectedColor = isDark ? theme.colorScheme.primary : theme.primaryColor;
+    final selectedColor = isDark
+        ? theme.colorScheme.primary
+        : theme.primaryColor;
     final onSelectedColor = isDark ? theme.colorScheme.onPrimary : Colors.white;
 
     final color = isMatched
@@ -275,9 +285,9 @@ class _MatchButton extends StatelessWidget {
 
     final textColor = isMatched
         ? Colors.white
-        : (isSelected 
-            ? onSelectedColor 
-            : (theme.textTheme.bodyLarge?.color ?? Colors.black));
+        : (isSelected
+              ? onSelectedColor
+              : (theme.textTheme.bodyLarge?.color ?? Colors.black));
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
@@ -294,9 +304,11 @@ class _MatchButton extends StatelessWidget {
               border: Border.all(
                 color: isMatched
                     ? Colors.green
-                    : (isSelected 
-                        ? selectedColor 
-                        : (isDark ? theme.colorScheme.outlineVariant : Colors.grey.withValues(alpha: 0.3))),
+                    : (isSelected
+                          ? selectedColor
+                          : (isDark
+                                ? theme.colorScheme.outlineVariant
+                                : Colors.grey.withValues(alpha: 0.3))),
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(12),

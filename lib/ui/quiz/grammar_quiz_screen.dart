@@ -76,10 +76,7 @@ class GrammarQuizScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Grammar Rules'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Grammar Rules'), centerTitle: true),
       body: Column(
         children: [
           Padding(
@@ -91,7 +88,9 @@ class GrammarQuizScreen extends ConsumerWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const GrammarReferenceScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => const GrammarReferenceScreen(),
+                  ),
                 );
               },
             ),
@@ -102,10 +101,7 @@ class GrammarQuizScreen extends ConsumerWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 'Practice Quizzes',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
           ),

@@ -28,8 +28,18 @@ void main() {
     mockStorage = _MockStorageService();
   });
 
-  LanguageItem makeItem({String id = 'item1', String pt = 'ola', String en = 'hello', int mastery = 0}) {
-    return LanguageItem(id: id, portuguese: pt, english: en, masteryLevel: mastery);
+  LanguageItem makeItem({
+    String id = 'item1',
+    String pt = 'ola',
+    String en = 'hello',
+    int mastery = 0,
+  }) {
+    return LanguageItem(
+      id: id,
+      portuguese: pt,
+      english: en,
+      masteryLevel: mastery,
+    );
   }
 
   // =========================================================================
@@ -51,8 +61,13 @@ void main() {
     });
 
     test('getSetting() with default — returns default when key missing', () {
-      when(() => mockStorage.getSetting('nonexistent', defaultValue: 'fallback')).thenReturn('fallback');
-      expect(mockStorage.getSetting('nonexistent', defaultValue: 'fallback'), 'fallback');
+      when(
+        () => mockStorage.getSetting('nonexistent', defaultValue: 'fallback'),
+      ).thenReturn('fallback');
+      expect(
+        mockStorage.getSetting('nonexistent', defaultValue: 'fallback'),
+        'fallback',
+      );
     });
 
     test('isQuestionSeen() — returns false when not seen', () {
@@ -102,13 +117,17 @@ void main() {
     });
 
     test('getXPHistory(7) — returns list of 7 values', () {
-      when(() => mockStorage.getXPHistory(7)).thenReturn([10, 20, 30, 40, 50, 60, 70]);
+      when(
+        () => mockStorage.getXPHistory(7),
+      ).thenReturn([10, 20, 30, 40, 50, 60, 70]);
       final history = mockStorage.getXPHistory(7);
       expect(history, hasLength(7));
     });
 
     test('getXPHistoryLabels(7) — returns 7 day abbreviations', () {
-      when(() => mockStorage.getXPHistoryLabels(7)).thenReturn(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
+      when(
+        () => mockStorage.getXPHistoryLabels(7),
+      ).thenReturn(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']);
       final labels = mockStorage.getXPHistoryLabels(7);
       expect(labels, hasLength(7));
     });
@@ -120,7 +139,11 @@ void main() {
 
   group('StorageService — Word Progress & Mastery', () {
     test('getWordProgress() — returns progress for item', () {
-      final progress = WordProgress(itemId: 'wp1', totalCorrect: 5, totalWrong: 2);
+      final progress = WordProgress(
+        itemId: 'wp1',
+        totalCorrect: 5,
+        totalWrong: 2,
+      );
       when(() => mockStorage.getWordProgress('wp1')).thenReturn(progress);
 
       final result = mockStorage.getWordProgress('wp1');
@@ -130,20 +153,34 @@ void main() {
     });
 
     test('getMasteryDistribution() — returns tier counts', () {
-      when(() => mockStorage.getMasteryDistribution()).thenReturn({0: 10, 1: 5, 2: 3, 3: 1, 4: 0});
+      when(
+        () => mockStorage.getMasteryDistribution(),
+      ).thenReturn({0: 10, 1: 5, 2: 3, 3: 1, 4: 0});
       final dist = mockStorage.getMasteryDistribution();
       expect(dist[0], 10);
       expect(dist[4], 0);
     });
 
     test('updateWordProgress() — returns XP awarded', () async {
-      when(() => mockStorage.updateWordProgress('wp1', true, firstAttempt: any(named: 'firstAttempt'))).thenAnswer((_) async => 10);
-      final xp = await mockStorage.updateWordProgress('wp1', true, firstAttempt: true);
+      when(
+        () => mockStorage.updateWordProgress(
+          'wp1',
+          true,
+          firstAttempt: any(named: 'firstAttempt'),
+        ),
+      ).thenAnswer((_) async => 10);
+      final xp = await mockStorage.updateWordProgress(
+        'wp1',
+        true,
+        firstAttempt: true,
+      );
       expect(xp, 10);
     });
 
     test('updateWordProgress() wrong — returns 0 XP', () async {
-      when(() => mockStorage.updateWordProgress('wp1', false)).thenAnswer((_) async => 0);
+      when(
+        () => mockStorage.updateWordProgress('wp1', false),
+      ).thenAnswer((_) async => 0);
       final xp = await mockStorage.updateWordProgress('wp1', false);
       expect(xp, 0);
     });
@@ -158,9 +195,9 @@ void main() {
     late ProviderContainer container;
 
     setUp(() {
-      container = ProviderContainer(overrides: [
-        storageServiceProvider.overrideWithValue(mockStorage),
-      ]);
+      container = ProviderContainer(
+        overrides: [storageServiceProvider.overrideWithValue(mockStorage)],
+      );
       service = container.read(progressServiceProvider.notifier);
     });
 
@@ -178,44 +215,101 @@ void main() {
       when(() => mockStorage.getMasteryDistribution()).thenReturn({});
     }
 
-    test('recordQuizAnswer() correct → calls storage.updateWordProgress() with correct=true', () async {
-      when(() => mockStorage.updateWordProgress('item1', true, firstAttempt: any(named: 'firstAttempt'))).thenAnswer((_) async => 10);
-      when(() => mockStorage.addXP(10)).thenAnswer((_) async {});
-      when(() => mockStorage.incrementWordsReviewed(1)).thenAnswer((_) async {});
-      setupMocks(todayXP: 10);
+    test(
+      'recordQuizAnswer() correct → calls storage.updateWordProgress() with correct=true',
+      () async {
+        when(
+          () => mockStorage.updateWordProgress(
+            'item1',
+            true,
+            firstAttempt: any(named: 'firstAttempt'),
+          ),
+        ).thenAnswer((_) async => 10);
+        when(() => mockStorage.addXP(10)).thenAnswer((_) async {});
+        when(
+          () => mockStorage.incrementWordsReviewed(1),
+        ).thenAnswer((_) async {});
+        setupMocks(todayXP: 10);
 
-      await service.recordQuizAnswer(storage: mockStorage, itemId: 'item1', correct: true);
+        await service.recordQuizAnswer(
+          storage: mockStorage,
+          itemId: 'item1',
+          correct: true,
+        );
 
-      verify(() => mockStorage.updateWordProgress('item1', true, firstAttempt: any(named: 'firstAttempt'))).called(1);
-    });
+        verify(
+          () => mockStorage.updateWordProgress(
+            'item1',
+            true,
+            firstAttempt: any(named: 'firstAttempt'),
+          ),
+        ).called(1);
+      },
+    );
 
-    test('recordQuizAnswer() correct → calls storage.addXP() with XP amount', () async {
-      when(() => mockStorage.updateWordProgress('item1', true, firstAttempt: any(named: 'firstAttempt'))).thenAnswer((_) async => 10);
-      when(() => mockStorage.addXP(10)).thenAnswer((_) async {});
-      when(() => mockStorage.incrementWordsReviewed(1)).thenAnswer((_) async {});
-      setupMocks(todayXP: 10);
+    test(
+      'recordQuizAnswer() correct → calls storage.addXP() with XP amount',
+      () async {
+        when(
+          () => mockStorage.updateWordProgress(
+            'item1',
+            true,
+            firstAttempt: any(named: 'firstAttempt'),
+          ),
+        ).thenAnswer((_) async => 10);
+        when(() => mockStorage.addXP(10)).thenAnswer((_) async {});
+        when(
+          () => mockStorage.incrementWordsReviewed(1),
+        ).thenAnswer((_) async {});
+        setupMocks(todayXP: 10);
 
-      await service.recordQuizAnswer(storage: mockStorage, itemId: 'item1', correct: true);
+        await service.recordQuizAnswer(
+          storage: mockStorage,
+          itemId: 'item1',
+          correct: true,
+        );
 
-      verify(() => mockStorage.addXP(10)).called(1);
-    });
+        verify(() => mockStorage.addXP(10)).called(1);
+      },
+    );
 
-    test('recordQuizAnswer() wrong → calls storage.updateWordProgress() with correct=false', () async {
-      when(() => mockStorage.updateWordProgress('item1', false)).thenAnswer((_) async => 0);
-      setupMocks(todayXP: 0);
+    test(
+      'recordQuizAnswer() wrong → calls storage.updateWordProgress() with correct=false',
+      () async {
+        when(
+          () => mockStorage.updateWordProgress('item1', false),
+        ).thenAnswer((_) async => 0);
+        setupMocks(todayXP: 0);
 
-      await service.recordQuizAnswer(storage: mockStorage, itemId: 'item1', correct: false);
+        await service.recordQuizAnswer(
+          storage: mockStorage,
+          itemId: 'item1',
+          correct: false,
+        );
 
-      verify(() => mockStorage.updateWordProgress('item1', false)).called(1);
-    });
+        verify(() => mockStorage.updateWordProgress('item1', false)).called(1);
+      },
+    );
 
     test('recordQuizAnswer() → refreshes state', () async {
-      when(() => mockStorage.updateWordProgress('item1', true, firstAttempt: any(named: 'firstAttempt'))).thenAnswer((_) async => 10);
+      when(
+        () => mockStorage.updateWordProgress(
+          'item1',
+          true,
+          firstAttempt: any(named: 'firstAttempt'),
+        ),
+      ).thenAnswer((_) async => 10);
       when(() => mockStorage.addXP(10)).thenAnswer((_) async {});
-      when(() => mockStorage.incrementWordsReviewed(1)).thenAnswer((_) async {});
+      when(
+        () => mockStorage.incrementWordsReviewed(1),
+      ).thenAnswer((_) async {});
       setupMocks(todayXP: 10);
 
-      await service.recordQuizAnswer(storage: mockStorage, itemId: 'item1', correct: true);
+      await service.recordQuizAnswer(
+        storage: mockStorage,
+        itemId: 'item1',
+        correct: true,
+      );
 
       expect(service.state.todayXP, 10);
     });
@@ -294,8 +388,22 @@ void main() {
   group('QuizViewModel — State Management', () {
     test('QuizState — currentQuestion returns question at currentIndex', () {
       final questions = [
-        Question(id: 'q1', questionText: 'What is this?', options: ['A', 'B'], correctAnswer: 'A', type: QuestionType.multipleChoice, sourceItem: makeItem(id: 's1')),
-        Question(id: 'q2', questionText: 'What is that?', options: ['C', 'D'], correctAnswer: 'C', type: QuestionType.multipleChoice, sourceItem: makeItem(id: 's2')),
+        Question(
+          id: 'q1',
+          questionText: 'What is this?',
+          options: ['A', 'B'],
+          correctAnswer: 'A',
+          type: QuestionType.multipleChoice,
+          sourceItem: makeItem(id: 's1'),
+        ),
+        Question(
+          id: 'q2',
+          questionText: 'What is that?',
+          options: ['C', 'D'],
+          correctAnswer: 'C',
+          type: QuestionType.multipleChoice,
+          sourceItem: makeItem(id: 's2'),
+        ),
       ];
       final state = QuizState(questions: questions, currentIndex: 1);
       expect(state.currentQuestion!.id, 'q2');
@@ -306,13 +414,23 @@ void main() {
       expect(state.currentQuestion, isNull);
     });
 
-    test('QuizState — currentQuestion returns null when index out of bounds', () {
-      final questions = [
-        Question(id: 'q1', questionText: 'What?', options: ['A'], correctAnswer: 'A', type: QuestionType.multipleChoice, sourceItem: makeItem(id: 's1')),
-      ];
-      final state = QuizState(questions: questions, currentIndex: 5);
-      expect(state.currentQuestion, isNull);
-    });
+    test(
+      'QuizState — currentQuestion returns null when index out of bounds',
+      () {
+        final questions = [
+          Question(
+            id: 'q1',
+            questionText: 'What?',
+            options: ['A'],
+            correctAnswer: 'A',
+            type: QuestionType.multipleChoice,
+            sourceItem: makeItem(id: 's1'),
+          ),
+        ];
+        final state = QuizState(questions: questions, currentIndex: 5);
+        expect(state.currentQuestion, isNull);
+      },
+    );
 
     test('QuizState — totalXPEarned sums sessionXP + sessionBonusXP', () {
       final state = QuizState(questions: [], sessionXP: 50, sessionBonusXP: 30);
@@ -368,7 +486,9 @@ void main() {
     });
 
     test('ProgressSnapshot — totalWords sums mastery distribution', () {
-      final snapshot = ProgressSnapshot(masteryDistribution: {0: 10, 1: 5, 2: 3});
+      final snapshot = ProgressSnapshot(
+        masteryDistribution: {0: 10, 1: 5, 2: 3},
+      );
       expect(snapshot.totalWords, 18);
     });
 

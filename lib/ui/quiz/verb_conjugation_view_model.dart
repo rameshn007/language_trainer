@@ -59,8 +59,12 @@ class VerbConjugationState {
       isLoading: isLoading ?? this.isLoading,
       matchedPairs: matchedPairs ?? this.matchedPairs,
       shuffledConjugations: shuffledConjugations ?? this.shuffledConjugations,
-      selectedPronoun: clearSelections ? null : (selectedPronoun ?? this.selectedPronoun),
-      selectedConjugation: clearSelections ? null : (selectedConjugation ?? this.selectedConjugation),
+      selectedPronoun: clearSelections
+          ? null
+          : (selectedPronoun ?? this.selectedPronoun),
+      selectedConjugation: clearSelections
+          ? null
+          : (selectedConjugation ?? this.selectedConjugation),
       sessionScore: sessionScore ?? this.sessionScore,
       sessionTotal: sessionTotal ?? this.sessionTotal,
       sessionXP: sessionXP ?? this.sessionXP,
@@ -87,7 +91,11 @@ class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
   @override
   VerbConjugationState build() {
     Future.microtask(() => loadVerbs());
-    return VerbConjugationState(verbs: [], currentVerbIndex: 0, isLoading: true);
+    return VerbConjugationState(
+      verbs: [],
+      currentVerbIndex: 0,
+      isLoading: true,
+    );
   }
 
   Future<void> loadVerbs() async {
@@ -169,23 +177,25 @@ class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
         );
 
         // Record correct via progress service
-        progressService.recordQuizAnswer(
-          storage: storage,
-          itemId: itemId,
-          correct: true,
-          firstAttempt: true,
-        ).then((xp) {
-          state = state.copyWith(sessionXP: state.sessionXP + xp);
-        });
-        
+        progressService
+            .recordQuizAnswer(
+              storage: storage,
+              itemId: itemId,
+              correct: true,
+              firstAttempt: true,
+            )
+            .then((xp) {
+              state = state.copyWith(sessionXP: state.sessionXP + xp);
+            });
+
         // Speak the combo
-        ref.read(ttsServiceProvider).speak('$pronoun $conjugation', language: 'pt');
+        ref
+            .read(ttsServiceProvider)
+            .speak('$pronoun $conjugation', language: 'pt');
 
         // Check if all pairs matched → record verb completed
         if (newMatches.length == verb.conjugations.length) {
-          state = state.copyWith(
-            verbsCompleted: state.verbsCompleted + 1,
-          );
+          state = state.copyWith(verbsCompleted: state.verbsCompleted + 1);
         }
       } else {
         // Mismatch, reset selections
@@ -195,20 +205,18 @@ class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
         );
 
         // Record incorrect via progress service
-        progressService.recordQuizAnswer(
-          storage: storage,
-          itemId: itemId,
-          correct: false,
-        ).then((xp) {
-          state = state.copyWith(sessionXP: state.sessionXP + xp);
-        });
+        progressService
+            .recordQuizAnswer(storage: storage, itemId: itemId, correct: false)
+            .then((xp) {
+              state = state.copyWith(sessionXP: state.sessionXP + xp);
+            });
       }
     }
   }
 
   void nextVerb() {
     if (state.verbs.isEmpty) return;
-    
+
     int nextIndex = state.currentVerbIndex + 1;
     if (nextIndex >= state.verbs.length) {
       // Record session completion before reshuffling
@@ -229,7 +237,7 @@ class VerbConjugationViewModel extends Notifier<VerbConjugationState> {
     } else {
       state = state.copyWith(currentVerbIndex: nextIndex);
     }
-    
+
     _setupCurrentVerb();
   }
 

@@ -7,10 +7,7 @@ class PrepositionRulesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Preposition Rules'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Preposition Rules'), centerTitle: true),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -18,10 +15,7 @@ class PrepositionRulesScreen extends StatelessWidget {
             FadeInDown(
               child: const Text(
                 'Portuguese Preposition Usage',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -51,15 +45,39 @@ class PrepositionRulesScreen extends StatelessWidget {
 
   Widget _buildRulesTable(BuildContext context) {
     final List<_RuleEntry> rules = [
-      _RuleEntry('a', 'At (specific time/hours), to (direction or movement), to (indirect object).'),
-      _RuleEntry('ao / à', 'At the / to the. Used when combined with masculine (o) or feminine (a) articles.'),
-      _RuleEntry('de', 'Of, from (origin), by (possession), or about (subject).'),
-      _RuleEntry('do / da', 'Of the / from the. Used when combined with masculine (o) or feminine (a) articles.'),
-      _RuleEntry('em', 'In, on, at. Used for general location or position in space and time.'),
-      _RuleEntry('no / na', 'In the / on the / at the. Used for specific location with articles.'),
-      _RuleEntry('por', 'For (duration), through, by, across, via. Expresses cause, motive, or route.'),
+      _RuleEntry(
+        'a',
+        'At (specific time/hours), to (direction or movement), to (indirect object).',
+      ),
+      _RuleEntry(
+        'ao / à',
+        'At the / to the. Used when combined with masculine (o) or feminine (a) articles.',
+      ),
+      _RuleEntry(
+        'de',
+        'Of, from (origin), by (possession), or about (subject).',
+      ),
+      _RuleEntry(
+        'do / da',
+        'Of the / from the. Used when combined with masculine (o) or feminine (a) articles.',
+      ),
+      _RuleEntry(
+        'em',
+        'In, on, at. Used for general location or position in space and time.',
+      ),
+      _RuleEntry(
+        'no / na',
+        'In the / on the / at the. Used for specific location with articles.',
+      ),
+      _RuleEntry(
+        'por',
+        'For (duration), through, by, across, via. Expresses cause, motive, or route.',
+      ),
       _RuleEntry('pelo / pela', 'By the / through the. (por + o/a)'),
-      _RuleEntry('para', 'For (purpose), to (final destination), towards. Expresses intent or target.'),
+      _RuleEntry(
+        'para',
+        'For (purpose), to (final destination), towards. Expresses intent or target.',
+      ),
       _RuleEntry('com', 'With. Accompaniment or instrument.'),
       _RuleEntry('sem', 'Without. Absence of something.'),
       _RuleEntry('sob', 'Under, beneath.'),
@@ -78,7 +96,9 @@ class PrepositionRulesScreen extends StatelessWidget {
           // Header
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            color: Theme.of(context).colorScheme.primaryContainer.withValues(alpha: 0.3),
+            color: Theme.of(
+              context,
+            ).colorScheme.primaryContainer.withValues(alpha: 0.3),
             child: Row(
               children: [
                 Expanded(
@@ -111,9 +131,13 @@ class PrepositionRulesScreen extends StatelessWidget {
             return Container(
               decoration: BoxDecoration(
                 border: Border(
-                  bottom: isLast 
-                    ? BorderSide.none 
-                    : BorderSide(color: Theme.of(context).colorScheme.outline.withValues(alpha: 0.1)),
+                  bottom: isLast
+                      ? BorderSide.none
+                      : BorderSide(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.outline.withValues(alpha: 0.1),
+                        ),
                 ),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -136,10 +160,7 @@ class PrepositionRulesScreen extends StatelessWidget {
                     flex: 5,
                     child: Text(
                       rule.explanation,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        height: 1.4,
-                      ),
+                      style: const TextStyle(fontSize: 14, height: 1.4),
                     ),
                   ),
                 ],

@@ -17,7 +17,8 @@ class QuizState {
   final int sessionXP;
   final int sessionBonusXP; // Completion + daily goal bonus
   final bool dailyGoalJustMet;
-  final Map<String, bool> firstAttemptTracker; // questionId -> was first attempt correct
+  final Map<String, bool>
+  firstAttemptTracker; // questionId -> was first attempt correct
   final bool isCurrentQuestionCorrect;
   final bool hasAttemptedCurrent;
   final Set<String> currentWrongAnswers;
@@ -68,7 +69,8 @@ class QuizState {
       sessionBonusXP: sessionBonusXP ?? this.sessionBonusXP,
       dailyGoalJustMet: dailyGoalJustMet ?? this.dailyGoalJustMet,
       firstAttemptTracker: firstAttemptTracker ?? this.firstAttemptTracker,
-      isCurrentQuestionCorrect: isCurrentQuestionCorrect ?? this.isCurrentQuestionCorrect,
+      isCurrentQuestionCorrect:
+          isCurrentQuestionCorrect ?? this.isCurrentQuestionCorrect,
       hasAttemptedCurrent: hasAttemptedCurrent ?? this.hasAttemptedCurrent,
       currentWrongAnswers: currentWrongAnswers ?? this.currentWrongAnswers,
       isInfinite: isInfinite ?? this.isInfinite,
@@ -193,11 +195,14 @@ class QuizViewModel extends Notifier<QuizState> {
       count: count,
       seenIds: seenIds.toList(),
     );
-    
+
     state = QuizState(questions: vocabularyQuestions);
   }
 
-  Future<void> startInterrogativeQuiz({int count = 20, String? category}) async {
+  Future<void> startInterrogativeQuiz({
+    int count = 20,
+    String? category,
+  }) async {
     _sessionStartTime = DateTime.now();
     final storage = ref.read(storageServiceProvider);
     final seenIds = storage.getSeenQuestionIds();
@@ -233,37 +238,80 @@ class QuizViewModel extends Notifier<QuizState> {
     state = QuizState(questions: questions);
   }
 
-  Future<List<Question>> _generateLuckyBatch({int count = 80, bool isRetry = false}) async {
+  Future<List<Question>> _generateLuckyBatch({
+    int count = 80,
+    bool isRetry = false,
+  }) async {
     final storage = ref.read(storageServiceProvider);
     final items = storage.getAllItems();
     final verbService = ref.read(verbServiceProvider);
     final verbs = await verbService.loadVerbs();
     final seenIds = storage.getSeenQuestionIds();
 
-    final bool vocabOnly = storage.getSetting('vocab_only_mode', defaultValue: false) == true;
+    final bool vocabOnly =
+        storage.getSetting('vocab_only_mode', defaultValue: false) == true;
 
     // Use a larger pool size to ensure we find enough unseen questions even if we filter out seen ones
     final int poolSize = count * 2;
 
     // 1. Gather potential questions from each "Bucket"
-    final List<Question> vocabPool = _engine.generateVocabularyQuiz(items, count: poolSize, seenIds: seenIds.toList());
-    
+    final List<Question> vocabPool = _engine.generateVocabularyQuiz(
+      items,
+      count: poolSize,
+      seenIds: seenIds.toList(),
+    );
+
     final List<Question> builderPool = [];
     final List<Question> generalJsonPool = [];
     final List<Question> interrogPool = [];
     final List<Question> prepPool = [];
-    
+
     if (!vocabOnly) {
-      builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/unit_10.json', items));
-      builderPool.addAll(await _loader.loadQuestions('assets/data/exercises/question_builder.json', items));
-      generalJsonPool.addAll(await _loader.loadQuestions('assets/data/questions.json', items));
-      generalJsonPool.addAll(await _loader.loadQuestions('assets/data/combined_questions.json', items));
-      interrogPool.addAll(await _engine.generateInterrogativeQuiz(count: poolSize, seenIds: seenIds.toList()));
-      prepPool.addAll(await _engine.generatePrepositionQuiz(count: poolSize, seenIds: seenIds.toList()));
+      builderPool.addAll(
+        await _loader.loadQuestions(
+          'assets/data/exercises/unit_10.json',
+          items,
+        ),
+      );
+      builderPool.addAll(
+        await _loader.loadQuestions(
+          'assets/data/exercises/question_builder.json',
+          items,
+        ),
+      );
+      generalJsonPool.addAll(
+        await _loader.loadQuestions('assets/data/questions.json', items),
+      );
+      generalJsonPool.addAll(
+        await _loader.loadQuestions(
+          'assets/data/combined_questions.json',
+          items,
+        ),
+      );
+      interrogPool.addAll(
+        await _engine.generateInterrogativeQuiz(
+          count: poolSize,
+          seenIds: seenIds.toList(),
+        ),
+      );
+      prepPool.addAll(
+        await _engine.generatePrepositionQuiz(
+          count: poolSize,
+          seenIds: seenIds.toList(),
+        ),
+      );
     }
-    
-    final List<Question> verbPool = _engine.generateVerbConjugationQuestions(verbs: verbs, count: poolSize, seenIds: seenIds.toList());
-    final List<Question> clozePool = _engine.generateClozeQuestionsFromExamples(items, count: poolSize, seenIds: seenIds.toList());
+
+    final List<Question> verbPool = _engine.generateVerbConjugationQuestions(
+      verbs: verbs,
+      count: poolSize,
+      seenIds: seenIds.toList(),
+    );
+    final List<Question> clozePool = _engine.generateClozeQuestionsFromExamples(
+      items,
+      count: poolSize,
+      seenIds: seenIds.toList(),
+    );
 
     // 2. Filter pools to ONLY keep unseen questions for a strict no-repeat policy
     List<Question> onlyUnseen(List<Question> pool) {
@@ -272,17 +320,17 @@ class QuizViewModel extends Notifier<QuizState> {
 
     // 3. Prepare all pools
     final allPools = [
-      onlyUnseen(vocabPool), 
+      onlyUnseen(vocabPool),
       onlyUnseen(verbPool),
-      onlyUnseen(clozePool)
+      onlyUnseen(clozePool),
     ];
 
     if (!vocabOnly) {
       allPools.addAll([
-        onlyUnseen(builderPool), 
-        onlyUnseen(generalJsonPool), 
-        onlyUnseen(interrogPool), 
-        onlyUnseen(prepPool), 
+        onlyUnseen(builderPool),
+        onlyUnseen(generalJsonPool),
+        onlyUnseen(interrogPool),
+        onlyUnseen(prepPool),
       ]);
     }
 
@@ -297,7 +345,8 @@ class QuizViewModel extends Notifier<QuizState> {
     // 4. Balanced interleaving with random bucket order per pick
     final List<Question> batch = [];
     while (batch.length < count && allPools.any((p) => p.isNotEmpty)) {
-      final activePools = allPools.where((p) => p.isNotEmpty).toList()..shuffle();
+      final activePools = allPools.where((p) => p.isNotEmpty).toList()
+        ..shuffle();
       for (var pool in activePools) {
         if (batch.length < count) {
           batch.add(pool.removeAt(0));
@@ -310,14 +359,11 @@ class QuizViewModel extends Notifier<QuizState> {
 
   Future<void> startLuckyQuiz() async {
     _sessionStartTime = DateTime.now();
-    
+
     // Generate a fresh balanced batch
     final initialBatch = await _generateLuckyBatch(count: 100);
 
-    state = QuizState(
-      questions: initialBatch,
-      isInfinite: true,
-    );
+    state = QuizState(questions: initialBatch, isInfinite: true);
   }
 
   bool _isGrammarCategory(String category) {
@@ -342,7 +388,9 @@ class QuizViewModel extends Notifier<QuizState> {
     final progressService = ref.read(progressServiceProvider.notifier);
 
     // Determine activity type
-    ActivityType activityType = state.isInfinite ? ActivityType.quiz : ActivityType.quiz; // lucky mix
+    ActivityType activityType = state.isInfinite
+        ? ActivityType.quiz
+        : ActivityType.quiz; // lucky mix
     if (state.questions.isNotEmpty && !state.isInfinite) {
       final firstType = state.questions.first.type;
       if (firstType == QuestionType.vocabularyMatch) {
@@ -351,7 +399,10 @@ class QuizViewModel extends Notifier<QuizState> {
         activityType = ActivityType.interrogativeQuiz;
       } else if (firstType == QuestionType.prepositionFill) {
         activityType = ActivityType.prepositionQuiz;
-      } else if (firstType == QuestionType.multipleChoice && state.questions.isNotEmpty && state.questions.first.category != null && _isGrammarCategory(state.questions.first.category!)) {
+      } else if (firstType == QuestionType.multipleChoice &&
+          state.questions.isNotEmpty &&
+          state.questions.first.category != null &&
+          _isGrammarCategory(state.questions.first.category!)) {
         activityType = ActivityType.grammarQuiz;
       }
     }
@@ -384,7 +435,6 @@ class QuizViewModel extends Notifier<QuizState> {
     storage.saveHighScore(state.score);
   }
 
-
   /// Answers the current question and records XP via ProgressService.
   /// Returns the XP awarded for this answer.
   Future<int> answerQuestion(String answer) async {
@@ -415,8 +465,10 @@ class QuizViewModel extends Notifier<QuizState> {
       );
     }
 
-    final newScore = (isFirstAttempt && isCorrect) ? state.score + 1 : state.score;
-    
+    final newScore = (isFirstAttempt && isCorrect)
+        ? state.score + 1
+        : state.score;
+
     final newWrongAnswers = Set<String>.from(state.currentWrongAnswers);
     if (!isCorrect) {
       newWrongAnswers.add(answer);
@@ -437,9 +489,9 @@ class QuizViewModel extends Notifier<QuizState> {
   Future<void> nextQuestion() async {
     // Check if we need more questions for infinite mode
     if (state.isInfinite && state.currentIndex >= state.questions.length - 5) {
-       // Generate another fresh batch instead of reshuffling history
-       final freshBatch = await _generateLuckyBatch(count: 60);
-       state = state.copyWith(questions: [...state.questions, ...freshBatch]);
+      // Generate another fresh batch instead of reshuffling history
+      final freshBatch = await _generateLuckyBatch(count: 60);
+      state = state.copyWith(questions: [...state.questions, ...freshBatch]);
     }
 
     if (state.currentIndex < state.questions.length - 1) {

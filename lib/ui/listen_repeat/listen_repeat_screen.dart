@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import '../../main.dart';
 import '../../models/language_item.dart';
 import 'listen_repeat_view_model.dart';
@@ -9,14 +11,14 @@ class ListenRepeatScreen extends ConsumerStatefulWidget {
   const ListenRepeatScreen({super.key});
 
   @override
-  ConsumerState<ListenRepeatScreen> createState() =>
-      _ListenRepeatScreenState();
+  ConsumerState<ListenRepeatScreen> createState() => _ListenRepeatScreenState();
 }
 
 class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
     with WidgetsBindingObserver {
   bool _isSpeaking = false;
   bool _isAutoPlayActive = false;
+  final AudioPlayer _bgAudioPlayer = AudioPlayer();
 
   @override
   void initState() {
@@ -25,13 +27,35 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.read(listenRepeatViewModelProvider.notifier).startSession();
       if (mounted && ref.read(listenRepeatViewModelProvider).isPlaying) {
+        _startBackgroundSilence();
         _startAutoPlayLoop();
       }
     });
   }
 
+  Future<void> _startBackgroundSilence() async {
+    try {
+      await _bgAudioPlayer.setAudioSource(
+        AudioSource.asset(
+          'assets/audio/silence.mp3',
+          tag: MediaItem(
+            id: 'listen_repeat_silence',
+            album: 'Language Trainer',
+            title: 'Listen & Repeat',
+            artist: 'Playing vocabulary',
+          ),
+        ),
+      );
+      await _bgAudioPlayer.setLoopMode(LoopMode.one);
+      _bgAudioPlayer.play();
+    } catch (e) {
+      debugPrint("Failed to start background silence: $e");
+    }
+  }
+
   @override
   void dispose() {
+    _bgAudioPlayer.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
@@ -123,6 +147,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
 
   Future<void> _stopSession() async {
     _isAutoPlayActive = false;
+    _bgAudioPlayer.stop();
     final tts = ref.read(ttsServiceProvider);
     tts.stop();
     ref.read(listenRepeatViewModelProvider.notifier).stopSession();
@@ -141,10 +166,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
         title: const Text('Listen & Repeat'),
         actions: [
           if (state.isPlaying)
-            TextButton(
-              onPressed: _stopSession,
-              child: const Text('Stop'),
-            ),
+            TextButton(onPressed: _stopSession, child: const Text('Stop')),
         ],
       ),
       body: Center(
@@ -162,7 +184,9 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
                 child: Container(
                   padding: const EdgeInsets.all(24),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(
@@ -171,17 +195,19 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
                       // Portuguese word
                       Text(
                         item.portuguese,
-                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+                        style: Theme.of(context).textTheme.headlineLarge
+                            ?.copyWith(fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 12),
                       // English translation
                       Text(
                         item.english,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(
+                              color: Theme.of(
+                                context,
+                              ).colorScheme.onSurfaceVariant,
                             ),
                         textAlign: TextAlign.center,
                       ),
@@ -189,9 +215,12 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
                         const SizedBox(height: 8),
                         Text(
                           item.notes,
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          style: Theme.of(context).textTheme.bodyMedium
+                              ?.copyWith(
                                 fontStyle: FontStyle.italic,
-                                color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
                               ),
                           textAlign: TextAlign.center,
                         ),
@@ -204,8 +233,8 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
               Text(
                 _isAutoPlayActive ? 'Auto-playing ...' : 'Repeat after hearing',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 32),
 
@@ -217,10 +246,15 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
                 repeat: true,
                 child: ElevatedButton.icon(
                   onPressed: _isSpeaking ? null : _playCurrentWord,
-                  icon: Icon(_isSpeaking ? Icons.pause : Icons.volume_up_rounded),
+                  icon: Icon(
+                    _isSpeaking ? Icons.pause : Icons.volume_up_rounded,
+                  ),
                   label: Text(_isSpeaking ? 'Speaking...' : 'Play Again'),
                   style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32,
+                      vertical: 16,
+                    ),
                     textStyle: const TextStyle(fontSize: 18),
                   ),
                 ),
@@ -233,7 +267,10 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
                 icon: const Icon(Icons.forward_rounded),
                 label: const Text('Next Word'),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 32,
+                    vertical: 16,
+                  ),
                   textStyle: const TextStyle(fontSize: 18),
                 ),
               ),
@@ -262,8 +299,8 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
               Text(
                 'Word ${state.totalWordsSeen + 1}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             ] else if (state.isPlaying) ...[
               const CircularProgressIndicator(),
@@ -279,15 +316,15 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
               Text(
                 'No words loaded',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
                 'Add vocabulary words to get started',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onSurfaceVariant,
-                    ),
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
               ),
             ],
           ],

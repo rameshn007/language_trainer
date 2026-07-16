@@ -17,15 +17,18 @@ class TranslationService {
     if (text.isEmpty) return null;
 
     final langPair = fromEn ? 'en|pt-PT' : 'pt-PT|en';
-    final url = Uri.parse('$_baseUrl?q=${Uri.encodeComponent(text)}&langpair=$langPair');
+    final url = Uri.parse(
+      '$_baseUrl?q=${Uri.encodeComponent(text)}&langpair=$langPair',
+    );
 
     try {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        final translatedText = data['responseData']['translatedText'] as String?;
-        
+        final translatedText =
+            data['responseData']['translatedText'] as String?;
+
         if (translatedText != null && translatedText.isNotEmpty) {
           // MyMemory sometimes returns error messages as the translated text if rate limited
           if (translatedText.contains('MYMEMORY WARNING')) {

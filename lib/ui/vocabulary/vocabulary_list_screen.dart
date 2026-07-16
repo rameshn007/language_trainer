@@ -13,10 +13,7 @@ enum SortMode { alphabetical, mastery, random }
 class VocabularyListScreen extends ConsumerStatefulWidget {
   final bool filterVerbsOnly;
 
-  const VocabularyListScreen({
-    super.key,
-    this.filterVerbsOnly = false,
-  });
+  const VocabularyListScreen({super.key, this.filterVerbsOnly = false});
 
   @override
   ConsumerState<VocabularyListScreen> createState() =>
@@ -103,9 +100,11 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
     Iterable<LanguageItem> items = _items;
 
     if (widget.filterVerbsOnly) {
-      items = items.where((item) =>
-          item.english.toLowerCase().startsWith('to ') ||
-          item.notes.toLowerCase().contains('verb'));
+      items = items.where(
+        (item) =>
+            item.english.toLowerCase().startsWith('to ') ||
+            item.notes.toLowerCase().contains('verb'),
+      );
     }
 
     if (_searchQuery.isEmpty) {
@@ -632,4 +631,3 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
     );
   }
 }
-

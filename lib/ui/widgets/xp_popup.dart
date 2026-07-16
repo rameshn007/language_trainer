@@ -14,10 +14,7 @@ class XPPopup extends StatefulWidget {
     final overlay = Overlay.of(context);
     late OverlayEntry entry;
     entry = OverlayEntry(
-      builder: (context) => XPPopup(
-        xp: xp,
-        onDone: () => entry.remove(),
-      ),
+      builder: (context) => XPPopup(xp: xp, onDone: () => entry.remove()),
     );
     overlay.insert(entry);
   }
@@ -41,9 +38,7 @@ class _XPPopupState extends State<XPPopup> with SingleTickerProviderStateMixin {
     _position = Tween(
       begin: const Offset(0, 0),
       end: const Offset(0, -80),
-    ).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _controller.forward().then((_) => widget.onDone());
   }
 
@@ -64,10 +59,7 @@ class _XPPopupState extends State<XPPopup> with SingleTickerProviderStateMixin {
         builder: (context, child) {
           return Transform.translate(
             offset: _position.value,
-            child: Opacity(
-              opacity: _opacity.value,
-              child: child,
-            ),
+            child: Opacity(opacity: _opacity.value, child: child),
           );
         },
         child: Center(

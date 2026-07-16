@@ -104,10 +104,13 @@ void main() {
       expect(service.isCorrect('sim', 'não'), isFalse);
     });
 
-    test('empty spoken vs non-empty expected returns true (both normalize to empty)', () {
-      // Both strings normalize to empty after stripping non-word chars
-      expect(service.isCorrect('', ''), isTrue);
-    });
+    test(
+      'empty spoken vs non-empty expected returns true (both normalize to empty)',
+      () {
+        // Both strings normalize to empty after stripping non-word chars
+        expect(service.isCorrect('', ''), isTrue);
+      },
+    );
 
     test('single char different returns false for short words', () {
       expect(service.isCorrect('a', 'b'), isFalse);

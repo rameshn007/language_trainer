@@ -35,7 +35,9 @@ class StorageService {
     _settingsBox = await Hive.openBox(_settingsBoxName);
     _seenQuestionsBox = await Hive.openBox<String>(_seenQuestionsBoxName);
     _dailyRecordsBox = await Hive.openBox<DailyRecord>(_dailyRecordsBoxName);
-    _sessionRecordsBox = await Hive.openBox<SessionRecord>(_sessionRecordsBoxName);
+    _sessionRecordsBox = await Hive.openBox<SessionRecord>(
+      _sessionRecordsBoxName,
+    );
     _wordProgressBox = await Hive.openBox<WordProgress>(_wordProgressBoxName);
   }
 
@@ -102,19 +104,24 @@ class StorageService {
   Future<void> resetHighScore() async {
     await _settingsBox?.delete('high_score');
   }
-  
+
   // --- Notification Settings ---
-  bool get remindersEnabled => getSetting('reminders_enabled', defaultValue: true);
+  bool get remindersEnabled =>
+      getSetting('reminders_enabled', defaultValue: true);
   int get reminderHour => getSetting('reminder_hour', defaultValue: 9);
   int get reminderMinute => getSetting('reminder_minute', defaultValue: 0);
-  bool get hasRequestedNotifications => getSetting('has_requested_notifications', defaultValue: false);
+  bool get hasRequestedNotifications =>
+      getSetting('has_requested_notifications', defaultValue: false);
 
-  Future<void> setRemindersEnabled(bool enabled) async => saveSetting('reminders_enabled', enabled);
+  Future<void> setRemindersEnabled(bool enabled) async =>
+      saveSetting('reminders_enabled', enabled);
   Future<void> setReminderTime(int hour, int minute) async {
     await saveSetting('reminder_hour', hour);
     await saveSetting('reminder_minute', minute);
   }
-  Future<void> markNotificationsRequested() async => saveSetting('has_requested_notifications', true);
+
+  Future<void> markNotificationsRequested() async =>
+      saveSetting('has_requested_notifications', true);
 
   // --- Seen Questions Tracking ---
   bool isQuestionSeen(String id) {
@@ -262,7 +269,7 @@ class StorageService {
     // Get all daily records sorted by date
     final records = _dailyRecordsBox!.values.toList()
       ..sort((a, b) => a.date.compareTo(b.date));
-    
+
     if (records.isEmpty) return 0;
 
     int bestStreak = 0;
@@ -271,16 +278,20 @@ class StorageService {
 
     for (final record in records) {
       if (record.xpEarned <= 0) continue;
-      
+
       final parts = record.date.split('-');
-      final date = DateTime(int.parse(parts[0]), int.parse(parts[1]), int.parse(parts[2]));
-      
+      final date = DateTime(
+        int.parse(parts[0]),
+        int.parse(parts[1]),
+        int.parse(parts[2]),
+      );
+
       if (lastDate == null || date.difference(lastDate).inDays == 1) {
         currentStreak++;
       } else if (date.difference(lastDate).inDays > 1) {
         currentStreak = 1;
       }
-      
+
       if (currentStreak > bestStreak) bestStreak = currentStreak;
       lastDate = date;
     }
@@ -329,9 +340,13 @@ class StorageService {
 
   /// Updates word progress and mastery tier based on correctness.
   /// Returns the XP awarded for this answer.
-  Future<int> updateWordProgress(String itemId, bool correct, {bool firstAttempt = true}) async {
+  Future<int> updateWordProgress(
+    String itemId,
+    bool correct, {
+    bool firstAttempt = true,
+  }) async {
     if (_wordProgressBox == null || _itemsBox == null) return 0;
-    
+
     final progress = getWordProgress(itemId);
     final item = _itemsBox!.get(itemId);
     int xp = 0;
@@ -340,7 +355,7 @@ class StorageService {
       progress.totalCorrect += 1;
       progress.correctStreak += 1;
       progress.lastReviewedAt = DateTime.now();
-      
+
       // Award XP
       xp = firstAttempt ? 10 : 5;
 

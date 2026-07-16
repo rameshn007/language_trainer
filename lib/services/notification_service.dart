@@ -17,7 +17,8 @@ class NotificationService {
 
   Future<void> init() async {
     tz_data.initializeTimeZones();
-    final String timeZoneName = (await FlutterTimezone.getLocalTimezone()).identifier;
+    final String timeZoneName =
+        (await FlutterTimezone.getLocalTimezone()).identifier;
     tz.setLocalLocation(tz.getLocation(timeZoneName));
 
     const AndroidInitializationSettings initializationSettingsAndroid =
@@ -25,15 +26,16 @@ class NotificationService {
 
     const DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
-      requestAlertPermission: false,
-      requestBadgePermission: false,
-      requestSoundPermission: false,
-    );
+          requestAlertPermission: false,
+          requestBadgePermission: false,
+          requestSoundPermission: false,
+        );
 
-    const InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsDarwin,
-    );
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
+          android: initializationSettingsAndroid,
+          iOS: initializationSettingsDarwin,
+        );
 
     debugPrint('NotificationService: Initializing...');
     await _notificationsPlugin.initialize(
@@ -45,7 +47,9 @@ class NotificationService {
     // Check if app was launched from a notification
     final NotificationAppLaunchDetails? launchDetails =
         await _notificationsPlugin.getNotificationAppLaunchDetails();
-    debugPrint('NotificationService: Launch details - didLaunchApp: ${launchDetails?.didNotificationLaunchApp}');
+    debugPrint(
+      'NotificationService: Launch details - didLaunchApp: ${launchDetails?.didNotificationLaunchApp}',
+    );
     if (launchDetails?.didNotificationLaunchApp ?? false) {
       _onNotificationTapped(launchDetails!.notificationResponse!);
     }
@@ -55,7 +59,9 @@ class NotificationService {
   }
 
   void handlePendingNotification() {
-    debugPrint('NotificationService: Checking for pending notification... (Has pending: ${_pendingResponse != null})');
+    debugPrint(
+      'NotificationService: Checking for pending notification... (Has pending: ${_pendingResponse != null})',
+    );
     if (_pendingResponse != null) {
       _onNotificationTapped(_pendingResponse!);
       _pendingResponse = null;
@@ -63,9 +69,13 @@ class NotificationService {
   }
 
   void _onNotificationTapped(NotificationResponse response) {
-    debugPrint('NotificationService: Notification tapped! (Action ID: ${response.actionId}, Payload: ${response.payload})');
+    debugPrint(
+      'NotificationService: Notification tapped! (Action ID: ${response.actionId}, Payload: ${response.payload})',
+    );
     if (navigatorKey.currentState == null) {
-      debugPrint('NotificationService: Navigator state is NULL, saving as pending.');
+      debugPrint(
+        'NotificationService: Navigator state is NULL, saving as pending.',
+      );
       _pendingResponse = response;
       return;
     }
@@ -82,18 +92,17 @@ class NotificationService {
     debugPrint('NotificationService: Requesting permissions...');
     final bool? result = await _notificationsPlugin
         .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+          IOSFlutterLocalNotificationsPlugin
+        >()
+        ?.requestPermissions(alert: true, badge: true, sound: true);
     debugPrint('NotificationService: Permissions granted: $result');
     return result ?? false;
   }
 
   Future<void> requestPermissionsIfFirstTime() async {
-    final hasRequested = _storage.getSetting('has_requested_notifications', defaultValue: false) as bool;
+    final hasRequested =
+        _storage.getSetting('has_requested_notifications', defaultValue: false)
+            as bool;
     if (!hasRequested) {
       await requestPermissions();
       await _storage.saveSetting('has_requested_notifications', true);
@@ -113,12 +122,13 @@ class NotificationService {
   }
 
   Future<void> showTestNotification() async {
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'test_channel',
-      'Test Notifications',
-      importance: Importance.max,
-      priority: Priority.high,
-    );
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+          'test_channel',
+          'Test Notifications',
+          importance: Importance.max,
+          priority: Priority.high,
+        );
 
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
       presentAlert: true,
@@ -133,9 +143,13 @@ class NotificationService {
       iOS: iosDetails,
     );
 
-    debugPrint('NotificationService: Scheduling test notification for 5 seconds from now...');
-    final scheduledDate = tz.TZDateTime.now(tz.local).add(const Duration(seconds: 5));
-    
+    debugPrint(
+      'NotificationService: Scheduling test notification for 5 seconds from now...',
+    );
+    final scheduledDate = tz.TZDateTime.now(
+      tz.local,
+    ).add(const Duration(seconds: 5));
+
     try {
       await _notificationsPlugin.zonedSchedule(
         id: 99,
@@ -145,7 +159,9 @@ class NotificationService {
         notificationDetails: platformDetails,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       );
-      debugPrint('NotificationService: Test notification scheduled successfully for $scheduledDate');
+      debugPrint(
+        'NotificationService: Test notification scheduled successfully for $scheduledDate',
+      );
     } catch (e) {
       debugPrint('NotificationService: Error scheduling test notification: $e');
     }
@@ -168,15 +184,19 @@ class NotificationService {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
 
-    debugPrint('Scheduling daily reminder for $hour:$minute (Local time: $scheduledDate)');
-    
-    const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-      'daily_reminder_channel',
-      'Daily Reminders',
-      channelDescription: 'Notifications to remind you to practice your language skills',
-      importance: Importance.max,
-      priority: Priority.high,
+    debugPrint(
+      'Scheduling daily reminder for $hour:$minute (Local time: $scheduledDate)',
     );
+
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+          'daily_reminder_channel',
+          'Daily Reminders',
+          channelDescription:
+              'Notifications to remind you to practice your language skills',
+          importance: Importance.max,
+          priority: Priority.high,
+        );
 
     const DarwinNotificationDetails iosDetails = DarwinNotificationDetails(
       presentAlert: true,

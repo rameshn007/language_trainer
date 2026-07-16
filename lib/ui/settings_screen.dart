@@ -134,7 +134,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                   OutlinedButton(
                     onPressed: () {
-                      ref.read(ttsServiceProvider).speak("Olá, como estás?", language: 'pt');
+                      ref
+                          .read(ttsServiceProvider)
+                          .speak("Olá, como estás?", language: 'pt');
                     },
                     child: const Text("Test Voice"),
                   ),
@@ -193,7 +195,12 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                   OutlinedButton(
                     onPressed: () {
-                      ref.read(ttsServiceProvider).speak("Hello, testing one two three.", language: 'en');
+                      ref
+                          .read(ttsServiceProvider)
+                          .speak(
+                            "Hello, testing one two three.",
+                            language: 'en',
+                          );
                     },
                     child: const Text("Test Voice"),
                   ),
@@ -224,7 +231,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     _saveSelection('en', val);
 
                     // Play a quick test
-                    ref.read(ttsServiceProvider).speak(
+                    ref
+                        .read(ttsServiceProvider)
+                        .speak(
                           "Hello, and testing one two three.",
                           language: 'en',
                         );
@@ -248,7 +257,10 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text("Daily Reminder", style: TextStyle(fontWeight: FontWeight.w600)),
+              title: const Text(
+                "Daily Reminder",
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
               subtitle: Text(
                 _remindersEnabled
                     ? "Scheduled for ${_formatTime(_reminderHour, _reminderMinute)}"
@@ -268,7 +280,9 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   icon: const Icon(Icons.access_time_rounded),
                   label: const Text("Change Reminder Time"),
                   style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
               ),
@@ -289,16 +303,31 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
             ListTile(
               contentPadding: EdgeInsets.zero,
-              title: const Text("Use Only New Vocabulary", style: TextStyle(fontWeight: FontWeight.w600)),
-              subtitle: const Text("Skip merging with existing content (Beta/Test)"),
+              title: const Text(
+                "Use Only New Vocabulary",
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              subtitle: const Text(
+                "Skip merging with existing content (Beta/Test)",
+              ),
               trailing: Switch(
-                value: ref.read(storageServiceProvider).getSetting('vocab_only_mode', defaultValue: false) == true,
+                value:
+                    ref
+                        .read(storageServiceProvider)
+                        .getSetting('vocab_only_mode', defaultValue: false) ==
+                    true,
                 onChanged: (val) async {
-                  await ref.read(storageServiceProvider).saveSetting('vocab_only_mode', val);
+                  await ref
+                      .read(storageServiceProvider)
+                      .saveSetting('vocab_only_mode', val);
                   setState(() {});
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("Setting saved. Please return Home and tap 'Refresh Data'.")),
+                      const SnackBar(
+                        content: Text(
+                          "Setting saved. Please return Home and tap 'Refresh Data'.",
+                        ),
+                      ),
                     );
                   }
                 },
@@ -310,7 +339,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  bool get _remindersEnabled => ref.read(storageServiceProvider).remindersEnabled;
+  bool get _remindersEnabled =>
+      ref.read(storageServiceProvider).remindersEnabled;
   int get _reminderHour => ref.read(storageServiceProvider).reminderHour;
   int get _reminderMinute => ref.read(storageServiceProvider).reminderMinute;
 
@@ -328,7 +358,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
       if (!granted) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Notification permissions are required for reminders.")),
+            const SnackBar(
+              content: Text(
+                "Notification permissions are required for reminders.",
+              ),
+            ),
           );
         }
         return;

@@ -92,7 +92,9 @@ class TtsService {
         try {
           final locale = v['locale'].toString().toLowerCase();
           final name = v['name'].toString().toLowerCase();
-          return locale.startsWith('pt') || name.contains('joana') || name.contains('luciana');
+          return locale.startsWith('pt') ||
+              name.contains('joana') ||
+              name.contains('luciana');
         } catch (e) {
           return false;
         }
@@ -147,7 +149,10 @@ class TtsService {
         try {
           final locale = v['locale'].toString().toLowerCase();
           final name = v['name'].toString().toLowerCase();
-          return locale.startsWith('en') || name.contains('fred') || name.contains('samantha') || name.contains('daniel');
+          return locale.startsWith('en') ||
+              name.contains('fred') ||
+              name.contains('samantha') ||
+              name.contains('daniel');
         } catch (e) {
           return false;
         }
@@ -322,7 +327,9 @@ class TtsService {
 
   /// Dynamically find the best available voice for a language by querying
   /// the system at speak-time. This avoids stale cached data and guessed identifiers.
-  Future<Map<String, String>?> _findBestAvailableVoice(String langPrefix) async {
+  Future<Map<String, String>?> _findBestAvailableVoice(
+    String langPrefix,
+  ) async {
     try {
       final voices = await _flutterTts.getVoices;
       if (voices == null || voices.isEmpty) return null;
@@ -340,7 +347,8 @@ class TtsService {
 
       // Sort by score to pick the best
       matching.sort(
-        (a, b) => _scoreVoice(b, langPrefix).compareTo(_scoreVoice(a, langPrefix)),
+        (a, b) =>
+            _scoreVoice(b, langPrefix).compareTo(_scoreVoice(a, langPrefix)),
       );
 
       final best = matching.first;
@@ -355,7 +363,10 @@ class TtsService {
         "identifier": (best["identifier"] ?? "") as String,
       };
     } catch (e) {
-      AppLogger.log("Error finding voice for $langPrefix: $e", name: "TtsService");
+      AppLogger.log(
+        "Error finding voice for $langPrefix: $e",
+        name: "TtsService",
+      );
       return null;
     }
   }
@@ -394,23 +405,31 @@ class TtsService {
 
         // 2. If cached voice failed, dynamically query available voices
         if (!voiceSet) {
-          AppLogger.log("EN: Cached voice failed, querying system voices dynamically...", name: "TtsService");
+          AppLogger.log(
+            "EN: Cached voice failed, querying system voices dynamically...",
+            name: "TtsService",
+          );
           final dynamicVoice = await _findBestAvailableVoice('en');
           if (dynamicVoice != null) {
             try {
               final result = await _flutterTts.setVoice(dynamicVoice);
               if (result == 1) {
                 voiceSet = true;
-                AppLogger.log("EN: Dynamic voice set successfully: ${dynamicVoice['name']}", name: "TtsService");
+                AppLogger.log(
+                  "EN: Dynamic voice set successfully: ${dynamicVoice['name']}",
+                  name: "TtsService",
+                );
               }
             } catch (_) {}
           }
         }
 
         if (!voiceSet) {
-          AppLogger.log("EN: All voice attempts failed, using setLanguage('en-US') only", name: "TtsService");
+          AppLogger.log(
+            "EN: All voice attempts failed, using setLanguage('en-US') only",
+            name: "TtsService",
+          );
         }
-
       } else if (language.startsWith('pt')) {
         await _flutterTts.setLanguage('pt-PT');
 
@@ -428,21 +447,30 @@ class TtsService {
         }
 
         if (!voiceSet) {
-          AppLogger.log("PT: Cached voice failed, querying system voices dynamically...", name: "TtsService");
+          AppLogger.log(
+            "PT: Cached voice failed, querying system voices dynamically...",
+            name: "TtsService",
+          );
           final dynamicVoice = await _findBestAvailableVoice('pt');
           if (dynamicVoice != null) {
             try {
               final result = await _flutterTts.setVoice(dynamicVoice);
               if (result == 1) {
                 voiceSet = true;
-                AppLogger.log("PT: Dynamic voice set successfully: ${dynamicVoice['name']}", name: "TtsService");
+                AppLogger.log(
+                  "PT: Dynamic voice set successfully: ${dynamicVoice['name']}",
+                  name: "TtsService",
+                );
               }
             } catch (_) {}
           }
         }
 
         if (!voiceSet) {
-          AppLogger.log("PT: All voice attempts failed, using setLanguage('pt-PT') only", name: "TtsService");
+          AppLogger.log(
+            "PT: All voice attempts failed, using setLanguage('pt-PT') only",
+            name: "TtsService",
+          );
         }
       }
     }
