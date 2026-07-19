@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
-import '../../main.dart';
-import '../../models/language_item.dart';
 import 'listen_repeat_view_model.dart';
 
 class ListenRepeatScreen extends ConsumerStatefulWidget {
@@ -14,127 +10,18 @@ class ListenRepeatScreen extends ConsumerStatefulWidget {
   ConsumerState<ListenRepeatScreen> createState() => _ListenRepeatScreenState();
 }
 
-class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
-    with WidgetsBindingObserver {
-  bool _isSpeaking = false;
-  bool _isAutoPlayActive = false;
-  final AudioPlayer _bgAudioPlayer = AudioPlayer();
+class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await ref.read(listenRepeatViewModelProvider.notifier).startSession();
-      if (mounted && ref.read(listenRepeatViewModelProvider).isPlaying) {
-        _startBackgroundSilence();
-        _startAutoPlayLoop();
-      }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(listenRepeatViewModelProvider.notifier).startSession();
     });
   }
 
-  Future<void> _startBackgroundSilence() async {
-    try {
-      await _bgAudioPlayer.setAudioSource(
-        AudioSource.asset(
-          'assets/audio/silence.mp3',
-          tag: MediaItem(
-            id: 'listen_repeat_silence',
-            album: 'Language Trainer',
-            title: 'Listen & Repeat',
-            artist: 'Playing vocabulary',
-          ),
-        ),
-      );
-      await _bgAudioPlayer.setLoopMode(LoopMode.one);
-      _bgAudioPlayer.play();
-    } catch (e) {
-      debugPrint("Failed to start background silence: $e");
-    }
-  }
-
-  @override
-  void dispose() {
-    _bgAudioPlayer.dispose();
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-  }
-
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed && _isSpeaking) {
-      // App returned to foreground while TTS was speaking.
-      // The isolate may be stuck mid-await (e.g. user paused from lock screen).
-      // Unblock the await and advance to the next word so playback resumes.
-      final tts = ref.read(ttsServiceProvider);
-      tts.stop();
-      ref.read(listenRepeatViewModelProvider.notifier).nextWord();
-    }
-  }
-
-  Future<void> _startAutoPlayLoop() async {
-    if (_isAutoPlayActive) return;
-    _isAutoPlayActive = true;
-
-    // Small delay to let state settle after startSession
-    await Future.delayed(const Duration(milliseconds: 200));
-
-    while (mounted) {
-      final state = ref.read(listenRepeatViewModelProvider);
-      if (!state.isPlaying || state.currentItem == null) {
-        _isAutoPlayActive = false;
-        return;
-      }
-
-      await _playAudio(state.currentItem!);
-
-      // Pause so user has time to repeat
-      await Future.delayed(const Duration(seconds: 2));
-
-      if (!mounted) {
-        _isAutoPlayActive = false;
-        return;
-      }
-
-      final newState = ref.read(listenRepeatViewModelProvider);
-      if (!newState.isPlaying) {
-        _isAutoPlayActive = false;
-        return;
-      }
-
-      ref.read(listenRepeatViewModelProvider.notifier).nextWord();
-    }
-    _isAutoPlayActive = false;
-  }
-
-  Future<void> _playAudio(LanguageItem item) async {
-    if (!mounted) return;
-
-    setState(() => _isSpeaking = true);
-    final tts = ref.read(ttsServiceProvider);
-
-    // Speak Portuguese first
-    await tts.speak(item.portuguese, language: 'pt-PT');
-
-    // Brief pause between languages
-    if (mounted) {
-      await Future.delayed(const Duration(milliseconds: 500));
-    }
-    if (!mounted) return;
-
-    // Then speak English
-    await tts.speak(item.english, language: 'en-US');
-
-    if (mounted) {
-      setState(() => _isSpeaking = false);
-    }
-  }
-
-  Future<void> _playCurrentWord() async {
-    final item = ref.read(listenRepeatViewModelProvider).currentItem;
-    if (item != null) {
-      await _playAudio(item);
-    }
+  void _replayCurrentWord() {
+    ref.read(listenRepeatViewModelProvider.notifier).replayCurrentWord();
   }
 
   void _nextWord() {
@@ -145,11 +32,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
     ref.read(listenRepeatViewModelProvider.notifier).shufflePool();
   }
 
-  Future<void> _stopSession() async {
-    _isAutoPlayActive = false;
-    _bgAudioPlayer.stop();
-    final tts = ref.read(ttsServiceProvider);
-    tts.stop();
+  void _stopSession() {
     ref.read(listenRepeatViewModelProvider.notifier).stopSession();
     if (mounted) {
       Navigator.of(context).pop();
@@ -160,6 +43,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
   Widget build(BuildContext context) {
     final state = ref.watch(listenRepeatViewModelProvider);
     final item = state.currentItem;
+    final isSpeaking = state.isSpeaking;
 
     return Scaffold(
       appBar: AppBar(
@@ -177,7 +61,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
             if (item != null) ...[
               // AvatarGlow for audio playback feedback
               AvatarGlow(
-                animate: _isSpeaking,
+                animate: isSpeaking,
                 glowColor: Colors.blue.shade300,
                 duration: const Duration(milliseconds: 2000),
                 repeat: true,
@@ -231,7 +115,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
               ),
               const SizedBox(height: 16),
               Text(
-                _isAutoPlayActive ? 'Auto-playing ...' : 'Repeat after hearing',
+                'Auto-playing ...',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
@@ -240,16 +124,16 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
 
               // Play audio button (manual override)
               AvatarGlow(
-                animate: _isSpeaking,
+                animate: isSpeaking,
                 glowColor: Theme.of(context).colorScheme.primary,
                 duration: const Duration(milliseconds: 2000),
                 repeat: true,
                 child: ElevatedButton.icon(
-                  onPressed: _isSpeaking ? null : _playCurrentWord,
+                  onPressed: isSpeaking ? null : _replayCurrentWord,
                   icon: Icon(
-                    _isSpeaking ? Icons.pause : Icons.volume_up_rounded,
+                    isSpeaking ? Icons.pause : Icons.volume_up_rounded,
                   ),
-                  label: Text(_isSpeaking ? 'Speaking...' : 'Play Again'),
+                  label: Text(isSpeaking ? 'Speaking...' : 'Play Again'),
                   style: ElevatedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 32,
@@ -297,7 +181,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen>
 
               // Word counter
               Text(
-                'Word ${state.totalWordsSeen + 1}',
+                'Word ${state.totalWordsSeen}',
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),

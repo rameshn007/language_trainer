@@ -371,6 +371,98 @@ class TtsService {
     }
   }
 
+  Future<void> _prepareVoice(String language) async {
+    if (language.startsWith('en')) {
+      await _flutterTts.setLanguage('en-US');
+
+      bool voiceSet = false;
+
+      if (_bestEnVoice != null) {
+        final name = (_bestEnVoice!['name'] ?? '').toLowerCase();
+        final id = (_bestEnVoice!['identifier'] ?? '').toLowerCase();
+        if (!name.contains('siri') && !id.contains('siri')) {
+          try {
+            AppLogger.log(
+              "EN: Trying cached voice: ${_bestEnVoice!['name']} (${_bestEnVoice!['identifier']})",
+              name: "TtsService",
+            );
+            final result = await _flutterTts.setVoice(_bestEnVoice!);
+            if (result == 1) voiceSet = true;
+          } catch (_) {}
+        }
+      }
+
+      if (!voiceSet) {
+        AppLogger.log(
+          "EN: Cached voice failed, querying system voices dynamically...",
+          name: "TtsService",
+        );
+        final dynamicVoice = await _findBestAvailableVoice('en');
+        if (dynamicVoice != null) {
+          try {
+            final result = await _flutterTts.setVoice(dynamicVoice);
+            if (result == 1) {
+              voiceSet = true;
+              AppLogger.log(
+                "EN: Dynamic voice set successfully: ${dynamicVoice['name']}",
+                name: "TtsService",
+              );
+            }
+          } catch (_) {}
+        }
+      }
+
+      if (!voiceSet) {
+        AppLogger.log(
+          "EN: All voice attempts failed, using setLanguage('en-US') only",
+          name: "TtsService",
+        );
+      }
+    } else if (language.startsWith('pt')) {
+      await _flutterTts.setLanguage('pt-PT');
+
+      bool voiceSet = false;
+
+      if (_bestPtVoice != null) {
+        try {
+          AppLogger.log(
+            "PT: Trying cached voice: ${_bestPtVoice!['name']} (${_bestPtVoice!['identifier']})",
+            name: "TtsService",
+          );
+          final result = await _flutterTts.setVoice(_bestPtVoice!);
+          if (result == 1) voiceSet = true;
+        } catch (_) {}
+      }
+
+      if (!voiceSet) {
+        AppLogger.log(
+          "PT: Cached voice failed, querying system voices dynamically...",
+          name: "TtsService",
+        );
+        final dynamicVoice = await _findBestAvailableVoice('pt');
+        if (dynamicVoice != null) {
+          try {
+            final result = await _flutterTts.setVoice(dynamicVoice);
+            if (result == 1) {
+              voiceSet = true;
+              AppLogger.log(
+                "PT: Dynamic voice set successfully: ${dynamicVoice['name']}",
+                name: "TtsService",
+              );
+            }
+          } catch (_) {}
+        }
+      }
+
+      if (!voiceSet) {
+        AppLogger.log(
+          "PT: All voice attempts failed, using setLanguage('pt-PT') only",
+          name: "TtsService",
+        );
+      }
+    }
+  }
+
   Future<void> speak(String text, {String? language}) async {
     if (text.isEmpty) return;
 
@@ -379,103 +471,24 @@ class TtsService {
     }
 
     if (language != null) {
-      if (language.startsWith('en')) {
-        // Always set language first as a baseline — this ensures we never
-        // fall through to the device's default language (which might be
-        // Portuguese or something else entirely).
-        await _flutterTts.setLanguage('en-US');
-
-        bool voiceSet = false;
-
-        // 1. Try the cached best voice (from init or user selection)
-        if (_bestEnVoice != null) {
-          final name = (_bestEnVoice!['name'] ?? '').toLowerCase();
-          final id = (_bestEnVoice!['identifier'] ?? '').toLowerCase();
-          if (!name.contains('siri') && !id.contains('siri')) {
-            try {
-              AppLogger.log(
-                "EN: Trying cached voice: ${_bestEnVoice!['name']} (${_bestEnVoice!['identifier']})",
-                name: "TtsService",
-              );
-              final result = await _flutterTts.setVoice(_bestEnVoice!);
-              if (result == 1) voiceSet = true;
-            } catch (_) {}
-          }
-        }
-
-        // 2. If cached voice failed, dynamically query available voices
-        if (!voiceSet) {
-          AppLogger.log(
-            "EN: Cached voice failed, querying system voices dynamically...",
-            name: "TtsService",
-          );
-          final dynamicVoice = await _findBestAvailableVoice('en');
-          if (dynamicVoice != null) {
-            try {
-              final result = await _flutterTts.setVoice(dynamicVoice);
-              if (result == 1) {
-                voiceSet = true;
-                AppLogger.log(
-                  "EN: Dynamic voice set successfully: ${dynamicVoice['name']}",
-                  name: "TtsService",
-                );
-              }
-            } catch (_) {}
-          }
-        }
-
-        if (!voiceSet) {
-          AppLogger.log(
-            "EN: All voice attempts failed, using setLanguage('en-US') only",
-            name: "TtsService",
-          );
-        }
-      } else if (language.startsWith('pt')) {
-        await _flutterTts.setLanguage('pt-PT');
-
-        bool voiceSet = false;
-
-        if (_bestPtVoice != null) {
-          try {
-            AppLogger.log(
-              "PT: Trying cached voice: ${_bestPtVoice!['name']} (${_bestPtVoice!['identifier']})",
-              name: "TtsService",
-            );
-            final result = await _flutterTts.setVoice(_bestPtVoice!);
-            if (result == 1) voiceSet = true;
-          } catch (_) {}
-        }
-
-        if (!voiceSet) {
-          AppLogger.log(
-            "PT: Cached voice failed, querying system voices dynamically...",
-            name: "TtsService",
-          );
-          final dynamicVoice = await _findBestAvailableVoice('pt');
-          if (dynamicVoice != null) {
-            try {
-              final result = await _flutterTts.setVoice(dynamicVoice);
-              if (result == 1) {
-                voiceSet = true;
-                AppLogger.log(
-                  "PT: Dynamic voice set successfully: ${dynamicVoice['name']}",
-                  name: "TtsService",
-                );
-              }
-            } catch (_) {}
-          }
-        }
-
-        if (!voiceSet) {
-          AppLogger.log(
-            "PT: All voice attempts failed, using setLanguage('pt-PT') only",
-            name: "TtsService",
-          );
-        }
-      }
+      await _prepareVoice(language);
     }
 
     await _flutterTts.speak(text);
+  }
+
+  Future<void> synthesizeToFile(String text, String fileName, {String? language}) async {
+    if (text.isEmpty) return;
+
+    if (initFuture != null) {
+      await initFuture;
+    }
+
+    if (language != null) {
+      await _prepareVoice(language);
+    }
+
+    await _flutterTts.synthesizeToFile(text, fileName, true);
   }
 
   Future<void> stop() async {

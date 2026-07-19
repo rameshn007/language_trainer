@@ -43,10 +43,16 @@ void main() async {
   final ttsService = TtsService(storageService);
   final notificationService = NotificationService(storageService);
 
-  // CarPlay initialization moved to HomeScreen
-  // CarPlayService().init();
+  final container = ProviderContainer(
+    overrides: [
+      storageServiceProvider.overrideWithValue(storageService),
+      ttsServiceProvider.overrideWithValue(ttsService),
+      notificationServiceProvider.overrideWithValue(notificationService),
+    ],
+  );
+
   AppLogger.log("main() started", name: 'Main');
-  CarPlayService().init(storageService: storageService, ttsService: ttsService);
+  CarPlayService().init(container: container);
   try {
     await notificationService.init();
   } catch (e) {
@@ -57,12 +63,8 @@ void main() async {
   }
 
   runApp(
-    ProviderScope(
-      overrides: [
-        storageServiceProvider.overrideWithValue(storageService),
-        ttsServiceProvider.overrideWithValue(ttsService),
-        notificationServiceProvider.overrideWithValue(notificationService),
-      ],
+    UncontrolledProviderScope(
+      container: container,
       child: const LanguageTrainerApp(),
     ),
   );

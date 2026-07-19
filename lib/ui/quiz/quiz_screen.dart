@@ -604,8 +604,9 @@ class QuestionCardState extends ConsumerState<QuestionCard> {
       return;
     }
 
-    if (wrongAnswersNow.contains(option))
+    if (wrongAnswersNow.contains(option)) {
       return; // Already tried this wrong one
+    }
 
     // Call onAnswer for ALL attempts now, ViewModel handles logic
     widget.onAnswer(option);
