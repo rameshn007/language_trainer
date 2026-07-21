@@ -64,7 +64,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     });
 
     _bgAudioPlayer.playingStream.listen((isPlaying) {
-      if (state.isPlaying != isPlaying && _isAutoPlayActive) {
+      if (state.isPlaying != isPlaying) {
         state = state.copyWith(isPlaying: isPlaying, isSpeaking: isPlaying);
       }
     });
@@ -107,7 +107,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
       pool: allItems,
       shuffledPool: shuffled,
       isPlaying: true,
-      totalWordsSeen: 0,
+      totalWordsSeen: 1,
     );
 
     _isAutoPlayActive = true;
@@ -129,8 +129,9 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     } catch (e) {
       AppLogger.error('Error starting audio session', name: 'ListenRepeat', error: e);
       _isAutoPlayActive = false;
-      state = state.copyWith(isPlaying: false);
-      rethrow; // Rethrow to let CarPlay handle the error
+      _playlist = null;
+      _playlistWords.clear();
+      state = ListenRepeatState();
     }
   }
 
@@ -208,7 +209,9 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     } else if (_isAutoPlayActive) {
       // Retry in background if failed
       await Future.delayed(const Duration(seconds: 2));
-      _appendNextWordInBackground();
+      if (_isAutoPlayActive && _playlist != null) {
+        _appendNextWordInBackground();
+      }
     }
   }
 
@@ -264,7 +267,11 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   void stopSession() {
     _isAutoPlayActive = false;
     _currentIndexSubscription?.cancel();
+    _currentIndexSubscription = null;
     _bgAudioPlayer.stop();
+    _bgAudioPlayer.seek(Duration.zero);
+    _playlist = null;
+    _playlistWords.clear();
     state = ListenRepeatState();
   }
 

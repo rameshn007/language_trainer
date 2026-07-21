@@ -19,16 +19,16 @@ class CarPlayService {
 
     _flutterCarplay.addListenerOnConnectionChange((status) {
       if (status.toString().toLowerCase().contains('connected')) {
-        _startListenRepeat();
+        _showMainMenu();
       } else {
         _stopListenRepeat();
       }
     });
   }
 
-  void _startListenRepeat() {
+  void _showMainMenu() {
     if (_container == null) return;
-    AppLogger.log("Setting up CarPlay for Listen & Repeat", name: 'CarPlay');
+    AppLogger.log("Setting up CarPlay main menu", name: 'CarPlay');
 
     try {
       FlutterCarplay.setRootTemplate(
@@ -39,16 +39,10 @@ class CarPlayService {
               items: [
                 CPListItem(
                   text: 'Start Session',
-                  detailText: 'Shuffle words and start Listen & Repeat',
+                  detailText: 'Listen and repeat vocabulary words',
                   onPress: (complete, self) async {
-                    try {
-                      await _container!.read(listenRepeatViewModelProvider.notifier).startSession();
-                      FlutterCarplay.showSharedNowPlaying(animated: true);
-                    } catch (e) {
-                      AppLogger.error('Failed to start session', name: 'CarPlay', error: e);
-                    } finally {
-                      complete();
-                    }
+                    complete();
+                    _startSession();
                   },
                 ),
               ],
@@ -60,13 +54,29 @@ class CarPlayService {
         animated: true,
       );
     } catch (e) {
-      AppLogger.error('Error in CarPlay template setup', name: 'CarPlay', error: e);
+      AppLogger.error('Error setting CarPlay main menu', name: 'CarPlay', error: e);
     }
   }
 
-  void _stopListenRepeat() {
+  void _startSession() {
     if (_container == null) return;
-    AppLogger.log("Stopping Listen & Repeat for CarPlay", name: 'CarPlay');
+    AppLogger.log("Starting CarPlay session", name: 'CarPlay');
+
+    _container!
+        .read(listenRepeatViewModelProvider.notifier)
+        .startSession()
+        .then((_) {
+      // Audio started successfully — show the system Now Playing screen
+      FlutterCarplay.showSharedNowPlaying(animated: true);
+    }).catchError((error) {
+      AppLogger.error('CarPlay session failed to start', name: 'CarPlay', error: error);
+    });
+  }
+
+  void _stopListenRepeat() {
+    AppLogger.log("Stopping CarPlay session", name: 'CarPlay');
+
+    if (_container == null) return;
     _container!.read(listenRepeatViewModelProvider.notifier).stopSession();
   }
 }

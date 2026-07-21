@@ -488,7 +488,7 @@ class TtsService {
       await _prepareVoice(language);
     }
 
-    await _flutterTts.synthesizeToFile(text, fileName, true);
+    await _flutterTts.synthesizeToFile(text, fileName);
   }
 
   Future<void> stop() async {

@@ -64,11 +64,12 @@ class DynamicArtService {
     final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
     final Uint8List pngBytes = byteData!.buffer.asUint8List();
     
-    // Save to temp directory
+    // Save to temp directory with per-word filename to avoid race conditions
+    final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
     final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/album_art.png');
+    final file = File('${tempDir.path}/album_art_$safeId.png');
     await file.writeAsBytes(pngBytes);
-    
+
     return file.uri;
   }
 }

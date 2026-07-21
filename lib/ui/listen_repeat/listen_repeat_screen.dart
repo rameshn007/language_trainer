@@ -20,8 +20,12 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
     });
   }
 
-  void _replayCurrentWord() {
-    ref.read(listenRepeatViewModelProvider.notifier).replayCurrentWord();
+  void _previousWord() {
+    ref.read(listenRepeatViewModelProvider.notifier).previousWord();
+  }
+
+  void _togglePlayPause() {
+    ref.read(listenRepeatViewModelProvider.notifier).togglePlayPause();
   }
 
   void _nextWord() {
@@ -122,41 +126,58 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
               ),
               const SizedBox(height: 32),
 
-              // Play audio button (manual override)
-              AvatarGlow(
-                animate: isSpeaking,
-                glowColor: Theme.of(context).colorScheme.primary,
-                duration: const Duration(milliseconds: 2000),
-                repeat: true,
-                child: ElevatedButton.icon(
-                  onPressed: isSpeaking ? null : _replayCurrentWord,
-                  icon: Icon(
-                    isSpeaking ? Icons.pause : Icons.volume_up_rounded,
-                  ),
-                  label: Text(isSpeaking ? 'Speaking...' : 'Play Again'),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 32,
-                      vertical: 16,
+              // Playback controls row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Previous button
+                  ElevatedButton.icon(
+                    onPressed: _previousWord,
+                    icon: const Icon(Icons.skip_previous_rounded),
+                    label: const Text('Prev'),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
                     ),
-                    textStyle: const TextStyle(fontSize: 18),
                   ),
-                ),
-              ),
-              const SizedBox(height: 20),
-
-              // Next word button
-              ElevatedButton.icon(
-                onPressed: _nextWord,
-                icon: const Icon(Icons.forward_rounded),
-                label: const Text('Next Word'),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 16,
+                  const SizedBox(width: 12),
+                  // Play/Pause button
+                  AvatarGlow(
+                    animate: isSpeaking,
+                    glowColor: Theme.of(context).colorScheme.primary,
+                    duration: const Duration(milliseconds: 2000),
+                    repeat: true,
+                    child: ElevatedButton.icon(
+                      onPressed: _togglePlayPause,
+                      icon: Icon(
+                        state.isPlaying ? Icons.pause : Icons.play_arrow_rounded,
+                      ),
+                      label: Text(state.isPlaying ? 'Pause' : 'Play'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 16,
+                        ),
+                        textStyle: const TextStyle(fontSize: 16),
+                      ),
+                    ),
                   ),
-                  textStyle: const TextStyle(fontSize: 18),
-                ),
+                  const SizedBox(width: 12),
+                  // Next button
+                  ElevatedButton.icon(
+                    onPressed: _nextWord,
+                    icon: const Icon(Icons.skip_next_rounded),
+                    label: const Text('Next'),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 32),
 
