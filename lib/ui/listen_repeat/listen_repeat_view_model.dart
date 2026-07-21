@@ -115,26 +115,34 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     print('[LR] Got ${allItems.length} items, proceeding...');
 
     final shuffled = List<LanguageItem>.from(allItems)..shuffle(_random);
+    print('[LR] shuffled ${shuffled.length} items');
 
     _isAutoPlayActive = true;
     _playlistWords.clear();
     _playlist = null;
 
     // Fully stop any previous session before starting a new one
+    print('[LR] calling stopSession...');
     await stopSession();
+    print('[LR] stopSession done');
 
     try {
+      print('[LR] generating initial sequence...');
       final initialSequence = await _generateNextWordSequence();
+      print('[LR] sequence: ${initialSequence == null ? 'null' : '${initialSequence.length} items'}');
       if (initialSequence == null) {
         throw Exception("Failed to generate initial word sequence");
       }
 
+      print('[LR] setting audio source...');
       // ignore: deprecated_member_use
       _playlist = ConcatenatingAudioSource(children: initialSequence);
       await _bgAudioPlayer.setAudioSource(_playlist!);
+      print('[LR] audio source set, playing...');
 
       // Play immediately
       await _bgAudioPlayer.play();
+      print('[LR] playing started');
 
       state = ListenRepeatState(
         pool: allItems,
@@ -142,8 +150,10 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
         isPlaying: true,
         totalWordsSeen: 1,
       );
-    } catch (e) {
-      AppLogger.error('Error starting audio session', name: 'ListenRepeat', error: e);
+      print('[LR] state updated, session started!');
+    } catch (e, st) {
+      print('[LR] ERROR: $e');
+      print('[LR] stack: $st');
       _isAutoPlayActive = false;
       _playlist = null;
       _playlistWords.clear();
