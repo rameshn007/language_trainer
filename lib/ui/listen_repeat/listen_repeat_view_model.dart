@@ -53,6 +53,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   // ignore: deprecated_member_use
   ConcatenatingAudioSource? _playlist;
   final List<LanguageItem> _playlistWords = [];
+  final List<LanguageItem> _shuffledPool = [];
   StreamSubscription? _currentIndexSubscription;
 
   @override
@@ -114,8 +115,10 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     }
     print('[LR] Got ${allItems.length} items, proceeding...');
 
-    final shuffled = List<LanguageItem>.from(allItems)..shuffle(_random);
-    print('[LR] shuffled ${shuffled.length} items');
+    _shuffledPool.clear();
+    _shuffledPool.addAll(allItems);
+    _shuffledPool.shuffle(_random);
+    print('[LR] shuffled ${_shuffledPool.length} items');
 
     _isAutoPlayActive = true;
     _playlistWords.clear();
@@ -146,7 +149,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
 
       state = ListenRepeatState(
         pool: allItems,
-        shuffledPool: shuffled,
+        shuffledPool: List.unmodifiable(_shuffledPool),
         isPlaying: true,
         totalWordsSeen: 1,
       );
@@ -162,13 +165,13 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   }
 
   Future<List<AudioSource>?> _generateNextWordSequence() async {
-    if (!_isAutoPlayActive || state.shuffledPool.isEmpty) {
-      print('[LR-gen] ABORT: !_isAutoPlayActive=$_isAutoPlayActive shuffledPool.isEmpty=${state.shuffledPool.isEmpty}');
+    if (!_isAutoPlayActive || _shuffledPool.isEmpty) {
+      print('[LR-gen] ABORT: !_isAutoPlayActive=$_isAutoPlayActive _shuffledPool.isEmpty=$_shuffledPool.isEmpty');
       return null;
     }
 
     final wordIndexToGenerate = _playlistWords.length;
-    final item = state.shuffledPool[wordIndexToGenerate % state.shuffledPool.length];
+    final item = _shuffledPool[wordIndexToGenerate % _shuffledPool.length];
     print('[LR-gen] item: ${item.portuguese} (id=${item.id})');
 
     _playlistWords.add(item);
@@ -344,14 +347,17 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     }
     _playlist = null;
     _playlistWords.clear();
+    _shuffledPool.clear();
     state = ListenRepeatState();
   }
 
   void shufflePool() {
     if (state.pool.isEmpty) return;
 
-    final shuffled = List<LanguageItem>.from(state.pool)..shuffle(_random);
-    state = state.copyWith(shuffledPool: shuffled);
+    _shuffledPool.clear();
+    _shuffledPool.addAll(state.pool);
+    _shuffledPool.shuffle(_random);
+    state = state.copyWith(shuffledPool: List.unmodifiable(_shuffledPool));
 
     startSession();
   }
