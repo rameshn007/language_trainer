@@ -93,19 +93,26 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   }
 
   Future<void> startSession() async {
-    AppLogger.log("startSession() called", name: 'ListenRepeat');
-    if (state.isPlaying || _isAutoPlayActive) return;
+    print('[LR] startSession ENTER');
+    if (state.isPlaying || _isAutoPlayActive) {
+      print('[LR] startSession RETURNED (playing or active)');
+      return;
+    }
 
     final storage = ref.read(storageServiceProvider);
+    print('[LR] storage: $storage');
     final allItems = storage.getAllItems();
+    print('[LR] allItems count: ${allItems.length}');
 
     if (allItems.isEmpty) {
       // Storage may not be ready yet (Hive data loads at app startup).
       // Retry after a short delay to give data time to load.
-      AppLogger.log("No items yet, retrying in 1s...", name: 'ListenRepeat');
+      print('[LR] No items yet, retrying in 1s...');
       await Future.delayed(const Duration(seconds: 1));
+      print('[LR] Retrying startSession...');
       return await startSession(); // Retry (top-of-function guard handles cancellation)
     }
+    print('[LR] Got ${allItems.length} items, proceeding...');
 
     final shuffled = List<LanguageItem>.from(allItems)..shuffle(_random);
 
