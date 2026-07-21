@@ -104,8 +104,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
       // Retry after a short delay to give data time to load.
       AppLogger.log("No items yet, retrying in 1s...", name: 'ListenRepeat');
       await Future.delayed(const Duration(seconds: 1));
-      if (!_isAutoPlayActive) return; // Session was cancelled
-      return await startSession(); // Retry
+      return await startSession(); // Retry (top-of-function guard handles cancellation)
     }
 
     final shuffled = List<LanguageItem>.from(allItems)..shuffle(_random);
