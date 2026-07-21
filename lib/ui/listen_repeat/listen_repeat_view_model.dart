@@ -99,33 +99,43 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     final storage = ref.read(storageServiceProvider);
     final allItems = storage.getAllItems();
 
-    if (allItems.isEmpty) return;
+    if (allItems.isEmpty) {
+      // Storage may not be ready yet (Hive data loads at app startup).
+      // Retry after a short delay to give data time to load.
+      AppLogger.log("No items yet, retrying in 1s...", name: 'ListenRepeat');
+      await Future.delayed(const Duration(seconds: 1));
+      if (!_isAutoPlayActive) return; // Session was cancelled
+      return await startSession(); // Retry
+    }
 
     final shuffled = List<LanguageItem>.from(allItems)..shuffle(_random);
-
-    state = ListenRepeatState(
-      pool: allItems,
-      shuffledPool: shuffled,
-      isPlaying: true,
-      totalWordsSeen: 1,
-    );
 
     _isAutoPlayActive = true;
     _playlistWords.clear();
     _playlist = null;
-    
+
+    // Fully stop any previous session before starting a new one
+    await stopSession();
+
     try {
       final initialSequence = await _generateNextWordSequence();
       if (initialSequence == null) {
         throw Exception("Failed to generate initial word sequence");
       }
-      
+
       // ignore: deprecated_member_use
       _playlist = ConcatenatingAudioSource(children: initialSequence);
       await _bgAudioPlayer.setAudioSource(_playlist!);
-      
+
       // Play immediately
       await _bgAudioPlayer.play();
+
+      state = ListenRepeatState(
+        pool: allItems,
+        shuffledPool: shuffled,
+        isPlaying: true,
+        totalWordsSeen: 1,
+      );
     } catch (e) {
       AppLogger.error('Error starting audio session', name: 'ListenRepeat', error: e);
       _isAutoPlayActive = false;
@@ -215,17 +225,21 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     }
   }
 
-  void replayCurrentWord() {
+  Future<void> replayCurrentWord() async {
     if (!_isAutoPlayActive || _bgAudioPlayer.currentIndex == null) return;
     final currentWordIndex = _bgAudioPlayer.currentIndex! ~/ 4;
-    _bgAudioPlayer.seek(Duration.zero, index: currentWordIndex * 4);
-    _bgAudioPlayer.play();
+    try {
+      await _bgAudioPlayer.seek(Duration.zero, index: currentWordIndex * 4);
+      await _bgAudioPlayer.play();
+    } catch (e) {
+      AppLogger.error('Non-fatal error replaying word', name: 'ListenRepeat', error: e);
+    }
   }
 
-  void nextWord() async {
+  Future<void> nextWord() async {
     if (!_isAutoPlayActive || _bgAudioPlayer.currentIndex == null || _playlist == null) return;
     final currentWordIndex = _bgAudioPlayer.currentIndex! ~/ 4;
-    
+
     if (currentWordIndex + 1 >= _playlistWords.length) {
       // Wait for it to be generated if we hit next too fast
       final sequence = await _generateNextWordSequence();
@@ -233,43 +247,61 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
         await _playlist!.addAll(sequence);
       }
     }
-    
-    _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex + 1) * 4);
+
+    try {
+      await _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex + 1) * 4);
+    } catch (e) {
+      AppLogger.error('Non-fatal error seeking to next word', name: 'ListenRepeat', error: e);
+    }
   }
   
-  void previousWord() {
+  Future<void> previousWord() async {
     if (!_isAutoPlayActive || _bgAudioPlayer.currentIndex == null) return;
     final currentWordIndex = _bgAudioPlayer.currentIndex! ~/ 4;
     if (currentWordIndex > 0) {
-      _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex - 1) * 4);
+      try {
+        await _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex - 1) * 4);
+      } catch (e) {
+        AppLogger.error('Non-fatal error seeking to previous word', name: 'ListenRepeat', error: e);
+      }
     } else {
-      replayCurrentWord();
+      await replayCurrentWord();
     }
   }
 
-  void togglePlayPause() {
+  Future<void> togglePlayPause() async {
     if (_bgAudioPlayer.playing) {
-      pause();
+      await pause();
     } else {
       if (_isAutoPlayActive) {
-        _bgAudioPlayer.play();
+        await _bgAudioPlayer.play();
       } else {
-        startSession();
+        await startSession();
       }
     }
   }
 
-  void pause() {
-    _bgAudioPlayer.pause();
+  Future<void> pause() async {
+    try {
+      await _bgAudioPlayer.pause();
+    } catch (e) {
+      AppLogger.error('Non-fatal error pausing audio player', name: 'ListenRepeat', error: e);
+    }
     state = state.copyWith(isPlaying: false);
   }
 
-  void stopSession() {
+  Future<void> stopSession() async {
     _isAutoPlayActive = false;
     _currentIndexSubscription?.cancel();
     _currentIndexSubscription = null;
-    _bgAudioPlayer.stop();
-    _bgAudioPlayer.seek(Duration.zero);
+    try {
+      await _bgAudioPlayer.stop();
+      await _bgAudioPlayer.seek(Duration.zero);
+    } catch (e) {
+      // seek after stop can throw on just_audio_background (native handler
+      // is already torn down). Ignore — we are stopping the session anyway.
+      AppLogger.error('Non-fatal error stopping audio player', name: 'ListenRepeat', error: e);
+    }
     _playlist = null;
     _playlistWords.clear();
     state = ListenRepeatState();

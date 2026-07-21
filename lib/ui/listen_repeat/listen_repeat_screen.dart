@@ -24,8 +24,8 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
     ref.read(listenRepeatViewModelProvider.notifier).previousWord();
   }
 
-  void _togglePlayPause() {
-    ref.read(listenRepeatViewModelProvider.notifier).togglePlayPause();
+  Future<void> _togglePlayPause() async {
+    await ref.read(listenRepeatViewModelProvider.notifier).togglePlayPause();
   }
 
   void _nextWord() {
