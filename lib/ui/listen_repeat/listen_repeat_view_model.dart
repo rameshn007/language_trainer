@@ -162,50 +162,71 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   }
 
   Future<List<AudioSource>?> _generateNextWordSequence() async {
-    if (!_isAutoPlayActive || state.shuffledPool.isEmpty) return null;
+    if (!_isAutoPlayActive || state.shuffledPool.isEmpty) {
+      print('[LR-gen] ABORT: !_isAutoPlayActive=$_isAutoPlayActive shuffledPool.isEmpty=${state.shuffledPool.isEmpty}');
+      return null;
+    }
 
     final wordIndexToGenerate = _playlistWords.length;
     final item = state.shuffledPool[wordIndexToGenerate % state.shuffledPool.length];
-    
+    print('[LR-gen] item: ${item.portuguese} (id=${item.id})');
+
     _playlistWords.add(item);
 
     try {
       final tts = ref.read(ttsServiceProvider);
+      print('[LR-gen] tts: $tts');
       final dir = await getTemporaryDirectory();
-      
+      print('[LR-gen] temp dir: ${dir.path}');
+
       final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
       final ext = Platform.isAndroid ? 'wav' : 'caf';
       final ptFilePath = '${dir.path}/pt_$safeId.$ext';
       final enFilePath = '${dir.path}/en_$safeId.$ext';
-      
+      print('[LR-gen] pt: $ptFilePath');
+      print('[LR-gen] en: $enFilePath');
+
       final ptFile = File(ptFilePath);
       final enFile = File(enFilePath);
 
       if (!ptFile.existsSync() || ptFile.lengthSync() == 0) {
+        print('[LR-gen] synthesizing PT...');
         await tts.synthesizeToFile(item.portuguese, ptFilePath, language: 'pt-PT');
+        print('[LR-gen] PT synthesize done, file exists: ${ptFile.existsSync()}, size: ${ptFile.existsSync() ? ptFile.lengthSync() : 0}');
         int attempts = 0;
         while ((!ptFile.existsSync() || ptFile.lengthSync() == 0) && attempts < 20) {
           await Future.delayed(const Duration(milliseconds: 50));
           attempts++;
         }
+        print('[LR-gen] PT after wait, exists: ${ptFile.existsSync()}, size: ${ptFile.existsSync() ? ptFile.lengthSync() : 0}');
+      } else {
+        print('[LR-gen] PT file already exists, size: ${ptFile.lengthSync()}');
       }
-      
+
       if (!enFile.existsSync() || enFile.lengthSync() == 0) {
+        print('[LR-gen] synthesizing EN...');
         await tts.synthesizeToFile(item.english, enFilePath, language: 'en-US');
+        print('[LR-gen] EN synthesize done, exists: ${enFile.existsSync()}, size: ${enFile.existsSync() ? enFile.lengthSync() : 0}');
         int attempts = 0;
         while ((!enFile.existsSync() || enFile.lengthSync() == 0) && attempts < 20) {
           await Future.delayed(const Duration(milliseconds: 50));
           attempts++;
         }
+        print('[LR-gen] EN after wait, exists: ${enFile.existsSync()}, size: ${enFile.existsSync() ? enFile.lengthSync() : 0}');
+      } else {
+        print('[LR-gen] EN file already exists, size: ${enFile.lengthSync()}');
       }
-      
+
       if (!ptFile.existsSync() || ptFile.lengthSync() == 0) {
+         print('[LR-gen] THROW: PT file missing or empty');
          throw Exception("Failed to synthesize Portuguese audio to disk");
       }
 
+      print('[LR-gen] generating word art...');
       final artUri = await DynamicArtService.generateWordArt(item);
+      print('[LR-gen] word art: $artUri');
       final mediaItem = MediaItem(
-        id: 'listen_repeat_${item.id}_$wordIndexToGenerate', // Make globally unique per playlist index
+        id: 'listen_repeat_${item.id}_$wordIndexToGenerate',
         album: 'Language Trainer',
         title: item.portuguese,
         artist: item.english,
@@ -219,9 +240,12 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
         AudioSource.asset('assets/audio/silence.mp3', tag: mediaItem.copyWith(id: '${mediaItem.id}_silence2')),
       ];
 
+      print('[LR-gen] SUCCESS: returning ${sequence.length} audio sources');
       return sequence;
 
-    } catch (e) {
+    } catch (e, st) {
+      print('[LR-gen] ERROR: $e');
+      print('[LR-gen] stack: $st');
       AppLogger.error('Error in _generateNextWordSequence', name: 'ListenRepeat', error: e);
       _playlistWords.removeLast(); // Revert the addition
       return null;
