@@ -347,7 +347,10 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     }
     _playlist = null;
     _playlistWords.clear();
-    _shuffledPool.clear();
+    // Note: _shuffledPool is NOT cleared here — startSession() repopulates it
+    // and stopSession may be called mid-startSession (e.g., when switching
+    // from shuffle). Clearing it would destroy data needed by
+    // _generateNextWordSequence().
     state = ListenRepeatState();
   }
 
