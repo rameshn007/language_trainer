@@ -15,7 +15,9 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
   @override
   void initState() {
     super.initState();
+    debugPrint('ListenRepeatScreen.initState - scheduling startSession');
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      debugPrint('ListenRepeatScreen.postFrameCallback - calling startSession');
       ref.read(listenRepeatViewModelProvider.notifier).startSession();
     });
   }
