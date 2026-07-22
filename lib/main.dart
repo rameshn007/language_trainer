@@ -31,6 +31,10 @@ final notificationServiceProvider = Provider<NotificationService>((ref) {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Initialize just_audio_background BEFORE TTS service so the audio session
+  // is claimed by just_audio first. TTS creates its own audio session on
+  // construction, which would conflict with just_audio_background if it runs
+  // first — causing CarPlay audio routing to fail.
   await JustAudioBackground.init(
     androidNotificationChannelId: 'com.example.language_trainer.channel.audio',
     androidNotificationChannelName: 'Audio playback',
@@ -43,10 +47,16 @@ void main() async {
   final ttsService = TtsService(storageService);
   final notificationService = NotificationService(storageService);
 
-  // CarPlay initialization moved to HomeScreen
-  // CarPlayService().init();
+  final container = ProviderContainer(
+    overrides: [
+      storageServiceProvider.overrideWithValue(storageService),
+      ttsServiceProvider.overrideWithValue(ttsService),
+      notificationServiceProvider.overrideWithValue(notificationService),
+    ],
+  );
+
   AppLogger.log("main() started", name: 'Main');
-  CarPlayService().init(storageService: storageService, ttsService: ttsService);
+  CarPlayService().init(container: container);
   try {
     await notificationService.init();
   } catch (e) {
@@ -57,12 +67,8 @@ void main() async {
   }
 
   runApp(
-    ProviderScope(
-      overrides: [
-        storageServiceProvider.overrideWithValue(storageService),
-        ttsServiceProvider.overrideWithValue(ttsService),
-        notificationServiceProvider.overrideWithValue(notificationService),
-      ],
+    UncontrolledProviderScope(
+      container: container,
       child: const LanguageTrainerApp(),
     ),
   );
