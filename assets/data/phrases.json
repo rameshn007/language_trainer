@@ -1,1 +1,126 @@
-[{"portuguese": "Olá, como você está?", "english": "Hello, how are you?"}, {"portuguese": "Obrigado por sua ajuda.", "english": "Thank you for your help."}, {"portuguese": "Eu não entendo.", "english": "I don't understand."}, {"portuguese": "Posso ajudar?", "english": "Can I help?"}, {"portuguese": "Qual é o seu nome?", "english": "What is your name?"}, {"portuguese": "Meu nome é...", "english": "My name is..."}, {"portuguese": "Eu gosto de...", "english": "I like..."}, {"portuguese": "Onde está o banheiro?", "english": "Where is the bathroom?"}, {"portuguese": "Quanto custa?", "english": "How much does it cost?"}, {"portuguese": "Estou perdido.", "english": "I am lost."}, {"portuguese": "Eu quero um café.", "english": "I want a coffee."}, {"portuguese": "Isso é muito caro.", "english": "This is too expensive."}, {"portuguese": "Eu não falo português.", "english": "I don't speak Portuguese."}, {"portuguese": "Como se chama isso?", "english": "What is this called?"}, {"portuguese": "Você fala inglês?", "english": "Do you speak English?"}, {"portuguese": "Estou com fome.", "english": "I am hungry."}, {"portuguese": "Estou com sede.", "english": "I am thirsty."}, {"portuguese": "Onde é o restaurante?", "english": "Where is the restaurant?"}, {"portuguese": "Preciso de ajuda.", "english": "I need help."}, {"portuguese": "Estou bem, obrigado.", "english": "I'm fine, thank you."}]
+[
+  {
+    "portuguese": "Olá, como você está?",
+    "english": "Hello, how are you?"
+  },
+  {
+    "portuguese": "Obrigado por sua ajuda.",
+    "english": "Thank you for your help."
+  },
+  {
+    "portuguese": "Eu não entendo.",
+    "english": "I don't understand."
+  },
+  {
+    "portuguese": "Posso ajudar?",
+    "english": "Can I help?"
+  },
+  {
+    "portuguese": "Qual é o seu nome?",
+    "english": "What is your name?"
+  },
+  {
+    "portuguese": "Meu nome é...",
+    "english": "My name is..."
+  },
+  {
+    "portuguese": "Eu gosto de...",
+    "english": "I like..."
+  },
+  {
+    "portuguese": "Onde está o banheiro?",
+    "english": "Where is the bathroom?"
+  },
+  {
+    "portuguese": "Quanto custa?",
+    "english": "How much does it cost?"
+  },
+  {
+    "portuguese": "Estou perdido.",
+    "english": "I am lost."
+  },
+  {
+    "portuguese": "Eu quero um café.",
+    "english": "I want a coffee."
+  },
+  {
+    "portuguese": "Isso é muito caro.",
+    "english": "This is too expensive."
+  },
+  {
+    "portuguese": "Eu não falo português.",
+    "english": "I don't speak Portuguese."
+  },
+  {
+    "portuguese": "Como se chama isso?",
+    "english": "What is this called?"
+  },
+  {
+    "portuguese": "Você fala inglês?",
+    "english": "Do you speak English?"
+  },
+  {
+    "portuguese": "Estou com fome.",
+    "english": "I am hungry."
+  },
+  {
+    "portuguese": "Estou com sede.",
+    "english": "I am thirsty."
+  },
+  {
+    "portuguese": "Onde é o restaurante?",
+    "english": "Where is the restaurant?"
+  },
+  {
+    "portuguese": "Preciso de ajuda.",
+    "english": "I need help."
+  },
+  {
+    "portuguese": "Estou bem, obrigado.",
+    "english": "I'm fine, thank you."
+  },
+  {
+    "portuguese": "Para quem é o café?",
+    "english": "Who is the coffee for?"
+  },
+  {
+    "portuguese": "É para mim, obrigado!",
+    "english": "It's for me, thank you!"
+  },
+  {
+    "portuguese": "Para ti, qual é a melhor praia portuguesa?",
+    "english": "For you, which is the best Portuguese beach?"
+  },
+  {
+    "portuguese": "Dr. Pedro, este dossiê é para si.",
+    "english": "Dr. Pedro, this dossier is for you."
+  },
+  {
+    "portuguese": "Esta carta chegou para vocês.",
+    "english": "This letter arrived for you."
+  },
+  {
+    "portuguese": "Paula, espera por mim.",
+    "english": "Paula, wait for me."
+  },
+  {
+    "portuguese": "Lembro-me muitas vezes de ti.",
+    "english": "I often remember you."
+  },
+  {
+    "portuguese": "A Sara dá o casaco ao filho.",
+    "english": "Sara gives the coat to her son."
+  },
+  {
+    "portuguese": "A Sara dá-lhe o casaco.",
+    "english": "Sara gives him the coat."
+  },
+  {
+    "portuguese": "O Peter não telefona à mãe.",
+    "english": "Peter doesn't call his mother."
+  },
+  {
+    "portuguese": "O Peter não lhe telefona.",
+    "english": "Peter doesn't call her."
+  }
+]

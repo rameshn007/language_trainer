@@ -1,8 +1,9 @@
 import 'dart:developer' as developer;
+import 'package:flutter/foundation.dart';
 
 class AppLogger {
   static void log(String message, {String name = 'App'}) {
-    developer.log(message, name: name);
+    debugPrint('[$name] $message');
   }
 
   static void error(

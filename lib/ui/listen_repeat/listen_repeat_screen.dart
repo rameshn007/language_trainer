@@ -11,15 +11,28 @@ class ListenRepeatScreen extends ConsumerStatefulWidget {
 }
 
 class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
+  ListenRepeatViewModel? _viewModel;
 
   @override
   void initState() {
     super.initState();
+    _viewModel = ref.read(listenRepeatViewModelProvider.notifier);
     debugPrint('ListenRepeatScreen.initState - scheduling startSession');
     WidgetsBinding.instance.addPostFrameCallback((_) {
       debugPrint('ListenRepeatScreen.postFrameCallback - calling startSession');
-      ref.read(listenRepeatViewModelProvider.notifier).startSession();
+      _viewModel?.startSession();
     });
+  }
+
+  @override
+  void dispose() {
+    debugPrint('ListenRepeatScreen.dispose - stopping session');
+    try {
+      _viewModel?.stopSession();
+    } catch (e) {
+      debugPrint('Error stopping session on dispose: $e');
+    }
+    super.dispose();
   }
 
   void _previousWord() {
@@ -55,6 +68,20 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
       appBar: AppBar(
         title: const Text('Listen & Repeat'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.speed),
+            tooltip: 'Toggle Speed',
+            onPressed: () {
+              final newSpeed = ref.read(listenRepeatViewModelProvider.notifier).cycleSpeed();
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Speed: ${newSpeed}x"),
+                  duration: const Duration(seconds: 1),
+                ),
+              );
+            },
+          ),
           if (state.isPlaying)
             TextButton(onPressed: _stopSession, child: const Text('Stop')),
         ],

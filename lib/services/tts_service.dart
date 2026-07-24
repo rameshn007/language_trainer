@@ -488,7 +488,8 @@ class TtsService {
       await _prepareVoice(language);
     }
 
-    await _flutterTts.synthesizeToFile(text, fileName);
+    // On iOS, we MUST pass true for isFullPath if we provide an absolute path
+    await _flutterTts.synthesizeToFile(text, fileName, Platform.isIOS);
   }
 
   Future<void> stop() async {

@@ -72,6 +72,12 @@ class ExerciseListScreen extends StatelessWidget {
       'path': 'assets/data/exercises/prepositional_pronouns.json',
       'icon': 'chat',
     },
+    {
+      'title': 'Indirect Object Pronouns',
+      'subtitle': 'Practice me, te, lhe, nos, vos, lhes.',
+      'path': 'assets/data/exercises/indirect_object_pronouns.json',
+      'icon': 'chat',
+    },
   ];
 
   @override

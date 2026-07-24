@@ -1932,3 +1932,90 @@
 | Queria falar com a senhora | I would like to speak with you | Grammar - Practice |
 | Com quem vais ao cinema? | Who are you going to the cinema with? | Grammar - Practice |
 
+
+# New Words and Phrases from assets/new_words_phrases.md
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| A Ana envia-lhes uma mensagem | Ana sends the message to her cousins | New Vocabulary |
+| Enviar | Send | New Vocabulary |
+| Os atletas telefonam-lhe | The athletes call their coach | New Vocabulary |
+| A Inês envia-lhe um email | Ines sends an email to her director | New Vocabulary |
+| A Diretora | The Director (feminine) | New Vocabulary |
+| O Diretor | The Director (masculine) | New Vocabulary |
+| Emprestar | to lend | New Vocabulary |
+| pedir emprestado | to borrow | New Vocabulary |
+| Caderno | Notebook | New Vocabulary |
+| Nós emprestamos-lhe o caderno | We lend him the notebook | New Vocabulary |
+| O Duarte conta-lhes uma história | Duarte tells the story to the his children | New Vocabulary |
+| a sobrinha | niece | New Vocabulary |
+| O Dorian também lhe dá um presente | Dorian also gives the present to her | New Vocabulary |
+| Quando é que a professora lhes entrega os testes | When does the teacher give the test to them? | New Vocabulary |
+| A Diana só lhe devolve o livro quando terminar a leitura | Diana only gives back the book to him when she finish reading it | New Vocabulary |
+| Dás-lhe o dinheiro | Give him the money | New Vocabulary |
+| A Carla pede-me ajuda | Carl asks me for help | New Vocabulary |
+| pede | Ask | New Vocabulary |
+| pode | possible (can) | New Vocabulary |
+| jogar com as palavras | play on words | New Vocabulary |
+| um mito | the myth | New Vocabulary |
+| Eu envio um presente | I send a present | Generated from Enviar |
+| Eles enviam cartas todos os dias | They send letters every day | Generated from Enviar |
+| A diretora está na escola | The director is in the school | Generated from A Diretora |
+| O diretor fala com os alunos | The director speaks with the students | Generated from O Diretor |
+| Podes emprestar-me a tua caneta? | Can you lend me your pen? | Generated from Emprestar |
+| Vou pedir um livro emprestado | I am going to borrow a book | Generated from pedir emprestado |
+| Escreve no teu caderno | Write in your notebook | Generated from Caderno |
+| A minha sobrinha é muito simpática | My niece is very nice | Generated from a sobrinha |
+| Ele pede um café | He asks for a coffee | Generated from pede |
+| Você pode ajudar-me? | Can you help me? | Generated from pode |
+| O que lhe dizes? | What do you say to him/her? | Generated - Indirect Pronoun |
+| Nós compramos-lhes um carro | We buy a car for them | Generated - Indirect Pronoun |
+| Isso é apenas um mito | That is just a myth | Generated from um mito |
+| Eu gosto de jogar com as palavras | I like to play on words | Generated from jogar com as palavras |
+
+# New Words and Phrases from assets/ano_words_phrases.md
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| há | for \- indicates a period of time (total amount, month, week etc) | New Vocabulary |
+| desde | since \- used to indicate when it was initiated (specific with hour, part of day, year). Can also be used for starting at that price. | New Vocabulary |
+| final de tarde | evening | New Vocabulary |
+| Casa da Musica | Porto \- musuem | New Vocabulary |
+| A Maria faz visitas guiadas desde que trabalha na Casa da Música | Marias has been a tour guide since she started working at the Casa da Musica | New Vocabulary |
+| Os amigos estão na esplanada há meia hora | the friends are on the terrace for half an hour. | New Vocabulary |
+| A Olívia faz campismo desde criança | Olivia has been camping since she was a child | New Vocabulary |
+| A atleta olímpica pratica natação há mais de dez anos | the olympic athlete has been practicing swimming for more than 10 years | New Vocabulary |
+| O nosso casamento | Our wedding | New Vocabulary |
+| casar-se | To marry | New Vocabulary |
+| divórcio | divorce | New Vocabulary |
+| testamento | will | New Vocabulary |
+| herdeiros | inheritors (receive inheritance) | New Vocabulary |
+| herança | inheritance | New Vocabulary |
+| cá/lá | here/there | New Vocabulary |
+| esta,essa,aquela | this here, that there, that over there | New Vocabulary |
+| tao | as big as \+ adjective/adverb \+ como | New Vocabulary |
+| tanto | so many or so much (tanto \+ \[nome\] \+ como | New Vocabulary |
+| como | like/as/how | New Vocabulary |
+| Comer legumes é tão bom para a saúde como comer fruta | Eating vegetables is as good for your health as eating fruit. | New Vocabulary |
+| As aulas de kizomba são tão divertido como as aulas de samba | The lessons for quizomba are as fun as the lessons or samba | New Vocabulary |
+| Andar de metrô é tão barato como andar de autocarro | Going by metro is as cheap as going by bus | New Vocabulary |
+| Nós não temos tantos livros como vocês | We don’t have as many books as you | New Vocabulary |
+| A Teresa não tem tanto tempo livre como eu | Teresa does not have as much free time as me. | New Vocabulary |
+| tempo livre | free time | New Vocabulary |
+| Praticar futebol tem tantas vantagens como praticar andebol | Practicing football has as many advantages as practicing handball | New Vocabulary |
+| precenciais | present (in person) | New Vocabulary |
+| em vou em pessoa | I go in person | New Vocabulary |
+| vou ter uma reunião online | I’m going to have a meeting online | New Vocabulary |
+| vou ter uma reunião presencial | I’m going to have a meeting face to face | New Vocabulary |
+| Eu moro aqui há dois anos | I have lived here for two years | Generated from há |
+| Estou à espera há uma hora | I have been waiting for an hour | Generated from há |
+| Trabalho aqui desde janeiro | I have worked here since January | Generated from desde |
+| Ela vive no Porto desde 2010 | She has lived in Porto since 2010 | Generated from desde |
+| Eles vão casar-se no próximo ano | They are going to get married next year | Generated from casar-se |
+| O avô deixou uma grande herança | The grandfather left a big inheritance | Generated from herança |
+| Vem cá, por favor | Come here, please | Generated from cá/lá |
+| Ela está lá em cima | She is up there | Generated from cá/lá |
+| Este carro é tão rápido como o outro | This car is as fast as the other | Generated from tao |
+| Eu tenho tanta fome como tu | I am as hungry as you | Generated from tanto |
+| Não faças tanto barulho | Don't make so much noise | Generated from tanto |
+| As reuniões presenciais são melhores | Face-to-face meetings are better | Generated from presencial |

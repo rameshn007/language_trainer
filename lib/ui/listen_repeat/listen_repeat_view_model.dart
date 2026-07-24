@@ -17,6 +17,7 @@ class ListenRepeatState {
   final bool isPlaying;
   final int totalWordsSeen;
   final bool isSpeaking;
+  final double playbackSpeed;
 
   ListenRepeatState({
     this.currentItem,
@@ -25,6 +26,7 @@ class ListenRepeatState {
     this.isPlaying = false,
     this.totalWordsSeen = 0,
     this.isSpeaking = false,
+    this.playbackSpeed = 1.0,
   });
 
   ListenRepeatState copyWith({
@@ -34,6 +36,7 @@ class ListenRepeatState {
     bool? isPlaying,
     int? totalWordsSeen,
     bool? isSpeaking,
+    double? playbackSpeed,
   }) {
     return ListenRepeatState(
       currentItem: currentItem ?? this.currentItem,
@@ -42,6 +45,7 @@ class ListenRepeatState {
       isPlaying: isPlaying ?? this.isPlaying,
       totalWordsSeen: totalWordsSeen ?? this.totalWordsSeen,
       isSpeaking: isSpeaking ?? this.isSpeaking,
+      playbackSpeed: playbackSpeed ?? this.playbackSpeed,
     );
   }
 }
@@ -49,6 +53,8 @@ class ListenRepeatState {
 class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   final Random _random = Random();
   bool _isAutoPlayActive = false;
+  int _sessionId = 0;
+  Future<void>? _generationFuture;
   final AudioPlayer _bgAudioPlayer = AudioPlayer();
   // ignore: deprecated_member_use
   ConcatenatingAudioSource? _playlist;
@@ -86,7 +92,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
 
       // Pre-fetch next word when we are on the last word in the playlist
       if (wordIndex >= _playlistWords.length - 1) {
-        _appendNextWordInBackground();
+        _appendNextWordInBackground(_sessionId);
       }
     });
 
@@ -94,69 +100,80 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   }
 
   Future<void> startSession() async {
-    print('[LR] startSession ENTER');
+    AppLogger.log('[LR] startSession ENTER', name: 'ListenRepeat');
     if (state.isPlaying || _isAutoPlayActive) {
-      print('[LR] startSession RETURNED (playing or active)');
+      AppLogger.log('[LR] startSession RETURNED (playing or active)', name: 'ListenRepeat');
       return;
     }
 
     final storage = ref.read(storageServiceProvider);
-    print('[LR] storage: $storage');
+    AppLogger.log('[LR] storage: $storage', name: 'ListenRepeat');
     final allItems = storage.getAllItems();
-    print('[LR] allItems count: ${allItems.length}');
+    AppLogger.log('[LR] allItems count: ${allItems.length}', name: 'ListenRepeat');
 
     if (allItems.isEmpty) {
-      // Storage may not be ready yet (Hive data loads at app startup).
-      // Retry after a short delay to give data time to load.
-      print('[LR] No items yet, retrying in 1s...');
+      AppLogger.log('[LR] No items yet, retrying in 1s...', name: 'ListenRepeat');
       await Future.delayed(const Duration(seconds: 1));
-      print('[LR] Retrying startSession...');
-      return await startSession(); // Retry (top-of-function guard handles cancellation)
+      AppLogger.log('[LR] Retrying startSession...', name: 'ListenRepeat');
+      return await startSession();
     }
-    print('[LR] Got ${allItems.length} items, proceeding...');
+    AppLogger.log('[LR] Got ${allItems.length} items, proceeding...', name: 'ListenRepeat');
 
     _shuffledPool.clear();
     _shuffledPool.addAll(allItems);
     _shuffledPool.shuffle(_random);
-    print('[LR] shuffled ${_shuffledPool.length} items');
+    AppLogger.log('[LR] shuffled ${_shuffledPool.length} items', name: 'ListenRepeat');
 
+    AppLogger.log('[LR] calling stopSession...', name: 'ListenRepeat');
+    await stopSession();
+    AppLogger.log('[LR] stopSession done', name: 'ListenRepeat');
+
+    _sessionId++;
+    final currentSessionId = _sessionId;
     _isAutoPlayActive = true;
     _playlistWords.clear();
     _playlist = null;
-
-    // Fully stop any previous session before starting a new one
-    print('[LR] calling stopSession...');
-    await stopSession();
-    print('[LR] stopSession done');
+    
+    // Show loading spinner immediately
+    state = state.copyWith(isPlaying: true, currentItem: null);
 
     try {
-      print('[LR] generating initial sequence...');
-      final initialSequence = await _generateNextWordSequence();
-      print('[LR] sequence: ${initialSequence == null ? 'null' : '${initialSequence.length} items'}');
-      if (initialSequence == null) {
+      AppLogger.log('[LR] generating initial sequence...', name: 'ListenRepeat');
+      await _ensureNextWordAppended(currentSessionId);
+      
+      if (currentSessionId != _sessionId) {
+        AppLogger.log('[LR] Session aborted during start', name: 'ListenRepeat');
+        return;
+      }
+      
+      if (_playlistWords.isEmpty) {
         throw Exception("Failed to generate initial word sequence");
       }
 
-      print('[LR] setting audio source...');
-      // ignore: deprecated_member_use
-      _playlist = ConcatenatingAudioSource(children: initialSequence);
+      AppLogger.log('[LR] setting audio source...', name: 'ListenRepeat');
       await _bgAudioPlayer.setAudioSource(_playlist!);
-      print('[LR] audio source set, playing...');
-
-      // Play immediately
-      await _bgAudioPlayer.play();
-      print('[LR] playing started');
+      AppLogger.log('[LR] audio source set, ready to play.', name: 'ListenRepeat');
 
       state = ListenRepeatState(
+        currentItem: _playlistWords.isNotEmpty ? _playlistWords.first : null,
         pool: allItems,
         shuffledPool: List.unmodifiable(_shuffledPool),
         isPlaying: true,
+        isSpeaking: true,
         totalWordsSeen: 1,
+        playbackSpeed: state.playbackSpeed,
       );
-      print('[LR] state updated, session started!');
+      _bgAudioPlayer.setSpeed(state.playbackSpeed);
+      AppLogger.log('[LR] state updated, session started!', name: 'ListenRepeat');
+
+      // Play immediately (do not await, as just_audio play() blocks until playback finishes)
+      _bgAudioPlayer.play().catchError((e) {
+        AppLogger.error('Error during playback', name: 'ListenRepeat', error: e);
+      });
+      AppLogger.log('[LR] playing started', name: 'ListenRepeat');
     } catch (e, st) {
-      print('[LR] ERROR: $e');
-      print('[LR] stack: $st');
+      AppLogger.log('[LR] ERROR: $e', name: 'ListenRepeat');
+      AppLogger.log('[LR] stack: $st', name: 'ListenRepeat');
       _isAutoPlayActive = false;
       _playlist = null;
       _playlistWords.clear();
@@ -164,70 +181,109 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     }
   }
 
-  Future<List<AudioSource>?> _generateNextWordSequence() async {
-    if (!_isAutoPlayActive || _shuffledPool.isEmpty) {
-      print('[LR-gen] ABORT: !_isAutoPlayActive=$_isAutoPlayActive _shuffledPool.isEmpty=$_shuffledPool.isEmpty');
+  Future<void> _ensureNextWordAppended(int sessionId) async {
+    // Wait for any ongoing generation to finish first (Mutex lock)
+    while (_generationFuture != null) {
+      await _generationFuture;
+    }
+    if (sessionId != _sessionId || !_isAutoPlayActive) return;
+
+    final completer = Completer<void>();
+    _generationFuture = completer.future;
+
+    try {
+      final sequence = await _generateNextWordSequence(sessionId);
+      if (sequence != null && _isAutoPlayActive && sessionId == _sessionId) {
+        if (_playlist == null) {
+          // ignore: deprecated_member_use
+          _playlist = ConcatenatingAudioSource(children: sequence);
+        } else {
+          await _playlist!.addAll(sequence);
+        }
+      } else if (_isAutoPlayActive && sessionId == _sessionId) {
+        // Retry in background if failed
+        await Future.delayed(const Duration(seconds: 2));
+        if (_isAutoPlayActive && sessionId == _sessionId) {
+          // Release lock before retrying so we don't deadlock
+          completer.complete();
+          _generationFuture = null;
+          return _ensureNextWordAppended(sessionId);
+        }
+      }
+    } finally {
+      if (!completer.isCompleted) {
+        completer.complete();
+        _generationFuture = null;
+      }
+    }
+  }
+
+  Future<List<AudioSource>?> _generateNextWordSequence(int sessionId) async {
+    if (!_isAutoPlayActive || _shuffledPool.isEmpty || sessionId != _sessionId) {
+      AppLogger.log('[LR-gen] ABORT: !_isAutoPlayActive=$_isAutoPlayActive _shuffledPool.isEmpty=${_shuffledPool.isEmpty}', name: 'ListenRepeat');
       return null;
     }
 
     final wordIndexToGenerate = _playlistWords.length;
     final item = _shuffledPool[wordIndexToGenerate % _shuffledPool.length];
-    print('[LR-gen] item: ${item.portuguese} (id=${item.id})');
+    AppLogger.log('[LR-gen] item: ${item.portuguese} (id=${item.id})', name: 'ListenRepeat');
 
     _playlistWords.add(item);
 
     try {
       final tts = ref.read(ttsServiceProvider);
-      print('[LR-gen] tts: $tts');
+      AppLogger.log('[LR-gen] tts: $tts', name: 'ListenRepeat');
       final dir = await getTemporaryDirectory();
-      print('[LR-gen] temp dir: ${dir.path}');
+      AppLogger.log('[LR-gen] temp dir: ${dir.path}', name: 'ListenRepeat');
 
       final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
       final ext = Platform.isAndroid ? 'wav' : 'caf';
       final ptFilePath = '${dir.path}/pt_$safeId.$ext';
       final enFilePath = '${dir.path}/en_$safeId.$ext';
-      print('[LR-gen] pt: $ptFilePath');
-      print('[LR-gen] en: $enFilePath');
+      AppLogger.log('[LR-gen] pt: $ptFilePath', name: 'ListenRepeat');
+      AppLogger.log('[LR-gen] en: $enFilePath', name: 'ListenRepeat');
 
       final ptFile = File(ptFilePath);
       final enFile = File(enFilePath);
 
       if (!ptFile.existsSync() || ptFile.lengthSync() == 0) {
-        print('[LR-gen] synthesizing PT...');
+        AppLogger.log('[LR-gen] synthesizing PT...', name: 'ListenRepeat');
         await tts.synthesizeToFile(item.portuguese, ptFilePath, language: 'pt-PT');
-        print('[LR-gen] PT synthesize done, file exists: ${ptFile.existsSync()}, size: ${ptFile.existsSync() ? ptFile.lengthSync() : 0}');
+        AppLogger.log('[LR-gen] PT synthesize returned. Waiting for file to exist...', name: 'ListenRepeat');
         int attempts = 0;
-        while ((!ptFile.existsSync() || ptFile.lengthSync() == 0) && attempts < 20) {
+        while ((!ptFile.existsSync() || ptFile.lengthSync() == 0) && attempts < 200 && sessionId == _sessionId) {
           await Future.delayed(const Duration(milliseconds: 50));
           attempts++;
         }
-        print('[LR-gen] PT after wait, exists: ${ptFile.existsSync()}, size: ${ptFile.existsSync() ? ptFile.lengthSync() : 0}');
+        AppLogger.log('[LR-gen] PT after wait, exists: ${ptFile.existsSync()}, size: ${ptFile.existsSync() ? ptFile.lengthSync() : 0}', name: 'ListenRepeat');
       } else {
-        print('[LR-gen] PT file already exists, size: ${ptFile.lengthSync()}');
+        AppLogger.log('[LR-gen] PT file already exists, size: ${ptFile.lengthSync()}', name: 'ListenRepeat');
       }
 
+      if (sessionId != _sessionId) throw Exception("Session aborted");
+
       if (!enFile.existsSync() || enFile.lengthSync() == 0) {
-        print('[LR-gen] synthesizing EN...');
+        AppLogger.log('[LR-gen] synthesizing EN...', name: 'ListenRepeat');
         await tts.synthesizeToFile(item.english, enFilePath, language: 'en-US');
-        print('[LR-gen] EN synthesize done, exists: ${enFile.existsSync()}, size: ${enFile.existsSync() ? enFile.lengthSync() : 0}');
+        AppLogger.log('[LR-gen] EN synthesize returned. Waiting for file to exist...', name: 'ListenRepeat');
         int attempts = 0;
-        while ((!enFile.existsSync() || enFile.lengthSync() == 0) && attempts < 20) {
+        while ((!enFile.existsSync() || enFile.lengthSync() == 0) && attempts < 200 && sessionId == _sessionId) {
           await Future.delayed(const Duration(milliseconds: 50));
           attempts++;
         }
-        print('[LR-gen] EN after wait, exists: ${enFile.existsSync()}, size: ${enFile.existsSync() ? enFile.lengthSync() : 0}');
+        AppLogger.log('[LR-gen] EN after wait, exists: ${enFile.existsSync()}, size: ${enFile.existsSync() ? enFile.lengthSync() : 0}', name: 'ListenRepeat');
       } else {
-        print('[LR-gen] EN file already exists, size: ${enFile.lengthSync()}');
+        AppLogger.log('[LR-gen] EN file already exists, size: ${enFile.lengthSync()}', name: 'ListenRepeat');
       }
 
       if (!ptFile.existsSync() || ptFile.lengthSync() == 0) {
-         print('[LR-gen] THROW: PT file missing or empty');
+         AppLogger.log('[LR-gen] THROW: PT file missing or empty', name: 'ListenRepeat');
          throw Exception("Failed to synthesize Portuguese audio to disk");
       }
 
-      print('[LR-gen] generating word art...');
+      AppLogger.log('[LR-gen] generating word art...', name: 'ListenRepeat');
       final artUri = await DynamicArtService.generateWordArt(item);
-      print('[LR-gen] word art: $artUri');
+      AppLogger.log('[LR-gen] word art: $artUri', name: 'ListenRepeat');
       final mediaItem = MediaItem(
         id: 'listen_repeat_${item.id}_$wordIndexToGenerate',
         album: 'Language Trainer',
@@ -243,29 +299,26 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
         AudioSource.asset('assets/audio/silence.mp3', tag: mediaItem.copyWith(id: '${mediaItem.id}_silence2')),
       ];
 
-      print('[LR-gen] SUCCESS: returning ${sequence.length} audio sources');
+      if (sessionId != _sessionId) throw Exception("Session aborted");
+
+      AppLogger.log('[LR-gen] SUCCESS: returning ${sequence.length} audio sources', name: 'ListenRepeat');
       return sequence;
 
     } catch (e, st) {
-      print('[LR-gen] ERROR: $e');
-      print('[LR-gen] stack: $st');
-      AppLogger.error('Error in _generateNextWordSequence', name: 'ListenRepeat', error: e);
-      _playlistWords.removeLast(); // Revert the addition
+      if (sessionId == _sessionId) {
+        AppLogger.log('[LR-gen] ERROR: $e', name: 'ListenRepeat');
+        AppLogger.log('[LR-gen] stack: $st', name: 'ListenRepeat');
+        AppLogger.error('Error in _generateNextWordSequence', name: 'ListenRepeat', error: e);
+        if (_playlistWords.isNotEmpty && _playlistWords.last == item) {
+          _playlistWords.removeLast(); // Revert the addition if it was the last one added
+        }
+      }
       return null;
     }
   }
 
-  Future<void> _appendNextWordInBackground() async {
-    final sequence = await _generateNextWordSequence();
-    if (sequence != null && _playlist != null && _isAutoPlayActive) {
-      await _playlist!.addAll(sequence);
-    } else if (_isAutoPlayActive) {
-      // Retry in background if failed
-      await Future.delayed(const Duration(seconds: 2));
-      if (_isAutoPlayActive && _playlist != null) {
-        _appendNextWordInBackground();
-      }
-    }
+  Future<void> _appendNextWordInBackground(int sessionId) async {
+    await _ensureNextWordAppended(sessionId);
   }
 
   Future<void> replayCurrentWord() async {
@@ -282,14 +335,15 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   Future<void> nextWord() async {
     if (!_isAutoPlayActive || _bgAudioPlayer.currentIndex == null || _playlist == null) return;
     final currentWordIndex = _bgAudioPlayer.currentIndex! ~/ 4;
+    final currentSessionId = _sessionId;
 
     if (currentWordIndex + 1 >= _playlistWords.length) {
       // Wait for it to be generated if we hit next too fast
-      final sequence = await _generateNextWordSequence();
-      if (sequence != null) {
-        await _playlist!.addAll(sequence);
-      }
+      await _ensureNextWordAppended(currentSessionId);
     }
+
+    // After waiting, check if session is still active
+    if (currentSessionId != _sessionId || !_isAutoPlayActive) return;
 
     try {
       await _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex + 1) * 4);
@@ -334,9 +388,8 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   }
 
   Future<void> stopSession() async {
+    _sessionId++; // Invalidate any ongoing generation for this session
     _isAutoPlayActive = false;
-    _currentIndexSubscription?.cancel();
-    _currentIndexSubscription = null;
     try {
       await _bgAudioPlayer.stop();
       await _bgAudioPlayer.seek(Duration.zero);
@@ -351,7 +404,25 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     // and stopSession may be called mid-startSession (e.g., when switching
     // from shuffle). Clearing it would destroy data needed by
     // _generateNextWordSequence().
-    state = ListenRepeatState();
+    state = ListenRepeatState(playbackSpeed: state.playbackSpeed);
+  }
+
+  double cycleSpeed() {
+    double newSpeed = state.playbackSpeed;
+    if (newSpeed == 1.0) {
+      newSpeed = 1.25;
+    } else if (newSpeed == 1.25) {
+      newSpeed = 1.5;
+    } else if (newSpeed == 1.5) {
+      newSpeed = 0.5;
+    } else if (newSpeed == 0.5) {
+      newSpeed = 0.75;
+    } else {
+      newSpeed = 1.0;
+    }
+    _bgAudioPlayer.setSpeed(newSpeed);
+    state = state.copyWith(playbackSpeed: newSpeed);
+    return newSpeed;
   }
 
   void shufflePool() {

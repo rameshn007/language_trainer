@@ -1,0 +1,97 @@
+[
+  {
+    "id": "indir_pron_1",
+    "questionText": "A Sara dá o casaco ao filho. -> A Sara dá-____ o casaco.",
+    "options": [
+      "lhe",
+      "o",
+      "lo",
+      "lhe a"
+    ],
+    "correctAnswer": "lhe",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "indir_pron_1_src",
+      "portuguese": "lhe",
+      "english": "to him/her",
+      "notes": "Indirect Object Pronoun"
+    },
+    "category": "Indirect Object Pronouns"
+  },
+  {
+    "id": "indir_pron_2",
+    "questionText": "O Peter não telefona à mãe. -> O Peter não ____ telefona.",
+    "options": [
+      "lhe",
+      "a",
+      "la",
+      "lha"
+    ],
+    "correctAnswer": "lhe",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "indir_pron_2_src",
+      "portuguese": "lhe",
+      "english": "to him/her",
+      "notes": "Indirect Object Pronoun"
+    },
+    "category": "Indirect Object Pronouns"
+  },
+  {
+    "id": "indir_pron_3",
+    "questionText": "Eu dou um presente a ti. -> Eu dou-____ um presente.",
+    "options": [
+      "te",
+      "ti",
+      "lhe",
+      "me"
+    ],
+    "correctAnswer": "te",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "indir_pron_3_src",
+      "portuguese": "te",
+      "english": "to you",
+      "notes": "Indirect Object Pronoun"
+    },
+    "category": "Indirect Object Pronouns"
+  },
+  {
+    "id": "indir_pron_4",
+    "questionText": "Eles explicam a lição a nós. -> Eles explicam-____ a lição.",
+    "options": [
+      "nos",
+      "nós",
+      "vos",
+      "lhes"
+    ],
+    "correctAnswer": "nos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "indir_pron_4_src",
+      "portuguese": "nos",
+      "english": "to us",
+      "notes": "Indirect Object Pronoun"
+    },
+    "category": "Indirect Object Pronouns"
+  },
+  {
+    "id": "indir_pron_5",
+    "questionText": "Nós escrevemos aos nossos amigos. -> Nós escrevemos-____.",
+    "options": [
+      "lhes",
+      "os",
+      "los",
+      "lhes a"
+    ],
+    "correctAnswer": "lhes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "indir_pron_5_src",
+      "portuguese": "lhes",
+      "english": "to them",
+      "notes": "Indirect Object Pronoun"
+    },
+    "category": "Indirect Object Pronouns"
+  }
+]

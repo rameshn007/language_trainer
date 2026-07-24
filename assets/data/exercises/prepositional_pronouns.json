@@ -2,7 +2,12 @@
   {
     "id": "prep_pron_q1",
     "questionText": "Queres ir ao cinema ____ hoje? (with me)",
-    "options": ["comigo", "contigo", "consigo", "connosco"],
+    "options": [
+      "comigo",
+      "contigo",
+      "consigo",
+      "connosco"
+    ],
     "correctAnswer": "comigo",
     "type": "cloze",
     "sourceItem": {
@@ -16,7 +21,12 @@
   {
     "id": "prep_pron_q2",
     "questionText": "Eu gosto muito de estar ____. (with you - informal)",
-    "options": ["contigo", "comigo", "connosco", "convosco"],
+    "options": [
+      "contigo",
+      "comigo",
+      "connosco",
+      "convosco"
+    ],
     "correctAnswer": "contigo",
     "type": "cloze",
     "sourceItem": {
@@ -30,7 +40,12 @@
   {
     "id": "prep_pron_q3",
     "questionText": "Doutor Pedro, eu gostava de falar ____ amanhã. (with you - formal)",
-    "options": ["consigo", "contigo", "comigo", "connosco"],
+    "options": [
+      "consigo",
+      "contigo",
+      "comigo",
+      "connosco"
+    ],
     "correctAnswer": "consigo",
     "type": "cloze",
     "sourceItem": {
@@ -44,7 +59,12 @@
   {
     "id": "prep_pron_q4",
     "questionText": "Nós vamos ao restaurante. Queres vir ____? (with us)",
-    "options": ["connosco", "convosco", "comigo", "com eles"],
+    "options": [
+      "connosco",
+      "convosco",
+      "comigo",
+      "com eles"
+    ],
     "correctAnswer": "connosco",
     "type": "cloze",
     "sourceItem": {
@@ -58,7 +78,12 @@
   {
     "id": "prep_pron_q5",
     "questionText": "Meus amigos, nós gostamos muito de trabalhar ____. (with you - plural)",
-    "options": ["convosco", "connosco", "consigo", "com vocês"],
+    "options": [
+      "convosco",
+      "connosco",
+      "consigo",
+      "com vocês"
+    ],
     "correctAnswer": "convosco",
     "type": "cloze",
     "sourceItem": {
@@ -72,7 +97,12 @@
   {
     "id": "prep_pron_q6",
     "questionText": "O João é muito simpático. Eu vou ao cinema ____. (with him)",
-    "options": ["com ele", "comigo", "consigo", "com ela"],
+    "options": [
+      "com ele",
+      "comigo",
+      "consigo",
+      "com ela"
+    ],
     "correctAnswer": "com ele",
     "type": "cloze",
     "sourceItem": {
@@ -86,7 +116,12 @@
   {
     "id": "prep_pron_q7",
     "questionText": "A Ana vai almoçar. O Pedro foi ____. (with her)",
-    "options": ["com ela", "com ele", "contigo", "comigo"],
+    "options": [
+      "com ela",
+      "com ele",
+      "contigo",
+      "comigo"
+    ],
     "correctAnswer": "com ela",
     "type": "cloze",
     "sourceItem": {
@@ -100,7 +135,12 @@
   {
     "id": "prep_pron_q8",
     "questionText": "Os meus pais estão na sala. Eu vou falar ____. (with them - masculine)",
-    "options": ["com eles", "com elas", "connosco", "convosco"],
+    "options": [
+      "com eles",
+      "com elas",
+      "connosco",
+      "convosco"
+    ],
     "correctAnswer": "com eles",
     "type": "cloze",
     "sourceItem": {
@@ -114,7 +154,12 @@
   {
     "id": "prep_pron_q9",
     "questionText": "As minhas irmãs vão viajar. Eu vou ____ para a Grécia. (with them - feminine)",
-    "options": ["com elas", "com eles", "com vocês", "connosco"],
+    "options": [
+      "com elas",
+      "com eles",
+      "com vocês",
+      "connosco"
+    ],
     "correctAnswer": "com elas",
     "type": "cloze",
     "sourceItem": {
@@ -128,7 +173,12 @@
   {
     "id": "prep_pron_q10",
     "questionText": "Meus filhos, eu vou ao parque ____. (with you - plural)",
-    "options": ["com vocês", "connosco", "convosco", "consigo"],
+    "options": [
+      "com vocês",
+      "connosco",
+      "convosco",
+      "consigo"
+    ],
     "correctAnswer": "com vocês",
     "type": "cloze",
     "sourceItem": {
@@ -142,7 +192,12 @@
   {
     "id": "prep_pron_q11",
     "questionText": "Senhor Silva, eu vou ao banco ____. (with you - formal masculine)",
-    "options": ["com o senhor", "com a senhora", "consigo", "contigo"],
+    "options": [
+      "com o senhor",
+      "com a senhora",
+      "consigo",
+      "contigo"
+    ],
     "correctAnswer": "com o senhor",
     "type": "cloze",
     "sourceItem": {
@@ -156,7 +211,12 @@
   {
     "id": "prep_pron_q12",
     "questionText": "Dona Maria, eu queria falar ____. (with you - formal feminine)",
-    "options": ["com a senhora", "com o senhor", "contigo", "consigo"],
+    "options": [
+      "com a senhora",
+      "com o senhor",
+      "contigo",
+      "consigo"
+    ],
     "correctAnswer": "com a senhora",
     "type": "cloze",
     "sourceItem": {
@@ -170,7 +230,12 @@
   {
     "id": "prep_pron_q13",
     "questionText": "____ vais ao cinema hoje? (With whom)",
-    "options": ["Com quem", "Comigo", "Contigo", "Consigo"],
+    "options": [
+      "Com quem",
+      "Comigo",
+      "Contigo",
+      "Consigo"
+    ],
     "correctAnswer": "Com quem",
     "type": "cloze",
     "sourceItem": {
@@ -184,7 +249,12 @@
   {
     "id": "prep_pron_q14",
     "questionText": "Ele vai jogar ténis ____ amanhã. (with me)",
-    "options": ["comigo", "contigo", "consigo", "connosco"],
+    "options": [
+      "comigo",
+      "contigo",
+      "consigo",
+      "connosco"
+    ],
     "correctAnswer": "comigo",
     "type": "cloze",
     "sourceItem": {
@@ -198,13 +268,132 @@
   {
     "id": "prep_pron_q15",
     "questionText": "Vem ____ à praia no sábado! (with us)",
-    "options": ["connosco", "convosco", "comigo", "com eles"],
+    "options": [
+      "connosco",
+      "convosco",
+      "comigo",
+      "com eles"
+    ],
     "correctAnswer": "connosco",
     "type": "cloze",
     "sourceItem": {
       "id": "prep_pron_connosco_2",
       "portuguese": "connosco",
       "english": "with us",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_para_mim",
+    "questionText": "É para ____, obrigado! (for me)",
+    "options": [
+      "mim",
+      "eu",
+      "me",
+      "minha"
+    ],
+    "correctAnswer": "mim",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_para_mim_src",
+      "portuguese": "para mim",
+      "english": "for me",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_para_ti",
+    "questionText": "Para ____, qual é a melhor praia portuguesa? (for you - informal)",
+    "options": [
+      "ti",
+      "tu",
+      "te",
+      "tua"
+    ],
+    "correctAnswer": "ti",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_para_ti_src",
+      "portuguese": "para ti",
+      "english": "for you",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_para_si",
+    "questionText": "Dr. Pedro, este dossiê é para ____. (for you - formal)",
+    "options": [
+      "si",
+      "você",
+      "ele",
+      "o senhor"
+    ],
+    "correctAnswer": "si",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_para_si_src",
+      "portuguese": "para si",
+      "english": "for you (formal)",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_para_voces",
+    "questionText": "Esta carta chegou para ____. (for you all)",
+    "options": [
+      "vocês",
+      "vós",
+      "vos",
+      "si"
+    ],
+    "correctAnswer": "vocês",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_para_voces_src",
+      "portuguese": "para vocês",
+      "english": "for you all",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_por_mim",
+    "questionText": "Paula, espera por ____. (for me)",
+    "options": [
+      "mim",
+      "eu",
+      "me",
+      "comigo"
+    ],
+    "correctAnswer": "mim",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_por_mim_src",
+      "portuguese": "por mim",
+      "english": "for me",
+      "notes": "Prepositional pronoun"
+    },
+    "category": "Prepositional Pronouns"
+  },
+  {
+    "id": "prep_pron_de_ti",
+    "questionText": "Lembro-me muitas vezes de ____. (of you - informal)",
+    "options": [
+      "ti",
+      "tu",
+      "te",
+      "contigo"
+    ],
+    "correctAnswer": "ti",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "prep_pron_de_ti_src",
+      "portuguese": "de ti",
+      "english": "of you",
       "notes": "Prepositional pronoun"
     },
     "category": "Prepositional Pronouns"
