@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:math';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:path_provider/path_provider.dart';
 import '../../models/language_item.dart';
+import '../../models/progress_data.dart';
 import '../../main.dart';
 import '../../services/dynamic_art_service.dart';
+import '../../services/progress_service.dart';
 import '../../utils/logger.dart';
 
 class ListenRepeatState {
@@ -50,7 +53,7 @@ class ListenRepeatState {
   }
 }
 
-class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
+class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBindingObserver {
   final Random _random = Random();
   bool _isAutoPlayActive = false;
   int _sessionId = 0;
@@ -64,7 +67,10 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
 
   @override
   ListenRepeatState build() {
+    WidgetsBinding.instance.addObserver(this);
+    
     ref.onDispose(() {
+      WidgetsBinding.instance.removeObserver(this);
       _bgAudioPlayer.dispose();
       _currentIndexSubscription?.cancel();
       _isAutoPlayActive = false;
@@ -77,26 +83,39 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     });
 
     _currentIndexSubscription = _bgAudioPlayer.currentIndexStream.listen((index) {
-      if (index == null || !_isAutoPlayActive) return;
-
-      final wordIndex = index ~/ 4;
-      if (wordIndex < _playlistWords.length) {
-        final currentWord = _playlistWords[wordIndex];
-        if (state.currentItem != currentWord) {
-          state = state.copyWith(
-            currentItem: currentWord,
-            totalWordsSeen: wordIndex + 1,
-          );
-        }
-      }
-
-      // Pre-fetch next word when we are on the last word in the playlist
-      if (wordIndex >= _playlistWords.length - 1) {
-        _appendNextWordInBackground(_sessionId);
-      }
+      if (!_isAutoPlayActive) return;
+      _syncCurrentIndex(index);
     });
 
     return ListenRepeatState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && _isAutoPlayActive) {
+      // Dart stream events might be dropped while the isolate is suspended in background.
+      // Manually sync the current word index when returning to the app.
+      _syncCurrentIndex(_bgAudioPlayer.currentIndex);
+    }
+  }
+
+  void _syncCurrentIndex(int? index) {
+    if (index == null) return;
+    final wordIndex = index ~/ 4;
+    if (wordIndex < _playlistWords.length) {
+      final currentWord = _playlistWords[wordIndex];
+      if (state.currentItem != currentWord) {
+        state = state.copyWith(
+          currentItem: currentWord,
+          totalWordsSeen: wordIndex + 1,
+        );
+      }
+    }
+
+    // Maintain a buffer of up to 3 words
+    if (wordIndex >= _playlistWords.length - 3) {
+      _appendNextWordInBackground(_sessionId);
+    }
   }
 
   Future<void> startSession() async {
@@ -199,6 +218,13 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
           _playlist = ConcatenatingAudioSource(children: sequence);
         } else {
           await _playlist!.addAll(sequence);
+          
+          if (_isAutoPlayActive && state.isPlaying && _bgAudioPlayer.processingState == ProcessingState.completed) {
+            AppLogger.log('[LR] Resuming playback after appending sequence (queue ran out)', name: 'ListenRepeat');
+            _bgAudioPlayer.play().catchError((e) {
+              AppLogger.error('Error auto-resuming', name: 'ListenRepeat', error: e);
+            });
+          }
         }
       } else if (_isAutoPlayActive && sessionId == _sessionId) {
         // Retry in background if failed
@@ -318,7 +344,14 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
   }
 
   Future<void> _appendNextWordInBackground(int sessionId) async {
-    await _ensureNextWordAppended(sessionId);
+    while (_playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ 4) < 3) {
+      if (sessionId != _sessionId || !_isAutoPlayActive) break;
+      // Yield heavily to the event loop to prevent UI jank, especially on start
+      await Future.delayed(const Duration(seconds: 1));
+      if (sessionId != _sessionId || !_isAutoPlayActive) break;
+      
+      await _ensureNextWordAppended(sessionId);
+    }
   }
 
   Future<void> replayCurrentWord() async {
@@ -387,7 +420,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     state = state.copyWith(isPlaying: false);
   }
 
-  Future<void> stopSession() async {
+  Future<int> stopSession() async {
     _sessionId++; // Invalidate any ongoing generation for this session
     _isAutoPlayActive = false;
     try {
@@ -400,11 +433,26 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> {
     }
     _playlist = null;
     _playlistWords.clear();
+    
+    int earnedXP = 0;
+    if (state.totalWordsSeen > 0) {
+      // Award 2 XP per word seen for Listen & Repeat
+      final sessionXP = state.totalWordsSeen * 2;
+      earnedXP = await ref.read(progressServiceProvider.notifier).recordSessionComplete(
+        storage: ref.read(storageServiceProvider),
+        activityType: ActivityType.listenRepeat,
+        score: state.totalWordsSeen,
+        total: state.totalWordsSeen,
+        sessionXP: sessionXP,
+      );
+    }
+
     // Note: _shuffledPool is NOT cleared here — startSession() repopulates it
     // and stopSession may be called mid-startSession (e.g., when switching
     // from shuffle). Clearing it would destroy data needed by
     // _generateNextWordSequence().
     state = ListenRepeatState(playbackSpeed: state.playbackSpeed);
+    return earnedXP;
   }
 
   double cycleSpeed() {

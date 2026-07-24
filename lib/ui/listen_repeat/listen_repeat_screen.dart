@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'listen_repeat_view_model.dart';
+import '../widgets/xp_popup.dart';
 
 class ListenRepeatScreen extends ConsumerStatefulWidget {
   const ListenRepeatScreen({super.key});
@@ -51,9 +52,12 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
     ref.read(listenRepeatViewModelProvider.notifier).shufflePool();
   }
 
-  void _stopSession() {
-    ref.read(listenRepeatViewModelProvider.notifier).stopSession();
+  void _stopSession() async {
+    final xp = await ref.read(listenRepeatViewModelProvider.notifier).stopSession();
     if (mounted) {
+      if (xp > 0) {
+        XPPopup.show(context, xp);
+      }
       Navigator.of(context).pop();
     }
   }

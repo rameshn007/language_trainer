@@ -169,6 +169,8 @@ class ActivityTypeAdapter extends TypeAdapter<ActivityType> {
         return ActivityType.prepositionQuiz;
       case 8:
         return ActivityType.grammarQuiz;
+      case 9:
+        return ActivityType.listenRepeat;
       default:
         return ActivityType.quiz;
     }
@@ -203,6 +205,9 @@ class ActivityTypeAdapter extends TypeAdapter<ActivityType> {
         break;
       case ActivityType.grammarQuiz:
         writer.writeByte(8);
+        break;
+      case ActivityType.listenRepeat:
+        writer.writeByte(9);
         break;
     }
   }
