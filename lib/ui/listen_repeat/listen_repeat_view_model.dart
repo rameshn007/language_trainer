@@ -64,7 +64,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   final Random _random = Random();
   bool _isAutoPlayActive = false;
   int _sessionId = 0;
-  int _emptyLoadAttempts = 0;
+  bool _isStarting = false;
   static const int _maxEmptyLoadAttempts = 5;
   Future<void>? _generationFuture;
   final AudioPlayer _bgAudioPlayer = AudioPlayer();
@@ -127,39 +127,78 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     }
   }
 
+  /// Guard so only one start attempt runs at a time. Both the Try again button
+  /// and [shufflePool] call this without awaiting, and the real work below
+  /// waits on second-scale delays, so without it two attempts can interleave
+  /// and both reach playback. A dropped attempt leaves the plain empty state,
+  /// never a spinner that will never resolve.
   Future<void> startSession() async {
+    if (_isStarting) {
+      AppLogger.log('[LR] startSession RETURNED (start already in flight)', name: 'ListenRepeat');
+      return;
+    }
+    _isStarting = true;
+    try {
+      await _startSession();
+    } catch (e, st) {
+      // Also catches anything thrown outside the playback section (a closed
+      // Hive box, say), which would otherwise surface as an unhandled async
+      // error and leave the screen sitting on a spinner.
+      AppLogger.log('[LR] startSession ERROR: $e', name: 'ListenRepeat');
+      AppLogger.log('[LR] stack: $st', name: 'ListenRepeat');
+      _reportFailure(_describeError(e));
+    } finally {
+      _isStarting = false;
+    }
+  }
+
+  Future<void> _startSession() async {
     AppLogger.log('[LR] startSession ENTER', name: 'ListenRepeat');
     if (state.isPlaying || _isAutoPlayActive) {
       AppLogger.log('[LR] startSession RETURNED (playing or active)', name: 'ListenRepeat');
       return;
     }
 
+    // Cancel token for the waits below: stopSession() bumps _sessionId, and the
+    // screen's dispose() calls stopSession(), so backing out mid-load aborts
+    // the attempt instead of starting speech on a screen that is gone.
+    final startingSessionId = _sessionId;
+
     final storage = ref.read(storageServiceProvider);
     AppLogger.log('[LR] storage: $storage', name: 'ListenRepeat');
-    final allItems = storage.getAllItems();
+    var allItems = storage.getAllItems();
     AppLogger.log('[LR] allItems count: ${allItems.length}', name: 'ListenRepeat');
 
-    if (allItems.isEmpty) {
-      // The startup data load may still be in flight when this screen opens, so
-      // retry a few times — but never forever. An endless retry left the screen
-      // stuck on the "no words" message and hid the real failure.
-      if (_emptyLoadAttempts >= _maxEmptyLoadAttempts) {
-        _emptyLoadAttempts = 0;
-        AppLogger.log('[LR] still no items after $_maxEmptyLoadAttempts attempts, giving up', name: 'ListenRepeat');
-        state = ListenRepeatState(
-          playbackSpeed: state.playbackSpeed,
-          failure: 'No vocabulary found after $_maxEmptyLoadAttempts attempts. '
-              'The data may still be loading - go back and open this screen again.',
-        );
+    // The startup data load may still be in flight when this screen opens, so
+    // give it a few seconds - but never forever. An endless retry left the
+    // screen stuck on the "no words" message and hid the real failure.
+    var attempts = 0;
+    while (allItems.isEmpty && attempts < _maxEmptyLoadAttempts) {
+      attempts++;
+      // Stay in the loading state while waiting so the screen shows a progress
+      // indicator instead of flicking "No words loaded" once per second.
+      state = ListenRepeatState(isPlaying: true, playbackSpeed: state.playbackSpeed);
+      AppLogger.log('[LR] no items yet, retry $attempts/$_maxEmptyLoadAttempts in 1s...', name: 'ListenRepeat');
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (startingSessionId != _sessionId) {
+        AppLogger.log('[LR] load wait aborted (session cancelled)', name: 'ListenRepeat');
+        state = ListenRepeatState(playbackSpeed: state.playbackSpeed);
         return;
       }
-      _emptyLoadAttempts++;
-      AppLogger.log('[LR] No items yet, retrying in 1s...', name: 'ListenRepeat');
-      await Future.delayed(const Duration(seconds: 1));
-      AppLogger.log('[LR] Retrying startSession...', name: 'ListenRepeat');
-      return await startSession();
+      allItems = storage.getAllItems();
+      AppLogger.log('[LR] retry $attempts count: ${allItems.length}', name: 'ListenRepeat');
     }
-    _emptyLoadAttempts = 0;
+
+    if (allItems.isEmpty) {
+      // Nothing to play, but nothing broken either. Keep the screen's empty
+      // state ("add vocabulary") rather than the error panel: there is no
+      // action a user can take on an empty library from an error screen.
+      AppLogger.log('[LR] still no items after $attempts attempts - empty vocabulary', name: 'ListenRepeat');
+      state = ListenRepeatState(playbackSpeed: state.playbackSpeed);
+      return;
+    }
+
     AppLogger.log('[LR] Got ${allItems.length} items, proceeding...', name: 'ListenRepeat');
 
     _shuffledPool.clear();
@@ -224,14 +263,19 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     } catch (e, st) {
       AppLogger.log('[LR] ERROR: $e', name: 'ListenRepeat');
       AppLogger.log('[LR] stack: $st', name: 'ListenRepeat');
-      _isAutoPlayActive = false;
-      _playlist = null;
-      _playlistWords.clear();
-      state = ListenRepeatState(
-        playbackSpeed: state.playbackSpeed,
-        failure: 'Session could not start: ${_describeError(e)}',
-      );
+      _reportFailure(_describeError(e));
     }
+  }
+
+  /// tears down the half-built session and shows why on screen.
+  void _reportFailure(String reason) {
+    _isAutoPlayActive = false;
+    _playlist = null;
+    _playlistWords.clear();
+    state = ListenRepeatState(
+      playbackSpeed: state.playbackSpeed,
+      failure: 'Session could not start: $reason',
+    );
   }
 
   /// Compact, readable form of a failure for the UI. Deliberately keeps the
