@@ -22,6 +22,10 @@ class ListenRepeatState {
   final bool isSpeaking;
   final double playbackSpeed;
 
+  /// Non-null when a session failed to start. Surfaced in the UI so a broken
+  /// session is not mistaken for an empty vocabulary.
+  final String? failure;
+
   ListenRepeatState({
     this.currentItem,
     this.pool = const [],
@@ -30,6 +34,7 @@ class ListenRepeatState {
     this.totalWordsSeen = 0,
     this.isSpeaking = false,
     this.playbackSpeed = 1.0,
+    this.failure,
   });
 
   ListenRepeatState copyWith({
@@ -40,6 +45,7 @@ class ListenRepeatState {
     int? totalWordsSeen,
     bool? isSpeaking,
     double? playbackSpeed,
+    String? failure,
   }) {
     return ListenRepeatState(
       currentItem: currentItem ?? this.currentItem,
@@ -49,6 +55,7 @@ class ListenRepeatState {
       totalWordsSeen: totalWordsSeen ?? this.totalWordsSeen,
       isSpeaking: isSpeaking ?? this.isSpeaking,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
+      failure: failure ?? this.failure,
     );
   }
 }
@@ -57,6 +64,8 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   final Random _random = Random();
   bool _isAutoPlayActive = false;
   int _sessionId = 0;
+  int _emptyLoadAttempts = 0;
+  static const int _maxEmptyLoadAttempts = 5;
   Future<void>? _generationFuture;
   final AudioPlayer _bgAudioPlayer = AudioPlayer();
   // ignore: deprecated_member_use
@@ -131,11 +140,26 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     AppLogger.log('[LR] allItems count: ${allItems.length}', name: 'ListenRepeat');
 
     if (allItems.isEmpty) {
+      // The startup data load may still be in flight when this screen opens, so
+      // retry a few times — but never forever. An endless retry left the screen
+      // stuck on the "no words" message and hid the real failure.
+      if (_emptyLoadAttempts >= _maxEmptyLoadAttempts) {
+        _emptyLoadAttempts = 0;
+        AppLogger.log('[LR] still no items after $_maxEmptyLoadAttempts attempts, giving up', name: 'ListenRepeat');
+        state = ListenRepeatState(
+          playbackSpeed: state.playbackSpeed,
+          failure: 'No vocabulary found after $_maxEmptyLoadAttempts attempts. '
+              'The data may still be loading - go back and open this screen again.',
+        );
+        return;
+      }
+      _emptyLoadAttempts++;
       AppLogger.log('[LR] No items yet, retrying in 1s...', name: 'ListenRepeat');
       await Future.delayed(const Duration(seconds: 1));
       AppLogger.log('[LR] Retrying startSession...', name: 'ListenRepeat');
       return await startSession();
     }
+    _emptyLoadAttempts = 0;
     AppLogger.log('[LR] Got ${allItems.length} items, proceeding...', name: 'ListenRepeat');
 
     _shuffledPool.clear();
@@ -153,8 +177,15 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     _playlistWords.clear();
     _playlist = null;
     
-    // Show loading spinner immediately
-    state = state.copyWith(isPlaying: true, currentItem: null);
+    // Show loading spinner immediately. Built from scratch instead of via
+    // copyWith so the previous session's word and failure message are cleared
+    // (copyWith ignores nulls, which left the stale word on screen).
+    state = ListenRepeatState(
+      pool: allItems,
+      shuffledPool: List.unmodifiable(_shuffledPool),
+      isPlaying: true,
+      playbackSpeed: state.playbackSpeed,
+    );
 
     try {
       AppLogger.log('[LR] generating initial sequence...', name: 'ListenRepeat');
@@ -196,8 +227,19 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       _isAutoPlayActive = false;
       _playlist = null;
       _playlistWords.clear();
-      state = ListenRepeatState();
+      state = ListenRepeatState(
+        playbackSpeed: state.playbackSpeed,
+        failure: 'Session could not start: ${_describeError(e)}',
+      );
     }
+  }
+
+  /// Compact, readable form of a failure for the UI. Deliberately keeps the
+  /// exception class and message: that detail is what makes an audio-session
+  /// failure diagnosable from a screenshot.
+  String _describeError(Object e) {
+    final text = e.toString();
+    return text.length > 180 ? '${text.substring(0, 177)}…' : text;
   }
 
   Future<void> _ensureNextWordAppended(int sessionId) async {
