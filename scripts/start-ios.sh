@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 # start-ios.sh — List available iOS simulators, start one (default: iPhone 17 Pro Max),
 #                 or reuse an already-booted device, then launch the Flutter app.
 #
@@ -7,6 +7,9 @@
 #   ./scripts/start-ios.sh "iPhone 17 Pro"  # start by display name (exact or prefix match)
 #   ./scripts/start-ios.sh --list           # list only, no launch
 #   ./scripts/start-ios.sh --reuse          # use first already-booted device, no start
+#
+# Env:  CULLMODE=off|safe|aggressive  — polygon culling A/B override, see
+#       "perf test flags" below.
 
 set -euo pipefail
 
@@ -76,6 +79,29 @@ bring_simulator_to_front() {
   osascript -e 'tell application "Simulator" to activate' 2>/dev/null || true
 }
 
+# ── perf test flags ─────────────────────────────────────────────────────────
+# CULLMODE selects the far-side polygon occlusion-culling mode for a test run:
+#   CULLMODE=off          draw every polygon (baseline for A/B)
+#   CULLMODE=safe         shipped behaviour, safety margins on
+#   CULLMODE=aggressive   margins off, hides some visible polygons (measure only)
+# Example: CULLMODE=aggressive ./scripts/start-ios.sh --reuse
+DART_DEFINES=()
+if [[ -n "${CULLMODE:-}" ]]; then
+  case "$CULLMODE" in
+    off|safe|aggressive)
+      DART_DEFINES+=(--dart-define=CULL_MODE="$CULLMODE")
+      echo "Polygon culling mode: $CULLMODE" ;;
+    *)
+      echo "Warning: unknown CULLMODE '$CULLMODE' (expected off|safe|aggressive) - ignored." >&2 ;;
+  esac
+fi
+
+# flutter run with the current --dart-define list. The ${arr[@]+...} form is needed
+# because `set -u` on bash 3.2 treats an empty array as unset.
+run_flutter() {
+  flutter run ${DART_DEFINES[@]+"${DART_DEFINES[@]}"} -d "$1"
+}
+
 # ── main ─────────────────────────────────────────────────────────────────────
 
 # 1. --list flag: just show devices and exit.
@@ -94,7 +120,7 @@ if [[ "${1:-}" == "--reuse" ]]; then
   fi
   echo "Using already-booted device: $device_id"
   bring_simulator_to_front "$device_id"
-  flutter run -d "$device_id"
+  run_flutter "$device_id"
   exit 0
 fi
 
@@ -111,7 +137,7 @@ if [[ -n "${1:-}" ]]; then
     xcrun simctl boot "$device_id" 2>/dev/null || true
   fi
   bring_simulator_to_front "$device_id"
-  flutter run -d "$device_id"
+  run_flutter "$device_id"
   exit 0
 fi
 
@@ -147,4 +173,4 @@ fi
 bring_simulator_to_front "$device_id"
 
 echo "Launching Flutter on $device_id …"
-flutter run -d "$device_id"
+run_flutter "$device_id"
