@@ -22,6 +22,10 @@ class ListenRepeatState {
   final bool isSpeaking;
   final double playbackSpeed;
 
+  /// Non-null when a session failed to start. Surfaced in the UI so a broken
+  /// session is not mistaken for an empty vocabulary.
+  final String? failure;
+
   ListenRepeatState({
     this.currentItem,
     this.pool = const [],
@@ -30,6 +34,7 @@ class ListenRepeatState {
     this.totalWordsSeen = 0,
     this.isSpeaking = false,
     this.playbackSpeed = 1.0,
+    this.failure,
   });
 
   ListenRepeatState copyWith({
@@ -40,6 +45,7 @@ class ListenRepeatState {
     int? totalWordsSeen,
     bool? isSpeaking,
     double? playbackSpeed,
+    String? failure,
   }) {
     return ListenRepeatState(
       currentItem: currentItem ?? this.currentItem,
@@ -49,6 +55,7 @@ class ListenRepeatState {
       totalWordsSeen: totalWordsSeen ?? this.totalWordsSeen,
       isSpeaking: isSpeaking ?? this.isSpeaking,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
+      failure: failure ?? this.failure,
     );
   }
 }
@@ -57,6 +64,8 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   final Random _random = Random();
   bool _isAutoPlayActive = false;
   int _sessionId = 0;
+  bool _isStarting = false;
+  static const int _maxEmptyLoadAttempts = 5;
   Future<void>? _generationFuture;
   final AudioPlayer _bgAudioPlayer = AudioPlayer();
   // ignore: deprecated_member_use
@@ -118,24 +127,78 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     }
   }
 
+  /// Guard so only one start attempt runs at a time. Both the Try again button
+  /// and [shufflePool] call this without awaiting, and the real work below
+  /// waits on second-scale delays, so without it two attempts can interleave
+  /// and both reach playback. A dropped attempt leaves the plain empty state,
+  /// never a spinner that will never resolve.
   Future<void> startSession() async {
+    if (_isStarting) {
+      AppLogger.log('[LR] startSession RETURNED (start already in flight)', name: 'ListenRepeat');
+      return;
+    }
+    _isStarting = true;
+    try {
+      await _startSession();
+    } catch (e, st) {
+      // Also catches anything thrown outside the playback section (a closed
+      // Hive box, say), which would otherwise surface as an unhandled async
+      // error and leave the screen sitting on a spinner.
+      AppLogger.log('[LR] startSession ERROR: $e', name: 'ListenRepeat');
+      AppLogger.log('[LR] stack: $st', name: 'ListenRepeat');
+      _reportFailure(_describeError(e));
+    } finally {
+      _isStarting = false;
+    }
+  }
+
+  Future<void> _startSession() async {
     AppLogger.log('[LR] startSession ENTER', name: 'ListenRepeat');
     if (state.isPlaying || _isAutoPlayActive) {
       AppLogger.log('[LR] startSession RETURNED (playing or active)', name: 'ListenRepeat');
       return;
     }
 
+    // Cancel token for the waits below: stopSession() bumps _sessionId, and the
+    // screen's dispose() calls stopSession(), so backing out mid-load aborts
+    // the attempt instead of starting speech on a screen that is gone.
+    final startingSessionId = _sessionId;
+
     final storage = ref.read(storageServiceProvider);
     AppLogger.log('[LR] storage: $storage', name: 'ListenRepeat');
-    final allItems = storage.getAllItems();
+    var allItems = storage.getAllItems();
     AppLogger.log('[LR] allItems count: ${allItems.length}', name: 'ListenRepeat');
 
-    if (allItems.isEmpty) {
-      AppLogger.log('[LR] No items yet, retrying in 1s...', name: 'ListenRepeat');
+    // The startup data load may still be in flight when this screen opens, so
+    // give it a few seconds - but never forever. An endless retry left the
+    // screen stuck on the "no words" message and hid the real failure.
+    var attempts = 0;
+    while (allItems.isEmpty && attempts < _maxEmptyLoadAttempts) {
+      attempts++;
+      // Stay in the loading state while waiting so the screen shows a progress
+      // indicator instead of flicking "No words loaded" once per second.
+      state = ListenRepeatState(isPlaying: true, playbackSpeed: state.playbackSpeed);
+      AppLogger.log('[LR] no items yet, retry $attempts/$_maxEmptyLoadAttempts in 1s...', name: 'ListenRepeat');
       await Future.delayed(const Duration(seconds: 1));
-      AppLogger.log('[LR] Retrying startSession...', name: 'ListenRepeat');
-      return await startSession();
+
+      if (startingSessionId != _sessionId) {
+        AppLogger.log('[LR] load wait aborted (session cancelled)', name: 'ListenRepeat');
+        state = ListenRepeatState(playbackSpeed: state.playbackSpeed);
+        return;
+      }
+      allItems = storage.getAllItems();
+      AppLogger.log('[LR] retry $attempts count: ${allItems.length}', name: 'ListenRepeat');
     }
+
+    if (allItems.isEmpty) {
+      // Nothing to play, but nothing broken either. Keep the screen's empty
+      // state ("add vocabulary") rather than the error panel: there is no
+      // action a user can take on an empty library from an error screen.
+      AppLogger.log('[LR] still no items after $attempts attempts - empty vocabulary', name: 'ListenRepeat');
+      state = ListenRepeatState(playbackSpeed: state.playbackSpeed);
+      return;
+    }
+
     AppLogger.log('[LR] Got ${allItems.length} items, proceeding...', name: 'ListenRepeat');
 
     _shuffledPool.clear();
@@ -153,8 +216,15 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     _playlistWords.clear();
     _playlist = null;
     
-    // Show loading spinner immediately
-    state = state.copyWith(isPlaying: true, currentItem: null);
+    // Show loading spinner immediately. Built from scratch instead of via
+    // copyWith so the previous session's word and failure message are cleared
+    // (copyWith ignores nulls, which left the stale word on screen).
+    state = ListenRepeatState(
+      pool: allItems,
+      shuffledPool: List.unmodifiable(_shuffledPool),
+      isPlaying: true,
+      playbackSpeed: state.playbackSpeed,
+    );
 
     try {
       AppLogger.log('[LR] generating initial sequence...', name: 'ListenRepeat');
@@ -193,11 +263,27 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     } catch (e, st) {
       AppLogger.log('[LR] ERROR: $e', name: 'ListenRepeat');
       AppLogger.log('[LR] stack: $st', name: 'ListenRepeat');
-      _isAutoPlayActive = false;
-      _playlist = null;
-      _playlistWords.clear();
-      state = ListenRepeatState();
+      _reportFailure(_describeError(e));
     }
+  }
+
+  /// tears down the half-built session and shows why on screen.
+  void _reportFailure(String reason) {
+    _isAutoPlayActive = false;
+    _playlist = null;
+    _playlistWords.clear();
+    state = ListenRepeatState(
+      playbackSpeed: state.playbackSpeed,
+      failure: 'Session could not start: $reason',
+    );
+  }
+
+  /// Compact, readable form of a failure for the UI. Deliberately keeps the
+  /// exception class and message: that detail is what makes an audio-session
+  /// failure diagnosable from a screenshot.
+  String _describeError(Object e) {
+    final text = e.toString();
+    return text.length > 180 ? '${text.substring(0, 177)}…' : text;
   }
 
   Future<void> _ensureNextWordAppended(int sessionId) async {

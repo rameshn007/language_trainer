@@ -52,6 +52,12 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
     ref.read(listenRepeatViewModelProvider.notifier).shufflePool();
   }
 
+  void _retrySession() {
+    // startSession() is a no-op while a session is already running, so this is
+    // only reachable from the failure state.
+    ref.read(listenRepeatViewModelProvider.notifier).startSession();
+  }
+
   void _stopSession() async {
     final xp = await ref.read(listenRepeatViewModelProvider.notifier).stopSession();
     if (mounted) {
@@ -244,6 +250,44 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
               const CircularProgressIndicator(),
               const SizedBox(height: 16),
               const Text('Loading words...'),
+            ] else if (state.failure != null) ...[
+              Icon(
+                Icons.error_outline_rounded,
+                size: 72,
+                color: Theme.of(context).colorScheme.error,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Listen & Repeat is not working',
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.error,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 28),
+                child: Text(
+                  state.failure!,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton.icon(
+                onPressed: _retrySession,
+                icon: const Icon(Icons.refresh_rounded),
+                label: const Text('Try again'),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Or go back and reopen the screen.',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                ),
+              ),
             ] else ...[
               Icon(
                 Icons.headset_rounded,
