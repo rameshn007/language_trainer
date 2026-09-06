@@ -207,5 +207,59 @@ void main() {
       final baterPresEle = items.firstWhere((i) => i.id == 'conj_pres_bater_ele');
       expect(baterPresEle.english, equals('He hits'));
     });
+
+    test('loads prepositions, contractions, and locatives in ListenRepeatMode.prepositions', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'ola', english: 'hello'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => []);
+
+      final items = await contentService.loadContent(mode: ListenRepeatMode.prepositions);
+
+      expect(items, isNotEmpty);
+      expect(items.length, greaterThanOrEqualTo(100));
+
+      // Preposition sentence from prepositions.json
+      final prepSentence = items.firstWhere((i) => i.id.startsWith('prep_00'));
+      expect(prepSentence.notes, contains('Preposição'));
+
+      // Article contraction
+      final naContraction = items.firstWhere((i) => i.portuguese == 'na');
+      expect(naContraction.english, contains('in the / on the / at the'));
+      expect(naContraction.notes, contains('em + a = na'));
+
+      // Spatial locative
+      final pertoDe = items.firstWhere((i) => i.portuguese == 'perto de');
+      expect(pertoDe.english, contains('near'));
+      expect(pertoDe.notes, contains('Espacial'));
+
+      // Prepositional pronoun
+      final connosco = items.firstWhere((i) => i.portuguese == 'connosco');
+      expect(connosco.english, equals('with us'));
+      expect(connosco.notes, contains('Pronome Preposicional'));
+    });
+
+    test('interleaves prepositions in ListenRepeatMode.all', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'sol', english: 'sun'),
+        LanguageItem(id: 'v2', portuguese: 'lua', english: 'moon'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => [
+        Verb(
+          infinitive: 'abrir',
+          translation: 'to open',
+          conjugations: {'eu': 'abro'},
+        ),
+      ]);
+
+      final pool = await contentService.loadContent(mode: ListenRepeatMode.all);
+      expect(pool, isNotEmpty);
+      // Contains preposition items
+      expect(pool.any((i) => i.id.startsWith('prep_')), isTrue);
+      // Contains verb conjugation
+      expect(pool.any((i) => i.id.startsWith('conj_')), isTrue);
+      // Contains core vocab
+      expect(pool.any((i) => i.id == 'v1' || i.id == 'v2'), isTrue);
+    });
   });
 }

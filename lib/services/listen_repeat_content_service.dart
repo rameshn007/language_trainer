@@ -10,6 +10,7 @@ import 'verb_service.dart';
 enum ListenRepeatMode {
   all,
   verbs,
+  prepositions,
   phrases,
   vocabulary,
 }
@@ -21,6 +22,8 @@ extension ListenRepeatModeExtension on ListenRepeatMode {
         return 'Balanced Mix';
       case ListenRepeatMode.verbs:
         return 'Verbs & Tenses';
+      case ListenRepeatMode.prepositions:
+        return 'Prepositions';
       case ListenRepeatMode.phrases:
         return 'Phrases & Sentences';
       case ListenRepeatMode.vocabulary:
@@ -34,6 +37,8 @@ extension ListenRepeatModeExtension on ListenRepeatMode {
         return 'Mix';
       case ListenRepeatMode.verbs:
         return 'Verbs';
+      case ListenRepeatMode.prepositions:
+        return 'Preposições';
       case ListenRepeatMode.phrases:
         return 'Phrases';
       case ListenRepeatMode.vocabulary:
@@ -56,6 +61,7 @@ class ListenRepeatContentService {
   List<LanguageItem>? _cachedVerbPhrases;
   List<LanguageItem>? _cachedExampleSentences;
   List<LanguageItem>? _cachedConjugations;
+  List<LanguageItem>? _cachedPrepositions;
 
   ListenRepeatContentService(this._storageService, this._verbService);
 
@@ -72,10 +78,12 @@ class ListenRepeatContentService {
     final verbPhrases = _cachedVerbPhrases ?? [];
     final exampleSentences = _cachedExampleSentences ?? [];
     final conjugations = _cachedConjugations ?? [];
+    final prepositions = _cachedPrepositions ?? [];
 
     AppLogger.log(
       'Loaded auxiliary pools: ${phrases.length} phrases, ${verbPhrases.length} verb phrases, '
-      '${exampleSentences.length} examples, ${conjugations.length} conjugations, ${vocabItems.length} vocab',
+      '${exampleSentences.length} examples, ${conjugations.length} conjugations, '
+      '${prepositions.length} prepositions, ${vocabItems.length} vocab',
       name: 'ListenRepeatContent',
     );
 
@@ -86,6 +94,12 @@ class ListenRepeatContentService {
         list.addAll(verbPhrases);
         // Include verb infinitives from vocab
         list.addAll(vocabItems.where((i) => i.id.startsWith('verb_') || i.wordType == 'verb'));
+        list.shuffle();
+        return list;
+
+      case ListenRepeatMode.prepositions:
+        final list = <LanguageItem>[];
+        list.addAll(prepositions);
         list.shuffle();
         return list;
 
@@ -109,6 +123,7 @@ class ListenRepeatContentService {
           verbPhrases: verbPhrases,
           exampleSentences: exampleSentences,
           conjugations: conjugations,
+          prepositions: prepositions,
         );
     }
   }
@@ -121,20 +136,23 @@ class ListenRepeatContentService {
     required List<LanguageItem> verbPhrases,
     required List<LanguageItem> exampleSentences,
     required List<LanguageItem> conjugations,
+    required List<LanguageItem> prepositions,
   }) {
     final allPhrases = [...phrases, ...verbPhrases, ...exampleSentences]..shuffle();
     final allConjugations = [...conjugations]..shuffle();
+    final allPrepositions = [...prepositions]..shuffle();
     final pureVocab = vocabItems.where((i) => !i.id.startsWith('verb_')).toList()..shuffle();
 
     final result = <LanguageItem>[];
     int vocabIndex = 0;
     int phraseIndex = 0;
     int conjIndex = 0;
+    int prepIndex = 0;
 
-    final totalTarget = pureVocab.length + allPhrases.length + allConjugations.length;
+    final totalTarget = pureVocab.length + allPhrases.length + allConjugations.length + allPrepositions.length;
     if (totalTarget == 0) return [];
 
-    // Interleave pattern: 2 Vocab -> 1 Conjugation (Pres/Past/Fut) -> 1 Phrase/Sentence
+    // Interleave pattern: 2 Vocab -> 1 Conjugation (Pres/Past/Fut) -> 1 Preposition -> 1 Phrase/Sentence
     while (result.length < totalTarget) {
       bool addedAny = false;
 
@@ -152,7 +170,13 @@ class ListenRepeatContentService {
         addedAny = true;
       }
 
-      // 3. Add 1 conversational phrase or contextual sentence
+      // 3. Add 1 preposition item (sentence, contraction, locative, or pronoun)
+      if (prepIndex < allPrepositions.length) {
+        result.add(allPrepositions[prepIndex++]);
+        addedAny = true;
+      }
+
+      // 4. Add 1 conversational phrase or contextual sentence
       if (phraseIndex < allPhrases.length) {
         result.add(allPhrases[phraseIndex++]);
         addedAny = true;
@@ -169,6 +193,7 @@ class ListenRepeatContentService {
     _cachedVerbPhrases ??= await _loadVerbPhrases();
     _cachedExampleSentences ??= await _loadExampleSentences();
     _cachedConjugations ??= await _generateConjugationItems();
+    _cachedPrepositions ??= await _loadPrepositions();
   }
 
   /// Loads general conversational phrases from assets/data/phrases.json
@@ -258,6 +283,161 @@ class ListenRepeatContentService {
     } catch (e) {
       AppLogger.error('Error loading example sentences from vocabulary.json', name: 'ListenRepeatContent', error: e);
     }
+    return list;
+  }
+
+  /// Loads curated preposition sentences, essential article/demonstrative contractions,
+  /// spatial/temporal locatives, and prepositional pronouns.
+  Future<List<LanguageItem>> _loadPrepositions() async {
+    final list = <LanguageItem>[];
+    try {
+      final jsonStr = await rootBundle.loadString('assets/data/prepositions.json');
+      final List<dynamic> data = jsonDecode(jsonStr);
+      for (final item in data) {
+        final id = (item['id'] ?? 'prep_${list.length}').toString();
+        final pt = (item['portuguese'] ?? '').toString().trim();
+        final en = (item['english'] ?? '').toString().trim();
+        final cat = (item['category'] ?? 'preposition').toString();
+        final usage = (item['usage'] ?? '').toString();
+
+        String badge = 'Preposição';
+        if (cat == 'preposition_transport') {
+          badge = 'Preposição • Transporte';
+        } else if (usage.contains('hours')) {
+          badge = 'Preposição • Horas';
+        } else if (usage.contains('routines')) {
+          badge = 'Preposição • Rotinas (à)';
+        } else if (usage.contains('specific actions')) {
+          badge = 'Preposição • Data Específica (no/na)';
+        } else if (usage.contains('parts of day')) {
+          badge = 'Preposição • Parte do Dia';
+        } else if (usage.contains('seasons')) {
+          badge = 'Preposição • Estações';
+        } else if (cat.contains('para')) {
+          badge = 'Preposição • Para';
+        } else if (cat.contains('de')) {
+          badge = 'Preposição • De';
+        } else if (cat.contains('em')) {
+          badge = 'Preposição • Em';
+        } else if (cat.contains('a')) {
+          badge = 'Preposição • A';
+        }
+
+        if (pt.isNotEmpty && en.isNotEmpty) {
+          list.add(LanguageItem(
+            id: id,
+            portuguese: pt,
+            english: en,
+            wordType: 'preposition_sentence',
+            topicCategory: 'Preposições',
+            notes: badge,
+          ));
+        }
+      }
+    } catch (e) {
+      AppLogger.error('Error loading prepositions.json', name: 'ListenRepeatContent', error: e);
+    }
+
+    // --- 1. Essential Article & Demonstrative Contractions ---
+    final contractions = [
+      ('do', 'of the / from the (masc.)', 'Contração • de + o = do'),
+      ('da', 'of the / from the (fem.)', 'Contração • de + a = da'),
+      ('dos', 'of the / from the (masc. pl.)', 'Contração • de + os = dos'),
+      ('das', 'of the / from the (fem. pl.)', 'Contração • de + as = das'),
+      ('no', 'in the / on the / at the (masc.)', 'Contração • em + o = no'),
+      ('na', 'in the / on the / at the (fem.)', 'Contração • em + a = na'),
+      ('nos', 'in the / on the / at the (masc. pl.)', 'Contração • em + os = nos'),
+      ('nas', 'in the / on the / at the (fem. pl.)', 'Contração • em + as = nas'),
+      ('ao', 'to the / at the (masc.)', 'Contração • a + o = ao'),
+      ('à', 'to the / at the (fem.)', 'Contração • a + a = à'),
+      ('aos', 'to the / at the (masc. pl.)', 'Contração • a + os = aos'),
+      ('às', 'to the / at the (fem. pl.)', 'Contração • a + as = às'),
+      ('pelo', 'by the / through the (masc.)', 'Contração • por + o = pelo'),
+      ('pela', 'by the / through the (fem.)', 'Contração • por + a = pela'),
+      ('pelos', 'by the / through the (masc. pl.)', 'Contração • por + os = pelos'),
+      ('pelas', 'by the / through the (fem. pl.)', 'Contração • por + as = pelas'),
+      ('neste', 'in this (masc.)', 'Contração • em + este = neste'),
+      ('nesta', 'in this (fem.)', 'Contração • em + esta = nesta'),
+      ('nesse', 'in that (masc.)', 'Contração • em + esse = nesse'),
+      ('nessa', 'in that (fem.)', 'Contração • em + essa = nessa'),
+      ('naquele', 'in that over there (masc.)', 'Contração • em + aquele = naquele'),
+      ('naquela', 'in that over there (fem.)', 'Contração • em + aquela = naquela'),
+      ('deste', 'of this / from this (masc.)', 'Contração • de + este = deste'),
+      ('desta', 'of this / from this (fem.)', 'Contração • de + esta = desta'),
+      ('desse', 'of that / from that (masc.)', 'Contração • de + esse = desse'),
+      ('dessa', 'of that / from that (fem.)', 'Contração • de + essa = dessa'),
+      ('daquele', 'of that over there (masc.)', 'Contração • de + aquele = daquele'),
+      ('daquela', 'of that over there (fem.)', 'Contração • de + aquela = daquela'),
+    ];
+
+    for (int i = 0; i < contractions.length; i++) {
+      final c = contractions[i];
+      list.add(LanguageItem(
+        id: 'prep_contraction_$i',
+        portuguese: c.$1,
+        english: c.$2,
+        wordType: 'preposition_contraction',
+        topicCategory: 'Contrações',
+        notes: c.$3,
+      ));
+    }
+
+    // --- 2. Spatial Prepositions & Locatives ---
+    final locatives = [
+      ('perto de', 'near / close to', 'Preposição Espacial • proximidade'),
+      ('longe de', 'far from', 'Preposição Espacial • distância'),
+      ('ao lado de', 'next to / beside', 'Preposição Espacial • adjacente'),
+      ('em cima de', 'on top of / above', 'Preposição Espacial • superior'),
+      ('debaixo de', 'under / underneath', 'Preposição Espacial • inferior'),
+      ('à frente de', 'in front of', 'Preposição Espacial • anterior'),
+      ('atrás de', 'behind', 'Preposição Espacial • posterior'),
+      ('dentro de', 'inside / in', 'Preposição Espacial • interior'),
+      ('fora de', 'outside', 'Preposição Espacial • exterior'),
+      ('entre', 'between / among', 'Preposição Espacial • intermédio'),
+      ('antes de', 'before', 'Preposição Temporal • anterior'),
+      ('depois de', 'after', 'Preposição Temporal • posterior'),
+    ];
+
+    for (int i = 0; i < locatives.length; i++) {
+      final loc = locatives[i];
+      list.add(LanguageItem(
+        id: 'prep_locative_$i',
+        portuguese: loc.$1,
+        english: loc.$2,
+        wordType: 'preposition_spatial',
+        topicCategory: 'Locativas',
+        notes: loc.$3,
+      ));
+    }
+
+    // --- 3. Prepositional Pronouns ---
+    final prepPronouns = [
+      ('comigo', 'with me', 'Pronome Preposicional • eu'),
+      ('contigo', 'with you (informal)', 'Pronome Preposicional • tu'),
+      ('consigo', 'with you (formal) / with himself', 'Pronome Preposicional • você'),
+      ('connosco', 'with us', 'Pronome Preposicional • nós'),
+      ('dele', 'of him / his', 'Pronome Preposicional • de + ele'),
+      ('dela', 'of her / hers', 'Pronome Preposicional • de + ela'),
+      ('deles', 'of them (masc.) / their', 'Pronome Preposicional • de + eles'),
+      ('delas', 'of them (fem.) / their', 'Pronome Preposicional • de + elas'),
+      ('nele', 'in him / in it (masc.)', 'Pronome Preposicional • em + ele'),
+      ('nela', 'in her / in it (fem.)', 'Pronome Preposicional • em + ela'),
+      ('neles', 'in them (masc.)', 'Pronome Preposicional • em + eles'),
+      ('nelas', 'in them (fem.)', 'Pronome Preposicional • em + elas'),
+    ];
+
+    for (int i = 0; i < prepPronouns.length; i++) {
+      final p = prepPronouns[i];
+      list.add(LanguageItem(
+        id: 'prep_pronoun_$i',
+        portuguese: p.$1,
+        english: p.$2,
+        wordType: 'preposition_pronoun',
+        topicCategory: 'Pronomes Preposicionais',
+        notes: p.$3,
+      ));
+    }
+
     return list;
   }
 
