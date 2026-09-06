@@ -33,10 +33,7 @@ lib/
     markdown_parser.dart             # Parses markdown source data into LanguageItems
     translation_service.dart
     notification_service.dart        # Local notifications (flutter_local_notifications)
-    carplay_service.dart             # CarPlay orchestrator
-    carplay/
-      carplay_drill_provider.dart    # Abstract drill interface + DrillChallenge model
-      vocabulary_flashcard_drill_provider.dart  # Vocabulary flashcard drill (only implementation)
+    carplay_service.dart             # CarPlay orchestrator (Listen & Repeat player UI)
   ui/
     home_screen.dart                 # Main dashboard — expandable sections, FABs, animated stats card
     settings_screen.dart
@@ -170,54 +167,70 @@ The user repeats silently. This is purely a passive listening/repetition feature
 
 ## CarPlay Integration
 
-**Entry:** `CarPlayService().init(storageService, ttsService)` called in `main.dart` at app startup.
+**Entry:** `CarPlayService().init(container: container)` called in `main.dart` at app startup.
 
 ### Architecture
 
-Uses `flutter_carplay` (v1.6.3) with a **drill provider pattern** (strategy pattern):
-
-1. **`CarPlayDrillProvider`** (abstract interface):
-   - `displayName` / `description` — for list items
-   - `startSession()` → returns first `DrillChallenge`
-   - `nextChallenge()` → returns next challenge
-   - `processAnswer(String answer)` → validates spoken answer
-   - `completionSummary`, `isFinished`
-
-2. **`DrillChallenge`** — data model:
-   - `promptText`, `detailText`, `options`, `isVoiceOnly`
-
-3. **`VocabularyFlashcardDrillProvider`** — only concrete implementation:
-   - Takes 5 random vocabulary items
-   - Shows Portuguese word, user speaks answer
-   - Validates via substring matching against Portuguese target
-   - TTS feedback: "Correct" or "Incorrect. It was [word]"
+Uses `flutter_carplay` (v1.6.3). There is no mic/voice interaction in CarPlay
+anymore — the CarPlay surface is a **player for the shared Listen & Repeat
+session** (`listenRepeatViewModelProvider`). The same `AudioPlayer` playlist
+used by the phone UI plays through the car speakers; CarPlay templates only
+display state and route control taps back into the view model.
 
 ### Session Flow (`carplay_service.dart`)
 
-1. **Connection detection**: `FlutterCarplay.addListenerOnConnectionChange` → calls `_setupRootTemplate()` when connected
-2. **Root template**: `CPListTemplate` titled "Language Trainer" with house icon, shows "Available Drills" section
-3. **Drill session loop**:
-   - Pushes `CPListTemplate` with current challenge prompt
-   - If voice-only, speaks prompt via TTS
-   - Calls `VoiceQuizService.listenForAnswer(10s)` — uses `speech_to_text` with `pt-PT` locale
-   - Passes recognized answer to drill provider for validation
-   - Repeats until `isFinished`
-4. **Completion**: Shows summary, speaks it, pops back after 5 seconds
+1. **Trigger sources**: the plugin's `connected` event is ambiguous (a plain
+   cable connect emits the same event as an app-icon tap), so session start
+   is gated on a precise "driver is looking at our UI" signal:
+   - Custom `language_trainer/carplay_scene` MethodChannel (native observer
+     in `AppDelegate.swift`) pushes `sceneWillEnterForeground` whenever a
+     `CPTemplateApplicationScene` is about to become the visible screen —
+     the primary trigger (icon tap / template restore).
+   - Plugin `connected` events instead pull `sceneStatus` from that channel
+     and only start when the CarPlay scene is currently foregrounded.
+   - Two delayed pulls (~300/1500 ms after startup) cover cold starts where
+     scene activation races the Dart handler being installed.
+2. **On activation**: if no session is running, a Listen & Repeat session
+   starts immediately (no "Start Session" menu step) and a **player
+   `CPListTemplate`** is set as root: current word row (now-playing
+   indicator, tap = replay) + controls Pause/Resume, Replay word, Previous
+   word, Next word, Shuffle words, Speed, Stop session. If a session is
+   already running, the player is re-shown without restarting it. Triggers
+   within a 2s window are deduped.
+3. **Live updates**: `ProviderContainer.listen(listenRepeatViewModelProvider)`
+   mirrors state onto the visible template — word rows update via
+   `CPListItem.setText/setDetailText/setIsPlaying` as the playlist advances.
+4. **Background**: when another CarPlay app takes the screen, playback keeps
+   running (media-app behavior). Only `disconnected` stops the session (which
+   records XP through `ProgressService`).
+5. **Stop**: "Stop session" ends playback and returns to a minimal menu
+   (`Start Listen & Repeat` item) as root template.
 
 ### iOS Native Setup
 - `Info.plist` declares `CPTemplateApplicationSceneSessionRoleApplication` scene
 - Uses `flutter_carplay.FlutterCarPlaySceneDelegate` (implements `CPTemplateApplicationSceneDelegate`)
 - Shared `FlutterEngine` between regular app and CarPlay scene
+- `CarPlaySceneObserver` (in `AppDelegate.swift`) observes
+  `UISceneWillEnterForegroundNotification` for `CPTemplateApplicationScene`
+  and exposes the `language_trainer/carplay_scene` MethodChannel (pushes
+  `sceneWillEnterForeground`, answers `sceneStatus` pulls)
 - Audio permissions: `NSMicrophoneUsageDescription`, `NSSpeechRecognitionUsageDescription`
 - `UIBackgroundModes` includes `audio`
 
 ### Key files
-- `lib/services/carplay_service.dart` — CarPlay orchestrator (connection, navigation, session loop)
-- `lib/services/carplay/carplay_drill_provider.dart` — abstract interface + `DrillChallenge`
-- `lib/services/carplay/vocabulary_flashcard_drill_provider.dart` — vocabulary flashcard drill
+- `lib/services/carplay_service.dart` — CarPlay orchestrator (scene events, player template, control routing)
+- `lib/ui/listen_repeat/listen_repeat_view_model.dart` — shared session state also driven by CarPlay controls
 
 ### Current state
-Only **one drill** implemented. Architecture supports adding more by implementing `CarPlayDrillProvider`.
+CarPlay is Listen & Repeat only. Playback controls (pause, word-level
+next/previous, shuffle, speed) are custom `CPListItem`s; the system shared
+Now Playing template (`FlutterCarplay.showSharedNowPlaying()`) is available
+but not auto-shown — its next/previous buttons skip single playlist sources
+(5 per word), so word-level control is done through the custom player.
+
+**Shuffle note:** `ListenRepeatViewModel.shufflePool()` tears down the active
+session before restarting (a plain `startSession()` while playing hits the
+"already playing" guard and the reshuffled deck would be ignored).
 
 ---
 
@@ -295,4 +308,6 @@ Mastery and review history are preserved across reloads.
 - **Shared FlutterEngine** between mobile app and CarPlay scene on iOS
 - **Silence audio asset** (`assets/audio/silence.mp3`) is critical for iOS audio session behavior in Listen & Repeat
 - **Voice selection** has extensive scoring logic — don't remove novelty voice penalties without testing
-- **CarPlay** uses `FlutterCarplay.pop()` / `push()` to navigate — templates are replaced to avoid stack growth during sessions
+- **CarPlay** session triggers must distinguish "scene visible" from "cable
+  connected" — use the `language_trainer/carplay_scene` channel, not the
+  plugin's `connected` event alone (they look identical)
