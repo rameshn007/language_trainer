@@ -24,7 +24,6 @@ class ListenRepeatState {
   final bool isSpeaking;
   final double playbackSpeed;
   final ListenRepeatMode mode;
-  final bool extendedPause;
 
   /// Non-null when a session failed to start. Surfaced in the UI so a broken
   /// session is not mistaken for an empty vocabulary.
@@ -39,7 +38,6 @@ class ListenRepeatState {
     this.isSpeaking = false,
     this.playbackSpeed = 1.0,
     this.mode = ListenRepeatMode.all,
-    this.extendedPause = false,
     this.failure,
   });
 
@@ -52,7 +50,6 @@ class ListenRepeatState {
     bool? isSpeaking,
     double? playbackSpeed,
     ListenRepeatMode? mode,
-    bool? extendedPause,
     String? failure,
   }) {
     return ListenRepeatState(
@@ -64,7 +61,6 @@ class ListenRepeatState {
       isSpeaking: isSpeaking ?? this.isSpeaking,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
       mode: mode ?? this.mode,
-      extendedPause: extendedPause ?? this.extendedPause,
       failure: failure ?? this.failure,
     );
   }
@@ -84,8 +80,9 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   final List<LanguageItem> _playlistWords = [];
   final List<LanguageItem> _shuffledPool = [];
   StreamSubscription? _currentIndexSubscription;
-  int _poolSkipOffset = 0;
+  final Set<String> _failedItemIds = {};
   int _consecutiveFailures = 0;
+  int _sessionConsecutiveFailures = 0;
 
   bool _isValidAudioFile(File file) {
     return file.existsSync() && file.lengthSync() > 512;
@@ -144,14 +141,18 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     }
   }
 
-  /// Guard so only one start attempt runs at a time. Both the Try again button
-  /// and [shufflePool] call this without awaiting, and the real work below
-  /// waits on second-scale delays, so without it two attempts can interleave
-  /// and both reach playback. A dropped attempt leaves the plain empty state,
-  /// never a spinner that will never resolve.
+  /// Guard so only one start attempt runs at a time.
+  /// If a start is already in flight (e.g. during a rapid mode-switch),
+  /// wait briefly for the previous attempt to abort or complete instead of
+  /// silently dropping the call and leaving the UI stuck on "No words loaded".
   Future<void> startSession() async {
+    int waitCount = 0;
+    while (_isStarting && waitCount < 40) {
+      await Future.delayed(const Duration(milliseconds: 50));
+      waitCount++;
+    }
     if (_isStarting) {
-      AppLogger.log('[LR] startSession RETURNED (start already in flight)', name: 'ListenRepeat');
+      AppLogger.log('[LR] startSession TIMED OUT waiting for previous start', name: 'ListenRepeat');
       return;
     }
     _isStarting = true;
@@ -196,7 +197,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         isPlaying: true,
         playbackSpeed: state.playbackSpeed,
         mode: state.mode,
-        extendedPause: state.extendedPause,
       );
       AppLogger.log('[LR] no items yet, retry $attempts/$_maxEmptyLoadAttempts in 1s...', name: 'ListenRepeat');
       await Future.delayed(const Duration(seconds: 1));
@@ -206,7 +206,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         state = ListenRepeatState(
           playbackSpeed: state.playbackSpeed,
           mode: state.mode,
-          extendedPause: state.extendedPause,
         );
         return;
       }
@@ -222,15 +221,15 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       state = ListenRepeatState(
         playbackSpeed: state.playbackSpeed,
         mode: state.mode,
-        extendedPause: state.extendedPause,
       );
       return;
     }
 
     AppLogger.log('[LR] Got ${allItems.length} items, proceeding...', name: 'ListenRepeat');
 
-    _poolSkipOffset = 0;
+    _failedItemIds.clear();
     _consecutiveFailures = 0;
+    _sessionConsecutiveFailures = 0;
     _shuffledPool.clear();
     _shuffledPool.addAll(allItems);
     _shuffledPool.shuffle(_random);
@@ -255,7 +254,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       isPlaying: true,
       playbackSpeed: state.playbackSpeed,
       mode: state.mode,
-      extendedPause: state.extendedPause,
     );
 
     try {
@@ -284,7 +282,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         totalWordsSeen: 1,
         playbackSpeed: state.playbackSpeed,
         mode: state.mode,
-        extendedPause: state.extendedPause,
       );
       _bgAudioPlayer.setSpeed(state.playbackSpeed);
       AppLogger.log('[LR] state updated, session started!', name: 'ListenRepeat');
@@ -309,7 +306,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     state = ListenRepeatState(
       playbackSpeed: state.playbackSpeed,
       mode: state.mode,
-      extendedPause: state.extendedPause,
       failure: 'Session could not start: $reason',
     );
   }
@@ -372,10 +368,16 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       return null;
     }
 
+    final candidates = _shuffledPool.where((item) => !_failedItemIds.contains(item.id)).toList();
+    if (candidates.isEmpty) {
+      AppLogger.log('[LR-gen] ABORT: all pool items failed', name: 'ListenRepeat');
+      _reportFailure('All available words failed speech synthesis.');
+      return null;
+    }
+
     final wordIndexToGenerate = _playlistWords.length;
-    final poolIndex = (wordIndexToGenerate + _poolSkipOffset) % _shuffledPool.length;
-    final item = _shuffledPool[poolIndex];
-    AppLogger.log('[LR-gen] item: ${item.portuguese} (id=${item.id}, offset=$_poolSkipOffset)', name: 'ListenRepeat');
+    final item = candidates[wordIndexToGenerate % candidates.length];
+    AppLogger.log('[LR-gen] item: ${item.portuguese} (id=${item.id}, failed=${_failedItemIds.length})', name: 'ListenRepeat');
 
     _playlistWords.add(item);
 
@@ -387,8 +389,8 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
 
       final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
       final ext = Platform.isAndroid ? 'wav' : 'caf';
-      final ptFilePath = '${dir.path}/pt_$safeId.$ext';
-      final enFilePath = '${dir.path}/en_$safeId.$ext';
+      final ptFilePath = '${dir.path}/pt_v2_$safeId.$ext';
+      final enFilePath = '${dir.path}/en_v2_$safeId.$ext';
       AppLogger.log('[LR-gen] pt: $ptFilePath', name: 'ListenRepeat');
       AppLogger.log('[LR-gen] en: $enFilePath', name: 'ListenRepeat');
 
@@ -460,6 +462,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       if (sessionId != _sessionId) throw Exception("Session aborted");
 
       _consecutiveFailures = 0;
+      _sessionConsecutiveFailures = 0;
       AppLogger.log('[LR-gen] SUCCESS: returning ${sequence.length} audio sources', name: 'ListenRepeat');
       return sequence;
 
@@ -472,12 +475,20 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
           _playlistWords.removeLast(); // Revert the addition if it was the last one added
         }
 
-        // Poison-pill protection: If an item fails twice, skip it and advance offset
+        // Poison-pill protection: If an item fails twice, skip it and track its ID
         _consecutiveFailures++;
+        _sessionConsecutiveFailures++;
         if (_consecutiveFailures >= 2) {
-          _poolSkipOffset++;
+          _failedItemIds.add(item.id);
           _consecutiveFailures = 0;
-          AppLogger.log('[LR-gen] Skipped failing item ${item.id}, advanced pool offset to $_poolSkipOffset', name: 'ListenRepeat');
+          AppLogger.log('[LR-gen] Skipped failing item ${item.id} (${_failedItemIds.length} failed total)', name: 'ListenRepeat');
+        }
+
+        // Wholesale TTS failure check: if 6 consecutive attempts fail overall across items
+        if (_sessionConsecutiveFailures >= 6) {
+          AppLogger.log('[LR-gen] Wholesale synthesis failure: $_sessionConsecutiveFailures consecutive failures', name: 'ListenRepeat');
+          _reportFailure('Audio synthesis repeatedly failed ($e)');
+          return null;
         }
       }
       return null;
@@ -595,7 +606,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     state = ListenRepeatState(
       playbackSpeed: state.playbackSpeed,
       mode: state.mode,
-      extendedPause: state.extendedPause,
     );
     return earnedXP;
   }
@@ -623,10 +633,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     state = state.copyWith(mode: newMode);
     await stopSession();
     await startSession();
-  }
-
-  void toggleExtendedPause() {
-    state = state.copyWith(extendedPause: !state.extendedPause);
   }
 
   void shufflePool() {

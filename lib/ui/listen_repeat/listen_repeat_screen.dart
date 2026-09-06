@@ -112,16 +112,19 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: ListenRepeatMode.values.map((mode) {
                       final isSelected = state.mode == mode;
+                      final isStarting = state.isPlaying && state.currentItem == null;
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 4),
                         child: ChoiceChip(
                           selected: isSelected,
                           label: Text(mode.label),
-                          onSelected: (selected) {
-                            if (selected) {
-                              ref.read(listenRepeatViewModelProvider.notifier).setMode(mode);
-                            }
-                          },
+                          onSelected: isStarting
+                              ? null
+                              : (selected) {
+                                  if (selected) {
+                                    ref.read(listenRepeatViewModelProvider.notifier).setMode(mode);
+                                  }
+                                },
                         ),
                       );
                     }).toList(),

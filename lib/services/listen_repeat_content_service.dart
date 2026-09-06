@@ -331,7 +331,9 @@ class ListenRepeatContentService {
         }
 
         // --- 2. Past Tense (Pretérito Perfeito) ---
-        final past = verb.pastConjugations ?? _deriveRegularPast(inf);
+        final past = verb.pastConjugations ??
+            _irregularPastConjugations[inf.toLowerCase()] ??
+            _deriveRegularPast(inf);
         if (past != null && past.isNotEmpty) {
           if (past['eu']?.isNotEmpty == true) {
             list.add(LanguageItem(
@@ -377,7 +379,7 @@ class ListenRepeatContentService {
 
         // --- 3. Future Tense (Periphrastic: ir + infinitivo) ---
         // Most common future tense in spoken European Portuguese
-        final cleanTrans = trans.replaceFirst(RegExp(r'^to\s+', caseSensitive: false), '');
+        final cleanTrans = _cleanEnglishVerb(trans);
         list.add(LanguageItem(
           id: 'conj_fut_${inf}_eu',
           portuguese: 'Eu vou $inf',
@@ -410,12 +412,144 @@ class ListenRepeatContentService {
     return list;
   }
 
+  /// Authentic European Portuguese Pretérito Perfeito for irregular verbs.
+  static const Map<String, Map<String, String>> _irregularPastConjugations = {
+    'dar': {
+      'eu': 'dei',
+      'tu': 'deste',
+      'você, ela, ele': 'deu',
+      'nós': 'demos',
+      'vocês, elas, eles': 'deram',
+    },
+    'dizer': {
+      'eu': 'disse',
+      'tu': 'disseste',
+      'você, ela, ele': 'disse',
+      'nós': 'dissemos',
+      'vocês, elas, eles': 'disseram',
+    },
+    'estar': {
+      'eu': 'estive',
+      'tu': 'estiveste',
+      'você, ela, ele': 'esteve',
+      'nós': 'estivemos',
+      'vocês, elas, eles': 'estiveram',
+    },
+    'fazer': {
+      'eu': 'fiz',
+      'tu': 'fizeste',
+      'você, ela, ele': 'fez',
+      'nós': 'fizemos',
+      'vocês, elas, eles': 'fizeram',
+    },
+    'haver': {
+      'eu': 'houve',
+      'tu': 'houveste',
+      'você, ela, ele': 'houve',
+      'nós': 'houvemos',
+      'vocês, elas, eles': 'houveram',
+    },
+    'ir': {
+      'eu': 'fui',
+      'tu': 'foste',
+      'você, ela, ele': 'foi',
+      'nós': 'fomos',
+      'vocês, elas, eles': 'foram',
+    },
+    'poder': {
+      'eu': 'pude',
+      'tu': 'pudeste',
+      'você, ela, ele': 'pôde',
+      'nós': 'pudemos',
+      'vocês, elas, eles': 'puderam',
+    },
+    'pôr': {
+      'eu': 'pus',
+      'tu': 'puseste',
+      'você, ela, ele': 'pôs',
+      'nós': 'pusemos',
+      'vocês, elas, eles': 'puseram',
+    },
+    'querer': {
+      'eu': 'quis',
+      'tu': 'quiseste',
+      'você, ela, ele': 'quis',
+      'nós': 'quisemos',
+      'vocês, elas, eles': 'quiseram',
+    },
+    'saber': {
+      'eu': 'soube',
+      'tu': 'soubeste',
+      'você, ela, ele': 'soube',
+      'nós': 'soubemos',
+      'vocês, elas, eles': 'souberam',
+    },
+    'ser': {
+      'eu': 'fui',
+      'tu': 'foste',
+      'você, ela, ele': 'foi',
+      'nós': 'fomos',
+      'vocês, elas, eles': 'foram',
+    },
+    'ter': {
+      'eu': 'tive',
+      'tu': 'tiveste',
+      'você, ela, ele': 'teve',
+      'nós': 'tivemos',
+      'vocês, elas, eles': 'tiveram',
+    },
+    'trazer': {
+      'eu': 'trouxe',
+      'tu': 'trouxeste',
+      'você, ela, ele': 'trouxe',
+      'nós': 'trouxemos',
+      'vocês, elas, eles': 'trouxeram',
+    },
+    'ver': {
+      'eu': 'vi',
+      'tu': 'viste',
+      'você, ela, ele': 'viu',
+      'nós': 'vimos',
+      'vocês, elas, eles': 'viram',
+    },
+    'vir': {
+      'eu': 'vim',
+      'tu': 'vieste',
+      'você, ela, ele': 'veio',
+      'nós': 'viemos',
+      'vocês, elas, eles': 'vieram',
+    },
+    'cair': {
+      'eu': 'caí',
+      'tu': 'caíste',
+      'você, ela, ele': 'caiu',
+      'nós': 'caímos',
+      'vocês, elas, eles': 'caíram',
+    },
+    'sair': {
+      'eu': 'saí',
+      'tu': 'saíste',
+      'você, ela, ele': 'saiu',
+      'nós': 'saímos',
+      'vocês, elas, eles': 'saíram',
+    },
+  };
+
+  /// Known irregular verbs that MUST NOT receive regular past endings.
+  static const Set<String> _knownIrregularVerbs = {
+    'dar', 'dizer', 'estar', 'fazer', 'haver', 'ir', 'poder', 'pôr',
+    'querer', 'saber', 'ser', 'ter', 'trazer', 'ver', 'vir', 'cair', 'sair',
+  };
+
   /// Derives regular European Portuguese Pretérito Perfeito conjugations
   /// for regular -ar, -er, and -ir verbs when explicit past is not in DB.
+  /// Irregular verbs are blocked to prevent fabricating incorrect forms.
   Map<String, String>? _deriveRegularPast(String infinitive) {
-    if (infinitive.length < 3) return null;
-    final stem = infinitive.substring(0, infinitive.length - 2);
-    final ending = infinitive.substring(infinitive.length - 2).toLowerCase();
+    final lower = infinitive.toLowerCase().trim();
+    if (_knownIrregularVerbs.contains(lower)) return null;
+    if (lower.length < 3) return null;
+    final stem = lower.substring(0, lower.length - 2);
+    final ending = lower.substring(lower.length - 2);
 
     if (ending == 'ar') {
       return {
@@ -445,126 +579,148 @@ class ListenRepeatContentService {
     return null;
   }
 
-  String _translatePresent(String fullTranslation, String subject) {
-    String verb = fullTranslation.replaceFirst(RegExp(r'^to\s+', caseSensitive: false), '').trim();
-    // Keep first definition if multiple (e.g. "think / find" -> "think")
-    if (verb.contains('/')) {
-      verb = verb.split('/').first.trim();
+  /// Cleans English translation definitions: extracts the primary meaning
+  /// before slashes, strips parentheticals, and removes leading 'to '.
+  String _cleanEnglishVerb(String fullTranslation) {
+    String cleaned = fullTranslation.replaceAll(RegExp(r'\([^)]*\)'), '').trim();
+    if (cleaned.contains('/')) {
+      cleaned = cleaned.split('/').first.trim();
     }
+    cleaned = cleaned.replaceFirst(RegExp(r'^to\s+', caseSensitive: false), '').trim();
+    return cleaned.replaceAll(RegExp(r'\s+'), ' ');
+  }
+
+  String _translatePresent(String fullTranslation, String subject) {
+    final cleaned = _cleanEnglishVerb(fullTranslation);
+    final parts = cleaned.split(' ');
+    String head = parts.first;
+    final tail = parts.length > 1 ? ' ${parts.sublist(1).join(' ')}' : '';
+
     if (subject.toLowerCase() == 'he' || subject.toLowerCase() == 'she') {
-      if (verb.endsWith('ch') || verb.endsWith('sh') || verb.endsWith('ss') || verb.endsWith('x') || verb.endsWith('o')) {
-        return '${verb}es';
-      } else if (verb.endsWith('y') && !RegExp(r'[aeiou]y$').hasMatch(verb)) {
-        return '${verb.substring(0, verb.length - 1)}ies';
-      } else if (verb == 'have') {
-        return 'has';
+      if (head.endsWith('ch') || head.endsWith('sh') || head.endsWith('ss') || head.endsWith('x') || head.endsWith('o')) {
+        head = '${head}es';
+      } else if (head.endsWith('y') && !RegExp(r'[aeiou]y$').hasMatch(head)) {
+        head = '${head.substring(0, head.length - 1)}ies';
+      } else if (head == 'have') {
+        head = 'has';
       } else {
-        return '${verb}s';
+        head = '${head}s';
       }
     }
-    return verb;
+    return '$head$tail';
   }
 
   String _translatePast(String fullTranslation) {
-    String verb = fullTranslation.replaceFirst(RegExp(r'^to\s+', caseSensitive: false), '').trim();
-    if (verb.contains('/')) {
-      verb = verb.split('/').first.trim();
-    }
-    // Handle irregular English past tenses for common verbs
-    const irregulars = {
-      'be': 'was/were',
-      'have': 'had',
-      'do': 'did',
-      'say': 'said',
-      'go': 'went',
-      'get': 'got',
-      'make': 'made',
-      'know': 'knew',
-      'think': 'thought',
-      'take': 'took',
-      'see': 'saw',
-      'come': 'came',
-      'find': 'found',
-      'give': 'gave',
-      'tell': 'told',
-      'feel': 'felt',
-      'become': 'became',
-      'leave': 'left',
-      'put': 'put',
-      'mean': 'meant',
-      'keep': 'kept',
-      'let': 'let',
-      'begin': 'began',
-      'seem': 'seemed',
-      'help': 'helped',
-      'talk': 'talked',
-      'turn': 'turned',
-      'start': 'started',
-      'show': 'showed',
-      'hear': 'heard',
-      'play': 'played',
-      'run': 'ran',
-      'move': 'moved',
-      'like': 'liked',
-      'live': 'lived',
-      'believe': 'believed',
-      'hold': 'held',
-      'bring': 'brought',
-      'happen': 'happened',
-      'write': 'wrote',
-      'provide': 'provided',
-      'sit': 'sat',
-      'stand': 'stood',
-      'lose': 'lost',
-      'pay': 'paid',
-      'meet': 'met',
-      'include': 'included',
-      'continue': 'continued',
-      'set': 'set',
-      'learn': 'learned',
-      'change': 'changed',
-      'lead': 'led',
-      'understand': 'understood',
-      'watch': 'watched',
-      'follow': 'followed',
-      'stop': 'stopped',
-      'create': 'created',
-      'speak': 'spoke',
-      'read': 'read',
-      'spend': 'spent',
-      'grow': 'grew',
-      'open': 'opened',
-      'walk': 'walked',
-      'win': 'won',
-      'teach': 'taught',
-      'buy': 'bought',
-      'wait': 'waited',
-      'serve': 'served',
-      'die': 'died',
-      'send': 'sent',
-      'expect': 'expected',
-      'build': 'built',
-      'stay': 'stayed',
-      'fall': 'fell',
-      'cut': 'cut',
-      'reach': 'reached',
-      'kill': 'killed',
-      'remain': 'remained',
-      'eat': 'ate',
-      'drink': 'drank',
-      'sleep': 'slept',
-    };
+    final cleaned = _cleanEnglishVerb(fullTranslation);
+    final parts = cleaned.split(' ');
+    final head = parts.first.toLowerCase();
+    final tail = parts.length > 1 ? ' ${parts.sublist(1).join(' ')}' : '';
 
-    if (irregulars.containsKey(verb.toLowerCase())) {
-      return irregulars[verb.toLowerCase()]!;
-    }
-
-    if (verb.endsWith('e')) {
-      return '${verb}d';
-    } else if (verb.endsWith('y') && !RegExp(r'[aeiou]y$').hasMatch(verb)) {
-      return '${verb.substring(0, verb.length - 1)}ied';
+    String pastHead;
+    if (_irregularEnglishPast.containsKey(head)) {
+      pastHead = _irregularEnglishPast[head]!;
+    } else if (head.endsWith('e')) {
+      pastHead = '${head}d';
+    } else if (head.endsWith('y') && !RegExp(r'[aeiou]y$').hasMatch(head)) {
+      pastHead = '${head.substring(0, head.length - 1)}ied';
     } else {
-      return '${verb}ed';
+      pastHead = '${head}ed';
     }
+    return '$pastHead$tail';
   }
+
+  static const Map<String, String> _irregularEnglishPast = {
+    'be': 'was/were',
+    'beat': 'beat',
+    'become': 'became',
+    'begin': 'began',
+    'believe': 'believed',
+    'bring': 'brought',
+    'build': 'built',
+    'buy': 'bought',
+    'can': 'could',
+    'catch': 'caught',
+    'choose': 'chose',
+    'come': 'came',
+    'cost': 'cost',
+    'cut': 'cut',
+    'do': 'did',
+    'draw': 'drew',
+    'drink': 'drank',
+    'drive': 'drove',
+    'eat': 'ate',
+    'fall': 'fell',
+    'feel': 'felt',
+    'fight': 'fought',
+    'find': 'found',
+    'fly': 'flew',
+    'forget': 'forgot',
+    'get': 'got',
+    'give': 'gave',
+    'go': 'went',
+    'grow': 'grew',
+    'hang': 'hung',
+    'have': 'had',
+    'hear': 'heard',
+    'hide': 'hid',
+    'hit': 'hit',
+    'hold': 'held',
+    'hurt': 'hurt',
+    'keep': 'kept',
+    'know': 'knew',
+    'lay': 'laid',
+    'lead': 'led',
+    'leave': 'left',
+    'lend': 'lent',
+    'let': 'let',
+    'lie': 'lied',
+    'lose': 'lost',
+    'make': 'made',
+    'mean': 'meant',
+    'meet': 'met',
+    'must': 'had to',
+    'pay': 'paid',
+    'put': 'put',
+    'read': 'read',
+    'ride': 'rode',
+    'ring': 'rang',
+    'rise': 'rose',
+    'run': 'ran',
+    'say': 'said',
+    'see': 'saw',
+    'sell': 'sold',
+    'send': 'sent',
+    'set': 'set',
+    'shake': 'shook',
+    'shine': 'shone',
+    'shoot': 'shot',
+    'show': 'showed',
+    'shut': 'shut',
+    'sing': 'sang',
+    'sink': 'sank',
+    'sit': 'sat',
+    'sleep': 'slept',
+    'slide': 'slid',
+    'speak': 'spoke',
+    'spend': 'spent',
+    'stand': 'stood',
+    'steal': 'stole',
+    'stick': 'stuck',
+    'strike': 'struck',
+    'swear': 'swore',
+    'sweep': 'swept',
+    'swim': 'swam',
+    'swing': 'swung',
+    'take': 'took',
+    'teach': 'taught',
+    'tear': 'tore',
+    'tell': 'told',
+    'think': 'thought',
+    'throw': 'threw',
+    'understand': 'understood',
+    'wake': 'woke',
+    'wear': 'wore',
+    'win': 'won',
+    'write': 'wrote',
+  };
 }

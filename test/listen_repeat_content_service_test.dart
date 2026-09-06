@@ -130,5 +130,82 @@ void main() {
       expect(pool.length, equals(1));
       expect(pool.first.portuguese, equals('casa'));
     });
+
+    test('provides authentic past conjugations for irregular verbs lacking explicit past data', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'ola', english: 'hello'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => [
+        Verb(infinitive: 'dar', translation: 'to give', conjugations: {'eu': 'dou'}),
+        Verb(infinitive: 'poder', translation: 'can / to be able', conjugations: {'eu': 'posso'}),
+        Verb(infinitive: 'querer', translation: 'to want', conjugations: {'eu': 'quero'}),
+        Verb(infinitive: 'saber', translation: 'to know', conjugations: {'eu': 'sei'}),
+        Verb(infinitive: 'trazer', translation: 'to bring', conjugations: {'eu': 'trago'}),
+        Verb(infinitive: 'vir', translation: 'to come', conjugations: {'eu': 'venho'}),
+      ]);
+
+      final items = await contentService.loadContent(mode: ListenRepeatMode.verbs);
+
+      // Verify authentic irregular forms are used (not fabricated regular forms like "queri", "sabeu", "dou")
+      final darEu = items.firstWhere((i) => i.id == 'conj_past_dar_eu');
+      expect(darEu.portuguese, equals('Eu dei'));
+      expect(darEu.english, equals('I gave'));
+
+      final poderEla = items.firstWhere((i) => i.id == 'conj_past_poder_ele');
+      expect(poderEla.portuguese, equals('Ela pôde'));
+      expect(poderEla.english, equals('She could'));
+
+      final quererEu = items.firstWhere((i) => i.id == 'conj_past_querer_eu');
+      expect(quererEu.portuguese, equals('Eu quis'));
+      expect(quererEu.english, equals('I wanted'));
+
+      final saberEu = items.firstWhere((i) => i.id == 'conj_past_saber_eu');
+      expect(saberEu.portuguese, equals('Eu soube'));
+      expect(saberEu.english, equals('I knew'));
+
+      final trazerEu = items.firstWhere((i) => i.id == 'conj_past_trazer_eu');
+      expect(trazerEu.portuguese, equals('Eu trouxe'));
+      expect(trazerEu.english, equals('I brought'));
+
+      final virEla = items.firstWhere((i) => i.id == 'conj_past_vir_ele');
+      expect(virEla.portuguese, equals('Ela veio'));
+      expect(virEla.english, equals('She came'));
+    });
+
+    test('properly translates phrasal verbs and irregular English verbs in past and present', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'ola', english: 'hello'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => [
+        Verb(
+          infinitive: 'ligar',
+          translation: 'to turn on (light) / to light',
+          conjugations: {'eu': 'ligo', 'você, ela, ele': 'liga'},
+          pastConjugations: {'eu': 'liguei', 'você, ela, ele': 'ligou'},
+        ),
+        Verb(
+          infinitive: 'bater',
+          translation: 'to hit / to beat',
+          conjugations: {'eu': 'bato', 'você, ela, ele': 'bate'},
+          pastConjugations: {'eu': 'bati', 'você, ela, ele': 'bateu'},
+        ),
+      ]);
+
+      final items = await contentService.loadContent(mode: ListenRepeatMode.verbs);
+
+      // Phrasal verb: "turn on (light) / to light" -> "turns on" / "turned on"
+      final ligarPresEle = items.firstWhere((i) => i.id == 'conj_pres_ligar_ele');
+      expect(ligarPresEle.english, equals('He turns on'));
+
+      final ligarPastEu = items.firstWhere((i) => i.id == 'conj_past_ligar_eu');
+      expect(ligarPastEu.english, equals('I turned on'));
+
+      // Irregular English verb: "hit / beat" -> "hit" (not "hited")
+      final baterPastEu = items.firstWhere((i) => i.id == 'conj_past_bater_eu');
+      expect(baterPastEu.english, equals('I hit'));
+
+      final baterPresEle = items.firstWhere((i) => i.id == 'conj_pres_bater_ele');
+      expect(baterPresEle.english, equals('He hits'));
+    });
   });
 }
