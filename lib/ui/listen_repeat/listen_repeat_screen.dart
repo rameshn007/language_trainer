@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'listen_repeat_view_model.dart';
+import '../../services/listen_repeat_content_service.dart';
 import '../widgets/xp_popup.dart';
 
 class ListenRepeatScreen extends ConsumerStatefulWidget {
@@ -78,9 +79,9 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
       appBar: AppBar(
         title: const Text('Listen & Repeat'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.speed),
-            tooltip: 'Toggle Speed',
+          TextButton.icon(
+            icon: const Icon(Icons.speed, size: 20),
+            label: Text("${state.playbackSpeed}x"),
             onPressed: () {
               final newSpeed = ref.read(listenRepeatViewModelProvider.notifier).cycleSpeed();
               ScaffoldMessenger.of(context).clearSnackBars();
@@ -97,54 +98,91 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
         ],
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Word display
-            if (item != null) ...[
-              // AvatarGlow for audio playback feedback
-              AvatarGlow(
-                animate: isSpeaking,
-                glowColor: Colors.blue.shade300,
-                duration: const Duration(milliseconds: 2000),
-                repeat: true,
-                child: Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.surfaceContainerHighest,
-                    borderRadius: BorderRadius.circular(20),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Content Focus Selector
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: ListenRepeatMode.values.map((mode) {
+                      final isSelected = state.mode == mode;
+                      final isStarting = state.isPlaying && state.currentItem == null;
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: ChoiceChip(
+                          selected: isSelected,
+                          label: Text(mode.label),
+                          onSelected: isStarting
+                              ? null
+                              : (selected) {
+                                  if (selected) {
+                                    ref.read(listenRepeatViewModelProvider.notifier).setMode(mode);
+                                  }
+                                },
+                        ),
+                      );
+                    }).toList(),
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      // Portuguese word
-                      Text(
-                        item.portuguese,
-                        style: Theme.of(context).textTheme.headlineLarge
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 12),
-                      // English translation
-                      Text(
-                        item.english,
-                        style: Theme.of(context).textTheme.titleMedium
-                            ?.copyWith(
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.onSurfaceVariant,
+                ),
+              ),
+
+              // Word display
+              if (item != null) ...[
+                // AvatarGlow for audio playback feedback
+                AvatarGlow(
+                  animate: isSpeaking,
+                  glowColor: Colors.blue.shade300,
+                  duration: const Duration(milliseconds: 2000),
+                  repeat: true,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.surfaceContainerHighest,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Grammar / Tense Badge
+                        if (item.notes.isNotEmpty) ...[
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 12),
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primaryContainer,
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                        textAlign: TextAlign.center,
-                      ),
-                      if (item.notes.isNotEmpty) ...[
-                        const SizedBox(height: 8),
+                            child: Text(
+                              item.notes,
+                              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                        // Portuguese word / phrase
                         Text(
-                          item.notes,
-                          style: Theme.of(context).textTheme.bodyMedium
+                          item.portuguese,
+                          style: Theme.of(context).textTheme.headlineLarge
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 12),
+                        // English translation
+                        Text(
+                          item.english,
+                          style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(
-                                fontStyle: FontStyle.italic,
                                 color: Theme.of(
                                   context,
                                 ).colorScheme.onSurfaceVariant,
@@ -152,18 +190,17 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                           textAlign: TextAlign.center,
                         ),
                       ],
-                    ],
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Auto-playing ...',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                const SizedBox(height: 16),
+                Text(
+                  'Auto-playing ...',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 32),
+                const SizedBox(height: 32),
 
               // Playback controls row
               Row(
@@ -305,13 +342,13 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
               Text(
                 'Add vocabulary words to get started',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
-              ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
-    );
-  }
+    );}
 }
