@@ -10,7 +10,7 @@ This document tracks the phased architecture, design, and roadmap for the **List
 | :--- | :--- | :---: | :--- | :--- |
 | **Phase 1** | **Mode & Focus Selection** | ✅ **Merged** (PR #27) | Select Verbs, Prepositions, Phrases, Vocab, or Balanced Mix from CarPlay menu & switch focus mid-session. | `carplay_service.dart`, `listen_repeat_view_model.dart`, `listen_repeat_content_service.dart` |
 | **Phase 2** | **Steering Wheel & Native Media Controls** | ✅ **Merged** (PR #28) | Fix 5-source skip glitch so physical steering wheel buttons, Control Center, and Lock Screen skip full words instead of silence chunks. | `AppDelegate.swift`, `carplay_service.dart`, `listen_repeat_view_model.dart` |
-| **Phase 3** | **Glanceable Word Context & Dynamic Artwork** | ⏳ **In Progress** | Display `item.notes` (grammar/tenses) on CarPlay row, show word counter `#X`, and add notes badge to album art. | `carplay_service.dart`, `dynamic_art_service.dart` |
+| **Phase 3** | **Glanceable Word Context & Dynamic Artwork** | ✅ **Completed** | Display `item.notes` (grammar/tenses) on CarPlay row, show word counter `#X`, and add notes badge to album art. | `carplay_service.dart`, `dynamic_art_service.dart` |
 | **Phase 4** | **In-Car "Flag for Review" / Starred Words** | ⏳ Planned | One-tap button on CarPlay to bookmark difficult words while driving for later review on phone. | `carplay_service.dart`, `storage_service.dart`, `listen_repeat_screen.dart` |
 | **Phase 5** | **Commute Rewards & Post-Session XP Summary** | ⏳ Planned | Show completion alert on session stop with words completed and XP earned; display drive stats on menu. | `carplay_service.dart`, `listen_repeat_view_model.dart` |
 | **Phase 6** | **Active Recall & Repetition Modes** | ⏳ Planned | Optional "Active Recall" mode (EN prompt -> recall PT -> PT confirmation) and "Double Listen" for noisy commutes. | `listen_repeat_view_model.dart`, `carplay_service.dart` |
@@ -68,7 +68,7 @@ When the driver presses ⏭️ (Next Track) or ⏮️ (Previous Track) on physic
 
 ---
 
-### Phase 3: Glanceable Word Context & Dynamic Artwork
+### Phase 3: Glanceable Word Context & Dynamic Artwork ✅ (Completed)
 #### Problem
 - In the mobile UI, words display grammar/tense pills from `item.notes` (e.g. `Preterite Perfect - Eu`, `Preposition + article`). On CarPlay, `item.notes` is completely hidden.
 - The CarPlay player does not display session progress (e.g. "Word 12").
