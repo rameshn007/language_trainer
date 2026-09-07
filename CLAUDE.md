@@ -1,318 +1,76 @@
-# Language Trainer — Project Context
+# Language Trainer — Context & Architecture
 
-## Overview
-
-Flutter app (iOS + Android) teaching **European Portuguese** to English speakers.
-- **Framework:** Flutter SDK ^3.10.7
-- **State Management:** Riverpod (`flutter_riverpod` Notifier providers)
-- **Storage:** Hive (local NoSQL, `hive` + `hive_flutter`)
-- **Version:** 1.0.0+30
-
-## Directory Structure
-
-```
-lib/
-  main.dart                          # Entry point, ProviderScope, global service init
-  models/
-    language_item.dart               # Core vocabulary model (Hive-serialized, typeId 0)
-    language_item.g.dart             # Generated Hive adapter
-    question.dart                    # Quiz question model (8 question types)
-    question.g.dart
-    progress_data.dart               # DailyRecord, SessionRecord, WordProgress
-    progress_data.g.dart
-    verb.dart                        # Verb conjugation model
-    verb_phrase.dart                 # Verb phrase model
-  services/
-    storage_service.dart             # Hive wrapper: items, settings, progress, seen questions
-    tts_service.dart                 # Text-to-speech (flutter_tts) — shared across all features
-    voice_quiz_service.dart          # Speech recognition + fuzzy answer matching
-    quiz_engine_service.dart         # Generates all quiz types from data sources
-    progress_service.dart            # XP, streaks, mastery state (Riverpod Notifier)
-    question_loader_service.dart
-    verb_service.dart                # Loads verbs from CSV + JSON
-    markdown_parser.dart             # Parses markdown source data into LanguageItems
-    translation_service.dart
-    notification_service.dart        # Local notifications (flutter_local_notifications)
-    carplay_service.dart             # CarPlay orchestrator (Listen & Repeat player UI)
-  ui/
-    home_screen.dart                 # Main dashboard — expandable sections, FABs, animated stats card
-    settings_screen.dart
-    stats_screen.dart
-    voice_trainer_screen.dart        # Voice recognition practice (speech_to_text)
-    phrase_trainer_screen.dart       # Phrase training
-    vocabulary/
-      vocabulary_list_screen.dart
-      word_graph_screen.dart
-      vocabulary_item_dialog.dart
-    exercise/
-      exercise_list_screen.dart
-      exercise_screen.dart
-      exercise_view_model.dart
-    quiz/
-      quiz_screen.dart               # Main quiz UI (card swiper via flutter_card_swiper)
-      quiz_view_model.dart
-      category_selection_screen.dart
-      verb_conjugation_screen.dart
-      verb_conjugation_view_model.dart
-      single_verb_conjugation_screen.dart
-      single_verb_conjugation_view_model.dart
-      verb_phrase_trainer_screen.dart
-      interrogative_quiz_screen.dart
-      interrogative_reference_screen.dart
-      preposition_quiz_screen.dart
-      preposition_reference_screen.dart
-      grammar_quiz_screen.dart
-      grammar_reference_screen.dart
-    listen_repeat/
-      listen_repeat_screen.dart      # Passive listening/repetition mode
-      listen_repeat_view_model.dart  # Riverpod state for Listen & Repeat
-    widgets/
-      xp_popup.dart
-      word_star_field.dart
-    common/
-      long_press_word_text.dart
-  utils/
-    logger.dart
-    circular_reveal_clipper.dart     # Custom page transition clipper
-```
-
-## Routing
-
-No named routes. Uses imperative `Navigator.push` with `PageRouteBuilder` and `CircularRevealClipper` for circular reveal animations.
-
-`HomeScreen` is the `home` of `MaterialApp`. All other screens are pushed imperatively.
-
-## Global Providers (main.dart)
-
-| Provider | Type | Purpose |
-|---|---|---|
-| `storageServiceProvider` | `StorageService` | Hive database wrapper (singleton) |
-| `ttsServiceProvider` | `TtsService` | Text-to-speech |
-| `notificationServiceProvider` | `NotificationService` | Push/local notifications |
-| `progressServiceProvider` | `ProgressService → ProgressSnapshot` | XP, streaks, mastery |
-| `verbServiceProvider` | `VerbService` | Verb conjugation data |
-
-`navigatorKey` is a global `GlobalKey<NavigatorState>` for deep linking from notifications.
-
-## Key Features
-
-### Quiz Types (QuestionType enum)
-1. **Multiple Choice** — PT↔EN word matching
-2. **Vocabulary Match** — prioritizes unseen words, splits words vs phrases
-3. **Interrogative Match** — Portuguese question words to English
-4. **Preposition Fill** — cloze-style blanks in PT sentences
-5. **Grammar Rules** — multiple choice about grammar concepts
-6. **Verb Conjugation** — conjugate by pronoun (eu, tu, voce, nos, voces)
-7. **Cloze** — fill-in-the-blank from example sentences
-8. **Jumble / True-False / ReorderAndConjugate** — defined, usage varies
-
-### Learning Systems
-- **Mastery Tiers** (0–4): New → Learning → Familiar → Strong → Mastered
-- **XP System**: 10 XP first correct, 5 XP retries, 20 XP session bonus, 10 XP daily goal bonus
-- **Daily Goals**: Default 50 XP/day, configurable
-- **Streak Tracking**: Current and best streak from daily records
-- **Seen Questions Tracking**: Remembers question variants to avoid repetition
-
-### Home Screen Organization
-4 expandable sections with grid buttons:
-1. **Vocabulary & Flashcards** — Vocabulary list, Start Quiz, Vocab Quiz
-2. **Grammar & Verbs** — Verb Trainer, Interrogatives, Prepositions, Grammar Rules
-3. **Practice & Exercises** — Exercises, Sentence Builder, Question Builder
-4. **Speaking & Phrases** — Voice Trainer, Phrase Trainer, 100 Phrases
-
-Two FABs:
-- **Headphones** → Listen & Repeat
-- **Sparkle** → Lucky Quiz (infinite random quiz)
-
-Animated pinned stats card at top (shrinks on scroll): XP progress, streak, mastery distribution.
+European Portuguese learning app for English speakers (iOS & Android).
+- **Stack:** Flutter SDK ^3.10.7, Riverpod (`Notifier` providers), Hive (local storage), `just_audio` + `just_audio_background`.
+- **Navigation:** Imperative `Navigator.push` with `CircularRevealClipper` (no named routes). `HomeScreen` is root.
+- **Backend:** None. All TTS, STT, and quiz generation run entirely on-device.
 
 ---
 
-## Listen & Repeat Feature
+## Global Providers (`main.dart`)
 
-**Entry:** FAB (`Icons.headset_rounded`) on HomeScreen → pushes `ListenRepeatScreen`.
-
-### Flow
-
-1. **Session start** (`listen_repeat_view_model.dart`):
-   - Fetches all `LanguageItem`s from `StorageService.getAllItems()`
-   - Shuffles pool, picks a random word, sets `isPlaying = true`
-
-2. **Auto-play loop** (`listen_repeat_screen.dart:_startAutoPlayLoop`):
-   - Calls `_playAudio(item)`: speaks Portuguese (`pt-PT`) → 500ms pause → speaks English (`en-US`)
-   - Pauses 2 seconds (user repeats aloud)
-   - Advances to next random word via `nextWord()`
-   - Loops until user stops or app leaves foreground
-
-3. **Background silence**: `silence.mp3` plays on loop via `just_audio` to keep iOS audio session active (prevents lock-screen audio routing issues).
-
-4. **UI controls**:
-   - **Play Again** — replays current word audio (manual override)
-   - **Next Word** — skips to next random word
-   - **Shuffle** — reshuffles pool, picks new word
-   - **Stop** — stops session, pops screen
-
-5. **Lifecycle handling** (`didChangeAppLifecycleState`):
-   - On `resumed` while TTS is speaking: forces `tts.stop()` + `nextWord()` to unblock a stuck isolate (common iOS edge case when user pauses from lock screen).
-
-### No speech recognition in this mode.
-The user repeats silently. This is purely a passive listening/repetition feature.
-
-### Key files
-- `lib/ui/listen_repeat/listen_repeat_screen.dart` — UI + auto-play loop
-- `lib/ui/listen_repeat/listen_repeat_view_model.dart` — Riverpod Notifier state
-- `lib/services/tts_service.dart` — shared TTS engine
+- `storageServiceProvider`: `StorageService` (Hive boxes: `items`, `settings`, `progress`, `seen_questions`).
+- `ttsServiceProvider`: `TtsService` (system TTS scoring: prefers "Joana" pt-PT, "Alex"/"Daniel" en-US; penalizes Siri/novelty voices -1000).
+- `progressServiceProvider`: `ProgressService -> ProgressSnapshot` (XP, streaks, mastery tiers).
+- `verbServiceProvider`: `VerbService` (CSV + JSON conjugation tables).
+- `notificationServiceProvider`: `NotificationService` (local push notifications).
+- `navigatorKey`: Global key for notification deep linking.
 
 ---
 
-## CarPlay Integration
+## Data Model & Learning Systems
 
-**Entry:** `CarPlayService().init(container: container)` called in `main.dart` at app startup.
-
-### Architecture
-
-Uses `flutter_carplay` (v1.6.3). There is no mic/voice interaction in CarPlay
-anymore — the CarPlay surface is a **player for the shared Listen & Repeat
-session** (`listenRepeatViewModelProvider`). The same `AudioPlayer` playlist
-used by the phone UI plays through the car speakers; CarPlay templates only
-display state and route control taps back into the view model.
-
-### Session Flow (`carplay_service.dart`)
-
-1. **Trigger sources**: the plugin's `connected` event is ambiguous (a plain
-   cable connect emits the same event as an app-icon tap), so session start
-   is gated on a precise "driver is looking at our UI" signal:
-   - Custom `language_trainer/carplay_scene` MethodChannel (native observer
-     in `AppDelegate.swift`) pushes `sceneWillEnterForeground` whenever a
-     `CPTemplateApplicationScene` is about to become the visible screen —
-     the primary trigger (icon tap / template restore).
-   - Plugin `connected` events instead pull `sceneStatus` from that channel
-     and only start when the CarPlay scene is currently foregrounded.
-   - Two delayed pulls (~300/1500 ms after startup) cover cold starts where
-     scene activation races the Dart handler being installed.
-2. **On activation**: if no session is running, a Listen & Repeat session
-   starts immediately (no intermediate menu step) and a **player
-   `CPListTemplate`** is set as root: current word row (now-playing
-   indicator, tap = replay) + controls Pause/Resume, Previous word, Next word,
-   Study Focus (tap to cycle mode), Shuffle words, Speed, Stop session (8 items total).
-   The Study Focus row displays the active mode.
-   If a session is already running, the player is re-shown without restarting it.
-   Triggers within a 2s window are deduped.
-3. **Live updates**: `ProviderContainer.listen(listenRepeatViewModelProvider)`
-   mirrors state onto the visible template — word rows update via
-   `CPListItem.setText/setDetailText/setIsPlaying` as the playlist advances,
-   and the Study Focus row dynamically updates when mode changes.
-4. **Background**: when another CarPlay app takes the screen, playback keeps
-   running (media-app behavior). Only `disconnected` stops the session (which
-   records XP through `ProgressService`).
-5. **Stop**: "Stop session" ends playback and opens the **Study Focus menu**
-   (`Balanced Mix`, `Verbs & Tenses`, `Prepositions`, `Phrases & Sentences`,
-   `Core Vocabulary`), allowing the driver to start any specific focus with a tap.
-
-### iOS Native Setup
-- `Info.plist` declares `CPTemplateApplicationSceneSessionRoleApplication` scene
-- Uses `flutter_carplay.FlutterCarPlaySceneDelegate` (implements `CPTemplateApplicationSceneDelegate`)
-- Shared `FlutterEngine` between regular app and CarPlay scene
-- `CarPlaySceneObserver` (in `AppDelegate.swift`) observes
-  `UISceneWillEnterForegroundNotification` for `CPTemplateApplicationScene`
-  and exposes the `language_trainer/carplay_scene` MethodChannel (pushes
-  `sceneWillEnterForeground`, answers `sceneStatus` pulls)
-- Audio permissions: `NSMicrophoneUsageDescription`, `NSSpeechRecognitionUsageDescription`
-- `UIBackgroundModes` includes `audio`
-
-### Key files
-- `lib/services/carplay_service.dart` — CarPlay orchestrator (scene events, player template, control routing, mode picker)
-- `lib/ui/listen_repeat/listen_repeat_view_model.dart` — shared session state also driven by CarPlay controls
-
-### Current state
-CarPlay is Listen & Repeat only. Drivers can select study focus (Verbs,
-Prepositions, Phrases, Vocabulary, Mix) from the main menu or cycle modes
-directly in the player. Playback controls (pause, word-level next/previous,
-focus cycle, shuffle, speed) are custom `CPListItem`s; the system shared
-Now Playing template (`FlutterCarplay.showSharedNowPlaying()`) is available
-but not auto-shown — its next/previous buttons skip single playlist sources
-(5 per word), so word-level control is done through the custom player.
-
-**Shuffle note:** `ListenRepeatViewModel.shufflePool()` tears down the active
-session before restarting (a plain `startSession()` while playing hits the
-"already playing" guard and the reshuffled deck would be ignored).
+- **`LanguageItem`** (Hive typeId 0): `id`, `portuguese`, `english`, `notes`, `masteryLevel` (0–5), `lastReviewed`, sentences, gender, verb class.
+  - Loaded at launch from `assets/data/source.md`, `Combined_Portuguese_Class_Notes.md`, `vocabulary.json`, `verbs.csv`. User review history is preserved across reloads.
+- **Mastery Tiers (0–4):** New → Learning → Familiar → Strong → Mastered (`LanguageItem.masteryLevel` 0–5).
+- **XP System:** 10 XP first correct, 5 XP retry, 20 XP session completion bonus, 10 XP daily goal bonus (default goal: 50 XP/day).
+- **Voice Quiz (`VoiceQuizService`):** `speech_to_text` + fuzzy matcher (exact, substring, Levenshtein distance > 0.65 similarity).
+- **Quiz Engine (`QuizEngineService`):** 8 question types (Multiple Choice, Vocab Match, Cloze, Conjugation, Prepositions, Grammar, Interrogatives, Jumble). Tracks seen questions in storage to prevent repeats.
 
 ---
 
-## TtsService — Shared Speech Engine
+## Listen & Repeat (L&R) Architecture
 
-**File:** `lib/services/tts_service.dart`
+Passive audio training — no speech recognition, user repeats silently. Runs via `listenRepeatViewModelProvider` (`lib/ui/listen_repeat/listen_repeat_view_model.dart`).
 
-- Wraps `flutter_tts` with intelligent voice selection
-- **Voice scoring at init:**
-  - Portuguese: prefers "Joana" (+20), "Enhanced"/"Premium" (+10)
-  - English: prefers "Alex"/"Daniel" (+10), "Samantha" (+5), penalizes Siri (-1000), novelty voices (-1000)
-- Users can select custom voices (persisted in settings)
-- **Dynamic fallback:** if cached voice fails at speak-time, re-queries system voices
-- **Audio session (iOS):** `playback` category with `defaultToSpeaker`, `allowBluetooth`, `allowBluetoothA2DP`, `mixWithOthers`, `allowAirPlay`
-- **Rate:** base 0.5 × user multiplier (0.1–1.0 range)
-- `awaitSpeakCompletion(true)` — speak() waits for audio to finish
-
----
-
-## VoiceQuizService — Speech Recognition
-
-**File:** `lib/services/voice_quiz_service.dart`
-
-- Uses `speech_to_text` plugin
-- `listenForAnswer(Duration, localeId)` — activates mic, streams sound level updates, returns recognized text or null
-- Options: `listenFor` timeout, `pauseFor` 3s silence auto-stop, `listenMode.confirmation`
-- `isCorrect(spoken, correct)` — fuzzy matching:
-  1. Normalize: lowercase, trim, strip non-word chars
-  2. Direct match
-  3. Contains match (substring)
-  4. Levenshtein distance — similarity > 0.65 allowed
+- **Audio Pipeline:**
+  - Words are synthesized on-demand to temporary audio files (`pt-PT` and `en-US`) via `TtsService.synthesizeToFile`.
+  - Words are streamed into a `ConcatenatingAudioSource` played by `_bgAudioPlayer` (`just_audio` + `just_audio_background`).
+  - Each word consists of **5 audio sources**: `[PT, silence1, silence2 (repetition pause), EN, silence3]`.
+  - Every audio source **must** be tagged with `MediaItem.copyWith(id: '${item.id}_...')` for `just_audio_background` notification support.
+- **Concurrency & State Safety:**
+  - Concurrency model: **"latest request wins"** via `_runStartLoop` and `_sessionId` invalidation. Rapid taps (e.g. mode switches) cleanly abort prior in-flight builds.
+  - Word generation mutex: `_generationFuture` lock guarantees only one background deck build / TTS synthesis runs at a time.
+  - Poison-pill protection: skips any item that fails synthesis twice; halts after 6 consecutive failures.
+  - Playback resume: `_bgAudioPlayer.play()` is un-awaited (`if (_isAutoPlayActive && !_bgAudioPlayer.playing) _bgAudioPlayer.play().catchError(...)`) so it never blocks word-skipping methods.
+- **Study Focus Modes (`ListenRepeatMode`):**
+  - `all` (Balanced Mix), `verbs`, `prepositions`, `phrases`, `vocabulary`. Filtered via `ListenRepeatContentService`.
+  - Mode switching and shuffling pass `recordProgress: false` and cache `_sessionWordsOffset` so cumulative words seen persist without XP farming. Explicit session stops pass `recordProgress: true` to award XP once.
 
 ---
 
-## Data Model
+## CarPlay Integration (`CarPlayService` & Native iOS)
 
-**`LanguageItem`** (`lib/models/language_item.dart`) — Hive typeId 0:
-- `id`, `portuguese`, `english`, `notes`
-- `masteryLevel` (0–5), `lastReviewed`
-- `pronunciation`, `wordType`, `cefrLevel`, `topicCategory`
-- `exampleSentencePt`, `exampleSentenceEn`, `gender`, `plural`, `irregular`, `verbClass`
+CarPlay acts as an in-car player for the shared L&R session (no microphone/voice).
 
-Loaded from multiple sources at startup (`home_screen.dart:_loadData`):
-1. `assets/data/source.md` (markdown parser)
-2. `assets/Combined_Portuguese_Class_Notes.md`
-3. `assets/vocabulary.json`
-4. `assets/data/verbs.csv` (via `VerbService`)
-Mastery and review history are preserved across reloads.
-
----
-
-## Dependencies (pubspec.yaml)
-
-| Package | Purpose |
-|---|---|
-| `flutter_riverpod` | State management |
-| `hive` / `hive_flutter` | Local storage |
-| `flutter_tts` | Text-to-speech |
-| `speech_to_text` | Speech recognition |
-| `flutter_card_swiper` | Card-flip quiz UI |
-| `just_audio` / `just_audio_background` | Audio playback |
-| `flutter_local_notifications` | Notifications |
-| `flutter_carplay` | CarPlay integration |
-| `avatar_glow` | Audio playback animation |
-| `google_fonts` | Custom typography |
-| `animate_do` | Animations |
-| `http` | HTTP requests |
+- **Scene Lifecycle & Triggering (`CarPlaySceneObserver` in `AppDelegate.swift`):**
+  - Plugin `connected` event is ambiguous (fires on plain cable connect).
+  - Session startup is strictly gated on the native `language_trainer/carplay_scene` channel (`sceneWillEnterForeground` push or `sceneStatus` pull).
+  - State listening via `_ensureStateListener()` is lazy — never attach provider listeners in `init()`.
+- **UI & Head Unit Compliance:**
+  - Player template is a `CPListTemplate` capped at 8 items across 3 sections (Current Word with live now-playing indicator, Playback controls, Session controls: Focus cycle, Shuffle, Speed, Stop).
+  - Stop session returns to the Study Focus menu (`Balanced Mix`, `Verbs`, `Prepositions`, `Phrases`, `Vocabulary`).
+- **Steering Wheel & Media Controls (`RemoteCommandInterceptor` in `AppDelegate.swift`):**
+  - Fixes the 5-source skip glitch where default next/previous track steps into silence chunks.
+  - Swizzles `AudioServicePlugin` (`nextTrack:`, `previousTrack:`, `skipForward:`, `skipBackward:`) via Objective-C runtime and hooks `MPRemoteCommandCenter.shared()`.
+  - Dispatches `remoteNextWord` / `remotePreviousWord` to Dart, seeking by 5 audio sources (`(currentWordIndex ± 1) * 5`) directly to the Portuguese audio.
+  - Debounced in Dart with independent per-direction timers (`_lastRemoteNextTime`, `_lastRemotePreviousTime`, 300ms) to allow rapid reversals while dropping hardware bounce.
 
 ---
 
-## Important Notes for Development
+## Testing & Quality Conventions
 
-- **No backend/API** for speech processing — all TTS and STT run on-device (Apple Speech framework / Google Speech API)
-- **No named routes** — all navigation is imperative `Navigator.push`
-- **Shared FlutterEngine** between mobile app and CarPlay scene on iOS
-- **Silence audio asset** (`assets/audio/silence.mp3`) is critical for iOS audio session behavior in Listen & Repeat
-- **Voice selection** has extensive scoring logic — don't remove novelty voice penalties without testing
-- **CarPlay** session triggers must distinguish "scene visible" from "cable
-  connected" — use the `language_trainer/carplay_scene` channel, not the
-  plugin's `connected` event alone (they look identical)
+- Run tests: `flutter test` (all tests should pass, currently 163 tests).
+- Static analysis: `flutter analyze` (zero issues allowed).
+- iOS Simulator build: `flutter build ios --no-codesign --simulator`.
+- Test hygiene: Use `CarPlayService().resetForTesting()` in `tearDown` to reset container subscriptions and debounce timestamps.
