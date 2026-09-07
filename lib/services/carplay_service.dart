@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -39,6 +40,7 @@ class CarPlayService {
 
   ProviderContainer? _container;
   bool _stateListenerAdded = false;
+  ProviderSubscription<ListenRepeatState>? _stateSubscription;
 
   /// Dedicated app channel: pushes `sceneWillEnterForeground` events and
   /// answers `sceneStatus` pulls. Implemented natively (AppDelegate.swift);
@@ -50,6 +52,13 @@ class CarPlayService {
   /// "driver wants the experience" moment (foreground push + connected
   /// event, or the two plugin connection events) only starts one session.
   DateTime? _lastActivation;
+
+  /// Throttles rapid remote skip commands per direction (steering wheel, lock screen,
+  /// CarPlay Now Playing) to avoid double-skips caused by hardware bounce
+  /// or multi-target dispatch while still allowing rapid reversals.
+  DateTime? _lastRemoteNextTime;
+  DateTime? _lastRemotePreviousTime;
+  static const _kRemoteSkipDebounce = Duration(milliseconds: 300);
 
   /// Player template for the visible session. Null while CarPlay shows the
   /// main menu or is not connected.
@@ -67,8 +76,12 @@ class CarPlayService {
   void init({required ProviderContainer container}) {
     AppLogger.log("init() called", name: 'CarPlay');
     _container = container;
+    _lastRemoteNextTime = null;
+    _lastRemotePreviousTime = null;
+    _lastActivation = null;
 
-    // Precise CarPlay-scene foreground signal (iOS only).
+    // Set up the scene-lifecycle listener so we know when the driver has
+    // actually brought our CarPlay UI to the screen.
     _sceneChannel.setMethodCallHandler(_onSceneChannelCall);
 
     _flutterCarplay.addListenerOnConnectionChange((status) {
@@ -106,14 +119,51 @@ class CarPlayService {
         () => _querySceneState('launch-late'));
   }
 
+  @visibleForTesting
+  void resetForTesting() {
+    _lastRemoteNextTime = null;
+    _lastRemotePreviousTime = null;
+    _lastActivation = null;
+    _stateSubscription?.close();
+    _stateSubscription = null;
+    _stateListenerAdded = false;
+    _container = null;
+  }
+
   // ------------------------------------------------------------------
-  // Scene activation
+  // Scene activation & Remote Commands
   // ------------------------------------------------------------------
 
   Future<Object?> _onSceneChannelCall(MethodCall call) async {
     if (call.method == 'sceneWillEnterForeground') {
       AppLogger.log("CarPlay scene entering foreground", name: 'CarPlay');
       _onSceneActivated();
+    } else if (call.method == 'remoteNextWord') {
+      final now = DateTime.now();
+      if (_lastRemoteNextTime != null &&
+          now.difference(_lastRemoteNextTime!) < _kRemoteSkipDebounce) {
+        AppLogger.log("Debounced remoteNextWord", name: 'CarPlay');
+        return null;
+      }
+      _lastRemoteNextTime = now;
+      AppLogger.log("Handling remoteNextWord", name: 'CarPlay');
+      final container = _container;
+      if (container != null) {
+        await container.read(listenRepeatViewModelProvider.notifier).nextWord();
+      }
+    } else if (call.method == 'remotePreviousWord') {
+      final now = DateTime.now();
+      if (_lastRemotePreviousTime != null &&
+          now.difference(_lastRemotePreviousTime!) < _kRemoteSkipDebounce) {
+        AppLogger.log("Debounced remotePreviousWord", name: 'CarPlay');
+        return null;
+      }
+      _lastRemotePreviousTime = now;
+      AppLogger.log("Handling remotePreviousWord", name: 'CarPlay');
+      final container = _container;
+      if (container != null) {
+        await container.read(listenRepeatViewModelProvider.notifier).previousWord();
+      }
     }
     return null;
   }
@@ -406,7 +456,7 @@ class CarPlayService {
   void _ensureStateListener(ProviderContainer container) {
     if (_stateListenerAdded) return;
     _stateListenerAdded = true;
-    container.listen<ListenRepeatState>(
+    _stateSubscription = container.listen<ListenRepeatState>(
       listenRepeatViewModelProvider,
       (previous, next) => _onListenRepeatStateChanged(next),
     );

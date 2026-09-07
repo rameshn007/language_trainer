@@ -593,7 +593,11 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     final currentWordIndex = _bgAudioPlayer.currentIndex! ~/ _kSourcesPerWord;
     try {
       await _bgAudioPlayer.seek(Duration.zero, index: currentWordIndex * _kSourcesPerWord);
-      await _bgAudioPlayer.play();
+      if (_isAutoPlayActive && !_bgAudioPlayer.playing) {
+        _bgAudioPlayer.play().catchError((e) {
+          AppLogger.error('Error resuming audio after replay', name: 'ListenRepeat', error: e);
+        });
+      }
     } catch (e) {
       AppLogger.error('Non-fatal error replaying word', name: 'ListenRepeat', error: e);
     }
@@ -612,10 +616,17 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     // After waiting, check if session is still active
     if (currentSessionId != _sessionId || !_isAutoPlayActive) return;
 
-    try {
-      await _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex + 1) * _kSourcesPerWord);
-    } catch (e) {
-      AppLogger.error('Non-fatal error seeking to next word', name: 'ListenRepeat', error: e);
+    if (currentWordIndex + 1 < _playlistWords.length) {
+      try {
+        await _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex + 1) * _kSourcesPerWord);
+        if (_isAutoPlayActive && !_bgAudioPlayer.playing) {
+          _bgAudioPlayer.play().catchError((e) {
+            AppLogger.error('Error resuming audio after nextWord', name: 'ListenRepeat', error: e);
+          });
+        }
+      } catch (e) {
+        AppLogger.error('Non-fatal error seeking to next word', name: 'ListenRepeat', error: e);
+      }
     }
   }
   
@@ -625,6 +636,11 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     if (currentWordIndex > 0) {
       try {
         await _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex - 1) * _kSourcesPerWord);
+        if (_isAutoPlayActive && !_bgAudioPlayer.playing) {
+          _bgAudioPlayer.play().catchError((e) {
+            AppLogger.error('Error resuming audio after previousWord', name: 'ListenRepeat', error: e);
+          });
+        }
       } catch (e) {
         AppLogger.error('Non-fatal error seeking to previous word', name: 'ListenRepeat', error: e);
       }
