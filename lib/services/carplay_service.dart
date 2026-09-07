@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../models/language_item.dart';
 import '../ui/listen_repeat/listen_repeat_view_model.dart';
 import '../utils/logger.dart';
 import 'listen_repeat_content_service.dart';
@@ -72,6 +73,23 @@ class CarPlayService {
   bool? _shownPlayingState;
   String? _shownFailure;
   ListenRepeatMode? _shownMode;
+  int? _shownWordsSeen;
+
+  /// Formats the subtitle of the current word row in CarPlay, displaying English
+  /// translation along with glanceable grammar/tense pills if notes are present.
+  static String formatWordDetailText(LanguageItem? item) {
+    if (item == null) {
+      return 'Listen to the word, then repeat it aloud';
+    }
+    final notes = item.notes.trim();
+    final grammarNote = notes.isNotEmpty ? ' • [$notes]' : '';
+    return '${item.english}$grammarNote';
+  }
+
+  /// Formats the header for the primary word section, indicating session progress.
+  static String formatWordSectionHeader(int totalWordsSeen) {
+    return totalWordsSeen > 0 ? 'Current Word (#$totalWordsSeen)' : 'Current Word';
+  }
 
   void init({required ProviderContainer container}) {
     AppLogger.log("init() called", name: 'CarPlay');
@@ -128,6 +146,7 @@ class CarPlayService {
     _stateSubscription = null;
     _stateListenerAdded = false;
     _container = null;
+    _resetPlayer();
   }
 
   // ------------------------------------------------------------------
@@ -262,13 +281,13 @@ class CarPlayService {
     _shownPlayingState = state.isPlaying;
     _shownFailure = null;
     _shownMode = state.mode;
+    _shownWordsSeen = state.totalWordsSeen;
 
     final notifier = _container!.read(listenRepeatViewModelProvider.notifier);
 
     final wordItem = CPListItem(
       text: state.currentItem?.portuguese ?? 'Loading words...',
-      detailText: state.currentItem?.english ??
-          'Listen to the word, then repeat it aloud',
+      detailText: formatWordDetailText(state.currentItem),
       isPlaying: state.isPlaying,
       playingIndicatorLocation: CPListItemPlayingIndicatorLocation.trailing,
       onPress: (complete, self) {
@@ -358,7 +377,10 @@ class CarPlayService {
       title: 'Listen & Repeat',
       systemIcon: 'headphones',
       sections: [
-        CPListSection(header: 'Current word', items: [wordItem]),
+        CPListSection(
+          header: formatWordSectionHeader(state.totalWordsSeen),
+          items: [wordItem],
+        ),
         CPListSection(
           header: 'Playback',
           items: [pauseItem, previousItem, nextItem],
@@ -427,7 +449,38 @@ class CarPlayService {
       _shownWordId = item.id;
       final wordItem = _wordItem!;
       wordItem.setText(item.portuguese);
-      wordItem.setDetailText(item.english);
+      wordItem.setDetailText(formatWordDetailText(item));
+    }
+
+    if (state.totalWordsSeen != _shownWordsSeen) {
+      _shownWordsSeen = state.totalWordsSeen;
+      final template = _playerTemplate;
+      if (template != null && template.sections.isNotEmpty && _wordItem != null) {
+        try {
+          final updatedFirstSection = CPListSection(
+            header: formatWordSectionHeader(state.totalWordsSeen),
+            items: [_wordItem!],
+          );
+          final updatedSections = [
+            updatedFirstSection,
+            ...template.sections.skip(1),
+          ];
+          unawaited(
+            _flutterCarplay
+                .updateListTemplateSections(
+                  elementId: template.uniqueId,
+                  sections: updatedSections,
+                )
+                .catchError((e) {
+              AppLogger.log("CarPlay section header update ignored: $e",
+                  name: 'CarPlay');
+            }),
+          );
+        } catch (e) {
+          AppLogger.log("Error preparing updated CarPlay sections: $e",
+              name: 'CarPlay');
+        }
+      }
     }
 
     if (state.failure != null && state.failure != _shownFailure) {
@@ -476,6 +529,7 @@ class CarPlayService {
     _shownPlayingState = null;
     _shownFailure = null;
     _shownMode = null;
+    _shownWordsSeen = null;
   }
 
   Future<void> _stopSession() async {
