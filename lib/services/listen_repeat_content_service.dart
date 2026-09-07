@@ -38,7 +38,7 @@ extension ListenRepeatModeExtension on ListenRepeatMode {
       case ListenRepeatMode.verbs:
         return 'Verbs';
       case ListenRepeatMode.prepositions:
-        return 'Preposições';
+        return 'Prepositions';
       case ListenRepeatMode.phrases:
         return 'Phrases';
       case ListenRepeatMode.vocabulary:

@@ -182,12 +182,10 @@ class CarPlayService {
     // controls right away, then let the view model build the audio playlist.
     _showPlayer(currentState.copyWith(mode: targetMode, isPlaying: true));
 
-    final notifier = container.read(listenRepeatViewModelProvider.notifier);
-    final startFuture = (mode != null && mode != currentState.mode)
-        ? notifier.setMode(mode)
-        : notifier.startSession();
-
-    startFuture.then((_) {
+    container
+        .read(listenRepeatViewModelProvider.notifier)
+        .startSession(mode: mode)
+        .then((_) {
       // startSession() resolves without error on an empty library; say so
       // explicitly instead of leaving the player on "Loading words...".
       final state = container.read(listenRepeatViewModelProvider);
@@ -237,15 +235,6 @@ class CarPlayService {
       },
     );
 
-    final replayItem = CPListItem(
-      text: 'Replay word',
-      detailText: 'Hear the current word again',
-      onPress: (complete, self) {
-        complete();
-        notifier.replayCurrentWord();
-      },
-    );
-
     final previousItem = CPListItem(
       text: 'Previous word',
       onPress: (complete, self) {
@@ -265,11 +254,14 @@ class CarPlayService {
     final focusItem = CPListItem(
       text: 'Focus: ${state.mode.badge}',
       detailText: 'Tap to change (${state.mode.label})',
-      onPress: (complete, self) {
-        final newMode = notifier.cycleMode();
-        _focusItem?.setText('Focus: ${newMode.badge}');
-        _focusItem?.setDetailText('Tap to change (${newMode.label})');
-        complete();
+      onPress: (complete, self) async {
+        try {
+          await notifier.cycleMode();
+        } catch (e) {
+          AppLogger.error('Error cycling mode from CarPlay', name: 'CarPlay', error: e);
+        } finally {
+          complete();
+        }
       },
     );
 
@@ -295,21 +287,24 @@ class CarPlayService {
     final stopItem = CPListItem(
       text: 'Stop session',
       detailText: 'Stop playback and open the menu',
-      onPress: (complete, self) {
-        complete();
-        _stopSession();
-        _showMainMenu();
+      onPress: (complete, self) async {
+        try {
+          await _stopSession();
+        } finally {
+          complete();
+          _showMainMenu();
+        }
       },
     );
 
     final template = CPListTemplate(
-      title: 'Listen & Repeat • ${state.mode.badge}',
+      title: 'Listen & Repeat',
       systemIcon: 'headphones',
       sections: [
         CPListSection(header: 'Current word', items: [wordItem]),
         CPListSection(
           header: 'Playback',
-          items: [pauseItem, replayItem, previousItem, nextItem],
+          items: [pauseItem, previousItem, nextItem],
         ),
         CPListSection(
           header: 'Session',
@@ -426,19 +421,17 @@ class CarPlayService {
     _shownMode = null;
   }
 
-  void _stopSession() {
+  Future<void> _stopSession() async {
     final container = _container;
     if (container == null) return;
-    // stopSession() is async; handle its errors via the future so nothing
-    // escapes unhandled (a try/catch here would only cover the sync part).
-    container
-        .read(listenRepeatViewModelProvider.notifier)
-        .stopSession()
-        .then((xp) {
+    try {
+      final xp = await container
+          .read(listenRepeatViewModelProvider.notifier)
+          .stopSession();
       AppLogger.log("CarPlay session stopped, XP earned: $xp", name: 'CarPlay');
-    }, onError: (Object e, StackTrace st) {
+    } catch (e, st) {
       AppLogger.error('Error stopping session',
           name: 'CarPlay', error: e, stackTrace: st);
-    });
+    }
   }
 }

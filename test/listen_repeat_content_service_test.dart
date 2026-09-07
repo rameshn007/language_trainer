@@ -45,6 +45,7 @@ void main() {
         expect(mode.badge, isNotEmpty);
         expect(mode.description, isNotEmpty);
       }
+      expect(ListenRepeatMode.prepositions.badge, equals('Prepositions'));
       expect(ListenRepeatMode.all.description, contains('Mix'));
       expect(ListenRepeatMode.verbs.description, contains('Conjugations'));
       expect(ListenRepeatMode.prepositions.description, contains('Prepositions'));

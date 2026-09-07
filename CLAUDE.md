@@ -193,9 +193,9 @@ display state and route control taps back into the view model.
 2. **On activation**: if no session is running, a Listen & Repeat session
    starts immediately (no intermediate menu step) and a **player
    `CPListTemplate`** is set as root: current word row (now-playing
-   indicator, tap = replay) + controls Pause/Resume, Replay word, Previous
-   word, Next word, Study Focus (tap to cycle mode), Shuffle words, Speed,
-   Stop session. Template title displays the active mode (`Listen & Repeat • Verbs`).
+   indicator, tap = replay) + controls Pause/Resume, Previous word, Next word,
+   Study Focus (tap to cycle mode), Shuffle words, Speed, Stop session (8 items total).
+   The Study Focus row displays the active mode.
    If a session is already running, the player is re-shown without restarting it.
    Triggers within a 2s window are deduped.
 3. **Live updates**: `ProviderContainer.listen(listenRepeatViewModelProvider)`
