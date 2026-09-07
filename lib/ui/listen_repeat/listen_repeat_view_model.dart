@@ -629,10 +629,22 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   }
 
   Future<void> setMode(ListenRepeatMode newMode) async {
-    if (state.mode == newMode) return;
+    final modeChanged = state.mode != newMode;
     state = state.copyWith(mode: newMode);
-    await stopSession();
-    await startSession();
+    if (modeChanged && _isAutoPlayActive) {
+      await stopSession();
+      await startSession();
+    } else if (!_isAutoPlayActive) {
+      await startSession();
+    }
+  }
+
+  ListenRepeatMode cycleMode() {
+    final values = ListenRepeatMode.values;
+    final nextIndex = (values.indexOf(state.mode) + 1) % values.length;
+    final newMode = values[nextIndex];
+    setMode(newMode);
+    return newMode;
   }
 
   Future<void> shufflePool() async {

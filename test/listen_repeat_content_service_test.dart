@@ -38,6 +38,21 @@ void main() {
     });
   });
 
+  group('ListenRepeatModeExtension', () {
+    test('provides distinct labels, badges, and descriptions for all modes', () {
+      for (final mode in ListenRepeatMode.values) {
+        expect(mode.label, isNotEmpty);
+        expect(mode.badge, isNotEmpty);
+        expect(mode.description, isNotEmpty);
+      }
+      expect(ListenRepeatMode.all.description, contains('Mix'));
+      expect(ListenRepeatMode.verbs.description, contains('Conjugations'));
+      expect(ListenRepeatMode.prepositions.description, contains('Prepositions'));
+      expect(ListenRepeatMode.phrases.description, contains('Everyday phrases'));
+      expect(ListenRepeatMode.vocabulary.description, contains('Essential words'));
+    });
+  });
+
   group('ListenRepeatContentService', () {
     late _MockStorageService storage;
     late _MockVerbService verbService;
