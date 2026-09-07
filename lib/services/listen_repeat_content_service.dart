@@ -38,11 +38,26 @@ extension ListenRepeatModeExtension on ListenRepeatMode {
       case ListenRepeatMode.verbs:
         return 'Verbs';
       case ListenRepeatMode.prepositions:
-        return 'Preposições';
+        return 'Prepositions';
       case ListenRepeatMode.phrases:
         return 'Phrases';
       case ListenRepeatMode.vocabulary:
         return 'Vocab';
+    }
+  }
+
+  String get description {
+    switch (this) {
+      case ListenRepeatMode.all:
+        return 'Mix of verbs, phrases, and vocabulary';
+      case ListenRepeatMode.verbs:
+        return 'Conjugations & verb phrases';
+      case ListenRepeatMode.prepositions:
+        return 'Prepositions, contractions, and locatives';
+      case ListenRepeatMode.phrases:
+        return 'Everyday phrases & sentences';
+      case ListenRepeatMode.vocabulary:
+        return 'Essential words & vocabulary';
     }
   }
 }

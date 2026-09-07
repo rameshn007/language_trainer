@@ -191,20 +191,23 @@ display state and route control taps back into the view model.
    - Two delayed pulls (~300/1500 ms after startup) cover cold starts where
      scene activation races the Dart handler being installed.
 2. **On activation**: if no session is running, a Listen & Repeat session
-   starts immediately (no "Start Session" menu step) and a **player
+   starts immediately (no intermediate menu step) and a **player
    `CPListTemplate`** is set as root: current word row (now-playing
-   indicator, tap = replay) + controls Pause/Resume, Replay word, Previous
-   word, Next word, Shuffle words, Speed, Stop session. If a session is
-   already running, the player is re-shown without restarting it. Triggers
-   within a 2s window are deduped.
+   indicator, tap = replay) + controls Pause/Resume, Previous word, Next word,
+   Study Focus (tap to cycle mode), Shuffle words, Speed, Stop session (8 items total).
+   The Study Focus row displays the active mode.
+   If a session is already running, the player is re-shown without restarting it.
+   Triggers within a 2s window are deduped.
 3. **Live updates**: `ProviderContainer.listen(listenRepeatViewModelProvider)`
    mirrors state onto the visible template — word rows update via
-   `CPListItem.setText/setDetailText/setIsPlaying` as the playlist advances.
+   `CPListItem.setText/setDetailText/setIsPlaying` as the playlist advances,
+   and the Study Focus row dynamically updates when mode changes.
 4. **Background**: when another CarPlay app takes the screen, playback keeps
    running (media-app behavior). Only `disconnected` stops the session (which
    records XP through `ProgressService`).
-5. **Stop**: "Stop session" ends playback and returns to a minimal menu
-   (`Start Listen & Repeat` item) as root template.
+5. **Stop**: "Stop session" ends playback and opens the **Study Focus menu**
+   (`Balanced Mix`, `Verbs & Tenses`, `Prepositions`, `Phrases & Sentences`,
+   `Core Vocabulary`), allowing the driver to start any specific focus with a tap.
 
 ### iOS Native Setup
 - `Info.plist` declares `CPTemplateApplicationSceneSessionRoleApplication` scene
@@ -218,12 +221,14 @@ display state and route control taps back into the view model.
 - `UIBackgroundModes` includes `audio`
 
 ### Key files
-- `lib/services/carplay_service.dart` — CarPlay orchestrator (scene events, player template, control routing)
+- `lib/services/carplay_service.dart` — CarPlay orchestrator (scene events, player template, control routing, mode picker)
 - `lib/ui/listen_repeat/listen_repeat_view_model.dart` — shared session state also driven by CarPlay controls
 
 ### Current state
-CarPlay is Listen & Repeat only. Playback controls (pause, word-level
-next/previous, shuffle, speed) are custom `CPListItem`s; the system shared
+CarPlay is Listen & Repeat only. Drivers can select study focus (Verbs,
+Prepositions, Phrases, Vocabulary, Mix) from the main menu or cycle modes
+directly in the player. Playback controls (pause, word-level next/previous,
+focus cycle, shuffle, speed) are custom `CPListItem`s; the system shared
 Now Playing template (`FlutterCarplay.showSharedNowPlaying()`) is available
 but not auto-shown — its next/previous buttons skip single playlist sources
 (5 per word), so word-level control is done through the custom player.

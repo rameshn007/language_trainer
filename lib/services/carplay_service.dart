@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../ui/listen_repeat/listen_repeat_view_model.dart';
 import '../utils/logger.dart';
+import 'listen_repeat_content_service.dart';
 
 /// Orchestrates the CarPlay experience.
 ///
@@ -55,10 +57,12 @@ class CarPlayService {
   CPListItem? _wordItem;
   CPListItem? _pauseItem;
   CPListItem? _speedItem;
+  CPListItem? _focusItem;
 
   String? _shownWordId;
   bool? _shownPlayingState;
   String? _shownFailure;
+  ListenRepeatMode? _shownMode;
 
   void init({required ProviderContainer container}) {
     AppLogger.log("init() called", name: 'CarPlay');
@@ -168,17 +172,20 @@ class CarPlayService {
     _startExperience();
   }
 
-  void _startExperience() {
+  void _startExperience({ListenRepeatMode? mode}) {
     final container = _container;
     if (container == null) return;
 
+    final currentState = container.read(listenRepeatViewModelProvider);
+    final targetMode = mode ?? currentState.mode;
+
     // Show the player immediately (in a loading state) so the driver sees
     // controls right away, then let the view model build the audio playlist.
-    _showPlayer(container.read(listenRepeatViewModelProvider));
+    _showPlayer(currentState.copyWith(mode: targetMode, isPlaying: true));
 
     container
         .read(listenRepeatViewModelProvider.notifier)
-        .startSession()
+        .startSession(mode: mode)
         .then((_) {
       // startSession() resolves without error on an empty library; say so
       // explicitly instead of leaving the player on "Loading words...".
@@ -204,6 +211,7 @@ class CarPlayService {
     _shownWordId = state.currentItem?.id;
     _shownPlayingState = state.isPlaying;
     _shownFailure = null;
+    _shownMode = state.mode;
 
     final notifier = _container!.read(listenRepeatViewModelProvider.notifier);
 
@@ -228,15 +236,6 @@ class CarPlayService {
       },
     );
 
-    final replayItem = CPListItem(
-      text: 'Replay word',
-      detailText: 'Hear the current word again',
-      onPress: (complete, self) {
-        complete();
-        notifier.replayCurrentWord();
-      },
-    );
-
     final previousItem = CPListItem(
       text: 'Previous word',
       onPress: (complete, self) {
@@ -250,6 +249,26 @@ class CarPlayService {
       onPress: (complete, self) {
         complete();
         notifier.nextWord();
+      },
+    );
+
+    final focusItem = CPListItem(
+      text: 'Focus: ${state.mode.badge}',
+      detailText: 'Tap to change (${state.mode.label})',
+      onPress: (complete, self) {
+        // Complete immediately to release the CarPlay selection highlight without delay.
+        // Awaiting the full speech synthesis / deck rebuild here keeps the row highlighted
+        // for several seconds on a cold cache. The row text and detail text are updated
+        // reactively via _onListenRepeatStateChanged as soon as the new deck is ready,
+        // and ListenRepeatViewModel serializes rapid consecutive taps so the latest request wins.
+        complete();
+        unawaited(() async {
+          try {
+            await notifier.cycleMode();
+          } catch (e) {
+            AppLogger.error('Error cycling mode from CarPlay', name: 'CarPlay', error: e);
+          }
+        }());
       },
     );
 
@@ -275,10 +294,13 @@ class CarPlayService {
     final stopItem = CPListItem(
       text: 'Stop session',
       detailText: 'Stop playback and open the menu',
-      onPress: (complete, self) {
-        complete();
-        _stopSession();
-        _showMainMenu();
+      onPress: (complete, self) async {
+        try {
+          await _stopSession();
+        } finally {
+          complete();
+          _showMainMenu();
+        }
       },
     );
 
@@ -289,11 +311,11 @@ class CarPlayService {
         CPListSection(header: 'Current word', items: [wordItem]),
         CPListSection(
           header: 'Playback',
-          items: [pauseItem, replayItem, previousItem, nextItem],
+          items: [pauseItem, previousItem, nextItem],
         ),
         CPListSection(
           header: 'Session',
-          items: [shuffleItem, speedItem, stopItem],
+          items: [focusItem, shuffleItem, speedItem, stopItem],
         ),
       ],
     );
@@ -302,6 +324,7 @@ class CarPlayService {
     _wordItem = wordItem;
     _pauseItem = pauseItem;
     _speedItem = speedItem;
+    _focusItem = focusItem;
 
     FlutterCarplay.setRootTemplate(rootTemplate: template, animated: true);
   }
@@ -315,17 +338,17 @@ class CarPlayService {
         rootTemplate: CPListTemplate(
           sections: [
             CPListSection(
-              header: 'Listen & Repeat',
-              items: [
-                CPListItem(
-                  text: 'Start Listen & Repeat',
-                  detailText: 'Listen to a word, then repeat it aloud',
+              header: 'Study Focus',
+              items: ListenRepeatMode.values.map((mode) {
+                return CPListItem(
+                  text: mode.label,
+                  detailText: mode.description,
                   onPress: (complete, self) {
                     complete();
-                    _startExperience();
+                    _startExperience(mode: mode);
                   },
-                ),
-              ],
+                );
+              }).toList(),
             ),
           ],
           title: 'Language Trainer',
@@ -372,6 +395,12 @@ class CarPlayService {
       _wordItem?.setIsPlaying(state.isPlaying);
       _pauseItem?.setText(state.isPlaying ? 'Pause' : 'Resume');
     }
+
+    if (state.mode != _shownMode) {
+      _shownMode = state.mode;
+      _focusItem?.setText('Focus: ${state.mode.badge}');
+      _focusItem?.setDetailText('Tap to change (${state.mode.label})');
+    }
   }
 
   void _ensureStateListener(ProviderContainer container) {
@@ -392,24 +421,24 @@ class CarPlayService {
     _wordItem = null;
     _pauseItem = null;
     _speedItem = null;
+    _focusItem = null;
     _shownWordId = null;
     _shownPlayingState = null;
     _shownFailure = null;
+    _shownMode = null;
   }
 
-  void _stopSession() {
+  Future<void> _stopSession() async {
     final container = _container;
     if (container == null) return;
-    // stopSession() is async; handle its errors via the future so nothing
-    // escapes unhandled (a try/catch here would only cover the sync part).
-    container
-        .read(listenRepeatViewModelProvider.notifier)
-        .stopSession()
-        .then((xp) {
+    try {
+      final xp = await container
+          .read(listenRepeatViewModelProvider.notifier)
+          .stopSession();
       AppLogger.log("CarPlay session stopped, XP earned: $xp", name: 'CarPlay');
-    }, onError: (Object e, StackTrace st) {
+    } catch (e, st) {
       AppLogger.error('Error stopping session',
           name: 'CarPlay', error: e, stackTrace: st);
-    });
+    }
   }
 }
