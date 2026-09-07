@@ -117,6 +117,17 @@ void main() {
     });
   });
 
+  Future<void> waitForCondition(
+    bool Function() condition, {
+    Duration timeout = const Duration(seconds: 3),
+  }) async {
+    final end = DateTime.now().add(timeout);
+    while (!condition() && DateTime.now().isBefore(end)) {
+      await Future<void>.delayed(const Duration(milliseconds: 10));
+    }
+    expect(condition(), isTrue, reason: 'Condition not met within $timeout');
+  }
+
   group('CarPlayService scene activation with glanceable context', () {
     test('scene activation sets up player template with notes in detailText and word count in header', () async {
       final storage = _MockStorageService();
@@ -187,8 +198,8 @@ void main() {
         (ByteData? data) {},
       );
 
-      // Allow async startSession to run
-      await Future<void>.delayed(const Duration(milliseconds: 200));
+      // Deterministically await startSession to run and populate currentItem
+      await waitForCondition(() => container.read(listenRepeatViewModelProvider).currentItem != null);
 
       final state = container.read(listenRepeatViewModelProvider);
       expect(state.currentItem?.id, 'g1');
@@ -288,11 +299,12 @@ void main() {
         (ByteData? data) {},
       );
 
-      await Future<void>.delayed(const Duration(milliseconds: 200));
+      // Deterministically await startSession to run and populate currentItem
+      await waitForCondition(() => container.read(listenRepeatViewModelProvider).currentItem != null);
 
-      // Advance to next word
+      // Advance to next word and await state propagation
       await vm.nextWord();
-      await Future<void>.delayed(const Duration(milliseconds: 100));
+      await waitForCondition(() => container.read(listenRepeatViewModelProvider).totalWordsSeen == 2);
 
       // Check method calls
       final hasSetRoot = carPlayCalls.any((call) => call.method == 'setRootTemplate');

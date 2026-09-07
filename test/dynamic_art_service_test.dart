@@ -118,5 +118,24 @@ void main() {
       expect(bytes.isNotEmpty, isTrue);
       expect(bytes.sublist(0, 4), [0x89, 0x50, 0x4E, 0x47]);
     });
+
+    test('reuses existing cached file on repeat synthesis of same word', () async {
+      final item = LanguageItem(
+        id: 'cached_word_5',
+        portuguese: 'Bom dia',
+        english: 'Good morning',
+        notes: 'Greeting',
+      );
+
+      final uri1 = await DynamicArtService.generateWordArt(item);
+      final file1 = File.fromUri(uri1);
+      final modTime1 = file1.lastModifiedSync();
+
+      // Second call should return cached file without modifying or re-synthesizing
+      final uri2 = await DynamicArtService.generateWordArt(item);
+      expect(uri2, uri1);
+      final modTime2 = file1.lastModifiedSync();
+      expect(modTime2, modTime1);
+    });
   });
 }

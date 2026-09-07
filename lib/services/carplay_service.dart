@@ -87,6 +87,8 @@ class CarPlayService {
   }
 
   /// Formats the header for the primary word section, indicating session progress.
+  /// Note: [totalWordsSeen] tracks the active word position within the session
+  /// (advances on Next, steps back on Previous).
   static String formatWordSectionHeader(int totalWordsSeen) {
     return totalWordsSeen > 0 ? 'Current Word (#$totalWordsSeen)' : 'Current Word';
   }
@@ -448,13 +450,20 @@ class CarPlayService {
     if (item != null && item.id != _shownWordId) {
       _shownWordId = item.id;
       final wordItem = _wordItem!;
-      wordItem.setText(item.portuguese);
-      wordItem.setDetailText(formatWordDetailText(item));
+      // Use update() to batch text and detailText into a single platform channel call
+      wordItem.update(
+        text: item.portuguese,
+        detailText: formatWordDetailText(item),
+      );
     }
 
     if (state.totalWordsSeen != _shownWordsSeen) {
       _shownWordsSeen = state.totalWordsSeen;
       final template = _playerTemplate;
+      // Section header displays live session progress ('Current Word (#N)').
+      // Note: FCPListTemplate.updateSections rebuilds template sections natively.
+      // We only invoke it when totalWordsSeen actually changes, and guard with try/catch
+      // so any head unit or platform channel failure is swallowed gracefully.
       if (template != null && template.sections.isNotEmpty && _wordItem != null) {
         try {
           final updatedFirstSection = CPListSection(

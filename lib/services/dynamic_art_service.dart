@@ -19,6 +19,17 @@ class DynamicArtService {
   }
 
   static Future<Uri> generateWordArt(LanguageItem item) async {
+    final cleanNotes = item.notes.trim();
+    final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
+    final contentHash = '${item.portuguese}_${item.english}_$cleanNotes'.hashCode.toRadixString(36);
+    final tempDir = await getTemporaryDirectory();
+    final file = File('${tempDir.path}/album_art_${safeId}_$contentHash.png');
+
+    // Fast-path: return cached image if already synthesized and non-empty
+    if (await file.exists() && await file.length() > 0) {
+      return file.uri;
+    }
+
     const double width = 800;
     const double height = 800;
 
@@ -29,7 +40,6 @@ class DynamicArtService {
     final Paint bgPaint = Paint()..color = const Color(0xFF1E1E2C);
     canvas.drawRect(const Rect.fromLTWH(0, 0, width, height), bgPaint);
 
-    final cleanNotes = item.notes.trim();
     final bool hasNotes = cleanNotes.isNotEmpty;
 
     // Optional Grammar / Tense Pill Badge
@@ -141,12 +151,10 @@ class DynamicArtService {
     // Convert to Image
     final ui.Image image = await recorder.endRecording().toImage(width.toInt(), height.toInt());
     final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
+    image.dispose(); // Free native RGBA memory immediately
     final Uint8List pngBytes = byteData!.buffer.asUint8List();
 
     // Save to temp directory with per-word filename to avoid race conditions
-    final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
-    final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/album_art_$safeId.png');
     await file.writeAsBytes(pngBytes);
 
     return file.uri;
