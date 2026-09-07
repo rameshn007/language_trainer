@@ -612,10 +612,15 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     // After waiting, check if session is still active
     if (currentSessionId != _sessionId || !_isAutoPlayActive) return;
 
-    try {
-      await _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex + 1) * _kSourcesPerWord);
-    } catch (e) {
-      AppLogger.error('Non-fatal error seeking to next word', name: 'ListenRepeat', error: e);
+    if (currentWordIndex + 1 < _playlistWords.length) {
+      try {
+        await _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex + 1) * _kSourcesPerWord);
+        if (_isAutoPlayActive) {
+          await _bgAudioPlayer.play();
+        }
+      } catch (e) {
+        AppLogger.error('Non-fatal error seeking to next word', name: 'ListenRepeat', error: e);
+      }
     }
   }
   
@@ -625,6 +630,9 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     if (currentWordIndex > 0) {
       try {
         await _bgAudioPlayer.seek(Duration.zero, index: (currentWordIndex - 1) * _kSourcesPerWord);
+        if (_isAutoPlayActive) {
+          await _bgAudioPlayer.play();
+        }
       } catch (e) {
         AppLogger.error('Non-fatal error seeking to previous word', name: 'ListenRepeat', error: e);
       }

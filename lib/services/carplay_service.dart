@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -51,6 +52,12 @@ class CarPlayService {
   /// event, or the two plugin connection events) only starts one session.
   DateTime? _lastActivation;
 
+  /// Throttles rapid remote skip commands (steering wheel, lock screen,
+  /// CarPlay Now Playing) to avoid double-skips caused by hardware bounce
+  /// or multi-target dispatch.
+  DateTime? _lastRemoteSkipTime;
+  static const _kRemoteSkipDebounce = Duration(milliseconds: 300);
+
   /// Player template for the visible session. Null while CarPlay shows the
   /// main menu or is not connected.
   CPListTemplate? _playerTemplate;
@@ -67,8 +74,21 @@ class CarPlayService {
   void init({required ProviderContainer container}) {
     AppLogger.log("init() called", name: 'CarPlay');
     _container = container;
+    _lastRemoteSkipTime = null;
+    _lastActivation = null;
 
-    // Precise CarPlay-scene foreground signal (iOS only).
+    // Listen to changes in ListenRepeatViewModel so the CarPlay player row
+    // stays in sync with whichever word is playing.
+    if (!_stateListenerAdded) {
+      container.listen<ListenRepeatState>(
+        listenRepeatViewModelProvider,
+        (previous, next) => _onListenRepeatStateChanged(next),
+      );
+      _stateListenerAdded = true;
+    }
+
+    // Set up the scene-lifecycle listener so we know when the driver has
+    // actually brought our CarPlay UI to the screen.
     _sceneChannel.setMethodCallHandler(_onSceneChannelCall);
 
     _flutterCarplay.addListenerOnConnectionChange((status) {
@@ -106,14 +126,46 @@ class CarPlayService {
         () => _querySceneState('launch-late'));
   }
 
+  @visibleForTesting
+  void resetForTesting() {
+    _lastRemoteSkipTime = null;
+    _lastActivation = null;
+  }
+
   // ------------------------------------------------------------------
-  // Scene activation
+  // Scene activation & Remote Commands
   // ------------------------------------------------------------------
 
   Future<Object?> _onSceneChannelCall(MethodCall call) async {
     if (call.method == 'sceneWillEnterForeground') {
       AppLogger.log("CarPlay scene entering foreground", name: 'CarPlay');
       _onSceneActivated();
+    } else if (call.method == 'remoteNextWord') {
+      final now = DateTime.now();
+      if (_lastRemoteSkipTime != null &&
+          now.difference(_lastRemoteSkipTime!) < _kRemoteSkipDebounce) {
+        AppLogger.log("Debounced remoteNextWord", name: 'CarPlay');
+        return null;
+      }
+      _lastRemoteSkipTime = now;
+      AppLogger.log("Handling remoteNextWord", name: 'CarPlay');
+      final container = _container;
+      if (container != null) {
+        await container.read(listenRepeatViewModelProvider.notifier).nextWord();
+      }
+    } else if (call.method == 'remotePreviousWord') {
+      final now = DateTime.now();
+      if (_lastRemoteSkipTime != null &&
+          now.difference(_lastRemoteSkipTime!) < _kRemoteSkipDebounce) {
+        AppLogger.log("Debounced remotePreviousWord", name: 'CarPlay');
+        return null;
+      }
+      _lastRemoteSkipTime = now;
+      AppLogger.log("Handling remotePreviousWord", name: 'CarPlay');
+      final container = _container;
+      if (container != null) {
+        await container.read(listenRepeatViewModelProvider.notifier).previousWord();
+      }
     }
     return null;
   }

@@ -1,6 +1,8 @@
 import Flutter
 import UIKit
 import CarPlay
+import MediaPlayer
+import ObjectiveC
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -59,6 +61,7 @@ final class CarPlaySceneObserver: NSObject {
       }
     }
     self.channel = channel
+    RemoteCommandInterceptor.attach(to: channel)
 
     NotificationCenter.default.addObserver(
       self,
@@ -83,6 +86,94 @@ final class CarPlaySceneObserver: NSObject {
         return false
       }
     }
+  }
+}
+
+/// Intercepts native media commands from physical steering wheel controls,
+/// CarPlay Now Playing controls, Lock Screen, and Control Center.
+///
+/// In Listen & Repeat mode, each word is comprised of 5 audio sources
+/// (PT, silence1, silence2, EN, silence3). By default, `just_audio_background`'s
+/// internal handler advances by a single audio source index, causing skip buttons
+/// to land in silence or mid-word.
+///
+/// This interceptor:
+///  1. Hooks `MPRemoteCommandCenter.shared().nextTrackCommand` and `previousTrackCommand`.
+///  2. Replaces/swizzles `AudioServicePlugin`'s `nextTrack:` and `previousTrack:` methods
+///     using the Objective-C runtime so that even when `AudioServicePlugin` re-registers
+///     itself as the command target upon playback state updates, execution routes here.
+///  3. Dispatches `remoteNextWord` and `remotePreviousWord` over `language_trainer/carplay_scene`
+///     to advance/rewind by full words (5 sources).
+final class RemoteCommandInterceptor {
+  private static var hasSwizzled = false
+  private static weak var activeChannel: FlutterMethodChannel?
+
+  static func attach(to channel: FlutterMethodChannel) {
+    activeChannel = channel
+    setupDirectCommands()
+    swizzleAudioServicePlugin()
+  }
+
+  private static func setupDirectCommands() {
+    let commandCenter = MPRemoteCommandCenter.shared()
+    commandCenter.nextTrackCommand.addTarget { _ in
+      handleRemoteNext()
+      return .success
+    }
+    commandCenter.previousTrackCommand.addTarget { _ in
+      handleRemotePrevious()
+      return .success
+    }
+  }
+
+  private static func handleRemoteNext() {
+    DispatchQueue.main.async {
+      NSLog("[RemoteCommandInterceptor] remoteNextWord triggered")
+      activeChannel?.invokeMethod("remoteNextWord", arguments: nil)
+    }
+  }
+
+  private static func handleRemotePrevious() {
+    DispatchQueue.main.async {
+      NSLog("[RemoteCommandInterceptor] remotePreviousWord triggered")
+      activeChannel?.invokeMethod("remotePreviousWord", arguments: nil)
+    }
+  }
+
+  private static func swizzleAudioServicePlugin() {
+    guard !hasSwizzled else { return }
+    guard let pluginClass = NSClassFromString("AudioServicePlugin") else {
+      NSLog("[RemoteCommandInterceptor] AudioServicePlugin class not found in runtime")
+      return
+    }
+
+    // Replace nextTrack:
+    let nextSelector = Selector(("nextTrack:"))
+    if let originalMethod = class_getInstanceMethod(pluginClass, nextSelector) {
+      let typeEncoding = method_getTypeEncoding(originalMethod)
+      let nextBlock: @convention(block) (AnyObject, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { _, _ in
+        handleRemoteNext()
+        return .success
+      }
+      let newImp = imp_implementationWithBlock(nextBlock)
+      class_replaceMethod(pluginClass, nextSelector, newImp, typeEncoding)
+      NSLog("[RemoteCommandInterceptor] Replaced nextTrack: on AudioServicePlugin")
+    }
+
+    // Replace previousTrack:
+    let prevSelector = Selector(("previousTrack:"))
+    if let originalMethod = class_getInstanceMethod(pluginClass, prevSelector) {
+      let typeEncoding = method_getTypeEncoding(originalMethod)
+      let prevBlock: @convention(block) (AnyObject, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { _, _ in
+        handleRemotePrevious()
+        return .success
+      }
+      let newImp = imp_implementationWithBlock(prevBlock)
+      class_replaceMethod(pluginClass, prevSelector, newImp, typeEncoding)
+      NSLog("[RemoteCommandInterceptor] Replaced previousTrack: on AudioServicePlugin")
+    }
+
+    hasSwizzled = true
   }
 }
 
