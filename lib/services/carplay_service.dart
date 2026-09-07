@@ -40,6 +40,7 @@ class CarPlayService {
 
   ProviderContainer? _container;
   bool _stateListenerAdded = false;
+  ProviderSubscription<ListenRepeatState>? _stateSubscription;
 
   /// Dedicated app channel: pushes `sceneWillEnterForeground` events and
   /// answers `sceneStatus` pulls. Implemented natively (AppDelegate.swift);
@@ -52,10 +53,11 @@ class CarPlayService {
   /// event, or the two plugin connection events) only starts one session.
   DateTime? _lastActivation;
 
-  /// Throttles rapid remote skip commands (steering wheel, lock screen,
+  /// Throttles rapid remote skip commands per direction (steering wheel, lock screen,
   /// CarPlay Now Playing) to avoid double-skips caused by hardware bounce
-  /// or multi-target dispatch.
-  DateTime? _lastRemoteSkipTime;
+  /// or multi-target dispatch while still allowing rapid reversals.
+  DateTime? _lastRemoteNextTime;
+  DateTime? _lastRemotePreviousTime;
   static const _kRemoteSkipDebounce = Duration(milliseconds: 300);
 
   /// Player template for the visible session. Null while CarPlay shows the
@@ -74,18 +76,9 @@ class CarPlayService {
   void init({required ProviderContainer container}) {
     AppLogger.log("init() called", name: 'CarPlay');
     _container = container;
-    _lastRemoteSkipTime = null;
+    _lastRemoteNextTime = null;
+    _lastRemotePreviousTime = null;
     _lastActivation = null;
-
-    // Listen to changes in ListenRepeatViewModel so the CarPlay player row
-    // stays in sync with whichever word is playing.
-    if (!_stateListenerAdded) {
-      container.listen<ListenRepeatState>(
-        listenRepeatViewModelProvider,
-        (previous, next) => _onListenRepeatStateChanged(next),
-      );
-      _stateListenerAdded = true;
-    }
 
     // Set up the scene-lifecycle listener so we know when the driver has
     // actually brought our CarPlay UI to the screen.
@@ -128,8 +121,13 @@ class CarPlayService {
 
   @visibleForTesting
   void resetForTesting() {
-    _lastRemoteSkipTime = null;
+    _lastRemoteNextTime = null;
+    _lastRemotePreviousTime = null;
     _lastActivation = null;
+    _stateSubscription?.close();
+    _stateSubscription = null;
+    _stateListenerAdded = false;
+    _container = null;
   }
 
   // ------------------------------------------------------------------
@@ -142,12 +140,12 @@ class CarPlayService {
       _onSceneActivated();
     } else if (call.method == 'remoteNextWord') {
       final now = DateTime.now();
-      if (_lastRemoteSkipTime != null &&
-          now.difference(_lastRemoteSkipTime!) < _kRemoteSkipDebounce) {
+      if (_lastRemoteNextTime != null &&
+          now.difference(_lastRemoteNextTime!) < _kRemoteSkipDebounce) {
         AppLogger.log("Debounced remoteNextWord", name: 'CarPlay');
         return null;
       }
-      _lastRemoteSkipTime = now;
+      _lastRemoteNextTime = now;
       AppLogger.log("Handling remoteNextWord", name: 'CarPlay');
       final container = _container;
       if (container != null) {
@@ -155,12 +153,12 @@ class CarPlayService {
       }
     } else if (call.method == 'remotePreviousWord') {
       final now = DateTime.now();
-      if (_lastRemoteSkipTime != null &&
-          now.difference(_lastRemoteSkipTime!) < _kRemoteSkipDebounce) {
+      if (_lastRemotePreviousTime != null &&
+          now.difference(_lastRemotePreviousTime!) < _kRemoteSkipDebounce) {
         AppLogger.log("Debounced remotePreviousWord", name: 'CarPlay');
         return null;
       }
-      _lastRemoteSkipTime = now;
+      _lastRemotePreviousTime = now;
       AppLogger.log("Handling remotePreviousWord", name: 'CarPlay');
       final container = _container;
       if (container != null) {
@@ -458,7 +456,7 @@ class CarPlayService {
   void _ensureStateListener(ProviderContainer container) {
     if (_stateListenerAdded) return;
     _stateListenerAdded = true;
-    container.listen<ListenRepeatState>(
+    _stateSubscription = container.listen<ListenRepeatState>(
       listenRepeatViewModelProvider,
       (previous, next) => _onListenRepeatStateChanged(next),
     );

@@ -98,10 +98,12 @@ final class CarPlaySceneObserver: NSObject {
 /// to land in silence or mid-word.
 ///
 /// This interceptor:
-///  1. Hooks `MPRemoteCommandCenter.shared().nextTrackCommand` and `previousTrackCommand`.
-///  2. Replaces/swizzles `AudioServicePlugin`'s `nextTrack:` and `previousTrack:` methods
-///     using the Objective-C runtime so that even when `AudioServicePlugin` re-registers
-///     itself as the command target upon playback state updates, execution routes here.
+///  1. Hooks `MPRemoteCommandCenter.shared().nextTrackCommand`, `previousTrackCommand`,
+///     `skipForwardCommand`, and `skipBackwardCommand`.
+///  2. Replaces/swizzles `AudioServicePlugin`'s corresponding action methods
+///     (`nextTrack:`, `previousTrack:`, `skipForward:`, `skipBackward:`) using the
+///     Objective-C runtime so that even when `AudioServicePlugin` re-registers itself
+///     upon playback updates, execution routes here.
 ///  3. Dispatches `remoteNextWord` and `remotePreviousWord` over `language_trainer/carplay_scene`
 ///     to advance/rewind by full words (5 sources).
 final class RemoteCommandInterceptor {
@@ -124,6 +126,14 @@ final class RemoteCommandInterceptor {
       handleRemotePrevious()
       return .success
     }
+    commandCenter.skipForwardCommand.addTarget { _ in
+      handleRemoteNext()
+      return .success
+    }
+    commandCenter.skipBackwardCommand.addTarget { _ in
+      handleRemotePrevious()
+      return .success
+    }
   }
 
   private static func handleRemoteNext() {
@@ -143,35 +153,38 @@ final class RemoteCommandInterceptor {
   private static func swizzleAudioServicePlugin() {
     guard !hasSwizzled else { return }
     guard let pluginClass = NSClassFromString("AudioServicePlugin") else {
-      NSLog("[RemoteCommandInterceptor] AudioServicePlugin class not found in runtime")
+      NSLog("[RemoteCommandInterceptor] CRITICAL: AudioServicePlugin class not found in runtime")
+      #if DEBUG
+      assertionFailure("[RemoteCommandInterceptor] AudioServicePlugin class not found in Objective-C runtime")
+      #endif
       return
     }
 
-    // Replace nextTrack:
-    let nextSelector = Selector(("nextTrack:"))
-    if let originalMethod = class_getInstanceMethod(pluginClass, nextSelector) {
+    func replaceMethod(named selectorName: String, handler: @escaping () -> Void) -> Bool {
+      let selector = Selector((selectorName))
+      guard let originalMethod = class_getInstanceMethod(pluginClass, selector) else {
+        NSLog("[RemoteCommandInterceptor] WARNING: Method \(selectorName) not found on AudioServicePlugin")
+        return false
+      }
       let typeEncoding = method_getTypeEncoding(originalMethod)
-      let nextBlock: @convention(block) (AnyObject, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { _, _ in
-        handleRemoteNext()
+      let block: @convention(block) (AnyObject, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { _, _ in
+        handler()
         return .success
       }
-      let newImp = imp_implementationWithBlock(nextBlock)
-      class_replaceMethod(pluginClass, nextSelector, newImp, typeEncoding)
-      NSLog("[RemoteCommandInterceptor] Replaced nextTrack: on AudioServicePlugin")
+      let newImp = imp_implementationWithBlock(block)
+      class_replaceMethod(pluginClass, selector, newImp, typeEncoding)
+      NSLog("[RemoteCommandInterceptor] Successfully replaced \(selectorName) on AudioServicePlugin")
+      return true
     }
 
-    // Replace previousTrack:
-    let prevSelector = Selector(("previousTrack:"))
-    if let originalMethod = class_getInstanceMethod(pluginClass, prevSelector) {
-      let typeEncoding = method_getTypeEncoding(originalMethod)
-      let prevBlock: @convention(block) (AnyObject, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus = { _, _ in
-        handleRemotePrevious()
-        return .success
-      }
-      let newImp = imp_implementationWithBlock(prevBlock)
-      class_replaceMethod(pluginClass, prevSelector, newImp, typeEncoding)
-      NSLog("[RemoteCommandInterceptor] Replaced previousTrack: on AudioServicePlugin")
-    }
+    let swizzledNext = replaceMethod(named: "nextTrack:", handler: handleRemoteNext)
+    let swizzledPrev = replaceMethod(named: "previousTrack:", handler: handleRemotePrevious)
+    _ = replaceMethod(named: "skipForward:", handler: handleRemoteNext)
+    _ = replaceMethod(named: "skipBackward:", handler: handleRemotePrevious)
+
+    #if DEBUG
+    assert(swizzledNext && swizzledPrev, "[RemoteCommandInterceptor] AudioServicePlugin nextTrack:/previousTrack: could not be swizzled")
+    #endif
 
     hasSwizzled = true
   }

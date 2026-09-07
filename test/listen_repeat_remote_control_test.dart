@@ -283,5 +283,88 @@ void main() {
       // Should only have executed once due to 300ms debounce
       verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
     });
+
+    test('rapid reversal (next then previous within 300ms) is preserved by per-direction debounce', () async {
+      setupContainer();
+      final carPlayService = CarPlayService();
+      carPlayService.resetForTesting();
+      carPlayService.init(container: container!);
+
+      final vm = notifier();
+      await vm.startSession();
+
+      // Start at word 0 (source index 0)
+      when(() => audioPlayer.currentIndex).thenReturn(0);
+      clearInteractions(audioPlayer);
+
+      final binding = TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+
+      // User presses Next
+      await binding.handlePlatformMessage(
+        sceneChannel.name,
+        sceneChannel.codec.encodeMethodCall(const MethodCall('remoteNextWord')),
+        (_) {},
+      );
+
+      // Current index moves to word 1 (source index 5)
+      when(() => audioPlayer.currentIndex).thenReturn(5);
+
+      // Immediately presses Previous within 50ms (realizing they skipped by mistake)
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+      await binding.handlePlatformMessage(
+        sceneChannel.name,
+        sceneChannel.codec.encodeMethodCall(const MethodCall('remotePreviousWord')),
+        (_) {},
+      );
+
+      // Both should have executed because next and previous have separate debounce trackers
+      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      verify(() => audioPlayer.seek(Duration.zero, index: 0)).called(1);
+    });
+
+    test('CarPlayService.init does not eagerly build ListenRepeatViewModel', () {
+      bool vmBuilt = false;
+      final customContainer = ProviderContainer(
+        overrides: [
+          listenRepeatViewModelProvider.overrideWith(() {
+            vmBuilt = true;
+            return ListenRepeatViewModel(audioPlayer: audioPlayer);
+          }),
+        ],
+      );
+
+      final carPlayService = CarPlayService();
+      carPlayService.resetForTesting();
+      carPlayService.init(container: customContainer);
+
+      // init() must NOT build the ViewModel eagerly on app launch
+      expect(vmBuilt, isFalse);
+
+      customContainer.dispose();
+    });
+
+    test('nextWord and previousWord only invoke play() if player is currently paused', () async {
+      setupContainer();
+      final vm = notifier();
+      await vm.startSession();
+
+      // Case A: currently playing -> play() is NOT invoked (seek maintains playing state)
+      when(() => audioPlayer.playing).thenReturn(true);
+      when(() => audioPlayer.currentIndex).thenReturn(0);
+      clearInteractions(audioPlayer);
+
+      await vm.nextWord();
+      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      verifyNever(() => audioPlayer.play());
+
+      // Case B: currently paused -> play() IS invoked to resume playback on the new word
+      when(() => audioPlayer.playing).thenReturn(false);
+      when(() => audioPlayer.currentIndex).thenReturn(5);
+      clearInteractions(audioPlayer);
+
+      await vm.previousWord();
+      verify(() => audioPlayer.seek(Duration.zero, index: 0)).called(1);
+      verify(() => audioPlayer.play()).called(1);
+    });
   });
 }
