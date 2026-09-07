@@ -7,6 +7,7 @@ import '../models/language_item.dart';
 import '../ui/listen_repeat/listen_repeat_view_model.dart';
 import '../utils/logger.dart';
 import 'listen_repeat_content_service.dart';
+import 'storage_service.dart';
 
 /// Orchestrates the CarPlay experience.
 ///
@@ -40,6 +41,7 @@ class CarPlayService {
   final FlutterCarplay _flutterCarplay = FlutterCarplay();
 
   ProviderContainer? _container;
+  StorageService? _storageService;
   bool _stateListenerAdded = false;
   ProviderSubscription<ListenRepeatState>? _stateSubscription;
 
@@ -65,15 +67,36 @@ class CarPlayService {
   /// main menu or is not connected.
   CPListTemplate? _playerTemplate;
   CPListItem? _wordItem;
+  CPListItem? _flagItem;
   CPListItem? _pauseItem;
   CPListItem? _speedItem;
   CPListItem? _focusItem;
+
+  @visibleForTesting
+  CPListTemplate? get playerTemplateForTesting => _playerTemplate;
+
+  @visibleForTesting
+  CPListItem? get flagItemForTesting => _flagItem;
+
+  @visibleForTesting
+  CPListItem? get wordItemForTesting => _wordItem;
 
   String? _shownWordId;
   bool? _shownPlayingState;
   String? _shownFailure;
   ListenRepeatMode? _shownMode;
   int? _shownWordsSeen;
+  bool? _shownFlagged;
+
+  /// Formats the primary text for the "Flag for Review" row in CarPlay.
+  static String formatFlagItemText(bool isFlagged) {
+    return isFlagged ? '★ Flagged for Review' : '☆ Flag for Review';
+  }
+
+  /// Formats the subtitle text for the "Flag for Review" row in CarPlay.
+  static String formatFlagItemDetailText(bool isFlagged) {
+    return isFlagged ? 'Saved to study later on phone' : 'Save to study later on phone';
+  }
 
   /// Formats the subtitle of the current word row in CarPlay, displaying English
   /// translation along with glanceable grammar/tense pills if notes are present.
@@ -93,9 +116,10 @@ class CarPlayService {
     return totalWordsSeen > 0 ? 'Current Word (#$totalWordsSeen)' : 'Current Word';
   }
 
-  void init({required ProviderContainer container}) {
+  void init({required ProviderContainer container, StorageService? storageService}) {
     AppLogger.log("init() called", name: 'CarPlay');
     _container = container;
+    _storageService = storageService;
     _lastRemoteNextTime = null;
     _lastRemotePreviousTime = null;
     _lastActivation = null;
@@ -148,6 +172,8 @@ class CarPlayService {
     _stateSubscription = null;
     _stateListenerAdded = false;
     _container = null;
+    _storageService = null;
+    _shownFlagged = null;
     _resetPlayer();
   }
 
@@ -298,6 +324,36 @@ class CarPlayService {
       },
     );
 
+    final storage = _storageService;
+    final currentItem = state.currentItem;
+    final isInitiallyFlagged = currentItem != null && (storage?.isItemFlagged(currentItem.id) ?? false);
+    _shownFlagged = isInitiallyFlagged;
+    _shownWordId = currentItem?.id;
+
+    CPListItem? flagItem;
+    if (storage != null) {
+      flagItem = CPListItem(
+        text: formatFlagItemText(isInitiallyFlagged),
+        detailText: formatFlagItemDetailText(isInitiallyFlagged),
+        onPress: (complete, self) async {
+          complete();
+          final activeItem = _container?.read(listenRepeatViewModelProvider).currentItem;
+          if (activeItem != null) {
+            final flaggedItemId = activeItem.id;
+            final isFlagged = await storage.toggleItemFlagged(flaggedItemId);
+            // Protect against race where the word advanced while the async toggle was in flight
+            if (_shownWordId == flaggedItemId) {
+              _shownFlagged = isFlagged;
+              _flagItem?.update(
+                text: formatFlagItemText(isFlagged),
+                detailText: formatFlagItemDetailText(isFlagged),
+              );
+            }
+          }
+        },
+      );
+    }
+
     final pauseItem = CPListItem(
       text: state.isPlaying ? 'Pause' : 'Resume',
       detailText: 'Pause or resume playback',
@@ -343,15 +399,6 @@ class CarPlayService {
       },
     );
 
-    final shuffleItem = CPListItem(
-      text: 'Shuffle words',
-      detailText: 'Restart with a reshuffled deck',
-      onPress: (complete, self) {
-        complete();
-        notifier.shufflePool();
-      },
-    );
-
     final speedItem = CPListItem(
       text: 'Speed: ${state.playbackSpeed}x',
       detailText: 'Tap to change speech speed',
@@ -381,7 +428,7 @@ class CarPlayService {
       sections: [
         CPListSection(
           header: formatWordSectionHeader(state.totalWordsSeen),
-          items: [wordItem],
+          items: [wordItem, ?flagItem],
         ),
         CPListSection(
           header: 'Playback',
@@ -389,13 +436,14 @@ class CarPlayService {
         ),
         CPListSection(
           header: 'Session',
-          items: [focusItem, shuffleItem, speedItem, stopItem],
+          items: [focusItem, speedItem, stopItem],
         ),
       ],
     );
 
     _playerTemplate = template;
     _wordItem = wordItem;
+    _flagItem = flagItem;
     _pauseItem = pauseItem;
     _speedItem = speedItem;
     _focusItem = focusItem;
@@ -455,6 +503,18 @@ class CarPlayService {
         text: item.portuguese,
         detailText: formatWordDetailText(item),
       );
+
+      final storage = _storageService;
+      if (_flagItem != null && storage != null) {
+        final isFlagged = storage.isItemFlagged(item.id);
+        if (isFlagged != _shownFlagged) {
+          _shownFlagged = isFlagged;
+          _flagItem?.update(
+            text: formatFlagItemText(isFlagged),
+            detailText: formatFlagItemDetailText(isFlagged),
+          );
+        }
+      }
     }
 
     if (state.totalWordsSeen != _shownWordsSeen) {
@@ -468,7 +528,10 @@ class CarPlayService {
         try {
           final updatedFirstSection = CPListSection(
             header: formatWordSectionHeader(state.totalWordsSeen),
-            items: [_wordItem!],
+            items: [
+              _wordItem!,
+              ?_flagItem,
+            ],
           );
           final updatedSections = [
             updatedFirstSection,
@@ -531,6 +594,7 @@ class CarPlayService {
   void _resetPlayer() {
     _playerTemplate = null;
     _wordItem = null;
+    _flagItem = null;
     _pauseItem = null;
     _speedItem = null;
     _focusItem = null;
@@ -539,6 +603,7 @@ class CarPlayService {
     _shownFailure = null;
     _shownMode = null;
     _shownWordsSeen = null;
+    _shownFlagged = null;
   }
 
   Future<void> _stopSession() async {

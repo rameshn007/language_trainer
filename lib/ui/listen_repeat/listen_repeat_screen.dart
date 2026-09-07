@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'listen_repeat_view_model.dart';
+import '../../main.dart';
 import '../../services/listen_repeat_content_service.dart';
 import '../widgets/xp_popup.dart';
 
@@ -134,64 +135,102 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
 
               // Word display
               if (item != null) ...[
-                // AvatarGlow for audio playback feedback
-                AvatarGlow(
-                  animate: isSpeaking,
-                  glowColor: Colors.blue.shade300,
-                  duration: const Duration(milliseconds: 2000),
-                  repeat: true,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      color: Theme.of(
-                        context,
-                      ).colorScheme.surfaceContainerHighest,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Grammar / Tense Badge
-                        if (item.notes.isNotEmpty) ...[
-                          Container(
-                            margin: const EdgeInsets.only(bottom: 12),
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primaryContainer,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              item.notes,
-                              style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                color: Theme.of(context).colorScheme.onPrimaryContainer,
-                                fontWeight: FontWeight.bold,
+                Builder(
+                  builder: (context) {
+                    final storage = ref.watch(storageServiceProvider);
+                    final isFlagged = storage.isItemFlagged(item.id);
+
+                    return AvatarGlow(
+                      animate: isSpeaking,
+                      glowColor: Colors.blue.shade300,
+                      duration: const Duration(milliseconds: 2000),
+                      repeat: true,
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.surfaceContainerHighest,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 24,
+                                vertical: 28,
+                              ),
+                              child: Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    // Grammar / Tense Badge
+                                    if (item.notes.isNotEmpty) ...[
+                                      Container(
+                                        margin: const EdgeInsets.only(bottom: 12),
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 12,
+                                          vertical: 4,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context).colorScheme.primaryContainer,
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child: Text(
+                                          item.notes,
+                                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                            color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                    // Portuguese word / phrase
+                                    Text(
+                                      item.portuguese,
+                                      style: Theme.of(context).textTheme.headlineLarge
+                                          ?.copyWith(fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    const SizedBox(height: 12),
+                                    // English translation
+                                    Text(
+                                      item.english,
+                                      style: Theme.of(context).textTheme.titleMedium
+                                          ?.copyWith(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onSurfaceVariant,
+                                          ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        ],
-                        // Portuguese word / phrase
-                        Text(
-                          item.portuguese,
-                          style: Theme.of(context).textTheme.headlineLarge
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 12),
-                        // English translation
-                        Text(
-                          item.english,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onSurfaceVariant,
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: IconButton(
+                                key: const Key('listen_repeat_star_button'),
+                                icon: Icon(
+                                  isFlagged ? Icons.star_rounded : Icons.star_border_rounded,
+                                  color: isFlagged ? Colors.amber : Theme.of(context).colorScheme.onSurfaceVariant,
+                                  size: 28,
+                                ),
+                                tooltip: isFlagged ? 'Remove from review' : 'Flag for review',
+                                onPressed: () async {
+                                  await storage.toggleItemFlagged(item.id);
+                                  if (!mounted) return;
+                                  setState(() {});
+                                },
                               ),
-                          textAlign: TextAlign.center,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
+                    );
+                  },
                 ),
                 const SizedBox(height: 16),
                 Text(

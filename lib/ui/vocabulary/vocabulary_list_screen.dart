@@ -29,6 +29,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   double _speedMultiplier = 0.75;
   bool _isTranslationsHidden = false;
   SortMode _sortMode = SortMode.alphabetical;
+  bool _filterFlaggedOnly = false;
   bool _isPlaying = false;
   String? _currentlyPlayingId;
   final ScrollController _scrollController = ScrollController();
@@ -105,6 +106,11 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
             item.english.toLowerCase().startsWith('to ') ||
             item.notes.toLowerCase().contains('verb'),
       );
+    }
+
+    if (_filterFlaggedOnly) {
+      final storage = ref.read(storageServiceProvider);
+      items = items.where((item) => storage.isItemFlagged(item.id));
     }
 
     if (_searchQuery.isEmpty) {
@@ -302,6 +308,9 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   }
 
   void _showContextMenu(LanguageItem item) {
+    final storage = ref.read(storageServiceProvider);
+    final isFlagged = storage.isItemFlagged(item.id);
+
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -311,6 +320,23 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            ListTile(
+              leading: Icon(
+                isFlagged ? Icons.star_rounded : Icons.star_border_rounded,
+                color: isFlagged ? Colors.amber : null,
+              ),
+              title: Text(isFlagged ? 'Remove from Review' : 'Flag for Review'),
+              onTap: () async {
+                Navigator.pop(context);
+                await storage.toggleItemFlagged(item.id);
+                if (!mounted) return;
+                setState(() {
+                  if (_filterFlaggedOnly) {
+                    _filterItems();
+                  }
+                });
+              },
+            ),
             ListTile(
               leading: const Icon(Icons.play_arrow),
               title: const Text('Play from here'),
@@ -384,6 +410,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final storage = ref.read(storageServiceProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vocabulary List'),
@@ -411,6 +438,20 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
             tooltip: _isPlaying ? 'Stop Playlist' : 'Play Playlist',
             color: _isPlaying ? Colors.red : null,
             onPressed: _togglePlayStop,
+          ),
+          IconButton(
+            key: const Key('vocab_filter_flagged_button'),
+            icon: Icon(
+              _filterFlaggedOnly ? Icons.star : Icons.star_border,
+              color: _filterFlaggedOnly ? Colors.amber : null,
+            ),
+            tooltip: _filterFlaggedOnly ? 'Show all words' : 'Show flagged words only',
+            onPressed: () {
+              setState(() {
+                _filterFlaggedOnly = !_filterFlaggedOnly;
+                _filterItems();
+              });
+            },
           ),
           IconButton(
             icon: const Icon(Icons.speed),
@@ -444,6 +485,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
         separatorBuilder: (context, index) => const Divider(height: 1),
         itemBuilder: (context, index) {
           final item = _filteredItems[index];
+          final isFlagged = storage.isItemFlagged(item.id);
 
           Color masteryColor;
           if (item.masteryLevel >= 4) {
@@ -616,6 +658,25 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
                                 fontSize: 16,
                               ),
                             ),
+                    ),
+                    IconButton(
+                      key: Key('vocab_star_button_${item.id}'),
+                      icon: Icon(
+                        isFlagged ? Icons.star_rounded : Icons.star_border_rounded,
+                        color: isFlagged ? Colors.amber : Colors.grey[400],
+                        size: 24,
+                      ),
+                      tooltip: isFlagged ? 'Remove from review' : 'Flag for review',
+                      visualDensity: VisualDensity.compact,
+                      onPressed: () async {
+                        await storage.toggleItemFlagged(item.id);
+                        if (!mounted) return;
+                        setState(() {
+                          if (_filterFlaggedOnly) {
+                            _filterItems();
+                          }
+                        });
+                      },
                     ),
                   ],
                 ),

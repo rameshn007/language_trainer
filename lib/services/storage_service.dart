@@ -21,14 +21,14 @@ class StorageService {
   Future<void> init() async {
     await Hive.initFlutter();
 
-    // Register all adapters
-    Hive.registerAdapter(LanguageItemAdapter());
-    Hive.registerAdapter(QuestionTypeAdapter());
-    Hive.registerAdapter(QuestionAdapter());
-    Hive.registerAdapter(ActivityTypeAdapter());
-    Hive.registerAdapter(DailyRecordAdapter());
-    Hive.registerAdapter(SessionRecordAdapter());
-    Hive.registerAdapter(WordProgressAdapter());
+    // Register all adapters idempotently
+    if (!Hive.isAdapterRegistered(0)) Hive.registerAdapter(LanguageItemAdapter());
+    if (!Hive.isAdapterRegistered(1)) Hive.registerAdapter(QuestionTypeAdapter());
+    if (!Hive.isAdapterRegistered(2)) Hive.registerAdapter(QuestionAdapter());
+    if (!Hive.isAdapterRegistered(3)) Hive.registerAdapter(ActivityTypeAdapter());
+    if (!Hive.isAdapterRegistered(4)) Hive.registerAdapter(DailyRecordAdapter());
+    if (!Hive.isAdapterRegistered(5)) Hive.registerAdapter(SessionRecordAdapter());
+    if (!Hive.isAdapterRegistered(6)) Hive.registerAdapter(WordProgressAdapter());
 
     // Open all boxes
     _itemsBox = await Hive.openBox<LanguageItem>(_boxName);
@@ -39,6 +39,13 @@ class StorageService {
       _sessionRecordsBoxName,
     );
     _wordProgressBox = await Hive.openBox<WordProgress>(_wordProgressBoxName);
+
+    final rawFlagged = _settingsBox?.get(_flaggedItemIdsKey);
+    if (rawFlagged is List) {
+      _flaggedItemIds = rawFlagged.map((e) => e.toString()).toSet();
+    } else {
+      _flaggedItemIds = <String>{};
+    }
   }
 
   // --- Items ---
@@ -69,6 +76,31 @@ class StorageService {
   Future<void> deleteItem(String id) async {
     if (_itemsBox == null) return;
     await _itemsBox!.delete(id);
+  }
+
+  // --- Flagged Words for Review ---
+  static const String _flaggedItemIdsKey = 'flagged_item_ids';
+  Set<String> _flaggedItemIds = <String>{};
+
+  Set<String> getFlaggedItemIds() {
+    return Set<String>.unmodifiable(_flaggedItemIds);
+  }
+
+  bool isItemFlagged(String itemId) {
+    return _flaggedItemIds.contains(itemId);
+  }
+
+  Future<bool> toggleItemFlagged(String itemId) async {
+    final bool willBeFlagged;
+    if (_flaggedItemIds.contains(itemId)) {
+      _flaggedItemIds.remove(itemId);
+      willBeFlagged = false;
+    } else {
+      _flaggedItemIds.add(itemId);
+      willBeFlagged = true;
+    }
+    await _settingsBox?.put(_flaggedItemIdsKey, _flaggedItemIds.toList());
+    return willBeFlagged;
   }
 
   // --- Settings / Progress ---
