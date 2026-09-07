@@ -36,8 +36,9 @@ void main() {
     // ignore: deprecated_member_use
     registerFallbackValue(ConcatenatingAudioSource(children: []));
     registerFallbackValue(_MockStorageService());
+    registerFallbackValue(LanguageItem(id: 'dummy', portuguese: 'ola', english: 'hello'));
 
-    tempDir = await Directory.systemTemp.createTemp('carplay_glanceable_test');
+    tempDir = await Directory.systemTemp.createTemp('carplay_flag_test');
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
       const MethodChannel('plugins.flutter.io/path_provider'),
@@ -67,53 +68,15 @@ void main() {
     CarPlayService().resetForTesting();
   });
 
-  group('CarPlayService glanceable formatting helpers', () {
-    test('formatWordDetailText returns default instruction when item is null', () {
-      expect(
-        CarPlayService.formatWordDetailText(null),
-        'Listen to the word, then repeat it aloud',
-      );
+  group('CarPlayService - Flagged Words Formatting Helpers', () {
+    test('formatFlagItemText returns star indicator based on flagged state', () {
+      expect(CarPlayService.formatFlagItemText(false), '☆ Flag for Review');
+      expect(CarPlayService.formatFlagItemText(true), '★ Flagged for Review');
     });
 
-    test('formatWordDetailText returns English translation alone when notes is empty', () {
-      final item1 = LanguageItem(
-        id: 'w1',
-        portuguese: 'Obrigado',
-        english: 'Thank you',
-        notes: '',
-      );
-      expect(CarPlayService.formatWordDetailText(item1), 'Thank you');
-
-      final item2 = LanguageItem(
-        id: 'w2',
-        portuguese: 'Por favor',
-        english: 'Please',
-        notes: '   ',
-      );
-      expect(CarPlayService.formatWordDetailText(item2), 'Please');
-    });
-
-    test('formatWordDetailText appends grammar/tense pill note when present', () {
-      final item = LanguageItem(
-        id: 'w3',
-        portuguese: 'Falei',
-        english: 'I spoke',
-        notes: 'Preterite Perfect - Eu',
-      );
-      expect(
-        CarPlayService.formatWordDetailText(item),
-        'I spoke • [Preterite Perfect - Eu]',
-      );
-    });
-
-    test('formatWordSectionHeader returns unindexed header when totalWordsSeen is 0', () {
-      expect(CarPlayService.formatWordSectionHeader(0), 'Current Word');
-    });
-
-    test('formatWordSectionHeader includes live word index when totalWordsSeen > 0', () {
-      expect(CarPlayService.formatWordSectionHeader(1), 'Current Word (#1)');
-      expect(CarPlayService.formatWordSectionHeader(12), 'Current Word (#12)');
-      expect(CarPlayService.formatWordSectionHeader(99), 'Current Word (#99)');
+    test('formatFlagItemDetailText returns clear instruction based on flagged state', () {
+      expect(CarPlayService.formatFlagItemDetailText(false), 'Save to study later on phone');
+      expect(CarPlayService.formatFlagItemDetailText(true), 'Saved to study later on phone');
     });
   });
 
@@ -128,15 +91,15 @@ void main() {
     expect(condition(), isTrue, reason: 'Condition not met within $timeout');
   }
 
-  group('CarPlayService scene activation with glanceable context', () {
-    test('scene activation sets up player template with notes in detailText and word count in header', () async {
+  group('CarPlayService - Flag for Review In-Car Integration', () {
+    test('player template adheres strictly to 8-row limit and includes flag row', () async {
       final storage = _MockStorageService();
       final audioPlayer = _MockAudioPlayer();
       final contentService = _MockContentService();
       final tts = _MockTtsService();
       final progressService = _MockProgressService();
 
-      when(() => storage.isItemFlagged(any())).thenReturn(false);
+      when(() => storage.isItemFlagged('w1')).thenReturn(false);
       when(() => audioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
       when(() => audioPlayer.currentIndexStream).thenAnswer((_) => Stream.value(0));
       when(() => audioPlayer.currentIndex).thenReturn(0);
@@ -165,117 +128,14 @@ void main() {
         await file.writeAsBytes(List.filled(1000, 0));
       });
 
-      final wordWithNotes = LanguageItem(
-        id: 'g1',
-        portuguese: 'Comprei',
-        english: 'I bought',
-        notes: 'Preterite Perfect - Eu',
+      final item = LanguageItem(
+        id: 'w1',
+        portuguese: 'Obrigado',
+        english: 'Thank you',
       );
 
       when(() => contentService.loadContent(mode: any(named: 'mode')))
-          .thenAnswer((_) async => [wordWithNotes]);
-
-      final vm = ListenRepeatViewModel(audioPlayer: audioPlayer);
-      final container = ProviderContainer(
-        overrides: [
-          listenRepeatViewModelProvider.overrideWith(() => vm),
-          storageServiceProvider.overrideWithValue(storage),
-          ttsServiceProvider.overrideWithValue(tts),
-          listenRepeatContentServiceProvider.overrideWithValue(contentService),
-          progressServiceProvider.overrideWith(() => progressService),
-        ],
-      );
-
-      final carPlayService = CarPlayService();
-      carPlayService.init(container: container);
-
-      // Trigger scene activation via native method channel
-      await TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-          .handlePlatformMessage(
-        'language_trainer/carplay_scene',
-        const StandardMethodCodec().encodeMethodCall(
-          const MethodCall('sceneWillEnterForeground'),
-        ),
-        (ByteData? data) {},
-      );
-
-      // Deterministically await startSession to run and populate currentItem
-      await waitForCondition(() => container.read(listenRepeatViewModelProvider).currentItem != null);
-
-      final state = container.read(listenRepeatViewModelProvider);
-      expect(state.currentItem?.id, 'g1');
-      expect(CarPlayService.formatWordDetailText(state.currentItem), 'I bought • [Preterite Perfect - Eu]');
-      expect(CarPlayService.formatWordSectionHeader(state.totalWordsSeen), 'Current Word (#1)');
-    });
-
-    test('advancing words updates row detail text and dispatches section header update', () async {
-      final storage = _MockStorageService();
-      final audioPlayer = _MockAudioPlayer();
-      final contentService = _MockContentService();
-      final tts = _MockTtsService();
-      final progressService = _MockProgressService();
-
-      final carPlayCalls = <MethodCall>[];
-      when(() => storage.isItemFlagged(any())).thenReturn(false);
-      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-          .setMockMethodCallHandler(
-        const MethodChannel('com.oguzhnatly.flutter_carplay'),
-        (MethodCall call) async {
-          carPlayCalls.add(call);
-          return true;
-        },
-      );
-
-      final indexController = StreamController<int?>.broadcast();
-      when(() => audioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
-      when(() => audioPlayer.currentIndexStream).thenAnswer((_) => indexController.stream);
-      when(() => audioPlayer.currentIndex).thenReturn(0);
-      when(() => audioPlayer.playing).thenReturn(false);
-      when(() => audioPlayer.processingState).thenReturn(ProcessingState.ready);
-      when(() => audioPlayer.setAudioSource(any(), initialIndex: any(named: 'initialIndex'), initialPosition: any(named: 'initialPosition'))).thenAnswer((_) async {
-        indexController.add(0);
-        return const Duration(seconds: 1);
-      });
-      when(() => audioPlayer.setSpeed(any())).thenAnswer((_) async {});
-      when(() => audioPlayer.play()).thenAnswer((_) async {});
-      when(() => audioPlayer.stop()).thenAnswer((_) async {});
-      when(() => audioPlayer.seek(any(), index: any(named: 'index'))).thenAnswer((inv) async {
-        final idx = inv.namedArguments[const Symbol('index')] as int?;
-        indexController.add(idx);
-      });
-      when(() => audioPlayer.dispose()).thenAnswer((_) async {});
-
-      when(() => progressService.recordSessionComplete(
-            storage: any(named: 'storage'),
-            activityType: any(named: 'activityType'),
-            score: any(named: 'score'),
-            total: any(named: 'total'),
-            sessionXP: any(named: 'sessionXP'),
-            durationSeconds: any(named: 'durationSeconds'),
-          )).thenAnswer((_) async => 0);
-
-      when(() => tts.synthesizeToFile(any(), any(), language: any(named: 'language'))).thenAnswer((invocation) async {
-        final path = invocation.positionalArguments[1] as String;
-        final file = File(path);
-        await file.parent.create(recursive: true);
-        await file.writeAsBytes(List.filled(1000, 0));
-      });
-
-      final word1 = LanguageItem(
-        id: 'g1',
-        portuguese: 'Comprei',
-        english: 'I bought',
-        notes: 'Preterite Perfect - Eu',
-      );
-      final word2 = LanguageItem(
-        id: 'g2',
-        portuguese: 'Vendi',
-        english: 'I sold',
-        notes: 'Preterite Perfect - Eu',
-      );
-
-      when(() => contentService.loadContent(mode: any(named: 'mode')))
-          .thenAnswer((_) async => [word1, word2]);
+          .thenAnswer((_) async => [item]);
 
       final vm = ListenRepeatViewModel(audioPlayer: audioPlayer);
       final container = ProviderContainer(
@@ -301,26 +161,116 @@ void main() {
         (ByteData? data) {},
       );
 
-      // Deterministically await startSession to run and populate currentItem
       await waitForCondition(() => container.read(listenRepeatViewModelProvider).currentItem != null);
 
-      // Advance to next word and await state propagation
-      await vm.nextWord();
-      await waitForCondition(() => container.read(listenRepeatViewModelProvider).totalWordsSeen == 2);
+      final template = carPlayService.playerTemplateForTesting;
+      expect(template, isNotNull);
 
-      // Check method calls
-      final hasSetRoot = carPlayCalls.any((call) => call.method == 'setRootTemplate');
-      expect(hasSetRoot, isTrue);
+      // Verify sections and row counts:
+      // Section 0: Current Word (wordItem, flagItem) -> 2 items
+      // Section 1: Playback (pauseItem, previousItem, nextItem) -> 3 items
+      // Section 2: Session (focusItem, speedItem, stopItem) -> 3 items
+      // Total = 8 items!
+      expect(template!.sections.length, 3);
+      expect(template.sections[0].items.length, 2);
+      expect(template.sections[1].items.length, 3);
+      expect(template.sections[2].items.length, 3);
 
-      final hasUpdateItem = carPlayCalls.any((call) =>
-          call.method == 'setDetailText' ||
-          call.method == 'updateListItem' ||
-          (call.arguments is Map && call.arguments['detailText'] != null));
-      expect(hasUpdateItem, isTrue);
+      final totalRows = template.sections.fold<int>(0, (sum, sec) => sum + sec.items.length);
+      expect(totalRows, 8, reason: 'CarPlay template must strictly adhere to the 8-row limit');
 
-      final state = container.read(listenRepeatViewModelProvider);
-      expect(state.totalWordsSeen, 2);
-      expect(CarPlayService.formatWordSectionHeader(state.totalWordsSeen), 'Current Word (#2)');
+      final flagItem = carPlayService.flagItemForTesting;
+      expect(flagItem, isNotNull);
+      expect(flagItem!.text, '☆ Flag for Review');
+      expect(flagItem.detailText, 'Save to study later on phone');
+    });
+
+    test('tapping Flag row invokes StorageService toggle and updates row text', () async {
+      final storage = _MockStorageService();
+      final audioPlayer = _MockAudioPlayer();
+      final contentService = _MockContentService();
+      final tts = _MockTtsService();
+      final progressService = _MockProgressService();
+
+      when(() => storage.isItemFlagged('w1')).thenReturn(false);
+      when(() => storage.toggleItemFlagged('w1', item: any(named: 'item'))).thenAnswer((_) async => true);
+
+      when(() => audioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
+      when(() => audioPlayer.currentIndexStream).thenAnswer((_) => Stream.value(0));
+      when(() => audioPlayer.currentIndex).thenReturn(0);
+      when(() => audioPlayer.playing).thenReturn(false);
+      when(() => audioPlayer.processingState).thenReturn(ProcessingState.ready);
+      when(() => audioPlayer.setAudioSource(any(), initialIndex: any(named: 'initialIndex'), initialPosition: any(named: 'initialPosition'))).thenAnswer((_) async => const Duration(seconds: 1));
+      when(() => audioPlayer.setSpeed(any())).thenAnswer((_) async {});
+      when(() => audioPlayer.play()).thenAnswer((_) async {});
+      when(() => audioPlayer.stop()).thenAnswer((_) async {});
+      when(() => audioPlayer.seek(any(), index: any(named: 'index'))).thenAnswer((_) async {});
+      when(() => audioPlayer.dispose()).thenAnswer((_) async {});
+
+      when(() => progressService.recordSessionComplete(
+            storage: any(named: 'storage'),
+            activityType: any(named: 'activityType'),
+            score: any(named: 'score'),
+            total: any(named: 'total'),
+            sessionXP: any(named: 'sessionXP'),
+            durationSeconds: any(named: 'durationSeconds'),
+          )).thenAnswer((_) async => 0);
+
+      when(() => tts.synthesizeToFile(any(), any(), language: any(named: 'language'))).thenAnswer((invocation) async {
+        final path = invocation.positionalArguments[1] as String;
+        final file = File(path);
+        await file.parent.create(recursive: true);
+        await file.writeAsBytes(List.filled(1000, 0));
+      });
+
+      final item = LanguageItem(
+        id: 'w1',
+        portuguese: 'Obrigado',
+        english: 'Thank you',
+      );
+
+      when(() => contentService.loadContent(mode: any(named: 'mode')))
+          .thenAnswer((_) async => [item]);
+
+      final vm = ListenRepeatViewModel(audioPlayer: audioPlayer);
+      final container = ProviderContainer(
+        overrides: [
+          listenRepeatViewModelProvider.overrideWith(() => vm),
+          storageServiceProvider.overrideWithValue(storage),
+          ttsServiceProvider.overrideWithValue(tts),
+          listenRepeatContentServiceProvider.overrideWithValue(contentService),
+          progressServiceProvider.overrideWith(() => progressService),
+        ],
+      );
+
+      final carPlayService = CarPlayService();
+      carPlayService.init(container: container);
+
+      await TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .handlePlatformMessage(
+        'language_trainer/carplay_scene',
+        const StandardMethodCodec().encodeMethodCall(
+          const MethodCall('sceneWillEnterForeground'),
+        ),
+        (ByteData? data) {},
+      );
+
+      await waitForCondition(() => container.read(listenRepeatViewModelProvider).currentItem != null);
+
+      final flagItem = carPlayService.flagItemForTesting;
+      expect(flagItem, isNotNull);
+
+      // Trigger onPress on the flag item
+      var completed = false;
+      flagItem!.onPress!( () {
+        completed = true;
+      }, flagItem);
+
+      expect(completed, isTrue);
+
+      await waitForCondition(() => flagItem.text == '★ Flagged for Review');
+      expect(flagItem.detailText, 'Saved to study later on phone');
+      verify(() => storage.toggleItemFlagged('w1', item: any(named: 'item'))).called(1);
     });
   });
 }

@@ -12,6 +12,7 @@ import '../../main.dart';
 import '../../services/dynamic_art_service.dart';
 import '../../services/listen_repeat_content_service.dart';
 import '../../services/progress_service.dart';
+import '../../services/silence_audio_service.dart';
 import '../../utils/logger.dart';
 import '../../utils/tts_text_sanitizer.dart';
 
@@ -531,14 +532,38 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         artUri: artUri,
       );
 
+      final betweenWordsPause = SilenceAudioService.calculateBetweenWordsPause(item);
+      final repetitionPause = SilenceAudioService.calculateRepetitionPause(item);
+      final repetitionHalf = double.parse((repetitionPause / 2.0).toStringAsFixed(1));
+
+      // Generate or retrieve cached silence WAV files
+      AudioSource silence1Source;
+      AudioSource silence2Source;
+      AudioSource silence3Source;
+
+      try {
+        final silence1Path = await SilenceAudioService.getSilenceFilePath(durationSeconds: repetitionHalf, targetDir: dir);
+        final silence2Path = await SilenceAudioService.getSilenceFilePath(durationSeconds: repetitionHalf, targetDir: dir);
+        final silence3Path = await SilenceAudioService.getSilenceFilePath(durationSeconds: betweenWordsPause, targetDir: dir);
+
+        silence1Source = AudioSource.uri(Uri.file(silence1Path), tag: mediaItem.copyWith(id: '${mediaItem.id}_silence1'));
+        silence2Source = AudioSource.uri(Uri.file(silence2Path), tag: mediaItem.copyWith(id: '${mediaItem.id}_silence2'));
+        silence3Source = AudioSource.uri(Uri.file(silence3Path), tag: mediaItem.copyWith(id: '${mediaItem.id}_silence3'));
+      } catch (silenceErr) {
+        AppLogger.error('Failed to generate silence WAV, falling back to asset silence.mp3', name: 'ListenRepeat', error: silenceErr);
+        silence1Source = AudioSource.asset('assets/audio/silence.mp3', tag: mediaItem.copyWith(id: '${mediaItem.id}_silence1'));
+        silence2Source = AudioSource.asset('assets/audio/silence.mp3', tag: mediaItem.copyWith(id: '${mediaItem.id}_silence2'));
+        silence3Source = AudioSource.asset('assets/audio/silence.mp3', tag: mediaItem.copyWith(id: '${mediaItem.id}_silence3'));
+      }
+
       // Sequence with 5 sources per word:
-      // PT -> Silence 1 -> Silence 2 (~2.1s repetition pause) -> EN -> Silence 3 (~1.0s)
+      // PT -> Silence 1 -> Silence 2 (repetition pause) -> EN -> Silence 3 (between-words pause)
       final sequence = [
         AudioSource.uri(Uri.file(ptFilePath), tag: mediaItem.copyWith(id: '${mediaItem.id}_pt')),
-        AudioSource.asset('assets/audio/silence.mp3', tag: mediaItem.copyWith(id: '${mediaItem.id}_silence1')),
-        AudioSource.asset('assets/audio/silence.mp3', tag: mediaItem.copyWith(id: '${mediaItem.id}_silence2')),
+        silence1Source,
+        silence2Source,
         AudioSource.uri(Uri.file(enFilePath), tag: mediaItem.copyWith(id: '${mediaItem.id}_en')),
-        AudioSource.asset('assets/audio/silence.mp3', tag: mediaItem.copyWith(id: '${mediaItem.id}_silence3')),
+        silence3Source,
       ];
 
       if (sessionId != _sessionId) throw Exception("Session aborted");

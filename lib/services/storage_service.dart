@@ -21,14 +21,14 @@ class StorageService {
   Future<void> init() async {
     await Hive.initFlutter();
 
-    // Register all adapters
-    Hive.registerAdapter(LanguageItemAdapter());
-    Hive.registerAdapter(QuestionTypeAdapter());
-    Hive.registerAdapter(QuestionAdapter());
-    Hive.registerAdapter(ActivityTypeAdapter());
-    Hive.registerAdapter(DailyRecordAdapter());
-    Hive.registerAdapter(SessionRecordAdapter());
-    Hive.registerAdapter(WordProgressAdapter());
+    // Register all adapters idempotently
+    if (!Hive.isAdapterRegistered(0)) Hive.registerAdapter(LanguageItemAdapter());
+    if (!Hive.isAdapterRegistered(1)) Hive.registerAdapter(QuestionTypeAdapter());
+    if (!Hive.isAdapterRegistered(2)) Hive.registerAdapter(QuestionAdapter());
+    if (!Hive.isAdapterRegistered(3)) Hive.registerAdapter(ActivityTypeAdapter());
+    if (!Hive.isAdapterRegistered(4)) Hive.registerAdapter(DailyRecordAdapter());
+    if (!Hive.isAdapterRegistered(5)) Hive.registerAdapter(SessionRecordAdapter());
+    if (!Hive.isAdapterRegistered(6)) Hive.registerAdapter(WordProgressAdapter());
 
     // Open all boxes
     _itemsBox = await Hive.openBox<LanguageItem>(_boxName);
@@ -69,6 +69,48 @@ class StorageService {
   Future<void> deleteItem(String id) async {
     if (_itemsBox == null) return;
     await _itemsBox!.delete(id);
+  }
+
+  LanguageItem? getItem(String id) {
+    return _itemsBox?.get(id);
+  }
+
+  // --- Flagged Words for Review ---
+  static const String _flaggedItemIdsKey = 'flagged_item_ids';
+
+  Set<String> getFlaggedItemIds() {
+    final raw = _settingsBox?.get(_flaggedItemIdsKey);
+    if (raw is List) {
+      return raw.map((e) => e.toString()).toSet();
+    }
+    return <String>{};
+  }
+
+  bool isItemFlagged(String itemId) {
+    return getFlaggedItemIds().contains(itemId);
+  }
+
+  Future<bool> toggleItemFlagged(String itemId, {LanguageItem? item}) async {
+    final flagged = getFlaggedItemIds();
+    final bool willBeFlagged;
+    if (flagged.contains(itemId)) {
+      flagged.remove(itemId);
+      willBeFlagged = false;
+    } else {
+      flagged.add(itemId);
+      willBeFlagged = true;
+      if (item != null && _itemsBox != null && !_itemsBox!.containsKey(itemId)) {
+        await _itemsBox!.put(itemId, item);
+      }
+    }
+    await _settingsBox?.put(_flaggedItemIdsKey, flagged.toList());
+    return willBeFlagged;
+  }
+
+  List<LanguageItem> getFlaggedItems() {
+    final flaggedIds = getFlaggedItemIds();
+    if (flaggedIds.isEmpty || _itemsBox == null) return [];
+    return _itemsBox!.values.where((item) => flaggedIds.contains(item.id)).toList();
   }
 
   // --- Settings / Progress ---
