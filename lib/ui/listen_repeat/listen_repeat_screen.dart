@@ -212,6 +212,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                               top: 8,
                               right: 8,
                               child: IconButton(
+                                key: const Key('listen_repeat_star_button'),
                                 icon: Icon(
                                   isFlagged ? Icons.star_rounded : Icons.star_border_rounded,
                                   color: isFlagged ? Colors.amber : Theme.of(context).colorScheme.onSurfaceVariant,
@@ -219,7 +220,8 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                                 ),
                                 tooltip: isFlagged ? 'Remove from review' : 'Flag for review',
                                 onPressed: () async {
-                                  await storage.toggleItemFlagged(item.id, item: item);
+                                  await storage.toggleItemFlagged(item.id);
+                                  if (!mounted) return;
                                   setState(() {});
                                 },
                               ),

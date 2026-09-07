@@ -3,11 +3,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../main.dart';
 import '../models/language_item.dart';
 import '../ui/listen_repeat/listen_repeat_view_model.dart';
 import '../utils/logger.dart';
 import 'listen_repeat_content_service.dart';
+import 'storage_service.dart';
 
 /// Orchestrates the CarPlay experience.
 ///
@@ -41,6 +41,7 @@ class CarPlayService {
   final FlutterCarplay _flutterCarplay = FlutterCarplay();
 
   ProviderContainer? _container;
+  StorageService? _storageService;
   bool _stateListenerAdded = false;
   ProviderSubscription<ListenRepeatState>? _stateSubscription;
 
@@ -85,15 +86,14 @@ class CarPlayService {
   String? _shownFailure;
   ListenRepeatMode? _shownMode;
   int? _shownWordsSeen;
+  bool? _shownFlagged;
 
   /// Formats the primary text for the "Flag for Review" row in CarPlay.
-  @visibleForTesting
   static String formatFlagItemText(bool isFlagged) {
     return isFlagged ? '★ Flagged for Review' : '☆ Flag for Review';
   }
 
   /// Formats the subtitle text for the "Flag for Review" row in CarPlay.
-  @visibleForTesting
   static String formatFlagItemDetailText(bool isFlagged) {
     return isFlagged ? 'Saved to study later on phone' : 'Save to study later on phone';
   }
@@ -116,9 +116,10 @@ class CarPlayService {
     return totalWordsSeen > 0 ? 'Current Word (#$totalWordsSeen)' : 'Current Word';
   }
 
-  void init({required ProviderContainer container}) {
+  void init({required ProviderContainer container, StorageService? storageService}) {
     AppLogger.log("init() called", name: 'CarPlay');
     _container = container;
+    _storageService = storageService;
     _lastRemoteNextTime = null;
     _lastRemotePreviousTime = null;
     _lastActivation = null;
@@ -171,6 +172,8 @@ class CarPlayService {
     _stateSubscription = null;
     _stateListenerAdded = false;
     _container = null;
+    _storageService = null;
+    _shownFlagged = null;
     _resetPlayer();
   }
 
@@ -321,25 +324,35 @@ class CarPlayService {
       },
     );
 
-    final storage = _container?.read(storageServiceProvider);
+    final storage = _storageService;
     final currentItem = state.currentItem;
     final isInitiallyFlagged = currentItem != null && (storage?.isItemFlagged(currentItem.id) ?? false);
+    _shownFlagged = isInitiallyFlagged;
+    _shownWordId = currentItem?.id;
 
-    final flagItem = CPListItem(
-      text: formatFlagItemText(isInitiallyFlagged),
-      detailText: formatFlagItemDetailText(isInitiallyFlagged),
-      onPress: (complete, self) async {
-        complete();
-        final activeItem = _container?.read(listenRepeatViewModelProvider).currentItem;
-        if (activeItem != null && storage != null) {
-          final isFlagged = await storage.toggleItemFlagged(activeItem.id, item: activeItem);
-          _flagItem?.update(
-            text: formatFlagItemText(isFlagged),
-            detailText: formatFlagItemDetailText(isFlagged),
-          );
-        }
-      },
-    );
+    CPListItem? flagItem;
+    if (storage != null) {
+      flagItem = CPListItem(
+        text: formatFlagItemText(isInitiallyFlagged),
+        detailText: formatFlagItemDetailText(isInitiallyFlagged),
+        onPress: (complete, self) async {
+          complete();
+          final activeItem = _container?.read(listenRepeatViewModelProvider).currentItem;
+          if (activeItem != null) {
+            final flaggedItemId = activeItem.id;
+            final isFlagged = await storage.toggleItemFlagged(flaggedItemId);
+            // Protect against race where the word advanced while the async toggle was in flight
+            if (_shownWordId == flaggedItemId) {
+              _shownFlagged = isFlagged;
+              _flagItem?.update(
+                text: formatFlagItemText(isFlagged),
+                detailText: formatFlagItemDetailText(isFlagged),
+              );
+            }
+          }
+        },
+      );
+    }
 
     final pauseItem = CPListItem(
       text: state.isPlaying ? 'Pause' : 'Resume',
@@ -415,7 +428,7 @@ class CarPlayService {
       sections: [
         CPListSection(
           header: formatWordSectionHeader(state.totalWordsSeen),
-          items: [wordItem, flagItem],
+          items: [wordItem, ?flagItem],
         ),
         CPListSection(
           header: 'Playback',
@@ -491,12 +504,17 @@ class CarPlayService {
         detailText: formatWordDetailText(item),
       );
 
-      final storage = _container?.read(storageServiceProvider);
-      final isFlagged = storage?.isItemFlagged(item.id) ?? false;
-      _flagItem?.update(
-        text: formatFlagItemText(isFlagged),
-        detailText: formatFlagItemDetailText(isFlagged),
-      );
+      final storage = _storageService;
+      if (_flagItem != null && storage != null) {
+        final isFlagged = storage.isItemFlagged(item.id);
+        if (isFlagged != _shownFlagged) {
+          _shownFlagged = isFlagged;
+          _flagItem?.update(
+            text: formatFlagItemText(isFlagged),
+            detailText: formatFlagItemDetailText(isFlagged),
+          );
+        }
+      }
     }
 
     if (state.totalWordsSeen != _shownWordsSeen) {
@@ -585,6 +603,7 @@ class CarPlayService {
     _shownFailure = null;
     _shownMode = null;
     _shownWordsSeen = null;
+    _shownFlagged = null;
   }
 
   Future<void> _stopSession() async {

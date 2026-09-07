@@ -39,6 +39,13 @@ class StorageService {
       _sessionRecordsBoxName,
     );
     _wordProgressBox = await Hive.openBox<WordProgress>(_wordProgressBoxName);
+
+    final rawFlagged = _settingsBox?.get(_flaggedItemIdsKey);
+    if (rawFlagged is List) {
+      _flaggedItemIds = rawFlagged.map((e) => e.toString()).toSet();
+    } else {
+      _flaggedItemIds = <String>{};
+    }
   }
 
   // --- Items ---
@@ -71,46 +78,29 @@ class StorageService {
     await _itemsBox!.delete(id);
   }
 
-  LanguageItem? getItem(String id) {
-    return _itemsBox?.get(id);
-  }
-
   // --- Flagged Words for Review ---
   static const String _flaggedItemIdsKey = 'flagged_item_ids';
+  Set<String> _flaggedItemIds = <String>{};
 
   Set<String> getFlaggedItemIds() {
-    final raw = _settingsBox?.get(_flaggedItemIdsKey);
-    if (raw is List) {
-      return raw.map((e) => e.toString()).toSet();
-    }
-    return <String>{};
+    return Set<String>.unmodifiable(_flaggedItemIds);
   }
 
   bool isItemFlagged(String itemId) {
-    return getFlaggedItemIds().contains(itemId);
+    return _flaggedItemIds.contains(itemId);
   }
 
-  Future<bool> toggleItemFlagged(String itemId, {LanguageItem? item}) async {
-    final flagged = getFlaggedItemIds();
+  Future<bool> toggleItemFlagged(String itemId) async {
     final bool willBeFlagged;
-    if (flagged.contains(itemId)) {
-      flagged.remove(itemId);
+    if (_flaggedItemIds.contains(itemId)) {
+      _flaggedItemIds.remove(itemId);
       willBeFlagged = false;
     } else {
-      flagged.add(itemId);
+      _flaggedItemIds.add(itemId);
       willBeFlagged = true;
-      if (item != null && _itemsBox != null && !_itemsBox!.containsKey(itemId)) {
-        await _itemsBox!.put(itemId, item);
-      }
     }
-    await _settingsBox?.put(_flaggedItemIdsKey, flagged.toList());
+    await _settingsBox?.put(_flaggedItemIdsKey, _flaggedItemIds.toList());
     return willBeFlagged;
-  }
-
-  List<LanguageItem> getFlaggedItems() {
-    final flaggedIds = getFlaggedItemIds();
-    if (flaggedIds.isEmpty || _itemsBox == null) return [];
-    return _itemsBox!.values.where((item) => flaggedIds.contains(item.id)).toList();
   }
 
   // --- Settings / Progress ---

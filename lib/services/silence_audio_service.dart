@@ -7,42 +7,51 @@ import '../utils/logger.dart';
 class SilenceAudioService {
   SilenceAudioService._();
 
+  /// Calculates the expected byte size of a 16-bit mono PCM WAV file.
+  static int calculateExpectedWavBytes(double durationSeconds, {int sampleRate = 44100}) {
+    const int channels = 1;
+    const int bitsPerSample = 16;
+    final int numSamples = (sampleRate * durationSeconds).round();
+    final int dataSize = numSamples * channels * (bitsPerSample ~/ 8);
+    return 44 + dataSize;
+  }
+
   /// Calculates the recommended pause between words (after English before next Portuguese).
   ///
-  /// For short single words, gives a comfortable 2.5s pause (up from legacy ~1.0s).
-  /// For long phrases, dynamically scales up to 5.0s to allow absorption of the phrase.
+  /// For short single words, provides a comfortable 1.4s pause (close to legacy ~1.05s).
+  /// For longer phrases, dynamically scales up to 2.4s max so learners have time to absorb
+  /// the translation without creating long dead air that feels like playback stalled.
   static double calculateBetweenWordsPause(LanguageItem item) {
     final pt = item.portuguese.trim();
     final words = pt.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
     final chars = pt.length;
 
     if (words <= 2 && chars <= 16) {
-      return 2.5;
+      return 1.4;
     }
 
-    // Scale dynamically with length and word count, capped at 5.0s
-    final extraFromWords = (words - 2) * 0.4;
-    final extraFromChars = chars > 25 ? 0.5 : (chars > 16 ? 0.2 : 0.0);
-    final total = (2.5 + extraFromWords + extraFromChars).clamp(2.5, 5.0);
+    final extraFromWords = (words - 2) * 0.25;
+    final extraFromChars = chars > 25 ? 0.3 : (chars > 16 ? 0.15 : 0.0);
+    final total = (1.4 + extraFromWords + extraFromChars).clamp(1.4, 2.4);
     return double.parse(total.toStringAsFixed(1));
   }
 
   /// Calculates the recommended repetition pause (after Portuguese before English).
   ///
-  /// Base is ~2.2s for single words, scaling up to 4.4s for long phrases so learners
-  /// have ample time to speak multi-word utterances before the English translation plays.
+  /// Base is 2.0s for single words (legacy was 2.09s), scaling up to 3.4s for long phrases
+  /// so learners have ample time to repeat multi-word utterances without dead air.
   static double calculateRepetitionPause(LanguageItem item) {
     final pt = item.portuguese.trim();
     final words = pt.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
     final chars = pt.length;
 
     if (words <= 2 && chars <= 16) {
-      return 2.2;
+      return 2.0;
     }
 
-    final extraFromWords = (words - 2) * 0.35;
-    final extraFromChars = chars > 25 ? 0.4 : (chars > 16 ? 0.2 : 0.0);
-    final total = (2.2 + extraFromWords + extraFromChars).clamp(2.2, 4.4);
+    final extraFromWords = (words - 2) * 0.3;
+    final extraFromChars = chars > 25 ? 0.3 : (chars > 16 ? 0.15 : 0.0);
+    final total = (2.0 + extraFromWords + extraFromChars).clamp(2.0, 3.4);
     return double.parse(total.toStringAsFixed(1));
   }
 
@@ -94,7 +103,9 @@ class SilenceAudioService {
   /// Retrieves or creates a silence WAV file on disk for [durationSeconds].
   ///
   /// Caches the file in [targetDir] (or temporary directory) so subsequent calls
-  /// for the same duration reuse the pre-generated file.
+  /// for the same duration reuse the pre-generated file. Writes atomically via a
+  /// temporary file and verifies exact byte size to protect against corrupt or
+  /// truncated files.
   static Future<String> getSilenceFilePath({
     required double durationSeconds,
     Directory? targetDir,
@@ -104,13 +115,26 @@ class SilenceAudioService {
       final ms = (durationSeconds * 1000).round();
       final filePath = '${dir.path}/silence_${ms}ms.wav';
       final file = File(filePath);
+      final expectedBytes = calculateExpectedWavBytes(durationSeconds);
 
-      if (file.existsSync() && file.lengthSync() > 44) {
-        return filePath;
+      if (file.existsSync()) {
+        if (file.lengthSync() == expectedBytes) {
+          return filePath;
+        }
+        // File exists but size does not match expected length (truncated/corrupt). Delete it.
+        AppLogger.log('[Silence] Evicting corrupted/invalid silence WAV: $filePath', name: 'SilenceAudioService');
+        try {
+          file.deleteSync();
+        } catch (_) {}
       }
 
       final bytes = createWavSilenceBytes(durationSeconds);
-      await file.writeAsBytes(bytes, flush: true);
+      // Atomic write: write to temp file then rename
+      final tempFilePath = '$filePath.tmp_${DateTime.now().microsecondsSinceEpoch}';
+      final tempFile = File(tempFilePath);
+      await tempFile.writeAsBytes(bytes, flush: true);
+      await tempFile.rename(filePath);
+
       AppLogger.log('[Silence] Created silence WAV ($durationSeconds s): $filePath', name: 'SilenceAudioService');
       return filePath;
     } catch (e) {

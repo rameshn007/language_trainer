@@ -328,7 +328,8 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
               title: Text(isFlagged ? 'Remove from Review' : 'Flag for Review'),
               onTap: () async {
                 Navigator.pop(context);
-                await storage.toggleItemFlagged(item.id, item: item);
+                await storage.toggleItemFlagged(item.id);
+                if (!mounted) return;
                 setState(() {
                   if (_filterFlaggedOnly) {
                     _filterItems();
@@ -409,6 +410,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final storage = ref.read(storageServiceProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vocabulary List'),
@@ -438,6 +440,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
             onPressed: _togglePlayStop,
           ),
           IconButton(
+            key: const Key('vocab_filter_flagged_button'),
             icon: Icon(
               _filterFlaggedOnly ? Icons.star : Icons.star_border,
               color: _filterFlaggedOnly ? Colors.amber : null,
@@ -482,7 +485,6 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
         separatorBuilder: (context, index) => const Divider(height: 1),
         itemBuilder: (context, index) {
           final item = _filteredItems[index];
-          final storage = ref.read(storageServiceProvider);
           final isFlagged = storage.isItemFlagged(item.id);
 
           Color masteryColor;
@@ -658,6 +660,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
                             ),
                     ),
                     IconButton(
+                      key: Key('vocab_star_button_${item.id}'),
                       icon: Icon(
                         isFlagged ? Icons.star_rounded : Icons.star_border_rounded,
                         color: isFlagged ? Colors.amber : Colors.grey[400],
@@ -666,8 +669,8 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
                       tooltip: isFlagged ? 'Remove from review' : 'Flag for review',
                       visualDensity: VisualDensity.compact,
                       onPressed: () async {
-                        final storage = ref.read(storageServiceProvider);
-                        await storage.toggleItemFlagged(item.id, item: item);
+                        await storage.toggleItemFlagged(item.id);
+                        if (!mounted) return;
                         setState(() {
                           if (_filterFlaggedOnly) {
                             _filterItems();

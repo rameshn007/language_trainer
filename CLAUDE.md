@@ -58,7 +58,7 @@ CarPlay acts as an in-car player for the shared L&R session (no microphone/voice
   - Session startup is strictly gated on the native `language_trainer/carplay_scene` channel (`sceneWillEnterForeground` push or `sceneStatus` pull).
   - State listening via `_ensureStateListener()` is lazy — never attach provider listeners in `init()`.
 - **UI & Head Unit Compliance:**
-  - Player template is a `CPListTemplate` capped at 8 items across 3 sections (Current Word with live now-playing indicator, Playback controls, Session controls: Focus cycle, Shuffle, Speed, Stop).
+  - Player template is a `CPListTemplate` capped at 8 items across 3 sections (Current Word with live now-playing indicator & Flag for Review action [2 items], Playback controls [3 items], Session controls: Focus cycle, Speed, Stop [3 items]; replacing mid-session reshuffle to stay strictly within Apple's 8-item template limit).
   - Stop session returns to the Study Focus menu (`Balanced Mix`, `Verbs`, `Prepositions`, `Phrases`, `Vocabulary`).
 - **Steering Wheel & Media Controls (`RemoteCommandInterceptor` in `AppDelegate.swift`):**
   - Fixes the 5-source skip glitch where default next/previous track steps into silence chunks.

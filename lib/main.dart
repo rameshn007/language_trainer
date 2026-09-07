@@ -56,7 +56,7 @@ void main() async {
   );
 
   AppLogger.log("main() started", name: 'Main');
-  CarPlayService().init(container: container);
+  CarPlayService().init(container: container, storageService: storageService);
   try {
     await notificationService.init();
   } catch (e) {

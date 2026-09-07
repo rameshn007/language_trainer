@@ -6,23 +6,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:language_trainer/main.dart';
 import 'package:language_trainer/models/language_item.dart';
-import 'package:language_trainer/models/progress_data.dart';
 import 'package:language_trainer/services/carplay_service.dart';
 import 'package:language_trainer/services/listen_repeat_content_service.dart';
 import 'package:language_trainer/services/progress_service.dart';
-import 'package:language_trainer/services/storage_service.dart';
-import 'package:language_trainer/services/tts_service.dart';
 import 'package:language_trainer/ui/listen_repeat/listen_repeat_view_model.dart';
 import 'package:mocktail/mocktail.dart';
-
-class _MockAudioPlayer extends Mock implements AudioPlayer {}
-class _MockStorageService extends Mock implements StorageService {}
-class _MockContentService extends Mock implements ListenRepeatContentService {}
-class _MockTtsService extends Mock implements TtsService {}
-class _MockProgressService extends Notifier<ProgressSnapshot> with Mock implements ProgressService {
-  @override
-  ProgressSnapshot build() => const ProgressSnapshot();
-}
+import 'helpers/carplay_test_helpers.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -30,31 +19,9 @@ void main() {
   late Directory tempDir;
 
   setUpAll(() async {
-    registerFallbackValue(ListenRepeatMode.all);
-    registerFallbackValue(ActivityType.listenRepeat);
-    registerFallbackValue(Duration.zero);
-    // ignore: deprecated_member_use
-    registerFallbackValue(ConcatenatingAudioSource(children: []));
-    registerFallbackValue(_MockStorageService());
-
+    registerCarPlayFallbackValues();
     tempDir = await Directory.systemTemp.createTemp('carplay_glanceable_test');
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(
-      const MethodChannel('plugins.flutter.io/path_provider'),
-      (MethodCall methodCall) async {
-        if (methodCall.method == 'getTemporaryDirectory') {
-          return tempDir.path;
-        }
-        return null;
-      },
-    );
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMethodCallHandler(
-      const MethodChannel('com.oguzhnatly.flutter_carplay'),
-      (MethodCall methodCall) async {
-        return true;
-      },
-    );
+    setupCarPlayPlatformChannels(tempDir);
   });
 
   tearDownAll(() async {
@@ -117,26 +84,14 @@ void main() {
     });
   });
 
-  Future<void> waitForCondition(
-    bool Function() condition, {
-    Duration timeout = const Duration(seconds: 3),
-  }) async {
-    final end = DateTime.now().add(timeout);
-    while (!condition() && DateTime.now().isBefore(end)) {
-      await Future<void>.delayed(const Duration(milliseconds: 10));
-    }
-    expect(condition(), isTrue, reason: 'Condition not met within $timeout');
-  }
-
   group('CarPlayService scene activation with glanceable context', () {
     test('scene activation sets up player template with notes in detailText and word count in header', () async {
-      final storage = _MockStorageService();
-      final audioPlayer = _MockAudioPlayer();
-      final contentService = _MockContentService();
-      final tts = _MockTtsService();
-      final progressService = _MockProgressService();
+      final storage = FakeStorageService();
+      final audioPlayer = MockAudioPlayer();
+      final contentService = MockListenRepeatContentService();
+      final tts = MockTtsService();
+      final progressService = MockProgressService();
 
-      when(() => storage.isItemFlagged(any())).thenReturn(false);
       when(() => audioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
       when(() => audioPlayer.currentIndexStream).thenAnswer((_) => Stream.value(0));
       when(() => audioPlayer.currentIndex).thenReturn(0);
@@ -209,14 +164,13 @@ void main() {
     });
 
     test('advancing words updates row detail text and dispatches section header update', () async {
-      final storage = _MockStorageService();
-      final audioPlayer = _MockAudioPlayer();
-      final contentService = _MockContentService();
-      final tts = _MockTtsService();
-      final progressService = _MockProgressService();
+      final storage = FakeStorageService();
+      final audioPlayer = MockAudioPlayer();
+      final contentService = MockListenRepeatContentService();
+      final tts = MockTtsService();
+      final progressService = MockProgressService();
 
       final carPlayCalls = <MethodCall>[];
-      when(() => storage.isItemFlagged(any())).thenReturn(false);
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
           .setMockMethodCallHandler(
         const MethodChannel('com.oguzhnatly.flutter_carplay'),
