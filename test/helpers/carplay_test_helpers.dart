@@ -122,9 +122,12 @@ Future<void> waitForCondition(
   bool Function() condition, {
   Duration timeout = const Duration(seconds: 2),
 }) async {
-  final end = DateTime.now().add(timeout);
-  while (!condition() && DateTime.now().isBefore(end)) {
-    await Future<void>.delayed(const Duration(milliseconds: 10));
+  if (condition()) return;
+  final stopwatch = Stopwatch()..start();
+  while (!condition()) {
+    if (stopwatch.elapsed > timeout) {
+      fail('Condition not met within $timeout');
+    }
+    await Future<void>.delayed(Duration.zero);
   }
-  expect(condition(), isTrue, reason: 'Condition not met within $timeout');
 }

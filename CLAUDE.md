@@ -70,7 +70,7 @@ CarPlay acts as an in-car player for the shared L&R session (no microphone/voice
 
 ## Testing & Quality Conventions
 
-- Run tests: `flutter test` (all tests should pass, currently 163 tests).
+- Run tests: `flutter test` (all tests should pass, currently 197 tests).
 - Static analysis: `flutter analyze` (zero issues allowed).
 - iOS Simulator build: `flutter build ios --no-codesign --simulator`.
 - Test hygiene: Use `CarPlayService().resetForTesting()` in `tearDown` to reset container subscriptions and debounce timestamps.
