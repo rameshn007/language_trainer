@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_carplay/flutter_carplay.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -254,14 +255,20 @@ class CarPlayService {
     final focusItem = CPListItem(
       text: 'Focus: ${state.mode.badge}',
       detailText: 'Tap to change (${state.mode.label})',
-      onPress: (complete, self) async {
-        try {
-          await notifier.cycleMode();
-        } catch (e) {
-          AppLogger.error('Error cycling mode from CarPlay', name: 'CarPlay', error: e);
-        } finally {
-          complete();
-        }
+      onPress: (complete, self) {
+        // Complete immediately to release the CarPlay selection highlight without delay.
+        // Awaiting the full speech synthesis / deck rebuild here keeps the row highlighted
+        // for several seconds on a cold cache. The row text and detail text are updated
+        // reactively via _onListenRepeatStateChanged as soon as the new deck is ready,
+        // and ListenRepeatViewModel serializes rapid consecutive taps so the latest request wins.
+        complete();
+        unawaited(() async {
+          try {
+            await notifier.cycleMode();
+          } catch (e) {
+            AppLogger.error('Error cycling mode from CarPlay', name: 'CarPlay', error: e);
+          }
+        }());
       },
     );
 

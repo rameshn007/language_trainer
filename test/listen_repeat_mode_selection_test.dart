@@ -258,4 +258,33 @@ void main() {
     expect(state().pool.first.id, equals('phrases_1'));
     expect(state().isPlaying, isTrue);
   });
+
+  test('rapid mode switches during slow synthesis serialize cleanly and latest request wins', () async {
+    setupContainer();
+    final vm = notifier();
+
+    // Introduce artificial synthesis delay simulating slow cold-cache network / TTS build
+    when(() => ttsService.synthesizeToFile(any(), any(), language: any(named: 'language'))).thenAnswer((invocation) async {
+      await Future.delayed(const Duration(milliseconds: 100));
+      final path = invocation.positionalArguments[1] as String;
+      final file = File(path);
+      await file.parent.create(recursive: true);
+      await file.writeAsBytes(List.filled(1000, 0));
+    });
+
+    // Fire verbs, then prepositions, then phrases in rapid succession
+    final start1 = vm.startSession(mode: ListenRepeatMode.verbs);
+    await Future.delayed(const Duration(milliseconds: 20));
+    final start2 = vm.setMode(ListenRepeatMode.prepositions);
+    await Future.delayed(const Duration(milliseconds: 20));
+    final start3 = vm.setMode(ListenRepeatMode.phrases);
+
+    await Future.wait([start1, start2, start3]);
+
+    // Latest request (phrases) must win and be actively playing
+    expect(state().mode, equals(ListenRepeatMode.phrases));
+    expect(state().pool.first.id, equals('phrases_1'));
+    expect(state().isPlaying, isTrue);
+    expect(state().failure, isNull);
+  });
 }

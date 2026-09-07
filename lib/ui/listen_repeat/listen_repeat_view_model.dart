@@ -98,6 +98,11 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     
     ref.onDispose(() {
       WidgetsBinding.instance.removeObserver(this);
+      _pendingMode = null;
+      if (_pendingCompleter != null && !_pendingCompleter!.isCompleted) {
+        _pendingCompleter!.complete();
+      }
+      _pendingCompleter = null;
       _bgAudioPlayer.dispose();
       _currentIndexSubscription?.cancel();
       _isAutoPlayActive = false;
@@ -145,47 +150,94 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     }
   }
 
-  /// Guard so only one start attempt runs at a time.
-  /// If a start is already in flight (e.g. during a rapid mode-switch),
-  /// wait briefly for the previous attempt to abort or complete instead of
-  /// silently dropping the call and leaving the UI stuck on "No words loaded".
+  Future<void>? _activeStartFuture;
+  ListenRepeatMode? _pendingMode;
+  Completer<void>? _pendingCompleter;
+
+  /// Starts a playback session for the current or specified [mode].
+  ///
+  /// Concurrency model ("latest request wins"):
+  /// If a start attempt or deck rebuild is already running (e.g. during cold-start
+  /// speech synthesis) and a new mode is requested via [mode], the in-flight
+  /// attempt is invalidated via [_sessionId] and aborted at its next async checkpoint.
+  /// The active start runner then immediately executes the latest requested mode
+  /// rather than giving up after a fixed timeout.
   Future<void> startSession({ListenRepeatMode? mode}) async {
-    if (mode != null) {
-      if (state.mode == mode && (_isAutoPlayActive || _isStarting || state.isPlaying)) {
-        return;
-      }
-      state = state.copyWith(mode: mode);
-      if (_isAutoPlayActive || _isStarting || state.isPlaying) {
-        _sessionWordsOffset = state.totalWordsSeen;
-        await stopSession(recordProgress: false);
-      }
-    } else {
+    // If no mode specified and already active or starting, join existing start
+    if (mode == null) {
       if (_isAutoPlayActive || state.isPlaying) {
         return;
       }
+      if (_isStarting && _activeStartFuture != null) {
+        return _activeStartFuture!;
+      }
     }
 
-    int waitCount = 0;
-    while (_isStarting && waitCount < 40) {
-      await Future.delayed(const Duration(milliseconds: 50));
-      waitCount++;
-    }
-    if (_isStarting) {
-      AppLogger.log('[LR] startSession TIMED OUT waiting for previous start', name: 'ListenRepeat');
+    // If mode is specified and already playing this mode with nothing pending
+    if (mode != null && state.mode == mode && _pendingMode == null && (_isAutoPlayActive || state.isPlaying)) {
       return;
     }
+
+    if (mode != null) {
+      state = state.copyWith(mode: mode);
+    }
+
+    // Invalidate any in-flight generation so its current step aborts promptly
+    _sessionId++;
+    if (_isAutoPlayActive || state.isPlaying) {
+      _sessionWordsOffset = state.totalWordsSeen;
+      _isAutoPlayActive = false;
+      try {
+        await _bgAudioPlayer.stop();
+        await _bgAudioPlayer.seek(Duration.zero);
+      } catch (_) {}
+    }
+
+    _pendingMode = mode ?? state.mode;
+
+    _pendingCompleter ??= Completer<void>();
+    final completer = _pendingCompleter!;
+
+    if (_activeStartFuture != null) {
+      // The running start worker will notice _pendingMode and start the latest mode.
+      return completer.future;
+    }
+
+    _activeStartFuture = _runStartLoop();
+    return completer.future;
+  }
+
+  Future<void> _runStartLoop() async {
     _isStarting = true;
     try {
-      await _startSession();
-    } catch (e, st) {
-      // Also catches anything thrown outside the playback section (a closed
-      // Hive box, say), which would otherwise surface as an unhandled async
-      // error and leave the screen sitting on a spinner.
-      AppLogger.log('[LR] startSession ERROR: $e', name: 'ListenRepeat');
-      AppLogger.log('[LR] stack: $st', name: 'ListenRepeat');
-      _reportFailure(_describeError(e));
+      while (_pendingMode != null) {
+        _pendingMode = null;
+        final currentCompleter = _pendingCompleter;
+
+        try {
+          await _startSession();
+        } catch (e, st) {
+          AppLogger.log('[LR] startSession ERROR: $e', name: 'ListenRepeat');
+          AppLogger.log('[LR] stack: $st', name: 'ListenRepeat');
+          _reportFailure(_describeError(e));
+        } finally {
+          // If no new mode was queued while this session was starting,
+          // complete the completer for the waiting callers.
+          if (_pendingMode == null && currentCompleter != null && !currentCompleter.isCompleted) {
+            currentCompleter.complete();
+            if (_pendingCompleter == currentCompleter) {
+              _pendingCompleter = null;
+            }
+          }
+        }
+      }
     } finally {
       _isStarting = false;
+      _activeStartFuture = null;
+      if (_pendingCompleter != null && !_pendingCompleter!.isCompleted) {
+        _pendingCompleter!.complete();
+      }
+      _pendingCompleter = null;
     }
   }
 
@@ -259,10 +311,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     _shuffledPool.addAll(allItems);
     _shuffledPool.shuffle(_random);
     AppLogger.log('[LR] shuffled ${_shuffledPool.length} items', name: 'ListenRepeat');
-
-    AppLogger.log('[LR] calling stopSession...', name: 'ListenRepeat');
-    await stopSession(recordProgress: false);
-    AppLogger.log('[LR] stopSession done', name: 'ListenRepeat');
 
     _sessionId++;
     final currentSessionId = _sessionId;
@@ -606,9 +654,27 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     state = state.copyWith(isPlaying: false);
   }
 
+  /// Stops playback, clears the playlist, and optionally settles session progress.
+  ///
+  /// Contract for [recordProgress] and [_sessionWordsOffset]:
+  /// - Mid-session operations such as mode switching ([setMode], [cycleMode])
+  ///   or reshuffling ([shufflePool]) pass `recordProgress: false`. In this case,
+  ///   no completed session record is written to storage and no XP is awarded,
+  ///   preventing "XP farming" where repeated cycling or shuffling awards duplicate
+  ///   XP. Instead, [_sessionWordsOffset] caches `state.totalWordsSeen` so the
+  ///   accumulated word count seamlessly carries over into the next deck.
+  /// - Only terminal actions (user explicitly pressing "Stop session", screen
+  ///   disposal, CarPlay disconnect) pass `recordProgress: true` (default). This
+  ///   settles XP exactly once for all words seen during the entire listening session
+  ///   and resets [_sessionWordsOffset] to 0.
   Future<int> stopSession({bool recordProgress = true}) async {
     _sessionId++; // Invalidate any ongoing generation for this session
     _isAutoPlayActive = false;
+    _pendingMode = null;
+    if (_pendingCompleter != null && !_pendingCompleter!.isCompleted) {
+      _pendingCompleter!.complete();
+    }
+    _pendingCompleter = null;
     try {
       await _bgAudioPlayer.stop();
       await _bgAudioPlayer.seek(Duration.zero);
