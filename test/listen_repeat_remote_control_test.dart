@@ -127,8 +127,8 @@ void main() {
   ListenRepeatViewModel notifier() =>
       container!.read(listenRepeatViewModelProvider.notifier);
 
-  group('Word skip controls (Fixing 5-source glitch)', () {
-    test('nextWord seeks by exactly 5 audio sources (1 full word) and resumes play', () async {
+  group('Word skip controls (Fixing 6-source sequence)', () {
+    test('nextWord seeks by exactly 6 audio sources (1 full word) and resumes play', () async {
       setupContainer();
       final vm = notifier();
       await vm.startSession();
@@ -141,8 +141,8 @@ void main() {
 
       await vm.nextWord();
 
-      // Must seek to index 5 (word 1, PT), NOT index 1 (silence1)
-      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      // Must seek to index 6 (word 1, PT), NOT index 1 (silence1)
+      verify(() => audioPlayer.seek(Duration.zero, index: 6)).called(1);
       verify(() => audioPlayer.play()).called(1);
     });
 
@@ -158,25 +158,25 @@ void main() {
 
       await vm.nextWord();
 
-      // 2 ~/ 5 = 0, so next word index is 1 -> seek to 5
-      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      // 2 ~/ 6 = 0, so next word index is 1 -> seek to 6
+      verify(() => audioPlayer.seek(Duration.zero, index: 6)).called(1);
       verify(() => audioPlayer.play()).called(1);
     });
 
-    test('previousWord seeks back by exactly 5 audio sources (1 full word) and resumes play', () async {
+    test('previousWord seeks back by exactly 6 audio sources (1 full word) and resumes play', () async {
       setupContainer();
       final vm = notifier();
       await vm.startSession();
 
       clearInteractions(audioPlayer);
 
-      // Current source index is in word 2 (source index 10)
-      when(() => audioPlayer.currentIndex).thenReturn(10);
+      // Current source index is in word 2 (source index 12)
+      when(() => audioPlayer.currentIndex).thenReturn(12);
 
       await vm.previousWord();
 
-      // Must seek to index 5 (word 1, PT)
-      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      // Must seek to index 6 (word 1, PT)
+      verify(() => audioPlayer.seek(Duration.zero, index: 6)).called(1);
       verify(() => audioPlayer.play()).called(1);
     });
 
@@ -187,13 +187,13 @@ void main() {
 
       clearInteractions(audioPlayer);
 
-      // Current source index is in word 2 English prompt (source index 13: 13 ~/ 5 = 2)
-      when(() => audioPlayer.currentIndex).thenReturn(13);
+      // Current source index is in word 2 English prompt (source index 16: 16 ~/ 6 = 2)
+      when(() => audioPlayer.currentIndex).thenReturn(16);
 
       await vm.previousWord();
 
-      // Must seek to (2 - 1) * 5 = 5
-      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      // Must seek to (2 - 1) * 6 = 6
+      verify(() => audioPlayer.seek(Duration.zero, index: 6)).called(1);
       verify(() => audioPlayer.play()).called(1);
     });
 
@@ -251,7 +251,7 @@ void main() {
         (_) {},
       );
 
-      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      verify(() => audioPlayer.seek(Duration.zero, index: 6)).called(1);
     });
 
     test('rapid remote calls within debounce window are discarded', () async {
@@ -281,7 +281,7 @@ void main() {
       );
 
       // Should only have executed once due to 300ms debounce
-      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      verify(() => audioPlayer.seek(Duration.zero, index: 6)).called(1);
     });
 
     test('rapid reversal (next then previous within 300ms) is preserved by per-direction debounce', () async {
@@ -306,8 +306,8 @@ void main() {
         (_) {},
       );
 
-      // Current index moves to word 1 (source index 5)
-      when(() => audioPlayer.currentIndex).thenReturn(5);
+      // Current index moves to word 1 (source index 6)
+      when(() => audioPlayer.currentIndex).thenReturn(6);
 
       // Immediately presses Previous within 50ms (realizing they skipped by mistake)
       await Future<void>.delayed(const Duration(milliseconds: 50));
@@ -318,7 +318,7 @@ void main() {
       );
 
       // Both should have executed because next and previous have separate debounce trackers
-      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      verify(() => audioPlayer.seek(Duration.zero, index: 6)).called(1);
       verify(() => audioPlayer.seek(Duration.zero, index: 0)).called(1);
     });
 
@@ -354,12 +354,12 @@ void main() {
       clearInteractions(audioPlayer);
 
       await vm.nextWord();
-      verify(() => audioPlayer.seek(Duration.zero, index: 5)).called(1);
+      verify(() => audioPlayer.seek(Duration.zero, index: 6)).called(1);
       verifyNever(() => audioPlayer.play());
 
       // Case B: currently paused -> play() IS invoked to resume playback on the new word
       when(() => audioPlayer.playing).thenReturn(false);
-      when(() => audioPlayer.currentIndex).thenReturn(5);
+      when(() => audioPlayer.currentIndex).thenReturn(6);
       clearInteractions(audioPlayer);
 
       await vm.previousWord();

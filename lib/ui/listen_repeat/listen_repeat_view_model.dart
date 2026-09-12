@@ -68,7 +68,7 @@ class ListenRepeatState {
 }
 
 class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBindingObserver {
-  static const int _kSourcesPerWord = 5;
+  static const int _kSourcesPerWord = 6;
   final Random _random = Random();
   bool _isAutoPlayActive = false;
   int _sessionId = 0;
@@ -145,8 +145,8 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       }
     }
 
-    // Maintain a buffer of up to 3 words
-    if (wordIndex >= _playlistWords.length - 3) {
+    // Maintain a buffer of up to 4 words
+    if (wordIndex >= _playlistWords.length - 4) {
       _appendNextWordInBackground(_sessionId);
     }
   }
@@ -343,6 +343,11 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         throw Exception("Failed to generate initial word sequence");
       }
 
+      // Pre-buffer a second word if pool has multiple items to prevent queue starvation
+      if (_shuffledPool.length > 1 && currentSessionId == _sessionId) {
+        await _ensureNextWordAppended(currentSessionId);
+      }
+
       AppLogger.log('[LR] setting audio source...', name: 'ListenRepeat');
       await _bgAudioPlayer.setAudioSource(_playlist!);
       if (currentSessionId != _sessionId) {
@@ -532,24 +537,25 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         artUri: artUri,
       );
 
-      final betweenWordsPause = SilenceAudioService.calculateBetweenWordsPause(item);
-      final repetitionPause = SilenceAudioService.calculateRepetitionPause(item);
-      final repetitionHalf = double.parse((repetitionPause / 2.0).toStringAsFixed(1));
+      final preEnglishPause = SilenceAudioService.calculatePreEnglishPause(item);
+      const repetitionPause = 1.0;
+      const betweenWordsPause = 1.0;
 
       // Generate or retrieve cached silence WAV files
-      final silence1Path = await SilenceAudioService.getSilenceFilePath(durationSeconds: repetitionHalf, targetDir: dir);
-      final silence2Path = await SilenceAudioService.getSilenceFilePath(durationSeconds: repetitionHalf, targetDir: dir);
+      final silence1Path = await SilenceAudioService.getSilenceFilePath(durationSeconds: repetitionPause, targetDir: dir);
+      final silence2Path = await SilenceAudioService.getSilenceFilePath(durationSeconds: preEnglishPause, targetDir: dir);
       final silence3Path = await SilenceAudioService.getSilenceFilePath(durationSeconds: betweenWordsPause, targetDir: dir);
 
       final silence1Source = AudioSource.uri(Uri.file(silence1Path), tag: mediaItem.copyWith(id: '${mediaItem.id}_silence1'));
       final silence2Source = AudioSource.uri(Uri.file(silence2Path), tag: mediaItem.copyWith(id: '${mediaItem.id}_silence2'));
       final silence3Source = AudioSource.uri(Uri.file(silence3Path), tag: mediaItem.copyWith(id: '${mediaItem.id}_silence3'));
 
-      // Sequence with 5 sources per word:
-      // PT -> Silence 1 -> Silence 2 (repetition pause) -> EN -> Silence 3 (between-words pause)
+      // Sequence with 6 sources per word:
+      // PT -> Silence 1 (1.0s repetition pause) -> PT (repeated) -> Silence 2 (0.5-1.5s adaptive pre-English pause) -> EN -> Silence 3 (1.0s between-words pause)
       final sequence = [
-        AudioSource.uri(Uri.file(ptFilePath), tag: mediaItem.copyWith(id: '${mediaItem.id}_pt')),
+        AudioSource.uri(Uri.file(ptFilePath), tag: mediaItem.copyWith(id: '${mediaItem.id}_pt1')),
         silence1Source,
+        AudioSource.uri(Uri.file(ptFilePath), tag: mediaItem.copyWith(id: '${mediaItem.id}_pt2')),
         silence2Source,
         AudioSource.uri(Uri.file(enFilePath), tag: mediaItem.copyWith(id: '${mediaItem.id}_en')),
         silence3Source,
@@ -592,10 +598,13 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   }
 
   Future<void> _appendNextWordInBackground(int sessionId) async {
-    while (_playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord) < 3) {
+    while (_playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord) < 4) {
       if (sessionId != _sessionId || !_isAutoPlayActive) break;
-      // Yield heavily to the event loop to prevent UI jank, especially on start
-      await Future.delayed(const Duration(seconds: 1));
+      final remainingWords = _playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord);
+      // Yield slightly if we already have at least 2 words buffered to prevent UI jank
+      if (remainingWords >= 2) {
+        await Future.delayed(const Duration(milliseconds: 500));
+      }
       if (sessionId != _sessionId || !_isAutoPlayActive) break;
       
       await _ensureNextWordAppended(sessionId);

@@ -36,7 +36,7 @@ Passive audio training — no speech recognition, user repeats silently. Runs vi
 - **Audio Pipeline:**
   - Words are synthesized on-demand to temporary audio files (`pt-PT` and `en-US`) via `TtsService.synthesizeToFile`.
   - Words are streamed into a `ConcatenatingAudioSource` played by `_bgAudioPlayer` (`just_audio` + `just_audio_background`).
-  - Each word consists of **5 audio sources**: `[PT, silence1, silence2 (repetition pause), EN, silence3]`.
+  - Each word consists of **6 audio sources**: `[PT, silence1 (1.0s repetition pause), PT (repeated), silence2 (adaptive 0.5s~1.5s pre-English pause), EN, silence3 (1.0s between-words pause)]`.
   - Every audio source **must** be tagged with `MediaItem.copyWith(id: '${item.id}_...')` for `just_audio_background` notification support.
 - **Concurrency & State Safety:**
   - Concurrency model: **"latest request wins"** via `_runStartLoop` and `_sessionId` invalidation. Rapid taps (e.g. mode switches) cleanly abort prior in-flight builds.
@@ -61,9 +61,9 @@ CarPlay acts as an in-car player for the shared L&R session (no microphone/voice
   - Player template is a `CPListTemplate` capped at 8 items across 3 sections (Current Word with live now-playing indicator & Flag for Review action [2 items], Playback controls [3 items], Session controls: Focus cycle, Speed, Stop [3 items]; replacing mid-session reshuffle to stay strictly within Apple's 8-item template limit).
   - Stop session returns to the Study Focus menu (`Balanced Mix`, `Verbs`, `Prepositions`, `Phrases`, `Vocabulary`).
 - **Steering Wheel & Media Controls (`RemoteCommandInterceptor` in `AppDelegate.swift`):**
-  - Fixes the 5-source skip glitch where default next/previous track steps into silence chunks.
+  - Fixes the multi-source skip glitch where default next/previous track steps into silence chunks.
   - Swizzles `AudioServicePlugin` (`nextTrack:`, `previousTrack:`, `skipForward:`, `skipBackward:`) via Objective-C runtime and hooks `MPRemoteCommandCenter.shared()`.
-  - Dispatches `remoteNextWord` / `remotePreviousWord` to Dart, seeking by 5 audio sources (`(currentWordIndex ± 1) * 5`) directly to the Portuguese audio.
+  - Dispatches `remoteNextWord` / `remotePreviousWord` to Dart, seeking by 6 audio sources (`(currentWordIndex ± 1) * 6`) directly to the Portuguese audio.
   - Debounced in Dart with independent per-direction timers (`_lastRemoteNextTime`, `_lastRemotePreviousTime`, 300ms) to allow rapid reversals while dropping hardware bounce.
 
 ---

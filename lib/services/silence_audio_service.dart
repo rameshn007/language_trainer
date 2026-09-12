@@ -36,6 +36,26 @@ class SilenceAudioService {
     return double.parse(total.toStringAsFixed(1));
   }
 
+  /// Calculates the recommended pause before the English translation (after Portuguese repetition).
+  ///
+  /// For short single words (e.g. "Olá", "Sim"), provides a 0.5s pause.
+  /// For longer phrases, dynamically scales up to 1.5s max depending on the word and character count
+  /// of the Portuguese utterance.
+  static double calculatePreEnglishPause(LanguageItem item) {
+    final pt = item.portuguese.trim();
+    final words = pt.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
+    final chars = pt.length;
+
+    if (words <= 2 && chars <= 12) {
+      return 0.5;
+    }
+
+    final extraFromWords = (words - 2) * 0.15;
+    final extraFromChars = chars > 25 ? 0.3 : (chars > 12 ? 0.15 : 0.0);
+    final total = (0.5 + extraFromWords + extraFromChars).clamp(0.5, 1.5);
+    return double.parse(total.toStringAsFixed(1));
+  }
+
   /// Calculates the recommended repetition pause (after Portuguese before English).
   ///
   /// Base is 2.0s for single words (legacy was 2.09s), scaling up to 3.4s for long phrases
