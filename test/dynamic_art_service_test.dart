@@ -131,7 +131,9 @@ void main() {
       final file1 = File.fromUri(uri1);
       final modTime1 = file1.lastModifiedSync();
 
-      // Second call should return cached file without modifying or re-synthesizing
+      // Second call should return cached file without modifying or re-synthesizing.
+      // Clear memory cache first to explicitly test the disk-cache fast path.
+      DynamicArtService.clearMemoryCacheForTesting();
       final uri2 = await DynamicArtService.generateWordArt(item);
       expect(uri2, uri1);
       final modTime2 = file1.lastModifiedSync();

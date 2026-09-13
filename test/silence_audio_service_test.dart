@@ -40,6 +40,27 @@ void main() {
       expect(pause, lessThanOrEqualTo(2.4));
     });
 
+    test('calculatePreEnglishPause returns 0.5s for short single word', () {
+      final item = LanguageItem(id: '1', portuguese: 'olá', english: 'hello');
+      expect(SilenceAudioService.calculatePreEnglishPause(item), 0.5);
+    });
+
+    test('calculatePreEnglishPause returns 0.5s for 2 short words', () {
+      final item = LanguageItem(id: '2', portuguese: 'bom dia', english: 'good morning');
+      expect(SilenceAudioService.calculatePreEnglishPause(item), 0.5);
+    });
+
+    test('calculatePreEnglishPause scales adaptively for long phrase, capped at 1.5s', () {
+      final item = LanguageItem(
+        id: '3',
+        portuguese: 'A que horas abre a farmácia mais próxima daqui?',
+        english: 'What time does the nearest pharmacy open from here?',
+      );
+      final pause = SilenceAudioService.calculatePreEnglishPause(item);
+      expect(pause, greaterThan(1.0));
+      expect(pause, lessThanOrEqualTo(1.5));
+    });
+
     test('calculateRepetitionPause scales up for long phrase, capped at 3.4s', () {
       final single = LanguageItem(id: '1', portuguese: 'cão', english: 'dog');
       expect(SilenceAudioService.calculateRepetitionPause(single), 2.0);

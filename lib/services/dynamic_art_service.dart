@@ -6,6 +6,14 @@ import 'package:path_provider/path_provider.dart';
 import '../models/language_item.dart';
 
 class DynamicArtService {
+  static const int _maxCacheSize = 64;
+  static final Map<String, Uri> _memoryCache = {};
+
+  @visibleForTesting
+  static void clearMemoryCacheForTesting() {
+    _memoryCache.clear();
+  }
+
   static double getPortugueseFontSize(int length) {
     if (length > 40) return 44;
     if (length > 25) return 54;
@@ -22,11 +30,25 @@ class DynamicArtService {
     final cleanNotes = item.notes.trim();
     final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
     final contentHash = '${item.portuguese}_${item.english}_$cleanNotes'.hashCode.toRadixString(36);
+    final cacheKey = '${item.id}_$contentHash';
+
+    if (_memoryCache.containsKey(cacheKey)) {
+      final cachedUri = _memoryCache[cacheKey]!;
+      if (File.fromUri(cachedUri).existsSync()) {
+        return cachedUri;
+      }
+      _memoryCache.remove(cacheKey);
+    }
+
     final tempDir = await getTemporaryDirectory();
     final file = File('${tempDir.path}/album_art_${safeId}_$contentHash.png');
 
     // Fast-path: return cached image if already synthesized and non-empty
     if (await file.exists() && await file.length() > 0) {
+      if (_memoryCache.length >= _maxCacheSize) {
+        _memoryCache.remove(_memoryCache.keys.first);
+      }
+      _memoryCache[cacheKey] = file.uri;
       return file.uri;
     }
 
@@ -156,6 +178,10 @@ class DynamicArtService {
 
     // Save to temp directory with per-word filename to avoid race conditions
     await file.writeAsBytes(pngBytes);
+    if (_memoryCache.length >= _maxCacheSize) {
+      _memoryCache.remove(_memoryCache.keys.first);
+    }
+    _memoryCache[cacheKey] = file.uri;
 
     return file.uri;
   }

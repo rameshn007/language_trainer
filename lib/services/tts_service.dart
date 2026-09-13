@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'storage_service.dart';
 import '../utils/logger.dart';
@@ -119,11 +121,11 @@ class TtsService {
 
         // Store available voices for Settings
         availablePtVoices = ptVoicesRaw
-            .map(
-              (v) => {
-                "name": (v["name"] ?? "") as String,
-                "locale": (v["locale"] ?? "") as String,
-                "identifier": (v["identifier"] ?? "") as String,
+            .map<Map<String, String>>(
+              (v) => <String, String>{
+                "name": (v["name"] ?? "").toString(),
+                "locale": (v["locale"] ?? "").toString(),
+                "identifier": (v["identifier"] ?? "").toString(),
               },
             )
             .toList();
@@ -177,11 +179,11 @@ class TtsService {
 
         // Store available voices for Settings
         availableEnVoices = enVoicesRaw
-            .map(
-              (v) => {
-                "name": (v["name"] ?? "") as String,
-                "locale": (v["locale"] ?? "") as String,
-                "identifier": (v["identifier"] ?? "") as String,
+            .map<Map<String, String>>(
+              (v) => <String, String>{
+                "name": (v["name"] ?? "").toString(),
+                "locale": (v["locale"] ?? "").toString(),
+                "identifier": (v["identifier"] ?? "").toString(),
               },
             )
             .toList();
@@ -201,7 +203,7 @@ class TtsService {
         }
       }
     } catch (e) {
-      // Fallbacks
+      AppLogger.error('Error in TtsService._init', name: 'TtsService', error: e);
     }
 
     await _flutterTts.setPitch(1.0);
@@ -209,9 +211,17 @@ class TtsService {
     await _flutterTts.setSpeechRate(0.5);
     // Ensure speak() actually waits for audio to finish before returning
     await _flutterTts.awaitSpeakCompletion(true);
+    // Ensure synthesizeToFile() waits for the audio file to finish writing before returning
+    await _flutterTts.awaitSynthCompletion(true);
   }
 
+  String? _currentConfiguredLanguage;
+  String? _currentConfiguredVoiceIdentifier;
+  Future<void>? _synthLock;
+
   Future<void> setExplicitVoice(String language, String identifier) async {
+    _currentConfiguredLanguage = null;
+    _currentConfiguredVoiceIdentifier = null;
     if (language.startsWith('pt')) {
       try {
         _bestPtVoice = availablePtVoices.firstWhere(
@@ -373,7 +383,15 @@ class TtsService {
 
   Future<void> _prepareVoice(String language) async {
     if (language.startsWith('en')) {
+      final preferredId = _bestEnVoice?['identifier'];
+      if (_currentConfiguredLanguage == 'en-US' &&
+          _currentConfiguredVoiceIdentifier != null &&
+          _currentConfiguredVoiceIdentifier == preferredId) {
+        return;
+      }
+
       await _flutterTts.setLanguage('en-US');
+      _currentConfiguredLanguage = 'en-US';
 
       bool voiceSet = false;
 
@@ -387,7 +405,10 @@ class TtsService {
               name: "TtsService",
             );
             final result = await _flutterTts.setVoice(_bestEnVoice!);
-            if (result == 1) voiceSet = true;
+            if (result == 1) {
+              voiceSet = true;
+              _currentConfiguredVoiceIdentifier = _bestEnVoice!['identifier'];
+            }
           } catch (_) {}
         }
       }
@@ -403,6 +424,7 @@ class TtsService {
             final result = await _flutterTts.setVoice(dynamicVoice);
             if (result == 1) {
               voiceSet = true;
+              _currentConfiguredVoiceIdentifier = dynamicVoice['identifier'];
               AppLogger.log(
                 "EN: Dynamic voice set successfully: ${dynamicVoice['name']}",
                 name: "TtsService",
@@ -413,13 +435,22 @@ class TtsService {
       }
 
       if (!voiceSet) {
+        _currentConfiguredVoiceIdentifier = null;
         AppLogger.log(
           "EN: All voice attempts failed, using setLanguage('en-US') only",
           name: "TtsService",
         );
       }
     } else if (language.startsWith('pt')) {
+      final preferredId = _bestPtVoice?['identifier'];
+      if (_currentConfiguredLanguage == 'pt-PT' &&
+          _currentConfiguredVoiceIdentifier != null &&
+          _currentConfiguredVoiceIdentifier == preferredId) {
+        return;
+      }
+
       await _flutterTts.setLanguage('pt-PT');
+      _currentConfiguredLanguage = 'pt-PT';
 
       bool voiceSet = false;
 
@@ -430,7 +461,10 @@ class TtsService {
             name: "TtsService",
           );
           final result = await _flutterTts.setVoice(_bestPtVoice!);
-          if (result == 1) voiceSet = true;
+          if (result == 1) {
+            voiceSet = true;
+            _currentConfiguredVoiceIdentifier = _bestPtVoice!['identifier'];
+          }
         } catch (_) {}
       }
 
@@ -445,6 +479,7 @@ class TtsService {
             final result = await _flutterTts.setVoice(dynamicVoice);
             if (result == 1) {
               voiceSet = true;
+              _currentConfiguredVoiceIdentifier = dynamicVoice['identifier'];
               AppLogger.log(
                 "PT: Dynamic voice set successfully: ${dynamicVoice['name']}",
                 name: "TtsService",
@@ -455,10 +490,55 @@ class TtsService {
       }
 
       if (!voiceSet) {
+        _currentConfiguredVoiceIdentifier = null;
         AppLogger.log(
           "PT: All voice attempts failed, using setLanguage('pt-PT') only",
           name: "TtsService",
         );
+      }
+    }
+  }
+
+  @visibleForTesting
+  Duration lockWaitTimeout = const Duration(seconds: 8);
+
+  @visibleForTesting
+  Duration actionTimeout = const Duration(seconds: 12);
+
+  Future<T> _withTtsLock<T>(Future<T> Function() action) async {
+    while (_synthLock != null) {
+      try {
+        await _synthLock!.timeout(lockWaitTimeout);
+      } catch (e) {
+        AppLogger.error('TTS lock wait timed out, breaking lock', name: 'TtsService', error: e);
+        try {
+          await _flutterTts.stop();
+        } catch (_) {}
+        _synthLock = null;
+        break;
+      }
+    }
+
+    final completer = Completer<void>();
+    _synthLock = completer.future;
+
+    try {
+      return await action().timeout(
+        actionTimeout,
+        onTimeout: () {
+          AppLogger.error('TTS action timed out after ${actionTimeout.inSeconds}s', name: 'TtsService');
+          try {
+            _flutterTts.stop();
+          } catch (_) {}
+          throw TimeoutException('TTS operation timed out');
+        },
+      );
+    } finally {
+      if (!completer.isCompleted) {
+        completer.complete();
+      }
+      if (identical(_synthLock, completer.future)) {
+        _synthLock = null;
       }
     }
   }
@@ -470,11 +550,12 @@ class TtsService {
       await initFuture;
     }
 
-    if (language != null) {
-      await _prepareVoice(language);
-    }
-
-    await _flutterTts.speak(text);
+    await _withTtsLock(() async {
+      if (language != null) {
+        await _prepareVoice(language);
+      }
+      await _flutterTts.speak(text);
+    });
   }
 
   Future<void> synthesizeToFile(String text, String fileName, {String? language}) async {
@@ -484,15 +565,21 @@ class TtsService {
       await initFuture;
     }
 
-    if (language != null) {
-      await _prepareVoice(language);
-    }
+    await _withTtsLock(() async {
+      if (language != null) {
+        await _prepareVoice(language);
+      }
 
-    // On iOS, we MUST pass true for isFullPath if we provide an absolute path
-    await _flutterTts.synthesizeToFile(text, fileName, Platform.isIOS);
+      // On iOS, we MUST pass true for isFullPath if we provide an absolute path
+      await _flutterTts.synthesizeToFile(text, fileName, Platform.isIOS);
+    });
   }
 
   Future<void> stop() async {
-    await _flutterTts.stop();
+    _currentConfiguredLanguage = null;
+    _currentConfiguredVoiceIdentifier = null;
+    try {
+      await _flutterTts.stop();
+    } catch (_) {}
   }
 }
