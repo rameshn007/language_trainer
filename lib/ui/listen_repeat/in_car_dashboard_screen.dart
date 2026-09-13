@@ -1,8 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../main.dart';
+import '../../models/language_item.dart';
+import '../../services/carplay_service.dart';
 import '../../services/listen_repeat_content_service.dart';
+import '../../services/storage_service.dart';
 import '../../theme/carplay_theme.dart';
 import '../widgets/xp_popup.dart';
 import 'listen_repeat_view_model.dart';
@@ -20,12 +24,27 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final state = ref.read(listenRepeatViewModelProvider);
       if (!state.isPlaying && state.currentItem == null) {
         ref.read(listenRepeatViewModelProvider.notifier).startSession();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    super.dispose();
   }
 
   void _stopSessionAndPop() async {
@@ -42,6 +61,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(listenRepeatViewModelProvider);
     final storage = ref.watch(storageServiceProvider);
+    final modeCounts = ref.watch(listenRepeatModeCountsProvider).valueOrNull ?? {};
     final item = state.currentItem;
     final isFlagged = item != null && storage.isItemFlagged(item.id);
     final notifier = ref.read(listenRepeatViewModelProvider.notifier);
@@ -64,7 +84,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                     // Left Column: Practice Sets
                     Expanded(
                       flex: 3,
-                      child: _buildPracticeSetsColumn(state, notifier),
+                      child: _buildPracticeSetsColumn(state, notifier, modeCounts),
                     ),
 
                     const SizedBox(width: 20),
@@ -72,7 +92,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                     // Center Column: Flashcard & Status
                     Expanded(
                       flex: 6,
-                      child: _buildCenterCardColumn(state, item, isFlagged, storage),
+                      child: _buildCenterCardColumn(state, item, isFlagged, storage, modeCounts),
                     ),
 
                     const SizedBox(width: 20),
@@ -181,6 +201,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
   Widget _buildPracticeSetsColumn(
     ListenRepeatState state,
     ListenRepeatViewModel notifier,
+    Map<ListenRepeatMode, int> modeCounts,
   ) {
     const modes = [
       ListenRepeatMode.all,
@@ -207,9 +228,9 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
             itemBuilder: (context, index) {
               final mode = modes[index];
               final isSelected = state.mode == mode;
-              final wordCount = (isSelected && state.pool.isNotEmpty)
-                  ? state.pool.length
-                  : 12;
+              final wordCount = modeCounts[mode] ??
+                  ((isSelected && state.pool.isNotEmpty) ? state.pool.length : 0);
+              final countText = wordCount > 0 ? '$wordCount words' : 'Available words';
 
               return InkWell(
                 key: Key('carplay_dash_mode_${mode.name}'),
@@ -252,7 +273,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              '$wordCount words',
+                              countText,
                               style: CarPlayTheme.cardSubtitle,
                             ),
                           ],
@@ -277,13 +298,23 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
 
   Widget _buildCenterCardColumn(
     ListenRepeatState state,
-    dynamic item,
+    LanguageItem? item,
     bool isFlagged,
-    dynamic storage,
+    StorageService storage,
+    Map<ListenRepeatMode, int> modeCounts,
   ) {
-    final int wordsSeen = max(1, state.totalWordsSeen);
-    final int poolCount = state.pool.isNotEmpty ? state.pool.length : 12;
-    final int currentDot = (wordsSeen - 1).clamp(0, 11);
+    final int wordsSeen = state.totalWordsSeen;
+    final int poolCount = state.pool.isNotEmpty
+        ? state.pool.length
+        : (modeCounts[state.mode] ?? 0);
+    final int currentWordPos = (poolCount > 0 && wordsSeen > 0)
+        ? ((wordsSeen - 1) % poolCount) + 1
+        : max(1, wordsSeen);
+    final int dotCount = poolCount > 0 ? min(poolCount, 12) : 12;
+    final int currentDot = (currentWordPos - 1) % dotCount;
+    final String counterText = poolCount > 0
+        ? 'Word $currentWordPos of $poolCount'
+        : 'Word $wordsSeen';
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -325,8 +356,9 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                       tooltip: isFlagged ? 'Remove bookmark' : 'Flag for review',
                       onPressed: item != null
                           ? () async {
-                              await storage.toggleItemFlagged(item.id);
+                              final newFlagged = await storage.toggleItemFlagged(item.id);
                               setState(() {});
+                              CarPlayService().onItemFlagToggled(item, newFlagged);
                             }
                           : null,
                     ),
@@ -410,7 +442,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
             // Pagination Dots
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(12, (index) {
+              children: List.generate(dotCount, (index) {
                 final isCurrent = index == currentDot;
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 3),
@@ -439,7 +471,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
 
             // Word Counter Text
             Text(
-              'Word $wordsSeen of $poolCount',
+              counterText,
               style: CarPlayTheme.metaText,
             ),
           ],

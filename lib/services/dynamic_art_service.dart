@@ -55,8 +55,11 @@ class DynamicArtService {
     final cleanNotes = item.notes.trim();
     final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
     final contentHash = '${item.portuguese}_${item.english}_$cleanNotes'.hashCode.toRadixString(36);
+    final int? displayWordPos = (wordIndex != null && totalWords != null && totalWords > 0)
+        ? ((wordIndex - 1) % totalWords) + 1
+        : wordIndex;
     final flagTag = isFlagged ? 'f1' : 'f0';
-    final progressTag = wordIndex != null ? 'w${wordIndex}_$totalWords' : 'w0';
+    final progressTag = displayWordPos != null ? 'w${displayWordPos}_$totalWords' : 'w0';
     final cacheKey = '${item.id}_${contentHash}_${flagTag}_$progressTag';
 
     if (_memoryCache.containsKey(cacheKey)) {
@@ -68,7 +71,7 @@ class DynamicArtService {
     }
 
     final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/album_art_${safeId}_${contentHash}_$flagTag.png');
+    final file = File('${tempDir.path}/album_art_${safeId}_${contentHash}_${flagTag}_$progressTag.png');
 
     // Fast-path: return cached image if already synthesized and non-empty
     if (await file.exists() && await file.length() > 0) {
@@ -246,9 +249,9 @@ class DynamicArtService {
     );
 
     // 9. Bottom progress counter / dots if provided
-    if (wordIndex != null && totalWords != null && totalWords > 0) {
+    if (displayWordPos != null && totalWords != null && totalWords > 0) {
       final int dotCount = totalWords.clamp(1, 14);
-      final int activeDot = (wordIndex - 1).clamp(0, dotCount - 1);
+      final int activeDot = (displayWordPos - 1) % dotCount;
       const double dotRadius = 4.0;
       const double dotSpacing = 14.0;
       final double totalDotsWidth = (dotCount * dotRadius * 2) + ((dotCount - 1) * (dotSpacing - (dotRadius * 2)));

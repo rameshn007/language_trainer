@@ -13,9 +13,9 @@ This document tracks the phased architecture, design, and roadmap for the **List
 | **Phase 3** | **Glanceable Word Context & Dynamic Artwork** | ✅ **Completed** | Display `item.notes` (grammar/tenses) on CarPlay row, show word counter `#X`, and add notes badge to album art. | `carplay_service.dart`, `dynamic_art_service.dart` |
 | **Phase 4** | **In-Car "Flag for Review" / Starred Words** | ✅ **Merged** (PR #30) | One-tap button on CarPlay to bookmark difficult words while driving for later review on phone. | `carplay_service.dart`, `storage_service.dart`, `listen_repeat_screen.dart` |
 | **Phase 5** | **Brand-Spec UX & Native Now Playing Integration** | ✅ **Completed** | Automatic navigation to CPNowPlayingTemplate with high-fidelity flashcard art (steel-blue halo), native Now Playing Star button, Practice Sets, and In-Car Dashboard. | `AppDelegate.swift`, `carplay_service.dart`, `dynamic_art_service.dart`, `in_car_dashboard_screen.dart` |
-| **Phase 5** | **Commute Rewards & Post-Session XP Summary** | ⏳ Planned | Show completion alert on session stop with words completed and XP earned; display drive stats on menu. | `carplay_service.dart`, `listen_repeat_view_model.dart` |
-| **Phase 6** | **Active Recall & Repetition Modes** | ⏳ Planned | Optional "Active Recall" mode (EN prompt -> recall PT -> PT confirmation) and "Double Listen" for noisy commutes. | `listen_repeat_view_model.dart`, `carplay_service.dart` |
-| **Phase 7** | **HIG Layout & In-Car Error Recovery** | ⏳ Planned | Streamline list layout for driving safety; add one-tap "Try Again" item on CarPlay when TTS fails. | `carplay_service.dart` |
+| **Phase 6** | **Commute Rewards & Post-Session XP Summary** | ⏳ Planned | Show completion alert on session stop with words completed and XP earned; display drive stats on menu. | `carplay_service.dart`, `listen_repeat_view_model.dart` |
+| **Phase 7** | **Active Recall & Repetition Modes** | ⏳ Planned | Optional "Active Recall" mode (EN prompt -> recall PT -> PT confirmation) and "Double Listen" for noisy commutes. | `listen_repeat_view_model.dart`, `carplay_service.dart` |
+| **Phase 8** | **HIG Layout & In-Car Error Recovery** | ⏳ Planned | Streamline list layout for driving safety; add one-tap "Try Again" item on CarPlay when TTS fails. | `carplay_service.dart` |
 
 ---
 
@@ -114,7 +114,7 @@ Drivers who encounter a difficult conjugation or unfamiliar phrase while driving
 
 ---
 
-### Phase 5: Commute Rewards & Post-Session XP Summary
+### Phase 6: Commute Rewards & Post-Session XP Summary
 #### Problem
 When the driver taps "Stop session", the CarPlay screen resets to the main menu without feedback on words reviewed or XP earned.
 
@@ -132,7 +132,7 @@ When the driver taps "Stop session", the CarPlay screen resets to the main menu 
 
 ---
 
-### Phase 6: Driving Pedagogy Modes: Active Recall & Double Listen
+### Phase 7: Driving Pedagogy Modes: Active Recall & Double Listen
 #### Problem
 Commutes often have background road noise making a single pass hard to hear. Furthermore, some learners want active recall (English prompt first -> recall Portuguese before speaker reveals it).
 
@@ -150,7 +150,7 @@ Commutes often have background road noise making a single pass hard to hear. Fur
 
 ---
 
-### Phase 7: Apple CarPlay HIG Layout Streamlining & In-Car Error Recovery
+### Phase 8: Apple CarPlay HIG Layout Streamlining & In-Car Error Recovery
 #### Problem
 - Redundant items ("Replay word" when tapping the word row already replays).
 - If TTS fails, the driver cannot retry from CarPlay.

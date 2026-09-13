@@ -68,9 +68,16 @@ final listenRepeatContentServiceProvider = Provider<ListenRepeatContentService>(
   return ListenRepeatContentService(storage, verbService);
 });
 
+final listenRepeatModeCountsProvider = FutureProvider<Map<ListenRepeatMode, int>>((ref) async {
+  final contentService = ref.watch(listenRepeatContentServiceProvider);
+  return contentService.getModeCounts();
+});
+
 class ListenRepeatContentService {
   final StorageService _storageService;
   final VerbService _verbService;
+
+  Map<ListenRepeatMode, int>? _cachedModeCounts;
 
   List<LanguageItem>? _cachedPhrases;
   List<LanguageItem>? _cachedVerbPhrases;
@@ -79,6 +86,36 @@ class ListenRepeatContentService {
   List<LanguageItem>? _cachedPrepositions;
 
   ListenRepeatContentService(this._storageService, this._verbService);
+
+  Future<Map<ListenRepeatMode, int>> getModeCounts() async {
+    if (_cachedModeCounts != null) return _cachedModeCounts!;
+    final vocabItems = _storageService.getAllItems();
+    if (vocabItems.isEmpty) {
+      return {for (final m in ListenRepeatMode.values) m: 0};
+    }
+    await _ensureAuxiliaryDataLoaded();
+
+    final phrases = _cachedPhrases ?? [];
+    final verbPhrases = _cachedVerbPhrases ?? [];
+    final exampleSentences = _cachedExampleSentences ?? [];
+    final conjugations = _cachedConjugations ?? [];
+    final prepositions = _cachedPrepositions ?? [];
+
+    final verbsCount = conjugations.length + verbPhrases.length + vocabItems.where((i) => i.id.startsWith('verb_') || i.wordType == 'verb').length;
+    final prepCount = prepositions.length;
+    final phrasesCount = phrases.length + verbPhrases.length + exampleSentences.length;
+    final vocabCount = vocabItems.where((i) => !i.id.startsWith('verb_')).length;
+    final allCount = vocabCount + phrasesCount + conjugations.length + prepCount;
+
+    _cachedModeCounts = {
+      ListenRepeatMode.all: allCount,
+      ListenRepeatMode.verbs: verbsCount,
+      ListenRepeatMode.prepositions: prepCount,
+      ListenRepeatMode.phrases: phrasesCount,
+      ListenRepeatMode.vocabulary: vocabCount,
+    };
+    return _cachedModeCounts!;
+  }
 
   Future<List<LanguageItem>> loadContent({ListenRepeatMode mode = ListenRepeatMode.all}) async {
     final vocabItems = _storageService.getAllItems();

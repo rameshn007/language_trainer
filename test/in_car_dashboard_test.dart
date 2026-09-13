@@ -19,15 +19,24 @@ class _MockDashboardLRViewModel extends ListenRepeatViewModel {
   bool cycleSpeedCalled = false;
   ListenRepeatMode? switchedMode;
 
-  _MockDashboardLRViewModel(this._initialItem, {required super.audioPlayer});
+  final List<LanguageItem>? _initialPool;
+  final int _initialWordsSeen;
+
+  _MockDashboardLRViewModel(
+    this._initialItem, {
+    required super.audioPlayer,
+    List<LanguageItem>? initialPool,
+    int initialWordsSeen = 8,
+  })  : _initialPool = initialPool,
+        _initialWordsSeen = initialWordsSeen;
 
   @override
   ListenRepeatState build() {
     return ListenRepeatState(
       currentItem: _initialItem,
-      pool: [_initialItem],
+      pool: _initialPool ?? [_initialItem],
       isPlaying: false,
-      totalWordsSeen: 8,
+      totalWordsSeen: _initialWordsSeen,
       mode: ListenRepeatMode.verbs,
     );
   }
@@ -106,11 +115,20 @@ void main() {
   Widget createWidgetUnderTest({
     required FakeStorageService storage,
     required _MockDashboardLRViewModel vm,
+    Map<ListenRepeatMode, int>? modeCounts,
   }) {
+    final counts = modeCounts ?? {
+      ListenRepeatMode.all: 20,
+      ListenRepeatMode.verbs: 10,
+      ListenRepeatMode.prepositions: 5,
+      ListenRepeatMode.phrases: 8,
+      ListenRepeatMode.vocabulary: 15,
+    };
     return ProviderScope(
       overrides: [
         storageServiceProvider.overrideWithValue(storage),
         listenRepeatViewModelProvider.overrideWith(() => vm),
+        listenRepeatModeCountsProvider.overrideWith((ref) => Future.value(counts)),
       ],
       child: const MaterialApp(
         home: InCarDashboardScreen(),
@@ -139,19 +157,24 @@ void main() {
       expect(find.byKey(const Key('carplay_dash_stop_button')), findsOneWidget);
       expect(find.text('Stop'), findsNWidgets(2)); // Top action and bottom pill button
 
-      // Left Column: Practice Sets
+      // Left Column: Practice Sets with precomputed word count badges (never hardcoded 12)
       expect(find.text('PRACTICE SET'), findsOneWidget);
       expect(find.text('Balanced Mix'), findsOneWidget);
+      expect(find.text('20 words'), findsOneWidget);
       expect(find.text('Verbs & Tenses'), findsOneWidget);
+      expect(find.text('10 words'), findsOneWidget);
       expect(find.text('Prepositions'), findsOneWidget);
+      expect(find.text('5 words'), findsOneWidget);
+      expect(find.text('12 words'), findsNothing);
       expect(find.byIcon(Icons.check_rounded), findsOneWidget); // Selected Verbs mode checkmark
 
-      // Center Column: Flashcard & Status
+      // Center Column: Flashcard & Status (infinite deck wrapping: word 8 of 1 -> Word 1 of 1)
       expect(find.text('Futuro (vamos) • nós'), findsOneWidget);
       expect(find.text('Nós vamos ouvir'), findsOneWidget);
       expect(find.text('We are going to hear'), findsOneWidget);
       expect(find.text('... Ready'), findsOneWidget);
-      expect(find.text('Word 8 of 1'), findsOneWidget);
+      expect(find.text('Word 1 of 1'), findsOneWidget);
+      expect(find.text('Word 8 of 1'), findsNothing);
       expect(find.byKey(const Key('carplay_dash_star_button')), findsOneWidget);
 
       // Right Column: Playback Controls
@@ -161,6 +184,37 @@ void main() {
       expect(find.byKey(const Key('carplay_dash_next_button')), findsOneWidget);
       expect(find.byKey(const Key('carplay_dash_shuffle_button')), findsOneWidget);
       expect(find.byKey(const Key('carplay_dash_bottom_stop_button')), findsOneWidget);
+    });
+
+    testWidgets('infinite deck wrapping displays correct Word X of Y position', (tester) async {
+      final storage = FakeStorageService(initialItems: [testItem]);
+      final audioPlayer = MockAudioPlayer();
+      final pool = List.generate(
+        30,
+        (i) => LanguageItem(
+          id: 'item_$i',
+          portuguese: 'Palavra $i',
+          english: 'Word $i',
+        ),
+      );
+      final vm = _MockDashboardLRViewModel(
+        testItem,
+        audioPlayer: audioPlayer,
+        initialPool: pool,
+        initialWordsSeen: 45,
+      );
+
+      tester.view.physicalSize = const Size(1024, 600);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(createWidgetUnderTest(storage: storage, vm: vm));
+      await tester.pump();
+
+      // ((45 - 1) % 30) + 1 = 15 -> Word 15 of 30 (not Word 45 of 30)
+      expect(find.text('Word 15 of 30'), findsOneWidget);
+      expect(find.text('Word 45 of 30'), findsNothing);
     });
 
     testWidgets('star button toggles item flag in storage and updates icon', (tester) async {

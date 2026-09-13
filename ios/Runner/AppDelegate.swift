@@ -62,7 +62,8 @@ final class CarPlaySceneObserver: NSObject {
         self?.pushNowPlaying(animated: animated, result: result)
       case "updateNowPlayingStar":
         let isFlagged = (call.arguments as? [String: Any])?["isFlagged"] as? Bool ?? false
-        self?.updateNowPlayingStar(isFlagged: isFlagged)
+        let artPath = (call.arguments as? [String: Any])?["artPath"] as? String
+        self?.updateNowPlayingStar(isFlagged: isFlagged, artPath: artPath)
         result(true)
       default:
         result(nil)
@@ -125,7 +126,7 @@ final class CarPlaySceneObserver: NSObject {
     }
   }
 
-  private func updateNowPlayingStar(isFlagged: Bool) {
+  private func updateNowPlayingStar(isFlagged: Bool, artPath: String? = nil) {
     DispatchQueue.main.async {
       let systemName = isFlagged ? "star.fill" : "star"
       guard let image = UIImage(systemName: systemName) else { return }
@@ -133,6 +134,13 @@ final class CarPlaySceneObserver: NSObject {
         self?.channel?.invokeMethod("remoteToggleFlag", arguments: nil)
       }
       CPNowPlayingTemplate.shared.updateNowPlayingButtons([starButton])
+
+      if let path = artPath, let artworkImage = UIImage(contentsOfFile: path) {
+        let artwork = MPMediaItemArtwork(boundsSize: artworkImage.size) { _ in artworkImage }
+        var info = MPNowPlayingInfoCenter.default().nowPlayingInfo ?? [:]
+        info[MPMediaItemPropertyArtwork] = artwork
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+      }
     }
   }
 }
