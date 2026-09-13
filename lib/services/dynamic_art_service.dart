@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import '../models/language_item.dart';
+import '../theme/carplay_theme.dart';
 
 class DynamicArtService {
   static const int _maxCacheSize = 64;
@@ -26,11 +28,36 @@ class DynamicArtService {
     return 50;
   }
 
-  static Future<Uri> generateWordArt(LanguageItem item) async {
+  static Path _createStarPath(double cx, double cy, double outerRadius, double innerRadius) {
+    final path = Path();
+    const double step = pi / 5;
+    for (int i = 0; i < 10; i++) {
+      final double radius = i.isEven ? outerRadius : innerRadius;
+      final double angle = i * step - (pi / 2);
+      final double x = cx + radius * cos(angle);
+      final double y = cy + radius * sin(angle);
+      if (i == 0) {
+        path.moveTo(x, y);
+      } else {
+        path.lineTo(x, y);
+      }
+    }
+    path.close();
+    return path;
+  }
+
+  static Future<Uri> generateWordArt(
+    LanguageItem item, {
+    bool isFlagged = false,
+    int? wordIndex,
+    int? totalWords,
+  }) async {
     final cleanNotes = item.notes.trim();
     final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
     final contentHash = '${item.portuguese}_${item.english}_$cleanNotes'.hashCode.toRadixString(36);
-    final cacheKey = '${item.id}_$contentHash';
+    final flagTag = isFlagged ? 'f1' : 'f0';
+    final progressTag = wordIndex != null ? 'w${wordIndex}_$totalWords' : 'w0';
+    final cacheKey = '${item.id}_${contentHash}_${flagTag}_$progressTag';
 
     if (_memoryCache.containsKey(cacheKey)) {
       final cachedUri = _memoryCache[cacheKey]!;
@@ -41,7 +68,7 @@ class DynamicArtService {
     }
 
     final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/album_art_${safeId}_$contentHash.png');
+    final file = File('${tempDir.path}/album_art_${safeId}_${contentHash}_$flagTag.png');
 
     // Fast-path: return cached image if already synthesized and non-empty
     if (await file.exists() && await file.length() > 0) {
@@ -58,13 +85,61 @@ class DynamicArtService {
     final ui.PictureRecorder recorder = ui.PictureRecorder();
     final Canvas canvas = Canvas(recorder, Rect.fromPoints(Offset.zero, const Offset(width, height)));
 
-    // Background
-    final Paint bgPaint = Paint()..color = const Color(0xFF1E1E2C);
+    // 1. App background canvas (--bg)
+    final Paint bgPaint = Paint()..color = CarPlayTheme.bg;
     canvas.drawRect(const Rect.fromLTWH(0, 0, width, height), bgPaint);
+
+    // 2. Ambient steel-blue radial halo glow behind card
+    final Paint haloPaint = Paint()
+      ..shader = ui.Gradient.radial(
+        const Offset(width / 2, height / 2),
+        360,
+        [
+          const Color(0x553B68A8),
+          const Color(0x223B68A8),
+          Colors.transparent,
+        ],
+        [0.0, 0.55, 1.0],
+      );
+    canvas.drawCircle(const Offset(width / 2, height / 2), 360, haloPaint);
+
+    // 3. Center Flashcard (--surface)
+    const double cardLeft = 64;
+    const double cardTop = 64;
+    const double cardWidth = width - (cardLeft * 2);
+    const double cardHeight = height - (cardTop * 2);
+    final cardRRect = RRect.fromRectAndRadius(
+      const Rect.fromLTWH(cardLeft, cardTop, cardWidth, cardHeight),
+      const Radius.circular(CarPlayTheme.cardRadius + 4),
+    );
+
+    final Paint cardPaint = Paint()..color = CarPlayTheme.surface;
+    final Paint cardBorderPaint = Paint()
+      ..color = CarPlayTheme.border
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5;
+
+    canvas.drawRRect(cardRRect, cardPaint);
+    canvas.drawRRect(cardRRect, cardBorderPaint);
+
+    // 4. Star Bookmark Indicator (top-right of card)
+    const double starCx = cardLeft + cardWidth - 44;
+    const double starCy = cardTop + 44;
+    final starPath = _createStarPath(starCx, starCy, 16, 8);
+    if (isFlagged) {
+      final starFill = Paint()..color = CarPlayTheme.starGold;
+      canvas.drawPath(starPath, starFill);
+    } else {
+      final starOutline = Paint()
+        ..color = const Color(0xFF5A5868)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.0;
+      canvas.drawPath(starPath, starOutline);
+    }
 
     final bool hasNotes = cleanNotes.isNotEmpty;
 
-    // Optional Grammar / Tense Pill Badge
+    // 5. Grammar / Tense Pill Badge
     TextPainter? notePainter;
     double pillWidth = 0;
     double pillHeight = 0;
@@ -77,8 +152,8 @@ class DynamicArtService {
         text: TextSpan(
           text: cleanNotes,
           style: const TextStyle(
-            color: Color(0xFF93C5FD),
-            fontSize: 24,
+            color: Color(0xFFD6C2FD),
+            fontSize: 22,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.5,
           ),
@@ -86,19 +161,19 @@ class DynamicArtService {
         textAlign: TextAlign.center,
         textDirection: TextDirection.ltr,
         maxLines: 2,
-      )..layout(minWidth: 0, maxWidth: width - 120);
+      )..layout(minWidth: 0, maxWidth: cardWidth - 140);
 
       pillWidth = notePainter.width + (pillHPad * 2);
       pillHeight = notePainter.height + (pillVPad * 2);
     }
 
-    // Portuguese Text (Dynamic font size to prevent overflow)
+    // 6. Portuguese Text (Dynamic font size)
     final double ptFontSize = getPortugueseFontSize(item.portuguese.length);
     final TextPainter ptPainter = TextPainter(
       text: TextSpan(
         text: item.portuguese,
         style: TextStyle(
-          color: Colors.white,
+          color: CarPlayTheme.fg,
           fontSize: ptFontSize,
           fontWeight: FontWeight.bold,
         ),
@@ -106,15 +181,15 @@ class DynamicArtService {
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
       maxLines: 4,
-    )..layout(minWidth: 0, maxWidth: width - 80);
+    )..layout(minWidth: 0, maxWidth: cardWidth - 80);
 
-    // English Text (Faded, dynamically scaled)
+    // 7. English Text (Muted, dynamic font size)
     final double enFontSize = getEnglishFontSize(item.english.length);
     final TextPainter enPainter = TextPainter(
       text: TextSpan(
         text: item.english,
         style: TextStyle(
-          color: Colors.white.withAlpha(178), // ~70% opacity
+          color: CarPlayTheme.muted,
           fontSize: enFontSize,
           fontWeight: FontWeight.normal,
         ),
@@ -122,15 +197,15 @@ class DynamicArtService {
       textAlign: TextAlign.center,
       textDirection: TextDirection.ltr,
       maxLines: 4,
-    )..layout(minWidth: 0, maxWidth: width - 80);
+    )..layout(minWidth: 0, maxWidth: cardWidth - 80);
 
-    // Dynamic Vertical Centering Calculation
-    const double contentSpacing = 24;
+    // 8. Dynamic Vertical Centering Calculation
+    const double contentSpacing = 20;
     final double pillBlockHeight = hasNotes ? (pillHeight + pillBottomSpacing) : 0;
-    final double totalHeight = pillBlockHeight + ptPainter.height + contentSpacing + enPainter.height;
+    final double totalContentHeight = pillBlockHeight + ptPainter.height + contentSpacing + enPainter.height;
 
-    double currentY = (height - totalHeight) / 2;
-    if (currentY < 40) currentY = 40; // Guard top padding
+    double currentY = cardTop + ((cardHeight - totalContentHeight) / 2);
+    if (currentY < cardTop + 40) currentY = cardTop + 40;
 
     // Render Grammar Pill
     if (hasNotes && notePainter != null) {
@@ -140,9 +215,9 @@ class DynamicArtService {
         const Radius.circular(16),
       );
 
-      final pillFill = Paint()..color = const Color(0xFF252B43);
+      final pillFill = Paint()..color = const Color(0xFF2E2C3D);
       final pillBorder = Paint()
-        ..color = const Color(0xFF3B82F6).withAlpha(128)
+        ..color = const Color(0x66B587FA)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 1.5;
 
@@ -170,13 +245,32 @@ class DynamicArtService {
       Offset((width - enPainter.width) / 2, currentY),
     );
 
+    // 9. Bottom progress counter / dots if provided
+    if (wordIndex != null && totalWords != null && totalWords > 0) {
+      final int dotCount = totalWords.clamp(1, 14);
+      final int activeDot = (wordIndex - 1).clamp(0, dotCount - 1);
+      const double dotRadius = 4.0;
+      const double dotSpacing = 14.0;
+      final double totalDotsWidth = (dotCount * dotRadius * 2) + ((dotCount - 1) * (dotSpacing - (dotRadius * 2)));
+      double dotX = (width - totalDotsWidth) / 2;
+      final double dotY = cardTop + cardHeight - 36;
+
+      for (int d = 0; d < dotCount; d++) {
+        final isCur = d == activeDot;
+        final Paint dotPaint = Paint()
+          ..color = isCur ? CarPlayTheme.accent : const Color(0xFF464455);
+        canvas.drawCircle(Offset(dotX + dotRadius, dotY), dotRadius, dotPaint);
+        dotX += dotSpacing;
+      }
+    }
+
     // Convert to Image
     final ui.Image image = await recorder.endRecording().toImage(width.toInt(), height.toInt());
     final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.png);
-    image.dispose(); // Free native RGBA memory immediately
+    image.dispose();
     final Uint8List pngBytes = byteData!.buffer.asUint8List();
 
-    // Save to temp directory with per-word filename to avoid race conditions
+    // Save to temp directory with per-word filename
     await file.writeAsBytes(pngBytes);
     if (_memoryCache.length >= _maxCacheSize) {
       _memoryCache.remove(_memoryCache.keys.first);

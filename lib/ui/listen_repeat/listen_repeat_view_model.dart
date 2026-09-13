@@ -537,7 +537,17 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       }
 
       AppLogger.log('[LR-gen] generating word art...', name: 'ListenRepeat');
-      final artUri = await DynamicArtService.generateWordArt(item);
+      bool isFlagged = false;
+      try {
+        final storage = ref.read(storageServiceProvider);
+        isFlagged = storage.isItemFlagged(item.id);
+      } catch (_) {}
+      final artUri = await DynamicArtService.generateWordArt(
+        item,
+        isFlagged: isFlagged,
+        wordIndex: wordIndexToGenerate + 1,
+        totalWords: state.pool.isNotEmpty ? state.pool.length : null,
+      );
       AppLogger.log('[LR-gen] word art: $artUri', name: 'ListenRepeat');
       final mediaItem = MediaItem(
         id: 'listen_repeat_${item.id}_$wordIndexToGenerate',

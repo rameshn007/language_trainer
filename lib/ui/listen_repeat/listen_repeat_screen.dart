@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'in_car_dashboard_screen.dart';
 import 'listen_repeat_view_model.dart';
 import '../../main.dart';
 import '../../services/listen_repeat_content_service.dart';
@@ -80,6 +81,18 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
       appBar: AppBar(
         title: const Text('Listen & Repeat'),
         actions: [
+          IconButton(
+            key: const Key('listen_repeat_car_mode_button'),
+            icon: const Icon(Icons.directions_car_filled_rounded),
+            tooltip: 'In-Car Dashboard Mode',
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const InCarDashboardScreen(),
+                ),
+              );
+            },
+          ),
           TextButton.icon(
             icon: const Icon(Icons.speed, size: 20),
             label: Text("${state.playbackSpeed}x"),

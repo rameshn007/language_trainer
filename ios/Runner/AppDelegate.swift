@@ -46,18 +46,26 @@ final class CarPlaySceneObserver: NSObject {
     let channel = FlutterMethodChannel(
       name: "language_trainer/carplay_scene",
       binaryMessenger: engine.binaryMessenger)
-    channel.setMethodCallHandler { call, result in
-      guard call.method == "sceneStatus" else {
+    channel.setMethodCallHandler { [weak self] call, result in
+      switch call.method {
+      case "sceneStatus":
+        let reply = {
+          result(["foreground": CarPlaySceneObserver.isAnyCarPlaySceneForegrounded()])
+        }
+        if Thread.isMainThread {
+          reply()
+        } else {
+          DispatchQueue.main.async(execute: reply)
+        }
+      case "showNowPlaying":
+        let animated = (call.arguments as? [String: Any])?["animated"] as? Bool ?? true
+        self?.pushNowPlaying(animated: animated, result: result)
+      case "updateNowPlayingStar":
+        let isFlagged = (call.arguments as? [String: Any])?["isFlagged"] as? Bool ?? false
+        self?.updateNowPlayingStar(isFlagged: isFlagged)
+        result(true)
+      default:
         result(nil)
-        return
-      }
-      let reply = {
-        result(["foreground": CarPlaySceneObserver.isAnyCarPlaySceneForegrounded()])
-      }
-      if Thread.isMainThread {
-        reply()
-      } else {
-        DispatchQueue.main.async(execute: reply)
       }
     }
     self.channel = channel
@@ -85,6 +93,46 @@ final class CarPlaySceneObserver: NSObject {
       default:
         return false
       }
+    }
+  }
+
+  private func pushNowPlaying(animated: Bool, result: @escaping FlutterResult) {
+    DispatchQueue.main.async {
+      guard let templateScene = UIApplication.shared.connectedScenes.first(where: {
+        $0 is CPTemplateApplicationScene
+      }) as? CPTemplateApplicationScene else {
+        NSLog("[CarPlaySceneObserver] No active CPTemplateApplicationScene found")
+        result(false)
+        return
+      }
+
+      let interfaceController = templateScene.interfaceController
+      if interfaceController.topTemplate is CPNowPlayingTemplate {
+        NSLog("[CarPlaySceneObserver] NowPlaying is already top template")
+        result(true)
+        return
+      }
+
+      interfaceController.pushTemplate(CPNowPlayingTemplate.shared, animated: animated) { success, error in
+        if let error = error {
+          NSLog("[CarPlaySceneObserver] Error pushing CPNowPlayingTemplate: \(error)")
+          result(false)
+        } else {
+          NSLog("[CarPlaySceneObserver] Successfully pushed CPNowPlayingTemplate")
+          result(true)
+        }
+      }
+    }
+  }
+
+  private func updateNowPlayingStar(isFlagged: Bool) {
+    DispatchQueue.main.async {
+      let systemName = isFlagged ? "star.fill" : "star"
+      guard let image = UIImage(systemName: systemName) else { return }
+      let starButton = CPNowPlayingImageButton(image: image) { [weak self] _ in
+        self?.channel?.invokeMethod("remoteToggleFlag", arguments: nil)
+      }
+      CPNowPlayingTemplate.shared.updateNowPlayingButtons([starButton])
     }
   }
 }

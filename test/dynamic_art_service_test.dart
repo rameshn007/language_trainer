@@ -139,5 +139,27 @@ void main() {
       final modTime2 = file1.lastModifiedSync();
       expect(modTime2, modTime1);
     });
+
+    test('generates valid PNG with flagged star and word progress indicator', () async {
+      final item = LanguageItem(
+        id: 'flagged_word_6',
+        portuguese: 'Nós vamos ouvir',
+        english: 'We are going to hear',
+        notes: 'Futuro (vamos) • nós',
+      );
+
+      final uri = await DynamicArtService.generateWordArt(
+        item,
+        isFlagged: true,
+        wordIndex: 8,
+        totalWords: 12,
+      );
+      final file = File.fromUri(uri);
+
+      expect(file.existsSync(), isTrue);
+      final bytes = await file.readAsBytes();
+      expect(bytes.isNotEmpty, isTrue);
+      expect(bytes.sublist(0, 4), [0x89, 0x50, 0x4E, 0x47]);
+    });
   });
 }
