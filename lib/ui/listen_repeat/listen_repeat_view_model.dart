@@ -88,7 +88,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   int _consecutiveFailures = 0;
   int _sessionConsecutiveFailures = 0;
   int _sessionWordsOffset = 0;
-  bool _isFillingBuffer = false;
+  int? _fillingSessionId;
 
   bool _isValidAudioFile(File file) {
     if (!file.existsSync()) return false;
@@ -325,6 +325,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     _sessionId++;
     final currentSessionId = _sessionId;
     _isAutoPlayActive = true;
+    _fillingSessionId = null;
     _playlistWords.clear();
     _playlist = null;
     
@@ -392,6 +393,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   /// tears down the half-built session and shows why on screen.
   void _reportFailure(String reason) {
     _isAutoPlayActive = false;
+    _fillingSessionId = null;
     _playlist = null;
     _playlistWords.clear();
     state = ListenRepeatState(
@@ -481,19 +483,23 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
 
       final safeId = item.id.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_');
       final ext = Platform.isAndroid ? 'wav' : 'caf';
-      final ptFilePath = '${dir.path}/pt_v2_$safeId.$ext';
-      final enFilePath = '${dir.path}/en_v2_$safeId.$ext';
-      AppLogger.log('[LR-gen] pt: $ptFilePath', name: 'ListenRepeat');
-      AppLogger.log('[LR-gen] en: $enFilePath', name: 'ListenRepeat');
-
-      final ptFile = File(ptFilePath);
-      final enFile = File(enFilePath);
 
       // Sanitize text before synthesizing speech
       final cleanPt = TtsTextSanitizer.sanitizePt(item.portuguese);
       final cleanEn = TtsTextSanitizer.sanitizeEn(item.english);
       final ptToSpeak = cleanPt.isNotEmpty ? cleanPt : item.portuguese;
       final enToSpeak = cleanEn.isNotEmpty ? cleanEn : item.english;
+
+      final ptHash = ptToSpeak.hashCode.toRadixString(36);
+      final enHash = enToSpeak.hashCode.toRadixString(36);
+
+      final ptFilePath = '${dir.path}/pt_v2_${safeId}_$ptHash.$ext';
+      final enFilePath = '${dir.path}/en_v2_${safeId}_$enHash.$ext';
+      AppLogger.log('[LR-gen] pt: $ptFilePath', name: 'ListenRepeat');
+      AppLogger.log('[LR-gen] en: $enFilePath', name: 'ListenRepeat');
+
+      final ptFile = File(ptFilePath);
+      final enFile = File(enFilePath);
 
       if (!_isValidAudioFile(ptFile)) {
         AppLogger.log('[LR-gen] synthesizing PT...', name: 'ListenRepeat');
@@ -556,14 +562,14 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
 
       // Distinct file link for repetition 2 to ensure AVQueuePlayer / AVPlayerItem
       // never deduplicates back-to-back identical audio URLs in the native player queue.
-      final ptRepFilePath = '${dir.path}/pt_v2_${safeId}_rep.$ext';
+      final ptRepFilePath = '${dir.path}/pt_v2_${safeId}_${ptHash}_rep.$ext';
       final ptRepFile = File(ptRepFilePath);
-      if (!ptRepFile.existsSync() && ptFile.existsSync()) {
+      if ((!_isValidAudioFile(ptRepFile)) && _isValidAudioFile(ptFile)) {
         try {
           await ptFile.copy(ptRepFilePath);
         } catch (_) {}
       }
-      final pt2Uri = ptRepFile.existsSync() ? ptRepFile.uri : Uri.file(ptFilePath);
+      final pt2Uri = _isValidAudioFile(ptRepFile) ? ptRepFile.uri : Uri.file(ptFilePath);
 
       // Sequence with 6 sources per word:
       // PT -> Silence 1 (1.0s repetition pause) -> PT (repeated) -> Silence 2 (0.5-1.5s adaptive pre-English pause) -> EN -> Silence 3 (1.0s between-words pause)
@@ -615,8 +621,9 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   }
 
   Future<void> _appendNextWordInBackground(int sessionId) async {
-    if (_isFillingBuffer) return;
-    _isFillingBuffer = true;
+    if (sessionId != _sessionId || !_isAutoPlayActive) return;
+    if (_fillingSessionId == sessionId) return;
+    _fillingSessionId = sessionId;
 
     try {
       while (_playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord) < 4) {
@@ -628,7 +635,9 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         await _ensureNextWordAppended(sessionId);
       }
     } finally {
-      _isFillingBuffer = false;
+      if (_fillingSessionId == sessionId) {
+        _fillingSessionId = null;
+      }
     }
   }
 
@@ -730,7 +739,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   Future<int> stopSession({bool recordProgress = true}) async {
     _sessionId++; // Invalidate any ongoing generation for this session
     _isAutoPlayActive = false;
-    _isFillingBuffer = false;
+    _fillingSessionId = null;
     _pendingMode = null;
     if (_pendingCompleter != null && !_pendingCompleter!.isCompleted) {
       _pendingCompleter!.complete();

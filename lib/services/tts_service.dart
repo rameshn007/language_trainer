@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'storage_service.dart';
 import '../utils/logger.dart';
@@ -498,12 +499,21 @@ class TtsService {
     }
   }
 
+  @visibleForTesting
+  Duration lockWaitTimeout = const Duration(seconds: 8);
+
+  @visibleForTesting
+  Duration actionTimeout = const Duration(seconds: 12);
+
   Future<T> _withTtsLock<T>(Future<T> Function() action) async {
     while (_synthLock != null) {
       try {
-        await _synthLock!.timeout(const Duration(seconds: 8));
+        await _synthLock!.timeout(lockWaitTimeout);
       } catch (e) {
         AppLogger.error('TTS lock wait timed out, breaking lock', name: 'TtsService', error: e);
+        try {
+          await _flutterTts.stop();
+        } catch (_) {}
         _synthLock = null;
         break;
       }
@@ -514,9 +524,12 @@ class TtsService {
 
     try {
       return await action().timeout(
-        const Duration(seconds: 12),
+        actionTimeout,
         onTimeout: () {
-          AppLogger.error('TTS action timed out after 12s', name: 'TtsService');
+          AppLogger.error('TTS action timed out after ${actionTimeout.inSeconds}s', name: 'TtsService');
+          try {
+            _flutterTts.stop();
+          } catch (_) {}
           throw TimeoutException('TTS operation timed out');
         },
       );
@@ -524,7 +537,9 @@ class TtsService {
       if (!completer.isCompleted) {
         completer.complete();
       }
-      _synthLock = null;
+      if (identical(_synthLock, completer.future)) {
+        _synthLock = null;
+      }
     }
   }
 
@@ -563,7 +578,6 @@ class TtsService {
   Future<void> stop() async {
     _currentConfiguredLanguage = null;
     _currentConfiguredVoiceIdentifier = null;
-    _synthLock = null;
     try {
       await _flutterTts.stop();
     } catch (_) {}
