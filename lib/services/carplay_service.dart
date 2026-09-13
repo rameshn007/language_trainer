@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/language_item.dart';
 import '../ui/listen_repeat/listen_repeat_view_model.dart';
 import '../utils/logger.dart';
+import 'dynamic_art_service.dart';
 import 'listen_repeat_content_service.dart';
 import 'storage_service.dart';
 
@@ -128,6 +129,11 @@ class CarPlayService {
     // actually brought our CarPlay UI to the screen.
     _sceneChannel.setMethodCallHandler(_onSceneChannelCall);
 
+    // Pre-cache mode counts so main menu has accurate counts immediately
+    try {
+      unawaited(container.read(listenRepeatContentServiceProvider).getModeCounts());
+    } catch (_) {}
+
     _flutterCarplay.addListenerOnConnectionChange((status) {
       switch (status) {
         case ConnectionStatusTypes.connected:
@@ -211,6 +217,15 @@ class CarPlayService {
       if (container != null) {
         await container.read(listenRepeatViewModelProvider.notifier).previousWord();
       }
+    } else if (call.method == 'remoteToggleFlag') {
+      AppLogger.log("Handling remoteToggleFlag from Now Playing", name: 'CarPlay');
+      final activeItem = _container?.read(listenRepeatViewModelProvider).currentItem;
+      final storage = _storageService;
+      if (activeItem != null && storage != null) {
+        final flaggedItemId = activeItem.id;
+        final isFlagged = await storage.toggleItemFlagged(flaggedItemId);
+        await onItemFlagToggled(activeItem, isFlagged);
+      }
     }
     return null;
   }
@@ -228,6 +243,65 @@ class CarPlayService {
       // Android and tests have no native channel; CarPlay support is iOS
       // only, so nothing to do.
       AppLogger.log("sceneStatus unavailable: $e", name: 'CarPlay');
+    }
+  }
+
+  /// Tells the native CarPlay interface to push the CPNowPlayingTemplate.
+  Future<void> showNowPlaying({bool animated = true}) async {
+    try {
+      await _sceneChannel.invokeMethod('showNowPlaying', {'animated': animated});
+    } catch (e) {
+      AppLogger.log("showNowPlaying unavailable: $e", name: 'CarPlay');
+    }
+  }
+
+  /// Updates the native CarPlay Now Playing star button state and optionally
+  /// refreshes Now Playing artwork on the head unit.
+  Future<void> updateNowPlayingStar(bool isFlagged, {String? artPath}) async {
+    try {
+      await _sceneChannel.invokeMethod('updateNowPlayingStar', {
+        'isFlagged': isFlagged,
+        'artPath': ?artPath,
+      });
+    } catch (e) {
+      AppLogger.log("updateNowPlayingStar unavailable: $e", name: 'CarPlay');
+    }
+  }
+
+  /// Called when an item's bookmark/flag state is toggled from CarPlay UI,
+  /// Now Playing star button, or in-car dashboard.
+  Future<void> onItemFlagToggled(LanguageItem item, bool isFlagged) async {
+    if (_shownWordId == item.id) {
+      _shownFlagged = isFlagged;
+      _flagItem?.update(
+        text: formatFlagItemText(isFlagged),
+        detailText: formatFlagItemDetailText(isFlagged),
+      );
+    }
+    await _refreshNowPlayingArtForFlag(item, isFlagged);
+  }
+
+  Future<void> _refreshNowPlayingArtForFlag(LanguageItem item, bool isFlagged) async {
+    try {
+      final state = _container?.read(listenRepeatViewModelProvider);
+      final pool = state?.pool ?? [];
+      final wordsSeen = state?.totalWordsSeen ?? 1;
+      final poolCount = pool.isNotEmpty ? pool.length : null;
+      final currentWordPos = (poolCount != null && poolCount > 0)
+          ? ((wordsSeen - 1) % poolCount) + 1
+          : wordsSeen;
+
+      final artUri = await DynamicArtService.generateWordArt(
+        item,
+        isFlagged: isFlagged,
+        wordIndex: currentWordPos,
+        totalWords: poolCount,
+      );
+      final artPath = artUri.toFilePath();
+      await updateNowPlayingStar(isFlagged, artPath: artPath);
+    } catch (e) {
+      AppLogger.log("Failed to refresh artwork for flag toggle: $e", name: 'CarPlay');
+      await updateNowPlayingStar(isFlagged);
     }
   }
 
@@ -260,6 +334,7 @@ class CarPlayService {
             name: 'CarPlay');
         _showPlayer(state);
       }
+      showNowPlaying();
       return;
     }
 
@@ -284,10 +359,10 @@ class CarPlayService {
         .read(listenRepeatViewModelProvider.notifier)
         .startSession(mode: mode)
         .then((_) {
-      // startSession() resolves without error on an empty library; say so
-      // explicitly instead of leaving the player on "Loading words...".
       final state = container.read(listenRepeatViewModelProvider);
-      if (state.currentItem == null && state.failure == null) {
+      if (state.currentItem != null) {
+        showNowPlaying();
+      } else if (state.failure == null) {
         final wordItem = _wordItem;
         if (wordItem != null) {
           wordItem.setText('No words to play');
@@ -320,6 +395,7 @@ class CarPlayService {
       playingIndicatorLocation: CPListItemPlayingIndicatorLocation.trailing,
       onPress: (complete, self) {
         complete();
+        showNowPlaying();
         notifier.replayCurrentWord();
       },
     );
@@ -341,14 +417,7 @@ class CarPlayService {
           if (activeItem != null) {
             final flaggedItemId = activeItem.id;
             final isFlagged = await storage.toggleItemFlagged(flaggedItemId);
-            // Protect against race where the word advanced while the async toggle was in flight
-            if (_shownWordId == flaggedItemId) {
-              _shownFlagged = isFlagged;
-              _flagItem?.update(
-                text: formatFlagItemText(isFlagged),
-                detailText: formatFlagItemDetailText(isFlagged),
-              );
-            }
+            await onItemFlagToggled(activeItem, isFlagged);
           }
         },
       );
@@ -449,22 +518,35 @@ class CarPlayService {
     _focusItem = focusItem;
 
     FlutterCarplay.setRootTemplate(rootTemplate: template, animated: true);
+    updateNowPlayingStar(isInitiallyFlagged);
   }
 
-  void _showMainMenu() {
+  Future<void> _showMainMenu() async {
     _resetPlayer();
     AppLogger.log("Showing main menu", name: 'CarPlay');
+
+    Map<ListenRepeatMode, int>? counts;
+    final container = _container;
+    if (container != null) {
+      try {
+        counts = await container.read(listenRepeatContentServiceProvider).getModeCounts();
+      } catch (e) {
+        AppLogger.log("Error fetching mode counts for CarPlay main menu: $e", name: 'CarPlay');
+      }
+    }
 
     try {
       FlutterCarplay.setRootTemplate(
         rootTemplate: CPListTemplate(
           sections: [
             CPListSection(
-              header: 'Study Focus',
+              header: 'Practice Sets',
               items: ListenRepeatMode.values.map((mode) {
+                final count = counts?[mode];
+                final countPrefix = count != null && count > 0 ? '$count words • ' : '';
                 return CPListItem(
                   text: mode.label,
-                  detailText: mode.description,
+                  detailText: '$countPrefix${mode.description}',
                   onPress: (complete, self) {
                     complete();
                     _startExperience(mode: mode);
@@ -513,6 +595,7 @@ class CarPlayService {
             text: formatFlagItemText(isFlagged),
             detailText: formatFlagItemDetailText(isFlagged),
           );
+          updateNowPlayingStar(isFlagged);
         }
       }
     }
