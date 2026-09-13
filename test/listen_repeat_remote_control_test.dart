@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:language_trainer/main.dart';
 import 'package:language_trainer/models/language_item.dart';
 import 'package:language_trainer/models/progress_data.dart';
@@ -365,6 +366,31 @@ void main() {
       await vm.previousWord();
       verify(() => audioPlayer.seek(Duration.zero, index: 0)).called(1);
       verify(() => audioPlayer.play()).called(1);
+    });
+
+    test('word sequence generates exactly 6 audio sources in expected pedagogical order', () async {
+      setupContainer();
+      dynamic capturedPlaylist;
+      when(() => audioPlayer.setAudioSource(any(), initialIndex: any(named: 'initialIndex'), initialPosition: any(named: 'initialPosition'))).thenAnswer((inv) async {
+        capturedPlaylist = inv.positionalArguments[0];
+        return const Duration(seconds: 1);
+      });
+
+      final vm = notifier();
+      await vm.startSession();
+
+      expect(capturedPlaylist, isNotNull);
+      final sources = capturedPlaylist!.sequence;
+      // Must generate exactly 6 audio sources per word matching _kSourcesPerWord
+      expect(sources.length, 6);
+
+      final tags = sources.map((s) => (s.tag as MediaItem).id).toList();
+      expect(tags[0], endsWith('_pt1'));
+      expect(tags[1], endsWith('_silence1'));
+      expect(tags[2], endsWith('_pt2'));
+      expect(tags[3], endsWith('_silence2'));
+      expect(tags[4], endsWith('_en'));
+      expect(tags[5], endsWith('_silence3'));
     });
   });
 }

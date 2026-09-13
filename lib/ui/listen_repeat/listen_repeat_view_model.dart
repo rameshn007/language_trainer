@@ -88,9 +88,18 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   int _consecutiveFailures = 0;
   int _sessionConsecutiveFailures = 0;
   int _sessionWordsOffset = 0;
+  bool _isFillingBuffer = false;
 
   bool _isValidAudioFile(File file) {
-    return file.existsSync() && file.lengthSync() > 512;
+    if (!file.existsSync()) return false;
+    final length = file.lengthSync();
+    if (length <= 512) {
+      try {
+        file.deleteSync();
+      } catch (_) {}
+      return false;
+    }
+    return true;
   }
 
   @override
@@ -343,11 +352,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         throw Exception("Failed to generate initial word sequence");
       }
 
-      // Pre-buffer a second word if pool has multiple items to prevent queue starvation
-      if (_shuffledPool.length > 1 && currentSessionId == _sessionId) {
-        await _ensureNextWordAppended(currentSessionId);
-      }
-
       AppLogger.log('[LR] setting audio source...', name: 'ListenRepeat');
       await _bgAudioPlayer.setAudioSource(_playlist!);
       if (currentSessionId != _sessionId) {
@@ -550,16 +554,29 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       final silence2Source = AudioSource.uri(Uri.file(silence2Path), tag: mediaItem.copyWith(id: '${mediaItem.id}_silence2'));
       final silence3Source = AudioSource.uri(Uri.file(silence3Path), tag: mediaItem.copyWith(id: '${mediaItem.id}_silence3'));
 
+      // Distinct file link for repetition 2 to ensure AVQueuePlayer / AVPlayerItem
+      // never deduplicates back-to-back identical audio URLs in the native player queue.
+      final ptRepFilePath = '${dir.path}/pt_v2_${safeId}_rep.$ext';
+      final ptRepFile = File(ptRepFilePath);
+      if (!ptRepFile.existsSync() && ptFile.existsSync()) {
+        try {
+          await ptFile.copy(ptRepFilePath);
+        } catch (_) {}
+      }
+      final pt2Uri = ptRepFile.existsSync() ? ptRepFile.uri : Uri.file(ptFilePath);
+
       // Sequence with 6 sources per word:
       // PT -> Silence 1 (1.0s repetition pause) -> PT (repeated) -> Silence 2 (0.5-1.5s adaptive pre-English pause) -> EN -> Silence 3 (1.0s between-words pause)
       final sequence = [
         AudioSource.uri(Uri.file(ptFilePath), tag: mediaItem.copyWith(id: '${mediaItem.id}_pt1')),
         silence1Source,
-        AudioSource.uri(Uri.file(ptFilePath), tag: mediaItem.copyWith(id: '${mediaItem.id}_pt2')),
+        AudioSource.uri(pt2Uri, tag: mediaItem.copyWith(id: '${mediaItem.id}_pt2')),
         silence2Source,
         AudioSource.uri(Uri.file(enFilePath), tag: mediaItem.copyWith(id: '${mediaItem.id}_en')),
         silence3Source,
       ];
+
+      assert(sequence.length == _kSourcesPerWord, 'Sequence length must match _kSourcesPerWord');
 
       if (sessionId != _sessionId) throw Exception("Session aborted");
 
@@ -598,16 +615,20 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   }
 
   Future<void> _appendNextWordInBackground(int sessionId) async {
-    while (_playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord) < 4) {
-      if (sessionId != _sessionId || !_isAutoPlayActive) break;
-      final remainingWords = _playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord);
-      // Yield slightly if we already have at least 2 words buffered to prevent UI jank
-      if (remainingWords >= 2) {
-        await Future.delayed(const Duration(milliseconds: 500));
+    if (_isFillingBuffer) return;
+    _isFillingBuffer = true;
+
+    try {
+      while (_playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord) < 4) {
+        if (sessionId != _sessionId || !_isAutoPlayActive) break;
+        // Yield to the event loop between syntheses
+        await Future.delayed(const Duration(milliseconds: 200));
+        if (sessionId != _sessionId || !_isAutoPlayActive) break;
+        
+        await _ensureNextWordAppended(sessionId);
       }
-      if (sessionId != _sessionId || !_isAutoPlayActive) break;
-      
-      await _ensureNextWordAppended(sessionId);
+    } finally {
+      _isFillingBuffer = false;
     }
   }
 
@@ -709,6 +730,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   Future<int> stopSession({bool recordProgress = true}) async {
     _sessionId++; // Invalidate any ongoing generation for this session
     _isAutoPlayActive = false;
+    _isFillingBuffer = false;
     _pendingMode = null;
     if (_pendingCompleter != null && !_pendingCompleter!.isCompleted) {
       _pendingCompleter!.complete();

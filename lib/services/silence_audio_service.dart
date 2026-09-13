@@ -16,11 +16,10 @@ class SilenceAudioService {
     return 44 + dataSize;
   }
 
-  /// Calculates the recommended pause between words (after English before next Portuguese).
+  /// Legacy pause between words (after English before next Portuguese).
   ///
-  /// For short single words, provides a comfortable 1.4s pause (close to legacy ~1.05s).
-  /// For longer phrases, dynamically scales up to 2.4s max so learners have time to absorb
-  /// the translation without creating long dead air that feels like playback stalled.
+  /// Retained for backwards compatibility and Phase 6 Active Recall mode
+  /// where single-pass prompts require longer absorption pauses.
   static double calculateBetweenWordsPause(LanguageItem item) {
     final pt = item.portuguese.trim();
     final words = pt.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
@@ -56,10 +55,9 @@ class SilenceAudioService {
     return double.parse(total.toStringAsFixed(1));
   }
 
-  /// Calculates the recommended repetition pause (after Portuguese before English).
+  /// Legacy repetition pause (after Portuguese before English in single-pass mode).
   ///
-  /// Base is 2.0s for single words (legacy was 2.09s), scaling up to 3.4s for long phrases
-  /// so learners have ample time to repeat multi-word utterances without dead air.
+  /// Retained for backwards compatibility and Phase 6 Active Recall mode.
   static double calculateRepetitionPause(LanguageItem item) {
     final pt = item.portuguese.trim();
     final words = pt.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;

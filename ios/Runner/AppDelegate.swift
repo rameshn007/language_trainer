@@ -92,8 +92,8 @@ final class CarPlaySceneObserver: NSObject {
 /// Intercepts native media commands from physical steering wheel controls,
 /// CarPlay Now Playing controls, Lock Screen, and Control Center.
 ///
-/// In Listen & Repeat mode, each word is comprised of 5 audio sources
-/// (PT, silence1, silence2, EN, silence3). By default, `just_audio_background`'s
+/// In Listen & Repeat mode, each word is comprised of 6 audio sources
+/// (PT, silence1, PT repetition, silence2, EN, silence3). By default, `just_audio_background`'s
 /// internal handler advances by a single audio source index, causing skip buttons
 /// to land in silence or mid-word.
 ///
@@ -105,7 +105,7 @@ final class CarPlaySceneObserver: NSObject {
 ///     Objective-C runtime so that even when `AudioServicePlugin` re-registers itself
 ///     upon playback updates, execution routes here.
 ///  3. Dispatches `remoteNextWord` and `remotePreviousWord` over `language_trainer/carplay_scene`
-///     to advance/rewind by full words (5 sources).
+///     to advance/rewind by full words (6 sources).
 final class RemoteCommandInterceptor {
   private static var hasSwizzled = false
   private static weak var activeChannel: FlutterMethodChannel?
