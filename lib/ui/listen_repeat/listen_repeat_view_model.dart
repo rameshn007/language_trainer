@@ -82,6 +82,12 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   // ignore: deprecated_member_use
   ConcatenatingAudioSource? _playlist;
   final List<LanguageItem> _playlistWords = [];
+  @visibleForTesting
+  int get playlistWordsCount => _playlistWords.length;
+  @visibleForTesting
+  List<LanguageItem> get playlistWords => List.unmodifiable(_playlistWords);
+  @visibleForTesting
+  bool get isRefilling => _fillingSessionId != null;
   final List<LanguageItem> _shuffledPool = [];
   StreamSubscription? _currentIndexSubscription;
   final Set<String> _failedItemIds = {};
@@ -135,13 +141,15 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed && _isAutoPlayActive) {
-      // Dart stream events might be dropped while the isolate is suspended in background.
+      // Dart stream events might be dropped while the isolate was suspended in background.
       // Manually sync the current word index when returning to the app.
-      _syncCurrentIndex(_bgAudioPlayer.currentIndex);
+      // Force refill bypass (C3): playback was interrupted/recovering during suspend, so refill
+      // immediately regardless of whether currentIndex happens to be an even (speech) index.
+      _syncCurrentIndex(_bgAudioPlayer.currentIndex, forceRefill: true);
     }
   }
 
-  void _syncCurrentIndex(int? index) {
+  void _syncCurrentIndex(int? index, {bool forceRefill = false}) {
     if (index == null) return;
     final wordIndex = index ~/ _kSourcesPerWord;
     if (wordIndex < _playlistWords.length) {
@@ -161,11 +169,12 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     // Stutter prevention: gate refill triggers to silence chunks (silence1, silence2, silence3)
     // when adequate buffer remains (remainingWords >= 2), completely shielding active speech
     // (pt1, pt2, en) from concurrent TTS synthesis, PNG encoding, and AVQueuePlayer queue mutation.
-    // An emergency starvation guard triggers refill during speech only if remainingWords < 2
-    // and we are approaching the end of the word (en prompt or final silence).
-    final isEmergencyStarvation = remainingWords <= 1 && sourceInWord >= 4;
-    if ((isSilence && remainingWords < 4) || isEmergencyStarvation) {
-      _appendNextWordInBackground(_sessionId);
+    // An emergency starvation guard (C6) triggers refill during speech if remainingWords <= 2
+    // and we are at or past the English prompt (sourceInWord >= 4) to protect against queue underrun
+    // at 1.25x/1.5x speeds.
+    final isEmergencyStarvation = remainingWords <= 2 && sourceInWord >= 4;
+    if (forceRefill || (isSilence && remainingWords < 4) || isEmergencyStarvation) {
+      _appendNextWordInBackground(_sessionId, force: forceRefill);
     }
   }
 
@@ -639,35 +648,55 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     }
   }
 
-  Future<void> _appendNextWordInBackground(int sessionId) async {
+  Future<void> _appendNextWordInBackground(int sessionId, {bool force = false}) async {
     if (sessionId != _sessionId || !_isAutoPlayActive) return;
     if (_fillingSessionId == sessionId) return;
     _fillingSessionId = sessionId;
 
     try {
-      while (_playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord) < 4) {
+      while (true) {
         if (sessionId != _sessionId || !_isAutoPlayActive) break;
 
-        final curIdx = _bgAudioPlayer.currentIndex ?? 0;
-        final remaining = _playlistWords.length - (curIdx ~/ _kSourcesPerWord);
-        final isSpeech = (curIdx % _kSourcesPerWord).isEven;
+        final curIdx = _bgAudioPlayer.currentIndex;
+        final int curWordIndex = curIdx != null
+            ? (curIdx ~/ _kSourcesPerWord)
+            : (_bgAudioPlayer.processingState == ProcessingState.completed ? _playlistWords.length : 0);
+        final remaining = _playlistWords.length - curWordIndex;
+
+        // Buffer target is 4 words ahead
+        if (remaining >= 4) break;
+
+        final isSpeech = curIdx != null && (curIdx % _kSourcesPerWord).isEven;
 
         // If we already have at least 2 words buffered and speech is actively playing,
         // yield and let the upcoming silence chunk resume replenishment.
-        if (remaining >= 2 && isSpeech) {
+        // Bypassed if force is true (e.g. lifecycle-resume recovery per C3).
+        if (!force && remaining >= 2 && isSpeech) {
           break;
         }
 
-        // Yield to the event loop between syntheses
-        await Future.delayed(const Duration(milliseconds: 100));
+        final wasStarved = remaining <= 1;
+
+        // Yield to the event loop between syntheses (reverted to 200ms per C4)
+        await Future.delayed(const Duration(milliseconds: 200));
         if (sessionId != _sessionId || !_isAutoPlayActive) break;
         
         await _ensureNextWordAppended(sessionId);
 
-        // When possessing adequate buffer (>= 2), appending one word per silence chunk
-        // avoids burst generation spilling over into upcoming speech.
-        final updatedRemaining = _playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord);
-        if (updatedRemaining >= 2 && sessionId == _sessionId) {
+        // Post-starvation recovery (C5):
+        // If queue was not starved, append 1 word per silence chunk to avoid multi-word bursts.
+        // If queue was starved (remaining <= 1), rebuild until at least 2 words buffered so
+        // playback does not suffer an audible gap lasting a full word cycle.
+        final updatedCurIdx = _bgAudioPlayer.currentIndex;
+        final int updatedCurWordIndex = updatedCurIdx != null
+            ? (updatedCurIdx ~/ _kSourcesPerWord)
+            : (_bgAudioPlayer.processingState == ProcessingState.completed ? _playlistWords.length : 0);
+        final updatedRemaining = _playlistWords.length - updatedCurWordIndex;
+
+        if (!wasStarved && updatedRemaining >= 2 && sessionId == _sessionId) {
+          break;
+        }
+        if (wasStarved && updatedRemaining >= 2 && sessionId == _sessionId) {
           break;
         }
       }
