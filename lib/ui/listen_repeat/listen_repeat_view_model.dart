@@ -154,8 +154,17 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       }
     }
 
-    // Maintain a buffer of up to 4 words
-    if (wordIndex >= _playlistWords.length - 4) {
+    final remainingWords = _playlistWords.length - wordIndex;
+    final sourceInWord = index % _kSourcesPerWord;
+    final isSilence = sourceInWord.isOdd;
+
+    // Stutter prevention: gate refill triggers to silence chunks (silence1, silence2, silence3)
+    // when adequate buffer remains (remainingWords >= 2), completely shielding active speech
+    // (pt1, pt2, en) from concurrent TTS synthesis, PNG encoding, and AVQueuePlayer queue mutation.
+    // An emergency starvation guard triggers refill during speech only if remainingWords < 2
+    // and we are approaching the end of the word (en prompt or final silence).
+    final isEmergencyStarvation = remainingWords <= 1 && sourceInWord >= 4;
+    if ((isSilence && remainingWords < 4) || isEmergencyStarvation) {
       _appendNextWordInBackground(_sessionId);
     }
   }
@@ -638,11 +647,29 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     try {
       while (_playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord) < 4) {
         if (sessionId != _sessionId || !_isAutoPlayActive) break;
+
+        final curIdx = _bgAudioPlayer.currentIndex ?? 0;
+        final remaining = _playlistWords.length - (curIdx ~/ _kSourcesPerWord);
+        final isSpeech = (curIdx % _kSourcesPerWord).isEven;
+
+        // If we already have at least 2 words buffered and speech is actively playing,
+        // yield and let the upcoming silence chunk resume replenishment.
+        if (remaining >= 2 && isSpeech) {
+          break;
+        }
+
         // Yield to the event loop between syntheses
-        await Future.delayed(const Duration(milliseconds: 200));
+        await Future.delayed(const Duration(milliseconds: 100));
         if (sessionId != _sessionId || !_isAutoPlayActive) break;
         
         await _ensureNextWordAppended(sessionId);
+
+        // When possessing adequate buffer (>= 2), appending one word per silence chunk
+        // avoids burst generation spilling over into upcoming speech.
+        final updatedRemaining = _playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord);
+        if (updatedRemaining >= 2 && sessionId == _sessionId) {
+          break;
+        }
       }
     } finally {
       if (_fillingSessionId == sessionId) {

@@ -620,13 +620,15 @@ class CarPlayService {
             updatedFirstSection,
             ...template.sections.skip(1),
           ];
+          final templateId = template.uniqueId;
           unawaited(
-            _flutterCarplay
-                .updateListTemplateSections(
-                  elementId: template.uniqueId,
-                  sections: updatedSections,
-                )
-                .catchError((e) {
+            Future.delayed(const Duration(milliseconds: 250), () async {
+              if (_playerTemplate?.uniqueId != templateId) return;
+              await _flutterCarplay.updateListTemplateSections(
+                elementId: templateId,
+                sections: updatedSections,
+              );
+            }).catchError((e) {
               AppLogger.log("CarPlay section header update ignored: $e",
                   name: 'CarPlay');
             }),
