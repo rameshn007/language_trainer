@@ -302,10 +302,12 @@ void main() {
       when(() => audioPlayer.playing).thenReturn(true);
       when(() => audioPlayer.currentIndex).thenReturn(0);
 
-      // Resuming while playing must respect speech shielding and NOT force refill
+      // Resuming while playing must respect speech shielding and NOT force refill.
+      // Observe for 500ms (> 200ms yield + synthesis) to ensure no refill fires.
       vm.didChangeAppLifecycleState(AppLifecycleState.resumed);
-      await Future<void>.delayed(const Duration(milliseconds: 100));
+      await Future<void>.delayed(const Duration(milliseconds: 500));
       expect(vm.playlistWordsCount, 1);
+      expect(vm.isRefilling, isFalse);
 
       // Case B: Audio is stopped/paused (isolate suspended, playback interrupted).
       when(() => audioPlayer.playing).thenReturn(false);
@@ -381,8 +383,9 @@ void main() {
       // Timer was cancelled and rescheduled; still pending
       expect(carPlay.hasPendingSectionUpdate, isTrue);
 
-      // Wait for 250ms debounced timer to complete
+      // Wait for 250ms debounced timer to complete and platform call to settle
       await _waitForCondition(() => !carPlay.hasPendingSectionUpdate);
+      await Future<void>.delayed(const Duration(milliseconds: 50));
 
       // Verify coalescing: only 1 updateListTemplateSections call occurred
       final sectionUpdates = carPlayCalls
