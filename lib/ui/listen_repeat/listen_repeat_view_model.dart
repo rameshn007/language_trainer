@@ -82,12 +82,19 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   // ignore: deprecated_member_use
   ConcatenatingAudioSource? _playlist;
   final List<LanguageItem> _playlistWords = [];
+  @visibleForTesting
+  int get playlistWordsCount => _playlistWords.length;
+  @visibleForTesting
+  List<LanguageItem> get playlistWords => List.unmodifiable(_playlistWords);
+  @visibleForTesting
+  bool get isRefilling => _fillingSessionId != null;
   final List<LanguageItem> _shuffledPool = [];
   StreamSubscription? _currentIndexSubscription;
   final Set<String> _failedItemIds = {};
   int _consecutiveFailures = 0;
   int _sessionConsecutiveFailures = 0;
   int _sessionWordsOffset = 0;
+  int _lastPlaybackWordIndex = 0;
   int? _fillingSessionId;
 
   bool _isValidAudioFile(File file) {
@@ -135,15 +142,24 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed && _isAutoPlayActive) {
-      // Dart stream events might be dropped while the isolate is suspended in background.
-      // Manually sync the current word index when returning to the app.
-      _syncCurrentIndex(_bgAudioPlayer.currentIndex);
+      // Dart stream events might be dropped while the isolate was suspended in background.
+      // If audio is paused/stopped, playback was interrupted so there is no concurrent-speech
+      // stutter risk — bypass the speech gate with forceRefill to recover the buffer immediately.
+      // If audio is actively playing (e.g. CarPlay background streaming), do not force refill
+      // during speech; let normal silence gating (or emergency starvation) refill safely (C3).
+      final bool shouldForce = !_bgAudioPlayer.playing;
+      _syncCurrentIndex(_bgAudioPlayer.currentIndex, forceRefill: shouldForce);
     }
   }
 
-  void _syncCurrentIndex(int? index) {
-    if (index == null) return;
-    final wordIndex = index ~/ _kSourcesPerWord;
+  void _syncCurrentIndex(int? index, {bool forceRefill = false}) {
+    if (index == null && !forceRefill && _bgAudioPlayer.processingState != ProcessingState.completed) return;
+    final wordIndex = index != null
+        ? (index ~/ _kSourcesPerWord)
+        : (_bgAudioPlayer.processingState == ProcessingState.completed
+            ? _playlistWords.length
+            : _lastPlaybackWordIndex);
+    _lastPlaybackWordIndex = wordIndex;
     if (wordIndex < _playlistWords.length) {
       final currentWord = _playlistWords[wordIndex];
       if (state.currentItem != currentWord) {
@@ -154,9 +170,23 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       }
     }
 
-    // Maintain a buffer of up to 4 words
-    if (wordIndex >= _playlistWords.length - 4) {
-      _appendNextWordInBackground(_sessionId);
+    final remainingWords = _playlistWords.length - wordIndex;
+    final sourceInWord = index != null ? (index % _kSourcesPerWord) : 0;
+    final isSilence = sourceInWord.isOdd;
+
+    // Stutter prevention: gate refill triggers to silence chunks (silence1, silence2, silence3)
+    // when adequate buffer remains (remainingWords >= 2), completely shielding active speech
+    // (pt1, pt2, en) from concurrent TTS synthesis, PNG encoding, and AVQueuePlayer queue mutation.
+    // An emergency starvation guard (C6) triggers refill during speech if remainingWords <= 2
+    // and we are at or past the English prompt (sourceInWord >= 4) to protect against queue underrun
+    // at 1.25x/1.5x speeds.
+    final isEmergencyStarvation = remainingWords <= 2 && (sourceInWord >= 4 || index == null);
+    if (forceRefill || (isSilence && remainingWords < 4) || isEmergencyStarvation) {
+      _appendNextWordInBackground(
+        _sessionId,
+        force: forceRefill,
+        isEmergency: isEmergencyStarvation,
+      );
     }
   }
 
@@ -326,6 +356,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     final currentSessionId = _sessionId;
     _isAutoPlayActive = true;
     _fillingSessionId = null;
+    _lastPlaybackWordIndex = 0;
     _playlistWords.clear();
     _playlist = null;
     
@@ -630,19 +661,88 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     }
   }
 
-  Future<void> _appendNextWordInBackground(int sessionId) async {
+  Future<void> _appendNextWordInBackground(
+    int sessionId, {
+    bool force = false,
+    bool isEmergency = false,
+  }) async {
     if (sessionId != _sessionId || !_isAutoPlayActive) return;
     if (_fillingSessionId == sessionId) return;
     _fillingSessionId = sessionId;
 
     try {
-      while (_playlistWords.length - ((_bgAudioPlayer.currentIndex ?? 0) ~/ _kSourcesPerWord) < 4) {
+      int wordsAppendedThisPass = 0;
+
+      while (true) {
         if (sessionId != _sessionId || !_isAutoPlayActive) break;
-        // Yield to the event loop between syntheses
+
+        final curIdx = _bgAudioPlayer.currentIndex;
+        final int curWordIndex;
+        if (curIdx != null) {
+          curWordIndex = curIdx ~/ _kSourcesPerWord;
+          _lastPlaybackWordIndex = curWordIndex;
+        } else if (_bgAudioPlayer.processingState == ProcessingState.completed) {
+          // Playback completed all words up to the point of starvation.
+          // Subtract words appended during this pass so remaining accurately reflects
+          // newly added unplayed words (C5).
+          curWordIndex = _playlistWords.length - wordsAppendedThisPass;
+        } else {
+          curWordIndex = _lastPlaybackWordIndex;
+        }
+
+        final remaining = _playlistWords.length - curWordIndex;
+
+        // Hard safety bound: target is 4 words ahead
+        if (remaining >= 4) break;
+
+        final isSpeech = curIdx != null && (curIdx % _kSourcesPerWord).isEven;
+
+        // Speech shielding:
+        // Shield active speech from concurrent synthesis if buffer has >= 2 words,
+        // UNLESS bypassed by force (e.g. resume when stopped) or emergency starvation (remaining <= 2 at source >= 4) (C6).
+        if (!force && !isEmergency && remaining >= 2 && isSpeech) {
+          break;
+        }
+
+        final wasStarved = remaining <= 1;
+
+        // Yield to the event loop between syntheses (reverted to 200ms per C4)
         await Future.delayed(const Duration(milliseconds: 200));
         if (sessionId != _sessionId || !_isAutoPlayActive) break;
         
         await _ensureNextWordAppended(sessionId);
+        wordsAppendedThisPass++;
+
+        final updatedCurIdx = _bgAudioPlayer.currentIndex;
+        final int updatedCurWordIndex;
+        if (updatedCurIdx != null) {
+          updatedCurWordIndex = updatedCurIdx ~/ _kSourcesPerWord;
+          _lastPlaybackWordIndex = updatedCurWordIndex;
+        } else if (_bgAudioPlayer.processingState == ProcessingState.completed) {
+          updatedCurWordIndex = _playlistWords.length - wordsAppendedThisPass;
+        } else {
+          updatedCurWordIndex = _lastPlaybackWordIndex;
+        }
+
+        final updatedRemaining = _playlistWords.length - updatedCurWordIndex;
+
+        // Break conditions (C5, C3):
+        // 1. If not starved initially (wasStarved == false): append exactly 1 word per pass
+        //    to avoid multi-word bursts spilling into upcoming speech.
+        if (!wasStarved) {
+          break;
+        }
+
+        // 2. If starved initially (wasStarved == true): rebuild buffer until at least 2 words
+        //    are buffered (updatedRemaining >= 2) or cap at 2 words appended in this pass.
+        if (wasStarved && (updatedRemaining >= 2 || wordsAppendedThisPass >= 2)) {
+          break;
+        }
+
+        // 3. If forced (lifecycle resume): cap to at most 2 words to avoid burst dumping.
+        if (force && (updatedRemaining >= 2 || wordsAppendedThisPass >= 2)) {
+          break;
+        }
       }
     } finally {
       if (_fillingSessionId == sessionId) {
@@ -750,6 +850,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     _sessionId++; // Invalidate any ongoing generation for this session
     _isAutoPlayActive = false;
     _fillingSessionId = null;
+    _lastPlaybackWordIndex = 0;
     _pendingMode = null;
     if (_pendingCompleter != null && !_pendingCompleter!.isCompleted) {
       _pendingCompleter!.complete();

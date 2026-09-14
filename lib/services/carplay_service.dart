@@ -73,6 +73,13 @@ class CarPlayService {
   CPListItem? _speedItem;
   CPListItem? _focusItem;
 
+  /// Single-flight timer to debounce and de-conflict heavy multi-section template
+  /// updates (C7). Cancels and coalesces rapid word skips so we never stack concurrent IPC payloads.
+  Timer? _pendingSectionUpdateTimer;
+
+  @visibleForTesting
+  bool get hasPendingSectionUpdate => _pendingSectionUpdateTimer?.isActive ?? false;
+
   @visibleForTesting
   CPListTemplate? get playerTemplateForTesting => _playerTemplate;
 
@@ -180,6 +187,8 @@ class CarPlayService {
     _container = null;
     _storageService = null;
     _shownFlagged = null;
+    _pendingSectionUpdateTimer?.cancel();
+    _pendingSectionUpdateTimer = null;
     _resetPlayer();
   }
 
@@ -620,17 +629,32 @@ class CarPlayService {
             updatedFirstSection,
             ...template.sections.skip(1),
           ];
-          unawaited(
-            _flutterCarplay
-                .updateListTemplateSections(
-                  elementId: template.uniqueId,
-                  sections: updatedSections,
-                )
-                .catchError((e) {
+          final templateId = template.uniqueId;
+
+          // De-confliction (C7, C8, C9, C10):
+          // Single-flight timer cancels and coalesces rapid word skips (e.g. steering-wheel 300ms debounce)
+          // so we never stack multiple concurrent IPC payloads.
+          //
+          // Transient 250ms visual state (C10): row text updates immediately via wordItem.update(),
+          // while section header (#N) lags by 250ms to prevent audio stutter during track startup.
+          // Do not synchronize synchronously as that re-introduces the IPC storm and speech stutter.
+          //
+          // Note on live references (C9): updatedSections references mutable _wordItem and _flagItem.
+          // When the timer fires, it sends the latest state of these items, which is the desired
+          // behavior for debounced template updates.
+          _pendingSectionUpdateTimer?.cancel();
+          _pendingSectionUpdateTimer = Timer(const Duration(milliseconds: 250), () async {
+            if (_playerTemplate?.uniqueId != templateId) return;
+            try {
+              await _flutterCarplay.updateListTemplateSections(
+                elementId: templateId,
+                sections: updatedSections,
+              );
+            } catch (e) {
               AppLogger.log("CarPlay section header update ignored: $e",
                   name: 'CarPlay');
-            }),
-          );
+            }
+          });
         } catch (e) {
           AppLogger.log("Error preparing updated CarPlay sections: $e",
               name: 'CarPlay');
@@ -675,6 +699,8 @@ class CarPlayService {
   // ------------------------------------------------------------------
 
   void _resetPlayer() {
+    _pendingSectionUpdateTimer?.cancel();
+    _pendingSectionUpdateTimer = null;
     _playerTemplate = null;
     _wordItem = null;
     _flagItem = null;

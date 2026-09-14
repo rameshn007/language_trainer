@@ -43,6 +43,12 @@ Passive audio training — no speech recognition, user repeats silently. Runs vi
   - Word generation mutex: `_generationFuture` lock guarantees only one background deck build / TTS synthesis runs at a time.
   - Poison-pill protection: skips any item that fails synthesis twice; halts after 6 consecutive failures.
   - Playback resume: `_bgAudioPlayer.play()` is un-awaited (`if (_isAutoPlayActive && !_bgAudioPlayer.playing) _bgAudioPlayer.play().catchError(...)`) so it never blocks word-skipping methods.
+- **Buffer Refill & Speech Shielding Contract:**
+  - Buffer target is 4 words ahead; background replenishment is gated to silence chunks (`silence1`, `silence2`, `silence3`) when `remainingWords < 4`.
+  - Active speech chunks (`pt1`, `pt2`, `en`) are completely shielded from concurrent TTS synthesis, disk I/O, PNG encoding, and `ConcatenatingAudioSource` queue mutations as long as `remainingWords >= 2`.
+  - **Emergency starvation guard:** If buffer drops to `remainingWords <= 2` and playback reaches or passes the English prompt (`sourceInWord >= 4`), refill triggers during speech to eliminate queue underruns (especially at 1.25×/1.5× playback speeds), synthesizing 1 word and immediately breaking.
+  - **Post-starvation recovery:** If the buffer runs dry (`remaining <= 1`), the replenishment loop rebuilds up to 2 words before exiting, avoiding audible gaps of a full word cycle while strictly capping multi-word synthesis to at most 2 words per pass. Yield time between syntheses is 200ms.
+  - **Lifecycle resume:** When the app returns from background (`didChangeAppLifecycleState(resumed)`), if audio is stopped/paused, `forceRefill` bypasses speech gating to recover the buffer immediately (capped to at most 2 words); if audio is actively playing (e.g. streaming over CarPlay), speech shielding remains active to avoid stuttering over ongoing audio.
 - **Study Focus Modes (`ListenRepeatMode`):**
   - `all` (Balanced Mix), `verbs`, `prepositions`, `phrases`, `vocabulary`. Filtered via `ListenRepeatContentService`.
   - Mode switching and shuffling pass `recordProgress: false` and cache `_sessionWordsOffset` so cumulative words seen persist without XP farming. Explicit session stops pass `recordProgress: true` to award XP once.
@@ -60,6 +66,11 @@ CarPlay acts as an in-car player for the shared L&R session (no microphone/voice
 - **UI & Head Unit Compliance:**
   - Player template is a `CPListTemplate` capped at 8 items across 3 sections (Current Word with live now-playing indicator & Flag for Review action [2 items], Playback controls [3 items], Session controls: Focus cycle, Speed, Stop [3 items]; replacing mid-session reshuffle to stay strictly within Apple's 8-item template limit).
   - Stop session returns to the Study Focus menu (`Balanced Mix`, `Verbs`, `Prepositions`, `Phrases`, `Vocabulary`).
+- **UI Staggering & IPC De-confliction:**
+  - When the active word changes, row item titles and subtitles (`_wordItem.update()`, `_flagItem.update()`) and now-playing metadata update immediately, while the full section header IPC (`template.updateSections(...)`) is debounced by a 250ms single-flight timer (`_pendingSectionUpdateTimer`).
+  - Single-flight timer coalesces rapid remote track skips (300ms steering wheel debounce) so multi-section IPC payloads do not stack and congest the platform bridge.
+  - Live references in `updatedSections` hold current item state across the delay. A transient display state during the 250ms window (new word item title with `#N-1` header) is an intentional trade-off to eliminate main-thread audio stutter.
+  - `resetForTesting()` and `_resetPlayer()` explicitly cancel any pending `_pendingSectionUpdateTimer`.
 - **Steering Wheel & Media Controls (`RemoteCommandInterceptor` in `AppDelegate.swift`):**
   - Fixes the multi-source skip glitch where default next/previous track steps into silence chunks.
   - Swizzles `AudioServicePlugin` (`nextTrack:`, `previousTrack:`, `skipForward:`, `skipBackward:`) via Objective-C runtime and hooks `MPRemoteCommandCenter.shared()`.
@@ -70,7 +81,7 @@ CarPlay acts as an in-car player for the shared L&R session (no microphone/voice
 
 ## Testing & Quality Conventions
 
-- Run tests: `flutter test` (all tests should pass, currently 197 tests).
+- Run tests: `flutter test` (all tests should pass, currently 222 tests).
 - Static analysis: `flutter analyze` (zero issues allowed).
 - iOS Simulator build: `flutter build ios --no-codesign --simulator`.
-- Test hygiene: Use `CarPlayService().resetForTesting()` in `tearDown` to reset container subscriptions and debounce timestamps.
+- Test hygiene: Use `CarPlayService().resetForTesting()` in `tearDown` to reset container subscriptions, cancel pending section update timers, and clear debounce timestamps.
