@@ -117,6 +117,8 @@ void main() {
       await file.writeAsBytes(List.filled(1000, 0));
     });
 
+    when(() => storage.isItemFlagged(any())).thenReturn(false);
+
     final items = customItems ?? [
       LanguageItem(id: 'w1', portuguese: 'Palavra 1', english: 'Word 1'),
       LanguageItem(id: 'w2', portuguese: 'Palavra 2', english: 'Word 2'),
@@ -232,54 +234,167 @@ void main() {
       expect(vm.playlistWordsCount, 4);
     });
 
-    test('emergency starvation guard initiates refill if remaining words <= 2 at en source (C6)', () async {
+    test('emergency starvation guard initiates refill if remaining words == 2 at en source (C6)', () async {
       setupContainer(customItems: [
         LanguageItem(id: 'starve_1', portuguese: 'Fome 1', english: 'Hunger 1'),
         LanguageItem(id: 'starve_2', portuguese: 'Fome 2', english: 'Hunger 2'),
+        LanguageItem(id: 'starve_3', portuguese: 'Fome 3', english: 'Hunger 3'),
       ]);
       final vm = notifier();
       await vm.startSession();
 
       expect(vm.playlistWordsCount, 1);
 
-      // Only word 0 is buffered (remaining = 1 <= 2). Audio reaches en (index 4)
+      // Advance to silence1 so exactly 2 words are buffered
+      when(() => audioPlayer.currentIndex).thenReturn(1);
+      currentIndexController.add(1);
+      await _waitForCondition(() => vm.playlistWordsCount == 2 && !vm.isRefilling);
+
+      // Now exactly 2 words are in playlist (remainingWords = 2 - 0 = 2).
+      // Playback reaches en (index 4, speech).
+      // Emergency starvation guard triggers during speech:
       when(() => audioPlayer.currentIndex).thenReturn(4);
       currentIndexController.add(4);
 
-      // Emergency starvation guard triggers immediately on en (sourceInWord >= 4 && remaining <= 2)
-      await _waitForCondition(() => vm.playlistWordsCount >= 2);
-      expect(vm.playlistWordsCount, 2);
+      await _waitForCondition(() => vm.playlistWordsCount == 3 && !vm.isRefilling);
+      expect(vm.playlistWordsCount, 3);
     });
 
-    test('didChangeAppLifecycleState(resumed) bypasses speech gate to recover dropped buffer events (C3)', () async {
+    test('post-starvation recovery rebuilds buffer to 2 words and does not loop indefinitely (C5)', () async {
+      setupContainer(customItems: [
+        LanguageItem(id: 'dry_1', portuguese: 'Seco 1', english: 'Dry 1'),
+        LanguageItem(id: 'dry_2', portuguese: 'Seco 2', english: 'Dry 2'),
+        LanguageItem(id: 'dry_3', portuguese: 'Seco 3', english: 'Dry 3'),
+        LanguageItem(id: 'dry_4', portuguese: 'Seco 4', english: 'Dry 4'),
+      ]);
+      final vm = notifier();
+      await vm.startSession();
+
+      expect(vm.playlistWordsCount, 1);
+
+      // Simulate queue running dry: player completed word 0, currentIndex becomes null
+      when(() => audioPlayer.currentIndex).thenReturn(null);
+      when(() => audioPlayer.processingState).thenReturn(ProcessingState.completed);
+      when(() => audioPlayer.playing).thenReturn(false);
+
+      // Recovery triggers via resume hook
+      vm.didChangeAppLifecycleState(AppLifecycleState.resumed);
+
+      // Starvation recovery must rebuild buffer to 2 words (1 consumed + 2 added = 3 total)
+      await _waitForCondition(() => vm.playlistWordsCount == 3 && !vm.isRefilling);
+      expect(vm.playlistWordsCount, 3);
+
+      // Ensure it does not continue looping indefinitely (pre-fix bug reached 14+ words)
+      await Future<void>.delayed(const Duration(milliseconds: 300));
+      expect(vm.playlistWordsCount, 3);
+      expect(vm.isRefilling, isFalse);
+    });
+
+    test('didChangeAppLifecycleState(resumed) scopes forceRefill: shields speech when playing, forces when stopped (C3)', () async {
       setupContainer();
       final vm = notifier();
       await vm.startSession();
 
       expect(vm.playlistWordsCount, 1);
 
-      // Player is paused at pt1 (index 0, speech)
+      // Case A: Audio is actively playing (e.g. CarPlay background streaming).
+      // Playback is at speech index 0 (pt1).
+      when(() => audioPlayer.playing).thenReturn(true);
       when(() => audioPlayer.currentIndex).thenReturn(0);
 
-      // Normal sync at index 0 would not refill
-      // But lifecycle resume with forceRefill = true must bypass the speech gate
+      // Resuming while playing must respect speech shielding and NOT force refill
       vm.didChangeAppLifecycleState(AppLifecycleState.resumed);
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+      expect(vm.playlistWordsCount, 1);
 
-      await _waitForCondition(() => vm.playlistWordsCount >= 2);
-      expect(vm.playlistWordsCount, greaterThanOrEqualTo(2));
+      // Case B: Audio is stopped/paused (isolate suspended, playback interrupted).
+      when(() => audioPlayer.playing).thenReturn(false);
+      when(() => audioPlayer.currentIndex).thenReturn(0);
+
+      // Resuming while stopped must bypass the speech gate and refill buffer
+      vm.didChangeAppLifecycleState(AppLifecycleState.resumed);
+      await _waitForCondition(() => vm.playlistWordsCount == 2 && !vm.isRefilling);
+      expect(vm.playlistWordsCount, 2);
     });
 
-    test('CarPlay single-flight timer coalesces rapid word skips (C7)', () async {
+    test('CarPlay single-flight timer debounces and coalesces rapid word skips (C7)', () async {
+      final carPlayCalls = <MethodCall>[];
       TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
           .setMockMethodCallHandler(
         const MethodChannel('com.oguzhnatly.flutter_carplay'),
-        (MethodCall call) async => true,
+        (MethodCall call) async {
+          carPlayCalls.add(call);
+          return true;
+        },
       );
 
+      setupContainer(customItems: [
+        LanguageItem(id: 'c1', portuguese: 'Carro 1', english: 'Car 1'),
+        LanguageItem(id: 'c2', portuguese: 'Carro 2', english: 'Car 2'),
+        LanguageItem(id: 'c3', portuguese: 'Carro 3', english: 'Car 3'),
+      ]);
+
       final carPlay = CarPlayService();
+      carPlay.init(container: container!, storageService: storage);
+
+      const sceneChannel = MethodChannel('language_trainer/carplay_scene');
+      await TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .handlePlatformMessage(
+        sceneChannel.name,
+        sceneChannel.codec.encodeMethodCall(
+          const MethodCall('sceneWillEnterForeground'),
+        ),
+        (ByteData? data) {},
+      );
+
+      await _waitForCondition(() => carPlay.playerTemplateForTesting != null);
       expect(carPlay.hasPendingSectionUpdate, isFalse);
 
-      // Reset cleans up pending timers
+      final vm = notifier();
+      await vm.startSession();
+
+      // Buffer words 1 and 2 so we have playlist items to skip between
+      when(() => audioPlayer.currentIndex).thenReturn(1);
+      currentIndexController.add(1);
+      await _waitForCondition(() => vm.playlistWordsCount == 2 && !vm.isRefilling);
+
+      when(() => audioPlayer.currentIndex).thenReturn(3);
+      currentIndexController.add(3);
+      await _waitForCondition(() => vm.playlistWordsCount == 3 && !vm.isRefilling);
+
+      // Clear calls from startup / initial buffer fills
+      carPlayCalls.clear();
+      expect(carPlay.hasPendingSectionUpdate, isFalse);
+
+      // Rapid skip 1: advance to word 1 (totalWordsSeen changes to 2)
+      when(() => audioPlayer.currentIndex).thenReturn(6);
+      currentIndexController.add(6);
+
+      // Single-flight timer is active
+      await _waitForCondition(() => carPlay.hasPendingSectionUpdate);
+      expect(carPlay.hasPendingSectionUpdate, isTrue);
+
+      // Rapid skip 2 before 250ms expires: advance to word 2 (totalWordsSeen changes to 3)
+      when(() => audioPlayer.currentIndex).thenReturn(12);
+      currentIndexController.add(12);
+
+      // Timer was cancelled and rescheduled; still pending
+      expect(carPlay.hasPendingSectionUpdate, isTrue);
+
+      // Wait for 250ms debounced timer to complete
+      await _waitForCondition(() => !carPlay.hasPendingSectionUpdate);
+
+      // Verify coalescing: only 1 updateListTemplateSections call occurred
+      final sectionUpdates = carPlayCalls
+          .where((call) => call.method == 'updateListTemplateSections')
+          .toList();
+      expect(sectionUpdates.length, 1);
+
+      // Verify cleanup: advance again and test resetForTesting()
+      when(() => audioPlayer.currentIndex).thenReturn(0);
+      currentIndexController.add(0);
+      await _waitForCondition(() => carPlay.hasPendingSectionUpdate);
+
       carPlay.resetForTesting();
       expect(carPlay.hasPendingSectionUpdate, isFalse);
     });

@@ -46,9 +46,9 @@ Passive audio training — no speech recognition, user repeats silently. Runs vi
 - **Buffer Refill & Speech Shielding Contract:**
   - Buffer target is 4 words ahead; background replenishment is gated to silence chunks (`silence1`, `silence2`, `silence3`) when `remainingWords < 4`.
   - Active speech chunks (`pt1`, `pt2`, `en`) are completely shielded from concurrent TTS synthesis, disk I/O, PNG encoding, and `ConcatenatingAudioSource` queue mutations as long as `remainingWords >= 2`.
-  - **Emergency starvation guard:** If buffer drops to `remainingWords <= 2` and playback reaches or passes the English prompt (`sourceInWord >= 4`), refill triggers during speech to eliminate queue underruns (especially at 1.25×/1.5× playback speeds).
-  - **Post-starvation recovery:** If the buffer runs dry (`remaining <= 1`), the replenishment loop does not stop at 1 word; it restores at least 2 words to target before exiting, avoiding audible gaps of a full word cycle. Yield time between multi-word syntheses is 200ms.
-  - **Lifecycle resume bypass:** When the app returns from background (`didChangeAppLifecycleState(resumed)`), `_syncCurrentIndex` is called with `forceRefill: true` to bypass the speech gate and immediately recover dropped queue events without waiting for a silence chunk.
+  - **Emergency starvation guard:** If buffer drops to `remainingWords <= 2` and playback reaches or passes the English prompt (`sourceInWord >= 4`), refill triggers during speech to eliminate queue underruns (especially at 1.25×/1.5× playback speeds), synthesizing 1 word and immediately breaking.
+  - **Post-starvation recovery:** If the buffer runs dry (`remaining <= 1`), the replenishment loop rebuilds up to 2 words before exiting, avoiding audible gaps of a full word cycle while strictly capping multi-word synthesis to at most 2 words per pass. Yield time between syntheses is 200ms.
+  - **Lifecycle resume:** When the app returns from background (`didChangeAppLifecycleState(resumed)`), if audio is stopped/paused, `forceRefill` bypasses speech gating to recover the buffer immediately (capped to at most 2 words); if audio is actively playing (e.g. streaming over CarPlay), speech shielding remains active to avoid stuttering over ongoing audio.
 - **Study Focus Modes (`ListenRepeatMode`):**
   - `all` (Balanced Mix), `verbs`, `prepositions`, `phrases`, `vocabulary`. Filtered via `ListenRepeatContentService`.
   - Mode switching and shuffling pass `recordProgress: false` and cache `_sessionWordsOffset` so cumulative words seen persist without XP farming. Explicit session stops pass `recordProgress: true` to award XP once.
@@ -81,7 +81,7 @@ CarPlay acts as an in-car player for the shared L&R session (no microphone/voice
 
 ## Testing & Quality Conventions
 
-- Run tests: `flutter test` (all tests should pass, currently 221 tests).
+- Run tests: `flutter test` (all tests should pass, currently 222 tests).
 - Static analysis: `flutter analyze` (zero issues allowed).
 - iOS Simulator build: `flutter build ios --no-codesign --simulator`.
 - Test hygiene: Use `CarPlayService().resetForTesting()` in `tearDown` to reset container subscriptions, cancel pending section update timers, and clear debounce timestamps.
