@@ -18,6 +18,7 @@ set -euo pipefail
 #   XCODE_PATH         — optional path to a stable (non-beta) Xcode.app
 #                        e.g. /Applications/Xcode.app
 #                        If unset, defaults to /Applications/Xcode.app
+#   ALLOW_BETA_XCODE   — set to 1 to bypass the beta Xcode check (optional)
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
@@ -64,22 +65,28 @@ XCODE_INFO=$(xcodebuild -version 2>&1) || die "Failed to run xcodebuild"
 XCODE_VERSION=$(echo "$XCODE_INFO" | head -n1 | awk '{print $2}')
 BUILD_VERSION=$(echo "$XCODE_INFO" | head -n2 | tail -n1 | awk '{print $3}')
 
-# Beta/rc build numbers end with a letter (e.g. 27A5194q, 15A5070d)
-if [[ "$BUILD_VERSION" =~ [a-zA-Z]$ ]]; then
-  die "Beta/RC Xcode detected (Xcode $XCODE_VERSION, build $BUILD_VERSION).
-App Store Connect requires a released (non-beta) Xcode version.
+if [[ "${ALLOW_BETA_XCODE:-0}" == "1" || "${SKIP_BETA_CHECK:-0}" == "1" ]]; then
+  echo "⚠️  Bypassing Xcode beta check (ALLOW_BETA_XCODE=1)"
+else
+  # Apple beta build numbers use 4+ digits before trailing letter (e.g. 27A5194q, 15A5070d).
+  # Official release candidate and final release builds use 1-3 digits (e.g. 27A266a, 16A242d, 15A240d)
+  # or no trailing letter (e.g. 15C65).
+  if [[ "$XCODE_INFO" =~ [Bb]eta ]] || [[ "$XCODE_PATH" =~ [Bb]eta ]] || [[ "$BUILD_VERSION" =~ [A-Z][0-9]{4,}[a-zA-Z]$ ]]; then
+    die "Beta Xcode detected (Xcode $XCODE_VERSION, build $BUILD_VERSION).
+App Store Connect requires a released or release-candidate (non-beta) Xcode version.
 
 To fix:
   1. Install a released Xcode from: https://developer.apple.com/download/
      (requires an Apple Developer account)
   2. Place it at /Applications/Xcode.app (or set XCODE_PATH env var)
-  3. Re-run this script
+  3. Re-run this script (or set ALLOW_BETA_XCODE=1 to override)
 
 Current Xcode: $XCODE_PATH
-Build version: $BUILD_VERSION (letter suffix = pre-release)"
+Build version: $BUILD_VERSION"
+  fi
 fi
 
-echo "✅ Xcode $XCODE_VERSION (build $BUILD_VERSION) — release version confirmed"
+echo "✅ Xcode $XCODE_VERSION (build $BUILD_VERSION) — release/RC version confirmed"
 
 # ── main ─────────────────────────────────────────────────────────────────────
 
