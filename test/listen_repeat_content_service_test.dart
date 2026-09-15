@@ -277,5 +277,18 @@ void main() {
       // Contains core vocab
       expect(pool.any((i) => i.id == 'v1' || i.id == 'v2'), isTrue);
     });
+
+    test('deduplicates phrases across pools in ListenRepeatMode.all', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'sol', english: 'sun'),
+        LanguageItem(id: 'v2', portuguese: 'Bom dia!', english: 'Good morning!'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => []);
+
+      final pool = await contentService.loadContent(mode: ListenRepeatMode.all);
+      // 'v2' is filtered out from pureVocab so 'Bom dia!' only appears once from the phrase pool
+      final bomDiaCount = pool.where((i) => i.portuguese.trim().toLowerCase() == 'bom dia!').length;
+      expect(bomDiaCount, equals(1));
+    });
   });
 }

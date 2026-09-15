@@ -578,5 +578,60 @@
     "verb": "descolar",
     "portuguese": "Nós descolamos ao meio-dia.",
     "english": "We take off at midday."
+  },
+  {
+    "verb": "esperar",
+    "portuguese": "Nós esperamos que não chova amanhã.",
+    "english": "We hope that it doesn't rain tomorrow."
+  },
+  {
+    "verb": "atender",
+    "portuguese": "A rececionista atende o telefone rapidamente.",
+    "english": "The receptionist answers the phone quickly."
+  },
+  {
+    "verb": "atender",
+    "portuguese": "O empregado atende os clientes com simpatia.",
+    "english": "The employee serves the customers with friendliness."
+  },
+  {
+    "verb": "arrumar",
+    "portuguese": "Eles arrumam a sala antes de receber os convidados.",
+    "english": "They tidy up the living room before receiving the guests."
+  },
+  {
+    "verb": "pôr",
+    "portuguese": "Eu ponho a mesa todos os dias antes do jantar.",
+    "english": "I set the table every day before dinner."
+  },
+  {
+    "verb": "levantar",
+    "portuguese": "Nós levantamos a mesa depois da refeição.",
+    "english": "We clear the table after the meal."
+  },
+  {
+    "verb": "tirar",
+    "portuguese": "Ela tira a carteira da mala para pagar.",
+    "english": "She takes the wallet out of her bag to pay."
+  },
+  {
+    "verb": "levar",
+    "portuguese": "Eu levo as crianças à escola todas as manhãs.",
+    "english": "I take the children to school every morning."
+  },
+  {
+    "verb": "conseguir",
+    "portuguese": "Hoje eu não consigo estudar porque estou doente.",
+    "english": "Today I cannot study because I am sick."
+  },
+  {
+    "verb": "fazer",
+    "portuguese": "Nós fazemos esqui na serra no inverno.",
+    "english": "We go skiing in the mountains in winter."
+  },
+  {
+    "verb": "ligar",
+    "portuguese": "Eu ligo o computador às nove da manhã.",
+    "english": "I turn on the computer at nine in the morning."
   }
 ]

@@ -223,3 +223,117 @@
 | em vou em pessoa | I go in person |
 | vou ter uma reunião online | I’m going to have a meeting online |
 | vou ter uma reunião presencial | I’m going to have a meeting face to face |
+
+# Aula de português 6
+
+| Portugues | English |
+| :---- | :---- |
+| dossiê | folder / dossier |
+| esperar por | to wait for (something or someone) |
+| esperar que | to hope that |
+| o teu marido | your husband |
+| Podes ir ao cinema sem mim | You can go to the cinema without me |
+| proposta | proposal |
+| uma proposta de trabalho | a job proposal |
+| uma proposta de negócio | a business proposal |
+| namorado | boyfriend |
+| namorada | girlfriend |
+| a melhor forma de conhecer | the best way to get to know (places or things) |
+| a melhor forma | the best way (feminine) |
+| a melhor maneira | the best way (feminine) |
+| o melhor modo | the best way (masculine) |
+| Para quem são estes óculos? Para si. | Who are these glasses for? For you (formal). |
+| relatório | report |
+| relojoaria | watch shop / watchmaker |
+| joalharia | jewellery shop |
+| meses | months |
+| estações do ano | seasons of the year |
+| em junho | in June |
+| na (em + a) | in the / on the (feminine) |
+| no (em + o) | in the / on the (masculine) |
+| formação | training / course |
+| Em fevereiro, vamos fazer uma formação | In February, we are going to do a training course |
+| dar formação | to provide training |
+| um formador | a trainer |
+| treinador | sports manager / coach |
+| Em julho, tenho de viajar para fora do país | In July, I have to travel outside the country |
+| No outono, vou levar as crianças à escola | In autumn, I take the children to school |
+| Em janeiro, posso fazer esqui | In January, I can ski |
+| Na primavera, costumo tirar fotografias na natureza | In spring, I usually take photographs in nature |
+| tirar a carta de condução | to get one's driving licence |
+| tirar a carteira da mala | to take the wallet out of the bag |
+| tirar | to take out / remove / take (photos) |
+| levar | take |
+| Em maio, eu e os meus amigos fazemos piqueniques no parque | In May, my friends and I have picnics in the park |
+| No inverno, a minha família gosta de ir ao mercado de natal | In winter, my family likes to go to the Christmas market |
+| quando | when (time) |
+| porque | because / why (cause) |
+| mas | but |
+| e | and (addition) |
+| parar | to stop |
+| pare | stop (formal imperative) |
+| paragem | bus stop / stop |
+| mais cedo | earlier |
+| atender o telefone | to answer the phone |
+| atender um cliente | to serve / assist a customer |
+| atendimento ao cliente | customer service |
+| junto | close / near / together |
+
+# Aula de português 7
+
+| Portugues | English |
+| :---- | :---- |
+| direita e esquerda | right and left / forehand and backhand |
+| serviço | serve (tennis) / service |
+| volei | volley (tennis) |
+| smash | smash (tennis) |
+| cruzada | cross-court (tennis) |
+| ao longo | down the line (tennis) |
+| um ás | an ace (tennis) |
+| dupla falta | double fault (tennis) |
+| um ponto ganhante | a winner / winning point (tennis) |
+| 40 igual | 40-all / deuce (tennis) |
+| vantagem | advantage (tennis) |
+| vantagem nula | no advantage / sudden death (tennis) |
+| agradar | to please |
+| por isso | therefore / that is why |
+| arrumam a sala | they tidy up the living room |
+| arrumar | to organize / tidy up |
+| dele | his / of him |
+| dela | hers / of her |
+| os filhos dele | his children |
+| os filhos dela | her children |
+| vão trazer | they are going to bring |
+| Eles estão no supermercado | They are at the supermarket |
+| Eu tenho teste amanhã, mas hoje não consigo estudar | I have a test tomorrow, but today I cannot study |
+| porque estou doente | because I am sick |
+| porque corre todos os dias | because he/she runs every day |
+| todos os dias | every day |
+| todo o dia | all day long |
+| Ela quer muito ir ao cinema connosco, mas, infelizmente, não pode | She really wants to go to the cinema with us, but, unfortunately, she cannot |
+| os netos | the grandchildren |
+| o neto | the grandson |
+| a neta | the granddaughter |
+| quando recebe | when he/she receives / welcomes |
+| põem a música mais baixa | they turn the music down |
+| mais alto | louder / higher |
+| fala mais alto | speak louder |
+| pôr a mesa | to set the table |
+| levantar a mesa | to clear the table |
+| este autor | this author (masculine) |
+| esta autora | this author (feminine) |
+| gosto muito de | I like ... very much |
+| gosto muito deste livro | I like this book very much |
+| Eu só vou à praia quando está bom tempo | I only go to the beach when the weather is good |
+| alguém | someone / somebody |
+| ninguém | nobody / no one |
+| gorro | winter hat (wollen hat) |
+| Hoje, está muito frio. É melhor vestir um casaco mais quente e levar o gorro. | Today is very cold. It is better to wear a warmer coat and take a woolen hat. |
+| Quando viajam pela Península Ibérica, os turistas americanos acham que Portugal é tão bonito como Espanha | When traveling through the Iberian Peninsula, American tourists think Portugal is as beautiful as Spain. |
+| A Rita e o irmão fazem geocaching há dois anos. É um passatempo ótimo para as pessoas que gostam de aventura. | Rita and her brother have been doing geocaching for two years. It is a great hobby for people who like adventure. |
+| passatempo | hobby / pastime |
+| Desde a última aula de português, o Nuno consegue compreender melhor os pronomes pessoais | Since the last Portuguese class, Nuno understands personal pronouns better. |
+| pronomes pessoais | personal pronouns |
+| Sr. Carlos, eu dou-lhe a senha para ligar o computador | Mr. Carlos, I give you the password to turn on the computer |
+| senha | password |
+| ligar o computador | to turn on the computer |
