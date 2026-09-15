@@ -43,40 +43,70 @@ resolve_device_id() {
 }
 
 bring_simulator_to_front() {
-  # Launch Simulator.app (idempotent), wait for it to be ready,
-  # then activate it so its window comes to the front.
-  # If Simulator.app is not installed, print a helpful message.
+  # Launch Device Hub (Xcode 27+) or legacy Simulator.app (Xcode <= 16/26),
+  # wait for the process to be ready, then activate it so its window comes to the front.
 
-  local sim_app
-  sim_app=$(mdfind "kMDItemCFBundleIdentifier == 'com.apple.iphonesimulator'" 2>/dev/null | head -n1)
-  if [[ -z "$sim_app" ]]; then
-    echo ""
-    echo "⚠️  Simulator.app is not installed."
-    echo "   The device is booted and the app is running, but there is no GUI to view it."
-    echo "   Install the Simulator app from the Mac App Store:"
-    echo "     https://apps.apple.com/us/app/simulator/id1149607702"
-    echo "   Or install Xcode (not beta) which bundles Simulator."
-    echo ""
+  local xcode_dev
+  xcode_dev="$(xcode-select -p 2>/dev/null || true)"
+  local dev_hub_app=""
+  if [[ -n "$xcode_dev" && -d "$xcode_dev/../Applications/DeviceHub.app" ]]; then
+    dev_hub_app="$xcode_dev/../Applications/DeviceHub.app"
+  fi
+
+  if [[ -z "$dev_hub_app" ]]; then
+    dev_hub_app=$(mdfind "kMDItemCFBundleIdentifier == 'com.apple.dt.Devices' || kMDItemCFBundleIdentifier == 'com.apple.dt.DeviceHub'" 2>/dev/null | head -n1 || true)
+  fi
+
+  # Prefer Device Hub (Xcode 27+) if present
+  if [[ -n "$dev_hub_app" ]]; then
+    open "$dev_hub_app" 2>/dev/null || open -b com.apple.dt.Devices 2>/dev/null || open -a DeviceHub 2>/dev/null || true
+
+    # Wait for DeviceHub process to appear (poll up to 15s).
+    local waited=0
+    while [[ $waited -lt 30 ]]; do
+      if pgrep -x DeviceHub >/dev/null 2>&1; then
+        break
+      fi
+      sleep 0.5
+      waited=$((waited + 1))
+    done
+
+    sleep 1
+
+    # Activate Device Hub to bring window to front
+    osascript -e 'tell application id "com.apple.dt.Devices" to activate' 2>/dev/null || \
+    osascript -e 'tell application "Device Hub" to activate' 2>/dev/null || \
+    osascript -e 'tell application "DeviceHub" to activate' 2>/dev/null || true
     return 0
   fi
 
-  open -a Simulator 2>/dev/null || true
+  # Fallback to legacy Simulator.app (Xcode <= 16/26)
+  local sim_app
+  sim_app=$(mdfind "kMDItemCFBundleIdentifier == 'com.apple.iphonesimulator'" 2>/dev/null | head -n1 || true)
+  if [[ -n "$sim_app" ]]; then
+    open -a Simulator 2>/dev/null || true
 
-  # Wait for Simulator process to appear (poll up to 15s).
-  local waited=0
-  while [[ $waited -lt 30 ]]; do
-    if pgrep -x Simulator >/dev/null 2>&1; then
-      break
-    fi
-    sleep 0.5
-    waited=$((waited + 1))
-  done
+    local waited=0
+    while [[ $waited -lt 30 ]]; do
+      if pgrep -x Simulator >/dev/null 2>&1; then
+        break
+      fi
+      sleep 0.5
+      waited=$((waited + 1))
+    done
 
-  # Give Simulator a moment to finish its own startup.
-  sleep 1
+    sleep 1
 
-  # Activate Simulator — this should bring its window to the front.
-  osascript -e 'tell application "Simulator" to activate' 2>/dev/null || true
+    osascript -e 'tell application "Simulator" to activate' 2>/dev/null || true
+    return 0
+  fi
+
+  echo ""
+  echo "⚠️  Neither Device Hub (Xcode 27+) nor Simulator.app (legacy) was found."
+  echo "   The device is booted and the app is running, but there is no GUI to view it."
+  echo "   Ensure Xcode is installed and active via 'xcode-select -s'."
+  echo ""
+  return 0
 }
 
 # ── perf test flags ─────────────────────────────────────────────────────────
