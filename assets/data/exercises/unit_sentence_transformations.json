@@ -1,0 +1,192 @@
+[
+  {
+    "id": "trans_q1",
+    "questionText": "Normalmente, eu faço exercícios para rever a matéria. -> Amanhã, eu também ____ exercícios para rever a matéria.",
+    "options": [
+      "vou fazer",
+      "faço",
+      "fazia",
+      "fiz"
+    ],
+    "correctAnswer": "vou fazer",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_1",
+      "portuguese": "vou fazer",
+      "english": "I am going to do",
+      "notes": "Screenshot 3 - Exercise 3a (Future periphrastic)"
+    },
+    "category": "Grammar & Transformations"
+  },
+  {
+    "id": "trans_q2",
+    "questionText": "A Vera e a irmã são muito simpáticas. -> A Vera é tão simpática ____ a irmã.",
+    "options": [
+      "como",
+      "que",
+      "de",
+      "do que"
+    ],
+    "correctAnswer": "como",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_2",
+      "portuguese": "tão ... como",
+      "english": "as ... as",
+      "notes": "Screenshot 3 - Exercise 3b (Comparative of equality)"
+    },
+    "category": "Grammar & Transformations"
+  },
+  {
+    "id": "trans_q3",
+    "questionText": "São 15:30. Tu estás na biblioteca há 30 minutos. -> Tu estás na biblioteca ____ as 15:00.",
+    "options": [
+      "desde",
+      "há",
+      "para",
+      "até"
+    ],
+    "correctAnswer": "desde",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_3",
+      "portuguese": "desde",
+      "english": "since",
+      "notes": "Screenshot 3 - Exercise 3c (há vs desde)"
+    },
+    "category": "Grammar & Transformations"
+  },
+  {
+    "id": "trans_q4",
+    "questionText": "Carlos, eu dou-te a senha para ligar o computador. -> Sr. Carlos, eu dou-____ a senha para ligar o computador.",
+    "options": [
+      "lhe",
+      "te",
+      "me",
+      "o"
+    ],
+    "correctAnswer": "lhe",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_4",
+      "portuguese": "dou-lhe",
+      "english": "I give you (formal)",
+      "notes": "Screenshot 3 - Exercise 3d (Informal to formal pronoun)"
+    },
+    "category": "Grammar & Transformations"
+  },
+  {
+    "id": "trans_q5",
+    "questionText": "Nós fazemos esqui na Serra da Estrela em janeiro. -> Eles fazem esqui na Serra da Estrela ____ inverno.",
+    "options": [
+      "no",
+      "na",
+      "em",
+      "pelo"
+    ],
+    "correctAnswer": "no",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_5",
+      "portuguese": "no inverno",
+      "english": "in winter",
+      "notes": "Screenshot 3 - Exercise 3e (Preposition + season)"
+    },
+    "category": "Grammar & Transformations"
+  },
+  {
+    "id": "trans_q6",
+    "questionText": "Quando viajam pela Península Ibérica, os turistas acham que Portugal é tão bonito ____ Espanha.",
+    "options": [
+      "como",
+      "que",
+      "do que",
+      "mais"
+    ],
+    "correctAnswer": "como",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_6",
+      "portuguese": "tão bonito como",
+      "english": "as beautiful as",
+      "notes": "Class 7 - Comparative"
+    },
+    "category": "Grammar & Transformations"
+  },
+  {
+    "id": "trans_q7",
+    "questionText": "A Rita e o irmão fazem geocaching ____ dois anos.",
+    "options": [
+      "há",
+      "desde",
+      "para",
+      "por"
+    ],
+    "correctAnswer": "há",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_7",
+      "portuguese": "há dois anos",
+      "english": "for two years",
+      "notes": "Class 7 - Duration há"
+    },
+    "category": "Grammar & Transformations"
+  },
+  {
+    "id": "trans_q8",
+    "questionText": "____ a última aula de português, o Nuno compreende melhor os pronomes.",
+    "options": [
+      "Desde",
+      "Há",
+      "Com",
+      "Para"
+    ],
+    "correctAnswer": "Desde",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_8",
+      "portuguese": "desde",
+      "english": "since",
+      "notes": "Class 7 - Starting point desde"
+    },
+    "category": "Grammar & Transformations"
+  },
+  {
+    "id": "trans_q9",
+    "questionText": "____ primavera, costumo tirar fotografias na natureza.",
+    "options": [
+      "Na",
+      "No",
+      "Em",
+      "Pela"
+    ],
+    "correctAnswer": "Na",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_9",
+      "portuguese": "na primavera",
+      "english": "in spring",
+      "notes": "Class 6 - Preposition + season"
+    },
+    "category": "Grammar & Transformations"
+  },
+  {
+    "id": "trans_q10",
+    "questionText": "____ outono, vou levar as crianças à escola.",
+    "options": [
+      "No",
+      "Na",
+      "Em",
+      "Pelo"
+    ],
+    "correctAnswer": "No",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "trans_src_10",
+      "portuguese": "no outono",
+      "english": "in autumn",
+      "notes": "Class 6 - Preposition + season"
+    },
+    "category": "Grammar & Transformations"
+  }
+]

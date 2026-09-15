@@ -78,6 +78,18 @@ class ExerciseListScreen extends StatelessWidget {
       'path': 'assets/data/exercises/indirect_object_pronouns.json',
       'icon': 'chat',
     },
+    {
+      'title': 'Conjunctions: Quando, Porque, Mas, E',
+      'subtitle': 'Practice connectors and linking words from Class 6',
+      'path': 'assets/data/exercises/unit_conjunctions.json',
+      'icon': 'chat',
+    },
+    {
+      'title': 'Sentence Transformations & Grammar',
+      'subtitle': 'Practice future tense, comparatives, há/desde & pronouns',
+      'path': 'assets/data/exercises/unit_sentence_transformations.json',
+      'icon': 'school',
+    },
   ];
 
   @override
