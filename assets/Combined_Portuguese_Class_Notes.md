@@ -263,12 +263,12 @@
 | tirar a carta de condução | to get one's driving licence |
 | tirar a carteira da mala | to take the wallet out of the bag |
 | tirar | to take out / remove / take (photos) |
-| levar | to take / carry (to a place) |
+| levar | take |
 | Em maio, eu e os meus amigos fazemos piqueniques no parque | In May, my friends and I have picnics in the park |
 | No inverno, a minha família gosta de ir ao mercado de natal | In winter, my family likes to go to the Christmas market |
 | quando | when (time) |
 | porque | because / why (cause) |
-| mas | but (opposition) |
+| mas | but |
 | e | and (addition) |
 | parar | to stop |
 | pare | stop (formal imperative) |
@@ -327,7 +327,7 @@
 | Eu só vou à praia quando está bom tempo | I only go to the beach when the weather is good |
 | alguém | someone / somebody |
 | ninguém | nobody / no one |
-| gorro | beanie / woolen hat |
+| gorro | winter hat (wollen hat) |
 | Hoje, está muito frio. É melhor vestir um casaco mais quente e levar o gorro. | Today is very cold. It is better to wear a warmer coat and take a woolen hat. |
 | Quando viajam pela Península Ibérica, os turistas americanos acham que Portugal é tão bonito como Espanha | When traveling through the Iberian Peninsula, American tourists think Portugal is as beautiful as Spain. |
 | A Rita e o irmão fazem geocaching há dois anos. É um passatempo ótimo para as pessoas que gostam de aventura. | Rita and her brother have been doing geocaching for two years. It is a great hobby for people who like adventure. |

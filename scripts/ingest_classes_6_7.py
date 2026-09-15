@@ -39,12 +39,12 @@ CLASS_6_ITEMS = [
     ("tirar a carta de condução", "to get one's driving licence", "Daily Life"),
     ("tirar a carteira da mala", "to take the wallet out of the bag", "Daily Life"),
     ("tirar", "to take out / remove / take (photos)", "Grammar & Verbs"),
-    ("levar", "to take / carry (to a place)", "Grammar & Verbs"),
+    ("levar", "take", "Grammar & Verbs (to take / carry)"),
     ("Em maio, eu e os meus amigos fazemos piqueniques no parque", "In May, my friends and I have picnics in the park", "Hobbies & Leisure"),
     ("No inverno, a minha família gosta de ir ao mercado de natal", "In winter, my family likes to go to the Christmas market", "Hobbies & Leisure"),
     ("quando", "when (time)", "Connectors"),
     ("porque", "because / why (cause)", "Connectors"),
-    ("mas", "but (opposition)", "Connectors"),
+    ("mas", "but", "Connectors (opposition)"),
     ("e", "and (addition)", "Connectors"),
     ("parar", "to stop", "Grammar & Verbs"),
     ("pare", "stop (formal imperative)", "Grammar & Verbs"),
@@ -102,7 +102,7 @@ CLASS_7_ITEMS = [
     ("Eu só vou à praia quando está bom tempo", "I only go to the beach when the weather is good", "Hobbies & Leisure"),
     ("alguém", "someone / somebody", "Basics"),
     ("ninguém", "nobody / no one", "Basics"),
-    ("gorro", "beanie / woolen hat", "Clothing"),
+    ("gorro", "winter hat (wollen hat)", "Clothing (beanie / woolen hat)"),
     ("Hoje, está muito frio. É melhor vestir um casaco mais quente e levar o gorro.", "Today is very cold. It is better to wear a warmer coat and take a woolen hat.", "Weather & Clothing"),
     ("Quando viajam pela Península Ibérica, os turistas americanos acham que Portugal é tão bonito como Espanha", "When traveling through the Iberian Peninsula, American tourists think Portugal is as beautiful as Spain.", "Travel & Directions"),
     ("A Rita e o irmão fazem geocaching há dois anos. É um passatempo ótimo para as pessoas que gostam de aventura.", "Rita and her brother have been doing geocaching for two years. It is a great hobby for people who like adventure.", "Hobbies & Leisure"),
@@ -761,7 +761,6 @@ def regenerate_quiz():
 def main():
     append_to_source_md()
     append_to_combined_class_notes()
-    update_phrases_json()
     update_verb_phrases_json()
     create_conjunctions_exercise()
     create_sentence_transformations_exercise()
