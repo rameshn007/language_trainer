@@ -104,7 +104,14 @@ class ListenRepeatContentService {
     final verbsCount = conjugations.length + verbPhrases.length + vocabItems.where((i) => i.id.startsWith('verb_') || i.wordType == 'verb').length;
     final prepCount = prepositions.length;
     final phrasesCount = phrases.length + verbPhrases.length + exampleSentences.length;
-    final vocabCount = vocabItems.where((i) => !i.id.startsWith('verb_')).length;
+    final phrasePtSet = {
+      for (final p in phrases) p.portuguese.trim().toLowerCase(),
+      for (final p in verbPhrases) p.portuguese.trim().toLowerCase(),
+      for (final p in exampleSentences) p.portuguese.trim().toLowerCase(),
+    };
+    final vocabCount = vocabItems
+        .where((i) => !i.id.startsWith('verb_') && !phrasePtSet.contains(i.portuguese.trim().toLowerCase()))
+        .length;
     final allCount = vocabCount + phrasesCount + conjugations.length + prepCount;
 
     _cachedModeCounts = {
@@ -193,7 +200,13 @@ class ListenRepeatContentService {
     final allPhrases = [...phrases, ...verbPhrases, ...exampleSentences]..shuffle();
     final allConjugations = [...conjugations]..shuffle();
     final allPrepositions = [...prepositions]..shuffle();
-    final pureVocab = vocabItems.where((i) => !i.id.startsWith('verb_')).toList()..shuffle();
+    final phrasePtSet = {
+      for (final p in allPhrases) p.portuguese.trim().toLowerCase(),
+    };
+    final pureVocab = vocabItems
+        .where((i) => !i.id.startsWith('verb_') && !phrasePtSet.contains(i.portuguese.trim().toLowerCase()))
+        .toList()
+      ..shuffle();
 
     final result = <LanguageItem>[];
     int vocabIndex = 0;

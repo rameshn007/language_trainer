@@ -93,5 +93,81 @@
       "notes": "Indirect Object Pronoun"
     },
     "category": "Indirect Object Pronouns"
+  },
+  {
+    "id": "indir_pron_carlos_senha",
+    "questionText": "Sr. Carlos, eu dou-____ a senha para ligar o computador. (to you - formal)",
+    "options": [
+      "lhe",
+      "te",
+      "me",
+      "nos"
+    ],
+    "correctAnswer": "lhe",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "indir_pron_carlos_senha_src",
+      "portuguese": "dou-lhe",
+      "english": "I give you (formal)",
+      "notes": "Indirect Object Pronoun - Class 7 / Screenshot 3"
+    },
+    "category": "Indirect Object Pronouns"
+  },
+  {
+    "id": "indir_pron_carlos_informal",
+    "questionText": "Carlos, eu dou-____ a senha para ligar o computador. (to you - informal)",
+    "options": [
+      "te",
+      "ti",
+      "lhe",
+      "me"
+    ],
+    "correctAnswer": "te",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "indir_pron_carlos_informal_src",
+      "portuguese": "dou-te",
+      "english": "I give you (informal)",
+      "notes": "Indirect Object Pronoun - Class 7 / Screenshot 3"
+    },
+    "category": "Indirect Object Pronouns"
+  },
+  {
+    "id": "indir_pron_explicar_materia",
+    "questionText": "A professora explica-____ a matéria com atenção. (to us)",
+    "options": [
+      "nos",
+      "nós",
+      "lhes",
+      "vos"
+    ],
+    "correctAnswer": "nos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "indir_pron_explicar_materia_src",
+      "portuguese": "explica-nos",
+      "english": "explains to us",
+      "notes": "Indirect Object Pronoun"
+    },
+    "category": "Indirect Object Pronouns"
+  },
+  {
+    "id": "indir_pron_dar_livro_eles",
+    "questionText": "Eu dou-____ os livros amanhã. (to them)",
+    "options": [
+      "lhes",
+      "os",
+      "nos",
+      "lhe"
+    ],
+    "correctAnswer": "lhes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "indir_pron_dar_livro_eles_src",
+      "portuguese": "dou-lhes",
+      "english": "I give them",
+      "notes": "Indirect Object Pronoun"
+    },
+    "category": "Indirect Object Pronouns"
   }
 ]

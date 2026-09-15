@@ -1,0 +1,268 @@
+[
+  {
+    "id": "conj_q1",
+    "questionText": "A minha mãe está em casa, ____ não atende o telefone.",
+    "options": [
+      "mas",
+      "porque",
+      "quando",
+      "e"
+    ],
+    "correctAnswer": "mas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_1",
+      "portuguese": "mas",
+      "english": "but (opposition)",
+      "notes": "Screenshot 2 - Exercise 27 Example"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q2",
+    "questionText": "A Carla e o Rodrigo estão a viajar ____ estão de férias.",
+    "options": [
+      "porque",
+      "mas",
+      "quando",
+      "e"
+    ],
+    "correctAnswer": "porque",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_2",
+      "portuguese": "porque",
+      "english": "because (cause)",
+      "notes": "Screenshot 2 - Exercise 27a"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q3",
+    "questionText": "A Mariana está cansada ____ trabalha muito.",
+    "options": [
+      "porque",
+      "mas",
+      "e",
+      "quando"
+    ],
+    "correctAnswer": "porque",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_3",
+      "portuguese": "porque",
+      "english": "because (cause)",
+      "notes": "Screenshot 2 - Exercise 27b"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q4",
+    "questionText": "A Luísa vive junto ao mar, ____ não gosta de peixe.",
+    "options": [
+      "mas",
+      "porque",
+      "e",
+      "quando"
+    ],
+    "correctAnswer": "mas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_4",
+      "portuguese": "mas",
+      "english": "but (opposition)",
+      "notes": "Screenshot 2 - Exercise 27c"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q5",
+    "questionText": "____ está sol, vamos correr à beira-mar.",
+    "options": [
+      "Quando",
+      "Porque",
+      "Mas",
+      "E"
+    ],
+    "correctAnswer": "Quando",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_5",
+      "portuguese": "quando",
+      "english": "when (time)",
+      "notes": "Screenshot 2 - Exercise 27d"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q6",
+    "questionText": "Os alunos ouvem a gravação ____ resolvem o exercício.",
+    "options": [
+      "e",
+      "mas",
+      "quando",
+      "porque"
+    ],
+    "correctAnswer": "e",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_6",
+      "portuguese": "e",
+      "english": "and (addition)",
+      "notes": "Screenshot 2 - Exercise 27e"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q7",
+    "questionText": "Nós vamos sair de casa ____ parar de chover.",
+    "options": [
+      "quando",
+      "porque",
+      "mas",
+      "e"
+    ],
+    "correctAnswer": "quando",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_7",
+      "portuguese": "quando",
+      "english": "when (time)",
+      "notes": "Screenshot 1 - Example 1"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q8",
+    "questionText": "A Isabel vai passar o fim de semana com a Vitória ____ são amigas.",
+    "options": [
+      "porque",
+      "mas",
+      "quando",
+      "e"
+    ],
+    "correctAnswer": "porque",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_8",
+      "portuguese": "porque",
+      "english": "because (cause)",
+      "notes": "Screenshot 1 - Example 2"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q9",
+    "questionText": "Nós gostamos de sair à noite, ____ raramente vamos à discoteca.",
+    "options": [
+      "mas",
+      "porque",
+      "quando",
+      "e"
+    ],
+    "correctAnswer": "mas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_9",
+      "portuguese": "mas",
+      "english": "but (opposition)",
+      "notes": "Screenshot 1 - Example 3"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q10",
+    "questionText": "Amanhã, vai chover, ____, no fim de semana, vai estar sol.",
+    "options": [
+      "e",
+      "mas",
+      "porque",
+      "quando"
+    ],
+    "correctAnswer": "e",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_10",
+      "portuguese": "e",
+      "english": "and (addition)",
+      "notes": "Screenshot 1 - Example 4"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q11",
+    "questionText": "Eu tenho teste amanhã, ____ hoje não consigo estudar porque estou doente.",
+    "options": [
+      "mas",
+      "porque",
+      "quando",
+      "e"
+    ],
+    "correctAnswer": "mas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_11",
+      "portuguese": "mas",
+      "english": "but (opposition)",
+      "notes": "Class 7"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q12",
+    "questionText": "Hoje estou muito cansado, ____ isso vou dormir mais cedo.",
+    "options": [
+      "por",
+      "para",
+      "de",
+      "em"
+    ],
+    "correctAnswer": "por",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_12",
+      "portuguese": "por isso",
+      "english": "therefore",
+      "notes": "Class 7"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q13",
+    "questionText": "Ela quer muito ir ao cinema connosco, ____, infelizmente, não pode.",
+    "options": [
+      "mas",
+      "e",
+      "porque",
+      "quando"
+    ],
+    "correctAnswer": "mas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_13",
+      "portuguese": "mas",
+      "english": "but (opposition)",
+      "notes": "Class 7"
+    },
+    "category": "Conjunctions"
+  },
+  {
+    "id": "conj_q14",
+    "questionText": "Eu só vou à praia ____ está bom tempo.",
+    "options": [
+      "quando",
+      "porque",
+      "mas",
+      "e"
+    ],
+    "correctAnswer": "quando",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "conj_src_14",
+      "portuguese": "quando",
+      "english": "when (condition/time)",
+      "notes": "Class 7"
+    },
+    "category": "Conjunctions"
+  }
+]
