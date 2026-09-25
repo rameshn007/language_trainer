@@ -1977,48 +1977,94 @@
 
 | Portugues | English | Notes |
 | :---- | :---- | :---- |
-| há | for \- indicates a period of time (total amount, month, week etc) | New Vocabulary |
-| desde | since \- used to indicate when it was initiated (specific with hour, part of day, year). Can also be used for starting at that price. | New Vocabulary |
-| final de tarde | evening | New Vocabulary |
-| Casa da Musica | Porto \- musuem | New Vocabulary |
-| A Maria faz visitas guiadas desde que trabalha na Casa da Música | Marias has been a tour guide since she started working at the Casa da Musica | New Vocabulary |
-| Os amigos estão na esplanada há meia hora | the friends are on the terrace for half an hour. | New Vocabulary |
-| A Olívia faz campismo desde criança | Olivia has been camping since she was a child | New Vocabulary |
-| A atleta olímpica pratica natação há mais de dez anos | the olympic athlete has been practicing swimming for more than 10 years | New Vocabulary |
-| O nosso casamento | Our wedding | New Vocabulary |
-| casar-se | To marry | New Vocabulary |
-| divórcio | divorce | New Vocabulary |
-| testamento | will | New Vocabulary |
-| herdeiros | inheritors (receive inheritance) | New Vocabulary |
-| herança | inheritance | New Vocabulary |
-| cá/lá | here/there | New Vocabulary |
-| esta,essa,aquela | this here, that there, that over there | New Vocabulary |
-| tao | as big as \+ adjective/adverb \+ como | New Vocabulary |
-| tanto | so many or so much (tanto \+ \[nome\] \+ como | New Vocabulary |
-| como | like/as/how | New Vocabulary |
-| Comer legumes é tão bom para a saúde como comer fruta | Eating vegetables is as good for your health as eating fruit. | New Vocabulary |
-| As aulas de kizomba são tão divertido como as aulas de samba | The lessons for quizomba are as fun as the lessons or samba | New Vocabulary |
-| Andar de metrô é tão barato como andar de autocarro | Going by metro is as cheap as going by bus | New Vocabulary |
-| Nós não temos tantos livros como vocês | We don’t have as many books as you | New Vocabulary |
-| A Teresa não tem tanto tempo livre como eu | Teresa does not have as much free time as me. | New Vocabulary |
-| tempo livre | free time | New Vocabulary |
-| Praticar futebol tem tantas vantagens como praticar andebol | Practicing football has as many advantages as practicing handball | New Vocabulary |
-| precenciais | present (in person) | New Vocabulary |
-| em vou em pessoa | I go in person | New Vocabulary |
-| vou ter uma reunião online | I’m going to have a meeting online | New Vocabulary |
-| vou ter uma reunião presencial | I’m going to have a meeting face to face | New Vocabulary |
-| Eu moro aqui há dois anos | I have lived here for two years | Generated from há |
-| Estou à espera há uma hora | I have been waiting for an hour | Generated from há |
-| Trabalho aqui desde janeiro | I have worked here since January | Generated from desde |
-| Ela vive no Porto desde 2010 | She has lived in Porto since 2010 | Generated from desde |
-| Eles vão casar-se no próximo ano | They are going to get married next year | Generated from casar-se |
-| O avô deixou uma grande herança | The grandfather left a big inheritance | Generated from herança |
-| Vem cá, por favor | Come here, please | Generated from cá/lá |
-| Ela está lá em cima | She is up there | Generated from cá/lá |
-| Este carro é tão rápido como o outro | This car is as fast as the other | Generated from tao |
-| Eu tenho tanta fome como tu | I am as hungry as you | Generated from tanto |
-| Não faças tanto barulho | Don't make so much noise | Generated from tanto |
-| As reuniões presenciais são melhores | Face-to-face meetings are better | Generated from presencial |
+| há | for (time duration) / ago | Grammar & Time |
+| desde | since / from (starting point) | Grammar & Time |
+| final de tarde | late afternoon / early evening | Time & Numbers |
+| Casa da Música | Casa da Música (Porto concert hall) | Culture & Places |
+| A Maria faz visitas guiadas desde que trabalha na Casa da Música | Maria has been giving guided tours since she started working at Casa da Música | Conversational Phrases |
+| Os amigos estão na esplanada há meia hora | The friends have been on the terrace for half an hour | Daily Life |
+| A Olívia faz campismo desde criança | Olívia has been camping since childhood | Hobbies & Leisure |
+| A atleta olímpica pratica natação há mais de dez anos | The Olympic athlete has been practicing swimming for more than ten years | Sports & Leisure |
+| o nosso casamento | our wedding / our marriage | Family & Life Events |
+| casar-se | to get married | Grammar & Verbs |
+| o divórcio | divorce | Family & Life Events |
+| o testamento | will / testament | Law & Society |
+| os herdeiros | heirs / inheritors | Law & Society |
+| a herança | inheritance | Law & Society |
+| cá | here | Basics & Directions |
+| lá | there | Basics & Directions |
+| esta, essa, aquela | this, that, that over there (feminine) | Grammar & Pronouns |
+| este, esse, aquele | this, that, that over there (masculine) | Grammar & Pronouns |
+| tão | as / so (tão + adjective/adverb + como) | Grammar & Comparatives |
+| tanto | as much / so much (tanto/a/os/as + noun + como) | Grammar & Comparatives |
+| como | as / like / how | Connectors & Grammar |
+| Comer legumes é tão bom para a saúde como comer fruta | Eating vegetables is as good for your health as eating fruit | Health & Food |
+| As aulas de kizomba são tão divertidas como as aulas de samba | Kizomba classes are as fun as samba classes | Hobbies & Leisure |
+| Andar de metro é tão barato como andar de autocarro | Taking the metro is as cheap as taking the bus | Travel & Directions |
+| Nós não temos tantos livros como vocês | We don't have as many books as you | Daily Life |
+| A Teresa não tem tanto tempo livre como eu | Teresa does not have as much free time as me | Daily Life |
+| tempo livre | free time | Hobbies & Leisure |
+| Praticar futebol tem tantas vantagens como praticar andebol | Playing football has as many advantages as playing handball | Sports & Leisure |
+| presenciais | in-person / face-to-face (plural) | Office & Work |
+| eu vou em pessoa | I go in person | Daily Routine |
+| vou ter uma reunião online | I am going to have an online meeting | Office & Work |
+| vou ter uma reunião presencial | I am going to have an in-person meeting | Office & Work |
+| O Pedro estuda português há seis meses | Pedro has been studying Portuguese for six months | Variations - Há vs Desde |
+| Eles vivem em Lisboa desde 2018 | They have lived in Lisbon since 2018 | Variations - Há vs Desde |
+| Não vejo o meu irmão há muito tempo | I haven't seen my brother for a long time | Variations - Há vs Desde |
+| Ela trabalha como médica desde que terminou o curso | She has worked as a doctor since she finished university | Variations - Há vs Desde |
+| Estou à espera do autocarro há vinte minutos | I have been waiting for the bus for twenty minutes | Variations - Há vs Desde |
+| Nós somos amigos desde a infância | We have been friends since childhood | Variations - Há vs Desde |
+| Há quanto tempo estás em Portugal? | How long have you been in Portugal? | Variations - Há vs Desde |
+| Desde quando é que conheces o Pedro? | Since when have you known Pedro? | Variations - Há vs Desde |
+| Cheguei ao Porto há duas semanas | I arrived in Porto two weeks ago | Variations - Há vs Desde |
+| Ele não fuma desde o ano passado | He hasn't smoked since last year | Variations - Há vs Desde |
+| O Porto é tão bonito como Lisboa | Porto is as beautiful as Lisbon | Variations - Comparatives |
+| Este exercício não é tão difícil como aquele | This exercise is not as difficult as that one | Variations - Comparatives |
+| Ela fala português tão bem como um nativo | She speaks Portuguese as well as a native | Variations - Comparatives |
+| O meu chá está tão quente como o teu | My tea is as hot as yours | Variations - Comparatives |
+| A praia de Cascais é tão calma como a praia de Sesimbra | Cascais beach is as calm as Sesimbra beach | Variations - Comparatives |
+| Este casaco é tão confortável como elegante | This coat is as comfortable as it is elegant | Variations - Comparatives |
+| Eles não são tão pontuais como nós | They are not as punctual as us | Variations - Comparatives |
+| Andar a pé é tão saudável como correr | Walking is as healthy as running | Variations - Comparatives |
+| Eu não tenho tanto dinheiro como ele | I don't have as much money as him | Variations - Comparatives of Quantity |
+| Nós temos tanta paciência como vocês | We have as much patience as you | Variations - Comparatives of Quantity |
+| O João comprou tantas maçãs como laranjas | João bought as many apples as oranges | Variations - Comparatives of Quantity |
+| Tu tens tantas dúvidas como eu? | Do you have as many questions as I do? | Variations - Comparatives of Quantity |
+| Este restaurante não tem tantos clientes como aquele | This restaurant does not have as many customers as that one | Variations - Comparatives of Quantity |
+| Hoje não há tanta gente na rua como ontem | Today there aren't as many people in the street as yesterday | Variations - Comparatives of Quantity |
+| Ela tem tantas amigas na universidade como na escola | She has as many friends at university as at school | Variations - Comparatives of Quantity |
+| Não faças tanto barulho, por favor | Don't make so much noise, please | Variations - Comparatives of Quantity |
+| Eles vão casar-se na próxima primavera | They are going to get married next spring | Variations - Life Events |
+| O casamento deles foi uma festa fantástica | Their wedding was a fantastic celebration | Variations - Life Events |
+| Ele casou-se com a Rita há três anos | He married Rita three years ago | Variations - Life Events |
+| Depois de conversar muito, o casal decidiu o divórcio | After talking a lot, the couple decided on divorce | Variations - Life Events |
+| O divórcio foi resolvido de forma amigável | The divorce was settled amicably | Variations - Life Events |
+| O avô deixou um testamento detalhado | The grandfather left a detailed will | Variations - Life Events |
+| Os herdeiros já assinaram todos os documentos | The heirs have already signed all the documents | Variations - Life Events |
+| Ela recebeu uma herança inesperada | She received an unexpected inheritance | Variations - Life Events |
+| A herança inclui uma casa antiga no Alentejo | The inheritance includes an old house in Alentejo | Variations - Life Events |
+| Vem cá, preciso de falar contigo | Come here, I need to talk to you | Variations - Location & Demonstratives |
+| O que estás a fazer aí? Vem cá para dentro | What are you doing there? Come in here | Variations - Location & Demonstratives |
+| Ela está lá em cima a trabalhar no quarto | She is up there working in the bedroom | Variations - Location & Demonstratives |
+| Vou lá amanhã de manhã resolver o assunto | I will go there tomorrow morning to resolve the matter | Variations - Location & Demonstratives |
+| Este café aqui é meu e essa água aí é tua | This coffee here is mine and that water there is yours | Variations - Location & Demonstratives |
+| Aquele edifício ao fundo é a Casa da Música | That building in the background is Casa da Música | Variations - Location & Demonstratives |
+| Esta cidade tem tanta história como Lisboa | This city has as much history as Lisbon | Variations - Location & Demonstratives |
+| Amanhã temos uma reunião presencial às dez horas | Tomorrow we have an in-person meeting at ten o'clock | Variations - Work & Meetings |
+| A reunião de projeto vai ser online através do computador | The project meeting is going to be online via computer | Variations - Work & Meetings |
+| Prefiro aulas presenciais para praticar conversação | I prefer in-person classes to practice conversation | Variations - Work & Meetings |
+| Os cursos online têm tantas vantagens como os cursos presenciais | Online courses have as many advantages as in-person courses | Variations - Work & Meetings |
+| Eu vou lá em pessoa entregar o contrato assinado | I will go there in person to deliver the signed contract | Variations - Work & Meetings |
+| O atendimento presencial no banco requer agendamento | In-person service at the bank requires an appointment | Variations - Work & Meetings |
+| Vais participar na reunião presencial ou online? | Are you going to participate in the meeting in person or online? | Variations - Work & Meetings |
+| No meu tempo livre gosto de ler e ouvir música | In my free time I like to read and listen to music | Variations - Free Time & Culture |
+| O que costumas fazer no teu tempo livre? | What do you usually do in your free time? | Variations - Free Time & Culture |
+| Ao final de tarde a esplanada fica cheia de amigos | In the late afternoon the terrace gets full of friends | Variations - Free Time & Culture |
+| Gosto de passear pela cidade ao final de tarde | I like to stroll through the city in the late afternoon | Variations - Free Time & Culture |
+| Já fizeste uma visita guiada à Casa da Música? | Have you ever taken a guided tour of Casa da Música? | Variations - Free Time & Culture |
+| A atleta olímpica treina natação todos os dias | The Olympic athlete trains swimming every day | Variations - Free Time & Culture |
+| Praticar andebol é tão dinâmico como praticar futebol | Playing handball is as dynamic as playing football | Variations - Free Time & Culture |
 
 
 # New Words & Phrases from Class 6

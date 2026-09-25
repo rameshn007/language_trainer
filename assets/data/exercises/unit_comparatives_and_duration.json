@@ -1,0 +1,534 @@
+[
+  {
+    "id": "comp_dur_q01",
+    "questionText": "A Maria faz visitas guiadas na Casa da Música ____ 2021.",
+    "options": [
+      "desde",
+      "há",
+      "para",
+      "até"
+    ],
+    "correctAnswer": "desde",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_01",
+      "portuguese": "desde",
+      "english": "since (starting point)",
+      "notes": "Time & Duration: starting point with year"
+    },
+    "category": "Time & Duration"
+  },
+  {
+    "id": "comp_dur_q02",
+    "questionText": "Os amigos estão na esplanada ____ meia hora a conversar.",
+    "options": [
+      "há",
+      "desde",
+      "por",
+      "em"
+    ],
+    "correctAnswer": "há",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_02",
+      "portuguese": "há meia hora",
+      "english": "for half an hour",
+      "notes": "Time & Duration: elapsed duration"
+    },
+    "category": "Time & Duration"
+  },
+  {
+    "id": "comp_dur_q03",
+    "questionText": "A Olívia faz campismo ____ criança.",
+    "options": [
+      "desde",
+      "há",
+      "com",
+      "por"
+    ],
+    "correctAnswer": "desde",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_03",
+      "portuguese": "desde criança",
+      "english": "since childhood",
+      "notes": "Time & Duration: point in life"
+    },
+    "category": "Time & Duration"
+  },
+  {
+    "id": "comp_dur_q04",
+    "questionText": "A atleta olímpica pratica natação ____ mais de dez anos.",
+    "options": [
+      "há",
+      "desde",
+      "para",
+      "de"
+    ],
+    "correctAnswer": "há",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_04",
+      "portuguese": "há mais de dez anos",
+      "english": "for more than ten years",
+      "notes": "Time & Duration: duration with há"
+    },
+    "category": "Time & Duration"
+  },
+  {
+    "id": "comp_dur_q05",
+    "questionText": "A Maria trabalha na Casa da Música ____ que terminou o curso de turismo.",
+    "options": [
+      "desde",
+      "há",
+      "porque",
+      "quando"
+    ],
+    "correctAnswer": "desde",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_05",
+      "portuguese": "desde que",
+      "english": "since (conjunction)",
+      "notes": "Time & Duration: desde que + clause"
+    },
+    "category": "Time & Duration"
+  },
+  {
+    "id": "comp_dur_q06",
+    "questionText": "Comer legumes é ____ bom para a saúde como comer fruta.",
+    "options": [
+      "tão",
+      "tanto",
+      "muito",
+      "mais"
+    ],
+    "correctAnswer": "tão",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_06",
+      "portuguese": "tão ... como",
+      "english": "as ... as (with adjective)",
+      "notes": "Comparatives of equality: tão + adjective"
+    },
+    "category": "Comparatives"
+  },
+  {
+    "id": "comp_dur_q07",
+    "questionText": "As aulas de kizomba são tão ____ como as aulas de samba.",
+    "options": [
+      "divertidas",
+      "divertido",
+      "divertida",
+      "divertidos"
+    ],
+    "correctAnswer": "divertidas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_07",
+      "portuguese": "tão divertidas como",
+      "english": "as fun as (feminine plural)",
+      "notes": "Agreement: aulas (fem. pl.) requires divertidas"
+    },
+    "category": "Comparatives & Agreement"
+  },
+  {
+    "id": "comp_dur_q08",
+    "questionText": "Andar de metro é tão barato ____ andar de autocarro.",
+    "options": [
+      "como",
+      "que",
+      "do que",
+      "quanto"
+    ],
+    "correctAnswer": "como",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_08",
+      "portuguese": "tão barato como",
+      "english": "as cheap as",
+      "notes": "Comparative correlative: tão ... como"
+    },
+    "category": "Comparatives"
+  },
+  {
+    "id": "comp_dur_q09",
+    "questionText": "Nós não temos ____ livros como vocês.",
+    "options": [
+      "tantos",
+      "tão",
+      "tanto",
+      "tantas"
+    ],
+    "correctAnswer": "tantos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_09",
+      "portuguese": "tantos ... como",
+      "english": "as many ... as (masculine plural)",
+      "notes": "Comparative of quantity: tantos livros"
+    },
+    "category": "Comparatives of Quantity"
+  },
+  {
+    "id": "comp_dur_q10",
+    "questionText": "A Teresa não tem ____ tempo livre como eu.",
+    "options": [
+      "tanto",
+      "tão",
+      "tanta",
+      "tantos"
+    ],
+    "correctAnswer": "tanto",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_10",
+      "portuguese": "tanto tempo livre como",
+      "english": "as much free time as",
+      "notes": "Comparative of quantity: tanto tempo (masc. sing.)"
+    },
+    "category": "Comparatives of Quantity"
+  },
+  {
+    "id": "comp_dur_q11",
+    "questionText": "Praticar futebol tem ____ vantagens como praticar andebol.",
+    "options": [
+      "tantas",
+      "tanto",
+      "tão",
+      "tantos"
+    ],
+    "correctAnswer": "tantas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_11",
+      "portuguese": "tantas vantagens como",
+      "english": "as many advantages as",
+      "notes": "Comparative of quantity: tantas vantagens (fem. pl.)"
+    },
+    "category": "Comparatives of Quantity"
+  },
+  {
+    "id": "comp_dur_q12",
+    "questionText": "Eu não tenho ____ paciência como tu para esperar na fila.",
+    "options": [
+      "tanta",
+      "tanto",
+      "tão",
+      "tantas"
+    ],
+    "correctAnswer": "tanta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_12",
+      "portuguese": "tanta paciência como",
+      "english": "as much patience as",
+      "notes": "Comparative of quantity: tanta paciência (fem. sing.)"
+    },
+    "category": "Comparatives of Quantity"
+  },
+  {
+    "id": "comp_dur_q13",
+    "questionText": "O Porto é ____ bonito como Lisboa.",
+    "options": [
+      "tão",
+      "tanto",
+      "tanta",
+      "como"
+    ],
+    "correctAnswer": "tão",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_13",
+      "portuguese": "tão bonito como",
+      "english": "as beautiful as",
+      "notes": "Comparative of equality with adjective bonito"
+    },
+    "category": "Comparatives"
+  },
+  {
+    "id": "comp_dur_q14",
+    "questionText": "Choose the correct adverbs: 'Esta camisa ____ é minha, mas essa camisa ____ é tua.'",
+    "options": [
+      "aqui / aí",
+      "lá / aqui",
+      "acolá / lá",
+      "ali / aqui"
+    ],
+    "correctAnswer": "aqui / aí",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "comp_dur_src_14",
+      "portuguese": "esta ... aqui, essa ... aí",
+      "english": "this here, that there (near you)",
+      "notes": "Demonstrative and location adverbs correspondence"
+    },
+    "category": "Demonstratives & Location"
+  },
+  {
+    "id": "comp_dur_q15",
+    "questionText": "O que estás a fazer aí fora? Vem ____ para dentro, está muito frio.",
+    "options": [
+      "cá",
+      "lá",
+      "onde",
+      "ali"
+    ],
+    "correctAnswer": "cá",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_15",
+      "portuguese": "vem cá",
+      "english": "come here",
+      "notes": "Location adverbs: cá (to here, near speaker)"
+    },
+    "category": "Location Adverbs"
+  },
+  {
+    "id": "comp_dur_q16",
+    "questionText": "O meu irmão está ____ em cima a trabalhar no quarto.",
+    "options": [
+      "lá",
+      "cá",
+      "aqui",
+      "este"
+    ],
+    "correctAnswer": "lá",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_16",
+      "portuguese": "lá em cima",
+      "english": "up there",
+      "notes": "Location adverbs: lá em cima"
+    },
+    "category": "Location Adverbs"
+  },
+  {
+    "id": "comp_dur_q17",
+    "questionText": "Qual é a palavra correta para a dissolução legal do casamento?",
+    "options": [
+      "o divórcio",
+      "o testamento",
+      "a herança",
+      "o noivado"
+    ],
+    "correctAnswer": "o divórcio",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "comp_dur_src_17",
+      "portuguese": "o divórcio",
+      "english": "divorce",
+      "notes": "Life events vocabulary"
+    },
+    "category": "Life Events & Law"
+  },
+  {
+    "id": "comp_dur_q18",
+    "questionText": "O avô foi ao notário para redigir o seu ____ e registar a divisão dos seus bens.",
+    "options": [
+      "testamento",
+      "divórcio",
+      "casamento",
+      "campismo"
+    ],
+    "correctAnswer": "testamento",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_18",
+      "portuguese": "o testamento",
+      "english": "will / testament",
+      "notes": "Law & Life Events: testamento"
+    },
+    "category": "Life Events & Law"
+  },
+  {
+    "id": "comp_dur_q19",
+    "questionText": "Os ____ receberam a casa e o terreno da família.",
+    "options": [
+      "herdeiros",
+      "testamentos",
+      "casamentos",
+      "divórcios"
+    ],
+    "correctAnswer": "herdeiros",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_19",
+      "portuguese": "os herdeiros",
+      "english": "the heirs",
+      "notes": "Law & Life Events: herdeiros"
+    },
+    "category": "Life Events & Law"
+  },
+  {
+    "id": "comp_dur_q20",
+    "questionText": "Ela dividiu a ____ com o irmão de forma justa.",
+    "options": [
+      "herança",
+      "reunião",
+      "natação",
+      "visita"
+    ],
+    "correctAnswer": "herança",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_20",
+      "portuguese": "a herança",
+      "english": "the inheritance",
+      "notes": "Law & Life Events: herança"
+    },
+    "category": "Life Events & Law"
+  },
+  {
+    "id": "comp_dur_q21",
+    "questionText": "Amanhã não temos reunião por vídeo, vamos ter uma reunião ____ no escritório.",
+    "options": [
+      "presencial",
+      "online",
+      "distante",
+      "vazia"
+    ],
+    "correctAnswer": "presencial",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_21",
+      "portuguese": "reunião presencial",
+      "english": "in-person meeting",
+      "notes": "Work modality: presencial (singular)"
+    },
+    "category": "Work & Modality"
+  },
+  {
+    "id": "comp_dur_q22",
+    "questionText": "As aulas ____ realizam-se na escola, enquanto as aulas virtuais são pela internet.",
+    "options": [
+      "presenciais",
+      "online",
+      "iguais",
+      "rápidas"
+    ],
+    "correctAnswer": "presenciais",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_22",
+      "portuguese": "aulas presenciais",
+      "english": "in-person classes",
+      "notes": "Work modality: presenciais (plural)"
+    },
+    "category": "Work & Modality"
+  },
+  {
+    "id": "comp_dur_q23",
+    "questionText": "Não te preocupes com o correio, eu vou lá em ____ entregar os documentos.",
+    "options": [
+      "pessoa",
+      "tempo",
+      "reunião",
+      "esplanada"
+    ],
+    "correctAnswer": "pessoa",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_23",
+      "portuguese": "em pessoa",
+      "english": "in person",
+      "notes": "Idiomatic phrase: ir em pessoa"
+    },
+    "category": "Expressions"
+  },
+  {
+    "id": "comp_dur_q24",
+    "questionText": "Ao ____ de tarde, a esplanada fica cheia de pessoas a relaxar.",
+    "options": [
+      "final",
+      "fim",
+      "tempo",
+      "começo"
+    ],
+    "correctAnswer": "final",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_24",
+      "portuguese": "final de tarde",
+      "english": "late afternoon",
+      "notes": "Time phrase: ao final de tarde"
+    },
+    "category": "Time & Routine"
+  },
+  {
+    "id": "comp_dur_q25",
+    "questionText": "A Casa da Música é uma emblemática sala de concertos situada na cidade do ____.",
+    "options": [
+      "Porto",
+      "Lisboa",
+      "Faro",
+      "Coimbra"
+    ],
+    "correctAnswer": "Porto",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "comp_dur_src_25",
+      "portuguese": "Casa da Música",
+      "english": "Casa da Música (Porto)",
+      "notes": "Culture & Geography: concert hall in Porto"
+    },
+    "category": "Culture & Places"
+  },
+  {
+    "id": "comp_dur_q26",
+    "questionText": "'Há quanto tempo estudas português?' -> 'Estudo português ____ seis meses.'",
+    "options": [
+      "há",
+      "desde",
+      "para",
+      "até"
+    ],
+    "correctAnswer": "há",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "comp_dur_src_26",
+      "portuguese": "há seis meses",
+      "english": "for six months",
+      "notes": "Question & Answer pair with há"
+    },
+    "category": "Time & Duration"
+  },
+  {
+    "id": "comp_dur_q27",
+    "questionText": "'Desde quando vives nesta cidade?' -> 'Vivo aqui ____ 2018.'",
+    "options": [
+      "desde",
+      "há",
+      "em",
+      "por"
+    ],
+    "correctAnswer": "desde",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "comp_dur_src_27",
+      "portuguese": "desde 2018",
+      "english": "since 2018",
+      "notes": "Question & Answer pair with desde"
+    },
+    "category": "Time & Duration"
+  },
+  {
+    "id": "comp_dur_q28",
+    "questionText": "No meu tempo ____, gosto de ouvir música, nadar e ler livros.",
+    "options": [
+      "livre",
+      "ocupado",
+      "tão",
+      "presencial"
+    ],
+    "correctAnswer": "livre",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "comp_dur_src_28",
+      "portuguese": "tempo livre",
+      "english": "free time",
+      "notes": "Vocabulary: tempo livre"
+    },
+    "category": "Hobbies & Leisure"
+  }
+]

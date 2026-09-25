@@ -48,6 +48,10 @@ void main() {
       validateExerciseFile('assets/data/exercises/unit_sentence_transformations.json');
     });
 
+    test('unit_comparatives_and_duration.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_comparatives_and_duration.json');
+    });
+
     test('indirect_object_pronouns.json adheres to exercise invariants and includes target items', () {
       validateExerciseFile('assets/data/exercises/indirect_object_pronouns.json');
 
@@ -79,20 +83,18 @@ void main() {
       }
     });
 
-    test('verbs.csv includes atender and tirar with all conjugation fields populated', () {
+    test('verbs.csv includes atender, tirar, herdar, and praticar with all conjugation fields populated', () {
       final verbsFile = File('assets/data/verbs.csv');
       expect(verbsFile.existsSync(), isTrue);
       final lines = verbsFile.readAsLinesSync();
 
-      final atenderLine = lines.firstWhere((l) => l.startsWith('atender,'), orElse: () => '');
-      expect(atenderLine, isNotEmpty, reason: 'verbs.csv must contain an entry for atender');
-      final atenderParts = atenderLine.split(',');
-      expect(atenderParts.length, greaterThanOrEqualTo(7));
-
-      final tirarLine = lines.firstWhere((l) => l.startsWith('tirar,'), orElse: () => '');
-      expect(tirarLine, isNotEmpty, reason: 'verbs.csv must contain an entry for tirar');
-      final tirarParts = tirarLine.split(',');
-      expect(tirarParts.length, greaterThanOrEqualTo(7));
+      for (final verb in ['atender', 'tirar', 'herdar', 'praticar']) {
+        final verbLine = lines.firstWhere((l) => l.startsWith('$verb,'), orElse: () => '');
+        expect(verbLine, isNotEmpty, reason: 'verbs.csv must contain an entry for $verb');
+        final parts = verbLine.split(',');
+        expect(parts.length, greaterThanOrEqualTo(7),
+            reason: '$verb entry in verbs.csv must have at least 7 fields');
+      }
     });
 
     test('questions.json has unique IDs and all answers present in options', () {
@@ -133,6 +135,7 @@ void main() {
       final unitPaths = screen.units.map((u) => u['path']).toList();
       expect(unitPaths.contains('assets/data/exercises/unit_conjunctions.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_sentence_transformations.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_comparatives_and_duration.json'), isTrue);
     });
   });
 }
