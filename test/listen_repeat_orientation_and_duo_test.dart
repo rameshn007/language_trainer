@@ -187,7 +187,7 @@ void main() {
       );
     }
 
-    testWidgets('renders simple view when in portrait', (tester) async {
+    testWidgets('renders simple view in portrait', (tester) async {
       final storage = FakeStorageService(initialItems: [testItem]);
       final mockAudioPlayer = MockAudioPlayer();
       when(() => mockAudioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
@@ -210,13 +210,9 @@ void main() {
       expect(find.text('Balanced Mix'), findsOneWidget);
       expect(find.text('Olá amigo'), findsOneWidget);
       expect(find.text('Hello friend'), findsOneWidget);
-
-      // Car View elements should NOT be present in portrait
-      expect(find.byKey(const Key('carplay_dash_back_button')), findsNothing);
-      expect(find.text('PRACTICE SET'), findsNothing);
     });
 
-    testWidgets('renders car view when in landscape', (tester) async {
+    testWidgets('preserves simple view in landscape without auto-swapping UI', (tester) async {
       final storage = FakeStorageService(initialItems: [testItem]);
       final mockAudioPlayer = MockAudioPlayer();
       when(() => mockAudioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
@@ -233,20 +229,18 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest(storage: storage, vm: vm));
       await tester.pumpAndSettle();
 
-      // In-Car Dashboard view elements should be present
-      expect(find.byKey(const Key('carplay_dash_back_button')), findsOneWidget);
-      expect(find.byKey(const Key('carplay_dash_stop_button')), findsOneWidget);
-      expect(find.byKey(const Key('carplay_dash_star_button')), findsOneWidget);
-      expect(find.text('PRACTICE SET'), findsOneWidget);
-      expect(find.text('PLAYBACK'), findsOneWidget);
+      // Simple View controls should remain available
+      expect(find.byKey(const Key('listen_repeat_car_mode_button')), findsOneWidget);
+      expect(find.byKey(const Key('listen_repeat_star_button')), findsOneWidget);
+      expect(find.text('Balanced Mix'), findsOneWidget);
       expect(find.text('Olá amigo'), findsOneWidget);
       expect(find.text('Hello friend'), findsOneWidget);
 
-      // Simple view specific button should NOT be present
-      expect(find.byKey(const Key('listen_repeat_car_mode_button')), findsNothing);
+      // In-Car Dashboard should not auto-embed
+      expect(find.byKey(const Key('carplay_dash_back_button')), findsNothing);
     });
 
-    testWidgets('dynamically transitions between simple view and car view on rotation', (tester) async {
+    testWidgets('tapping car mode button in landscape opens InCarDashboardScreen', (tester) async {
       final storage = FakeStorageService(initialItems: [testItem]);
       final mockAudioPlayer = MockAudioPlayer();
       when(() => mockAudioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
@@ -254,44 +248,7 @@ void main() {
       when(() => mockAudioPlayer.dispose()).thenAnswer((_) async {});
       final vm = _TestLRViewModel(testItem, audioPlayer: mockAudioPlayer);
 
-      // Start in Portrait
-      tester.view.physicalSize = const Size(466, 678);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
-
-      await tester.pumpWidget(createWidgetUnderTest(storage: storage, vm: vm));
-      await tester.pumpAndSettle();
-
-      expect(find.byKey(const Key('listen_repeat_car_mode_button')), findsOneWidget);
-      expect(find.byKey(const Key('carplay_dash_back_button')), findsNothing);
-
-      // Rotate to Landscape
       tester.view.physicalSize = const Size(678, 466);
-      await tester.pumpAndSettle();
-
-      expect(find.byKey(const Key('carplay_dash_back_button')), findsOneWidget);
-      expect(find.text('PRACTICE SET'), findsOneWidget);
-      expect(find.byKey(const Key('listen_repeat_car_mode_button')), findsNothing);
-
-      // Rotate back to Portrait
-      tester.view.physicalSize = const Size(466, 678);
-      await tester.pumpAndSettle();
-
-      expect(find.byKey(const Key('listen_repeat_car_mode_button')), findsOneWidget);
-      expect(find.byKey(const Key('carplay_dash_back_button')), findsNothing);
-    });
-
-    testWidgets('renders car view when in landscape on inside screen (951 x 669)', (tester) async {
-      final storage = FakeStorageService(initialItems: [testItem]);
-      final mockAudioPlayer = MockAudioPlayer();
-      when(() => mockAudioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
-      when(() => mockAudioPlayer.currentIndexStream).thenAnswer((_) => Stream.value(0));
-      when(() => mockAudioPlayer.dispose()).thenAnswer((_) async {});
-      final vm = _TestLRViewModel(testItem, audioPlayer: mockAudioPlayer);
-
-      // Set inside screen landscape: 951 x 669
-      tester.view.physicalSize = const Size(951, 669);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
       addTearDown(tester.view.resetDevicePixelRatio);
@@ -299,12 +256,11 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest(storage: storage, vm: vm));
       await tester.pumpAndSettle();
 
-      // In-Car Dashboard view elements should be present
+      await tester.tap(find.byKey(const Key('listen_repeat_car_mode_button')));
+      await tester.pumpAndSettle();
+
       expect(find.byKey(const Key('carplay_dash_back_button')), findsOneWidget);
-      expect(find.byKey(const Key('carplay_dash_stop_button')), findsOneWidget);
       expect(find.text('PRACTICE SET'), findsOneWidget);
-      expect(find.text('Olá amigo'), findsOneWidget);
-      expect(find.byKey(const Key('listen_repeat_car_mode_button')), findsNothing);
     });
   });
 }

@@ -856,25 +856,47 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 width: 1.2,
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  icon,
-                  size: 28,
-                  color: onPressed == null ? Colors.white70 : fgColor,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  label,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: onPressed == null ? Colors.white70 : fgColor,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isCompact = constraints.maxHeight < 72 || constraints.maxWidth < 80;
+                final iconSize = isCompact ? 22.0 : 28.0;
+                final gap = isCompact ? 4.0 : 8.0;
+                final fontSize = isCompact ? 11.0 : 12.0;
+                final contentWidth = (constraints.maxWidth - 8.0).clamp(10.0, double.infinity);
+
+                return Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SizedBox(
+                      width: contentWidth,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            icon,
+                            size: iconSize,
+                            color: onPressed == null ? Colors.white70 : fgColor,
+                          ),
+                          SizedBox(height: gap),
+                          Text(
+                            label,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: fontSize,
+                              fontWeight: FontWeight.bold,
+                              height: 1.15,
+                              color: onPressed == null ? Colors.white70 : fgColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),
@@ -1090,33 +1112,47 @@ class _PinnedStatsCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.local_fire_department,
-                                  color: progress.currentStreak > 0
-                                      ? Colors.deepOrange.shade300
-                                      : Colors.white38,
-                                  size: 22,
+                            Flexible(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.local_fire_department,
+                                      color: progress.currentStreak > 0
+                                          ? Colors.deepOrange.shade300
+                                          : Colors.white38,
+                                      size: 22,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      '${progress.currentStreak}-day streak',
+                                      style: TextStyle(
+                                        color: progress.currentStreak > 0
+                                            ? Colors.white
+                                            : Colors.white54,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  '${progress.currentStreak}-day streak',
-                                  style: TextStyle(
-                                    color: progress.currentStreak > 0
-                                        ? Colors.white
-                                        : Colors.white54,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Flexible(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  '${progress.todayXP}/${progress.dailyGoal} XP',
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 12,
                                   ),
                                 ),
-                              ],
-                            ),
-                            Text(
-                              '${progress.todayXP}/${progress.dailyGoal} XP',
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12,
                               ),
                             ),
                           ],
@@ -1150,27 +1186,36 @@ class _PinnedStatsCard extends StatelessWidget {
                               Colors.orange.shade200,
                               Colors.greenAccent.shade200,
                             ];
-                            return Column(
-                              children: [
-                                Text(
-                                  '$count',
-                                  style: TextStyle(
-                                    color: tierColors[tier],
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  WordProgress.tierName(tier),
-                                  style: TextStyle(
-                                    color: tierColors[tier].withValues(
-                                      alpha: 0.7,
+                            return Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      '$count',
+                                      style: TextStyle(
+                                        color: tierColors[tier],
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                    fontSize: 9,
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 2),
+                                  FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      WordProgress.tierName(tier),
+                                      style: TextStyle(
+                                        color: tierColors[tier].withValues(
+                                          alpha: 0.7,
+                                        ),
+                                        fontSize: 9,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
                           }),
                         ),
@@ -1178,29 +1223,43 @@ class _PinnedStatsCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Total XP: ${progress.totalXP}',
-                              style: const TextStyle(
-                                color: Colors.white54,
-                                fontSize: 11,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Sessions today: ${progress.todaySessions}',
+                            Expanded(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Total XP: ${progress.totalXP}',
                                   style: const TextStyle(
                                     color: Colors.white54,
                                     fontSize: 11,
                                   ),
                                 ),
-                                const SizedBox(width: 6),
-                                const Icon(
-                                  Icons.chevron_right,
-                                  color: Colors.white38,
-                                  size: 16,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerRight,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Sessions today: ${progress.todaySessions}',
+                                      style: const TextStyle(
+                                        color: Colors.white54,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    const Icon(
+                                      Icons.chevron_right,
+                                      color: Colors.white38,
+                                      size: 16,
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
@@ -1217,41 +1276,50 @@ class _PinnedStatsCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.local_fire_department,
-                              color: progress.currentStreak > 0
-                                  ? Colors.deepOrange.shade300
-                                  : Colors.white38,
-                              size: 22,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              '${progress.currentStreak}',
-                              style: TextStyle(
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.local_fire_department,
                                 color: progress.currentStreak > 0
-                                    ? Colors.white
-                                    : Colors.white54,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
+                                    ? Colors.deepOrange.shade300
+                                    : Colors.white38,
+                                size: 22,
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 4),
+                              Text(
+                                '${progress.currentStreak}',
+                                style: TextStyle(
+                                  color: progress.currentStreak > 0
+                                      ? Colors.white
+                                      : Colors.white54,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  '${progress.todayXP}/${progress.dailyGoal} XP',
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.bold,
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '${progress.todayXP}/${progress.dailyGoal} XP',
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 4),
@@ -1274,12 +1342,16 @@ class _PinnedStatsCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Text(
-                          '${progress.totalXP} Total',
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            '${progress.totalXP} Total',
+                            maxLines: 1,
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],

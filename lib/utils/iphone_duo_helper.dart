@@ -52,10 +52,18 @@ class IPhoneDuoHelper {
   /// Clearance margin for AppBar actions on the right to avoid colliding with the system icon.
   static const double appBarActionsRightPadding = 56.0;
 
+  static bool _isIOS(BuildContext context) {
+    return defaultTargetPlatform == TargetPlatform.iOS ||
+        Theme.of(context).platform == TargetPlatform.iOS;
+  }
+
   /// Checks if the current context is running on any iPhone Duo screen (outside or inside).
   static bool isDuo(BuildContext context) {
     if (debugOverride != null) {
       return debugOverride != DuoScreenOverride.none;
+    }
+    if (!_isIOS(context)) {
+      return false;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoSize(size);
@@ -67,6 +75,9 @@ class IPhoneDuoHelper {
       return debugOverride == DuoScreenOverride.outsidePortrait ||
           debugOverride == DuoScreenOverride.outsideLandscape;
     }
+    if (!_isIOS(context)) {
+      return false;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoOutsidePortraitSize(size) || isDuoOutsideLandscapeSize(size);
   }
@@ -76,6 +87,9 @@ class IPhoneDuoHelper {
     if (debugOverride != null) {
       return debugOverride == DuoScreenOverride.outsidePortrait;
     }
+    if (!_isIOS(context)) {
+      return false;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoOutsidePortraitSize(size);
   }
@@ -84,6 +98,9 @@ class IPhoneDuoHelper {
   static bool isDuoOutsideLandscape(BuildContext context) {
     if (debugOverride != null) {
       return debugOverride == DuoScreenOverride.outsideLandscape;
+    }
+    if (!_isIOS(context)) {
+      return false;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoOutsideLandscapeSize(size);
@@ -95,6 +112,9 @@ class IPhoneDuoHelper {
       return debugOverride == DuoScreenOverride.insidePortrait ||
           debugOverride == DuoScreenOverride.insideLandscape;
     }
+    if (!_isIOS(context)) {
+      return false;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoInsideSize(size);
   }
@@ -104,6 +124,9 @@ class IPhoneDuoHelper {
     if (debugOverride != null) {
       return debugOverride == DuoScreenOverride.insideLandscape;
     }
+    if (!_isIOS(context)) {
+      return false;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoInsideLandscapeSize(size);
   }
@@ -112,6 +135,9 @@ class IPhoneDuoHelper {
   static bool isDuoInsidePortrait(BuildContext context) {
     if (debugOverride != null) {
       return debugOverride == DuoScreenOverride.insidePortrait;
+    }
+    if (!_isIOS(context)) {
+      return false;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoInsidePortraitSize(size);
@@ -156,6 +182,8 @@ class IPhoneDuoHelper {
         isDuoInsidePortraitSize(size);
   }
 
+  static final Set<String> _loggedNearMisses = <String>{};
+
   static void _checkNearMiss(
     Size size,
     double expectedWidth,
@@ -163,17 +191,27 @@ class IPhoneDuoHelper {
     String modeName,
     bool matches,
   ) {
-    if (kDebugMode && !matches) {
+    if (kDebugMode && !matches && defaultTargetPlatform == TargetPlatform.iOS) {
       final double dw = (size.width - expectedWidth).abs();
       final double dh = (size.height - expectedHeight).abs();
       if (dw < 30 && dh < 30) {
-        debugPrint(
-          'IPhoneDuoHelper: Size ${size.width}x${size.height} is near Duo $modeName '
-          '(${expectedWidth}x$expectedHeight) but outside tolerance. '
-          'Set IPhoneDuoHelper.debugOverride if testing off-hardware.',
-        );
+        final key = '$modeName-${size.width.round()}x${size.height.round()}';
+        if (_loggedNearMisses.add(key)) {
+          debugPrint(
+            'IPhoneDuoHelper: Size ${size.width}x${size.height} is near Duo $modeName '
+            '(${expectedWidth}x$expectedHeight) but outside tolerance. '
+            'Set IPhoneDuoHelper.debugOverride if testing off-hardware.',
+          );
+        }
       }
     }
+  }
+
+  /// Resets test/debug caches for clean parallel or sequential testing.
+  @visibleForTesting
+  static void resetForTesting() {
+    debugOverride = null;
+    _loggedNearMisses.clear();
   }
 
   /// FloatingActionButtonLocation that vertically aligns the FAB with the system Wi-Fi icon.
