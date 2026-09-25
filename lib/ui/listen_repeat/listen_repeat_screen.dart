@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +6,7 @@ import 'in_car_dashboard_screen.dart';
 import 'listen_repeat_view_model.dart';
 import '../../main.dart';
 import '../../services/listen_repeat_content_service.dart';
+import '../../utils/iphone_duo_helper.dart';
 import '../widgets/xp_popup.dart';
 
 class ListenRepeatScreen extends ConsumerStatefulWidget {
@@ -36,6 +38,12 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
     } catch (e) {
       debugPrint('Error stopping session on dispose: $e');
     }
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 
@@ -73,42 +81,66 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final orientation = MediaQuery.orientationOf(context);
+    if (orientation == Orientation.landscape) {
+      return InCarDashboardScreen(
+        embedded: true,
+        onBack: () => Navigator.of(context).pop(),
+        onStop: _stopSession,
+      );
+    }
+
+    return _buildSimpleView(context);
+  }
+
+  Widget _buildSimpleView(BuildContext context) {
     final state = ref.watch(listenRepeatViewModelProvider);
     final item = state.currentItem;
     final isSpeaking = state.isSpeaking;
+    final isDuo = IPhoneDuoHelper.isDuo(context);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Listen & Repeat'),
         actions: [
-          IconButton(
-            key: const Key('listen_repeat_car_mode_button'),
-            icon: const Icon(Icons.directions_car_filled_rounded),
-            tooltip: 'In-Car Dashboard Mode',
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) => const InCarDashboardScreen(),
+          Padding(
+            padding: EdgeInsets.only(
+              right: isDuo ? IPhoneDuoHelper.appBarActionsRightPadding : 0.0,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  key: const Key('listen_repeat_car_mode_button'),
+                  icon: const Icon(Icons.directions_car_filled_rounded),
+                  tooltip: 'In-Car Dashboard Mode',
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const InCarDashboardScreen(),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-          TextButton.icon(
-            icon: const Icon(Icons.speed, size: 20),
-            label: Text("${state.playbackSpeed}x"),
-            onPressed: () {
-              final newSpeed = ref.read(listenRepeatViewModelProvider.notifier).cycleSpeed();
-              ScaffoldMessenger.of(context).clearSnackBars();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text("Speed: ${newSpeed}x"),
-                  duration: const Duration(seconds: 1),
+                TextButton.icon(
+                  icon: const Icon(Icons.speed, size: 20),
+                  label: Text("${state.playbackSpeed}x"),
+                  onPressed: () {
+                    final newSpeed = ref.read(listenRepeatViewModelProvider.notifier).cycleSpeed();
+                    ScaffoldMessenger.of(context).clearSnackBars();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Speed: ${newSpeed}x"),
+                        duration: const Duration(seconds: 1),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
+                if (state.isPlaying)
+                  TextButton(onPressed: _stopSession, child: const Text('Stop')),
+              ],
+            ),
           ),
-          if (state.isPlaying)
-            TextButton(onPressed: _stopSession, child: const Text('Stop')),
         ],
       ),
       body: Center(

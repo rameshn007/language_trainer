@@ -27,6 +27,7 @@ import 'quiz/interrogative_quiz_screen.dart';
 import 'quiz/grammar_quiz_screen.dart';
 import 'quiz/preposition_quiz_screen.dart';
 import 'listen_repeat/listen_repeat_screen.dart';
+import '../utils/iphone_duo_helper.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -289,6 +290,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final items = storage.getAllItems();
     final progress = ref.watch(progressServiceProvider);
     final learnedCount = items.where((i) => i.masteryLevel > 0).length;
+    final isDuo = IPhoneDuoHelper.isDuo(context);
 
     return Scaffold(
       extendBody: true,
@@ -299,62 +301,67 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         title: const Text('Language Trainer'),
         centerTitle: true,
         actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              if (value == 'refresh') {
-                _loadData();
-              } else if (value == 'shuffle') {
-                _confirmShuffle();
-              } else if (value == 'reset') {
-                _confirmReset();
-              } else if (value == 'test_notif') {
-                ref.read(notificationServiceProvider).showTestNotification();
-              } else if (value == 'settings') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SettingsScreen(),
+          Padding(
+            padding: EdgeInsets.only(
+              right: isDuo ? IPhoneDuoHelper.appBarActionsRightPadding : 0.0,
+            ),
+            child: PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'refresh') {
+                  _loadData();
+                } else if (value == 'shuffle') {
+                  _confirmShuffle();
+                } else if (value == 'reset') {
+                  _confirmReset();
+                } else if (value == 'test_notif') {
+                  ref.read(notificationServiceProvider).showTestNotification();
+                } else if (value == 'settings') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsScreen(),
+                    ),
+                  );
+                }
+              },
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 'settings',
+                  child: ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text('Settings'),
                   ),
-                );
-              }
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'settings',
-                child: ListTile(
-                  leading: Icon(Icons.settings),
-                  title: Text('Settings'),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'test_notif',
-                child: ListTile(
-                  leading: Icon(Icons.notifications_active),
-                  title: Text('Test Notification'),
+                const PopupMenuItem(
+                  value: 'test_notif',
+                  child: ListTile(
+                    leading: Icon(Icons.notifications_active),
+                    title: Text('Test Notification'),
+                  ),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'refresh',
-                child: ListTile(
-                  leading: Icon(Icons.refresh),
-                  title: Text('Refresh Data'),
+                const PopupMenuItem(
+                  value: 'refresh',
+                  child: ListTile(
+                    leading: Icon(Icons.refresh),
+                    title: Text('Refresh Data'),
+                  ),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'shuffle',
-                child: ListTile(
-                  leading: Icon(Icons.shuffle),
-                  title: Text('Shuffle All Questions'),
+                const PopupMenuItem(
+                  value: 'shuffle',
+                  child: ListTile(
+                    leading: Icon(Icons.shuffle),
+                    title: Text('Shuffle All Questions'),
+                  ),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'reset',
-                child: ListTile(
-                  leading: Icon(Icons.restore),
-                  title: Text('Reset Stats'),
+                const PopupMenuItem(
+                  value: 'reset',
+                  child: ListTile(
+                    leading: Icon(Icons.restore),
+                    title: Text('Reset Stats'),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -411,7 +418,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 80),
+                    padding: EdgeInsets.fromLTRB(
+                      20,
+                      10,
+                      isDuo ? IPhoneDuoHelper.systemIconReservedWidth : 20,
+                      80,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -695,6 +707,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     topPadding: topPadding,
                     shrinkPercentage: shrinkPercentage,
                     currentHeight: currentHeight,
+                    isDuo: isDuo,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -710,7 +723,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: isDuo
+          ? IPhoneDuoHelper.fabLocation
+          : FloatingActionButtonLocation.endFloat,
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -916,6 +931,7 @@ class _PinnedStatsCard extends StatelessWidget {
   final double topPadding;
   final double shrinkPercentage;
   final double currentHeight;
+  final bool isDuo;
 
   const _PinnedStatsCard({
     required this.progress,
@@ -923,6 +939,7 @@ class _PinnedStatsCard extends StatelessWidget {
     required this.topPadding,
     required this.shrinkPercentage,
     required this.currentHeight,
+    this.isDuo = false,
   });
 
   @override
@@ -940,7 +957,7 @@ class _PinnedStatsCard extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(
             20,
             topPadding + 20 * (1 - clampedShrink),
-            20,
+            isDuo ? IPhoneDuoHelper.systemIconReservedWidth : 20,
             10,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

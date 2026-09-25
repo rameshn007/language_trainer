@@ -11,6 +11,7 @@ import '../../main.dart';
 import '../vocabulary/vocabulary_list_screen.dart';
 import '../common/long_press_word_text.dart';
 import '../widgets/xp_popup.dart';
+import '../../utils/iphone_duo_helper.dart';
 
 class QuizScreen extends ConsumerStatefulWidget {
   final String? category;
@@ -388,6 +389,8 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
       );
     }
 
+    final isDuo = IPhoneDuoHelper.isDuo(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Score: ${quizState.score}'),
@@ -395,67 +398,77 @@ class _QuizScreenState extends ConsumerState<QuizScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.speed),
-            tooltip: 'Toggle Speed',
-            onPressed: _toggleSpeed,
-          ),
-          PopupMenuButton<String>(
-            icon: const Icon(Icons.more_vert),
-            onSelected: (value) {
-              if (value == 'vocabulary') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const VocabularyListScreen(),
-                  ),
-                );
-              } else if (value == 'voice_settings') {
-                _showVoiceSettings();
-              } else if (value == 'show_answer') {
-                _currentCardKey.currentState?.revealAnswer();
-              }
-            },
-            itemBuilder: (BuildContext context) {
-              return const [
-                PopupMenuItem<String>(
-                  value: 'show_answer',
-                  child: Row(
-                    children: [
-                      Icon(Icons.visibility),
-                      SizedBox(width: 8),
-                      Text('Show Answer'),
-                    ],
-                  ),
+          Padding(
+            padding: EdgeInsets.only(
+              right: isDuo ? IPhoneDuoHelper.appBarActionsRightPadding : 0.0,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.speed),
+                  tooltip: 'Toggle Speed',
+                  onPressed: _toggleSpeed,
                 ),
-                PopupMenuItem<String>(
-                  value: 'vocabulary',
-                  child: Row(
-                    children: [
-                      Icon(Icons.book),
-                      SizedBox(width: 8),
-                      Text('Vocabulary'),
-                    ],
-                  ),
+                PopupMenuButton<String>(
+                  icon: const Icon(Icons.more_vert),
+                  onSelected: (value) {
+                    if (value == 'vocabulary') {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const VocabularyListScreen(),
+                        ),
+                      );
+                    } else if (value == 'voice_settings') {
+                      _showVoiceSettings();
+                    } else if (value == 'show_answer') {
+                      _currentCardKey.currentState?.revealAnswer();
+                    }
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return const [
+                      PopupMenuItem<String>(
+                        value: 'show_answer',
+                        child: Row(
+                          children: [
+                            Icon(Icons.visibility),
+                            SizedBox(width: 8),
+                            Text('Show Answer'),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem<String>(
+                        value: 'vocabulary',
+                        child: Row(
+                          children: [
+                            Icon(Icons.book),
+                            SizedBox(width: 8),
+                            Text('Vocabulary'),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem<String>(
+                        value: 'voice_settings',
+                        child: Row(
+                          children: [
+                            Icon(Icons.record_voice_over),
+                            SizedBox(width: 8),
+                            Text('Voice Settings'),
+                          ],
+                        ),
+                      ),
+                    ];
+                  },
                 ),
-                PopupMenuItem<String>(
-                  value: 'voice_settings',
-                  child: Row(
-                    children: [
-                      Icon(Icons.record_voice_over),
-                      SizedBox(width: 8),
-                      Text('Voice Settings'),
-                    ],
-                  ),
+                IconButton(
+                  icon: const Icon(Icons.close),
+                  tooltip: 'Close Quiz',
+                  onPressed: () =>
+                      Navigator.of(context).popUntil((route) => route.isFirst),
                 ),
-              ];
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.close),
-            tooltip: 'Close Quiz',
-            onPressed: () =>
-                Navigator.of(context).popUntil((route) => route.isFirst),
+              ],
+            ),
           ),
         ],
       ),

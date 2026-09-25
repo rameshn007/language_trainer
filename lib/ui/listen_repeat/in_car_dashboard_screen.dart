@@ -11,10 +11,21 @@ import '../../theme/carplay_theme.dart';
 import '../widgets/xp_popup.dart';
 import 'listen_repeat_view_model.dart';
 
+import '../../utils/iphone_duo_helper.dart';
+
 /// Pixel-perfect in-car landscape dashboard implementing the Listen & Repeat
 /// brand specification and 3-column automotive layout.
 class InCarDashboardScreen extends ConsumerStatefulWidget {
-  const InCarDashboardScreen({super.key});
+  final VoidCallback? onBack;
+  final VoidCallback? onStop;
+  final bool embedded;
+
+  const InCarDashboardScreen({
+    super.key,
+    this.onBack,
+    this.onStop,
+    this.embedded = false,
+  });
 
   @override
   ConsumerState<InCarDashboardScreen> createState() => _InCarDashboardScreenState();
@@ -24,10 +35,12 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    if (!widget.embedded) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    }
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final state = ref.read(listenRepeatViewModelProvider);
       if (!state.isPlaying && state.currentItem == null) {
@@ -38,16 +51,22 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    if (!widget.embedded) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    }
     super.dispose();
   }
 
   void _stopSessionAndPop() async {
+    if (widget.onStop != null) {
+      widget.onStop!();
+      return;
+    }
     final xp = await ref.read(listenRepeatViewModelProvider.notifier).stopSession();
     if (mounted) {
       if (xp > 0) {
@@ -76,34 +95,40 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
 
             // Main 3-Column Content
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Left Column: Practice Sets
-                    Expanded(
-                      flex: 3,
-                      child: _buildPracticeSetsColumn(state, notifier, modeCounts),
+              child: Builder(
+                builder: (context) {
+                  final isDuo = IPhoneDuoHelper.isDuo(context);
+                  final rightContentPadding = isDuo ? 48.0 : 24.0;
+                  return Padding(
+                    padding: EdgeInsets.fromLTRB(24, 8, rightContentPadding, 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Left Column: Practice Sets
+                        Expanded(
+                          flex: 3,
+                          child: _buildPracticeSetsColumn(state, notifier, modeCounts),
+                        ),
+
+                        const SizedBox(width: 20),
+
+                        // Center Column: Flashcard & Status
+                        Expanded(
+                          flex: 6,
+                          child: _buildCenterCardColumn(state, item, isFlagged, storage, modeCounts),
+                        ),
+
+                        const SizedBox(width: 20),
+
+                        // Right Column: Playback Controls
+                        Expanded(
+                          flex: 3,
+                          child: _buildPlaybackControlsColumn(state, notifier),
+                        ),
+                      ],
                     ),
-
-                    const SizedBox(width: 20),
-
-                    // Center Column: Flashcard & Status
-                    Expanded(
-                      flex: 6,
-                      child: _buildCenterCardColumn(state, item, isFlagged, storage, modeCounts),
-                    ),
-
-                    const SizedBox(width: 20),
-
-                    // Right Column: Playback Controls
-                    Expanded(
-                      flex: 3,
-                      child: _buildPlaybackControlsColumn(state, notifier),
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
           ],
@@ -117,8 +142,11 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
     ListenRepeatState state,
     ListenRepeatViewModel notifier,
   ) {
+    final isDuo = IPhoneDuoHelper.isDuo(context);
+    final topBarRightPadding = isDuo ? 64.0 : 24.0;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      padding: EdgeInsets.fromLTRB(24, 12, topBarRightPadding, 12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -126,7 +154,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
           InkWell(
             key: const Key('carplay_dash_back_button'),
             borderRadius: BorderRadius.circular(CarPlayTheme.pillRadius),
-            onTap: () => Navigator.of(context).pop(),
+            onTap: widget.onBack ?? () => Navigator.of(context).pop(),
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               child: Row(

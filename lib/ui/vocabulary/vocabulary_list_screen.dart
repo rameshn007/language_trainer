@@ -7,6 +7,7 @@ import '../../services/tts_service.dart';
 import 'word_graph_screen.dart';
 import 'vocabulary_item_dialog.dart';
 import '../quiz/single_verb_conjugation_screen.dart';
+import '../../utils/iphone_duo_helper.dart';
 
 enum SortMode { alphabetical, mastery, random }
 
@@ -411,52 +412,63 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   @override
   Widget build(BuildContext context) {
     final storage = ref.read(storageServiceProvider);
+    final isDuo = IPhoneDuoHelper.isDuo(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vocabulary List'),
         actions: [
-          IconButton(
-            icon: Icon(
-              _isTranslationsHidden ? Icons.visibility_off : Icons.visibility,
+          Padding(
+            padding: EdgeInsets.only(
+              right: isDuo ? IPhoneDuoHelper.appBarActionsRightPadding : 0.0,
             ),
-            tooltip: 'Toggle Translations',
-            onPressed: _toggleTranslations,
-          ),
-          IconButton(
-            icon: Icon(
-              _sortMode == SortMode.alphabetical
-                  ? Icons.sort_by_alpha
-                  : (_sortMode == SortMode.mastery
-                        ? Icons.sort
-                        : Icons.shuffle),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    _isTranslationsHidden ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  tooltip: 'Toggle Translations',
+                  onPressed: _toggleTranslations,
+                ),
+                IconButton(
+                  icon: Icon(
+                    _sortMode == SortMode.alphabetical
+                        ? Icons.sort_by_alpha
+                        : (_sortMode == SortMode.mastery
+                              ? Icons.sort
+                              : Icons.shuffle),
+                  ),
+                  tooltip: 'Sort Mode: ${_sortMode.name}',
+                  onPressed: _toggleSort,
+                ),
+                IconButton(
+                  icon: Icon(_isPlaying ? Icons.stop : Icons.play_arrow),
+                  tooltip: _isPlaying ? 'Stop Playlist' : 'Play Playlist',
+                  color: _isPlaying ? Colors.red : null,
+                  onPressed: _togglePlayStop,
+                ),
+                IconButton(
+                  key: const Key('vocab_filter_flagged_button'),
+                  icon: Icon(
+                    _filterFlaggedOnly ? Icons.star : Icons.star_border,
+                    color: _filterFlaggedOnly ? Colors.amber : null,
+                  ),
+                  tooltip: _filterFlaggedOnly ? 'Show all words' : 'Show flagged words only',
+                  onPressed: () {
+                    setState(() {
+                      _filterFlaggedOnly = !_filterFlaggedOnly;
+                      _filterItems();
+                    });
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.speed),
+                  tooltip: 'Toggle Speed',
+                  onPressed: _toggleSpeed,
+                ),
+              ],
             ),
-            tooltip: 'Sort Mode: ${_sortMode.name}',
-            onPressed: _toggleSort,
-          ),
-          IconButton(
-            icon: Icon(_isPlaying ? Icons.stop : Icons.play_arrow),
-            tooltip: _isPlaying ? 'Stop Playlist' : 'Play Playlist',
-            color: _isPlaying ? Colors.red : null,
-            onPressed: _togglePlayStop,
-          ),
-          IconButton(
-            key: const Key('vocab_filter_flagged_button'),
-            icon: Icon(
-              _filterFlaggedOnly ? Icons.star : Icons.star_border,
-              color: _filterFlaggedOnly ? Colors.amber : null,
-            ),
-            tooltip: _filterFlaggedOnly ? 'Show all words' : 'Show flagged words only',
-            onPressed: () {
-              setState(() {
-                _filterFlaggedOnly = !_filterFlaggedOnly;
-                _filterItems();
-              });
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.speed),
-            tooltip: 'Toggle Speed',
-            onPressed: _toggleSpeed,
           ),
         ],
         bottom: PreferredSize(
@@ -480,6 +492,10 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
         ),
       ),
       body: ListView.separated(
+        padding: EdgeInsets.only(
+            right: isDuo ? IPhoneDuoHelper.systemIconReservedWidth : 0.0,
+          bottom: 80,
+        ),
         controller: _scrollController,
         itemCount: _filteredItems.length,
         separatorBuilder: (context, index) => const Divider(height: 1),
@@ -685,6 +701,9 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
           );
         },
       ),
+      floatingActionButtonLocation: isDuo
+          ? IPhoneDuoHelper.fabLocation
+          : FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showEditDialog(null),
         child: const Icon(Icons.add),
