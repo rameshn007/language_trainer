@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/language_item.dart';
@@ -482,7 +481,12 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(60),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.only(
+              left: isLandscape || isDuo ? contentPadding.left : 8.0,
+              right: isLandscape || isDuo ? contentPadding.right : 8.0,
+              top: 8.0,
+              bottom: 8.0,
+            ),
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
@@ -501,10 +505,8 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
       ),
       body: ListView.separated(
         padding: EdgeInsets.only(
-          left: isDuo ? 0.0 : (isLandscape ? math.max(0.0, contentPadding.left - 20.0) : 0.0),
-          right: isDuo
-              ? IPhoneDuoHelper.systemIconReservedWidth
-              : (isLandscape ? contentPadding.right : 0.0),
+          left: isLandscape || isDuo ? contentPadding.left : 0.0,
+          right: isLandscape || isDuo ? contentPadding.right : 0.0,
           bottom: 80,
         ),
         controller: _scrollController,

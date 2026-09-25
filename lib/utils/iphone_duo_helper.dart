@@ -1,12 +1,23 @@
 import 'dart:math' as math;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
+/// Modes for overriding iPhone Duo screen detection in tests or debug environments off-hardware.
+enum DuoScreenOverride {
+  none,
+  outsidePortrait,
+  outsideLandscape,
+  insidePortrait,
+  insideLandscape,
+}
 
 /// Helper utilities for detecting and adapting UI to the iPhone Duo screens
 /// (both outside cover screen and inside unfolded screen).
 ///
-/// Hardware specifications for iPhone Duo screens:
-/// - Outside (Cover) Screen: 1398 x 2034 px @ scale 3.0 -> 466 x 678 pt (portrait) or 678 x 466 pt (landscape).
-/// - Inside (Unfolded) Screen: 2007 x 2853 px @ scale 3.0 -> 669 x 951 pt (portrait) or 951 x 669 pt (landscape).
+/// Hardware specifications for iPhone Duo screens (derived from Xcode Simulator display
+/// descriptors, e.g., `xcrun simctl io booted enumerate` / `xcrun simctl list devicetypes`):
+/// - Outside (Cover) Screen: 1398 x 2034 px @ scale 3.0 -> 466.0 x 678.0 pt (portrait) or 678.0 x 466.0 pt (landscape).
+/// - Inside (Unfolded) Screen: 2007 x 2853 px @ scale 3.0 -> 669.0 x 951.0 pt (portrait) or 951.0 x 669.0 pt (landscape).
 ///
 /// On both screens:
 /// - The top-right corner features a prominent system status capsule with time and a circular Wi-Fi icon.
@@ -16,6 +27,10 @@ import 'package:flutter/material.dart';
 /// - Main content preserves a reservation margin (76 pt) on the right to keep clear of the system
 ///   icon and the vertically aligned FABs.
 class IPhoneDuoHelper {
+  /// Optional debug override to simulate iPhone Duo screen modes off-hardware or in tests.
+  /// When non-null, this overrides screen size sniffing logic.
+  static DuoScreenOverride? debugOverride;
+
   /// Expected logical width for the outside screen in portrait.
   static const double outsideWidthPortrait = 466.0;
 
@@ -39,64 +54,95 @@ class IPhoneDuoHelper {
 
   /// Checks if the current context is running on any iPhone Duo screen (outside or inside).
   static bool isDuo(BuildContext context) {
+    if (debugOverride != null) {
+      return debugOverride != DuoScreenOverride.none;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoSize(size);
   }
 
   /// Checks if the current context is running on the iPhone Duo outside screen (either portrait or landscape).
   static bool isDuoOutside(BuildContext context) {
+    if (debugOverride != null) {
+      return debugOverride == DuoScreenOverride.outsidePortrait ||
+          debugOverride == DuoScreenOverride.outsideLandscape;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoOutsidePortraitSize(size) || isDuoOutsideLandscapeSize(size);
   }
 
   /// Checks if the current context is in portrait on the iPhone Duo outside screen.
   static bool isDuoOutsidePortrait(BuildContext context) {
+    if (debugOverride != null) {
+      return debugOverride == DuoScreenOverride.outsidePortrait;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoOutsidePortraitSize(size);
   }
 
   /// Checks if the current context is in landscape on the iPhone Duo outside screen.
   static bool isDuoOutsideLandscape(BuildContext context) {
+    if (debugOverride != null) {
+      return debugOverride == DuoScreenOverride.outsideLandscape;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoOutsideLandscapeSize(size);
   }
 
   /// Checks if the current context is on the iPhone Duo inside screen (either portrait or landscape).
   static bool isDuoInside(BuildContext context) {
+    if (debugOverride != null) {
+      return debugOverride == DuoScreenOverride.insidePortrait ||
+          debugOverride == DuoScreenOverride.insideLandscape;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoInsideSize(size);
   }
 
   /// Checks if the current context is in landscape on the iPhone Duo inside screen.
   static bool isDuoInsideLandscape(BuildContext context) {
+    if (debugOverride != null) {
+      return debugOverride == DuoScreenOverride.insideLandscape;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoInsideLandscapeSize(size);
   }
 
   /// Checks if the current context is in portrait on the iPhone Duo inside screen.
   static bool isDuoInsidePortrait(BuildContext context) {
+    if (debugOverride != null) {
+      return debugOverride == DuoScreenOverride.insidePortrait;
+    }
     final size = MediaQuery.sizeOf(context);
     return isDuoInsidePortraitSize(size);
   }
 
   static bool isDuoOutsidePortraitSize(Size size) {
-    return (size.width - outsideWidthPortrait).abs() < 14 &&
+    final bool matches = (size.width - outsideWidthPortrait).abs() < 14 &&
         (size.height - outsideHeightPortrait).abs() < 14;
+    _checkNearMiss(size, outsideWidthPortrait, outsideHeightPortrait, 'outside portrait', matches);
+    return matches;
   }
 
   static bool isDuoOutsideLandscapeSize(Size size) {
-    return (size.width - outsideHeightPortrait).abs() < 14 &&
+    final bool matches = (size.width - outsideHeightPortrait).abs() < 14 &&
         (size.height - outsideWidthPortrait).abs() < 14;
+    _checkNearMiss(size, outsideHeightPortrait, outsideWidthPortrait, 'outside landscape', matches);
+    return matches;
   }
 
   static bool isDuoInsidePortraitSize(Size size) {
-    return (size.width - insideWidthPortrait).abs() < 16 &&
+    final bool matches = (size.width - insideWidthPortrait).abs() < 16 &&
         (size.height - insideHeightPortrait).abs() < 16;
+    _checkNearMiss(size, insideWidthPortrait, insideHeightPortrait, 'inside portrait', matches);
+    return matches;
   }
 
   static bool isDuoInsideLandscapeSize(Size size) {
-    return (size.width - insideHeightPortrait).abs() < 16 &&
+    final bool matches = (size.width - insideHeightPortrait).abs() < 16 &&
         (size.height - insideWidthPortrait).abs() < 16;
+    _checkNearMiss(size, insideHeightPortrait, insideWidthPortrait, 'inside landscape', matches);
+    return matches;
   }
 
   static bool isDuoInsideSize(Size size) {
@@ -110,8 +156,32 @@ class IPhoneDuoHelper {
         isDuoInsidePortraitSize(size);
   }
 
+  static void _checkNearMiss(
+    Size size,
+    double expectedWidth,
+    double expectedHeight,
+    String modeName,
+    bool matches,
+  ) {
+    if (kDebugMode && !matches) {
+      final double dw = (size.width - expectedWidth).abs();
+      final double dh = (size.height - expectedHeight).abs();
+      if (dw < 30 && dh < 30) {
+        debugPrint(
+          'IPhoneDuoHelper: Size ${size.width}x${size.height} is near Duo $modeName '
+          '(${expectedWidth}x$expectedHeight) but outside tolerance. '
+          'Set IPhoneDuoHelper.debugOverride if testing off-hardware.',
+        );
+      }
+    }
+  }
+
   /// FloatingActionButtonLocation that vertically aligns the FAB with the system Wi-Fi icon.
   static const FloatingActionButtonLocation fabLocation = DuoAlignedFabLocation();
+
+  /// Default constant landscape FAB location when safe insets are 0.
+  static const FloatingActionButtonLocation standardLandscapeFabLocation =
+      LandscapeRightFabLocation(rightMargin: 16.0);
 
   /// Returns the appropriate FAB location based on whether the device is Duo or in landscape.
   /// In landscape on standard iPhones, positions the FAB at the far right so it does not overlap content.
@@ -124,8 +194,12 @@ class IPhoneDuoHelper {
     }
     final media = MediaQuery.of(context);
     if (media.orientation == Orientation.landscape) {
+      final double totalMargin = media.padding.right + landscapeRightMargin;
+      if (totalMargin == 16.0) {
+        return standardLandscapeFabLocation;
+      }
       return LandscapeRightFabLocation(
-        rightMargin: media.padding.right + landscapeRightMargin,
+        rightMargin: totalMargin,
       );
     }
     return FloatingActionButtonLocation.endFloat;
@@ -193,6 +267,21 @@ class DuoAlignedFabLocation extends FloatingActionButtonLocation {
         bottomPadding;
     return Offset(fabX, fabY);
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is DuoAlignedFabLocation &&
+        other.fabCenterFromRight == fabCenterFromRight &&
+        other.bottomMargin == bottomMargin;
+  }
+
+  @override
+  int get hashCode => Object.hash(fabCenterFromRight, bottomMargin);
+
+  @override
+  String toString() =>
+      'DuoAlignedFabLocation(centerFromRight: $fabCenterFromRight, bottomMargin: $bottomMargin)';
 }
 
 /// Floating action button location positioned at the rightmost edge for landscape orientations.
@@ -219,4 +308,19 @@ class LandscapeRightFabLocation extends FloatingActionButtonLocation {
         bottomPadding;
     return Offset(fabX, fabY);
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is LandscapeRightFabLocation &&
+        other.rightMargin == rightMargin &&
+        other.bottomMargin == bottomMargin;
+  }
+
+  @override
+  int get hashCode => Object.hash(rightMargin, bottomMargin);
+
+  @override
+  String toString() =>
+      'LandscapeRightFabLocation(rightMargin: $rightMargin, bottomMargin: $bottomMargin)';
 }
