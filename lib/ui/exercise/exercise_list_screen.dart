@@ -85,6 +85,12 @@ class ExerciseListScreen extends StatelessWidget {
       'icon': 'chat',
     },
     {
+      'title': 'Unit 11: Comparatives, Time & Life Events',
+      'subtitle': 'Practice tão... como, tanto... como, há vs desde, marriage & deixis',
+      'path': 'assets/data/exercises/unit_comparatives_and_duration.json',
+      'icon': 'school',
+    },
+    {
       'title': 'Sentence Transformations & Grammar',
       'subtitle': 'Practice future tense, comparatives, há/desde & pronouns',
       'path': 'assets/data/exercises/unit_sentence_transformations.json',

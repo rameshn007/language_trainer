@@ -63004,19 +63004,19 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'há'?",
     "options": [
-      "for \\- indicates a period of time (total amount, month, week etc)",
+      "for (time duration) / ago",
       "The championship",
       "Man/Dude (filler word)",
       "Lunch"
     ],
-    "answer": "for \\- indicates a period of time (total amount, month, week etc)",
+    "answer": "for (time duration) / ago",
     "sourceItem": "há",
     "cat": "General"
   },
   {
     "id": "q_4502",
     "type": "multipleChoice",
-    "question": "How do you say 'for \\- indicates a period of time (total amount, month, week etc)' in Portuguese?",
+    "question": "How do you say 'for (time duration) / ago' in Portuguese?",
     "options": [
       "há",
       "até",
@@ -63034,17 +63034,17 @@
     "options": [
       "your husband",
       "I arrive at home at midday",
-      "since \\- used to indicate when it was initiated (specific with hour, part of day, year). Can also be used for starting at that price.",
+      "since / from (starting point)",
       "How much? How much does it cost How long does the trip take?"
     ],
-    "answer": "since \\- used to indicate when it was initiated (specific with hour, part of day, year). Can also be used for starting at that price.",
+    "answer": "since / from (starting point)",
     "sourceItem": "desde",
     "cat": "General"
   },
   {
     "id": "q_4504",
     "type": "multipleChoice",
-    "question": "How do you say 'since \\- used to indicate when it was initiated (specific with hour, part of day, year). Can also be used for starting at that price.' in Portuguese?",
+    "question": "How do you say 'since / from (starting point)' in Portuguese?",
     "options": [
       "costumo acordar cedo",
       "desde",
@@ -63100,35 +63100,35 @@
   {
     "id": "q_4508",
     "type": "multipleChoice",
-    "question": "What is the English translation of 'Casa da Musica'?",
+    "question": "What is the English translation of 'Casa da Música'?",
     "options": [
-      "Porto \\- musuem",
+      "Casa da Música (Porto concert hall)",
       "Will you marry me?",
       "Let's go out tonight",
       "What or which singular What is your favorite color"
     ],
-    "answer": "Porto \\- musuem",
-    "sourceItem": "Casa da Musica",
+    "answer": "Casa da Música (Porto concert hall)",
+    "sourceItem": "Casa da Música",
     "cat": "General"
   },
   {
     "id": "q_4509",
     "type": "multipleChoice",
-    "question": "How do you say 'Porto \\- musuem' in Portuguese?",
+    "question": "How do you say 'Casa da Música (Porto concert hall)' in Portuguese?",
     "options": [
       "estou bem, obrigado(a)",
       "Exatamente",
-      "Casa da Musica",
+      "Casa da Música",
       "A tua"
     ],
-    "answer": "Casa da Musica",
-    "sourceItem": "Casa da Musica",
+    "answer": "Casa da Música",
+    "sourceItem": "Casa da Música",
     "cat": "General"
   },
   {
     "id": "q_4510",
     "type": "cloze",
-    "question": "Fill in the blank: '______ da Musica' (Porto \\- musuem)",
+    "question": "Fill in the blank: '______ da Musica' (Casa da Música (Porto concert hall))",
     "options": [
       "Casa",
       "condução",
@@ -63136,7 +63136,7 @@
       "desafiante"
     ],
     "answer": "Casa",
-    "sourceItem": "Casa da Musica",
+    "sourceItem": "Casa da Música",
     "cat": "General"
   },
   {
@@ -63144,19 +63144,19 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'A Maria faz visitas guiadas desde que trabalha na Casa da Música'?",
     "options": [
-      "Marias has been a tour guide since she started working at the Casa da Musica",
+      "Marias has been a tour guide since she started working at the Casa da Música",
       "With best regards",
       "o",
       "the menu please"
     ],
-    "answer": "Marias has been a tour guide since she started working at the Casa da Musica",
+    "answer": "Marias has been a tour guide since she started working at the Casa da Música",
     "sourceItem": "A Maria faz visitas guiadas desde que trabalha na Casa da Música",
     "cat": "General"
   },
   {
     "id": "q_4512",
     "type": "multipleChoice",
-    "question": "How do you say 'Marias has been a tour guide since she started working at the Casa da Musica' in Portuguese?",
+    "question": "How do you say 'Marias has been a tour guide since she started working at the Casa da Música' in Portuguese?",
     "options": [
       "Prometo",
       "à meia-noite",
@@ -63170,7 +63170,7 @@
   {
     "id": "q_4513",
     "type": "cloze",
-    "question": "Fill in the blank: 'A Maria faz visitas guiadas desde que trabalha na Casa da ______' (Marias has been a tour guide since she started working at the Casa da Musica)",
+    "question": "Fill in the blank: 'A Maria faz visitas guiadas desde que trabalha na Casa da ______' (Marias has been a tour guide since she started working at the Casa da Música)",
     "options": [
       "comboio",
       "benfica",
@@ -63187,18 +63187,18 @@
     "question": "What is the English translation of 'Os amigos estão na esplanada há meia hora'?",
     "options": [
       "Monkeys jump between the trees.",
-      "the friends are on the terrace for half an hour.",
+      "The friends have been on the terrace for half an hour",
       "quickly",
       "166"
     ],
-    "answer": "the friends are on the terrace for half an hour.",
+    "answer": "The friends have been on the terrace for half an hour",
     "sourceItem": "Os amigos estão na esplanada há meia hora",
     "cat": "General"
   },
   {
     "id": "q_4515",
     "type": "multipleChoice",
-    "question": "How do you say 'the friends are on the terrace for half an hour.' in Portuguese?",
+    "question": "How do you say 'The friends have been on the terrace for half an hour' in Portuguese?",
     "options": [
       "Os amigos estão na esplanada há meia hora",
       "aquilo",
@@ -63212,7 +63212,7 @@
   {
     "id": "q_4516",
     "type": "cloze",
-    "question": "Fill in the blank: 'Os amigos estão na esplanada há ______ hora' (the friends are on the terrace for half an hour.)",
+    "question": "Fill in the blank: 'Os amigos estão na esplanada há ______ hora' (The friends have been on the terrace for half an hour)",
     "options": [
       "meia",
       "atender",
@@ -63273,16 +63273,16 @@
       "I am a software engineer",
       "Don't be lazy, let's go for a walk!",
       "follow the direction to \\<place\\>",
-      "the olympic athlete has been practicing swimming for more than 10 years"
+      "The Olympic athlete has been practicing swimming for more than ten years"
     ],
-    "answer": "the olympic athlete has been practicing swimming for more than 10 years",
+    "answer": "The Olympic athlete has been practicing swimming for more than ten years",
     "sourceItem": "A atleta olímpica pratica natação há mais de dez anos",
     "cat": "General"
   },
   {
     "id": "q_4521",
     "type": "multipleChoice",
-    "question": "How do you say 'the olympic athlete has been practicing swimming for more than 10 years' in Portuguese?",
+    "question": "How do you say 'The Olympic athlete has been practicing swimming for more than ten years' in Portuguese?",
     "options": [
       "Tens medo de baratas?",
       "A atleta olímpica pratica natação há mais de dez anos",
@@ -63296,7 +63296,7 @@
   {
     "id": "q_4522",
     "type": "cloze",
-    "question": "Fill in the blank: 'A atleta olímpica pratica natação há mais de dez ______' (the olympic athlete has been practicing swimming for more than 10 years)",
+    "question": "Fill in the blank: 'A atleta olímpica pratica natação há mais de dez ______' (The Olympic athlete has been practicing swimming for more than ten years)",
     "options": [
       "anos",
       "meus",
@@ -63329,7 +63329,7 @@
       "à segunda-feira=às segundas-feiras",
       "O nosso casamento",
       "Lamento",
-      "As aulas de kizomba são tão divertido como as aulas de samba"
+      "As aulas de kizomba são tão divertidas como as aulas de samba"
     ],
     "answer": "O nosso casamento",
     "sourceItem": "O nosso casamento",
@@ -63441,16 +63441,16 @@
       "We split the bill",
       "At that time (in that era)",
       "Stop it / Don't be like that",
-      "inheritors (receive inheritance)"
+      "heirs / inheritors"
     ],
-    "answer": "inheritors (receive inheritance)",
+    "answer": "heirs / inheritors",
     "sourceItem": "herdeiros",
     "cat": "General"
   },
   {
     "id": "q_4533",
     "type": "multipleChoice",
-    "question": "How do you say 'inheritors (receive inheritance)' in Portuguese?",
+    "question": "How do you say 'heirs / inheritors' in Portuguese?",
     "options": [
       "O mestrado",
       "Eu sou casado",
@@ -63522,19 +63522,19 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'esta,essa,aquela'?",
     "options": [
-      "this here, that there, that over there",
+      "this, that, that over there (feminine)",
       "That (over there) is very beautiful",
       "Sleeping late is my favorite laziness.",
       "til"
     ],
-    "answer": "this here, that there, that over there",
+    "answer": "this, that, that over there (feminine)",
     "sourceItem": "esta,essa,aquela",
     "cat": "General"
   },
   {
     "id": "q_4539",
     "type": "multipleChoice",
-    "question": "How do you say 'this here, that there, that over there' in Portuguese?",
+    "question": "How do you say 'this, that, that over there (feminine)' in Portuguese?",
     "options": [
       "esta,essa,aquela",
       "O sol",
@@ -63548,29 +63548,29 @@
   {
     "id": "q_4540",
     "type": "multipleChoice",
-    "question": "What is the English translation of 'tao'?",
+    "question": "What is the English translation of 'tão'?",
     "options": [
       "My (m)",
       "slowly",
-      "as big as \\+ adjective/adverb \\+ como",
+      "as / so (tão + adjective/adverb + como)",
       "to dine"
     ],
-    "answer": "as big as \\+ adjective/adverb \\+ como",
-    "sourceItem": "tao",
+    "answer": "as / so (tão + adjective/adverb + como)",
+    "sourceItem": "tão",
     "cat": "General"
   },
   {
     "id": "q_4541",
     "type": "multipleChoice",
-    "question": "How do you say 'as big as \\+ adjective/adverb \\+ como' in Portuguese?",
+    "question": "How do you say 'as / so (tão + adjective/adverb + como)' in Portuguese?",
     "options": [
-      "tao",
+      "tão",
       "Fogo!",
       "Estou só a ver, obrigado",
       "Encontramo-nos à porta do cinema"
     ],
-    "answer": "tao",
-    "sourceItem": "tao",
+    "answer": "tão",
+    "sourceItem": "tão",
     "cat": "General"
   },
   {
@@ -63674,35 +63674,35 @@
   {
     "id": "q_4549",
     "type": "multipleChoice",
-    "question": "What is the English translation of 'As aulas de kizomba são tão divertido como as aulas de samba'?",
+    "question": "What is the English translation of 'As aulas de kizomba são tão divertidas como as aulas de samba'?",
     "options": [
       "people from a country",
       "mirror",
-      "The lessons for quizomba are as fun as the lessons or samba",
+      "Kizomba classes are as fun as samba classes",
       "Do you want to have a drink?"
     ],
-    "answer": "The lessons for quizomba are as fun as the lessons or samba",
-    "sourceItem": "As aulas de kizomba são tão divertido como as aulas de samba",
+    "answer": "Kizomba classes are as fun as samba classes",
+    "sourceItem": "As aulas de kizomba são tão divertidas como as aulas de samba",
     "cat": "General"
   },
   {
     "id": "q_4550",
     "type": "multipleChoice",
-    "question": "How do you say 'The lessons for quizomba are as fun as the lessons or samba' in Portuguese?",
+    "question": "How do you say 'Kizomba classes are as fun as samba classes' in Portuguese?",
     "options": [
       "Ajuda!",
-      "As aulas de kizomba são tão divertido como as aulas de samba",
+      "As aulas de kizomba são tão divertidas como as aulas de samba",
       "Eu quero",
       "Ya"
     ],
-    "answer": "As aulas de kizomba são tão divertido como as aulas de samba",
-    "sourceItem": "As aulas de kizomba são tão divertido como as aulas de samba",
+    "answer": "As aulas de kizomba são tão divertidas como as aulas de samba",
+    "sourceItem": "As aulas de kizomba são tão divertidas como as aulas de samba",
     "cat": "General"
   },
   {
     "id": "q_4551",
     "type": "cloze",
-    "question": "Fill in the blank: 'As ______ de kizomba são tão divertido como as aulas de samba' (The lessons for quizomba are as fun as the lessons or samba)",
+    "question": "Fill in the blank: 'As ______ de kizomba são tão divertido como as aulas de samba' (Kizomba classes are as fun as samba classes)",
     "options": [
       "música",
       "doçaria",
@@ -63710,41 +63710,41 @@
       "lava"
     ],
     "answer": "aulas",
-    "sourceItem": "As aulas de kizomba são tão divertido como as aulas de samba",
+    "sourceItem": "As aulas de kizomba são tão divertidas como as aulas de samba",
     "cat": "General"
   },
   {
     "id": "q_4552",
     "type": "multipleChoice",
-    "question": "What is the English translation of 'Andar de metrô é tão barato como andar de autocarro'?",
+    "question": "What is the English translation of 'Andar de metro é tão barato como andar de autocarro'?",
     "options": [
       "h",
-      "Going by metro is as cheap as going by bus",
+      "Taking the metro is as cheap as taking the bus",
       "we are doing",
       "content"
     ],
-    "answer": "Going by metro is as cheap as going by bus",
-    "sourceItem": "Andar de metrô é tão barato como andar de autocarro",
+    "answer": "Taking the metro is as cheap as taking the bus",
+    "sourceItem": "Andar de metro é tão barato como andar de autocarro",
     "cat": "General"
   },
   {
     "id": "q_4553",
     "type": "multipleChoice",
-    "question": "How do you say 'Going by metro is as cheap as going by bus' in Portuguese?",
+    "question": "How do you say 'Taking the metro is as cheap as taking the bus' in Portuguese?",
     "options": [
       "Estou enjoado",
-      "Andar de metrô é tão barato como andar de autocarro",
+      "Andar de metro é tão barato como andar de autocarro",
       "Eu começo a trabalhar",
       "Um brinde aos noivos"
     ],
-    "answer": "Andar de metrô é tão barato como andar de autocarro",
-    "sourceItem": "Andar de metrô é tão barato como andar de autocarro",
+    "answer": "Andar de metro é tão barato como andar de autocarro",
+    "sourceItem": "Andar de metro é tão barato como andar de autocarro",
     "cat": "General"
   },
   {
     "id": "q_4554",
     "type": "cloze",
-    "question": "Fill in the blank: '______ de metrô é tão barato como andar de autocarro' (Going by metro is as cheap as going by bus)",
+    "question": "Fill in the blank: '______ de metro é tão barato como andar de autocarro' (Taking the metro is as cheap as taking the bus)",
     "options": [
       "ajudar-me",
       "Andar",
@@ -63752,7 +63752,7 @@
       "lagarto"
     ],
     "answer": "Andar",
-    "sourceItem": "Andar de metrô é tão barato como andar de autocarro",
+    "sourceItem": "Andar de metro é tão barato como andar de autocarro",
     "cat": "General"
   },
   {
@@ -63912,35 +63912,35 @@
   {
     "id": "q_4566",
     "type": "multipleChoice",
-    "question": "What is the English translation of 'precenciais'?",
+    "question": "What is the English translation of 'presenciais'?",
     "options": [
       "It is probable",
-      "present (in person)",
+      "in-person / face-to-face (plural)",
       "Turn left",
       "The grandfather left a big inheritance"
     ],
-    "answer": "present (in person)",
-    "sourceItem": "precenciais",
+    "answer": "in-person / face-to-face (plural)",
+    "sourceItem": "presenciais",
     "cat": "General"
   },
   {
     "id": "q_4567",
     "type": "multipleChoice",
-    "question": "How do you say 'present (in person)' in Portuguese?",
+    "question": "How do you say 'in-person / face-to-face (plural)' in Portuguese?",
     "options": [
-      "precenciais",
+      "presenciais",
       "decidem",
       "O terraço",
       "Vire à esquerda"
     ],
-    "answer": "precenciais",
-    "sourceItem": "precenciais",
+    "answer": "presenciais",
+    "sourceItem": "presenciais",
     "cat": "General"
   },
   {
     "id": "q_4568",
     "type": "multipleChoice",
-    "question": "What is the English translation of 'em vou em pessoa'?",
+    "question": "What is the English translation of 'eu vou em pessoa'?",
     "options": [
       "On that day",
       "the rat is gnawing the cork of the bottle of the king of russia",
@@ -63948,7 +63948,7 @@
       "I go in person"
     ],
     "answer": "I go in person",
-    "sourceItem": "em vou em pessoa",
+    "sourceItem": "eu vou em pessoa",
     "cat": "General"
   },
   {
@@ -63959,16 +63959,16 @@
       "caixa",
       "O currículo",
       "O sapo é verde e rugoso.",
-      "em vou em pessoa"
+      "eu vou em pessoa"
     ],
-    "answer": "em vou em pessoa",
-    "sourceItem": "em vou em pessoa",
+    "answer": "eu vou em pessoa",
+    "sourceItem": "eu vou em pessoa",
     "cat": "General"
   },
   {
     "id": "q_4570",
     "type": "cloze",
-    "question": "Fill in the blank: 'em vou em ______' (I go in person)",
+    "question": "Fill in the blank: 'eu vou em ______' (I go in person)",
     "options": [
       "Está",
       "caem",
@@ -63976,7 +63976,7 @@
       "Posso"
     ],
     "answer": "pessoa",
-    "sourceItem": "em vou em pessoa",
+    "sourceItem": "eu vou em pessoa",
     "cat": "General"
   },
   {
@@ -63984,19 +63984,19 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'vou ter uma reunião online'?",
     "options": [
-      "I’m going to have a meeting online",
+      "I am going to have an online meeting",
       "There",
       "The star",
       "Purple"
     ],
-    "answer": "I’m going to have a meeting online",
+    "answer": "I am going to have an online meeting",
     "sourceItem": "vou ter uma reunião online",
     "cat": "General"
   },
   {
     "id": "q_4572",
     "type": "multipleChoice",
-    "question": "How do you say 'I’m going to have a meeting online' in Portuguese?",
+    "question": "How do you say 'I am going to have an online meeting' in Portuguese?",
     "options": [
       "cheia",
       "Vamos ao cinema depois do jantar.",
@@ -64010,7 +64010,7 @@
   {
     "id": "q_4573",
     "type": "cloze",
-    "question": "Fill in the blank: 'vou ter uma ______ online' (I’m going to have a meeting online)",
+    "question": "Fill in the blank: 'vou ter uma ______ online' (I am going to have an online meeting)",
     "options": [
       "simpática",
       "loiça",
@@ -64029,16 +64029,16 @@
       "I take a shower",
       "To hate",
       "better",
-      "I’m going to have a meeting face to face"
+      "I am going to have an in-person meeting"
     ],
-    "answer": "I’m going to have a meeting face to face",
+    "answer": "I am going to have an in-person meeting",
     "sourceItem": "vou ter uma reunião presencial",
     "cat": "General"
   },
   {
     "id": "q_4575",
     "type": "multipleChoice",
-    "question": "How do you say 'I’m going to have a meeting face to face' in Portuguese?",
+    "question": "How do you say 'I am going to have an in-person meeting' in Portuguese?",
     "options": [
       "Vou deitar-me agora, boa noite.",
       "A conta, por favor",
@@ -64052,7 +64052,7 @@
   {
     "id": "q_4576",
     "type": "cloze",
-    "question": "Fill in the blank: 'vou ter uma ______ presencial' (I’m going to have a meeting face to face)",
+    "question": "Fill in the blank: 'vou ter uma ______ presencial' (I am going to have an in-person meeting)",
     "options": [
       "reunião",
       "tarde",
@@ -70698,5 +70698,2539 @@
     "answer": "ligar",
     "sourceItem": "Eu preciso de ligar o computador para começar a trabalhar.",
     "cat": "General"
+  },
+  {
+    "id": "q_5051",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o divórcio'?",
+    "options": [
+      "There",
+      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
+      "divorce",
+      "Carrot"
+    ],
+    "answer": "divorce",
+    "sourceItem": "o divórcio",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5052",
+    "type": "multipleChoice",
+    "question": "How do you say 'divorce' in Portuguese?",
+    "options": [
+      "Bonito",
+      "Está frio",
+      "águas furtadas",
+      "o divórcio"
+    ],
+    "answer": "o divórcio",
+    "sourceItem": "o divórcio",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5053",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o testamento'?",
+    "options": [
+      "How boring (slang)",
+      "this author (feminine)",
+      "The strike",
+      "will / testament"
+    ],
+    "answer": "will / testament",
+    "sourceItem": "o testamento",
+    "cat": "General"
+  },
+  {
+    "id": "q_5054",
+    "type": "multipleChoice",
+    "question": "How do you say 'will / testament' in Portuguese?",
+    "options": [
+      "sair na segunda saída",
+      "Eles querem falar com eles",
+      "o testamento",
+      "Vai dar uma volta"
+    ],
+    "answer": "o testamento",
+    "sourceItem": "o testamento",
+    "cat": "General"
+  },
+  {
+    "id": "q_5055",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os herdeiros'?",
+    "options": [
+      "Monkeys jump between the trees.",
+      "My (f)",
+      "heirs / inheritors",
+      "shops"
+    ],
+    "answer": "heirs / inheritors",
+    "sourceItem": "os herdeiros",
+    "cat": "General"
+  },
+  {
+    "id": "q_5056",
+    "type": "multipleChoice",
+    "question": "How do you say 'heirs / inheritors' in Portuguese?",
+    "options": [
+      "Depois de amanhã é feriado.",
+      "Chegadas",
+      "Velho",
+      "os herdeiros"
+    ],
+    "answer": "os herdeiros",
+    "sourceItem": "os herdeiros",
+    "cat": "General"
+  },
+  {
+    "id": "q_5057",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a herança'?",
+    "options": [
+      "without",
+      "I like to play on words",
+      "The sidewalk",
+      "inheritance"
+    ],
+    "answer": "inheritance",
+    "sourceItem": "a herança",
+    "cat": "General"
+  },
+  {
+    "id": "q_5058",
+    "type": "multipleChoice",
+    "question": "How do you say 'inheritance' in Portuguese?",
+    "options": [
+      "consegues",
+      "é",
+      "Não vale a pena",
+      "a herança"
+    ],
+    "answer": "a herança",
+    "sourceItem": "a herança",
+    "cat": "General"
+  },
+  {
+    "id": "q_5059",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'cá'?",
+    "options": [
+      "The union",
+      "Can I try it on?",
+      "We know",
+      "here"
+    ],
+    "answer": "here",
+    "sourceItem": "cá",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5060",
+    "type": "multipleChoice",
+    "question": "How do you say 'here' in Portuguese?",
+    "options": [
+      "Onde posso alugar um carro?",
+      "cá",
+      "O Duarte conta-lhes uma história",
+      "As noites de verão são agradáveis."
+    ],
+    "answer": "cá",
+    "sourceItem": "cá",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5061",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'esta, essa, aquela'?",
+    "options": [
+      "Can I?",
+      "Certainly",
+      "this, that, that over there (feminine)",
+      "The tunnel"
+    ],
+    "answer": "this, that, that over there (feminine)",
+    "sourceItem": "esta, essa, aquela",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5062",
+    "type": "multipleChoice",
+    "question": "How do you say 'this, that, that over there (feminine)' in Portuguese?",
+    "options": [
+      "depois",
+      "Deixa-te de coisas",
+      "esta, essa, aquela",
+      "O mundo"
+    ],
+    "answer": "esta, essa, aquela",
+    "sourceItem": "esta, essa, aquela",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5063",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ essa, aquela' (this, that, that over there (feminine))",
+    "options": [
+      "português",
+      "taça",
+      "esta",
+      "sempre"
+    ],
+    "answer": "esta",
+    "sourceItem": "esta, essa, aquela",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5064",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'este, esse, aquele'?",
+    "options": [
+      "this, that, that over there (masculine)",
+      "grilled",
+      "I need to practice more",
+      "therefore / that is why"
+    ],
+    "answer": "this, that, that over there (masculine)",
+    "sourceItem": "este, esse, aquele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5065",
+    "type": "multipleChoice",
+    "question": "How do you say 'this, that, that over there (masculine)' in Portuguese?",
+    "options": [
+      "este, esse, aquele",
+      "Lavo a loiça",
+      "A passadeira",
+      "A conta, por favor"
+    ],
+    "answer": "este, esse, aquele",
+    "sourceItem": "este, esse, aquele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5066",
+    "type": "cloze",
+    "question": "Fill in the blank: 'este, esse, ______' (this, that, that over there (masculine))",
+    "options": [
+      "sinal",
+      "aquele",
+      "rosto",
+      "ninguém"
+    ],
+    "answer": "aquele",
+    "sourceItem": "este, esse, aquele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5067",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O Pedro estuda português há seis meses'?",
+    "options": [
+      "I return to work",
+      "We like to go out at night, but we rarely go to the disco.",
+      "but",
+      "Pedro has been studying Portuguese for six months"
+    ],
+    "answer": "Pedro has been studying Portuguese for six months",
+    "sourceItem": "O Pedro estuda português há seis meses",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5068",
+    "type": "multipleChoice",
+    "question": "How do you say 'Pedro has been studying Portuguese for six months' in Portuguese?",
+    "options": [
+      "cave",
+      "Sou estudante",
+      "Está nublado",
+      "O Pedro estuda português há seis meses"
+    ],
+    "answer": "O Pedro estuda português há seis meses",
+    "sourceItem": "O Pedro estuda português há seis meses",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5069",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O Pedro estuda português há seis ______' (Pedro has been studying Portuguese for six months)",
+    "options": [
+      "tarde",
+      "onde",
+      "cozinha",
+      "meses"
+    ],
+    "answer": "meses",
+    "sourceItem": "O Pedro estuda português há seis meses",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5070",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eles vivem em Lisboa desde 2018'?",
+    "options": [
+      "Carrot",
+      "They have lived in Lisbon since 2018",
+      "The bridge",
+      "Monkeys jump between the trees."
+    ],
+    "answer": "They have lived in Lisbon since 2018",
+    "sourceItem": "Eles vivem em Lisboa desde 2018",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5071",
+    "type": "multipleChoice",
+    "question": "How do you say 'They have lived in Lisbon since 2018' in Portuguese?",
+    "options": [
+      "O vizinho",
+      "Eles vivem em Lisboa desde 2018",
+      "vivo na Malveira",
+      "a sobrinha"
+    ],
+    "answer": "Eles vivem em Lisboa desde 2018",
+    "sourceItem": "Eles vivem em Lisboa desde 2018",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5072",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eles vivem em ______ desde 2018' (They have lived in Lisbon since 2018)",
+    "options": [
+      "ajudar-te",
+      "carro",
+      "Lisboa",
+      "pessoa"
+    ],
+    "answer": "Lisboa",
+    "sourceItem": "Eles vivem em Lisboa desde 2018",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5073",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Não vejo o meu irmão há muito tempo'?",
+    "options": [
+      "With a sea view",
+      "I am Ramesh",
+      "I haven't seen my brother for a long time",
+      "In the morning I go to the supermarket"
+    ],
+    "answer": "I haven't seen my brother for a long time",
+    "sourceItem": "Não vejo o meu irmão há muito tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5074",
+    "type": "multipleChoice",
+    "question": "How do you say 'I haven't seen my brother for a long time' in Portuguese?",
+    "options": [
+      "consoantes",
+      "almoçamos",
+      "O livro",
+      "Não vejo o meu irmão há muito tempo"
+    ],
+    "answer": "Não vejo o meu irmão há muito tempo",
+    "sourceItem": "Não vejo o meu irmão há muito tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5075",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Não ______ o meu irmão há muito tempo' (I haven't seen my brother for a long time)",
+    "options": [
+      "aulas",
+      "tantos",
+      "horas",
+      "vejo"
+    ],
+    "answer": "vejo",
+    "sourceItem": "Não vejo o meu irmão há muito tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5076",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ela trabalha como médica desde que terminou o curso'?",
+    "options": [
+      "She has worked as a doctor since she finished university",
+      "To wait/hope",
+      "Who sings?",
+      "João bought as many apples as oranges"
+    ],
+    "answer": "She has worked as a doctor since she finished university",
+    "sourceItem": "Ela trabalha como médica desde que terminou o curso",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5077",
+    "type": "multipleChoice",
+    "question": "How do you say 'She has worked as a doctor since she finished university' in Portuguese?",
+    "options": [
+      "Ela trabalha como médica desde que terminou o curso",
+      "A língua portuguesa é difícil",
+      "Bom Ano Novo",
+      "agora"
+    ],
+    "answer": "Ela trabalha como médica desde que terminou o curso",
+    "sourceItem": "Ela trabalha como médica desde que terminou o curso",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5078",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ela trabalha como médica ______ que terminou o curso' (She has worked as a doctor since she finished university)",
+    "options": [
+      "vestir",
+      "engraçado",
+      "tusso",
+      "desde"
+    ],
+    "answer": "desde",
+    "sourceItem": "Ela trabalha como médica desde que terminou o curso",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5079",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Estou à espera do autocarro há vinte minutos'?",
+    "options": [
+      "Exactly",
+      "I have been waiting for the bus for twenty minutes",
+      "At that time (in that era)",
+      "The grandfather"
+    ],
+    "answer": "I have been waiting for the bus for twenty minutes",
+    "sourceItem": "Estou à espera do autocarro há vinte minutos",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5080",
+    "type": "multipleChoice",
+    "question": "How do you say 'I have been waiting for the bus for twenty minutes' in Portuguese?",
+    "options": [
+      "Está à espera do seu amigo?",
+      "Eu preciso de ajuda",
+      "Estou à espera do autocarro há vinte minutos",
+      "Eu gosto ler"
+    ],
+    "answer": "Estou à espera do autocarro há vinte minutos",
+    "sourceItem": "Estou à espera do autocarro há vinte minutos",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5081",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Estou à espera do ______ há vinte minutos' (I have been waiting for the bus for twenty minutes)",
+    "options": [
+      "autocarro",
+      "outubro",
+      "mais",
+      "saltam"
+    ],
+    "answer": "autocarro",
+    "sourceItem": "Estou à espera do autocarro há vinte minutos",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5082",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nós somos amigos desde a infância'?",
+    "options": [
+      "We have been friends since childhood",
+      "The bus",
+      "Porto is as beautiful as Lisbon",
+      "The Morning Mail"
+    ],
+    "answer": "We have been friends since childhood",
+    "sourceItem": "Nós somos amigos desde a infância",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5083",
+    "type": "multipleChoice",
+    "question": "How do you say 'We have been friends since childhood' in Portuguese?",
+    "options": [
+      "Nós somos amigos desde a infância",
+      "Bagagem",
+      "Tudo se resolve",
+      "Preto"
+    ],
+    "answer": "Nós somos amigos desde a infância",
+    "sourceItem": "Nós somos amigos desde a infância",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5084",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Nós somos amigos desde a ______' (We have been friends since childhood)",
+    "options": [
+      "torrada",
+      "gostamos",
+      "formador",
+      "infância"
+    ],
+    "answer": "infância",
+    "sourceItem": "Nós somos amigos desde a infância",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5085",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Há quanto tempo estás em Portugal?'?",
+    "options": [
+      "Actor",
+      "He forgets everything",
+      "How long have you been in Portugal?",
+      "recording"
+    ],
+    "answer": "How long have you been in Portugal?",
+    "sourceItem": "Há quanto tempo estás em Portugal?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5086",
+    "type": "multipleChoice",
+    "question": "How do you say 'How long have you been in Portugal?' in Portuguese?",
+    "options": [
+      "Há quanto tempo estás em Portugal?",
+      "Deito-me às onze",
+      "águas furtadas",
+      "Eu gosto de jogar ténis com ela"
+    ],
+    "answer": "Há quanto tempo estás em Portugal?",
+    "sourceItem": "Há quanto tempo estás em Portugal?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5087",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Há quanto ______ estás em Portugal?' (How long have you been in Portugal?)",
+    "options": [
+      "parar",
+      "tempo",
+      "Quando",
+      "casa"
+    ],
+    "answer": "tempo",
+    "sourceItem": "Há quanto tempo estás em Portugal?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5088",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Desde quando é que conheces o Pedro?'?",
+    "options": [
+      "informal)",
+      "Reservation",
+      "Since when have you known Pedro?",
+      "This is seat is reserved for you/These seats are reserved for you"
+    ],
+    "answer": "Since when have you known Pedro?",
+    "sourceItem": "Desde quando é que conheces o Pedro?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5089",
+    "type": "multipleChoice",
+    "question": "How do you say 'Since when have you known Pedro?' in Portuguese?",
+    "options": [
+      "namorado",
+      "Eu vou lá em pessoa entregar o contrato assinado",
+      "Desde quando é que conheces o Pedro?",
+      "O Público"
+    ],
+    "answer": "Desde quando é que conheces o Pedro?",
+    "sourceItem": "Desde quando é que conheces o Pedro?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5090",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Desde quando é que conheces o ______' (Since when have you known Pedro?)",
+    "options": [
+      "Pedro",
+      "carta",
+      "cansado",
+      "preferido"
+    ],
+    "answer": "Pedro",
+    "sourceItem": "Desde quando é que conheces o Pedro?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5091",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Cheguei ao Porto há duas semanas'?",
+    "options": [
+      "the best way (feminine)",
+      "I arrived in Porto two weeks ago",
+      "Get well soon",
+      "old"
+    ],
+    "answer": "I arrived in Porto two weeks ago",
+    "sourceItem": "Cheguei ao Porto há duas semanas",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5092",
+    "type": "multipleChoice",
+    "question": "How do you say 'I arrived in Porto two weeks ago' in Portuguese?",
+    "options": [
+      "Em que mês estamos?",
+      "Há quanto tempo…?",
+      "esplanada",
+      "Cheguei ao Porto há duas semanas"
+    ],
+    "answer": "Cheguei ao Porto há duas semanas",
+    "sourceItem": "Cheguei ao Porto há duas semanas",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5093",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Cheguei ao ______ há duas semanas' (I arrived in Porto two weeks ago)",
+    "options": [
+      "parede",
+      "Este",
+      "Essa",
+      "Porto"
+    ],
+    "answer": "Porto",
+    "sourceItem": "Cheguei ao Porto há duas semanas",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5094",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ele não fuma desde o ano passado'?",
+    "options": [
+      "Bread with butter",
+      "sunset",
+      "PhD",
+      "He hasn't smoked since last year"
+    ],
+    "answer": "He hasn't smoked since last year",
+    "sourceItem": "Ele não fuma desde o ano passado",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5095",
+    "type": "multipleChoice",
+    "question": "How do you say 'He hasn't smoked since last year' in Portuguese?",
+    "options": [
+      "ir direção norte",
+      "Ele não fuma desde o ano passado",
+      "São 19h15",
+      "Tenho dor de cabeça"
+    ],
+    "answer": "Ele não fuma desde o ano passado",
+    "sourceItem": "Ele não fuma desde o ano passado",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5096",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ele não fuma desde o ano ______' (He hasn't smoked since last year)",
+    "options": [
+      "para",
+      "passado",
+      "convosco",
+      "fazem"
+    ],
+    "answer": "passado",
+    "sourceItem": "Ele não fuma desde o ano passado",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5097",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O Porto é tão bonito como Lisboa'?",
+    "options": [
+      "Can you lend me your pen?",
+      "to wish",
+      "room temperature water",
+      "Porto is as beautiful as Lisbon"
+    ],
+    "answer": "Porto is as beautiful as Lisbon",
+    "sourceItem": "O Porto é tão bonito como Lisboa",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5098",
+    "type": "multipleChoice",
+    "question": "How do you say 'Porto is as beautiful as Lisbon' in Portuguese?",
+    "options": [
+      "Ouve música portuguesa",
+      "Surpreendido",
+      "O Porto é tão bonito como Lisboa",
+      "Eu começo a trabalhar"
+    ],
+    "answer": "O Porto é tão bonito como Lisboa",
+    "sourceItem": "O Porto é tão bonito como Lisboa",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5099",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O ______ é tão bonito como Lisboa' (Porto is as beautiful as Lisbon)",
+    "options": [
+      "farto",
+      "falta",
+      "Porto",
+      "Gosto"
+    ],
+    "answer": "Porto",
+    "sourceItem": "O Porto é tão bonito como Lisboa",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5100",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Este exercício não é tão difícil como aquele'?",
+    "options": [
+      "Pass times/hobbies",
+      "their future",
+      "Ask Ana for the newspaper",
+      "This exercise is not as difficult as that one"
+    ],
+    "answer": "This exercise is not as difficult as that one",
+    "sourceItem": "Este exercício não é tão difícil como aquele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5101",
+    "type": "multipleChoice",
+    "question": "How do you say 'This exercise is not as difficult as that one' in Portuguese?",
+    "options": [
+      "Saúde!",
+      "Este exercício não é tão difícil como aquele",
+      "Jantar",
+      "Advogado"
+    ],
+    "answer": "Este exercício não é tão difícil como aquele",
+    "sourceItem": "Este exercício não é tão difícil como aquele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5102",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Este exercício não é tão ______ como aquele' (This exercise is not as difficult as that one)",
+    "options": [
+      "difícil",
+      "forte",
+      "vídeo",
+      "valor"
+    ],
+    "answer": "difícil",
+    "sourceItem": "Este exercício não é tão difícil como aquele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5103",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ela fala português tão bem como um nativo'?",
+    "options": [
+      "Next week (coming)  \\- For the week that comes",
+      "She speaks Portuguese as well as a native",
+      "Deodorant",
+      "Departures"
+    ],
+    "answer": "She speaks Portuguese as well as a native",
+    "sourceItem": "Ela fala português tão bem como um nativo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5104",
+    "type": "multipleChoice",
+    "question": "How do you say 'She speaks Portuguese as well as a native' in Portuguese?",
+    "options": [
+      "Ganhar",
+      "em+a=na",
+      "Ela fala português tão bem como um nativo",
+      "não,nunca,ninguém"
+    ],
+    "answer": "Ela fala português tão bem como um nativo",
+    "sourceItem": "Ela fala português tão bem como um nativo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5105",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ela fala português tão bem como um ______' (She speaks Portuguese as well as a native)",
+    "options": [
+      "devagar",
+      "tempo",
+      "Baixos",
+      "nativo"
+    ],
+    "answer": "nativo",
+    "sourceItem": "Ela fala português tão bem como um nativo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5106",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O meu chá está tão quente como o teu'?",
+    "options": [
+      "January",
+      "high",
+      "My tea is as hot as yours",
+      "How do you say this in Portuguese?"
+    ],
+    "answer": "My tea is as hot as yours",
+    "sourceItem": "O meu chá está tão quente como o teu",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5107",
+    "type": "multipleChoice",
+    "question": "How do you say 'My tea is as hot as yours' in Portuguese?",
+    "options": [
+      "massa",
+      "É meio-dia",
+      "O meu chá está tão quente como o teu",
+      "Vamos de férias no próximo verão."
+    ],
+    "answer": "O meu chá está tão quente como o teu",
+    "sourceItem": "O meu chá está tão quente como o teu",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5108",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O meu chá está tão quente ______ o teu' (My tea is as hot as yours)",
+    "options": [
+      "comida",
+      "como",
+      "Tenho",
+      "debaixo"
+    ],
+    "answer": "como",
+    "sourceItem": "O meu chá está tão quente como o teu",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5109",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A praia de Cascais é tão calma como a praia de Sesimbra'?",
+    "options": [
+      "The student (pupil)",
+      "I have a reservation",
+      "Cascais beach is as calm as Sesimbra beach",
+      "Last night"
+    ],
+    "answer": "Cascais beach is as calm as Sesimbra beach",
+    "sourceItem": "A praia de Cascais é tão calma como a praia de Sesimbra",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5110",
+    "type": "multipleChoice",
+    "question": "How do you say 'Cascais beach is as calm as Sesimbra beach' in Portuguese?",
+    "options": [
+      "à segunda-feira=às segundas-feiras",
+      "Tomar vitaminas",
+      "A praia de Cascais é tão calma como a praia de Sesimbra",
+      "conseguem tomar."
+    ],
+    "answer": "A praia de Cascais é tão calma como a praia de Sesimbra",
+    "sourceItem": "A praia de Cascais é tão calma como a praia de Sesimbra",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5111",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A praia de Cascais é tão calma ______ a praia de Sesimbra' (Cascais beach is as calm as Sesimbra beach)",
+    "options": [
+      "parque",
+      "Artigos",
+      "como",
+      "forma"
+    ],
+    "answer": "como",
+    "sourceItem": "A praia de Cascais é tão calma como a praia de Sesimbra",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5112",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Este casaco é tão confortável como elegante'?",
+    "options": [
+      "to decide",
+      "ATV",
+      "This coat is as comfortable as it is elegant",
+      "Casa da Música (Porto concert hall)"
+    ],
+    "answer": "This coat is as comfortable as it is elegant",
+    "sourceItem": "Este casaco é tão confortável como elegante",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5113",
+    "type": "multipleChoice",
+    "question": "How do you say 'This coat is as comfortable as it is elegant' in Portuguese?",
+    "options": [
+      "leventar-se",
+      "É simples",
+      "Este casaco é tão confortável como elegante",
+      "está sol"
+    ],
+    "answer": "Este casaco é tão confortável como elegante",
+    "sourceItem": "Este casaco é tão confortável como elegante",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5114",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Este casaco é tão ______ como elegante' (This coat is as comfortable as it is elegant)",
+    "options": [
+      "nove",
+      "treinador",
+      "confortável",
+      "momento"
+    ],
+    "answer": "confortável",
+    "sourceItem": "Este casaco é tão confortável como elegante",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5115",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eles não são tão pontuais como nós'?",
+    "options": [
+      "Later",
+      "The chimney",
+      "The roundabout",
+      "They are not as punctual as us"
+    ],
+    "answer": "They are not as punctual as us",
+    "sourceItem": "Eles não são tão pontuais como nós",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5116",
+    "type": "multipleChoice",
+    "question": "How do you say 'They are not as punctual as us' in Portuguese?",
+    "options": [
+      "esplanada",
+      "o rato roeu a rolha da garrafa do rei da rússia",
+      "Tens medo de baratas?",
+      "Eles não são tão pontuais como nós"
+    ],
+    "answer": "Eles não são tão pontuais como nós",
+    "sourceItem": "Eles não são tão pontuais como nós",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5117",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eles não são tão ______ como nós' (They are not as punctual as us)",
+    "options": [
+      "ser,estar,ficar",
+      "Longe",
+      "podemos",
+      "pontuais"
+    ],
+    "answer": "pontuais",
+    "sourceItem": "Eles não são tão pontuais como nós",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5118",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Andar a pé é tão saudável como correr'?",
+    "options": [
+      "Walking is as healthy as running",
+      "Summer is my favorite season.",
+      "The street",
+      "laundromat"
+    ],
+    "answer": "Walking is as healthy as running",
+    "sourceItem": "Andar a pé é tão saudável como correr",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5119",
+    "type": "multipleChoice",
+    "question": "How do you say 'Walking is as healthy as running' in Portuguese?",
+    "options": [
+      "Andar a pé é tão saudável como correr",
+      "Ler",
+      "Quando viajam pela Península Ibérica, os turistas americanos acham que Portugal é tão bonito como Espanha",
+      "ainda"
+    ],
+    "answer": "Andar a pé é tão saudável como correr",
+    "sourceItem": "Andar a pé é tão saudável como correr",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5120",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Andar a pé é tão saudável ______ correr' (Walking is as healthy as running)",
+    "options": [
+      "nova",
+      "cavalo",
+      "como",
+      "Treinar"
+    ],
+    "answer": "como",
+    "sourceItem": "Andar a pé é tão saudável como correr",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5121",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu não tenho tanto dinheiro como ele'?",
+    "options": [
+      "Call me before you leave.",
+      "I don't have as much money as him",
+      "Entrance is free",
+      "not anymore"
+    ],
+    "answer": "I don't have as much money as him",
+    "sourceItem": "Eu não tenho tanto dinheiro como ele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5122",
+    "type": "multipleChoice",
+    "question": "How do you say 'I don't have as much money as him' in Portuguese?",
+    "options": [
+      "Eu não tenho tanto dinheiro como ele",
+      "Nao podes",
+      "Nós queremos",
+      "Tenho aulas todos os dias"
+    ],
+    "answer": "Eu não tenho tanto dinheiro como ele",
+    "sourceItem": "Eu não tenho tanto dinheiro como ele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5123",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu não tenho tanto dinheiro ______ ele' (I don't have as much money as him)",
+    "options": [
+      "como",
+      "agradável",
+      "tenho",
+      "Eles"
+    ],
+    "answer": "como",
+    "sourceItem": "Eu não tenho tanto dinheiro como ele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5124",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nós temos tanta paciência como vocês'?",
+    "options": [
+      "It is true",
+      "I do",
+      "We have as much patience as you",
+      "I have an allergy"
+    ],
+    "answer": "We have as much patience as you",
+    "sourceItem": "Nós temos tanta paciência como vocês",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5125",
+    "type": "multipleChoice",
+    "question": "How do you say 'We have as much patience as you' in Portuguese?",
+    "options": [
+      "Queres ir beber um café?",
+      "Abraços",
+      "Nós temos tanta paciência como vocês",
+      "queque"
+    ],
+    "answer": "Nós temos tanta paciência como vocês",
+    "sourceItem": "Nós temos tanta paciência como vocês",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5126",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Nós temos ______ paciência como vocês' (We have as much patience as you)",
+    "options": [
+      "barco",
+      "interior",
+      "farmácia",
+      "tanta"
+    ],
+    "answer": "tanta",
+    "sourceItem": "Nós temos tanta paciência como vocês",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5127",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O João comprou tantas maçãs como laranjas'?",
+    "options": [
+      "It is necessary",
+      "boat",
+      "João bought as many apples as oranges",
+      "stop (formal imperative)"
+    ],
+    "answer": "João bought as many apples as oranges",
+    "sourceItem": "O João comprou tantas maçãs como laranjas",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5128",
+    "type": "multipleChoice",
+    "question": "How do you say 'João bought as many apples as oranges' in Portuguese?",
+    "options": [
+      "Enfermeiro",
+      "as cadeiras",
+      "O João comprou tantas maçãs como laranjas",
+      "O Brazil"
+    ],
+    "answer": "O João comprou tantas maçãs como laranjas",
+    "sourceItem": "O João comprou tantas maçãs como laranjas",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5129",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O ______ comprou tantas maçãs como laranjas' (João bought as many apples as oranges)",
+    "options": [
+      "logo",
+      "estar",
+      "para",
+      "João"
+    ],
+    "answer": "João",
+    "sourceItem": "O João comprou tantas maçãs como laranjas",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5130",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Tu tens tantas dúvidas como eu?'?",
+    "options": [
+      "Do you have as many questions as I do?",
+      "Eating vegetables is as good for your health as eating fruit",
+      "to finish",
+      "with her"
+    ],
+    "answer": "Do you have as many questions as I do?",
+    "sourceItem": "Tu tens tantas dúvidas como eu?",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5131",
+    "type": "multipleChoice",
+    "question": "How do you say 'Do you have as many questions as I do?' in Portuguese?",
+    "options": [
+      "Nós queremos jantar com vocês",
+      "Moro em Lisboa",
+      "Tu tens tantas dúvidas como eu?",
+      "Eu não tenho tanto dinheiro como ele"
+    ],
+    "answer": "Tu tens tantas dúvidas como eu?",
+    "sourceItem": "Tu tens tantas dúvidas como eu?",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5132",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Tu tens tantas dúvidas ______ eu?' (Do you have as many questions as I do?)",
+    "options": [
+      "Sinto-me",
+      "cerrado",
+      "como",
+      "sede"
+    ],
+    "answer": "como",
+    "sourceItem": "Tu tens tantas dúvidas como eu?",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5133",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Este restaurante não tem tantos clientes como aquele'?",
+    "options": [
+      "Academic qualifications",
+      "This restaurant does not have as many customers as that one",
+      "At night I read",
+      "South"
+    ],
+    "answer": "This restaurant does not have as many customers as that one",
+    "sourceItem": "Este restaurante não tem tantos clientes como aquele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5134",
+    "type": "multipleChoice",
+    "question": "How do you say 'This restaurant does not have as many customers as that one' in Portuguese?",
+    "options": [
+      "Volto ao trabalho",
+      "Este restaurante não tem tantos clientes como aquele",
+      "Sinto-me mal",
+      "O bónus"
+    ],
+    "answer": "Este restaurante não tem tantos clientes como aquele",
+    "sourceItem": "Este restaurante não tem tantos clientes como aquele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5135",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Este restaurante não tem tantos clientes como ______' (This restaurant does not have as many customers as that one)",
+    "options": [
+      "aquele",
+      "100..cento",
+      "Lavo",
+      "lençol"
+    ],
+    "answer": "aquele",
+    "sourceItem": "Este restaurante não tem tantos clientes como aquele",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5136",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Hoje não há tanta gente na rua como ontem'?",
+    "options": [
+      "Doctor \\- masculine",
+      "Today there aren't as many people in the street as yesterday",
+      "short period (masculine)",
+      "I need a tow truck"
+    ],
+    "answer": "Today there aren't as many people in the street as yesterday",
+    "sourceItem": "Hoje não há tanta gente na rua como ontem",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5137",
+    "type": "multipleChoice",
+    "question": "How do you say 'Today there aren't as many people in the street as yesterday' in Portuguese?",
+    "options": [
+      "Hoje não há tanta gente na rua como ontem",
+      "e+a=da",
+      "Eles chegaram depois da festa acabar.",
+      "Ele casou-se com a Rita há três anos"
+    ],
+    "answer": "Hoje não há tanta gente na rua como ontem",
+    "sourceItem": "Hoje não há tanta gente na rua como ontem",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5138",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Hoje não há tanta gente na rua ______ ontem' (Today there aren't as many people in the street as yesterday)",
+    "options": [
+      "entrega",
+      "como",
+      "eles",
+      "montanha"
+    ],
+    "answer": "como",
+    "sourceItem": "Hoje não há tanta gente na rua como ontem",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5139",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ela tem tantas amigas na universidade como na escola'?",
+    "options": [
+      "boyfriend",
+      "six, seven",
+      "Front",
+      "She has as many friends at university as at school"
+    ],
+    "answer": "She has as many friends at university as at school",
+    "sourceItem": "Ela tem tantas amigas na universidade como na escola",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5140",
+    "type": "multipleChoice",
+    "question": "How do you say 'She has as many friends at university as at school' in Portuguese?",
+    "options": [
+      "Eu moro aqui há dois anos",
+      "Ela tem tantas amigas na universidade como na escola",
+      "Quem canta?",
+      "com atenção"
+    ],
+    "answer": "Ela tem tantas amigas na universidade como na escola",
+    "sourceItem": "Ela tem tantas amigas na universidade como na escola",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5141",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ela tem tantas amigas na universidade ______ na escola' (She has as many friends at university as at school)",
+    "options": [
+      "estação",
+      "Onde",
+      "ouvem",
+      "como"
+    ],
+    "answer": "como",
+    "sourceItem": "Ela tem tantas amigas na universidade como na escola",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5142",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eles vão casar-se na próxima primavera'?",
+    "options": [
+      "Better late than never",
+      "to get married",
+      "I leave the house at eight",
+      "They are going to get married next spring"
+    ],
+    "answer": "They are going to get married next spring",
+    "sourceItem": "Eles vão casar-se na próxima primavera",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5143",
+    "type": "multipleChoice",
+    "question": "How do you say 'They are going to get married next spring' in Portuguese?",
+    "options": [
+      "Eles vão casar-se na próxima primavera",
+      "Dás-lhe o dinheiro",
+      "Por isso",
+      "Estou a aprender muito"
+    ],
+    "answer": "Eles vão casar-se na próxima primavera",
+    "sourceItem": "Eles vão casar-se na próxima primavera",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5144",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eles vão casar-se na ______ primavera' (They are going to get married next spring)",
+    "options": [
+      "decisivo",
+      "próxima",
+      "presente",
+      "assunto"
+    ],
+    "answer": "próxima",
+    "sourceItem": "Eles vão casar-se na próxima primavera",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5145",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O casamento deles foi uma festa fantástica'?",
+    "options": [
+      "Pedro has been studying Portuguese for six months",
+      "I have not gone to the beach since september",
+      "Their wedding was a fantastic celebration",
+      "I agree"
+    ],
+    "answer": "Their wedding was a fantastic celebration",
+    "sourceItem": "O casamento deles foi uma festa fantástica",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5146",
+    "type": "multipleChoice",
+    "question": "How do you say 'Their wedding was a fantastic celebration' in Portuguese?",
+    "options": [
+      "Não fumar",
+      "Os quadros estão na parede",
+      "O casamento deles foi uma festa fantástica",
+      "É meia-noite"
+    ],
+    "answer": "O casamento deles foi uma festa fantástica",
+    "sourceItem": "O casamento deles foi uma festa fantástica",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5147",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O casamento ______ foi uma festa fantástica' (Their wedding was a fantastic celebration)",
+    "options": [
+      "tenho",
+      "mulher",
+      "insuficiente",
+      "deles"
+    ],
+    "answer": "deles",
+    "sourceItem": "O casamento deles foi uma festa fantástica",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5148",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ele casou-se com a Rita há três anos'?",
+    "options": [
+      "apron",
+      "He married Rita three years ago",
+      "The kitchen",
+      "Kizomba classes are as fun as samba classes"
+    ],
+    "answer": "He married Rita three years ago",
+    "sourceItem": "Ele casou-se com a Rita há três anos",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5149",
+    "type": "multipleChoice",
+    "question": "How do you say 'He married Rita three years ago' in Portuguese?",
+    "options": [
+      "Empregado de mesa",
+      "cheia",
+      "A internet não funciona",
+      "Ele casou-se com a Rita há três anos"
+    ],
+    "answer": "Ele casou-se com a Rita há três anos",
+    "sourceItem": "Ele casou-se com a Rita há três anos",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5150",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ele casou-se com a Rita há três ______' (He married Rita three years ago)",
+    "options": [
+      "relatório",
+      "metro",
+      "manhã",
+      "anos"
+    ],
+    "answer": "anos",
+    "sourceItem": "Ele casou-se com a Rita há três anos",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5151",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Depois de conversar muito, o casal decidiu o divórcio'?",
+    "options": [
+      "To eat",
+      "I did (past of fazer)",
+      "Young",
+      "After talking a lot, the couple decided on divorce"
+    ],
+    "answer": "After talking a lot, the couple decided on divorce",
+    "sourceItem": "Depois de conversar muito, o casal decidiu o divórcio",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5152",
+    "type": "multipleChoice",
+    "question": "How do you say 'After talking a lot, the couple decided on divorce' in Portuguese?",
+    "options": [
+      "Eu só vou à praia quando está bom tempo",
+      "Lamento",
+      "Depois de conversar muito, o casal decidiu o divórcio",
+      "Vire à direita"
+    ],
+    "answer": "Depois de conversar muito, o casal decidiu o divórcio",
+    "sourceItem": "Depois de conversar muito, o casal decidiu o divórcio",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5153",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Depois de conversar muito, o ______ decidiu o divórcio' (After talking a lot, the couple decided on divorce)",
+    "options": [
+      "casal",
+      "Quais…",
+      "Este",
+      "norte"
+    ],
+    "answer": "casal",
+    "sourceItem": "Depois de conversar muito, o casal decidiu o divórcio",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5154",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O divórcio foi resolvido de forma amigável'?",
+    "options": [
+      "The divorce was settled amicably",
+      "It is cloudy",
+      "Thief!",
+      "1230"
+    ],
+    "answer": "The divorce was settled amicably",
+    "sourceItem": "O divórcio foi resolvido de forma amigável",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5155",
+    "type": "multipleChoice",
+    "question": "How do you say 'The divorce was settled amicably' in Portuguese?",
+    "options": [
+      "As aulas de kizomba são tão divertidas como as aulas de samba",
+      "A areia",
+      "O divórcio foi resolvido de forma amigável",
+      "cem mil"
+    ],
+    "answer": "O divórcio foi resolvido de forma amigável",
+    "sourceItem": "O divórcio foi resolvido de forma amigável",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5156",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O divórcio foi resolvido de ______ amigável' (The divorce was settled amicably)",
+    "options": [
+      "forma",
+      "sala",
+      "descubro",
+      "Está"
+    ],
+    "answer": "forma",
+    "sourceItem": "O divórcio foi resolvido de forma amigável",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5157",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O avô deixou um testamento detalhado'?",
+    "options": [
+      "stop (formal imperative)",
+      "I wash myself",
+      "The grandfather left a detailed will",
+      "We are happy"
+    ],
+    "answer": "The grandfather left a detailed will",
+    "sourceItem": "O avô deixou um testamento detalhado",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5158",
+    "type": "multipleChoice",
+    "question": "How do you say 'The grandfather left a detailed will' in Portuguese?",
+    "options": [
+      "O avô deixou um testamento detalhado",
+      "A vassoura",
+      "A gramática é complexa",
+      "demência"
+    ],
+    "answer": "O avô deixou um testamento detalhado",
+    "sourceItem": "O avô deixou um testamento detalhado",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5159",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O avô deixou um testamento ______' (The grandfather left a detailed will)",
+    "options": [
+      "estação",
+      "Aquele",
+      "detalhado",
+      "gosto"
+    ],
+    "answer": "detalhado",
+    "sourceItem": "O avô deixou um testamento detalhado",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5160",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Os herdeiros já assinaram todos os documentos'?",
+    "options": [
+      "The heirs have already signed all the documents",
+      "the afternoon or da tarde, but after a time it is de tarde",
+      "in June",
+      "The gym"
+    ],
+    "answer": "The heirs have already signed all the documents",
+    "sourceItem": "Os herdeiros já assinaram todos os documentos",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5161",
+    "type": "multipleChoice",
+    "question": "How do you say 'The heirs have already signed all the documents' in Portuguese?",
+    "options": [
+      "Cancelado",
+      "A Maria quer casar com ele",
+      "Os herdeiros já assinaram todos os documentos",
+      "posso fazer"
+    ],
+    "answer": "Os herdeiros já assinaram todos os documentos",
+    "sourceItem": "Os herdeiros já assinaram todos os documentos",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5162",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Os herdeiros já ______ todos os documentos' (The heirs have already signed all the documents)",
+    "options": [
+      "assinaram",
+      "lava",
+      "Longe",
+      "tomas"
+    ],
+    "answer": "assinaram",
+    "sourceItem": "Os herdeiros já assinaram todos os documentos",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5163",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ela recebeu uma herança inesperada'?",
+    "options": [
+      "She received an unexpected inheritance",
+      "with his friends",
+      "bath",
+      "Where are my house slippers?"
+    ],
+    "answer": "She received an unexpected inheritance",
+    "sourceItem": "Ela recebeu uma herança inesperada",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5164",
+    "type": "multipleChoice",
+    "question": "How do you say 'She received an unexpected inheritance' in Portuguese?",
+    "options": [
+      "A segurança social",
+      "Ela recebeu uma herança inesperada",
+      "Correr",
+      "O perfume"
+    ],
+    "answer": "Ela recebeu uma herança inesperada",
+    "sourceItem": "Ela recebeu uma herança inesperada",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5165",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ela recebeu uma herança ______' (She received an unexpected inheritance)",
+    "options": [
+      "Casa",
+      "ganhámos",
+      "inesperada",
+      "noite"
+    ],
+    "answer": "inesperada",
+    "sourceItem": "Ela recebeu uma herança inesperada",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5166",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A herança inclui uma casa antiga no Alentejo'?",
+    "options": [
+      "That (f)",
+      "to hope that",
+      "He has",
+      "The inheritance includes an old house in Alentejo"
+    ],
+    "answer": "The inheritance includes an old house in Alentejo",
+    "sourceItem": "A herança inclui uma casa antiga no Alentejo",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5167",
+    "type": "multipleChoice",
+    "question": "How do you say 'The inheritance includes an old house in Alentejo' in Portuguese?",
+    "options": [
+      "Respeitosamente",
+      "Às vezes",
+      "A herança inclui uma casa antiga no Alentejo",
+      "érre"
+    ],
+    "answer": "A herança inclui uma casa antiga no Alentejo",
+    "sourceItem": "A herança inclui uma casa antiga no Alentejo",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5168",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A herança inclui uma ______ antiga no Alentejo' (The inheritance includes an old house in Alentejo)",
+    "options": [
+      "centro",
+      "casa",
+      "mesa",
+      "bilhete"
+    ],
+    "answer": "casa",
+    "sourceItem": "A herança inclui uma casa antiga no Alentejo",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5169",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Vem cá, preciso de falar contigo'?",
+    "options": [
+      "Come here, I need to talk to you",
+      "See you next time",
+      "In autumn, I take the children to school",
+      "Ugly"
+    ],
+    "answer": "Come here, I need to talk to you",
+    "sourceItem": "Vem cá, preciso de falar contigo",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5170",
+    "type": "multipleChoice",
+    "question": "How do you say 'Come here, I need to talk to you' in Portuguese?",
+    "options": [
+      "É canja",
+      "Vimos vários macacos no jardim zoológico.",
+      "eles sabem tocar guitarra",
+      "Vem cá, preciso de falar contigo"
+    ],
+    "answer": "Vem cá, preciso de falar contigo",
+    "sourceItem": "Vem cá, preciso de falar contigo",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5171",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Vem cá, ______ de falar contigo' (Come here, I need to talk to you)",
+    "options": [
+      "anos",
+      "quinhentos",
+      "preciso",
+      "adepto"
+    ],
+    "answer": "preciso",
+    "sourceItem": "Vem cá, preciso de falar contigo",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5172",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O que estás a fazer aí? Vem cá para dentro'?",
+    "options": [
+      "It is raining",
+      "My throat hurts",
+      "Not possible",
+      "What are you doing there? Come in here"
+    ],
+    "answer": "What are you doing there? Come in here",
+    "sourceItem": "O que estás a fazer aí? Vem cá para dentro",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5173",
+    "type": "multipleChoice",
+    "question": "How do you say 'What are you doing there? Come in here' in Portuguese?",
+    "options": [
+      "O que estás a fazer aí? Vem cá para dentro",
+      "Caro colega",
+      "á",
+      "O professor explica-nos a lição com paciência."
+    ],
+    "answer": "O que estás a fazer aí? Vem cá para dentro",
+    "sourceItem": "O que estás a fazer aí? Vem cá para dentro",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5174",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O que estás a fazer aí? Vem cá ______ dentro' (What are you doing there? Come in here)",
+    "options": [
+      "estes",
+      "para",
+      "cruzamento",
+      "banco"
+    ],
+    "answer": "para",
+    "sourceItem": "O que estás a fazer aí? Vem cá para dentro",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5175",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ela está lá em cima a trabalhar no quarto'?",
+    "options": [
+      "Tired",
+      "She is up there working in the bedroom",
+      "I passed the test",
+      "Respect the speed limit"
+    ],
+    "answer": "She is up there working in the bedroom",
+    "sourceItem": "Ela está lá em cima a trabalhar no quarto",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5176",
+    "type": "multipleChoice",
+    "question": "How do you say 'She is up there working in the bedroom' in Portuguese?",
+    "options": [
+      "Boa noite",
+      "O laboratório",
+      "Está livre?",
+      "Ela está lá em cima a trabalhar no quarto"
+    ],
+    "answer": "Ela está lá em cima a trabalhar no quarto",
+    "sourceItem": "Ela está lá em cima a trabalhar no quarto",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5177",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ela está lá em cima a trabalhar no ______' (She is up there working in the bedroom)",
+    "options": [
+      "prefiro",
+      "quarto",
+      "sente",
+      "antes"
+    ],
+    "answer": "quarto",
+    "sourceItem": "Ela está lá em cima a trabalhar no quarto",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5178",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Vou lá amanhã de manhã resolver o assunto'?",
+    "options": [
+      "The promotion",
+      "We can",
+      "I will go there tomorrow morning to resolve the matter",
+      "You have"
+    ],
+    "answer": "I will go there tomorrow morning to resolve the matter",
+    "sourceItem": "Vou lá amanhã de manhã resolver o assunto",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5179",
+    "type": "multipleChoice",
+    "question": "How do you say 'I will go there tomorrow morning to resolve the matter' in Portuguese?",
+    "options": [
+      "O passeio",
+      "as cadeiras",
+      "És o meu melhor amigo",
+      "Vou lá amanhã de manhã resolver o assunto"
+    ],
+    "answer": "Vou lá amanhã de manhã resolver o assunto",
+    "sourceItem": "Vou lá amanhã de manhã resolver o assunto",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5180",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Vou lá amanhã de ______ resolver o assunto' (I will go there tomorrow morning to resolve the matter)",
+    "options": [
+      "recebeu",
+      "Gosto",
+      "manhã",
+      "consegue"
+    ],
+    "answer": "manhã",
+    "sourceItem": "Vou lá amanhã de manhã resolver o assunto",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5181",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Este café aqui é meu e essa água aí é tua'?",
+    "options": [
+      "to lunch",
+      "Let's dance",
+      "This coffee here is mine and that water there is yours",
+      "I know"
+    ],
+    "answer": "This coffee here is mine and that water there is yours",
+    "sourceItem": "Este café aqui é meu e essa água aí é tua",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5182",
+    "type": "multipleChoice",
+    "question": "How do you say 'This coffee here is mine and that water there is yours' in Portuguese?",
+    "options": [
+      "veem",
+      "Este café aqui é meu e essa água aí é tua",
+      "Não é?",
+      "Esquerda"
+    ],
+    "answer": "Este café aqui é meu e essa água aí é tua",
+    "sourceItem": "Este café aqui é meu e essa água aí é tua",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5183",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Este café aqui é meu e essa ______ aí é tua' (This coffee here is mine and that water there is yours)",
+    "options": [
+      "água",
+      "outros",
+      "mundo",
+      "infelizmente"
+    ],
+    "answer": "água",
+    "sourceItem": "Este café aqui é meu e essa água aí é tua",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5184",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Aquele edifício ao fundo é a Casa da Música'?",
+    "options": [
+      "The invoice",
+      "To be \\- permanent I am \\- permanent You are \\- informal He",
+      "The ticket",
+      "That building in the background is Casa da Música"
+    ],
+    "answer": "That building in the background is Casa da Música",
+    "sourceItem": "Aquele edifício ao fundo é a Casa da Música",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5185",
+    "type": "multipleChoice",
+    "question": "How do you say 'That building in the background is Casa da Música' in Portuguese?",
+    "options": [
+      "Perigo",
+      "Aquele edifício ao fundo é a Casa da Música",
+      "É meia-noite",
+      "Eles vivem em Lisboa desde 2018"
+    ],
+    "answer": "Aquele edifício ao fundo é a Casa da Música",
+    "sourceItem": "Aquele edifício ao fundo é a Casa da Música",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5186",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Aquele edifício ao fundo é a Casa da ______' (That building in the background is Casa da Música)",
+    "options": [
+      "lindo",
+      "Fora",
+      "Música",
+      "laranjas"
+    ],
+    "answer": "Música",
+    "sourceItem": "Aquele edifício ao fundo é a Casa da Música",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5187",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Esta cidade tem tanta história como Lisboa'?",
+    "options": [
+      "The top of the mountain is covered with snow.",
+      "This city has as much history as Lisbon",
+      "pronouns I, you, he/she/, us, they",
+      "arrivals"
+    ],
+    "answer": "This city has as much history as Lisbon",
+    "sourceItem": "Esta cidade tem tanta história como Lisboa",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5188",
+    "type": "multipleChoice",
+    "question": "How do you say 'This city has as much history as Lisbon' in Portuguese?",
+    "options": [
+      "Esta cidade tem tanta história como Lisboa",
+      "O Pedro é de Viseu",
+      "Já estiveste no Brasil?",
+      "conseguem tomar."
+    ],
+    "answer": "Esta cidade tem tanta história como Lisboa",
+    "sourceItem": "Esta cidade tem tanta história como Lisboa",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5189",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Esta cidade tem tanta história ______ Lisboa' (This city has as much history as Lisbon)",
+    "options": [
+      "como",
+      "autocarro",
+      "fatia",
+      "ando"
+    ],
+    "answer": "como",
+    "sourceItem": "Esta cidade tem tanta história como Lisboa",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5190",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Amanhã temos uma reunião presencial às dez horas'?",
+    "options": [
+      "What is the best way to get to the center?",
+      "Second",
+      "put",
+      "Tomorrow we have an in-person meeting at ten o'clock"
+    ],
+    "answer": "Tomorrow we have an in-person meeting at ten o'clock",
+    "sourceItem": "Amanhã temos uma reunião presencial às dez horas",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5191",
+    "type": "multipleChoice",
+    "question": "How do you say 'Tomorrow we have an in-person meeting at ten o'clock' in Portuguese?",
+    "options": [
+      "Amanhã temos uma reunião presencial às dez horas",
+      "logo à noite",
+      "Não há duas sem três",
+      "disponivel"
+    ],
+    "answer": "Amanhã temos uma reunião presencial às dez horas",
+    "sourceItem": "Amanhã temos uma reunião presencial às dez horas",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5192",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Amanhã temos uma reunião ______ às dez horas' (Tomorrow we have an in-person meeting at ten o'clock)",
+    "options": [
+      "Isso",
+      "presencial",
+      "forte",
+      "felizes"
+    ],
+    "answer": "presencial",
+    "sourceItem": "Amanhã temos uma reunião presencial às dez horas",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5193",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A reunião de projeto vai ser online através do computador'?",
+    "options": [
+      "He can",
+      "size",
+      "You can go to the cinema without me",
+      "The project meeting is going to be online via computer"
+    ],
+    "answer": "The project meeting is going to be online via computer",
+    "sourceItem": "A reunião de projeto vai ser online através do computador",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5194",
+    "type": "multipleChoice",
+    "question": "How do you say 'The project meeting is going to be online via computer' in Portuguese?",
+    "options": [
+      "Qual é o teu nome?",
+      "mirtilos",
+      "A reunião de projeto vai ser online através do computador",
+      "bom fim de semana\\!"
+    ],
+    "answer": "A reunião de projeto vai ser online através do computador",
+    "sourceItem": "A reunião de projeto vai ser online através do computador",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5195",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A ______ de projeto vai ser online através do computador' (The project meeting is going to be online via computer)",
+    "options": [
+      "reunião",
+      "receção",
+      "acaba",
+      "sonhar"
+    ],
+    "answer": "reunião",
+    "sourceItem": "A reunião de projeto vai ser online através do computador",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5196",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Prefiro aulas presenciais para praticar conversação'?",
+    "options": [
+      "Up",
+      "I prefer in-person classes to practice conversation",
+      "to turn on the computer",
+      "good recommendations"
+    ],
+    "answer": "I prefer in-person classes to practice conversation",
+    "sourceItem": "Prefiro aulas presenciais para praticar conversação",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5197",
+    "type": "multipleChoice",
+    "question": "How do you say 'I prefer in-person classes to practice conversation' in Portuguese?",
+    "options": [
+      "Onde fica a paragem de elétrico?",
+      "Prefiro aulas presenciais para praticar conversação",
+      "Fica-me bem",
+      "A diretora está na escola"
+    ],
+    "answer": "Prefiro aulas presenciais para praticar conversação",
+    "sourceItem": "Prefiro aulas presenciais para praticar conversação",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5198",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ aulas presenciais para praticar conversação' (I prefer in-person classes to practice conversation)",
+    "options": [
+      "Prefiro",
+      "como",
+      "tuas",
+      "fome"
+    ],
+    "answer": "Prefiro",
+    "sourceItem": "Prefiro aulas presenciais para praticar conversação",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5199",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Os cursos online têm tantas vantagens como os cursos presenciais'?",
+    "options": [
+      "You have",
+      "A car (masculine)",
+      "Online courses have as many advantages as in-person courses",
+      "to bring"
+    ],
+    "answer": "Online courses have as many advantages as in-person courses",
+    "sourceItem": "Os cursos online têm tantas vantagens como os cursos presenciais",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5200",
+    "type": "multipleChoice",
+    "question": "How do you say 'Online courses have as many advantages as in-person courses' in Portuguese?",
+    "options": [
+      "Os cursos online têm tantas vantagens como os cursos presenciais",
+      "As baratas saem à noite.",
+      "esperar que",
+      "sentar-se"
+    ],
+    "answer": "Os cursos online têm tantas vantagens como os cursos presenciais",
+    "sourceItem": "Os cursos online têm tantas vantagens como os cursos presenciais",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5201",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Os cursos online têm tantas vantagens como os cursos ______' (Online courses have as many advantages as in-person courses)",
+    "options": [
+      "presenciais",
+      "velha",
+      "paciência",
+      "Olhar"
+    ],
+    "answer": "presenciais",
+    "sourceItem": "Os cursos online têm tantas vantagens como os cursos presenciais",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5202",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu vou lá em pessoa entregar o contrato assinado'?",
+    "options": [
+      "I will go there in person to deliver the signed contract",
+      "The CV",
+      "With",
+      "the menu please"
+    ],
+    "answer": "I will go there in person to deliver the signed contract",
+    "sourceItem": "Eu vou lá em pessoa entregar o contrato assinado",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5203",
+    "type": "multipleChoice",
+    "question": "How do you say 'I will go there in person to deliver the signed contract' in Portuguese?",
+    "options": [
+      "Está frio hoje",
+      "bicicleta",
+      "atender um cliente",
+      "Eu vou lá em pessoa entregar o contrato assinado"
+    ],
+    "answer": "Eu vou lá em pessoa entregar o contrato assinado",
+    "sourceItem": "Eu vou lá em pessoa entregar o contrato assinado",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5204",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu vou lá em ______ entregar o contrato assinado' (I will go there in person to deliver the signed contract)",
+    "options": [
+      "somos",
+      "porque",
+      "tempo",
+      "pessoa"
+    ],
+    "answer": "pessoa",
+    "sourceItem": "Eu vou lá em pessoa entregar o contrato assinado",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5205",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O atendimento presencial no banco requer agendamento'?",
+    "options": [
+      "Do you have a larger size?",
+      "(cappuccino) half of the milk",
+      "In-person service at the bank requires an appointment",
+      "Thank you very much"
+    ],
+    "answer": "In-person service at the bank requires an appointment",
+    "sourceItem": "O atendimento presencial no banco requer agendamento",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5206",
+    "type": "multipleChoice",
+    "question": "How do you say 'In-person service at the bank requires an appointment' in Portuguese?",
+    "options": [
+      "Onde é que o avião aterra?",
+      "Aquilo é muito bonito",
+      "O semáforo",
+      "O atendimento presencial no banco requer agendamento"
+    ],
+    "answer": "O atendimento presencial no banco requer agendamento",
+    "sourceItem": "O atendimento presencial no banco requer agendamento",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5207",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O atendimento presencial no ______ requer agendamento' (In-person service at the bank requires an appointment)",
+    "options": [
+      "cerrado",
+      "banco",
+      "hoje",
+      "todos"
+    ],
+    "answer": "banco",
+    "sourceItem": "O atendimento presencial no banco requer agendamento",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5208",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Vais participar na reunião presencial ou online?'?",
+    "options": [
+      "I can",
+      "Are you going to participate in the meeting in person or online?",
+      "Higher education degree",
+      "Where is the bathroom?"
+    ],
+    "answer": "Are you going to participate in the meeting in person or online?",
+    "sourceItem": "Vais participar na reunião presencial ou online?",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5209",
+    "type": "multipleChoice",
+    "question": "How do you say 'Are you going to participate in the meeting in person or online?' in Portuguese?",
+    "options": [
+      "Castanho",
+      "almoinhas",
+      "Vais participar na reunião presencial ou online?",
+      "Ansioso"
+    ],
+    "answer": "Vais participar na reunião presencial ou online?",
+    "sourceItem": "Vais participar na reunião presencial ou online?",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5210",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ participar na reunião presencial ou online?' (Are you going to participate in the meeting in person or online?)",
+    "options": [
+      "terminou",
+      "pior",
+      "você",
+      "Vais"
+    ],
+    "answer": "Vais",
+    "sourceItem": "Vais participar na reunião presencial ou online?",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5211",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'No meu tempo livre gosto de ler e ouvir música'?",
+    "options": [
+      "In my free time I like to read and listen to music",
+      "Turn right",
+      "stay (referring to a place)",
+      "undress"
+    ],
+    "answer": "In my free time I like to read and listen to music",
+    "sourceItem": "No meu tempo livre gosto de ler e ouvir música",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5212",
+    "type": "multipleChoice",
+    "question": "How do you say 'In my free time I like to read and listen to music' in Portuguese?",
+    "options": [
+      "Perigo",
+      "Habitualmente",
+      "É mentira",
+      "No meu tempo livre gosto de ler e ouvir música"
+    ],
+    "answer": "No meu tempo livre gosto de ler e ouvir música",
+    "sourceItem": "No meu tempo livre gosto de ler e ouvir música",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5213",
+    "type": "cloze",
+    "question": "Fill in the blank: 'No meu tempo livre gosto de ler e ouvir ______' (In my free time I like to read and listen to music)",
+    "options": [
+      "Está",
+      "idade",
+      "música",
+      "lava-loiça"
+    ],
+    "answer": "música",
+    "sourceItem": "No meu tempo livre gosto de ler e ouvir música",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5214",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O que costumas fazer no teu tempo livre?'?",
+    "options": [
+      "The curtain",
+      "for (time duration) / ago",
+      "The bedroom",
+      "What do you usually do in your free time?"
+    ],
+    "answer": "What do you usually do in your free time?",
+    "sourceItem": "O que costumas fazer no teu tempo livre?",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5215",
+    "type": "multipleChoice",
+    "question": "How do you say 'What do you usually do in your free time?' in Portuguese?",
+    "options": [
+      "O que costumas fazer no teu tempo livre?",
+      "E consigo?",
+      "connosco",
+      "Eu acabo o trabalho às 18h"
+    ],
+    "answer": "O que costumas fazer no teu tempo livre?",
+    "sourceItem": "O que costumas fazer no teu tempo livre?",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5216",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O que costumas fazer no teu tempo ______' (What do you usually do in your free time?)",
+    "options": [
+      "Faço",
+      "grande",
+      "livre",
+      "tudo"
+    ],
+    "answer": "livre",
+    "sourceItem": "O que costumas fazer no teu tempo livre?",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5217",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ao final de tarde a esplanada fica cheia de amigos'?",
+    "options": [
+      "In the late afternoon the terrace gets full of friends",
+      "The Olympic athlete trains swimming every day",
+      "Nurse",
+      "The classroom"
+    ],
+    "answer": "In the late afternoon the terrace gets full of friends",
+    "sourceItem": "Ao final de tarde a esplanada fica cheia de amigos",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5218",
+    "type": "multipleChoice",
+    "question": "How do you say 'In the late afternoon the terrace gets full of friends' in Portuguese?",
+    "options": [
+      "ando",
+      "Ao final de tarde a esplanada fica cheia de amigos",
+      "das minhas viagens",
+      "Refeições"
+    ],
+    "answer": "Ao final de tarde a esplanada fica cheia de amigos",
+    "sourceItem": "Ao final de tarde a esplanada fica cheia de amigos",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5219",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ao final de tarde a esplanada fica ______ de amigos' (In the late afternoon the terrace gets full of friends)",
+    "options": [
+      "livre",
+      "para",
+      "duche",
+      "cheia"
+    ],
+    "answer": "cheia",
+    "sourceItem": "Ao final de tarde a esplanada fica cheia de amigos",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5220",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Gosto de passear pela cidade ao final de tarde'?",
+    "options": [
+      "I'm going to buy new flip flops for the summer.",
+      "I like to stroll through the city in the late afternoon",
+      "The tax",
+      "I want"
+    ],
+    "answer": "I like to stroll through the city in the late afternoon",
+    "sourceItem": "Gosto de passear pela cidade ao final de tarde",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5221",
+    "type": "multipleChoice",
+    "question": "How do you say 'I like to stroll through the city in the late afternoon' in Portuguese?",
+    "options": [
+      "Preto",
+      "Envio muitos emails",
+      "A pasta de dentes",
+      "Gosto de passear pela cidade ao final de tarde"
+    ],
+    "answer": "Gosto de passear pela cidade ao final de tarde",
+    "sourceItem": "Gosto de passear pela cidade ao final de tarde",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5222",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ de passear pela cidade ao final de tarde' (I like to stroll through the city in the late afternoon)",
+    "options": [
+      "Manhã",
+      "Maria",
+      "Gosto",
+      "Ajuda"
+    ],
+    "answer": "Gosto",
+    "sourceItem": "Gosto de passear pela cidade ao final de tarde",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5223",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Já fizeste uma visita guiada à Casa da Música?'?",
+    "options": [
+      "good recommendations",
+      "Fire!",
+      "Have you ever taken a guided tour of Casa da Música?",
+      "That is a book"
+    ],
+    "answer": "Have you ever taken a guided tour of Casa da Música?",
+    "sourceItem": "Já fizeste uma visita guiada à Casa da Música?",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5224",
+    "type": "multipleChoice",
+    "question": "How do you say 'Have you ever taken a guided tour of Casa da Música?' in Portuguese?",
+    "options": [
+      "Já fizeste uma visita guiada à Casa da Música?",
+      "Podes tirar uma foto?",
+      "porque corre todos os dias",
+      "Direita"
+    ],
+    "answer": "Já fizeste uma visita guiada à Casa da Música?",
+    "sourceItem": "Já fizeste uma visita guiada à Casa da Música?",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5225",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Já fizeste uma visita ______ à Casa da Música?' (Have you ever taken a guided tour of Casa da Música?)",
+    "options": [
+      "como",
+      "eléctrico",
+      "tarde",
+      "guiada"
+    ],
+    "answer": "guiada",
+    "sourceItem": "Já fizeste uma visita guiada à Casa da Música?",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5226",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A atleta olímpica treina natação todos os dias'?",
+    "options": [
+      "roasted",
+      "The plane lands in a bit",
+      "The Olympic athlete trains swimming every day",
+      "Degrees"
+    ],
+    "answer": "The Olympic athlete trains swimming every day",
+    "sourceItem": "A atleta olímpica treina natação todos os dias",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5227",
+    "type": "multipleChoice",
+    "question": "How do you say 'The Olympic athlete trains swimming every day' in Portuguese?",
+    "options": [
+      "A atleta olímpica treina natação todos os dias",
+      "Vender",
+      "galo",
+      "Dás-lhe o dinheiro"
+    ],
+    "answer": "A atleta olímpica treina natação todos os dias",
+    "sourceItem": "A atleta olímpica treina natação todos os dias",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5228",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A atleta olímpica treina natação todos os ______' (The Olympic athlete trains swimming every day)",
+    "options": [
+      "seca",
+      "dias",
+      "viagem",
+      "forma"
+    ],
+    "answer": "dias",
+    "sourceItem": "A atleta olímpica treina natação todos os dias",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5229",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Praticar andebol é tão dinâmico como praticar futebol'?",
+    "options": [
+      "Playing handball is as dynamic as playing football",
+      "I used to wake up early",
+      "He is a thug/chav",
+      "close to you (here), far from you (there), far from both of us (over there)"
+    ],
+    "answer": "Playing handball is as dynamic as playing football",
+    "sourceItem": "Praticar andebol é tão dinâmico como praticar futebol",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5230",
+    "type": "multipleChoice",
+    "question": "How do you say 'Playing handball is as dynamic as playing football' in Portuguese?",
+    "options": [
+      "Dia",
+      "chegadas",
+      "Vejo televisão um pouco",
+      "Praticar andebol é tão dinâmico como praticar futebol"
+    ],
+    "answer": "Praticar andebol é tão dinâmico como praticar futebol",
+    "sourceItem": "Praticar andebol é tão dinâmico como praticar futebol",
+    "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5231",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Praticar andebol é tão dinâmico ______ praticar futebol' (Playing handball is as dynamic as playing football)",
+    "options": [
+      "como",
+      "Isto",
+      "Tenho",
+      "roupas"
+    ],
+    "answer": "como",
+    "sourceItem": "Praticar andebol é tão dinâmico como praticar futebol",
+    "cat": "Hobbies & Leisure"
   }
 ]

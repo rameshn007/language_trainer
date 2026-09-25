@@ -633,5 +633,40 @@
     "verb": "ligar",
     "portuguese": "Eu ligo o computador às nove da manhã.",
     "english": "I turn on the computer at nine in the morning."
+  },
+  {
+    "verb": "casar",
+    "portuguese": "Eles casam-se no próximo mês na igreja.",
+    "english": "They are getting married next month in church."
+  },
+  {
+    "verb": "casar",
+    "portuguese": "O meu irmão casa no próximo sábado.",
+    "english": "My brother gets married next Saturday."
+  },
+  {
+    "verb": "praticar",
+    "portuguese": "Ela pratica natação há mais de dez anos.",
+    "english": "She has been practicing swimming for more than ten years."
+  },
+  {
+    "verb": "praticar",
+    "portuguese": "Nós praticamos desporto ao final de tarde.",
+    "english": "We practice sports in the late afternoon."
+  },
+  {
+    "verb": "herdar",
+    "portuguese": "Ele herda a quinta dos avós.",
+    "english": "He inherits the grandparents' farm."
+  },
+  {
+    "verb": "herdar",
+    "portuguese": "Eles herdaram uma coleção de livros antigos.",
+    "english": "They inherited a collection of antique books."
+  },
+  {
+    "verb": "andar",
+    "portuguese": "Andar de metro é tão rápido como andar de táxi.",
+    "english": "Taking the metro is as fast as taking a taxi."
   }
 ]
