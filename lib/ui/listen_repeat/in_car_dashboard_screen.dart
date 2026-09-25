@@ -61,7 +61,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(listenRepeatViewModelProvider);
     final storage = ref.watch(storageServiceProvider);
-    final modeCounts = ref.watch(listenRepeatModeCountsProvider).valueOrNull ?? {};
+    final modeCounts = ref.watch(listenRepeatModeCountsProvider).value ?? {};
     final item = state.currentItem;
     final isFlagged = item != null && storage.isItemFlagged(item.id);
     final notifier = ref.read(listenRepeatViewModelProvider.notifier);
