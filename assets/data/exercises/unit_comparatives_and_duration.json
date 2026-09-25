@@ -305,7 +305,7 @@
   },
   {
     "id": "comp_dur_q17",
-    "questionText": "Qual é a palavra correta para a dissolução legal do casamento?",
+    "questionText": "What is the correct term for the legal dissolution of a marriage?",
     "options": [
       "o divórcio",
       "o testamento",
@@ -441,7 +441,7 @@
     "questionText": "Ao ____ de tarde, a esplanada fica cheia de pessoas a relaxar.",
     "options": [
       "final",
-      "fim",
+      "meio",
       "tempo",
       "começo"
     ],

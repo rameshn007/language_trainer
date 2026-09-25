@@ -230,6 +230,18 @@
 | eu vou em pessoa | I go in person |
 | vou ter uma reunião online | I am going to have an online meeting |
 | vou ter uma reunião presencial | I am going to have an in-person meeting |
+| Eu moro aqui há dois anos | I have lived here for two years |
+| Estou à espera há uma hora | I have been waiting for an hour |
+| Trabalho aqui desde janeiro | I have worked here since January |
+| Ela vive no Porto desde 2010 | She has lived in Porto since 2010 |
+| Eles vão casar-se no próximo ano | They are going to get married next year |
+| O avô deixou uma grande herança | The grandfather left a big inheritance |
+| Vem cá, por favor | Come here, please |
+| Ela está lá em cima | She is up there |
+| Este carro é tão rápido como o outro | This car is as fast as the other |
+| Eu tenho tanta fome como tu | I am as hungry as you |
+| Não faças tanto barulho | Don't make so much noise |
+| As reuniões presenciais são melhores | Face-to-face meetings are better |
 | O Pedro estuda português há seis meses | Pedro has been studying Portuguese for six months |
 | Eles vivem em Lisboa desde 2018 | They have lived in Lisbon since 2018 |
 | Não vejo o meu irmão há muito tempo | I haven't seen my brother for a long time |
@@ -255,7 +267,6 @@
 | Este restaurante não tem tantos clientes como aquele | This restaurant does not have as many customers as that one |
 | Hoje não há tanta gente na rua como ontem | Today there aren't as many people in the street as yesterday |
 | Ela tem tantas amigas na universidade como na escola | She has as many friends at university as at school |
-| Não faças tanto barulho, por favor | Don't make so much noise, please |
 | Eles vão casar-se na próxima primavera | They are going to get married next spring |
 | O casamento deles foi uma festa fantástica | Their wedding was a fantastic celebration |
 | Ele casou-se com a Rita há três anos | He married Rita three years ago |

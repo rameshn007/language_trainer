@@ -1,8 +1,24 @@
+"""
+ingest_ano_words.py
+
+One-shot ingestion and normalization generator for assets/ano_words_phrases.md.
+Normalizes European Portuguese spellings, corrects translations, expands grammatical
+variations (comparatives of equality, há vs desde duration, deixis, life events, work modality),
+creates the dedicated unit_comparatives_and_duration.json exercise unit, and updates
+associated auxiliary pools (phrases.json, verb_phrases.json, verbs.csv).
+
+All file paths are resolved relative to the repository root via Path(__file__).resolve().parent.parent
+so this script can be invoked safely from any working directory.
+"""
+
 import json
 import os
 import re
+from pathlib import Path
 
-# 1. Base items from assets/ano_words_phrases.md (corrected and cleaned)
+REPO_ROOT = Path(__file__).resolve().parent.parent
+
+# 1. Base items from assets/ano_words_phrases.md (corrected and standardized)
 CLEANED_BASE_ITEMS = [
     ("há", "for (time duration) / ago", "Grammar & Time"),
     ("desde", "since / from (starting point)", "Grammar & Time"),
@@ -38,8 +54,22 @@ CLEANED_BASE_ITEMS = [
     ("vou ter uma reunião presencial", "I am going to have an in-person meeting", "Office & Work"),
 ]
 
-# 2. Rich Variations
+# 2. Rich Variations (including the 12 pre-existing generated items from main)
 VARIATIONS = [
+    # Pre-existing items from main to preserve full test & quiz coverage
+    ("Eu moro aqui há dois anos", "I have lived here for two years", "Variations - Há vs Desde"),
+    ("Estou à espera há uma hora", "I have been waiting for an hour", "Variations - Há vs Desde"),
+    ("Trabalho aqui desde janeiro", "I have worked here since January", "Variations - Há vs Desde"),
+    ("Ela vive no Porto desde 2010", "She has lived in Porto since 2010", "Variations - Há vs Desde"),
+    ("Eles vão casar-se no próximo ano", "They are going to get married next year", "Variations - Life Events"),
+    ("O avô deixou uma grande herança", "The grandfather left a big inheritance", "Variations - Life Events"),
+    ("Vem cá, por favor", "Come here, please", "Variations - Location & Demonstratives"),
+    ("Ela está lá em cima", "She is up there", "Variations - Location & Demonstratives"),
+    ("Este carro é tão rápido como o outro", "This car is as fast as the other", "Variations - Comparatives"),
+    ("Eu tenho tanta fome como tu", "I am as hungry as you", "Variations - Comparatives of Quantity"),
+    ("Não faças tanto barulho", "Don't make so much noise", "Variations - Comparatives of Quantity"),
+    ("As reuniões presenciais são melhores", "Face-to-face meetings are better", "Variations - Work & Meetings"),
+
     # Duration vs Starting Point (há vs desde vs desde que)
     ("O Pedro estuda português há seis meses", "Pedro has been studying Portuguese for six months", "Variations - Há vs Desde"),
     ("Eles vivem em Lisboa desde 2018", "They have lived in Lisbon since 2018", "Variations - Há vs Desde"),
@@ -70,7 +100,6 @@ VARIATIONS = [
     ("Este restaurante não tem tantos clientes como aquele", "This restaurant does not have as many customers as that one", "Variations - Comparatives of Quantity"),
     ("Hoje não há tanta gente na rua como ontem", "Today there aren't as many people in the street as yesterday", "Variations - Comparatives of Quantity"),
     ("Ela tem tantas amigas na universidade como na escola", "She has as many friends at university as at school", "Variations - Comparatives of Quantity"),
-    ("Não faças tanto barulho, por favor", "Don't make so much noise, please", "Variations - Comparatives of Quantity"),
 
     # Family, Marriage, Divorce, Will & Inheritance
     ("Eles vão casar-se na próxima primavera", "They are going to get married next spring", "Variations - Life Events"),
@@ -112,7 +141,7 @@ VARIATIONS = [
 ]
 
 def update_ano_markdown():
-    path = "assets/ano_words_phrases.md"
+    path = REPO_ROOT / "assets/ano_words_phrases.md"
     content = "# Vocabulary, Comparatives & Time Markers (assets/ano_words_phrases.md)\n\n"
     content += "## Core Vocabulary & Phrases (Corrected & Standardized)\n\n"
     content += "| Portugues | English |\n"
@@ -130,12 +159,10 @@ def update_ano_markdown():
     print(f"Updated {path}")
 
 def update_source_markdown():
-    path = "assets/data/source.md"
+    path = REPO_ROOT / "assets/data/source.md"
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # Find the section "# New Words and Phrases from assets/ano_words_phrases.md"
-    # and replace everything up to "# New Words & Phrases from Class 6"
     target_start = "# New Words and Phrases from assets/ano_words_phrases.md"
     target_end = "# New Words & Phrases from Class 6"
 
@@ -153,7 +180,6 @@ def update_source_markdown():
         after = target_end + content.split(target_end)[1]
         updated_content = before + new_section + after
     else:
-        # Fallback append if headings differ
         updated_content = content + "\n\n" + new_section
 
     with open(path, "w", encoding="utf-8") as f:
@@ -161,13 +187,10 @@ def update_source_markdown():
     print(f"Updated {path}")
 
 def update_combined_notes():
-    path = "assets/Combined_Portuguese_Class_Notes.md"
+    path = REPO_ROOT / "assets/Combined_Portuguese_Class_Notes.md"
     with open(path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    # In Combined_Portuguese_Class_Notes.md, find the lines between:
-    # "| se eu quero dizer | If I wanted to say |"
-    # and "# Aula de português 6"
     marker_before = "| se eu quero dizer | If I wanted to say |"
     marker_after = "# Aula de português 6"
 
@@ -193,7 +216,7 @@ def update_combined_notes():
     print(f"Updated {path}")
 
 def update_phrases_json():
-    path = "assets/data/phrases.json"
+    path = REPO_ROOT / "assets/data/phrases.json"
     with open(path, "r", encoding="utf-8") as f:
         phrases = json.load(f)
 
@@ -232,7 +255,7 @@ def update_phrases_json():
     print(f"Added {added} phrases to {path}")
 
 def update_verb_phrases_json():
-    path = "assets/data/verb_phrases.json"
+    path = REPO_ROOT / "assets/data/verb_phrases.json"
     with open(path, "r", encoding="utf-8") as f:
         verb_phrases = json.load(f)
 
@@ -288,7 +311,7 @@ def update_verb_phrases_json():
     print(f"Added {added} verb phrases to {path}")
 
 def update_verbs_csv():
-    path = "assets/data/verbs.csv"
+    path = REPO_ROOT / "assets/data/verbs.csv"
     with open(path, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
@@ -307,7 +330,7 @@ def update_verbs_csv():
         print(f"Added {len(new_verbs)} verbs to {path}")
 
 def create_exercise_unit():
-    unit_path = "assets/data/exercises/unit_comparatives_and_duration.json"
+    unit_path = REPO_ROOT / "assets/data/exercises/unit_comparatives_and_duration.json"
     questions = [
         {
             "id": "comp_dur_q01",
@@ -535,7 +558,7 @@ def create_exercise_unit():
         },
         {
             "id": "comp_dur_q17",
-            "questionText": "Qual é a palavra correta para a dissolução legal do casamento?",
+            "questionText": "What is the correct term for the legal dissolution of a marriage?",
             "options": ["o divórcio", "o testamento", "a herança", "o noivado"],
             "correctAnswer": "o divórcio",
             "type": "multipleChoice",
@@ -634,7 +657,7 @@ def create_exercise_unit():
         {
             "id": "comp_dur_q24",
             "questionText": "Ao ____ de tarde, a esplanada fica cheia de pessoas a relaxar.",
-            "options": ["final", "fim", "tempo", "começo"],
+            "options": ["final", "meio", "tempo", "começo"],
             "correctAnswer": "final",
             "type": "cloze",
             "sourceItem": {
@@ -708,19 +731,18 @@ def create_exercise_unit():
     print(f"Created {len(questions)} exercise questions in {unit_path}")
 
 def register_unit_in_screen():
-    screen_path = "lib/ui/exercise/exercise_list_screen.dart"
+    screen_path = REPO_ROOT / "lib/ui/exercise/exercise_list_screen.dart"
     with open(screen_path, "r", encoding="utf-8") as f:
         content = f.read()
 
     new_unit_entry = """    {
-      'title': 'Comparatives, Time & Life Events',
-      'subtitle': 'Practice tão... como, tanto... como, há vs desde & vocabulary',
+      'title': 'Unit 11: Comparatives, Time & Life Events',
+      'subtitle': 'Practice tão... como, tanto... como, há vs desde, marriage & deixis',
       'path': 'assets/data/exercises/unit_comparatives_and_duration.json',
       'icon': 'school',
     },
 """
     if "unit_comparatives_and_duration.json" not in content:
-        # Insert before the closing bracket of units list
         marker = "    {\n      'title': 'Sentence Transformations & Grammar',"
         if marker in content:
             content = content.replace(marker, new_unit_entry + marker)
@@ -729,6 +751,21 @@ def register_unit_in_screen():
             print(f"Registered unit in {screen_path}")
         else:
             print("Warning: could not locate insertion point in ExerciseListScreen")
+    else:
+        # Update existing title if needed
+        content = re.sub(
+            r"'title':\s*'(?:Unit 11:\s*)?Comparatives,\s*Time\s*&\s*Life\s*Events'",
+            "'title': 'Unit 11: Comparatives, Time & Life Events'",
+            content
+        )
+        content = re.sub(
+            r"'subtitle':\s*'Practice tão\.\.\. como, tanto\.\.\. como, há vs desde(?:[^\']*)'",
+            "'subtitle': 'Practice tão... como, tanto... como, há vs desde, marriage & deixis'",
+            content
+        )
+        with open(screen_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"Verified/updated registration in {screen_path}")
 
 def main():
     print("Ingesting ano_words_phrases.md data...")

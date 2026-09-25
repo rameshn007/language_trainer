@@ -1,28 +1,27 @@
+import argparse
 import json
+import os
 import random
 import re
+from pathlib import Path
 
-SOURCE_FILE = "assets/data/source.md"
-OUTPUT_FILE = "assets/data/questions.json"
+REPO_ROOT = Path(__file__).resolve().parent
+SOURCE_FILE = REPO_ROOT / "assets/data/source.md"
+OUTPUT_FILE = REPO_ROOT / "assets/data/questions.json"
 
 def parse_markdown(file_path):
     items = []
     with open(file_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
     
-    # Simple table parser
-    # Looking for lines starting with | and containing at least 2 pipes
+    # Table parser: looks for lines starting with | and containing at least 2 pipes
     for line in lines:
         line = line.strip()
         if not line.startswith("|"):
             continue
         
         parts = [p.strip() for p in line.split("|")]
-        # parts[0] is empty (before first |)
-        # parts[1] is Portuguese
-        # parts[2] is English
-        # parts[3] is Notes (optional)
-        
+        # parts[0] is empty, parts[1] is PT, parts[2] is EN, parts[3] is Notes (optional)
         if len(parts) >= 4:
             pt = parts[1]
             en = parts[2]
@@ -35,25 +34,31 @@ def parse_markdown(file_path):
             if not pt and not en:
                 continue
 
-            # Basic cleanup of markdown bold/italics if necessary
             pt = pt.replace("**", "").replace("*", "")
             en = en.replace("**", "").replace("*", "")
 
-            # If there are notes, we stick them in 'notes' field but we mainly use pt/en
-            # EXTRACT CATEGORY: Use the Notes column as the category if it exists
-            # We map specific keywords in Notes to standard categories
             notes = parts[3].strip() if len(parts) > 3 else "General"
             
-            # Simple keyword matching to standardized categories
+            # Standardized category mapping
             category = "General"
             notes_lower = notes.lower()
             
-            if "family" in notes_lower: category = "Family"
-            elif "food" in notes_lower or "restaurant" in notes_lower or "drinks" in notes_lower: category = "Food & Drink"
-            elif "directions" in notes_lower or "city" in notes_lower or "location" in notes_lower: category = "Travel & Directions"
-            elif "verb" in notes_lower or "action" in notes_lower or "grammar" in notes_lower: category = "Grammar & Verbs"
-            elif "time" in notes_lower or "month" in notes_lower or "day" in notes_lower or "number" in notes_lower: category = "Time & Numbers"
-            elif "intro" in notes_lower or "greeting" in notes_lower: category = "Basics"
+            if "family" in notes_lower or "life events" in notes_lower:
+                category = "Family"
+            elif "food" in notes_lower or "restaurant" in notes_lower or "drinks" in notes_lower:
+                category = "Food & Drink"
+            elif "directions" in notes_lower or "city" in notes_lower or "location" in notes_lower or "travel" in notes_lower:
+                category = "Travel & Directions"
+            elif "work" in notes_lower or "office" in notes_lower or "meeting" in notes_lower:
+                category = "Office & Work"
+            elif "sport" in notes_lower or "hobby" in notes_lower or "culture" in notes_lower or "free time" in notes_lower:
+                category = "Hobbies & Leisure"
+            elif "time" in notes_lower or "month" in notes_lower or "day" in notes_lower or "number" in notes_lower or "duration" in notes_lower or "há vs desde" in notes_lower:
+                category = "Time & Numbers"
+            elif "comparative" in notes_lower or "verb" in notes_lower or "action" in notes_lower or "grammar" in notes_lower or "pronoun" in notes_lower:
+                category = "Grammar & Verbs"
+            elif "intro" in notes_lower or "greeting" in notes_lower:
+                category = "Basics"
 
             items.append({
                 "pt": pt,
@@ -65,10 +70,10 @@ def parse_markdown(file_path):
 
 def get_distractors(correct_item, all_items, key_type="en"):
     """
-    Selects 3 random distractors.
+    Selects 3 random distractors deterministically using seeded random.
     """
     options = [correct_item[key_type]]
-    max_attempts = 50
+    max_attempts = 100
     attempts = 0
     
     while len(options) < 4 and attempts < max_attempts:
@@ -80,7 +85,7 @@ def get_distractors(correct_item, all_items, key_type="en"):
         if candidate not in options and candidate.strip() != "":
             options.append(candidate)
             
-    # If we couldn't find enough unique distractors, fill with placeholders (unlikely in large set)
+    # Fallback placeholders if not enough unique distractors
     while len(options) < 4:
         options.append("---")
         
@@ -88,15 +93,49 @@ def get_distractors(correct_item, all_items, key_type="en"):
     return options
 
 def main():
+    random.seed(42)
+
+    parser = argparse.ArgumentParser(description="Generate quiz questions from source markdown.")
+    parser.add_argument("--rebuild-all", action="store_true", help="Rebuild entire questions bank from scratch")
+    args = parser.parse_args()
+
     raw_data = parse_markdown(SOURCE_FILE)
     print(f"Parsed {len(raw_data)} items from {SOURCE_FILE}")
     
-    questions = []
-    id_counter = 1
+    existing_questions = []
+    seen_source_pts = set()
+    max_id = 0
 
-    for item in raw_data:
+    if os.path.exists(OUTPUT_FILE) and not args.rebuild_all:
+        with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
+            existing_questions = json.load(f)
+        for q in existing_questions:
+            src = q.get('sourceItem', '').strip().lower()
+            if src:
+                seen_source_pts.add(src)
+            m = re.match(r'q_(\d+)', q['id'])
+            if m:
+                max_id = max(max_id, int(m.group(1)))
+        print(f"Loaded {len(existing_questions)} existing questions (max ID: q_{max_id:03})")
+
+    questions = list(existing_questions)
+    id_counter = max_id + 1
+
+    items_to_process = []
+    if args.rebuild_all or not existing_questions:
+        items_to_process = raw_data
+        questions = []
+        id_counter = 1
+    else:
+        for item in raw_data:
+            if item['pt'].strip().lower() not in seen_source_pts:
+                items_to_process.append(item)
+                seen_source_pts.add(item['pt'].strip().lower())
+
+    print(f"Generating questions for {len(items_to_process)} new items...")
+
+    for item in items_to_process:
         # 1. PT -> EN (Multiple Choice)
-        # "What is the English translation of '...'"
         q_obj = {
             "id": f"q_{id_counter:03}",
             "type": "multipleChoice",
@@ -110,7 +149,6 @@ def main():
         id_counter += 1
 
         # 2. EN -> PT (Multiple Choice)
-        # "How do you say '...' in Portuguese?"
         q_obj_rev = {
             "id": f"q_{id_counter:03}",
             "type": "multipleChoice",
@@ -124,33 +162,26 @@ def main():
         id_counter += 1
         
         # 3. CLOZE (Fill in the blank) for phrases longer than 2 words
-        # Only if it's a sentence/phrase, not single words
         pt_text = item['pt']
         words = pt_text.split()
         
-        # Filter out very short words or punctuation tokens for masking
         valid_indices = []
         for i, w in enumerate(words):
             clean_w = w.strip(".,?!();:/")
-            if len(clean_w) > 3: # Only mask words > 3 chars
+            if len(clean_w) > 3:
                 valid_indices.append(i)
                 
         if len(words) > 2 and valid_indices:
-            # Create a cloze question
             idx = random.choice(valid_indices)
             target_word_raw = words[idx]
             target_word_clean = target_word_raw.strip(".,?!();:/")
             
-            # Create sentence with blank
             words_clone = list(words)
             words_clone[idx] = "______"
             cloze_sentence = " ".join(words_clone)
             
-            # Generate distractors that are single words from other Portuguese items
-            # We want distractors that look like words, not full phrases
             distractors = [target_word_clean]
             
-            # Collect all single words from dataset to use as distractors
             all_pt_words = []
             for r in raw_data:
                 for w in r['pt'].split():
@@ -183,7 +214,7 @@ def main():
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         json.dump(questions, f, indent=2, ensure_ascii=False)
 
-    print(f"Successfully generated {len(questions)} questions in '{OUTPUT_FILE}'")
+    print(f"Successfully wrote {len(questions)} questions to '{OUTPUT_FILE}' (added {len(questions) - len(existing_questions)} new)")
 
 if __name__ == "__main__":
     main()

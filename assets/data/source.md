@@ -2009,6 +2009,18 @@
 | eu vou em pessoa | I go in person | Daily Routine |
 | vou ter uma reunião online | I am going to have an online meeting | Office & Work |
 | vou ter uma reunião presencial | I am going to have an in-person meeting | Office & Work |
+| Eu moro aqui há dois anos | I have lived here for two years | Variations - Há vs Desde |
+| Estou à espera há uma hora | I have been waiting for an hour | Variations - Há vs Desde |
+| Trabalho aqui desde janeiro | I have worked here since January | Variations - Há vs Desde |
+| Ela vive no Porto desde 2010 | She has lived in Porto since 2010 | Variations - Há vs Desde |
+| Eles vão casar-se no próximo ano | They are going to get married next year | Variations - Life Events |
+| O avô deixou uma grande herança | The grandfather left a big inheritance | Variations - Life Events |
+| Vem cá, por favor | Come here, please | Variations - Location & Demonstratives |
+| Ela está lá em cima | She is up there | Variations - Location & Demonstratives |
+| Este carro é tão rápido como o outro | This car is as fast as the other | Variations - Comparatives |
+| Eu tenho tanta fome como tu | I am as hungry as you | Variations - Comparatives of Quantity |
+| Não faças tanto barulho | Don't make so much noise | Variations - Comparatives of Quantity |
+| As reuniões presenciais são melhores | Face-to-face meetings are better | Variations - Work & Meetings |
 | O Pedro estuda português há seis meses | Pedro has been studying Portuguese for six months | Variations - Há vs Desde |
 | Eles vivem em Lisboa desde 2018 | They have lived in Lisbon since 2018 | Variations - Há vs Desde |
 | Não vejo o meu irmão há muito tempo | I haven't seen my brother for a long time | Variations - Há vs Desde |
@@ -2034,7 +2046,6 @@
 | Este restaurante não tem tantos clientes como aquele | This restaurant does not have as many customers as that one | Variations - Comparatives of Quantity |
 | Hoje não há tanta gente na rua como ontem | Today there aren't as many people in the street as yesterday | Variations - Comparatives of Quantity |
 | Ela tem tantas amigas na universidade como na escola | She has as many friends at university as at school | Variations - Comparatives of Quantity |
-| Não faças tanto barulho, por favor | Don't make so much noise, please | Variations - Comparatives of Quantity |
 | Eles vão casar-se na próxima primavera | They are going to get married next spring | Variations - Life Events |
 | O casamento deles foi uma festa fantástica | Their wedding was a fantastic celebration | Variations - Life Events |
 | Ele casou-se com a Rita há três anos | He married Rita three years ago | Variations - Life Events |
