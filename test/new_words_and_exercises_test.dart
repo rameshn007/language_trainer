@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:language_trainer/ui/exercise/exercise_list_screen.dart';
+import 'package:language_trainer/ui/quiz/category_selection_screen.dart';
 
 void main() {
   group('New Words & Exercises Validation — Invariant Checks', () {
@@ -136,6 +137,23 @@ void main() {
       expect(unitPaths.contains('assets/data/exercises/unit_conjunctions.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_sentence_transformations.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_comparatives_and_duration.json'), isTrue);
+    });
+
+    test('CategorySelectionScreen covers all categories present in questions.json', () {
+      const screen = CategorySelectionScreen();
+      expect(screen.categories, contains('Hobbies & Leisure'));
+      expect(screen.categories, contains('Office & Work'));
+
+      final file = File('assets/data/questions.json');
+      final List<dynamic> jsonList = jsonDecode(file.readAsStringSync());
+      final categoriesInBank = jsonList
+          .map((q) => (q['cat'] as String?) ?? 'General')
+          .toSet();
+
+      for (final cat in categoriesInBank) {
+        expect(screen.categories.contains(cat), isTrue,
+            reason: 'Category "$cat" from questions.json must have a corresponding route in CategorySelectionScreen');
+      }
     });
   });
 }

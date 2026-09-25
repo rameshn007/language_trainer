@@ -1,3 +1,17 @@
+"""
+generate_quiz.py
+
+Quiz question generator for assets/data/questions.json from source.md.
+By default, operates in ADDITIVE mode:
+- Preserves all pre-existing questions byte-stable to protect user seen-state (keyed by q.id in Hive).
+- Generates questions only for newly added source items using a deterministic PRNG seed (random.seed(42)).
+- Appends new questions with sequential IDs continuing from the highest existing ID.
+
+WARNING: --rebuild-all is an escape-hatch that wipes questions.json and regenerates everything from scratch.
+Because question IDs are assigned sequentially over the entire source file, a full rebuild shifts pre-existing
+IDs and invalidates the seen_questions box on installed devices. Do not run --rebuild-all casually.
+"""
+
 import argparse
 import json
 import os
@@ -96,7 +110,12 @@ def main():
     random.seed(42)
 
     parser = argparse.ArgumentParser(description="Generate quiz questions from source markdown.")
-    parser.add_argument("--rebuild-all", action="store_true", help="Rebuild entire questions bank from scratch")
+    parser.add_argument(
+        "--rebuild-all",
+        action="store_true",
+        help="WARNING: Rebuilds entire questions bank from scratch, regenerating and shuffling all question IDs. "
+             "Do NOT run casually: shifts pre-existing IDs and invalidates user seen_questions state."
+    )
     args = parser.parse_args()
 
     raw_data = parse_markdown(SOURCE_FILE)

@@ -14,6 +14,8 @@ class CategorySelectionScreen extends ConsumerWidget {
     'Travel & Directions',
     'Time & Numbers',
     'Grammar & Verbs',
+    'Hobbies & Leisure',
+    'Office & Work',
     'General',
   ];
 
@@ -120,6 +122,10 @@ class _CategoryCard extends StatelessWidget {
         return Icons.schedule;
       case 'Grammar & Verbs':
         return Icons.school;
+      case 'Hobbies & Leisure':
+        return Icons.sports_tennis;
+      case 'Office & Work':
+        return Icons.work_outline;
       case 'General':
         return Icons.grid_view;
       default:
