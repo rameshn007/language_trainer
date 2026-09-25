@@ -291,6 +291,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final progress = ref.watch(progressServiceProvider);
     final learnedCount = items.where((i) => i.masteryLevel > 0).length;
     final isDuo = IPhoneDuoHelper.isDuo(context);
+    final contentPadding = IPhoneDuoHelper.getContentHorizontalPadding(context);
+    final appBarRightPadding =
+        IPhoneDuoHelper.getAppBarActionsRightPadding(context);
+    final fabLocation = IPhoneDuoHelper.getFabLocation(context);
 
     return Scaffold(
       extendBody: true,
@@ -303,7 +307,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.only(
-              right: isDuo ? IPhoneDuoHelper.appBarActionsRightPadding : 0.0,
+              right: appBarRightPadding,
             ),
             child: PopupMenuButton<String>(
               onSelected: (value) {
@@ -419,9 +423,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(
-                      20,
+                      contentPadding.left,
                       10,
-                      isDuo ? IPhoneDuoHelper.systemIconReservedWidth : 20,
+                      contentPadding.right,
                       80,
                     ),
                     child: Column(
@@ -709,6 +713,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     shrinkPercentage: shrinkPercentage,
                     currentHeight: currentHeight,
                     isDuo: isDuo,
+                    leftMargin: contentPadding.left,
+                    rightMargin: contentPadding.right,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -724,9 +730,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ],
         ),
       ),
-      floatingActionButtonLocation: isDuo
-          ? IPhoneDuoHelper.fabLocation
-          : FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: fabLocation,
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -1011,6 +1015,8 @@ class _PinnedStatsCard extends StatelessWidget {
   final double shrinkPercentage;
   final double currentHeight;
   final bool isDuo;
+  final double leftMargin;
+  final double rightMargin;
 
   const _PinnedStatsCard({
     required this.progress,
@@ -1019,6 +1025,8 @@ class _PinnedStatsCard extends StatelessWidget {
     required this.shrinkPercentage,
     required this.currentHeight,
     this.isDuo = false,
+    this.leftMargin = 20.0,
+    this.rightMargin = 20.0,
   });
 
   @override
@@ -1034,9 +1042,9 @@ class _PinnedStatsCard extends StatelessWidget {
         onTap: onTap,
         child: Container(
           margin: EdgeInsets.fromLTRB(
-            20,
+            leftMargin,
             topPadding + 20 * (1 - clampedShrink),
-            isDuo ? IPhoneDuoHelper.systemIconReservedWidth : 20,
+            rightMargin,
             10,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),

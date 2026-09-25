@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 /// Helper utilities for detecting and adapting UI to the iPhone Duo screens
@@ -111,6 +112,61 @@ class IPhoneDuoHelper {
 
   /// FloatingActionButtonLocation that vertically aligns the FAB with the system Wi-Fi icon.
   static const FloatingActionButtonLocation fabLocation = DuoAlignedFabLocation();
+
+  /// Returns the appropriate FAB location based on whether the device is Duo or in landscape.
+  /// In landscape on standard iPhones, positions the FAB at the far right so it does not overlap content.
+  static FloatingActionButtonLocation getFabLocation(
+    BuildContext context, {
+    double landscapeRightMargin = 16.0,
+  }) {
+    if (isDuo(context)) {
+      return fabLocation;
+    }
+    final media = MediaQuery.of(context);
+    if (media.orientation == Orientation.landscape) {
+      return LandscapeRightFabLocation(
+        rightMargin: media.padding.right + landscapeRightMargin,
+      );
+    }
+    return FloatingActionButtonLocation.endFloat;
+  }
+
+  /// Returns horizontal insets (left, right) for main content to avoid Dynamic Island
+  /// obstruction and prevent overlap with right-aligned FABs in landscape or on Duo.
+  static EdgeInsets getContentHorizontalPadding(BuildContext context) {
+    if (isDuo(context)) {
+      return const EdgeInsets.only(
+        left: 20.0,
+        right: systemIconReservedWidth,
+      );
+    }
+    final mediaPadding = MediaQuery.paddingOf(context);
+    final isLandscape =
+        MediaQuery.orientationOf(context) == Orientation.landscape;
+
+    final double left =
+        math.max(20.0, mediaPadding.left + (isLandscape ? 16.0 : 0.0));
+    final double right = isLandscape
+        ? mediaPadding.right + 84.0
+        : math.max(20.0, mediaPadding.right);
+
+    return EdgeInsets.only(left: left, right: right);
+  }
+
+  /// Clearance margin for AppBar actions on the right to avoid colliding with
+  /// the system icon on Duo or Dynamic Island in landscape.
+  static double getAppBarActionsRightPadding(BuildContext context) {
+    if (isDuo(context)) {
+      return appBarActionsRightPadding;
+    }
+    final mediaPadding = MediaQuery.paddingOf(context);
+    final isLandscape =
+        MediaQuery.orientationOf(context) == Orientation.landscape;
+    if (isLandscape) {
+      return math.max(16.0, mediaPadding.right);
+    }
+    return 0.0;
+  }
 }
 
 /// Floating action button location aligned with the iPhone Duo screen's system Wi-Fi icon.
@@ -128,7 +184,35 @@ class DuoAlignedFabLocation extends FloatingActionButtonLocation {
     final double fabX = scaffoldGeometry.scaffoldSize.width -
         fabCenterFromRight -
         (scaffoldGeometry.floatingActionButtonSize.width / 2);
-    final double bottomPadding = scaffoldGeometry.minInsets.bottom;
+    final double bottomPadding = scaffoldGeometry.minViewPadding.bottom > 0
+        ? scaffoldGeometry.minViewPadding.bottom
+        : scaffoldGeometry.minInsets.bottom;
+    final double fabY = scaffoldGeometry.scaffoldSize.height -
+        scaffoldGeometry.floatingActionButtonSize.height -
+        bottomMargin -
+        bottomPadding;
+    return Offset(fabX, fabY);
+  }
+}
+
+/// Floating action button location positioned at the rightmost edge for landscape orientations.
+class LandscapeRightFabLocation extends FloatingActionButtonLocation {
+  final double rightMargin;
+  final double bottomMargin;
+
+  const LandscapeRightFabLocation({
+    this.rightMargin = 16.0,
+    this.bottomMargin = 16.0,
+  });
+
+  @override
+  Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
+    final double fabX = scaffoldGeometry.scaffoldSize.width -
+        rightMargin -
+        scaffoldGeometry.floatingActionButtonSize.width;
+    final double bottomPadding = scaffoldGeometry.minViewPadding.bottom > 0
+        ? scaffoldGeometry.minViewPadding.bottom
+        : scaffoldGeometry.minInsets.bottom;
     final double fabY = scaffoldGeometry.scaffoldSize.height -
         scaffoldGeometry.floatingActionButtonSize.height -
         bottomMargin -

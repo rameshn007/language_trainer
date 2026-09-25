@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../models/language_item.dart';
@@ -413,13 +414,20 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
   Widget build(BuildContext context) {
     final storage = ref.read(storageServiceProvider);
     final isDuo = IPhoneDuoHelper.isDuo(context);
+    final contentPadding = IPhoneDuoHelper.getContentHorizontalPadding(context);
+    final appBarRightPadding =
+        IPhoneDuoHelper.getAppBarActionsRightPadding(context);
+    final fabLocation = IPhoneDuoHelper.getFabLocation(context);
+    final isLandscape =
+        MediaQuery.orientationOf(context) == Orientation.landscape;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Vocabulary List'),
         actions: [
           Padding(
             padding: EdgeInsets.only(
-              right: isDuo ? IPhoneDuoHelper.appBarActionsRightPadding : 0.0,
+              right: appBarRightPadding,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -493,7 +501,10 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
       ),
       body: ListView.separated(
         padding: EdgeInsets.only(
-            right: isDuo ? IPhoneDuoHelper.systemIconReservedWidth : 0.0,
+          left: isDuo ? 0.0 : (isLandscape ? math.max(0.0, contentPadding.left - 20.0) : 0.0),
+          right: isDuo
+              ? IPhoneDuoHelper.systemIconReservedWidth
+              : (isLandscape ? contentPadding.right : 0.0),
           bottom: 80,
         ),
         controller: _scrollController,
@@ -701,9 +712,7 @@ class _VocabularyListScreenState extends ConsumerState<VocabularyListScreen> {
           );
         },
       ),
-      floatingActionButtonLocation: isDuo
-          ? IPhoneDuoHelper.fabLocation
-          : FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: fabLocation,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showEditDialog(null),
         child: const Icon(Icons.add),
