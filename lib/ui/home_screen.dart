@@ -457,6 +457,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         FadeInUp(
                           delay: const Duration(milliseconds: 200),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               _buildSection(
                                 title: 'Vocabulary & Flashcards',
@@ -827,7 +828,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       child: ExpansionTile(
         initiallyExpanded: initiallyExpanded,
-        tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+        tilePadding: const EdgeInsets.only(left: 16, right: 0),
         iconColor: isDark ? Colors.white : Colors.black87,
         collapsedIconColor: isDark ? Colors.white70 : Colors.black54,
         leading: Icon(icon, color: isDark ? Colors.white : Colors.black87),
