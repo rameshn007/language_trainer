@@ -27,8 +27,9 @@ enum DuoScreenOverride {
 /// - Main content preserves a reservation margin (76 pt) on the right to keep clear of the system
 ///   icon and the vertically aligned FABs.
 class IPhoneDuoHelper {
-  /// Optional debug override to simulate iPhone Duo screen modes off-hardware or in tests.
-  /// When non-null, this overrides screen size sniffing logic.
+  /// Optional debug override to simulate iPhone Duo screen modes in tests or debug environments off-hardware.
+  /// When non-null in debug mode on iOS, this overrides screen size sniffing logic.
+  @visibleForTesting
   static DuoScreenOverride? debugOverride;
 
   /// Expected logical width for the outside screen in portrait.
@@ -59,11 +60,11 @@ class IPhoneDuoHelper {
 
   /// Checks if the current context is running on any iPhone Duo screen (outside or inside).
   static bool isDuo(BuildContext context) {
-    if (debugOverride != null) {
-      return debugOverride != DuoScreenOverride.none;
-    }
     if (!_isIOS(context)) {
       return false;
+    }
+    if (kDebugMode && debugOverride != null) {
+      return debugOverride != DuoScreenOverride.none;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoSize(size);
@@ -71,12 +72,12 @@ class IPhoneDuoHelper {
 
   /// Checks if the current context is running on the iPhone Duo outside screen (either portrait or landscape).
   static bool isDuoOutside(BuildContext context) {
-    if (debugOverride != null) {
-      return debugOverride == DuoScreenOverride.outsidePortrait ||
-          debugOverride == DuoScreenOverride.outsideLandscape;
-    }
     if (!_isIOS(context)) {
       return false;
+    }
+    if (kDebugMode && debugOverride != null) {
+      return debugOverride == DuoScreenOverride.outsidePortrait ||
+          debugOverride == DuoScreenOverride.outsideLandscape;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoOutsidePortraitSize(size) || isDuoOutsideLandscapeSize(size);
@@ -84,11 +85,11 @@ class IPhoneDuoHelper {
 
   /// Checks if the current context is in portrait on the iPhone Duo outside screen.
   static bool isDuoOutsidePortrait(BuildContext context) {
-    if (debugOverride != null) {
-      return debugOverride == DuoScreenOverride.outsidePortrait;
-    }
     if (!_isIOS(context)) {
       return false;
+    }
+    if (kDebugMode && debugOverride != null) {
+      return debugOverride == DuoScreenOverride.outsidePortrait;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoOutsidePortraitSize(size);
@@ -96,11 +97,11 @@ class IPhoneDuoHelper {
 
   /// Checks if the current context is in landscape on the iPhone Duo outside screen.
   static bool isDuoOutsideLandscape(BuildContext context) {
-    if (debugOverride != null) {
-      return debugOverride == DuoScreenOverride.outsideLandscape;
-    }
     if (!_isIOS(context)) {
       return false;
+    }
+    if (kDebugMode && debugOverride != null) {
+      return debugOverride == DuoScreenOverride.outsideLandscape;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoOutsideLandscapeSize(size);
@@ -108,12 +109,12 @@ class IPhoneDuoHelper {
 
   /// Checks if the current context is on the iPhone Duo inside screen (either portrait or landscape).
   static bool isDuoInside(BuildContext context) {
-    if (debugOverride != null) {
-      return debugOverride == DuoScreenOverride.insidePortrait ||
-          debugOverride == DuoScreenOverride.insideLandscape;
-    }
     if (!_isIOS(context)) {
       return false;
+    }
+    if (kDebugMode && debugOverride != null) {
+      return debugOverride == DuoScreenOverride.insidePortrait ||
+          debugOverride == DuoScreenOverride.insideLandscape;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoInsideSize(size);
@@ -121,11 +122,11 @@ class IPhoneDuoHelper {
 
   /// Checks if the current context is in landscape on the iPhone Duo inside screen.
   static bool isDuoInsideLandscape(BuildContext context) {
-    if (debugOverride != null) {
-      return debugOverride == DuoScreenOverride.insideLandscape;
-    }
     if (!_isIOS(context)) {
       return false;
+    }
+    if (kDebugMode && debugOverride != null) {
+      return debugOverride == DuoScreenOverride.insideLandscape;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoInsideLandscapeSize(size);
@@ -133,11 +134,11 @@ class IPhoneDuoHelper {
 
   /// Checks if the current context is in portrait on the iPhone Duo inside screen.
   static bool isDuoInsidePortrait(BuildContext context) {
-    if (debugOverride != null) {
-      return debugOverride == DuoScreenOverride.insidePortrait;
-    }
     if (!_isIOS(context)) {
       return false;
+    }
+    if (kDebugMode && debugOverride != null) {
+      return debugOverride == DuoScreenOverride.insidePortrait;
     }
     final size = MediaQuery.sizeOf(context);
     return isDuoInsidePortraitSize(size);

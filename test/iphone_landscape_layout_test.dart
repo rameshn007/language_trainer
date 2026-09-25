@@ -19,16 +19,32 @@ import 'helpers/carplay_test_helpers.dart';
 class _MockNotificationService extends Mock implements NotificationService {}
 class _MockVerbService extends Mock implements VerbService {}
 
+class RealDeviceConfig {
+  final String name;
+  final Size logicalSize;
+  final EdgeInsets insets;
+  final double pixelRatio;
+
+  const RealDeviceConfig({
+    required this.name,
+    required this.logicalSize,
+    this.insets = EdgeInsets.zero,
+    this.pixelRatio = 3.0,
+  });
+}
+
+const realisticSnapshot = ProgressSnapshot(
+  totalXP: 1450,
+  todayXP: 130,
+  dailyGoal: 100,
+  currentStreak: 12,
+  todaySessions: 4,
+  masteryDistribution: {0: 10, 1: 8, 2: 5, 3: 12, 4: 15},
+);
+
 class _RealisticProgressService extends Notifier<ProgressSnapshot> with Mock implements ProgressService {
   final ProgressSnapshot _snapshot;
-  _RealisticProgressService([this._snapshot = const ProgressSnapshot(
-    totalXP: 1450,
-    todayXP: 130,
-    dailyGoal: 100,
-    currentStreak: 12,
-    todaySessions: 4,
-    masteryDistribution: {0: 10, 1: 8, 2: 5, 3: 12, 4: 15},
-  )]);
+  _RealisticProgressService([this._snapshot = realisticSnapshot]);
 
   @override
   ProgressSnapshot build() => _snapshot;
@@ -69,16 +85,18 @@ void main() {
     IPhoneDuoHelper.resetForTesting();
   });
 
-  group('iPhone 17 Landscape and Dynamic Island Layout Tests', () {
-    testWidgets('Landscape with Dynamic Island on left: content cleared and FABs at rightmost', (tester) async {
-      // iPhone 17 Landscape Left (932 x 430) with Dynamic Island on left (59 pt)
+  group('Dynamic Island & Landscape Geometry Unit Tests (Synthetic Scaffold)', () {
+    testWidgets('Synthetic Scaffold: Landscape with Dynamic Island on left clears left inset and places FAB at rightmost with bottom home indicator offset', (tester) async {
+      // iPhone 17 Landscape Left (932 x 430) with Dynamic Island on left (59 pt) and home indicator (21 pt)
       tester.view.physicalSize = const Size(2796, 1290);
       tester.view.devicePixelRatio = 3.0;
       tester.view.padding = const FakeViewPadding(left: 177, top: 0, right: 0, bottom: 63); // 59 pt left, 21 pt bottom
+      tester.view.viewPadding = const FakeViewPadding(left: 177, top: 0, right: 0, bottom: 63);
       addTearDown(() {
         tester.view.resetPhysicalSize();
         tester.view.resetDevicePixelRatio();
         tester.view.resetPadding();
+        tester.view.resetViewPadding();
       });
 
       late EdgeInsets contentPadding;
@@ -131,17 +149,25 @@ void main() {
 
       // FAB right edge should be near the right screen edge (16 pt margin)
       expect(932.0 - fabRect.right, closeTo(16.0, 2.0));
+
+      // FAB bottom edge must clear the 21.0 pt home indicator (minViewPadding.bottom > 0 branch: 21 pt + 16 pt = 37 pt)
+      expect(430.0 - fabRect.bottom, closeTo(37.0, 2.0));
+
+      // Fab location is standard landscape location
+      expect(fabLocation, equals(IPhoneDuoHelper.standardLandscapeFabLocation));
     });
 
-    testWidgets('Landscape with Dynamic Island on right: content cleared and FABs inside safe area', (tester) async {
-      // iPhone 17 Landscape Right (932 x 430) with Dynamic Island on right (59 pt)
+    testWidgets('Synthetic Scaffold: Landscape with Dynamic Island on right clears right inset and positions FAB inside safe area', (tester) async {
+      // iPhone 17 Landscape Right (932 x 430) with Dynamic Island on right (59 pt) and home indicator (21 pt)
       tester.view.physicalSize = const Size(2796, 1290);
       tester.view.devicePixelRatio = 3.0;
-      tester.view.padding = const FakeViewPadding(left: 0, top: 0, right: 177, bottom: 63); // 59 pt right
+      tester.view.padding = const FakeViewPadding(left: 0, top: 0, right: 177, bottom: 63); // 59 pt right, 21 pt bottom
+      tester.view.viewPadding = const FakeViewPadding(left: 0, top: 0, right: 177, bottom: 63);
       addTearDown(() {
         tester.view.resetPhysicalSize();
         tester.view.resetDevicePixelRatio();
         tester.view.resetPadding();
+        tester.view.resetViewPadding();
       });
 
       late EdgeInsets contentPadding;
@@ -183,7 +209,7 @@ void main() {
       // Left inset is standard margin (20.0 pt)
       expect(contentPadding.left, equals(20.0));
 
-      // Right inset must clear both the Dynamic Island (59 pt) and the FAB gutter (84 pt)
+      // Right inset must clear both the Dynamic Island (59 pt) and the FAB gutter (84 pt) -> 143 pt
       expect(contentPadding.right, greaterThanOrEqualTo(143.0));
 
       final contentRect = tester.getRect(find.byKey(const Key('test_content_card_right')));
@@ -192,8 +218,62 @@ void main() {
       // FAB must be strictly to the right of the content (no overlap)
       expect(fabRect.left, greaterThan(contentRect.right));
 
-      // FAB right edge must clear the Dynamic Island (59.0 pt from screen right) with 16 pt margin
+      // FAB right edge must clear the Dynamic Island (59.0 pt from screen right) with 16 pt margin = 75 pt
       expect(932.0 - fabRect.right, closeTo(75.0, 2.0));
+
+      // FAB bottom edge must clear the 21.0 pt home indicator (37.0 pt from bottom)
+      expect(430.0 - fabRect.bottom, closeTo(37.0, 2.0));
+
+      // FAB location is LandscapeRightFabLocation with rightMargin == 75.0
+      expect(fabLocation, isA<LandscapeRightFabLocation>());
+      expect((fabLocation as LandscapeRightFabLocation).rightMargin, equals(75.0));
+    });
+
+    testWidgets('Synthetic Scaffold: Landscape with zero insets uses standard 16 pt margins', (tester) async {
+      tester.view.physicalSize = const Size(1334, 750);
+      tester.view.devicePixelRatio = 2.0;
+      tester.view.padding = FakeViewPadding.zero;
+      tester.view.viewPadding = FakeViewPadding.zero;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        tester.view.resetPadding();
+        tester.view.resetViewPadding();
+      });
+
+      late EdgeInsets contentPadding;
+      late FloatingActionButtonLocation fabLocation;
+
+      await tester.pumpWidget(
+        testApp(
+          home: Builder(
+            builder: (context) {
+              contentPadding = IPhoneDuoHelper.getContentHorizontalPadding(context);
+              fabLocation = IPhoneDuoHelper.getFabLocation(context);
+
+              return Scaffold(
+                floatingActionButtonLocation: fabLocation,
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {},
+                  child: const Icon(Icons.star),
+                ),
+                body: Container(),
+              );
+            },
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      expect(contentPadding.left, equals(20.0));
+      expect(contentPadding.right, equals(84.0));
+      expect(fabLocation, equals(IPhoneDuoHelper.standardLandscapeFabLocation));
+
+      final fabRect = tester.getRect(find.byType(FloatingActionButton));
+      expect(667.0 - fabRect.right, closeTo(16.0, 2.0));
+      // With minViewPadding.bottom == 0, bottom margin is 16.0 pt
+      expect(375.0 - fabRect.bottom, closeTo(16.0, 2.0));
     });
 
     testWidgets('Portrait preserves standard 20 pt insets and endFloat location', (tester) async {
@@ -201,10 +281,12 @@ void main() {
       tester.view.physicalSize = const Size(1290, 2796);
       tester.view.devicePixelRatio = 3.0;
       tester.view.padding = const FakeViewPadding(left: 0, top: 177, right: 0, bottom: 102);
+      tester.view.viewPadding = const FakeViewPadding(left: 0, top: 177, right: 0, bottom: 102);
       addTearDown(() {
         tester.view.resetPhysicalSize();
         tester.view.resetDevicePixelRatio();
         tester.view.resetPadding();
+        tester.view.resetViewPadding();
       });
 
       late EdgeInsets contentPadding;
@@ -303,15 +385,17 @@ void main() {
   });
 
   group('Real Screen Landscape Layout Tests', () {
-    testWidgets('VocabularyListScreen applies correct left clearance and right gutter in landscape', (tester) async {
-      // iPhone 17 Landscape Left (932 x 430) with Dynamic Island on left (59 pt)
+    testWidgets('VocabularyListScreen applies correct left clearance and right gutter in landscape left (Dynamic Island left = 59pt, home indicator bottom = 21pt)', (tester) async {
+      // iPhone 17 Landscape Left (932 x 430) with Dynamic Island on left (59 pt) and home indicator (21 pt)
       tester.view.physicalSize = const Size(2796, 1290);
       tester.view.devicePixelRatio = 3.0;
       tester.view.padding = const FakeViewPadding(left: 177, top: 0, right: 0, bottom: 63);
+      tester.view.viewPadding = const FakeViewPadding(left: 177, top: 0, right: 0, bottom: 63);
       addTearDown(() {
         tester.view.resetPhysicalSize();
         tester.view.resetDevicePixelRatio();
         tester.view.resetPadding();
+        tester.view.resetViewPadding();
       });
 
       final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
@@ -334,7 +418,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      // 1. Verify ListView padding has left clearance >= 75.0 (well clear of 59.0pt Dynamic Island)
+      // 1. Verify ListView padding has left clearance >= 75.0 (59.0pt Dynamic Island + 16pt margin) and right >= 84.0
       final listView = tester.widget<ListView>(find.byType(ListView));
       final EdgeInsets listPadding = listView.padding as EdgeInsets;
       expect(listPadding.left, greaterThanOrEqualTo(75.0));
@@ -344,20 +428,76 @@ void main() {
       final searchRect = tester.getRect(find.byType(TextField));
       expect(searchRect.left, greaterThanOrEqualTo(75.0));
 
-      // 3. Verify FAB rightmost placement does not overlap the list content area
+      // 3. Verify FAB rightmost placement and bottom home indicator clearance (37 pt = 21 pt indicator + 16 pt margin)
       final fabRect = tester.getRect(find.byType(FloatingActionButton));
       expect(932.0 - fabRect.right, closeTo(16.0, 2.0));
+      expect(430.0 - fabRect.bottom, closeTo(37.0, 2.0));
     });
 
-    testWidgets('HomeScreen applies correct left clearance and right FAB gutter in landscape', (tester) async {
-      // iPhone 17 Landscape Left (932 x 430) with Dynamic Island on left (59 pt)
+    testWidgets('VocabularyListScreen applies correct right clearance (padding.right + 84) and FAB offset (rightMargin 75) in landscape right (Dynamic Island right = 59pt, home indicator bottom = 21pt)', (tester) async {
+      // iPhone 17 Landscape Right (932 x 430) with Dynamic Island on right (59 pt) and home indicator (21 pt)
       tester.view.physicalSize = const Size(2796, 1290);
       tester.view.devicePixelRatio = 3.0;
-      tester.view.padding = const FakeViewPadding(left: 177, top: 0, right: 0, bottom: 63);
+      tester.view.padding = const FakeViewPadding(left: 0, top: 0, right: 177, bottom: 63);
+      tester.view.viewPadding = const FakeViewPadding(left: 0, top: 0, right: 177, bottom: 63);
       addTearDown(() {
         tester.view.resetPhysicalSize();
         tester.view.resetDevicePixelRatio();
         tester.view.resetPadding();
+        tester.view.resetViewPadding();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      final mockTts = MockTtsService();
+      when(() => mockTts.setRate(any())).thenAnswer((_) async {});
+      when(() => mockTts.stop()).thenAnswer((_) async {});
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            ttsServiceProvider.overrideWithValue(mockTts),
+          ],
+          child: testApp(
+            home: const VocabularyListScreen(),
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      // 1. Verify ListView padding has right clearance >= 143.0 (59.0 pt Dynamic Island + 84.0 pt FAB gutter)
+      final listView = tester.widget<ListView>(find.byType(ListView));
+      final EdgeInsets listPadding = listView.padding as EdgeInsets;
+      expect(listPadding.left, equals(20.0));
+      expect(listPadding.right, greaterThanOrEqualTo(143.0));
+
+      // 2. Verify search bar TextField right edge is clear of Dynamic Island and FAB gutter
+      final searchRect = tester.getRect(find.byType(TextField));
+      expect(searchRect.left, equals(20.0));
+      expect(932.0 - searchRect.right, greaterThanOrEqualTo(143.0));
+
+      // 3. Verify FAB right edge clears Dynamic Island (75 pt from screen right) and bottom clears home indicator (37 pt)
+      final fabRect = tester.getRect(find.byType(FloatingActionButton));
+      expect(932.0 - fabRect.right, closeTo(75.0, 2.0));
+      expect(430.0 - fabRect.bottom, closeTo(37.0, 2.0));
+
+      // 4. Verify FAB does not overlap search bar or list view items
+      expect(fabRect.left, greaterThan(searchRect.right));
+    });
+
+    testWidgets('HomeScreen applies correct left clearance and right FAB gutter in landscape left (Dynamic Island left = 59pt, home indicator bottom = 21pt)', (tester) async {
+      // iPhone 17 Landscape Left (932 x 430) with Dynamic Island on left (59 pt) and home indicator (21 pt)
+      tester.view.physicalSize = const Size(2796, 1290);
+      tester.view.devicePixelRatio = 3.0;
+      tester.view.padding = const FakeViewPadding(left: 177, top: 0, right: 0, bottom: 63);
+      tester.view.viewPadding = const FakeViewPadding(left: 177, top: 0, right: 0, bottom: 63);
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        tester.view.resetPadding();
+        tester.view.resetViewPadding();
       });
 
       final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
@@ -394,36 +534,305 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
 
-      // Verify CustomScrollView and Card placement respect contentPadding
+      // Verify CustomScrollView is present
       expect(find.byType(CustomScrollView), findsOneWidget);
 
-      // Verify HomeScreen cards are clear of the Dynamic Island (>= 75.0 pt)
+      // Verify HomeScreen cards are clear of the Dynamic Island (>= 75.0 pt on left)
       final cardRect = tester.getRect(find.byType(Card).first);
       expect(cardRect.left, greaterThanOrEqualTo(75.0));
-      // Verify right edge leaves gutter for FABs
+      // Verify right edge leaves gutter for FABs (>= 84.0 pt)
+      expect(932.0 - cardRect.right, greaterThanOrEqualTo(84.0));
+
+      // Verify FAB right edge and bottom clearance (37 pt from bottom for bottom FAB)
+      final fabFinder = find.byType(FloatingActionButton);
+      expect(fabFinder, findsWidgets);
+      final bottomFabRect = tester.getRect(fabFinder.last);
+      expect(932.0 - bottomFabRect.right, closeTo(16.0, 2.0));
+      expect(430.0 - bottomFabRect.bottom, closeTo(37.0, 2.0));
+
+      // Verify FAB is strictly to the right of content
+      expect(bottomFabRect.left, greaterThanOrEqualTo(cardRect.right));
+    });
+
+    testWidgets('HomeScreen applies correct right clearance (padding.right + 84) and FAB offset (rightMargin 75) in landscape right (Dynamic Island right = 59pt, home indicator bottom = 21pt)', (tester) async {
+      // iPhone 17 Landscape Right (932 x 430) with Dynamic Island on right (59 pt) and home indicator (21 pt)
+      tester.view.physicalSize = const Size(2796, 1290);
+      tester.view.devicePixelRatio = 3.0;
+      tester.view.padding = const FakeViewPadding(left: 0, top: 0, right: 177, bottom: 63);
+      tester.view.viewPadding = const FakeViewPadding(left: 0, top: 0, right: 177, bottom: 63);
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        tester.view.resetPadding();
+        tester.view.resetViewPadding();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      fakeStorage.saveSetting('vocab_only_mode', true);
+      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
+
+      final mockNotif = _MockNotificationService();
+      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
+      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
+
+      final mockTts = MockTtsService();
+      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
+      when(() => mockTts.initFuture).thenAnswer((_) async {});
+
+      final mockVerb = _MockVerbService();
+      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            notificationServiceProvider.overrideWithValue(mockNotif),
+            ttsServiceProvider.overrideWithValue(mockTts),
+            verbServiceProvider.overrideWithValue(mockVerb),
+            progressServiceProvider.overrideWith(() => MockProgressService()),
+          ],
+          child: testApp(
+            home: const HomeScreen(),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Verify HomeScreen cards are clear of the Dynamic Island and FAB gutter (>= 143.0 pt from right)
+      final cardRect = tester.getRect(find.byType(Card).first);
+      expect(cardRect.left, equals(20.0));
+      expect(932.0 - cardRect.right, greaterThanOrEqualTo(143.0));
+
+      // Verify FAB right edge clears Dynamic Island (75.0 pt from right) and bottom clears home indicator (37.0 pt from bottom)
+      final fabFinder = find.byType(FloatingActionButton);
+      expect(fabFinder, findsWidgets);
+      final bottomFabRect = tester.getRect(fabFinder.last);
+      expect(932.0 - bottomFabRect.right, closeTo(75.0, 2.0));
+      expect(430.0 - bottomFabRect.bottom, closeTo(37.0, 2.0));
+
+      // Verify FAB is strictly to the right of content
+      expect(bottomFabRect.left, greaterThanOrEqualTo(cardRect.right));
+    });
+
+    testWidgets('HomeScreen on Duo outside landscape (678x466) with home indicator: FAB aligned at screenWidth - 38 and above home indicator', (tester) async {
+      tester.view.physicalSize = const Size(2034, 1398);
+      tester.view.devicePixelRatio = 3.0;
+      tester.view.padding = const FakeViewPadding(left: 0, top: 0, right: 0, bottom: 63); // 21 pt bottom
+      tester.view.viewPadding = const FakeViewPadding(left: 0, top: 0, right: 0, bottom: 63);
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        tester.view.resetPadding();
+        tester.view.resetViewPadding();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      fakeStorage.saveSetting('vocab_only_mode', true);
+      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
+
+      final mockNotif = _MockNotificationService();
+      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
+      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
+
+      final mockTts = MockTtsService();
+      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
+      when(() => mockTts.initFuture).thenAnswer((_) async {});
+
+      final mockVerb = _MockVerbService();
+      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            notificationServiceProvider.overrideWithValue(mockNotif),
+            ttsServiceProvider.overrideWithValue(mockTts),
+            verbServiceProvider.overrideWithValue(mockVerb),
+            progressServiceProvider.overrideWith(() => MockProgressService()),
+          ],
+          child: testApp(
+            home: const HomeScreen(),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Verify card right edge leaves 76 pt rail for Wi-Fi icon and FAB column
+      final cardRect = tester.getRect(find.byType(Card).first);
+      expect(678.0 - cardRect.right, greaterThanOrEqualTo(76.0));
+
+      // Verify FAB is centered at screenWidth - 38.0 pt
+      final fabFinder = find.byType(FloatingActionButton);
+      expect(fabFinder, findsWidgets);
+      final bottomFabRect = tester.getRect(fabFinder.last);
+      final fabCenter = bottomFabRect.left + (bottomFabRect.width / 2);
+      expect(fabCenter, closeTo(678.0 - 38.0, 1.0));
+
+      // Verify FAB bottom clears the 21 pt home indicator (37.0 pt from bottom for bottom FAB)
+      expect(466.0 - bottomFabRect.bottom, closeTo(37.0, 2.0));
+
+      // Verify FAB is strictly to the right of content
+      expect(bottomFabRect.left, greaterThanOrEqualTo(cardRect.right));
+    });
+
+    testWidgets('HomeScreen on Duo outside portrait (466x678) with status bar and home indicator: FAB aligned at screenWidth - 38 and above home indicator', (tester) async {
+      tester.view.physicalSize = const Size(1398, 2034);
+      tester.view.devicePixelRatio = 3.0;
+      tester.view.padding = const FakeViewPadding(left: 0, top: 72, right: 0, bottom: 63); // 24 pt top, 21 pt bottom
+      tester.view.viewPadding = const FakeViewPadding(left: 0, top: 72, right: 0, bottom: 63);
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        tester.view.resetPadding();
+        tester.view.resetViewPadding();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      fakeStorage.saveSetting('vocab_only_mode', true);
+      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
+
+      final mockNotif = _MockNotificationService();
+      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
+      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
+
+      final mockTts = MockTtsService();
+      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
+      when(() => mockTts.initFuture).thenAnswer((_) async {});
+
+      final mockVerb = _MockVerbService();
+      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            notificationServiceProvider.overrideWithValue(mockNotif),
+            ttsServiceProvider.overrideWithValue(mockTts),
+            verbServiceProvider.overrideWithValue(mockVerb),
+            progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
+          ],
+          child: testApp(
+            home: const HomeScreen(),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+
+      // Verify card right edge leaves 76 pt rail
+      final cardRect = tester.getRect(find.byType(Card).first);
+      expect(466.0 - cardRect.right, greaterThanOrEqualTo(76.0));
+
+      // Verify FAB is centered at screenWidth - 38.0 pt
+      final fabFinder = find.byType(FloatingActionButton);
+      expect(fabFinder, findsWidgets);
+      final bottomFabRect = tester.getRect(fabFinder.last);
+      final fabCenter = bottomFabRect.left + (bottomFabRect.width / 2);
+      expect(fabCenter, closeTo(466.0 - 38.0, 1.0));
+
+      // Verify FAB bottom clears the 21 pt home indicator (37.0 pt from bottom for bottom FAB)
+      expect(678.0 - bottomFabRect.bottom, closeTo(37.0, 2.0));
+
+      // Verify FAB is strictly to the right of content
+      expect(bottomFabRect.left, greaterThanOrEqualTo(cardRect.right));
     });
   });
 
   group('Real Screen Multi-Device & Orientation Layout Tests (Zero Overflow Assertions)', () {
-    final duoAndIPhoneSizes = <String, Size>{
-      'Duo outside portrait (466x678)': const Size(466, 678),
-      'Duo outside landscape (678x466)': const Size(678, 466),
-      'Duo inside landscape (951x669)': const Size(951, 669),
-      'Duo inside portrait (669x951)': const Size(669, 951),
-      'iPhone 8/SE portrait (375x667)': const Size(375, 667),
-      'iPhone X/mini portrait (375x812)': const Size(375, 812),
-      'iPhone SE 1st gen portrait (320x568)': const Size(320, 568),
-    };
+    final realDevices = <RealDeviceConfig>[
+      const RealDeviceConfig(
+        name: 'Duo outside portrait (466x678)',
+        logicalSize: Size(466, 678),
+        insets: EdgeInsets.only(top: 24, bottom: 21),
+      ),
+      const RealDeviceConfig(
+        name: 'Duo outside landscape (678x466)',
+        logicalSize: Size(678, 466),
+        insets: EdgeInsets.only(bottom: 21),
+      ),
+      const RealDeviceConfig(
+        name: 'Duo inside landscape (951x669)',
+        logicalSize: Size(951, 669),
+        insets: EdgeInsets.only(top: 24, bottom: 21),
+      ),
+      const RealDeviceConfig(
+        name: 'Duo inside portrait (669x951)',
+        logicalSize: Size(669, 951),
+        insets: EdgeInsets.only(top: 24, bottom: 21),
+      ),
+      const RealDeviceConfig(
+        name: 'iPhone 17 Pro landscape left (932x430, island left)',
+        logicalSize: Size(932, 430),
+        insets: EdgeInsets.only(left: 59, bottom: 21),
+      ),
+      const RealDeviceConfig(
+        name: 'iPhone 17 Pro landscape right (932x430, island right)',
+        logicalSize: Size(932, 430),
+        insets: EdgeInsets.only(right: 59, bottom: 21),
+      ),
+      const RealDeviceConfig(
+        name: 'iPhone 17 Pro portrait (430x932)',
+        logicalSize: Size(430, 932),
+        insets: EdgeInsets.only(top: 59, bottom: 34),
+      ),
+      const RealDeviceConfig(
+        name: 'iPhone X/mini landscape right (812x375, notch right)',
+        logicalSize: Size(812, 375),
+        insets: EdgeInsets.only(right: 44, bottom: 21),
+      ),
+      const RealDeviceConfig(
+        name: 'iPhone X/mini portrait (375x812)',
+        logicalSize: Size(375, 812),
+        insets: EdgeInsets.only(top: 44, bottom: 34),
+      ),
+      const RealDeviceConfig(
+        name: 'iPhone 8/SE landscape (667x375, zero insets)',
+        logicalSize: Size(667, 375),
+        insets: EdgeInsets.zero,
+        pixelRatio: 2.0,
+      ),
+      const RealDeviceConfig(
+        name: 'iPhone 8/SE portrait (375x667)',
+        logicalSize: Size(375, 667),
+        insets: EdgeInsets.only(top: 20),
+        pixelRatio: 2.0,
+      ),
+      const RealDeviceConfig(
+        name: 'iPhone SE 1st gen portrait (320x568)',
+        logicalSize: Size(320, 568),
+        insets: EdgeInsets.only(top: 20),
+        pixelRatio: 2.0,
+      ),
+    ];
 
-    const realisticSnapshot = ProgressSnapshot(
-      totalXP: 1450,
-      todayXP: 130,
-      dailyGoal: 100,
-      currentStreak: 12,
-      todaySessions: 4,
-      masteryDistribution: {0: 10, 1: 8, 2: 5, 3: 12, 4: 15},
-    );
-
+    void configureDevice(WidgetTester tester, RealDeviceConfig device) {
+      tester.view.physicalSize = Size(
+        device.logicalSize.width * device.pixelRatio,
+        device.logicalSize.height * device.pixelRatio,
+      );
+      tester.view.devicePixelRatio = device.pixelRatio;
+      tester.view.padding = FakeViewPadding(
+        left: device.insets.left * device.pixelRatio,
+        top: device.insets.top * device.pixelRatio,
+        right: device.insets.right * device.pixelRatio,
+        bottom: device.insets.bottom * device.pixelRatio,
+      );
+      tester.view.viewPadding = FakeViewPadding(
+        left: device.insets.left * device.pixelRatio,
+        top: device.insets.top * device.pixelRatio,
+        right: device.insets.right * device.pixelRatio,
+        bottom: device.insets.bottom * device.pixelRatio,
+      );
+    }
+ 
     final testProgressStates = <String, ProgressSnapshot>{
       'empty': const ProgressSnapshot(),
       'mid-session': const ProgressSnapshot(
@@ -437,16 +846,19 @@ void main() {
       'realistic': realisticSnapshot,
     };
 
-    for (final entry in duoAndIPhoneSizes.entries) {
+    for (final device in realDevices) {
       for (final vocabOnly in [false, true]) {
         for (final pEntry in testProgressStates.entries) {
           testWidgets(
-            'HomeScreen renders at ${entry.key} [vocabOnly=$vocabOnly, progress=${pEntry.key}] without overflow',
+            'HomeScreen renders at ${device.name} [vocabOnly=$vocabOnly, progress=${pEntry.key}] without overflow',
             (tester) async {
-              tester.view.physicalSize = entry.value;
-              tester.view.devicePixelRatio = 1.0;
-              addTearDown(tester.view.resetPhysicalSize);
-              addTearDown(tester.view.resetDevicePixelRatio);
+              configureDevice(tester, device);
+              addTearDown(() {
+                tester.view.resetPhysicalSize();
+                tester.view.resetDevicePixelRatio();
+                tester.view.resetPadding();
+                tester.view.resetViewPadding();
+              });
 
               final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
               final fakeStorage = FakeStorageService(initialItems: [item]);
@@ -496,68 +908,17 @@ void main() {
       }
     }
 
-    testWidgets('HomeScreen on Duo outside portrait (466x678): FABs in right rail below system icon without overlapping content', (tester) async {
-      tester.view.physicalSize = const Size(466, 678);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
-
-      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
-      final fakeStorage = FakeStorageService(initialItems: [item]);
-      fakeStorage.saveSetting('vocab_only_mode', true);
-      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
-
-      final mockNotif = _MockNotificationService();
-      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
-      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
-
-      final mockTts = MockTtsService();
-      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
-      when(() => mockTts.initFuture).thenAnswer((_) async {});
-
-      final mockVerb = _MockVerbService();
-      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
-
-      await tester.pumpWidget(
-        ProviderScope(
-          overrides: [
-            storageServiceProvider.overrideWithValue(fakeStorage),
-            notificationServiceProvider.overrideWithValue(mockNotif),
-            ttsServiceProvider.overrideWithValue(mockTts),
-            verbServiceProvider.overrideWithValue(mockVerb),
-            progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
-          ],
-          child: testApp(
-            home: const HomeScreen(),
-          ),
-        ),
-      );
-
-      await tester.pump();
-      await tester.pump(const Duration(milliseconds: 100));
-
-      expect(tester.takeException(), isNull);
-
-      // Verify content card right edge leaves a rail for the system icon and FABs (76 pt)
-      final cardRect = tester.getRect(find.byType(Card).first);
-      expect(466.0 - cardRect.right, greaterThanOrEqualTo(76.0));
-
-      // Verify FAB is centered at screenWidth - 38.0 pt (aligned with Wi-Fi icon column)
-      final fabFinder = find.byType(FloatingActionButton);
-      expect(fabFinder, findsWidgets);
-      final fabRect = tester.getRect(fabFinder.first);
-      final fabCenter = fabRect.left + (fabRect.width / 2);
-      expect(fabCenter, closeTo(466.0 - 38.0, 1.0));
-
-      // Verify FAB is strictly to the right of the content (no overlap)
-      expect(fabRect.left, greaterThanOrEqualTo(cardRect.right));
-    });
-
     testWidgets('HomeScreen degrades gracefully at 466x678 with accessibility text scale 1.35x and 2.0x', (tester) async {
-      tester.view.physicalSize = const Size(466, 678);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+      tester.view.physicalSize = const Size(1398, 2034);
+      tester.view.devicePixelRatio = 3.0;
+      tester.view.padding = const FakeViewPadding(left: 0, top: 72, right: 0, bottom: 63);
+      tester.view.viewPadding = const FakeViewPadding(left: 0, top: 72, right: 0, bottom: 63);
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        tester.view.resetPadding();
+        tester.view.resetViewPadding();
+      });
 
       final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
       final fakeStorage = FakeStorageService(initialItems: [item]);
@@ -602,10 +963,16 @@ void main() {
     });
 
     testWidgets('HomeScreen degrades gracefully on small iPhone (320x568) at accessibility scale 2.0x', (tester) async {
-      tester.view.physicalSize = const Size(320, 568);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
+      tester.view.physicalSize = const Size(640, 1136);
+      tester.view.devicePixelRatio = 2.0;
+      tester.view.padding = const FakeViewPadding(left: 0, top: 40, right: 0, bottom: 0);
+      tester.view.viewPadding = const FakeViewPadding(left: 0, top: 40, right: 0, bottom: 0);
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        tester.view.resetPadding();
+        tester.view.resetViewPadding();
+      });
 
       final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
       final fakeStorage = FakeStorageService(initialItems: [item]);
@@ -647,12 +1014,15 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    for (final entry in duoAndIPhoneSizes.entries) {
-      testWidgets('VocabularyListScreen renders at ${entry.key} without overflow', (tester) async {
-        tester.view.physicalSize = entry.value;
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(tester.view.resetPhysicalSize);
-        addTearDown(tester.view.resetDevicePixelRatio);
+    for (final device in realDevices) {
+      testWidgets('VocabularyListScreen renders at ${device.name} without overflow', (tester) async {
+        configureDevice(tester, device);
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+          tester.view.resetPadding();
+          tester.view.resetViewPadding();
+        });
 
         final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
         final fakeStorage = FakeStorageService(initialItems: [item]);
@@ -677,12 +1047,15 @@ void main() {
       });
     }
 
-    for (final entry in duoAndIPhoneSizes.entries) {
-      testWidgets('ListenRepeatScreen renders at ${entry.key} without overflow', (tester) async {
-        tester.view.physicalSize = entry.value;
-        tester.view.devicePixelRatio = 1.0;
-        addTearDown(tester.view.resetPhysicalSize);
-        addTearDown(tester.view.resetDevicePixelRatio);
+    for (final device in realDevices) {
+      testWidgets('ListenRepeatScreen renders at ${device.name} without overflow', (tester) async {
+        configureDevice(tester, device);
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+          tester.view.resetPadding();
+          tester.view.resetViewPadding();
+        });
 
         final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
         final fakeStorage = FakeStorageService(initialItems: [item]);
@@ -776,6 +1149,23 @@ void main() {
           home: Builder(
             builder: (context) {
               expect(IPhoneDuoHelper.isDuo(context), isFalse);
+              return Container();
+            },
+          ),
+        ),
+      );
+    });
+
+    testWidgets('debugOverride is ignored on non-iOS platforms', (tester) async {
+      IPhoneDuoHelper.debugOverride = DuoScreenOverride.outsidePortrait;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData(platform: TargetPlatform.android),
+          home: Builder(
+            builder: (context) {
+              expect(IPhoneDuoHelper.isDuo(context), isFalse);
+              expect(IPhoneDuoHelper.isDuoOutside(context), isFalse);
               return Container();
             },
           ),
