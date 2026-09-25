@@ -799,60 +799,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       margin: const EdgeInsets.only(bottom: 8),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-        child: _buildSectionContent(
+        child: SectionContent(
           title: title,
           icon: icon,
-          children: children,
           initiallyExpanded: initiallyExpanded,
           isDark: isDark,
+          children: children,
         ),
-      ),
-    );
-  }
-
-  Widget _buildSectionContent({
-    required String title,
-    required IconData icon,
-    required List<Widget> children,
-    required bool initiallyExpanded,
-    required bool isDark,
-  }) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        dividerColor: Colors.transparent,
-        listTileTheme: ListTileThemeData(
-          dense: true,
-          visualDensity: VisualDensity.compact,
-          iconColor: isDark ? Colors.white : Colors.black87,
-        ),
-      ),
-      child: ExpansionTile(
-        initiallyExpanded: initiallyExpanded,
-        tilePadding: const EdgeInsets.only(left: 16, right: 0),
-        iconColor: isDark ? Colors.white : Colors.black87,
-        collapsedIconColor: isDark ? Colors.white70 : Colors.black54,
-        leading: Icon(icon, color: isDark ? Colors.white : Colors.black87),
-        title: Text(
-          title,
-          style: TextStyle(
-            color: isDark ? Colors.white : Colors.black87,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-        childrenPadding: EdgeInsets.zero,
-        children: [
-          GridView.count(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            childAspectRatio: 1.1,
-            children: children,
-          ),
-        ],
       ),
     );
   }
@@ -922,6 +875,131 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ),
       ),
+    );
+  }
+}
+
+@visibleForTesting
+class SectionContent extends StatefulWidget {
+  final String title;
+  final IconData icon;
+  final List<Widget> children;
+  final bool initiallyExpanded;
+  final bool isDark;
+
+  const SectionContent({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.children,
+    required this.initiallyExpanded,
+    required this.isDark,
+  });
+
+  @override
+  State<SectionContent> createState() => _SectionContentState();
+}
+
+class _SectionContentState extends State<SectionContent>
+    with SingleTickerProviderStateMixin {
+  late bool _isExpanded;
+  late AnimationController _controller;
+  late Animation<double> _iconTurns;
+  late Animation<double> _heightFactor;
+
+  @override
+  void initState() {
+    super.initState();
+    _isExpanded = widget.initiallyExpanded;
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+      value: _isExpanded ? 1.0 : 0.0,
+    );
+    _iconTurns = _controller.drive(
+      Tween<double>(begin: 0.0, end: 0.5).chain(CurveTween(curve: Curves.easeIn)),
+    );
+    _heightFactor = _controller.drive(CurveTween(curve: Curves.easeIn));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _toggle() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+      if (_isExpanded) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final fgColor = widget.isDark ? Colors.white : Colors.black87;
+    final chevronColor = widget.isDark
+        ? (_isExpanded ? Colors.white : Colors.white70)
+        : (_isExpanded ? Colors.black87 : Colors.black54);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        InkWell(
+          onTap: _toggle,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Row(
+              children: [
+                Icon(widget.icon, color: fgColor),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    widget.title,
+                    style: TextStyle(
+                      color: fgColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                RotationTransition(
+                  turns: _iconTurns,
+                  child: Icon(Icons.expand_more, color: chevronColor),
+                ),
+              ],
+            ),
+          ),
+        ),
+        ClipRect(
+          child: AnimatedBuilder(
+            animation: _controller.view,
+            builder: (context, child) {
+              return Align(
+                alignment: Alignment.topCenter,
+                heightFactor: _heightFactor.value,
+                child: child,
+              );
+            },
+            child: GridView.count(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 1.1,
+              children: widget.children,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
