@@ -996,18 +996,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }) {
     final bool isEnabled = item.onPressed != null;
 
-    final isLight = isEnabled &&
-        ThemeData.estimateBrightnessForColor(item.color) == Brightness.light;
-    final fgColor = isLight ? Colors.black87 : Colors.white;
-    final subtitleColor = isLight
-        ? Colors.black.withValues(alpha: 0.68)
-        : Colors.white.withValues(alpha: 0.90);
-    final iconBoxColor = isLight
-        ? Colors.black.withValues(alpha: 0.10)
-        : Colors.white.withValues(alpha: 0.22);
-    final chevronColor = isLight
-        ? Colors.black45
-        : Colors.white.withValues(alpha: 0.70);
+    const fgColor = Colors.white;
+    final subtitleColor = Colors.white.withValues(alpha: 0.92);
+    final iconBoxColor = Colors.white.withValues(alpha: 0.22);
+    final chevronColor = Colors.white.withValues(alpha: 0.70);
 
     return Card(
       elevation: isEnabled ? 2 : 0,
