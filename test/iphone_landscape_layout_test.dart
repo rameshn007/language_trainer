@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -83,6 +84,110 @@ Widget testApp({required Widget home}) {
 void main() {
   tearDown(() {
     IPhoneDuoHelper.resetForTesting();
+  });
+
+  group('Canary Layout & Overflow Harness Verification Tests (Falsifiability Proofs)', () {
+    testWidgets('CANARY: Test harness detects horizontal RenderFlex overflow via tester.takeException()', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 200,
+              child: Row(
+                children: [
+                  Container(width: 500, height: 50, color: Colors.red),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final error = tester.takeException();
+      expect(error, isNotNull, reason: 'Harness must not swallow horizontal RenderFlex overflow');
+      expect(error.toString(), contains('overflowed by 300 pixels'));
+    });
+
+    testWidgets('CANARY: Test harness detects vertical RenderFlex overflow via tester.takeException()', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              height: 200,
+              child: Column(
+                children: [
+                  Container(width: 50, height: 500, color: Colors.blue),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+
+      final error = tester.takeException();
+      expect(error, isNotNull, reason: 'Harness must not swallow vertical RenderFlex overflow');
+      expect(error.toString(), contains('overflowed by 300 pixels'));
+    });
+
+    testWidgets('CANARY: Delayed animation content (FadeInUp) overflows ARE detected when pumped past delay', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SizedBox(
+              width: 320,
+              child: FadeInUp(
+                delay: const Duration(milliseconds: 200),
+                child: Row(
+                  children: [
+                    Container(width: 600, height: 50, color: Colors.green),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      // Pumping past 200ms delay triggers child painting and detects the 280px overflow
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      await tester.pump(const Duration(milliseconds: 500));
+
+      final error = tester.takeException();
+      expect(error, isNotNull, reason: 'Pumping past animation delay must reveal paint-time overflows');
+      expect(error.toString(), contains('overflowed by 280 pixels'));
+    });
+
+    testWidgets('CANARY: Geometry assertion detects width constraint violation independently of exception', (tester) async {
+      const screenWidth = 320.0;
+      tester.view.physicalSize = const Size(screenWidth, 568);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  left: 0,
+                  width: screenWidth + 50,
+                  height: 40,
+                  child: Container(key: const Key('oversized_box'), color: Colors.purple),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      final contentRect = tester.getRect(find.byKey(const Key('oversized_box')));
+      expect(contentRect.right, greaterThan(screenWidth), reason: 'Geometry measurement detects content extending beyond screen edge');
+    });
   });
 
   group('Dynamic Island & Landscape Geometry Unit Tests (Synthetic Scaffold)', () {
@@ -892,16 +997,55 @@ void main() {
               );
 
               await tester.pump();
-              await tester.pump(const Duration(milliseconds: 100));
+              await tester.pump(const Duration(milliseconds: 300));
+              await tester.pump(const Duration(milliseconds: 500));
 
               expect(tester.takeException(), isNull);
 
-              // Scroll through CustomScrollView to verify lazily built section cards
+              // 1. Positive geometry assertions for visible Cards
+              final cardFinders = find.byType(Card);
+              expect(cardFinders, findsWidgets, reason: 'HomeScreen must render visible cards');
+
+              final bool isDuoOutside = (device.logicalSize.width == 466.0 && device.logicalSize.height == 678.0) ||
+                  (device.logicalSize.width == 678.0 && device.logicalSize.height == 466.0);
+              final double expectedRightRail = isDuoOutside ? 76.0 : (device.insets.right > 0 ? (device.insets.right + 84.0) : 0.0);
+
+              for (final card in tester.widgetList<Card>(cardFinders)) {
+                final cardRect = tester.getRect(find.byWidget(card));
+                expect(cardRect.right, lessThanOrEqualTo(device.logicalSize.width + 0.5),
+                    reason: 'Card must not overflow right edge of viewport');
+                expect(cardRect.left, greaterThanOrEqualTo(0.0),
+                    reason: 'Card must not overflow left edge of viewport');
+                if (expectedRightRail > 0) {
+                  expect(device.logicalSize.width - cardRect.right, greaterThanOrEqualTo(expectedRightRail - 1.0),
+                      reason: 'Card right margin must clear reservation margin ($expectedRightRail pt)');
+                }
+              }
+
+              // 2. Positive geometry assertions for section header chevrons
+              final chevronFinders = find.byIcon(Icons.expand_more);
+              for (final chevron in tester.widgetList(chevronFinders)) {
+                final chevronRect = tester.getRect(find.byWidget(chevron));
+                expect(chevronRect.right, lessThanOrEqualTo(device.logicalSize.width + 0.5),
+                    reason: 'Section chevron must remain within screen width');
+                expect(chevronRect.left, greaterThanOrEqualTo(0.0),
+                    reason: 'Section chevron must not be pushed offscreen');
+              }
+
+              // 3. Scroll through CustomScrollView to verify lazily built section cards
               await tester.drag(find.byType(CustomScrollView), const Offset(0, -300));
               await tester.pump();
-              await tester.pump(const Duration(milliseconds: 100));
+              await tester.pump(const Duration(milliseconds: 300));
+              await tester.pump(const Duration(milliseconds: 500));
 
               expect(tester.takeException(), isNull);
+
+              // 4. Re-verify geometry after scroll
+              for (final card in tester.widgetList<Card>(find.byType(Card))) {
+                final cardRect = tester.getRect(find.byWidget(card));
+                expect(cardRect.right, lessThanOrEqualTo(device.logicalSize.width + 0.5),
+                    reason: 'Card after scroll must not overflow viewport right edge');
+              }
             },
           );
         }
@@ -956,9 +1100,15 @@ void main() {
         );
 
         await tester.pump();
-        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 300));
+        await tester.pump(const Duration(milliseconds: 500));
 
         expect(tester.takeException(), isNull);
+
+        for (final card in tester.widgetList<Card>(find.byType(Card))) {
+          final cardRect = tester.getRect(find.byWidget(card));
+          expect(cardRect.right, lessThanOrEqualTo(466.0 + 0.5));
+        }
       }
     });
 
@@ -1009,9 +1159,16 @@ void main() {
       );
 
       await tester.pump();
-      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 300));
+      await tester.pump(const Duration(milliseconds: 500));
 
       expect(tester.takeException(), isNull);
+
+      for (final card in tester.widgetList<Card>(find.byType(Card))) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.right, lessThanOrEqualTo(320.0 + 0.5),
+            reason: 'Cards must fit within 320pt width at 2.0x accessibility scale');
+      }
     });
 
     for (final device in realDevices) {
@@ -1044,6 +1201,20 @@ void main() {
 
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
+
+        // Positive geometry assertions: list and search field must remain within viewport
+        final listFinder = find.byType(ListView);
+        expect(listFinder, findsOneWidget);
+        final listRect = tester.getRect(listFinder);
+        expect(listRect.right, lessThanOrEqualTo(device.logicalSize.width + 0.5));
+        expect(listRect.left, greaterThanOrEqualTo(0.0));
+
+        final searchFinder = find.byType(TextField);
+        if (searchFinder.evaluate().isNotEmpty) {
+          final searchRect = tester.getRect(searchFinder);
+          expect(searchRect.right, lessThanOrEqualTo(device.logicalSize.width + 0.5));
+          expect(searchRect.left, greaterThanOrEqualTo(0.0));
+        }
       });
     }
 
@@ -1088,6 +1259,18 @@ void main() {
 
         await tester.pumpAndSettle();
         expect(tester.takeException(), isNull);
+
+        // Positive geometry assertions: scaffold width and cards stay within viewport
+        final scaffoldFinder = find.byType(Scaffold);
+        expect(scaffoldFinder, findsOneWidget);
+        final scaffoldRect = tester.getRect(scaffoldFinder);
+        expect(scaffoldRect.width, equals(device.logicalSize.width));
+
+        for (final card in tester.widgetList<Card>(find.byType(Card))) {
+          final cardRect = tester.getRect(find.byWidget(card));
+          expect(cardRect.right, lessThanOrEqualTo(device.logicalSize.width + 0.5));
+          expect(cardRect.left, greaterThanOrEqualTo(0.0));
+        }
       });
     }
   });
