@@ -27,6 +27,7 @@ import 'quiz/interrogative_quiz_screen.dart';
 import 'quiz/grammar_quiz_screen.dart';
 import 'quiz/preposition_quiz_screen.dart';
 import 'listen_repeat/listen_repeat_screen.dart';
+import '../utils/iphone_duo_helper.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -289,6 +290,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final items = storage.getAllItems();
     final progress = ref.watch(progressServiceProvider);
     final learnedCount = items.where((i) => i.masteryLevel > 0).length;
+    final isDuo = IPhoneDuoHelper.isDuo(context);
+    final contentPadding = IPhoneDuoHelper.getContentHorizontalPadding(context);
+    final appBarRightPadding =
+        IPhoneDuoHelper.getAppBarActionsRightPadding(context);
+    final fabLocation = IPhoneDuoHelper.getFabLocation(context);
 
     return Scaffold(
       extendBody: true,
@@ -299,62 +305,67 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         title: const Text('Language Trainer'),
         centerTitle: true,
         actions: [
-          PopupMenuButton<String>(
-            onSelected: (value) {
-              if (value == 'refresh') {
-                _loadData();
-              } else if (value == 'shuffle') {
-                _confirmShuffle();
-              } else if (value == 'reset') {
-                _confirmReset();
-              } else if (value == 'test_notif') {
-                ref.read(notificationServiceProvider).showTestNotification();
-              } else if (value == 'settings') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SettingsScreen(),
+          Padding(
+            padding: EdgeInsets.only(
+              right: appBarRightPadding,
+            ),
+            child: PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'refresh') {
+                  _loadData();
+                } else if (value == 'shuffle') {
+                  _confirmShuffle();
+                } else if (value == 'reset') {
+                  _confirmReset();
+                } else if (value == 'test_notif') {
+                  ref.read(notificationServiceProvider).showTestNotification();
+                } else if (value == 'settings') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsScreen(),
+                    ),
+                  );
+                }
+              },
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 'settings',
+                  child: ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text('Settings'),
                   ),
-                );
-              }
-            },
-            itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'settings',
-                child: ListTile(
-                  leading: Icon(Icons.settings),
-                  title: Text('Settings'),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'test_notif',
-                child: ListTile(
-                  leading: Icon(Icons.notifications_active),
-                  title: Text('Test Notification'),
+                const PopupMenuItem(
+                  value: 'test_notif',
+                  child: ListTile(
+                    leading: Icon(Icons.notifications_active),
+                    title: Text('Test Notification'),
+                  ),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'refresh',
-                child: ListTile(
-                  leading: Icon(Icons.refresh),
-                  title: Text('Refresh Data'),
+                const PopupMenuItem(
+                  value: 'refresh',
+                  child: ListTile(
+                    leading: Icon(Icons.refresh),
+                    title: Text('Refresh Data'),
+                  ),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'shuffle',
-                child: ListTile(
-                  leading: Icon(Icons.shuffle),
-                  title: Text('Shuffle All Questions'),
+                const PopupMenuItem(
+                  value: 'shuffle',
+                  child: ListTile(
+                    leading: Icon(Icons.shuffle),
+                    title: Text('Shuffle All Questions'),
+                  ),
                 ),
-              ),
-              const PopupMenuItem(
-                value: 'reset',
-                child: ListTile(
-                  leading: Icon(Icons.restore),
-                  title: Text('Reset Stats'),
+                const PopupMenuItem(
+                  value: 'reset',
+                  child: ListTile(
+                    leading: Icon(Icons.restore),
+                    title: Text('Reset Stats'),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -411,7 +422,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 80),
+                    padding: EdgeInsets.fromLTRB(
+                      contentPadding.left,
+                      10,
+                      contentPadding.right,
+                      80,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -445,6 +461,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         FadeInUp(
                           delay: const Duration(milliseconds: 200),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               _buildSection(
                                 title: 'Vocabulary & Flashcards',
@@ -695,6 +712,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     topPadding: topPadding,
                     shrinkPercentage: shrinkPercentage,
                     currentHeight: currentHeight,
+                    isDuo: isDuo,
+                    leftMargin: contentPadding.left,
+                    rightMargin: contentPadding.right,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -710,7 +730,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: fabLocation,
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -783,60 +803,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       margin: const EdgeInsets.only(bottom: 8),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-        child: _buildSectionContent(
+        child: SectionContent(
           title: title,
           icon: icon,
-          children: children,
           initiallyExpanded: initiallyExpanded,
           isDark: isDark,
+          children: children,
         ),
-      ),
-    );
-  }
-
-  Widget _buildSectionContent({
-    required String title,
-    required IconData icon,
-    required List<Widget> children,
-    required bool initiallyExpanded,
-    required bool isDark,
-  }) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        dividerColor: Colors.transparent,
-        listTileTheme: ListTileThemeData(
-          dense: true,
-          visualDensity: VisualDensity.compact,
-          iconColor: isDark ? Colors.white : Colors.black87,
-        ),
-      ),
-      child: ExpansionTile(
-        initiallyExpanded: initiallyExpanded,
-        tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-        iconColor: isDark ? Colors.white : Colors.black87,
-        collapsedIconColor: isDark ? Colors.white70 : Colors.black54,
-        leading: Icon(icon, color: isDark ? Colors.white : Colors.black87),
-        title: Text(
-          title,
-          style: TextStyle(
-            color: isDark ? Colors.white : Colors.black87,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-          ),
-        ),
-        childrenPadding: EdgeInsets.zero,
-        children: [
-          GridView.count(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-            crossAxisCount: 3,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisSpacing: 12,
-            mainAxisSpacing: 12,
-            childAspectRatio: 1.1,
-            children: children,
-          ),
-        ],
       ),
     );
   }
@@ -883,29 +856,176 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 width: 1.2,
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  icon,
-                  size: 28,
-                  color: onPressed == null ? Colors.white70 : fgColor,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  label,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: onPressed == null ? Colors.white70 : fgColor,
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final isCompact = constraints.maxHeight < 72 || constraints.maxWidth < 80;
+                final iconSize = isCompact ? 22.0 : 28.0;
+                final gap = isCompact ? 4.0 : 8.0;
+                final fontSize = isCompact ? 11.0 : 12.0;
+                final contentWidth = (constraints.maxWidth - 8.0).clamp(10.0, double.infinity);
+
+                return Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: SizedBox(
+                      width: contentWidth,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            icon,
+                            size: iconSize,
+                            color: onPressed == null ? Colors.white70 : fgColor,
+                          ),
+                          SizedBox(height: gap),
+                          Text(
+                            label,
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: fontSize,
+                              fontWeight: FontWeight.bold,
+                              height: 1.15,
+                              color: onPressed == null ? Colors.white70 : fgColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
+                );
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+@visibleForTesting
+class SectionContent extends StatefulWidget {
+  final String title;
+  final IconData icon;
+  final List<Widget> children;
+  final bool initiallyExpanded;
+  final bool isDark;
+
+  const SectionContent({
+    super.key,
+    required this.title,
+    required this.icon,
+    required this.children,
+    required this.initiallyExpanded,
+    required this.isDark,
+  });
+
+  @override
+  State<SectionContent> createState() => _SectionContentState();
+}
+
+class _SectionContentState extends State<SectionContent>
+    with SingleTickerProviderStateMixin {
+  late bool _isExpanded;
+  late AnimationController _controller;
+  late Animation<double> _iconTurns;
+  late Animation<double> _heightFactor;
+
+  @override
+  void initState() {
+    super.initState();
+    _isExpanded = widget.initiallyExpanded;
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+      value: _isExpanded ? 1.0 : 0.0,
+    );
+    _iconTurns = _controller.drive(
+      Tween<double>(begin: 0.0, end: 0.5).chain(CurveTween(curve: Curves.easeIn)),
+    );
+    _heightFactor = _controller.drive(CurveTween(curve: Curves.easeIn));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _toggle() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+      if (_isExpanded) {
+        _controller.forward();
+      } else {
+        _controller.reverse();
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final fgColor = widget.isDark ? Colors.white : Colors.black87;
+    final chevronColor = widget.isDark
+        ? (_isExpanded ? Colors.white : Colors.white70)
+        : (_isExpanded ? Colors.black87 : Colors.black54);
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        InkWell(
+          onTap: _toggle,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            child: Row(
+              children: [
+                Icon(widget.icon, color: fgColor),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    widget.title,
+                    style: TextStyle(
+                      color: fgColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                RotationTransition(
+                  turns: _iconTurns,
+                  child: Icon(Icons.expand_more, color: chevronColor),
                 ),
               ],
             ),
           ),
         ),
-      ),
+        ClipRect(
+          child: AnimatedBuilder(
+            animation: _controller.view,
+            builder: (context, child) {
+              return Align(
+                alignment: Alignment.topCenter,
+                heightFactor: _heightFactor.value,
+                child: child,
+              );
+            },
+            child: GridView.count(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
+              crossAxisCount: 3,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 1.1,
+              children: widget.children,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -916,6 +1036,9 @@ class _PinnedStatsCard extends StatelessWidget {
   final double topPadding;
   final double shrinkPercentage;
   final double currentHeight;
+  final bool isDuo;
+  final double leftMargin;
+  final double rightMargin;
 
   const _PinnedStatsCard({
     required this.progress,
@@ -923,6 +1046,9 @@ class _PinnedStatsCard extends StatelessWidget {
     required this.topPadding,
     required this.shrinkPercentage,
     required this.currentHeight,
+    this.isDuo = false,
+    this.leftMargin = 20.0,
+    this.rightMargin = 20.0,
   });
 
   @override
@@ -938,9 +1064,9 @@ class _PinnedStatsCard extends StatelessWidget {
         onTap: onTap,
         child: Container(
           margin: EdgeInsets.fromLTRB(
-            20,
+            leftMargin,
             topPadding + 20 * (1 - clampedShrink),
-            20,
+            rightMargin,
             10,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -986,33 +1112,47 @@ class _PinnedStatsCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.local_fire_department,
-                                  color: progress.currentStreak > 0
-                                      ? Colors.deepOrange.shade300
-                                      : Colors.white38,
-                                  size: 22,
+                            Flexible(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.local_fire_department,
+                                      color: progress.currentStreak > 0
+                                          ? Colors.deepOrange.shade300
+                                          : Colors.white38,
+                                      size: 22,
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      '${progress.currentStreak}-day streak',
+                                      style: TextStyle(
+                                        color: progress.currentStreak > 0
+                                            ? Colors.white
+                                            : Colors.white54,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(width: 4),
-                                Text(
-                                  '${progress.currentStreak}-day streak',
-                                  style: TextStyle(
-                                    color: progress.currentStreak > 0
-                                        ? Colors.white
-                                        : Colors.white54,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 13,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Flexible(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  '${progress.todayXP}/${progress.dailyGoal} XP',
+                                  style: const TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 12,
                                   ),
                                 ),
-                              ],
-                            ),
-                            Text(
-                              '${progress.todayXP}/${progress.dailyGoal} XP',
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12,
                               ),
                             ),
                           ],
@@ -1046,27 +1186,36 @@ class _PinnedStatsCard extends StatelessWidget {
                               Colors.orange.shade200,
                               Colors.greenAccent.shade200,
                             ];
-                            return Column(
-                              children: [
-                                Text(
-                                  '$count',
-                                  style: TextStyle(
-                                    color: tierColors[tier],
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 2),
-                                Text(
-                                  WordProgress.tierName(tier),
-                                  style: TextStyle(
-                                    color: tierColors[tier].withValues(
-                                      alpha: 0.7,
+                            return Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      '$count',
+                                      style: TextStyle(
+                                        color: tierColors[tier],
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                    fontSize: 9,
                                   ),
-                                ),
-                              ],
+                                  const SizedBox(height: 2),
+                                  FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      WordProgress.tierName(tier),
+                                      style: TextStyle(
+                                        color: tierColors[tier].withValues(
+                                          alpha: 0.7,
+                                        ),
+                                        fontSize: 9,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             );
                           }),
                         ),
@@ -1074,29 +1223,43 @@ class _PinnedStatsCard extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              'Total XP: ${progress.totalXP}',
-                              style: const TextStyle(
-                                color: Colors.white54,
-                                fontSize: 11,
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Sessions today: ${progress.todaySessions}',
+                            Expanded(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Total XP: ${progress.totalXP}',
                                   style: const TextStyle(
                                     color: Colors.white54,
                                     fontSize: 11,
                                   ),
                                 ),
-                                const SizedBox(width: 6),
-                                const Icon(
-                                  Icons.chevron_right,
-                                  color: Colors.white38,
-                                  size: 16,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                alignment: Alignment.centerRight,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      'Sessions today: ${progress.todaySessions}',
+                                      style: const TextStyle(
+                                        color: Colors.white54,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 6),
+                                    const Icon(
+                                      Icons.chevron_right,
+                                      color: Colors.white38,
+                                      size: 16,
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
@@ -1113,41 +1276,50 @@ class _PinnedStatsCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.local_fire_department,
-                              color: progress.currentStreak > 0
-                                  ? Colors.deepOrange.shade300
-                                  : Colors.white38,
-                              size: 22,
-                            ),
-                            const SizedBox(width: 4),
-                            Text(
-                              '${progress.currentStreak}',
-                              style: TextStyle(
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.local_fire_department,
                                 color: progress.currentStreak > 0
-                                    ? Colors.white
-                                    : Colors.white54,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
+                                    ? Colors.deepOrange.shade300
+                                    : Colors.white38,
+                                size: 22,
                               ),
-                            ),
-                          ],
+                              const SizedBox(width: 4),
+                              Text(
+                                '${progress.currentStreak}',
+                                style: TextStyle(
+                                  color: progress.currentStreak > 0
+                                      ? Colors.white
+                                      : Colors.white54,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  '${progress.todayXP}/${progress.dailyGoal} XP',
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.bold,
+                                FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    '${progress.todayXP}/${progress.dailyGoal} XP',
+                                    maxLines: 1,
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(height: 4),
@@ -1170,12 +1342,16 @@ class _PinnedStatsCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Text(
-                          '${progress.totalXP} Total',
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            '${progress.totalXP} Total',
+                            maxLines: 1,
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],

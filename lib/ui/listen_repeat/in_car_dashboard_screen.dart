@@ -11,10 +11,21 @@ import '../../theme/carplay_theme.dart';
 import '../widgets/xp_popup.dart';
 import 'listen_repeat_view_model.dart';
 
+import '../../utils/iphone_duo_helper.dart';
+
 /// Pixel-perfect in-car landscape dashboard implementing the Listen & Repeat
 /// brand specification and 3-column automotive layout.
 class InCarDashboardScreen extends ConsumerStatefulWidget {
-  const InCarDashboardScreen({super.key});
+  final VoidCallback? onBack;
+  final VoidCallback? onStop;
+  final bool embedded;
+
+  const InCarDashboardScreen({
+    super.key,
+    this.onBack,
+    this.onStop,
+    this.embedded = false,
+  });
 
   @override
   ConsumerState<InCarDashboardScreen> createState() => _InCarDashboardScreenState();
@@ -24,30 +35,38 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final state = ref.read(listenRepeatViewModelProvider);
-      if (!state.isPlaying && state.currentItem == null) {
-        ref.read(listenRepeatViewModelProvider.notifier).startSession();
-      }
-    });
+    if (!widget.embedded) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final state = ref.read(listenRepeatViewModelProvider);
+        if (!state.isPlaying && state.currentItem == null) {
+          ref.read(listenRepeatViewModelProvider.notifier).startSession();
+        }
+      });
+    }
   }
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
+    if (!widget.embedded) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    }
     super.dispose();
   }
 
   void _stopSessionAndPop() async {
+    if (widget.onStop != null) {
+      widget.onStop!();
+      return;
+    }
     final xp = await ref.read(listenRepeatViewModelProvider.notifier).stopSession();
     if (mounted) {
       if (xp > 0) {
@@ -65,6 +84,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
     final item = state.currentItem;
     final isFlagged = item != null && storage.isItemFlagged(item.id);
     final notifier = ref.read(listenRepeatViewModelProvider.notifier);
+    final isCompact = MediaQuery.sizeOf(context).height < 500;
 
     return Scaffold(
       backgroundColor: CarPlayTheme.bg,
@@ -72,38 +92,65 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
         child: Column(
           children: [
             // Top Bar
-            _buildTopBar(context, state, notifier),
+            _buildTopBar(context, state, notifier, isCompact: isCompact),
 
             // Main 3-Column Content
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // Left Column: Practice Sets
-                    Expanded(
-                      flex: 3,
-                      child: _buildPracticeSetsColumn(state, notifier, modeCounts),
+              child: Builder(
+                builder: (context) {
+                  final isDuo = IPhoneDuoHelper.isDuo(context);
+                  final rightContentPadding = isDuo ? 48.0 : 24.0;
+                  return Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      24,
+                      isCompact ? 4 : 8,
+                      rightContentPadding,
+                      isCompact ? 4 : 8,
                     ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Left Column: Practice Sets
+                        Expanded(
+                          flex: 3,
+                          child: _buildPracticeSetsColumn(
+                            state,
+                            notifier,
+                            modeCounts,
+                            isCompact: isCompact,
+                          ),
+                        ),
 
-                    const SizedBox(width: 20),
+                        const SizedBox(width: 20),
 
-                    // Center Column: Flashcard & Status
-                    Expanded(
-                      flex: 6,
-                      child: _buildCenterCardColumn(state, item, isFlagged, storage, modeCounts),
+                        // Center Column: Flashcard & Status
+                        Expanded(
+                          flex: 6,
+                          child: _buildCenterCardColumn(
+                            state,
+                            item,
+                            isFlagged,
+                            storage,
+                            modeCounts,
+                            isCompact: isCompact,
+                          ),
+                        ),
+
+                        const SizedBox(width: 20),
+
+                        // Right Column: Playback Controls
+                        Expanded(
+                          flex: 3,
+                          child: _buildPlaybackControlsColumn(
+                            state,
+                            notifier,
+                            isCompact: isCompact,
+                          ),
+                        ),
+                      ],
                     ),
-
-                    const SizedBox(width: 20),
-
-                    // Right Column: Playback Controls
-                    Expanded(
-                      flex: 3,
-                      child: _buildPlaybackControlsColumn(state, notifier),
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
           ],
@@ -115,10 +162,19 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
   Widget _buildTopBar(
     BuildContext context,
     ListenRepeatState state,
-    ListenRepeatViewModel notifier,
-  ) {
+    ListenRepeatViewModel notifier, {
+    bool isCompact = false,
+  }) {
+    final isDuo = IPhoneDuoHelper.isDuo(context);
+    final topBarRightPadding = isDuo ? 64.0 : 24.0;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      padding: EdgeInsets.fromLTRB(
+        24,
+        isCompact ? 4 : 12,
+        topBarRightPadding,
+        isCompact ? 4 : 12,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -126,7 +182,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
           InkWell(
             key: const Key('carplay_dash_back_button'),
             borderRadius: BorderRadius.circular(CarPlayTheme.pillRadius),
-            onTap: () => Navigator.of(context).pop(),
+            onTap: widget.onBack ?? () => Navigator.of(context).pop(),
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 6),
               child: Row(
@@ -201,8 +257,9 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
   Widget _buildPracticeSetsColumn(
     ListenRepeatState state,
     ListenRepeatViewModel notifier,
-    Map<ListenRepeatMode, int> modeCounts,
-  ) {
+    Map<ListenRepeatMode, int> modeCounts, {
+    bool isCompact = false,
+  }) {
     const modes = [
       ListenRepeatMode.all,
       ListenRepeatMode.verbs,
@@ -214,9 +271,9 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 4, bottom: 12),
-          child: Text(
+        Padding(
+          padding: EdgeInsets.only(left: 4, bottom: isCompact ? 6 : 12),
+          child: const Text(
             'PRACTICE SET',
             style: CarPlayTheme.sectionHeader,
           ),
@@ -224,7 +281,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
         Expanded(
           child: ListView.separated(
             itemCount: modes.length,
-            separatorBuilder: (_, _) => const SizedBox(height: 10),
+            separatorBuilder: (_, _) => SizedBox(height: isCompact ? 6 : 10),
             itemBuilder: (context, index) {
               final mode = modes[index];
               final isSelected = state.mode == mode;
@@ -237,7 +294,10 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                 borderRadius: BorderRadius.circular(16),
                 onTap: () => notifier.setMode(mode),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: isCompact ? 8 : 14,
+                  ),
                   decoration: BoxDecoration(
                     color: CarPlayTheme.surface,
                     borderRadius: BorderRadius.circular(16),
@@ -301,8 +361,9 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
     LanguageItem? item,
     bool isFlagged,
     StorageService storage,
-    Map<ListenRepeatMode, int> modeCounts,
-  ) {
+    Map<ListenRepeatMode, int> modeCounts, {
+    bool isCompact = false,
+  }) {
     final int wordsSeen = state.totalWordsSeen;
     final int poolCount = state.pool.isNotEmpty
         ? state.pool.length
@@ -342,8 +403,8 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                 children: [
                   // Star Bookmark Action
                   Positioned(
-                    top: 14,
-                    right: 14,
+                    top: isCompact ? 6 : 14,
+                    right: isCompact ? 6 : 14,
                     child: IconButton(
                       key: const Key('carplay_dash_star_button'),
                       icon: Icon(
@@ -351,7 +412,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                         color: isFlagged
                             ? CarPlayTheme.starGold
                             : CarPlayTheme.muted,
-                        size: 28,
+                        size: isCompact ? 24 : 28,
                       ),
                       tooltip: isFlagged ? 'Remove bookmark' : 'Flag for review',
                       onPressed: item != null
@@ -366,56 +427,68 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
 
                   // Main Text Content
                   Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 28),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // Grammar / Tense Pill Badge
-                          if (item != null && item.notes.trim().isNotEmpty) ...[
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 14,
-                                vertical: 5,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF2E2C3D),
-                                borderRadius: BorderRadius.circular(CarPlayTheme.badgeRadius),
-                                border: Border.all(
-                                  color: const Color(0x55B587FA),
-                                  width: 1.0,
+                    child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isCompact ? 16 : 28,
+                          vertical: isCompact ? 8 : 16,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            // Grammar / Tense Pill Badge
+                            if (item != null && item.notes.trim().isNotEmpty) ...[
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: isCompact ? 10 : 14,
+                                  vertical: isCompact ? 3 : 5,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF2E2C3D),
+                                  borderRadius: BorderRadius.circular(CarPlayTheme.badgeRadius),
+                                  border: Border.all(
+                                    color: const Color(0x55B587FA),
+                                    width: 1.0,
+                                  ),
+                                ),
+                                child: Text(
+                                  item.notes.trim(),
+                                  style: isCompact
+                                      ? CarPlayTheme.badgeText.copyWith(fontSize: 11)
+                                      : CarPlayTheme.badgeText,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              child: Text(
-                                item.notes.trim(),
-                                style: CarPlayTheme.badgeText,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                              SizedBox(height: isCompact ? 8 : 18),
+                            ],
+
+                            // Portuguese Target Phrase
+                            Text(
+                              item?.portuguese ?? (state.failure ?? 'Loading words...'),
+                              style: isCompact
+                                  ? CarPlayTheme.phraseText.copyWith(fontSize: 22)
+                                  : CarPlayTheme.phraseText,
+                              textAlign: TextAlign.center,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            const SizedBox(height: 18),
+
+                            SizedBox(height: isCompact ? 6 : 12),
+
+                            // English Translation
+                            Text(
+                              item?.english ?? '',
+                              style: isCompact
+                                  ? CarPlayTheme.translationText.copyWith(fontSize: 15)
+                                  : CarPlayTheme.translationText,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ],
-
-                          // Portuguese Target Phrase
-                          Text(
-                            item?.portuguese ?? (state.failure ?? 'Loading words...'),
-                            style: CarPlayTheme.phraseText,
-                            textAlign: TextAlign.center,
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-
-                          const SizedBox(height: 12),
-
-                          // English Translation
-                          Text(
-                            item?.english ?? '',
-                            style: CarPlayTheme.translationText,
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -425,7 +498,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
           ),
         ),
 
-        const SizedBox(height: 14),
+        SizedBox(height: isCompact ? 6 : 14),
 
         // Sub-Card Progress & Status
         Column(
@@ -434,10 +507,12 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
             // Status Label
             Text(
               state.isSpeaking ? 'Speaking ...' : '... Ready',
-              style: CarPlayTheme.metaText,
+              style: isCompact
+                  ? CarPlayTheme.metaText.copyWith(fontSize: 11)
+                  : CarPlayTheme.metaText,
             ),
 
-            const SizedBox(height: 8),
+            SizedBox(height: isCompact ? 4 : 8),
 
             // Pagination Dots
             Row(
@@ -446,8 +521,8 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                 final isCurrent = index == currentDot;
                 return Container(
                   margin: const EdgeInsets.symmetric(horizontal: 3),
-                  width: 7,
-                  height: 7,
+                  width: isCompact ? 6 : 7,
+                  height: isCompact ? 6 : 7,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isCurrent
@@ -467,12 +542,14 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
               }),
             ),
 
-            const SizedBox(height: 6),
+            SizedBox(height: isCompact ? 4 : 6),
 
             // Word Counter Text
             Text(
               counterText,
-              style: CarPlayTheme.metaText,
+              style: isCompact
+                  ? CarPlayTheme.metaText.copyWith(fontSize: 11)
+                  : CarPlayTheme.metaText,
             ),
           ],
         ),
@@ -482,14 +559,15 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
 
   Widget _buildPlaybackControlsColumn(
     ListenRepeatState state,
-    ListenRepeatViewModel notifier,
-  ) {
+    ListenRepeatViewModel notifier, {
+    bool isCompact = false,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(left: 4, bottom: 12),
-          child: Text(
+        Padding(
+          padding: EdgeInsets.only(left: 4, bottom: isCompact ? 6 : 12),
+          child: const Text(
             'PLAYBACK',
             style: CarPlayTheme.sectionHeader,
           ),
@@ -511,17 +589,18 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                       icon: Icons.skip_previous_rounded,
                       label: 'Prev',
                       onTap: () => notifier.previousWord(),
+                      isCompact: isCompact,
                     ),
 
-                    const SizedBox(width: 12),
+                    SizedBox(width: isCompact ? 8 : 12),
 
                     // Large Circular Violet Play/Pause Button
                     GestureDetector(
                       key: const Key('carplay_dash_play_button'),
                       onTap: () => notifier.togglePlayPause(),
                       child: Container(
-                        width: 68,
-                        height: 68,
+                        width: isCompact ? 54 : 68,
+                        height: isCompact ? 54 : 68,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: CarPlayTheme.accent,
@@ -538,12 +617,12 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                               ? Icons.pause_rounded
                               : Icons.play_arrow_rounded,
                           color: const Color(0xFF1B1924),
-                          size: 38,
+                          size: isCompact ? 30 : 38,
                         ),
                       ),
                     ),
 
-                    const SizedBox(width: 12),
+                    SizedBox(width: isCompact ? 8 : 12),
 
                     // Next Button
                     _buildPillButton(
@@ -552,12 +631,13 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                       label: 'Next',
                       trailingIcon: true,
                       onTap: () => notifier.nextWord(),
+                      isCompact: isCompact,
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 18),
+              SizedBox(height: isCompact ? 10 : 18),
 
               // Bottom Row: Shuffle & Stop
               FittedBox(
@@ -571,9 +651,10 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                       icon: Icons.shuffle_rounded,
                       label: 'Shuffle',
                       onTap: () => notifier.shufflePool(),
+                      isCompact: isCompact,
                     ),
 
-                    const SizedBox(width: 12),
+                    SizedBox(width: isCompact ? 8 : 12),
 
                     // Stop Button
                     _buildPillButton(
@@ -581,6 +662,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
                       icon: Icons.stop_rounded,
                       label: 'Stop',
                       onTap: _stopSessionAndPop,
+                      isCompact: isCompact,
                     ),
                   ],
                 ),
@@ -598,13 +680,17 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
     required String label,
     required VoidCallback onTap,
     bool trailingIcon = false,
+    bool isCompact = false,
   }) {
     return InkWell(
       key: key,
       borderRadius: BorderRadius.circular(CarPlayTheme.pillRadius),
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(
+          horizontal: isCompact ? 12 : 16,
+          vertical: isCompact ? 8 : 12,
+        ),
         decoration: BoxDecoration(
           color: CarPlayTheme.surface2,
           borderRadius: BorderRadius.circular(CarPlayTheme.pillRadius),
@@ -614,20 +700,20 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (!trailingIcon) ...[
-              Icon(icon, color: CarPlayTheme.fg, size: 18),
-              const SizedBox(width: 6),
+              Icon(icon, color: CarPlayTheme.fg, size: isCompact ? 16 : 18),
+              SizedBox(width: isCompact ? 4 : 6),
             ],
             Text(
               label,
-              style: const TextStyle(
+              style: TextStyle(
                 color: CarPlayTheme.fg,
-                fontSize: 14,
+                fontSize: isCompact ? 13 : 14,
                 fontWeight: FontWeight.w600,
               ),
             ),
             if (trailingIcon) ...[
-              const SizedBox(width: 6),
-              Icon(icon, color: CarPlayTheme.fg, size: 18),
+              SizedBox(width: isCompact ? 4 : 6),
+              Icon(icon, color: CarPlayTheme.fg, size: isCompact ? 16 : 18),
             ],
           ],
         ),

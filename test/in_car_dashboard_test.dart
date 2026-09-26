@@ -305,5 +305,46 @@ void main() {
       await tester.pump();
       expect(vm.switchedMode, ListenRepeatMode.prepositions);
     });
+
+    testWidgets('renders at 667x375 (compact landscape) with notes without vertical overflow', (tester) async {
+      final storage = FakeStorageService(initialItems: [testItem]);
+      final audioPlayer = MockAudioPlayer();
+      final vm = _MockDashboardLRViewModel(testItem, audioPlayer: audioPlayer);
+
+      tester.view.physicalSize = const Size(667, 375);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(createWidgetUnderTest(storage: storage, vm: vm));
+      await tester.pump();
+
+      expect(tester.takeException(), isNull);
+      expect(find.text('Futuro (vamos) • nós'), findsOneWidget);
+      expect(find.text('Nós vamos ouvir'), findsOneWidget);
+      expect(find.text('We are going to hear'), findsOneWidget);
+      expect(find.byKey(const Key('carplay_dash_play_button')), findsOneWidget);
+    });
+
+    testWidgets('renders at 852x393 (iPhone 15 Pro landscape) with notes without vertical overflow', (tester) async {
+      final storage = FakeStorageService(initialItems: [testItem]);
+      final audioPlayer = MockAudioPlayer();
+      final vm = _MockDashboardLRViewModel(testItem, audioPlayer: audioPlayer);
+
+      tester.view.physicalSize = const Size(852, 393);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(createWidgetUnderTest(storage: storage, vm: vm));
+      await tester.pump();
+
+      expect(tester.takeException(), isNull);
+      expect(find.text('Futuro (vamos) • nós'), findsOneWidget);
+      expect(find.text('Nós vamos ouvir'), findsOneWidget);
+      expect(find.text('We are going to hear'), findsOneWidget);
+      expect(find.byKey(const Key('carplay_dash_play_button')), findsOneWidget);
+    });
   });
 }
+

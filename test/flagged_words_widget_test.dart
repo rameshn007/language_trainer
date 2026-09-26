@@ -64,6 +64,11 @@ void main() {
       when(() => mockAudioPlayer.currentIndexStream).thenAnswer((_) => Stream.value(0));
       when(() => mockAudioPlayer.dispose()).thenAnswer((_) async {});
 
+      tester.view.physicalSize = const Size(393, 852);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
       await tester.pumpWidget(
         ProviderScope(
           overrides: [
