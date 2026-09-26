@@ -13,6 +13,7 @@ import 'helpers/carplay_test_helpers.dart';
 
 class _TestLRViewModel extends ListenRepeatViewModel {
   final LanguageItem _item;
+  int startSessionCalls = 0;
 
   _TestLRViewModel(this._item, {required super.audioPlayer});
 
@@ -28,10 +29,21 @@ class _TestLRViewModel extends ListenRepeatViewModel {
   }
 
   @override
-  Future<void> startSession({ListenRepeatMode? mode}) async {}
+  Future<void> startSession({ListenRepeatMode? mode}) async {
+    startSessionCalls++;
+  }
 
   @override
-  Future<int> stopSession({bool recordProgress = true}) async => 10;
+  Future<int> stopSession({bool recordProgress = true}) async {
+    state = ListenRepeatState(
+      isPlaying: false,
+      currentItem: null,
+      totalWordsSeen: state.totalWordsSeen,
+      playbackSpeed: state.playbackSpeed,
+      mode: state.mode,
+    );
+    return 10;
+  }
 }
 
 void main() {
@@ -154,6 +166,55 @@ void main() {
       expect(offset.dx, equals(951.0 - 38.0 - 28.0)); // 885.0
       expect(offset.dx + 28.0, equals(951.0 - 38.0)); // Center aligns with wifi icon
     });
+
+    testWidgets('isPhoneOrDuo identifies phone, Duo, and tablet screens', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: ThemeData(platform: TargetPlatform.iOS),
+          home: const Scaffold(body: SizedBox.shrink(key: Key('test_box'))),
+        ),
+      );
+
+      BuildContext getContext() => tester.element(find.byKey(const Key('test_box')));
+
+      // Phone portrait (393 x 852)
+      tester.view.physicalSize = const Size(393, 852);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      await tester.pump();
+      expect(IPhoneDuoHelper.isPhoneOrDuo(getContext()), isTrue);
+
+      // Phone landscape (852 x 393) - shortestSide 393 < 600
+      tester.view.physicalSize = const Size(852, 393);
+      await tester.pump();
+      expect(IPhoneDuoHelper.isPhoneOrDuo(getContext()), isTrue);
+
+      // Duo outside portrait (466 x 678)
+      tester.view.physicalSize = const Size(466, 678);
+      await tester.pump();
+      expect(IPhoneDuoHelper.isPhoneOrDuo(getContext()), isTrue);
+
+      // Duo outside landscape (678 x 466)
+      tester.view.physicalSize = const Size(678, 466);
+      await tester.pump();
+      expect(IPhoneDuoHelper.isPhoneOrDuo(getContext()), isTrue);
+
+      // Duo inside landscape (951 x 669) - shortestSide 669 >= 600, but Duo -> true
+      tester.view.physicalSize = const Size(951, 669);
+      await tester.pump();
+      expect(IPhoneDuoHelper.isPhoneOrDuo(getContext()), isTrue);
+
+      // iPad portrait (768 x 1024) - shortestSide 768 >= 600, not Duo -> false
+      tester.view.physicalSize = const Size(768, 1024);
+      await tester.pump();
+      expect(IPhoneDuoHelper.isPhoneOrDuo(getContext()), isFalse);
+
+      // iPad landscape (1024 x 768) - shortestSide 768 >= 600, not Duo -> false
+      tester.view.physicalSize = const Size(1024, 768);
+      await tester.pump();
+      expect(IPhoneDuoHelper.isPhoneOrDuo(getContext()), isFalse);
+    });
   });
 
   group('ListenRepeatScreen Orientation Switching', () {
@@ -181,13 +242,14 @@ void main() {
           listenRepeatViewModelProvider.overrideWith(() => vm),
           listenRepeatModeCountsProvider.overrideWith((ref) => Future.value(counts)),
         ],
-        child: const MaterialApp(
-          home: ListenRepeatScreen(),
+        child: MaterialApp(
+          theme: ThemeData(platform: TargetPlatform.iOS),
+          home: const ListenRepeatScreen(),
         ),
       );
     }
 
-    testWidgets('renders simple view in portrait', (tester) async {
+    testWidgets('renders simple view on iPad/tablet in landscape (1024 x 768)', (tester) async {
       final storage = FakeStorageService(initialItems: [testItem]);
       final mockAudioPlayer = MockAudioPlayer();
       when(() => mockAudioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
@@ -195,7 +257,36 @@ void main() {
       when(() => mockAudioPlayer.dispose()).thenAnswer((_) async {});
       final vm = _TestLRViewModel(testItem, audioPlayer: mockAudioPlayer);
 
-      // Set Portrait (e.g. 466 x 678 Duo outside portrait)
+      // Set iPad landscape: 1024 x 768 (shortestSide = 768 >= 600, not Duo)
+      tester.view.physicalSize = const Size(1024, 768);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+
+      await tester.pumpWidget(createWidgetUnderTest(storage: storage, vm: vm));
+      await tester.pumpAndSettle();
+
+      // On iPad/tablet in landscape, regular study view is maintained
+      expect(find.byKey(const Key('listen_repeat_car_mode_button')), findsOneWidget);
+      expect(find.byKey(const Key('listen_repeat_star_button')), findsOneWidget);
+      expect(find.text('Balanced Mix'), findsOneWidget);
+      expect(find.text('Olá amigo'), findsOneWidget);
+      expect(find.text('Hello friend'), findsOneWidget);
+
+      // Car View should NOT be auto-mounted on iPad/tablet
+      expect(find.byKey(const Key('carplay_dash_back_button')), findsNothing);
+      expect(find.text('PRACTICE SET'), findsNothing);
+    });
+
+    testWidgets('rotating to landscape after session stopped does not auto-restart session', (tester) async {
+      final storage = FakeStorageService(initialItems: [testItem]);
+      final mockAudioPlayer = MockAudioPlayer();
+      when(() => mockAudioPlayer.playingStream).thenAnswer((_) => Stream.value(false));
+      when(() => mockAudioPlayer.currentIndexStream).thenAnswer((_) => Stream.value(0));
+      when(() => mockAudioPlayer.dispose()).thenAnswer((_) async {});
+      final vm = _TestLRViewModel(testItem, audioPlayer: mockAudioPlayer);
+
+      // Start in Portrait on phone
       tester.view.physicalSize = const Size(466, 678);
       tester.view.devicePixelRatio = 1.0;
       addTearDown(tester.view.resetPhysicalSize);
@@ -204,12 +295,22 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest(storage: storage, vm: vm));
       await tester.pumpAndSettle();
 
-      // Simple View indicators
-      expect(find.byKey(const Key('listen_repeat_car_mode_button')), findsOneWidget);
-      expect(find.byKey(const Key('listen_repeat_star_button')), findsOneWidget);
-      expect(find.text('Balanced Mix'), findsOneWidget);
-      expect(find.text('Olá amigo'), findsOneWidget);
-      expect(find.text('Hello friend'), findsOneWidget);
+      // Initial session started once on mount
+      expect(vm.startSessionCalls, equals(1));
+
+      // User stops session
+      await vm.stopSession();
+      await tester.pumpAndSettle();
+
+      expect(vm.state.isPlaying, isFalse);
+      expect(vm.state.currentItem, isNull);
+
+      // Rotate to Landscape
+      tester.view.physicalSize = const Size(678, 466);
+      await tester.pumpAndSettle();
+
+      // Embedded InCarDashboardScreen should NOT trigger another startSession()
+      expect(vm.startSessionCalls, equals(1));
     });
 
     testWidgets('renders simple view when in portrait', (tester) async {

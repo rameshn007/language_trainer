@@ -70,6 +70,15 @@ class IPhoneDuoHelper {
     return isDuoSize(size);
   }
 
+  /// Checks if the current context is running on a phone form factor (shortestSide < 600)
+  /// or any iPhone Duo screen (outside cover or inside unfolded).
+  static bool isPhoneOrDuo(BuildContext context) {
+    if (isDuo(context)) {
+      return true;
+    }
+    return MediaQuery.sizeOf(context).shortestSide < 600;
+  }
+
   /// Checks if the current context is running on the iPhone Duo outside screen (either portrait or landscape).
   static bool isDuoOutside(BuildContext context) {
     if (!_isIOS(context)) {

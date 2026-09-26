@@ -82,7 +82,8 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
   @override
   Widget build(BuildContext context) {
     final orientation = MediaQuery.orientationOf(context);
-    if (orientation == Orientation.landscape) {
+    final isPhoneOrDuo = IPhoneDuoHelper.isPhoneOrDuo(context);
+    if (orientation == Orientation.landscape && isPhoneOrDuo) {
       return InCarDashboardScreen(
         embedded: true,
         onBack: () => Navigator.of(context).pop(),

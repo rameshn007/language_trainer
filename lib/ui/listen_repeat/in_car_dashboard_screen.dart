@@ -40,13 +40,13 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        final state = ref.read(listenRepeatViewModelProvider);
+        if (!state.isPlaying && state.currentItem == null) {
+          ref.read(listenRepeatViewModelProvider.notifier).startSession();
+        }
+      });
     }
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final state = ref.read(listenRepeatViewModelProvider);
-      if (!state.isPlaying && state.currentItem == null) {
-        ref.read(listenRepeatViewModelProvider.notifier).startSession();
-      }
-    });
   }
 
   @override
