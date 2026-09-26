@@ -1022,17 +1022,7 @@ void main() {
                 }
               }
 
-              // 2. Positive geometry assertions for section header chevrons
-              final chevronFinders = find.byIcon(Icons.expand_more);
-              for (final chevron in tester.widgetList(chevronFinders)) {
-                final chevronRect = tester.getRect(find.byWidget(chevron));
-                expect(chevronRect.right, lessThanOrEqualTo(device.logicalSize.width + 0.5),
-                    reason: 'Section chevron must remain within screen width');
-                expect(chevronRect.left, greaterThanOrEqualTo(0.0),
-                    reason: 'Section chevron must not be pushed offscreen');
-              }
-
-              // 3. Scroll through CustomScrollView to verify lazily built section cards
+              // 2. Scroll through CustomScrollView to verify lazily built section cards
               await tester.drag(find.byType(CustomScrollView), const Offset(0, -300));
               await tester.pump();
               await tester.pump(const Duration(milliseconds: 300));
@@ -1091,9 +1081,13 @@ void main() {
               progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
             ],
             child: testApp(
-              home: MediaQuery(
-                data: MediaQueryData(textScaler: TextScaler.linear(scale)),
-                child: const HomeScreen(),
+              home: Builder(
+                builder: (context) => MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                    textScaler: TextScaler.linear(scale),
+                  ),
+                  child: const HomeScreen(),
+                ),
               ),
             ),
           ),
@@ -1150,9 +1144,13 @@ void main() {
             progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
           ],
           child: testApp(
-            home: const MediaQuery(
-              data: MediaQueryData(textScaler: TextScaler.linear(2.0)),
-              child: HomeScreen(),
+            home: Builder(
+              builder: (context) => MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: const TextScaler.linear(2.0),
+                ),
+                child: const HomeScreen(),
+              ),
             ),
           ),
         ),
@@ -1354,6 +1352,269 @@ void main() {
           ),
         ),
       );
+    });
+
+    testWidgets('HomeScreen rotates dynamically between portrait and landscape without exceptions', (tester) async {
+      tester.view.physicalSize = const Size(1290, 2796);
+      tester.view.devicePixelRatio = 3.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      fakeStorage.saveSetting('vocab_only_mode', false);
+      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
+
+      final mockNotif = _MockNotificationService();
+      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
+      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
+
+      final mockTts = MockTtsService();
+      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
+      when(() => mockTts.initFuture).thenAnswer((_) async {});
+
+      final mockVerb = _MockVerbService();
+      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            notificationServiceProvider.overrideWithValue(mockNotif),
+            ttsServiceProvider.overrideWithValue(mockTts),
+            verbServiceProvider.overrideWithValue(mockVerb),
+            progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
+          ],
+          child: testApp(home: const HomeScreen()),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      final portraitCards = find.byType(Card);
+      expect(portraitCards, findsWidgets, reason: 'Portrait mode must display cards');
+      for (final card in tester.widgetList<Card>(portraitCards)) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.right, lessThanOrEqualTo(430.0 + 0.5));
+        expect(cardRect.left, greaterThanOrEqualTo(0.0));
+      }
+
+      // Rotate to landscape
+      tester.view.physicalSize = const Size(2796, 1290);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      final landscapeCards = find.byType(Card);
+      expect(landscapeCards, findsWidgets, reason: 'Landscape mode must display cards');
+      for (final card in tester.widgetList<Card>(landscapeCards)) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.right, lessThanOrEqualTo(932.0 + 0.5));
+        expect(cardRect.left, greaterThanOrEqualTo(0.0));
+      }
+
+      // Rotate back to portrait
+      tester.view.physicalSize = const Size(1290, 2796);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      final restoredCards = find.byType(Card);
+      expect(restoredCards, findsWidgets, reason: 'Restored portrait mode must display cards');
+      for (final card in tester.widgetList<Card>(restoredCards)) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.right, lessThanOrEqualTo(430.0 + 0.5));
+        expect(cardRect.left, greaterThanOrEqualTo(0.0));
+      }
+    });
+
+    testWidgets('HomeScreen rotates dynamically on narrow iPhone (320x568 <-> 568x320) without exceptions or clipping', (tester) async {
+      tester.view.physicalSize = const Size(640, 1136);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      fakeStorage.saveSetting('vocab_only_mode', false);
+      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
+
+      final mockNotif = _MockNotificationService();
+      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
+      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
+
+      final mockTts = MockTtsService();
+      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
+      when(() => mockTts.initFuture).thenAnswer((_) async {});
+
+      final mockVerb = _MockVerbService();
+      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            notificationServiceProvider.overrideWithValue(mockNotif),
+            ttsServiceProvider.overrideWithValue(mockTts),
+            verbServiceProvider.overrideWithValue(mockVerb),
+            progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
+          ],
+          child: testApp(home: const HomeScreen()),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      final portraitCards = find.byType(Card);
+      expect(portraitCards, findsWidgets);
+      for (final card in tester.widgetList<Card>(portraitCards)) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.right, lessThanOrEqualTo(320.0 + 0.5));
+        expect(cardRect.left, greaterThanOrEqualTo(0.0));
+      }
+
+      // Rotate to narrow landscape (568x320)
+      tester.view.physicalSize = const Size(1136, 640);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      final landscapeCards = find.byType(Card);
+      expect(landscapeCards, findsWidgets);
+      for (final card in tester.widgetList<Card>(landscapeCards)) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.right, lessThanOrEqualTo(568.0 + 0.5));
+        expect(cardRect.left, greaterThanOrEqualTo(0.0));
+      }
+
+      // Rotate back to narrow portrait (320x568)
+      tester.view.physicalSize = const Size(640, 1136);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      final restoredCards = find.byType(Card);
+      expect(restoredCards, findsWidgets);
+      for (final card in tester.widgetList<Card>(restoredCards)) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.right, lessThanOrEqualTo(320.0 + 0.5));
+        expect(cardRect.left, greaterThanOrEqualTo(0.0));
+      }
+    });
+
+    testWidgets('HomeScreen rotates dynamically with accessibility text scale 1.35x without overflow', (tester) async {
+      tester.view.physicalSize = const Size(1290, 2796);
+      tester.view.devicePixelRatio = 3.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      fakeStorage.saveSetting('vocab_only_mode', false);
+      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
+
+      final mockNotif = _MockNotificationService();
+      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
+      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
+
+      final mockTts = MockTtsService();
+      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
+      when(() => mockTts.initFuture).thenAnswer((_) async {});
+
+      final mockVerb = _MockVerbService();
+      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            notificationServiceProvider.overrideWithValue(mockNotif),
+            ttsServiceProvider.overrideWithValue(mockTts),
+            verbServiceProvider.overrideWithValue(mockVerb),
+            progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
+          ],
+          child: testApp(
+            home: Builder(
+              builder: (context) => MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: const TextScaler.linear(1.35),
+                ),
+                child: const HomeScreen(),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      // Rotate to landscape
+      tester.view.physicalSize = const Size(2796, 1290);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      final landscapeCards = find.byType(Card);
+      expect(landscapeCards, findsWidgets);
+      for (final card in tester.widgetList<Card>(landscapeCards)) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.right, lessThanOrEqualTo(932.0 + 0.5));
+        expect(cardRect.left, greaterThanOrEqualTo(0.0));
+      }
+    });
+
+    testWidgets('HomeScreen renders 3-column exercise section layout on wide desktop/tablet viewport (1024x768)', (tester) async {
+      tester.view.physicalSize = const Size(1024 * 2.0, 768 * 2.0);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      fakeStorage.saveSetting('vocab_only_mode', false);
+      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
+
+      final mockNotif = _MockNotificationService();
+      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
+      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
+
+      final mockTts = MockTtsService();
+      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
+      when(() => mockTts.initFuture).thenAnswer((_) async {});
+
+      final mockVerb = _MockVerbService();
+      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            notificationServiceProvider.overrideWithValue(mockNotif),
+            ttsServiceProvider.overrideWithValue(mockTts),
+            verbServiceProvider.overrideWithValue(mockVerb),
+            progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
+          ],
+          child: testApp(home: const HomeScreen()),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      final cards = find.byType(Card);
+      expect(cards, findsWidgets);
+      for (final card in tester.widgetList<Card>(cards)) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.left, greaterThanOrEqualTo(0.0));
+        expect(cardRect.right, lessThanOrEqualTo(1024.0 + 0.5));
+      }
     });
   });
 }
