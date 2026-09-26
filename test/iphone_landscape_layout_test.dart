@@ -1355,5 +1355,57 @@ void main() {
         ),
       );
     });
+
+    testWidgets('HomeScreen rotates dynamically between portrait and landscape without exceptions', (tester) async {
+      tester.view.physicalSize = const Size(1290, 2796);
+      tester.view.devicePixelRatio = 3.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      fakeStorage.saveSetting('vocab_only_mode', false);
+      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
+
+      final mockNotif = _MockNotificationService();
+      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
+      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
+
+      final mockTts = MockTtsService();
+      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
+      when(() => mockTts.initFuture).thenAnswer((_) async {});
+
+      final mockVerb = _MockVerbService();
+      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            notificationServiceProvider.overrideWithValue(mockNotif),
+            ttsServiceProvider.overrideWithValue(mockTts),
+            verbServiceProvider.overrideWithValue(mockVerb),
+            progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
+          ],
+          child: testApp(home: const HomeScreen()),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      // Rotate to landscape
+      tester.view.physicalSize = const Size(2796, 1290);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      // Rotate back to portrait
+      tester.view.physicalSize = const Size(1290, 2796);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+    });
   });
 }
