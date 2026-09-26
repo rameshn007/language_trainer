@@ -1568,5 +1568,53 @@ void main() {
         expect(cardRect.left, greaterThanOrEqualTo(0.0));
       }
     });
+
+    testWidgets('HomeScreen renders 3-column exercise section layout on wide desktop/tablet viewport (1024x768)', (tester) async {
+      tester.view.physicalSize = const Size(1024 * 2.0, 768 * 2.0);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
+
+      final item = LanguageItem(id: 'item1', portuguese: 'obrigado', english: 'thank you');
+      final fakeStorage = FakeStorageService(initialItems: [item]);
+      fakeStorage.saveSetting('vocab_only_mode', false);
+      fakeStorage.saveSetting('has_seen_enhanced_voice_prompt', true);
+
+      final mockNotif = _MockNotificationService();
+      when(() => mockNotif.requestPermissionsIfFirstTime()).thenAnswer((_) async {});
+      when(() => mockNotif.handlePendingNotification()).thenAnswer((_) async {});
+
+      final mockTts = MockTtsService();
+      when(() => mockTts.isEnhancedPtVoiceAvailable).thenReturn(true);
+      when(() => mockTts.initFuture).thenAnswer((_) async {});
+
+      final mockVerb = _MockVerbService();
+      when(() => mockVerb.loadVerbs()).thenAnswer((_) async => []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            notificationServiceProvider.overrideWithValue(mockNotif),
+            ttsServiceProvider.overrideWithValue(mockTts),
+            verbServiceProvider.overrideWithValue(mockVerb),
+            progressServiceProvider.overrideWith(() => _RealisticProgressService(realisticSnapshot)),
+          ],
+          child: testApp(home: const HomeScreen()),
+        ),
+      );
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(tester.takeException(), isNull);
+
+      final cards = find.byType(Card);
+      expect(cards, findsWidgets);
+      for (final card in tester.widgetList<Card>(cards)) {
+        final cardRect = tester.getRect(find.byWidget(card));
+        expect(cardRect.left, greaterThanOrEqualTo(0.0));
+        expect(cardRect.right, lessThanOrEqualTo(1024.0 + 0.5));
+      }
+    });
   });
 }

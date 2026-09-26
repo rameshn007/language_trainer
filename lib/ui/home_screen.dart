@@ -896,6 +896,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final textScaler = MediaQuery.textScalerOf(context);
     final scale = textScaler.scale(1.0);
     final effectiveWidth = math.max(60.0, availableWidth);
+    // 1 column on narrow viewports (<340pt) or large text scales (>1.25x);
+    // 3 columns on tablet/desktop/DeX widths (>=600pt); 2 columns on standard phones.
     final int crossAxisCount = (effectiveWidth < 340 || scale > 1.25)
         ? 1
         : (effectiveWidth >= 600 && scale <= 1.15 ? 3 : 2);

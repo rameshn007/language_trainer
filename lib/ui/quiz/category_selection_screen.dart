@@ -1,8 +1,6 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
-import '../../utils/iphone_duo_helper.dart';
 import 'quiz_screen.dart';
 
 class CategorySelectionScreen extends ConsumerWidget {
@@ -26,20 +24,17 @@ class CategorySelectionScreen extends ConsumerWidget {
     final isLandscape =
         MediaQuery.orientationOf(context) == Orientation.landscape;
     final crossAxisCount = isLandscape ? 4 : 3;
-    final safePadding = IPhoneDuoHelper.getContentHorizontalPadding(context);
-    final horizontalPad = math.max(12.0, isLandscape ? safePadding.left : 12.0);
-    final rightPad = math.max(12.0, isLandscape ? safePadding.right : 12.0);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Select Category'), centerTitle: true),
       body: SafeArea(
         top: false,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(horizontalPad, 12.0, rightPad, 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: crossAxisCount,
-              childAspectRatio: isLandscape ? 1.35 : 1.02,
+              mainAxisExtent: isLandscape ? 94.0 : 106.0,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
             ),
