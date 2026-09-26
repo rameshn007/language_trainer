@@ -995,20 +995,35 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required bool isDark,
   }) {
     final bool isEnabled = item.onPressed != null;
-    final fgColor = isDark ? Colors.white : Colors.black87;
-    final subtitleColor = isDark ? Colors.white60 : Colors.black54;
+
+    final isLight = isEnabled &&
+        ThemeData.estimateBrightnessForColor(item.color) == Brightness.light;
+    final fgColor = isLight ? Colors.black87 : Colors.white;
+    final subtitleColor = isLight
+        ? Colors.black.withValues(alpha: 0.68)
+        : Colors.white.withValues(alpha: 0.90);
+    final iconBoxColor = isLight
+        ? Colors.black.withValues(alpha: 0.10)
+        : Colors.white.withValues(alpha: 0.22);
+    final chevronColor = isLight
+        ? Colors.black45
+        : Colors.white.withValues(alpha: 0.70);
 
     return Card(
-      elevation: isDark ? 0 : 2,
+      elevation: isEnabled ? 2 : 0,
       margin: EdgeInsets.zero,
-      shadowColor: Colors.black.withValues(alpha: 0.15),
-      color: isDark ? Colors.white.withValues(alpha: 0.06) : Colors.white,
+      shadowColor: Colors.black.withValues(alpha: 0.25),
+      color: isEnabled
+          ? item.color
+          : (isDark
+              ? Colors.white.withValues(alpha: 0.12)
+              : Colors.grey.shade300),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
         side: BorderSide(
-          color: isDark
-              ? Colors.white.withValues(alpha: 0.12)
-              : Colors.grey.shade300,
+          color: isEnabled
+              ? Colors.white.withValues(alpha: 0.22)
+              : Colors.transparent,
           width: 1.1,
         ),
       ),
@@ -1018,44 +1033,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         onTapUp: isEnabled
             ? (details) => item.onPressed!(details.globalPosition)
             : null,
-        child: Padding(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: isEnabled
+                  ? [
+                      item.color.withValues(alpha: 0.88),
+                      item.color,
+                    ]
+                  : [
+                      Colors.grey.shade500.withValues(alpha: 0.6),
+                      Colors.grey.shade600.withValues(alpha: 0.7),
+                    ],
+            ),
+          ),
           padding:
               const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
           child: Row(
             children: [
               Container(
-                width: 40,
-                height: 40,
+                width: 38,
+                height: 38,
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: isEnabled
-                        ? [
-                            item.color.withValues(alpha: 0.82),
-                            item.color,
-                          ]
-                        : [
-                            Colors.grey.shade400,
-                            Colors.grey.shade500,
-                          ],
-                  ),
+                  color: isEnabled ? iconBoxColor : Colors.white12,
                   borderRadius: BorderRadius.circular(10),
-                  boxShadow: isEnabled
-                      ? [
-                          BoxShadow(
-                            color: item.color.withValues(alpha: 0.28),
-                            blurRadius: 6,
-                            offset: const Offset(0, 2),
-                          ),
-                        ]
-                      : null,
                 ),
                 child: Center(
                   child: Icon(
                     item.icon,
                     size: 20,
-                    color: Colors.white,
+                    color: isEnabled ? fgColor : Colors.white38,
                   ),
                 ),
               ),
@@ -1077,7 +1086,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           fontWeight: FontWeight.bold,
                           color: isEnabled
                               ? fgColor
-                              : fgColor.withValues(alpha: 0.4),
+                              : (isDark ? Colors.white38 : Colors.black38),
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -1087,10 +1096,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 10.5,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w500,
                           color: isEnabled
                               ? subtitleColor
-                              : subtitleColor.withValues(alpha: 0.4),
+                              : (isDark ? Colors.white24 : Colors.black26),
                         ),
                       ),
                     ],
@@ -1100,9 +1109,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               Icon(
                 Icons.chevron_right_rounded,
                 size: 18,
-                color: isEnabled
-                    ? (isDark ? Colors.white30 : Colors.black26)
-                    : Colors.transparent,
+                color: isEnabled ? chevronColor : Colors.transparent,
               ),
             ],
           ),
