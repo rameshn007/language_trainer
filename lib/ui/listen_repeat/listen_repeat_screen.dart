@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,6 +38,12 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
     } catch (e) {
       debugPrint('Error stopping session on dispose: $e');
     }
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
     super.dispose();
   }
 
@@ -74,6 +81,19 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final orientation = MediaQuery.orientationOf(context);
+    if (orientation == Orientation.landscape) {
+      return InCarDashboardScreen(
+        embedded: true,
+        onBack: () => Navigator.of(context).pop(),
+        onStop: _stopSession,
+      );
+    }
+
+    return _buildSimpleView(context);
+  }
+
+  Widget _buildSimpleView(BuildContext context) {
     final state = ref.watch(listenRepeatViewModelProvider);
     final item = state.currentItem;
     final isSpeaking = state.isSpeaking;
