@@ -426,6 +426,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 isDuo: isDuo,
                 isDark: isDark,
                 contentPadding: contentPadding,
+                categories: allCategories,
                 filteredCategories: filteredCategories,
               )
             else
@@ -436,6 +437,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 isDuo: isDuo,
                 isDark: isDark,
                 contentPadding: contentPadding,
+                categories: allCategories,
                 filteredCategories: filteredCategories,
               ),
           ],
@@ -494,6 +496,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required bool isDuo,
     required bool isDark,
     required EdgeInsets contentPadding,
+    required List<_CategoryData> categories,
     required List<_CategoryData> filteredCategories,
   }) {
     final view = View.maybeOf(context);
@@ -517,71 +520,78 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         contentPadding.right,
         10,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
-            width: leftRailWidth,
-            child: _buildLandscapeStatsCard(context, progress, isDuo),
+          _buildCategoryPills(
+            categories: categories,
+            isDark: isDark,
           ),
-          const SizedBox(width: gap),
+          const SizedBox(height: 10),
           Expanded(
-            child: CustomScrollView(
-              controller: _landscapeScrollController,
-              slivers: [
-                if (_isLoading)
-                  const SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20),
-                      child: Center(child: CircularProgressIndicator()),
-                    ),
-                  )
-                else if (items.isEmpty)
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.warning_amber_rounded,
-                            size: 50,
-                            color: Colors.orange,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: leftRailWidth,
+                  child: _buildLandscapeStatsCard(context, progress, isDuo),
+                ),
+                const SizedBox(width: gap),
+                Expanded(
+                  child: CustomScrollView(
+                    controller: _landscapeScrollController,
+                    slivers: [
+                      if (_isLoading)
+                        const SliverToBoxAdapter(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            child: Center(child: CircularProgressIndicator()),
                           ),
-                          const SizedBox(height: 10),
-                          const Text('No vocabulary loaded.'),
-                          TextButton(
-                            onPressed: _loadData,
-                            child: const Text('Tap here to load initial data'),
+                        )
+                      else if (items.isEmpty)
+                        SliverToBoxAdapter(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(
+                                  Icons.warning_amber_rounded,
+                                  size: 50,
+                                  color: Colors.orange,
+                                ),
+                                const SizedBox(height: 10),
+                                const Text('No vocabulary loaded.'),
+                                TextButton(
+                                  onPressed: _loadData,
+                                  child: const Text('Tap here to load initial data'),
+                                ),
+                              ],
+                            ),
                           ),
-                        ],
-                      ),
-                    ),
-                  ),
-                SliverToBoxAdapter(
-                  child: _buildCategoryPills(isDark),
-                ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 14),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final cat = filteredCategories[index];
-                      return _buildCategorySection(
-                        context: context,
-                        title: cat.title,
-                        icon: cat.icon,
-                        accentColor: cat.accentColor,
-                        exercises: cat.exercises,
-                        isDark: isDark,
-                        availableWidth: rightAvailableWidth,
-                      );
-                    },
-                    childCount: filteredCategories.length,
+                        )
+                      else
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final cat = filteredCategories[index];
+                              return _buildCategorySection(
+                                context: context,
+                                title: cat.title,
+                                icon: cat.icon,
+                                accentColor: cat.accentColor,
+                                exercises: cat.exercises,
+                                isDark: isDark,
+                                availableWidth: rightAvailableWidth,
+                              );
+                            },
+                            childCount: filteredCategories.length,
+                          ),
+                        ),
+                      const SliverPadding(padding: EdgeInsets.only(bottom: 60)),
+                    ],
                   ),
                 ),
-                const SliverPadding(padding: EdgeInsets.only(bottom: 60)),
               ],
             ),
           ),
@@ -597,6 +607,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required bool isDuo,
     required bool isDark,
     required EdgeInsets contentPadding,
+    required List<_CategoryData> categories,
     required List<_CategoryData> filteredCategories,
   }) {
     final view = View.maybeOf(context);
@@ -661,7 +672,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          _buildCategoryPills(isDark),
+                          _buildCategoryPills(
+                            categories: categories,
+                            isDark: isDark,
+                          ),
                           const SizedBox(height: 14),
                           ...filteredCategories.map(
                             (cat) => _buildCategorySection(
@@ -704,7 +718,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
               return _PinnedStatsCard(
                 progress: progress,
-                topPadding: 0.0,
                 shrinkPercentage: shrinkPercentage,
                 currentHeight: currentHeight,
                 isDuo: isDuo,
@@ -726,155 +739,148 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  Widget _buildCategoryPills(bool isDark) {
-    const pills = [
+  Widget _buildCategoryPills({
+    required List<_CategoryData> categories,
+    required bool isDark,
+  }) {
+    final totalCount =
+        categories.fold<int>(0, (sum, cat) => sum + cat.exercises.length);
+    final pills = [
       _CategoryFilterItem(
         id: 'all',
         label: 'All',
         icon: Icons.auto_awesome_mosaic_rounded,
-        count: 13,
+        count: totalCount,
       ),
-      _CategoryFilterItem(
-        id: 'vocab',
-        label: 'Vocabulary',
-        icon: Icons.menu_book_rounded,
-        count: 3,
-      ),
-      _CategoryFilterItem(
-        id: 'grammar',
-        label: 'Grammar',
-        icon: Icons.school_rounded,
-        count: 4,
-      ),
-      _CategoryFilterItem(
-        id: 'practice',
-        label: 'Practice',
-        icon: Icons.assignment_rounded,
-        count: 3,
-      ),
-      _CategoryFilterItem(
-        id: 'speaking',
-        label: 'Speaking',
-        icon: Icons.mic_rounded,
-        count: 3,
+      ...categories.map(
+        (cat) => _CategoryFilterItem(
+          id: cat.id,
+          label: cat.shortTitle,
+          icon: cat.icon,
+          count: cat.exercises.length,
+        ),
       ),
     ];
 
-    return SizedBox(
-      height: 38,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        itemCount: pills.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 8),
-        itemBuilder: (context, index) {
-          final pill = pills[index];
-          final isSelected = _selectedCategory == pill.id;
+    return Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: pills.map((pill) {
+        final isSelected = _selectedCategory == pill.id;
 
-          return Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(20),
-              onTap: () {
-                setState(() {
-                  if (_selectedCategory == pill.id && pill.id != 'all') {
-                    _selectedCategory = 'all';
-                  } else {
-                    _selectedCategory = pill.id;
-                  }
-                });
-              },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  gradient: isSelected
-                      ? LinearGradient(
-                          colors: [
-                            Colors.deepPurple.shade500,
-                            Colors.deepPurple.shade700,
-                          ],
-                        )
-                      : null,
-                  color: isSelected
-                      ? null
-                      : (isDark
-                          ? Colors.white.withValues(alpha: 0.08)
-                          : Colors.black.withValues(alpha: 0.05)),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
+        return Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20),
+            onTap: () {
+              setState(() {
+                if (_selectedCategory == pill.id && pill.id != 'all') {
+                  _selectedCategory = 'all';
+                } else {
+                  _selectedCategory = pill.id;
+                }
+              });
+            },
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 44.0),
+              child: Center(
+                widthFactor: 1.0,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    gradient: isSelected
+                        ? LinearGradient(
+                            colors: [
+                              Colors.deepPurple.shade500,
+                              Colors.deepPurple.shade700,
+                            ],
+                          )
+                        : null,
                     color: isSelected
-                        ? Colors.white.withValues(alpha: 0.4)
+                        ? null
                         : (isDark
-                            ? Colors.white.withValues(alpha: 0.15)
-                            : Colors.black.withValues(alpha: 0.1)),
-                    width: 1.2,
-                  ),
-                  boxShadow: isSelected
-                      ? [
-                          BoxShadow(
-                            color: Colors.deepPurple.withValues(alpha: 0.35),
-                            blurRadius: 8,
-                            offset: const Offset(0, 3),
-                          ),
-                        ]
-                      : null,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      pill.icon,
-                      size: 15,
+                            ? Colors.white.withValues(alpha: 0.08)
+                            : Colors.black.withValues(alpha: 0.05)),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
                       color: isSelected
-                          ? Colors.white
-                          : (isDark ? Colors.white70 : Colors.black87),
+                          ? Colors.white.withValues(alpha: 0.4)
+                          : (isDark
+                              ? Colors.white.withValues(alpha: 0.15)
+                              : Colors.black.withValues(alpha: 0.1)),
+                      width: 1.2,
                     ),
-                    const SizedBox(width: 6),
-                    Text(
-                      pill.label,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight:
-                            isSelected ? FontWeight.bold : FontWeight.w500,
-                        color: isSelected
-                            ? Colors.white
-                            : (isDark ? Colors.white70 : Colors.black87),
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 5,
-                        vertical: 1.5,
-                      ),
-                      decoration: BoxDecoration(
-                        color: isSelected
-                            ? Colors.white.withValues(alpha: 0.25)
-                            : (isDark
-                                ? Colors.white.withValues(alpha: 0.12)
-                                : Colors.black.withValues(alpha: 0.08)),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text(
-                        '${pill.count}',
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
+                    boxShadow: isSelected
+                        ? [
+                            BoxShadow(
+                              color: Colors.deepPurple.withValues(alpha: 0.35),
+                              blurRadius: 8,
+                              offset: const Offset(0, 3),
+                            ),
+                          ]
+                        : null,
+                  ),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          pill.icon,
+                          size: 15,
                           color: isSelected
                               ? Colors.white
-                              : (isDark ? Colors.white60 : Colors.black54),
+                              : (isDark ? Colors.white70 : Colors.black87),
                         ),
-                      ),
+                        const SizedBox(width: 6),
+                        Text(
+                          pill.label,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight:
+                                isSelected ? FontWeight.bold : FontWeight.w500,
+                            color: isSelected
+                                ? Colors.white
+                                : (isDark ? Colors.white70 : Colors.black87),
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 5,
+                            vertical: 1.5,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? Colors.white.withValues(alpha: 0.25)
+                                : (isDark
+                                    ? Colors.white.withValues(alpha: 0.12)
+                                    : Colors.black.withValues(alpha: 0.08)),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            '${pill.count}',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                              color: isSelected
+                                  ? Colors.white
+                                  : (isDark ? Colors.white60 : Colors.black54),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      }).toList(),
     );
   }
 
@@ -890,7 +896,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final textScaler = MediaQuery.textScalerOf(context);
     final scale = textScaler.scale(1.0);
     final effectiveWidth = math.max(60.0, availableWidth);
-    final int crossAxisCount = (effectiveWidth < 340 || scale > 1.25) ? 1 : 2;
+    final int crossAxisCount = (effectiveWidth < 340 || scale > 1.25)
+        ? 1
+        : (effectiveWidth >= 600 && scale <= 1.15 ? 3 : 2);
     const double cardSpacing = 10.0;
     final double cardHeight =
         scale > 1.5 ? 94.0 : (scale > 1.2 ? 86.0 : 72.0);
@@ -911,7 +919,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         );
       }
-    } else {
+    } else if (crossAxisCount == 2) {
       for (int i = 0; i < exercises.length; i += 2) {
         if (i > 0) cardRows.add(const SizedBox(height: cardSpacing));
         final first = exercises[i];
@@ -929,19 +937,43 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ),
-              const SizedBox(width: cardSpacing),
-              Expanded(
-                child: second != null
-                    ? SizedBox(
-                        height: cardHeight,
-                        child: _buildActionCard(
-                          context: context,
-                          item: second,
-                          isDark: isDark,
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-              ),
+              if (second != null) ...[
+                const SizedBox(width: cardSpacing),
+                Expanded(
+                  child: SizedBox(
+                    height: cardHeight,
+                    child: _buildActionCard(
+                      context: context,
+                      item: second,
+                      isDark: isDark,
+                    ),
+                  ),
+                ),
+              ],
+            ],
+          ),
+        );
+      }
+    } else {
+      for (int i = 0; i < exercises.length; i += 3) {
+        if (i > 0) cardRows.add(const SizedBox(height: cardSpacing));
+        final chunk = exercises.sublist(i, math.min(i + 3, exercises.length));
+        cardRows.add(
+          Row(
+            children: [
+              for (int j = 0; j < chunk.length; j++) ...[
+                if (j > 0) const SizedBox(width: cardSpacing),
+                Expanded(
+                  child: SizedBox(
+                    height: cardHeight,
+                    child: _buildActionCard(
+                      context: context,
+                      item: chunk[j],
+                      isDark: isDark,
+                    ),
+                  ),
+                ),
+              ],
             ],
           ),
         );
@@ -1002,6 +1034,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final chevronColor = Colors.white.withValues(alpha: 0.70);
 
     return Card(
+      key: ValueKey(item.id),
       elevation: isEnabled ? 2 : 0,
       margin: EdgeInsets.zero,
       shadowColor: Colors.black.withValues(alpha: 0.25),
@@ -1021,11 +1054,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: isEnabled ? () {} : null,
         onTapUp: isEnabled
             ? (details) => item.onPressed!(details.globalPosition)
             : null,
-        child: Container(
+        child: Ink(
           decoration: BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
@@ -1147,160 +1179,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.centerLeft,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.local_fire_department,
-                            color: progress.currentStreak > 0
-                                ? Colors.deepOrange.shade300
-                                : Colors.white38,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '${progress.currentStreak}-day streak',
-                            style: TextStyle(
-                              color: progress.currentStreak > 0
-                                  ? Colors.white
-                                  : Colors.white54,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        '${progress.todayXP}/${progress.dailyGoal} XP',
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: LinearProgressIndicator(
-                  value: progress.dailyGoalProgress,
-                  minHeight: 7,
-                  backgroundColor: Colors.white.withValues(alpha: 0.15),
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    progress.dailyGoalMet
-                        ? Colors.greenAccent.shade400
-                        : Colors.amber.shade300,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(5, (tier) {
-                  final count = progress.masteryDistribution[tier] ?? 0;
-                  final tierColors = [
-                    Colors.white38,
-                    Colors.blue.shade200,
-                    Colors.cyan.shade200,
-                    Colors.orange.shade200,
-                    Colors.greenAccent.shade200,
-                  ];
-                  return Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            '$count',
-                            style: TextStyle(
-                              color: tierColors[tier],
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 1),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            WordProgress.tierName(tier),
-                            style: TextStyle(
-                              color: tierColors[tier].withValues(alpha: 0.7),
-                              fontSize: 9,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-              ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Total: ${progress.totalXP} XP',
-                        style: const TextStyle(
-                          color: Colors.white60,
-                          fontSize: 11,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  const FittedBox(
-                    fit: BoxFit.scaleDown,
-                    alignment: Alignment.centerRight,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Stats',
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        SizedBox(width: 3),
-                        Icon(
-                          Icons.chevron_right,
-                          color: Colors.white54,
-                          size: 15,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+          child: SingleChildScrollView(
+            physics: const ClampingScrollPhysics(),
+            child: _StatsCardContent(progress: progress),
           ),
         ),
       ),
@@ -1316,6 +1197,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       _CategoryData(
         id: 'vocab',
         title: 'Vocabulary & Flashcards',
+        shortTitle: 'Vocabulary',
         icon: Icons.menu_book_rounded,
         accentColor: Colors.blue.shade500,
         exercises: [
@@ -1364,6 +1246,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       _CategoryData(
         id: 'grammar',
         title: 'Grammar & Verbs',
+        shortTitle: 'Grammar',
         icon: Icons.school_rounded,
         accentColor: Colors.purple.shade400,
         exercises: [
@@ -1412,6 +1295,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       _CategoryData(
         id: 'practice',
         title: 'Practice & Exercises',
+        shortTitle: 'Practice',
         icon: Icons.assignment_rounded,
         accentColor: Colors.teal.shade400,
         exercises: [
@@ -1462,6 +1346,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       _CategoryData(
         id: 'speaking',
         title: 'Speaking & Phrases',
+        shortTitle: 'Speaking',
         icon: Icons.mic_rounded,
         accentColor: Colors.deepOrange.shade400,
         exercises: [
@@ -1536,6 +1421,7 @@ class _CategoryFilterItem {
 class _CategoryData {
   final String id;
   final String title;
+  final String shortTitle;
   final IconData icon;
   final Color accentColor;
   final List<_ExerciseItem> exercises;
@@ -1543,131 +1429,179 @@ class _CategoryData {
   const _CategoryData({
     required this.id,
     required this.title,
+    required this.shortTitle,
     required this.icon,
     required this.accentColor,
     required this.exercises,
   });
 }
 
-@visibleForTesting
-class SectionContent extends StatefulWidget {
-  final String title;
-  final IconData icon;
-  final List<Widget> children;
-  final bool initiallyExpanded;
-  final bool isDark;
 
-  const SectionContent({
-    super.key,
-    required this.title,
-    required this.icon,
-    required this.children,
-    required this.initiallyExpanded,
-    required this.isDark,
-  });
+class _StatsCardContent extends StatelessWidget {
+  final ProgressSnapshot progress;
 
-  @override
-  State<SectionContent> createState() => _SectionContentState();
-}
-
-class _SectionContentState extends State<SectionContent>
-    with SingleTickerProviderStateMixin {
-  late bool _isExpanded;
-  late AnimationController _controller;
-  late Animation<double> _iconTurns;
-  late Animation<double> _heightFactor;
-
-  @override
-  void initState() {
-    super.initState();
-    _isExpanded = widget.initiallyExpanded;
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      vsync: this,
-      value: _isExpanded ? 1.0 : 0.0,
-    );
-    _iconTurns = _controller.drive(
-      Tween<double>(begin: 0.0, end: 0.5).chain(CurveTween(curve: Curves.easeIn)),
-    );
-    _heightFactor = _controller.drive(CurveTween(curve: Curves.easeIn));
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _toggle() {
-    setState(() {
-      _isExpanded = !_isExpanded;
-      if (_isExpanded) {
-        _controller.forward();
-      } else {
-        _controller.reverse();
-      }
-    });
-  }
+  const _StatsCardContent({required this.progress});
 
   @override
   Widget build(BuildContext context) {
-    final fgColor = widget.isDark ? Colors.white : Colors.black87;
-    final chevronColor = widget.isDark
-        ? (_isExpanded ? Colors.white : Colors.white70)
-        : (_isExpanded ? Colors.black87 : Colors.black54);
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        InkWell(
-          onTap: _toggle,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            child: Row(
-              children: [
-                Icon(widget.icon, color: fgColor),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    widget.title,
-                    style: TextStyle(
-                      color: fgColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.local_fire_department,
+                      color: progress.currentStreak > 0
+                          ? Colors.deepOrange.shade300
+                          : Colors.white38,
+                      size: 22,
                     ),
+                    const SizedBox(width: 4),
+                    Text(
+                      '${progress.currentStreak}-day streak',
+                      style: TextStyle(
+                        color: progress.currentStreak > 0
+                            ? Colors.white
+                            : Colors.white54,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Flexible(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerRight,
+                child: Text(
+                  '${progress.todayXP}/${progress.dailyGoal} XP',
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(width: 8),
-                RotationTransition(
-                  turns: _iconTurns,
-                  child: Icon(Icons.expand_more, color: chevronColor),
-                ),
-              ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: LinearProgressIndicator(
+            value: progress.dailyGoalProgress,
+            minHeight: 8,
+            backgroundColor: Colors.white.withValues(
+              alpha: 0.15,
+            ),
+            valueColor: AlwaysStoppedAnimation<Color>(
+              progress.dailyGoalMet
+                  ? Colors.greenAccent.shade400
+                  : Colors.amber.shade300,
             ),
           ),
         ),
-        ClipRect(
-          child: AnimatedBuilder(
-            animation: _controller.view,
-            builder: (context, child) {
-              return Align(
-                alignment: Alignment.topCenter,
-                heightFactor: _heightFactor.value,
-                child: child,
-              );
-            },
-            child: GridView.count(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 12),
-              crossAxisCount: 3,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              childAspectRatio: 1.1,
-              children: widget.children,
+        const SizedBox(height: 14),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: List.generate(5, (tier) {
+            final count =
+                progress.masteryDistribution[tier] ?? 0;
+            final tierColors = [
+              Colors.white38,
+              Colors.blue.shade200,
+              Colors.cyan.shade200,
+              Colors.orange.shade200,
+              Colors.greenAccent.shade200,
+            ];
+            return Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '$count',
+                      style: TextStyle(
+                        color: tierColors[tier],
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 2),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      WordProgress.tierName(tier),
+                      style: TextStyle(
+                        color: tierColors[tier].withValues(
+                          alpha: 0.7,
+                        ),
+                        fontSize: 9,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ),
+        const SizedBox(height: 10),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Total XP: ${progress.totalXP}',
+                  style: const TextStyle(
+                    color: Colors.white54,
+                    fontSize: 11,
+                  ),
+                ),
+              ),
             ),
-          ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerRight,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Sessions today: ${progress.todaySessions}',
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 11,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    const Icon(
+                      Icons.chevron_right,
+                      color: Colors.white38,
+                      size: 16,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
@@ -1677,7 +1611,6 @@ class _SectionContentState extends State<SectionContent>
 class _PinnedStatsCard extends StatelessWidget {
   final ProgressSnapshot progress;
   final VoidCallback onTap;
-  final double topPadding;
   final double shrinkPercentage;
   final double currentHeight;
   final bool isDuo;
@@ -1687,7 +1620,6 @@ class _PinnedStatsCard extends StatelessWidget {
   const _PinnedStatsCard({
     required this.progress,
     required this.onTap,
-    required this.topPadding,
     required this.shrinkPercentage,
     required this.currentHeight,
     this.isDuo = false,
@@ -1750,165 +1682,7 @@ class _PinnedStatsCard extends StatelessWidget {
                   child: OverflowBox(
                     maxHeight: 180.0,
                     alignment: Alignment.topCenter,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Flexible(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                alignment: Alignment.centerLeft,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(
-                                      Icons.local_fire_department,
-                                      color: progress.currentStreak > 0
-                                          ? Colors.deepOrange.shade300
-                                          : Colors.white38,
-                                      size: 22,
-                                    ),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      '${progress.currentStreak}-day streak',
-                                      style: TextStyle(
-                                        color: progress.currentStreak > 0
-                                            ? Colors.white
-                                            : Colors.white54,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 13,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Flexible(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                alignment: Alignment.centerRight,
-                                child: Text(
-                                  '${progress.todayXP}/${progress.dailyGoal} XP',
-                                  style: const TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 8),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: LinearProgressIndicator(
-                            value: progress.dailyGoalProgress,
-                            minHeight: 8,
-                            backgroundColor: Colors.white.withValues(
-                              alpha: 0.15,
-                            ),
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              progress.dailyGoalMet
-                                  ? Colors.greenAccent.shade400
-                                  : Colors.amber.shade300,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 14),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: List.generate(5, (tier) {
-                            final count =
-                                progress.masteryDistribution[tier] ?? 0;
-                            final tierColors = [
-                              Colors.white38,
-                              Colors.blue.shade200,
-                              Colors.cyan.shade200,
-                              Colors.orange.shade200,
-                              Colors.greenAccent.shade200,
-                            ];
-                            return Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Text(
-                                      '$count',
-                                      style: TextStyle(
-                                        color: tierColors[tier],
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 2),
-                                  FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Text(
-                                      WordProgress.tierName(tier),
-                                      style: TextStyle(
-                                        color: tierColors[tier].withValues(
-                                          alpha: 0.7,
-                                        ),
-                                        fontSize: 9,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          }),
-                        ),
-                        const SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Total XP: ${progress.totalXP}',
-                                  style: const TextStyle(
-                                    color: Colors.white54,
-                                    fontSize: 11,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                alignment: Alignment.centerRight,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      'Sessions today: ${progress.todaySessions}',
-                                      style: const TextStyle(
-                                        color: Colors.white54,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                    const SizedBox(width: 6),
-                                    const Icon(
-                                      Icons.chevron_right,
-                                      color: Colors.white38,
-                                      size: 16,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                    child: _StatsCardContent(progress: progress),
                   ),
                 ),
               if (collapsedOpacity > 0.0)
