@@ -1,0 +1,20 @@
+# Search noise: keeps binary/data blobs out of `rg`, `fd`, and agent file listings.
+# Targeted search inside an excluded path is still possible: rg --no-ignore <path>
+
+# Build output and tool caches
+build/
+**/build/
+.dart_tool/
+.opencode/
+*.log
+
+# Screenshots and binary assets (source still references these paths)
+screenshots/
+assets/images/
+*.png
+*.jpg
+*.jpeg
+*.ico
+*.ttf
+*.wav
+*.mp3
