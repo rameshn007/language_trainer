@@ -1,87 +1,34 @@
-# Language Trainer — Context & Architecture
+# Language Trainer — Project Guide
 
-European Portuguese learning app for English speakers (iOS & Android).
-- **Stack:** Flutter SDK ^3.10.7, Riverpod (`Notifier` providers), Hive (local storage), `just_audio` + `just_audio_background`.
-- **Navigation:** Imperative `Navigator.push` with `CircularRevealClipper` (no named routes). `HomeScreen` is root.
-- **Backend:** None. All TTS, STT, and quiz generation run entirely on-device.
+European Portuguese learning app for English speakers (iOS/Android).
+Flutter ^3.10.7 · Riverpod (`Notifier` providers) · Hive local storage · `just_audio` + `just_audio_background`.
+No backend: TTS, STT and quiz generation run on-device.
 
----
+## Layout
 
-## Global Providers (`main.dart`)
+- `lib/main.dart` — global providers: `storageServiceProvider`, `ttsServiceProvider`, `progressServiceProvider`, `verbServiceProvider`, `notificationServiceProvider`, `navigatorKey` (notification deep links).
+- `lib/services/` — one class per file (audio: `tts_service`, `silence_audio_service`, `carplay_service`; quiz: `quiz_engine_service`, `voice_quiz_service`, `question_loader_service`; content/state: the rest). `lib/ui/*/…_view_model.dart` holds feature state.
+- `lib/ui/` — imperative `Navigator.push` + `CircularRevealClipper`, no named routes; `HomeScreen` is root.
+- Data loaded at launch: `assets/vocabulary.json`, `assets/Combined_Portuguese_Class_Notes.md`, `assets/data/` (`source.md`, `verbs.csv`, `questions.json`, `combined_questions.json`, `grammar_rules.json`, `interrogatives.json`, `prepositions.json`, `phrases.json`, `verb_phrases.json`, `exercises/`).
+- Data tooling: `scripts/ingest_inbox.py`, `scripts/sanitize_source.py`, `scripts/check_duplicates.py`, `generate_quiz.py`.
 
-- `storageServiceProvider`: `StorageService` (Hive boxes: `items`, `settings`, `progress`, `seen_questions`).
-- `ttsServiceProvider`: `TtsService` (system TTS scoring: prefers "Joana" pt-PT, "Alex"/"Daniel" en-US; penalizes Siri/novelty voices -1000).
-- `progressServiceProvider`: `ProgressService -> ProgressSnapshot` (XP, streaks, mastery tiers).
-- `verbServiceProvider`: `VerbService` (CSV + JSON conjugation tables).
-- `notificationServiceProvider`: `NotificationService` (local push notifications).
-- `navigatorKey`: Global key for notification deep linking.
+## Invariants (break these and failures are silent)
 
----
+- Hive typeIds frozen: `LanguageItem`=0, `QuestionType`=1, `Question`=2. Append fields, never renumber.
+- Mastery: `LanguageItem.masteryLevel` 0–5; display tiers 0–4 New/Learning/Familiar/Strong/Mastered (`progress_data.dart`, `maxTier = 4`).
+- XP: 10 first correct / 5 retry (`storage_service.dart` `updateWordProgress`), +20 session completion, +10 daily-goal bonus, default goal 50 XP/day (`progress_service.dart`).
+- Quiz: 8 `QuestionType` values (`lib/models/question.dart`); seen questions persist in the `seen_questions` box, so any new type must register there or it repeats.
+- Voice grading (`voice_quiz_service.dart`): exact → substring → Levenshtein fuzzy at >0.65 similarity; keep all three tiers.
+- Listen & Repeat and CarPlay share one audio session. Mode switch / reshuffle pass `recordProgress: false`; only an explicit stop awards XP (blocks XP farming).
+- Every `AudioSource` needs a `MediaItem` tag with unique id (`'${item.id}_...'`) or lock-screen/CarPlay notification breaks.
 
-## Data Model & Learning Systems
+## Deep dives (read only when the task touches them)
 
-- **`LanguageItem`** (Hive typeId 0): `id`, `portuguese`, `english`, `notes`, `masteryLevel` (0–5), `lastReviewed`, sentences, gender, verb class.
-  - Loaded at launch from `assets/data/source.md`, `Combined_Portuguese_Class_Notes.md`, `vocabulary.json`, `verbs.csv`. User review history is preserved across reloads.
-- **Mastery Tiers (0–4):** New → Learning → Familiar → Strong → Mastered (`LanguageItem.masteryLevel` 0–5).
-- **XP System:** 10 XP first correct, 5 XP retry, 20 XP session completion bonus, 10 XP daily goal bonus (default goal: 50 XP/day).
-- **Voice Quiz (`VoiceQuizService`):** `speech_to_text` + fuzzy matcher (exact, substring, Levenshtein distance > 0.65 similarity).
-- **Quiz Engine (`QuizEngineService`):** 8 question types (Multiple Choice, Vocab Match, Cloze, Conjugation, Prepositions, Grammar, Interrogatives, Jumble). Tracks seen questions in storage to prevent repeats.
+- `.agents/skills/listen-repeat-audio/SKILL.md` — 6-source word layout, buffer/starvation/speech-shielding contract, TTS concurrency.
+- `.agents/skills/carplay-integration/SKILL.md` — scene gating, 8-item template limit, IPC debouncing, steering-wheel remote commands.
+- `.agents/skills/expand-vocabulary/SKILL.md` — inbox → `source.md` → `questions.json` pipeline.
 
----
+## Verify before finishing
 
-## Listen & Repeat (L&R) Architecture
-
-Passive audio training — no speech recognition, user repeats silently. Runs via `listenRepeatViewModelProvider` (`lib/ui/listen_repeat/listen_repeat_view_model.dart`).
-
-- **Audio Pipeline:**
-  - Words are synthesized on-demand to temporary audio files (`pt-PT` and `en-US`) via `TtsService.synthesizeToFile`.
-  - Words are streamed into a `ConcatenatingAudioSource` played by `_bgAudioPlayer` (`just_audio` + `just_audio_background`).
-  - Each word consists of **6 audio sources**: `[PT, silence1 (1.0s repetition pause), PT (repeated), silence2 (adaptive 0.5s~1.5s pre-English pause), EN, silence3 (1.0s between-words pause)]`.
-  - Every audio source **must** be tagged with `MediaItem.copyWith(id: '${item.id}_...')` for `just_audio_background` notification support.
-- **Concurrency & State Safety:**
-  - Concurrency model: **"latest request wins"** via `_runStartLoop` and `_sessionId` invalidation. Rapid taps (e.g. mode switches) cleanly abort prior in-flight builds.
-  - Word generation mutex: `_generationFuture` lock guarantees only one background deck build / TTS synthesis runs at a time.
-  - Poison-pill protection: skips any item that fails synthesis twice; halts after 6 consecutive failures.
-  - Playback resume: `_bgAudioPlayer.play()` is un-awaited (`if (_isAutoPlayActive && !_bgAudioPlayer.playing) _bgAudioPlayer.play().catchError(...)`) so it never blocks word-skipping methods.
-- **Buffer Refill & Speech Shielding Contract:**
-  - Buffer target is 4 words ahead; background replenishment is gated to silence chunks (`silence1`, `silence2`, `silence3`) when `remainingWords < 4`.
-  - Active speech chunks (`pt1`, `pt2`, `en`) are completely shielded from concurrent TTS synthesis, disk I/O, PNG encoding, and `ConcatenatingAudioSource` queue mutations as long as `remainingWords >= 2`.
-  - **Emergency starvation guard:** If buffer drops to `remainingWords <= 2` and playback reaches or passes the English prompt (`sourceInWord >= 4`), refill triggers during speech to eliminate queue underruns (especially at 1.25×/1.5× playback speeds), synthesizing 1 word and immediately breaking.
-  - **Post-starvation recovery:** If the buffer runs dry (`remaining <= 1`), the replenishment loop rebuilds up to 2 words before exiting, avoiding audible gaps of a full word cycle while strictly capping multi-word synthesis to at most 2 words per pass. Yield time between syntheses is 200ms.
-  - **Lifecycle resume:** When the app returns from background (`didChangeAppLifecycleState(resumed)`), if audio is stopped/paused, `forceRefill` bypasses speech gating to recover the buffer immediately (capped to at most 2 words); if audio is actively playing (e.g. streaming over CarPlay), speech shielding remains active to avoid stuttering over ongoing audio.
-- **Study Focus Modes (`ListenRepeatMode`):**
-  - `all` (Balanced Mix), `verbs`, `prepositions`, `phrases`, `vocabulary`. Filtered via `ListenRepeatContentService`.
-  - Mode switching and shuffling pass `recordProgress: false` and cache `_sessionWordsOffset` so cumulative words seen persist without XP farming. Explicit session stops pass `recordProgress: true` to award XP once.
-
----
-
-## CarPlay Integration (`CarPlayService` & Native iOS)
-
-CarPlay acts as an in-car player for the shared L&R session (no microphone/voice).
-
-- **Scene Lifecycle & Triggering (`CarPlaySceneObserver` in `AppDelegate.swift`):**
-  - Plugin `connected` event is ambiguous (fires on plain cable connect).
-  - Session startup is strictly gated on the native `language_trainer/carplay_scene` channel (`sceneWillEnterForeground` push or `sceneStatus` pull).
-  - State listening via `_ensureStateListener()` is lazy — never attach provider listeners in `init()`.
-- **UI & Head Unit Compliance:**
-  - Player template is a `CPListTemplate` capped at 8 items across 3 sections (Current Word with live now-playing indicator & Flag for Review action [2 items], Playback controls [3 items], Session controls: Focus cycle, Speed, Stop [3 items]; replacing mid-session reshuffle to stay strictly within Apple's 8-item template limit).
-  - Stop session returns to the Study Focus menu (`Balanced Mix`, `Verbs`, `Prepositions`, `Phrases`, `Vocabulary`).
-- **UI Staggering & IPC De-confliction:**
-  - When the active word changes, row item titles and subtitles (`_wordItem.update()`, `_flagItem.update()`) and now-playing metadata update immediately, while the full section header IPC (`template.updateSections(...)`) is debounced by a 250ms single-flight timer (`_pendingSectionUpdateTimer`).
-  - Single-flight timer coalesces rapid remote track skips (300ms steering wheel debounce) so multi-section IPC payloads do not stack and congest the platform bridge.
-  - Live references in `updatedSections` hold current item state across the delay. A transient display state during the 250ms window (new word item title with `#N-1` header) is an intentional trade-off to eliminate main-thread audio stutter.
-  - `resetForTesting()` and `_resetPlayer()` explicitly cancel any pending `_pendingSectionUpdateTimer`.
-- **Steering Wheel & Media Controls (`RemoteCommandInterceptor` in `AppDelegate.swift`):**
-  - Fixes the multi-source skip glitch where default next/previous track steps into silence chunks.
-  - Swizzles `AudioServicePlugin` (`nextTrack:`, `previousTrack:`, `skipForward:`, `skipBackward:`) via Objective-C runtime and hooks `MPRemoteCommandCenter.shared()`.
-  - Dispatches `remoteNextWord` / `remotePreviousWord` to Dart, seeking by 6 audio sources (`(currentWordIndex ± 1) * 6`) directly to the Portuguese audio.
-  - Debounced in Dart with independent per-direction timers (`_lastRemoteNextTime`, `_lastRemotePreviousTime`, 300ms) to allow rapid reversals while dropping hardware bounce.
-
----
-
-## Testing & Quality Conventions
-
-- Run tests: `flutter test` (all tests should pass, currently 222 tests).
-- Static analysis: `flutter analyze` (zero issues allowed).
-- iOS Simulator build: `flutter build ios --no-codesign --simulator`.
-- Test hygiene: Use `CarPlayService().resetForTesting()` in `tearDown` to reset container subscriptions, cancel pending section update timers, and clear debounce timestamps.
+- `flutter test` — all must pass (374 as of Sep 2026) · `flutter analyze` — zero issues · `flutter build ios --no-codesign --simulator` for native changes.
+- CarPlay/audio tests need `CarPlayService().resetForTesting()` in `tearDown` (cancels section-update timers, container subscriptions, debounce timestamps).
