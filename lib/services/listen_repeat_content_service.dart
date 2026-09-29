@@ -271,6 +271,8 @@ class ListenRepeatContentService {
         final item = data[i];
         final pt = (item['portuguese'] ?? '').toString().trim();
         final en = (item['english'] ?? '').toString().trim();
+        final category = (item['category'] ?? item['topicCategory'] ?? 'Conversational Phrases').toString();
+        final notes = (item['notes'] ?? 'Frase Útil').toString();
         if (pt.isNotEmpty && en.isNotEmpty) {
           list.add(
             LanguageItem(
@@ -278,8 +280,8 @@ class ListenRepeatContentService {
               portuguese: pt,
               english: en,
               wordType: 'phrase',
-              topicCategory: 'Conversational Phrases',
-              notes: 'Frase Útil',
+              topicCategory: category,
+              notes: notes,
             ),
           );
         }
@@ -301,6 +303,9 @@ class ListenRepeatContentService {
         final pt = (item['portuguese'] ?? '').toString().trim();
         final en = (item['english'] ?? '').toString().trim();
         final verb = (item['verb'] ?? '').toString().trim();
+        final category = (item['category'] ?? item['topicCategory'] ?? 'Verbs in Context').toString();
+        final defaultNote = verb.isNotEmpty ? 'Verbo em Contexto: $verb' : 'Verbo em Contexto';
+        final notes = (item['notes'] ?? defaultNote).toString();
         if (pt.isNotEmpty && en.isNotEmpty) {
           list.add(
             LanguageItem(
@@ -308,8 +313,8 @@ class ListenRepeatContentService {
               portuguese: pt,
               english: en,
               wordType: 'verb_phrase',
-              topicCategory: 'Verbs in Context',
-              notes: verb.isNotEmpty ? 'Verbo em Contexto: $verb' : 'Verbo em Contexto',
+              topicCategory: category,
+              notes: notes,
             ),
           );
         }
