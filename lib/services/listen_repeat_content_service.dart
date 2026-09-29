@@ -131,6 +131,13 @@ class ListenRepeatContentService {
     return false;
   }
 
+  static const Map<String, Set<String>> _topicVerbsByCategory = {
+    'House & Rooms': {'cozinhar', 'dormir', 'descansar', 'guardar', 'arrumar'},
+    'Household Items': {'aquecer', 'assar', 'ferver', 'varrer'},
+    'Body & Health': {'escovar', 'lavar', 'doer', 'torcer'},
+    'Everyday Items': {'carregar', 'esquecer', 'validar', 'proteger', 'levar'},
+  };
+
   /// Matches an item against a sub-topic category filter.
   static bool matchesSubCategory(LanguageItem item, String subCategory) {
     if (subCategory == 'All Topics' || subCategory.isEmpty) return true;
@@ -138,13 +145,26 @@ class ListenRepeatContentService {
     final note = item.notes.toLowerCase();
     switch (subCategory) {
       case 'House & Rooms':
-        return note.contains('a casa:') || note.contains('casa');
+        if (note.contains('a casa:') || note.contains('casa')) return true;
+        break;
       case 'Household Items':
-        return note.contains('objetos:');
+        if (note.contains('objetos:')) return true;
+        break;
       case 'Body & Health':
-        return note.contains('saúde:') || note.contains('saude:');
+        if (note.contains('saúde:') || note.contains('saude:')) return true;
+        break;
       case 'Everyday Items':
-        return note.contains('quotidiano:');
+        if (note.contains('quotidiano:')) return true;
+        break;
+    }
+    if (item.wordType == 'verb_phrase') {
+      final parts = item.id.split('_');
+      if (parts.length >= 3) {
+        final verb = parts[2];
+        if (_topicVerbsByCategory[subCategory]?.contains(verb) == true) {
+          return true;
+        }
+      }
     }
     return false;
   }

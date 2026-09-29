@@ -215,7 +215,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                         final isSelected = currentSub == t.$1;
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: FilterChip(
+                          child: ChoiceChip(
                             key: Key('topic_filter_${t.$1.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '_')}'),
                             selected: isSelected,
                             label: Text(

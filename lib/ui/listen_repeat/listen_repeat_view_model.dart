@@ -196,9 +196,10 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
 
   Future<void>? _activeStartFuture;
   ListenRepeatMode? _pendingMode;
+  bool _pendingRestart = false;
   Completer<void>? _pendingCompleter;
 
-  /// Starts a playback session for the current or specified [mode].
+  /// Starts a playback session for the current or specified [mode] and [subCategory].
   ///
   /// Concurrency model ("latest request wins"):
   /// If a start attempt or deck rebuild is already running (e.g. during cold-start
@@ -221,7 +222,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     final targetSubCategory = subCategory ?? (mode != null && mode != ListenRepeatMode.topics ? null : state.subCategory);
 
     // If mode and subCategory are specified and already playing with nothing pending
-    if (state.mode == targetMode && state.subCategory == targetSubCategory && _pendingMode == null && (_isAutoPlayActive || state.isPlaying)) {
+    if (state.mode == targetMode && state.subCategory == targetSubCategory && _pendingMode == null && !_pendingRestart && (_isAutoPlayActive || state.isPlaying)) {
       return;
     }
 
@@ -239,12 +240,13 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     }
 
     _pendingMode = targetMode;
+    _pendingRestart = true;
 
     _pendingCompleter ??= Completer<void>();
     final completer = _pendingCompleter!;
 
     if (_activeStartFuture != null) {
-      // The running start worker will notice _pendingMode and start the latest mode.
+      // The running start worker will notice _pendingRestart and start the latest mode.
       return completer.future;
     }
 
@@ -255,7 +257,8 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   Future<void> _runStartLoop() async {
     _isStarting = true;
     try {
-      while (_pendingMode != null) {
+      while (_pendingRestart || _pendingMode != null) {
+        _pendingRestart = false;
         _pendingMode = null;
         final currentCompleter = _pendingCompleter;
 
@@ -296,7 +299,9 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
 
     final contentService = ref.read(listenRepeatContentServiceProvider);
     AppLogger.log('[LR] loading content for mode ${state.mode} (subCategory: ${state.subCategory})...', name: 'ListenRepeat');
-    var allItems = await contentService.loadContent(mode: state.mode, subCategory: state.subCategory);
+    var allItems = state.subCategory != null
+        ? await contentService.loadContent(mode: state.mode, subCategory: state.subCategory)
+        : await contentService.loadContent(mode: state.mode);
     AppLogger.log('[LR] allItems count: ${allItems.length}', name: 'ListenRepeat');
 
     if (startingSessionId != _sessionId) {
@@ -314,6 +319,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         isPlaying: true,
         playbackSpeed: state.playbackSpeed,
         mode: state.mode,
+        subCategory: state.subCategory,
         totalWordsSeen: _sessionWordsOffset,
       );
       AppLogger.log('[LR] no items yet, retry $attempts/$_maxEmptyLoadAttempts in 1s...', name: 'ListenRepeat');
@@ -324,11 +330,14 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         state = ListenRepeatState(
           playbackSpeed: state.playbackSpeed,
           mode: state.mode,
+          subCategory: state.subCategory,
           totalWordsSeen: _sessionWordsOffset,
         );
         return;
       }
-      allItems = await contentService.loadContent(mode: state.mode);
+      allItems = state.subCategory != null
+          ? await contentService.loadContent(mode: state.mode, subCategory: state.subCategory)
+          : await contentService.loadContent(mode: state.mode);
       AppLogger.log('[LR] retry $attempts count: ${allItems.length}', name: 'ListenRepeat');
     }
 
@@ -342,6 +351,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       state = ListenRepeatState(
         playbackSpeed: state.playbackSpeed,
         mode: state.mode,
+        subCategory: state.subCategory,
         totalWordsSeen: _sessionWordsOffset,
       );
       return;
@@ -374,6 +384,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       isPlaying: true,
       playbackSpeed: state.playbackSpeed,
       mode: state.mode,
+      subCategory: state.subCategory,
       totalWordsSeen: _sessionWordsOffset,
     );
 
@@ -406,6 +417,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
         totalWordsSeen: _sessionWordsOffset + 1,
         playbackSpeed: state.playbackSpeed,
         mode: state.mode,
+        subCategory: state.subCategory,
       );
       _bgAudioPlayer.setSpeed(state.playbackSpeed);
       AppLogger.log('[LR] state updated, session started!', name: 'ListenRepeat');
@@ -435,6 +447,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     state = ListenRepeatState(
       playbackSpeed: state.playbackSpeed,
       mode: state.mode,
+      subCategory: state.subCategory,
       totalWordsSeen: _sessionWordsOffset,
       failure: 'Session could not start: $reason',
     );
@@ -896,6 +909,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     state = ListenRepeatState(
       playbackSpeed: state.playbackSpeed,
       mode: state.mode,
+      subCategory: state.subCategory,
       totalWordsSeen: recordProgress ? 0 : state.totalWordsSeen,
     );
     return earnedXP;
