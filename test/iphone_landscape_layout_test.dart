@@ -68,7 +68,7 @@ class _TestLRViewModel extends ListenRepeatViewModel {
   }
 
   @override
-  Future<void> startSession({ListenRepeatMode? mode}) async {}
+  Future<void> startSession({ListenRepeatMode? mode, String? subCategory}) async {}
 
   @override
   Future<int> stopSession({bool recordProgress = true}) async => 10;

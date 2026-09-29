@@ -46,6 +46,7 @@ class ListenRepeatState {
 
   ListenRepeatState copyWith({
     LanguageItem? currentItem,
+    bool clearCurrentItem = false,
     List<LanguageItem>? pool,
     List<LanguageItem>? shuffledPool,
     bool? isPlaying,
@@ -54,10 +55,12 @@ class ListenRepeatState {
     double? playbackSpeed,
     ListenRepeatMode? mode,
     String? subCategory,
+    bool clearSubCategory = false,
     String? failure,
+    bool clearFailure = false,
   }) {
     return ListenRepeatState(
-      currentItem: currentItem ?? this.currentItem,
+      currentItem: clearCurrentItem ? null : (currentItem ?? this.currentItem),
       pool: pool ?? this.pool,
       shuffledPool: shuffledPool ?? this.shuffledPool,
       isPlaying: isPlaying ?? this.isPlaying,
@@ -65,8 +68,8 @@ class ListenRepeatState {
       isSpeaking: isSpeaking ?? this.isSpeaking,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
       mode: mode ?? this.mode,
-      subCategory: subCategory ?? this.subCategory,
-      failure: failure ?? this.failure,
+      subCategory: clearSubCategory ? null : (subCategory ?? this.subCategory),
+      failure: clearFailure ? null : (failure ?? this.failure),
     );
   }
 }
@@ -219,14 +222,19 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     }
 
     final targetMode = mode ?? state.mode;
-    final targetSubCategory = subCategory ?? (mode != null && mode != ListenRepeatMode.topics ? null : state.subCategory);
+    final bool shouldClearSubCategory = (mode != null && mode != ListenRepeatMode.topics);
+    final targetSubCategory = shouldClearSubCategory ? null : (subCategory ?? state.subCategory);
 
     // If mode and subCategory are specified and already playing with nothing pending
     if (state.mode == targetMode && state.subCategory == targetSubCategory && _pendingMode == null && !_pendingRestart && (_isAutoPlayActive || state.isPlaying)) {
       return;
     }
 
-    state = state.copyWith(mode: targetMode, subCategory: targetSubCategory);
+    state = state.copyWith(
+      mode: targetMode,
+      subCategory: targetSubCategory,
+      clearSubCategory: shouldClearSubCategory,
+    );
 
     // Invalidate any in-flight generation so its current step aborts promptly
     _sessionId++;
@@ -375,10 +383,10 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     _playlistWords.clear();
     _playlist = null;
     
-    // Show loading spinner immediately. Built from scratch instead of via
-    // copyWith so the previous session's word and failure message are cleared
-    // (copyWith ignores nulls, which left the stale word on screen).
+    // Retain the current visible item while rebuilding the playlist in background
+    // so the card never collapses to a loading spinner when switching filters or modes.
     state = ListenRepeatState(
+      currentItem: state.currentItem,
       pool: allItems,
       shuffledPool: List.unmodifiable(_shuffledPool),
       isPlaying: true,

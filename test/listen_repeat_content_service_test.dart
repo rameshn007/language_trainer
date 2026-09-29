@@ -336,7 +336,9 @@ void main() {
     });
 
     test('biases newly added topic phrases into early rotation in ListenRepeatMode.phrases', () async {
-      when(() => storage.getAllItems()).thenReturn([]);
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'sol', english: 'sun'),
+      ]);
       when(() => verbService.loadVerbs()).thenAnswer((_) async => []);
 
       final pool = await contentService.loadContent(mode: ListenRepeatMode.phrases);

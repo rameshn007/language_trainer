@@ -256,113 +256,136 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                       glowColor: Colors.blue.shade300,
                       duration: const Duration(milliseconds: 2000),
                       repeat: true,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 28,
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    // Grammar / Tense Badge
-                                    if (item.notes.isNotEmpty) ...[
-                                      Container(
-                                        margin: const EdgeInsets.only(
-                                          bottom: 12,
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 4,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(
-                                            context,
-                                          ).colorScheme.primaryContainer,
-                                          borderRadius: BorderRadius.circular(
-                                            12,
-                                          ),
-                                        ),
-                                        child: Text(
-                                          item.notes,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall
-                                              ?.copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onPrimaryContainer,
-                                                fontWeight: FontWeight.bold,
+                      child: AnimatedSize(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOutCubic,
+                        child: Container(
+                          constraints: const BoxConstraints(
+                            minHeight: 200,
+                            minWidth: double.infinity,
+                          ),
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 28,
+                                ),
+                                child: Center(
+                                  child: AnimatedSwitcher(
+                                    duration: const Duration(milliseconds: 250),
+                                    switchInCurve: Curves.easeOut,
+                                    switchOutCurve: Curves.easeIn,
+                                    transitionBuilder: (child, animation) {
+                                      return FadeTransition(
+                                        opacity: animation,
+                                        child: child,
+                                      );
+                                    },
+                                    child: KeyedSubtree(
+                                      key: ValueKey(item.id),
+                                      child: Column(
+                                        key: ValueKey(item.id),
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          // Grammar / Tense Badge
+                                          if (item.notes.isNotEmpty) ...[
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                bottom: 12,
                                               ),
-                                        ),
+                                              padding: const EdgeInsets.symmetric(
+                                                horizontal: 12,
+                                                vertical: 4,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.primaryContainer,
+                                                borderRadius: BorderRadius.circular(
+                                                  12,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                item.notes,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelSmall
+                                                    ?.copyWith(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onPrimaryContainer,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                          // Portuguese word / phrase
+                                          Text(
+                                            item.portuguese,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineLarge
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(height: 12),
+                                          // English translation
+                                          Text(
+                                            item.english,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                  color: Theme.of(
+                                                    context,
+                                                  ).colorScheme.onSurfaceVariant,
+                                                ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                    // Portuguese word / phrase
-                                    Text(
-                                      item.portuguese,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineLarge
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                      textAlign: TextAlign.center,
                                     ),
-                                    const SizedBox(height: 12),
-                                    // English translation
-                                    Text(
-                                      item.english,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                            color: Theme.of(
-                                              context,
-                                            ).colorScheme.onSurfaceVariant,
-                                          ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: IconButton(
-                                key: const Key('listen_repeat_star_button'),
-                                icon: Icon(
-                                  isFlagged
-                                      ? Icons.star_rounded
-                                      : Icons.star_border_rounded,
-                                  color: isFlagged
-                                      ? Colors.amber
-                                      : Theme.of(
-                                          context,
-                                        ).colorScheme.onSurfaceVariant,
-                                  size: 28,
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: IconButton(
+                                  key: const Key('listen_repeat_star_button'),
+                                  icon: Icon(
+                                    isFlagged
+                                        ? Icons.star_rounded
+                                        : Icons.star_border_rounded,
+                                    color: isFlagged
+                                        ? Colors.amber
+                                        : Theme.of(
+                                            context,
+                                          ).colorScheme.onSurfaceVariant,
+                                    size: 28,
+                                  ),
+                                  tooltip: isFlagged
+                                      ? 'Remove from review'
+                                      : 'Flag for review',
+                                  onPressed: () async {
+                                    await storage.toggleItemFlagged(item.id);
+                                    if (!mounted) return;
+                                    setState(() {});
+                                  },
                                 ),
-                                tooltip: isFlagged
-                                    ? 'Remove from review'
-                                    : 'Flag for review',
-                                onPressed: () async {
-                                  await storage.toggleItemFlagged(item.id);
-                                  if (!mounted) return;
-                                  setState(() {});
-                                },
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -473,9 +496,32 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                   ),
                 ),
               ] else if (state.isPlaying) ...[
-                const CircularProgressIndicator(),
-                const SizedBox(height: 16),
-                const Text('Loading words...'),
+                Container(
+                  constraints: const BoxConstraints(
+                    minHeight: 200,
+                    minWidth: double.infinity,
+                  ),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 40),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CircularProgressIndicator(),
+                          SizedBox(height: 16),
+                          Text('Loading words...'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ] else if (state.failure != null) ...[
                 Icon(
                   Icons.error_outline_rounded,
