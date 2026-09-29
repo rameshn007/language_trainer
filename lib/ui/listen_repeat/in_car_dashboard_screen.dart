@@ -262,6 +262,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
   }) {
     const modes = [
       ListenRepeatMode.all,
+      ListenRepeatMode.topics,
       ListenRepeatMode.verbs,
       ListenRepeatMode.prepositions,
       ListenRepeatMode.phrases,

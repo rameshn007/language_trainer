@@ -119,6 +119,7 @@ void main() {
   }) {
     final counts = modeCounts ?? {
       ListenRepeatMode.all: 20,
+      ListenRepeatMode.topics: 12,
       ListenRepeatMode.verbs: 10,
       ListenRepeatMode.prepositions: 5,
       ListenRepeatMode.phrases: 8,

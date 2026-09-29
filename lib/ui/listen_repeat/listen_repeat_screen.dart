@@ -161,7 +161,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
             children: [
               // Content Focus Selector
               Padding(
-                padding: const EdgeInsets.only(bottom: 16),
+                padding: EdgeInsets.only(bottom: state.mode == ListenRepeatMode.topics ? 8 : 16),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -194,6 +194,55 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                   ),
                 ),
               ),
+
+              // Sub-topic Category Filter (when in A2 Everyday Topics mode)
+              if (state.mode == ListenRepeatMode.topics) ...[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ('All Topics', '✨ All Topics'),
+                        ('House & Rooms', '🏠 House & Rooms'),
+                        ('Household Items', '🍳 Household Items'),
+                        ('Body & Health', '🛡️ Body & Health'),
+                        ('Everyday Items', '🎒 Everyday Items'),
+                      ].map((t) {
+                        final currentSub = state.subCategory ?? 'All Topics';
+                        final isSelected = currentSub == t.$1;
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: FilterChip(
+                            key: Key('topic_filter_${t.$1.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '_')}'),
+                            selected: isSelected,
+                            label: Text(
+                              t.$2,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                              ),
+                            ),
+                            onSelected: (selected) {
+                              if (selected) {
+                                ref
+                                    .read(
+                                      listenRepeatViewModelProvider.notifier,
+                                    )
+                                    .setSubCategory(t.$1);
+                              }
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ],
 
               // Word display
               if (item != null) ...[

@@ -1236,6 +1236,7 @@ void main() {
         final vm = _TestLRViewModel(item, audioPlayer: mockAudioPlayer);
         final counts = {
           ListenRepeatMode.all: 20,
+          ListenRepeatMode.topics: 12,
           ListenRepeatMode.verbs: 10,
           ListenRepeatMode.prepositions: 5,
           ListenRepeatMode.phrases: 8,

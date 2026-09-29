@@ -1,4 +1,5 @@
 /.dart_tool
+/.dartServer
 .flutter-plugins-dependencies
 /.idea
 /android/.gradle

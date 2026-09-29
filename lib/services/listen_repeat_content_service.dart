@@ -9,6 +9,7 @@ import 'verb_service.dart';
 
 enum ListenRepeatMode {
   all,
+  topics,
   verbs,
   prepositions,
   phrases,
@@ -20,6 +21,8 @@ extension ListenRepeatModeExtension on ListenRepeatMode {
     switch (this) {
       case ListenRepeatMode.all:
         return 'Balanced Mix';
+      case ListenRepeatMode.topics:
+        return 'A2 Everyday Topics';
       case ListenRepeatMode.verbs:
         return 'Verbs & Tenses';
       case ListenRepeatMode.prepositions:
@@ -35,6 +38,8 @@ extension ListenRepeatModeExtension on ListenRepeatMode {
     switch (this) {
       case ListenRepeatMode.all:
         return 'Mix';
+      case ListenRepeatMode.topics:
+        return 'Topics';
       case ListenRepeatMode.verbs:
         return 'Verbs';
       case ListenRepeatMode.prepositions:
@@ -50,6 +55,8 @@ extension ListenRepeatModeExtension on ListenRepeatMode {
     switch (this) {
       case ListenRepeatMode.all:
         return 'Mix of verbs, phrases, and vocabulary';
+      case ListenRepeatMode.topics:
+        return 'House, health, household & everyday items';
       case ListenRepeatMode.verbs:
         return 'Conjugations & verb phrases';
       case ListenRepeatMode.prepositions:
@@ -87,6 +94,89 @@ class ListenRepeatContentService {
 
   ListenRepeatContentService(this._storageService, this._verbService);
 
+  static const Set<String> _targetTopicCategories = {
+    'House & Rooms',
+    'Household Items',
+    'Body & Health',
+    'Everyday Items',
+    'house and home',
+    'Home',
+  };
+
+  static const Set<String> _targetTopicVerbs = {
+    'cozinhar', 'dormir', 'descansar', 'guardar', 'arrumar', 'aquecer',
+    'assar', 'ferver', 'varrer', 'escovar', 'lavar', 'doer', 'torcer',
+    'carregar', 'esquecer', 'validar', 'proteger', 'levar',
+  };
+
+  /// Returns true if the item belongs to the newly added A2 topic sets:
+  /// House & Rooms, Household Items & Appliances, Body & Health, or Everyday Items.
+  static bool isTopicItem(LanguageItem item) {
+    if (_targetTopicCategories.contains(item.topicCategory)) return true;
+    final note = item.notes.toLowerCase();
+    if (note.contains('a casa:') ||
+        note.contains('objetos:') ||
+        note.contains('saúde:') ||
+        note.contains('saude:') ||
+        note.contains('quotidiano:')) {
+      return true;
+    }
+    if (item.wordType == 'verb_phrase') {
+      final parts = item.id.split('_');
+      // id format: verb_phrase_${verb}_$i
+      if (parts.length >= 3 && _targetTopicVerbs.contains(parts[2])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /// Matches an item against a sub-topic category filter.
+  static bool matchesSubCategory(LanguageItem item, String subCategory) {
+    if (subCategory == 'All Topics' || subCategory.isEmpty) return true;
+    if (item.topicCategory == subCategory) return true;
+    final note = item.notes.toLowerCase();
+    switch (subCategory) {
+      case 'House & Rooms':
+        return note.contains('a casa:') || note.contains('casa');
+      case 'Household Items':
+        return note.contains('objetos:');
+      case 'Body & Health':
+        return note.contains('saúde:') || note.contains('saude:');
+      case 'Everyday Items':
+        return note.contains('quotidiano:');
+    }
+    return false;
+  }
+
+  /// Builds a phrase deck where newly added A2 topic phrases are heavily biased
+  /// to appear early and frequently (1 priority topic phrase for every 2 general phrases)
+  /// rather than being diluted to <4% by 870+ example sentences.
+  List<LanguageItem> _buildBiasedPhrasesPool(List<LanguageItem> candidatePhrases) {
+    final priority = candidatePhrases.where(isTopicItem).toList()..shuffle();
+    final general = candidatePhrases.where((i) => !isTopicItem(i)).toList()..shuffle();
+
+    if (priority.isEmpty) {
+      return [...general];
+    }
+
+    final biased = <LanguageItem>[];
+    int pIdx = 0;
+    int gIdx = 0;
+
+    // Interleave pattern: 1 Priority Topic Phrase -> 2 General Phrases
+    while (pIdx < priority.length || gIdx < general.length) {
+      if (pIdx < priority.length) {
+        biased.add(priority[pIdx++]);
+      }
+      for (int i = 0; i < 2 && gIdx < general.length; i++) {
+        biased.add(general[gIdx++]);
+      }
+    }
+
+    return biased;
+  }
+
   Future<Map<ListenRepeatMode, int>> getModeCounts() async {
     if (_cachedModeCounts != null) return _cachedModeCounts!;
     final vocabItems = _storageService.getAllItems();
@@ -114,8 +204,16 @@ class ListenRepeatContentService {
         .length;
     final allCount = vocabCount + phrasesCount + conjugations.length + prepCount;
 
+    final topicCandidates = [
+      ...phrases.where(isTopicItem),
+      ...verbPhrases.where(isTopicItem),
+      ...vocabItems.where(isTopicItem),
+    ];
+    final topicsCount = topicCandidates.length;
+
     _cachedModeCounts = {
       ListenRepeatMode.all: allCount,
+      ListenRepeatMode.topics: topicsCount,
       ListenRepeatMode.verbs: verbsCount,
       ListenRepeatMode.prepositions: prepCount,
       ListenRepeatMode.phrases: phrasesCount,
@@ -124,7 +222,10 @@ class ListenRepeatContentService {
     return _cachedModeCounts!;
   }
 
-  Future<List<LanguageItem>> loadContent({ListenRepeatMode mode = ListenRepeatMode.all}) async {
+  Future<List<LanguageItem>> loadContent({
+    ListenRepeatMode mode = ListenRepeatMode.all,
+    String? subCategory,
+  }) async {
     final vocabItems = _storageService.getAllItems();
     if (vocabItems.isEmpty) {
       return [];
@@ -147,6 +248,21 @@ class ListenRepeatContentService {
     );
 
     switch (mode) {
+      case ListenRepeatMode.topics:
+        final list = <LanguageItem>[];
+        final allCandidates = <LanguageItem>[
+          ...phrases.where(isTopicItem),
+          ...verbPhrases.where(isTopicItem),
+          ...vocabItems.where(isTopicItem),
+        ];
+        if (subCategory != null && subCategory.isNotEmpty && subCategory != 'All Topics') {
+          list.addAll(allCandidates.where((i) => matchesSubCategory(i, subCategory)));
+        } else {
+          list.addAll(allCandidates);
+        }
+        list.shuffle();
+        return list;
+
       case ListenRepeatMode.verbs:
         final list = <LanguageItem>[];
         list.addAll(conjugations);
@@ -163,12 +279,11 @@ class ListenRepeatContentService {
         return list;
 
       case ListenRepeatMode.phrases:
-        final list = <LanguageItem>[];
-        list.addAll(phrases);
-        list.addAll(verbPhrases);
-        list.addAll(exampleSentences);
-        list.shuffle();
-        return list;
+        final allCandidates = <LanguageItem>[];
+        allCandidates.addAll(phrases);
+        allCandidates.addAll(verbPhrases);
+        allCandidates.addAll(exampleSentences);
+        return _buildBiasedPhrasesPool(allCandidates);
 
       case ListenRepeatMode.vocabulary:
         final list = vocabItems.where((i) => !i.id.startsWith('verb_')).toList();
@@ -197,7 +312,8 @@ class ListenRepeatContentService {
     required List<LanguageItem> conjugations,
     required List<LanguageItem> prepositions,
   }) {
-    final allPhrases = [...phrases, ...verbPhrases, ...exampleSentences]..shuffle();
+    final candidatePhrases = [...phrases, ...verbPhrases, ...exampleSentences];
+    final allPhrases = _buildBiasedPhrasesPool(candidatePhrases);
     final allConjugations = [...conjugations]..shuffle();
     final allPrepositions = [...prepositions]..shuffle();
     final phrasePtSet = {
