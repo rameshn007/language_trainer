@@ -53,6 +53,22 @@ void main() {
       validateExerciseFile('assets/data/exercises/unit_comparatives_and_duration.json');
     });
 
+    test('unit_rooms_in_the_house.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_rooms_in_the_house.json');
+    });
+
+    test('unit_household_items.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_household_items.json');
+    });
+
+    test('unit_body_parts_and_health.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_body_parts_and_health.json');
+    });
+
+    test('unit_everyday_items.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_everyday_items.json');
+    });
+
     test('indirect_object_pronouns.json adheres to exercise invariants and includes target items', () {
       validateExerciseFile('assets/data/exercises/indirect_object_pronouns.json');
 
@@ -137,6 +153,10 @@ void main() {
       expect(unitPaths.contains('assets/data/exercises/unit_conjunctions.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_sentence_transformations.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_comparatives_and_duration.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_rooms_in_the_house.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_household_items.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_body_parts_and_health.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_everyday_items.json'), isTrue);
     });
 
     test('CategorySelectionScreen covers all categories present in questions.json', () {

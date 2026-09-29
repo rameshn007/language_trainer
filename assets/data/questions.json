@@ -73232,5 +73232,2819 @@
     "answer": "como",
     "sourceItem": "Praticar andebol é tão dinâmico como praticar futebol",
     "cat": "Hobbies & Leisure"
+  },
+  {
+    "id": "q_5232",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a casa de banho'?",
+    "options": [
+      "There",
+      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
+      "the bathroom",
+      "Carrot"
+    ],
+    "answer": "the bathroom",
+    "sourceItem": "a casa de banho",
+    "cat": "General"
+  },
+  {
+    "id": "q_5233",
+    "type": "multipleChoice",
+    "question": "How do you say 'the bathroom' in Portuguese?",
+    "options": [
+      "Bonito",
+      "Está frio",
+      "águas furtadas",
+      "a casa de banho"
+    ],
+    "answer": "a casa de banho",
+    "sourceItem": "a casa de banho",
+    "cat": "General"
+  },
+  {
+    "id": "q_5234",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a ______ de banho' (the bathroom)",
+    "options": [
+      "Cidadão",
+      "decidem",
+      "casa",
+      "mochila"
+    ],
+    "answer": "casa",
+    "sourceItem": "a casa de banho",
+    "cat": "General"
+  },
+  {
+    "id": "q_5235",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a sala de estar'?",
+    "options": [
+      "the living room",
+      "The Holland",
+      "Your (m)",
+      "I am thirty years old"
+    ],
+    "answer": "the living room",
+    "sourceItem": "a sala de estar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5236",
+    "type": "multipleChoice",
+    "question": "How do you say 'the living room' in Portuguese?",
+    "options": [
+      "A novela",
+      "Saúde!",
+      "Apresse-se!",
+      "a sala de estar"
+    ],
+    "answer": "a sala de estar",
+    "sourceItem": "a sala de estar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5237",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a ______ de estar' (the living room)",
+    "options": [
+      "barata",
+      "Queres",
+      "diferente",
+      "sala"
+    ],
+    "answer": "sala",
+    "sourceItem": "a sala de estar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5238",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a sala de jantar'?",
+    "options": [
+      "I arrived before you.",
+      "the nails",
+      "To play (games/sports)",
+      "the dining room"
+    ],
+    "answer": "the dining room",
+    "sourceItem": "a sala de jantar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5239",
+    "type": "multipleChoice",
+    "question": "How do you say 'the dining room' in Portuguese?",
+    "options": [
+      "é",
+      "Fica perto",
+      "Não vale a pena",
+      "a sala de jantar"
+    ],
+    "answer": "a sala de jantar",
+    "sourceItem": "a sala de jantar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5240",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a sala de ______' (the dining room)",
+    "options": [
+      "jantar",
+      "galāo",
+      "Partidas",
+      "para"
+    ],
+    "answer": "jantar",
+    "sourceItem": "a sala de jantar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5241",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o corredor'?",
+    "options": [
+      "care / esteemed \\- dear",
+      "Summer nights are pleasant.",
+      "the corridor / hallway",
+      "Where can I rent a car?"
+    ],
+    "answer": "the corridor / hallway",
+    "sourceItem": "o corredor",
+    "cat": "General"
+  },
+  {
+    "id": "q_5242",
+    "type": "multipleChoice",
+    "question": "How do you say 'the corridor / hallway' in Portuguese?",
+    "options": [
+      "Com certeza",
+      "o pescoço",
+      "o corredor",
+      "Eu posso?"
+    ],
+    "answer": "o corredor",
+    "sourceItem": "o corredor",
+    "cat": "General"
+  },
+  {
+    "id": "q_5243",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o hall de entrada'?",
+    "options": [
+      "after",
+      "Stop it / Don't be like that",
+      "the entrance hall",
+      "The world"
+    ],
+    "answer": "the entrance hall",
+    "sourceItem": "o hall de entrada",
+    "cat": "General"
+  },
+  {
+    "id": "q_5244",
+    "type": "multipleChoice",
+    "question": "How do you say 'the entrance hall' in Portuguese?",
+    "options": [
+      "Às vezes",
+      "nós fazemos",
+      "o hall de entrada",
+      "Ainda não"
+    ],
+    "answer": "o hall de entrada",
+    "sourceItem": "o hall de entrada",
+    "cat": "General"
+  },
+  {
+    "id": "q_5245",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o hall de ______' (the entrance hall)",
+    "options": [
+      "ouvidos",
+      "teto",
+      "entrada",
+      "presenciais"
+    ],
+    "answer": "entrada",
+    "sourceItem": "o hall de entrada",
+    "cat": "General"
+  },
+  {
+    "id": "q_5246",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a despensa'?",
+    "options": [
+      "the pantry / larder",
+      "I wash the dishes",
+      "the cough",
+      "To eat vegetables"
+    ],
+    "answer": "the pantry / larder",
+    "sourceItem": "a despensa",
+    "cat": "General"
+  },
+  {
+    "id": "q_5247",
+    "type": "multipleChoice",
+    "question": "How do you say 'the pantry / larder' in Portuguese?",
+    "options": [
+      "a despensa",
+      "Estás tolo?",
+      "êfe",
+      "neblina"
+    ],
+    "answer": "a despensa",
+    "sourceItem": "a despensa",
+    "cat": "General"
+  },
+  {
+    "id": "q_5248",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a marquise'?",
+    "options": [
+      "Apple",
+      "the sunroom / enclosed balcony",
+      "This weekend",
+      "Raincoat"
+    ],
+    "answer": "the sunroom / enclosed balcony",
+    "sourceItem": "a marquise",
+    "cat": "General"
+  },
+  {
+    "id": "q_5249",
+    "type": "multipleChoice",
+    "question": "How do you say 'the sunroom / enclosed balcony' in Portuguese?",
+    "options": [
+      "a marquise",
+      "cave",
+      "acaba",
+      "Vou de avião para a escola."
+    ],
+    "answer": "a marquise",
+    "sourceItem": "a marquise",
+    "cat": "General"
+  },
+  {
+    "id": "q_5250",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o rés do chão'?",
+    "options": [
+      "See you very soon",
+      "the pot / saucepan",
+      "Perfume",
+      "the ground floor"
+    ],
+    "answer": "the ground floor",
+    "sourceItem": "o rés do chão",
+    "cat": "General"
+  },
+  {
+    "id": "q_5251",
+    "type": "multipleChoice",
+    "question": "How do you say 'the ground floor' in Portuguese?",
+    "options": [
+      "Cenoura",
+      "Os macacos saltam entre as árvores.",
+      "o rés do chão",
+      "recebe"
+    ],
+    "answer": "o rés do chão",
+    "sourceItem": "o rés do chão",
+    "cat": "General"
+  },
+  {
+    "id": "q_5252",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o rés do ______' (the ground floor)",
+    "options": [
+      "exame",
+      "muitos",
+      "unhas",
+      "chão"
+    ],
+    "answer": "chão",
+    "sourceItem": "o rés do chão",
+    "cat": "General"
+  },
+  {
+    "id": "q_5253",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o primeiro andar'?",
+    "options": [
+      "hobby / pastime",
+      "It is cloudy",
+      "the first floor",
+      "Let's go out tonight"
+    ],
+    "answer": "the first floor",
+    "sourceItem": "o primeiro andar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5254",
+    "type": "multipleChoice",
+    "question": "How do you say 'the first floor' in Portuguese?",
+    "options": [
+      "Concordo",
+      "em junho",
+      "de manhã eu vou ao supermercado",
+      "o primeiro andar"
+    ],
+    "answer": "o primeiro andar",
+    "sourceItem": "o primeiro andar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5255",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o ______ andar' (the first floor)",
+    "options": [
+      "Impermeável",
+      "foste",
+      "vezes",
+      "primeiro"
+    ],
+    "answer": "primeiro",
+    "sourceItem": "o primeiro andar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5256",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as escadas'?",
+    "options": [
+      "the stairs",
+      "To hate",
+      "the lips",
+      "Go straight ahead"
+    ],
+    "answer": "the stairs",
+    "sourceItem": "as escadas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5257",
+    "type": "multipleChoice",
+    "question": "How do you say 'the stairs' in Portuguese?",
+    "options": [
+      "Quem canta?",
+      "O semáforo",
+      "as escadas",
+      "a tábua de engomar"
+    ],
+    "answer": "as escadas",
+    "sourceItem": "as escadas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5258",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a lareira'?",
+    "options": [
+      "the fireplace",
+      "now",
+      "fog",
+      "wash"
+    ],
+    "answer": "the fireplace",
+    "sourceItem": "a lareira",
+    "cat": "General"
+  },
+  {
+    "id": "q_5259",
+    "type": "multipleChoice",
+    "question": "How do you say 'the fireplace' in Portuguese?",
+    "options": [
+      "Fazer análises",
+      "Abraços",
+      "Comer",
+      "a lareira"
+    ],
+    "answer": "a lareira",
+    "sourceItem": "a lareira",
+    "cat": "General"
+  },
+  {
+    "id": "q_5260",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o roupeiro'?",
+    "options": [
+      "The tax",
+      "I like to read",
+      "Go for a walk (Get lost)",
+      "the wardrobe"
+    ],
+    "answer": "the wardrobe",
+    "sourceItem": "o roupeiro",
+    "cat": "General"
+  },
+  {
+    "id": "q_5261",
+    "type": "multipleChoice",
+    "question": "How do you say 'the wardrobe' in Portuguese?",
+    "options": [
+      "A fatura",
+      "Semana passada, anteontem, ontem, hoje, amanhã, depois de amanhã, próxima semana",
+      "o roupeiro",
+      "Vinho branco"
+    ],
+    "answer": "o roupeiro",
+    "sourceItem": "o roupeiro",
+    "cat": "General"
+  },
+  {
+    "id": "q_5262",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o congelador'?",
+    "options": [
+      "the freezer",
+      "The Morning Mail",
+      "a business proposal",
+      "Your (f)"
+    ],
+    "answer": "the freezer",
+    "sourceItem": "o congelador",
+    "cat": "General"
+  },
+  {
+    "id": "q_5263",
+    "type": "multipleChoice",
+    "question": "How do you say 'the freezer' in Portuguese?",
+    "options": [
+      "por volta",
+      "Este exercício não é tão difícil como aquele",
+      "o congelador",
+      "Perder"
+    ],
+    "answer": "o congelador",
+    "sourceItem": "o congelador",
+    "cat": "General"
+  },
+  {
+    "id": "q_5264",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a torradeira'?",
+    "options": [
+      "sphinx",
+      "the toaster",
+      "we have to use the car the majority of the time",
+      "room with showroom"
+    ],
+    "answer": "the toaster",
+    "sourceItem": "a torradeira",
+    "cat": "General"
+  },
+  {
+    "id": "q_5265",
+    "type": "multipleChoice",
+    "question": "How do you say 'the toaster' in Portuguese?",
+    "options": [
+      "Castanho",
+      "gravação",
+      "a torradeira",
+      "pelo \\- por"
+    ],
+    "answer": "a torradeira",
+    "sourceItem": "a torradeira",
+    "cat": "General"
+  },
+  {
+    "id": "q_5266",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a chaleira elétrica'?",
+    "options": [
+      "Everything works out",
+      "Good job",
+      "the electric kettle",
+      "the nails"
+    ],
+    "answer": "the electric kettle",
+    "sourceItem": "a chaleira elétrica",
+    "cat": "General"
+  },
+  {
+    "id": "q_5267",
+    "type": "multipleChoice",
+    "question": "How do you say 'the electric kettle' in Portuguese?",
+    "options": [
+      "A tua",
+      "os herdeiros",
+      "a chaleira elétrica",
+      "Chover a cântaros"
+    ],
+    "answer": "a chaleira elétrica",
+    "sourceItem": "a chaleira elétrica",
+    "cat": "General"
+  },
+  {
+    "id": "q_5268",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a ______ elétrica' (the electric kettle)",
+    "options": [
+      "falo",
+      "vezes",
+      "chaleira",
+      "leite"
+    ],
+    "answer": "chaleira",
+    "sourceItem": "a chaleira elétrica",
+    "cat": "General"
+  },
+  {
+    "id": "q_5269",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a tábua de engomar'?",
+    "options": [
+      "boyfriend",
+      "I will go there in person to deliver the signed contract",
+      "the ironing board",
+      "The Public (Newspaper)"
+    ],
+    "answer": "the ironing board",
+    "sourceItem": "a tábua de engomar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5270",
+    "type": "multipleChoice",
+    "question": "How do you say 'the ironing board' in Portuguese?",
+    "options": [
+      "a tábua de engomar",
+      "No outono o tempo fica mais ventoso",
+      "Telefona-me antes de saíres.",
+      "Um dia"
+    ],
+    "answer": "a tábua de engomar",
+    "sourceItem": "a tábua de engomar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5271",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a tábua de ______' (the ironing board)",
+    "options": [
+      "cama",
+      "Atenciosamente",
+      "engomar",
+      "três"
+    ],
+    "answer": "engomar",
+    "sourceItem": "a tábua de engomar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5272",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a esfregona'?",
+    "options": [
+      "Which month are we in?",
+      "the suitcase",
+      "terrace",
+      "the mop"
+    ],
+    "answer": "the mop",
+    "sourceItem": "a esfregona",
+    "cat": "General"
+  },
+  {
+    "id": "q_5273",
+    "type": "multipleChoice",
+    "question": "How do you say 'the mop' in Portuguese?",
+    "options": [
+      "os netos",
+      "Olá, tudo bem?",
+      "a chávena",
+      "a esfregona"
+    ],
+    "answer": "a esfregona",
+    "sourceItem": "a esfregona",
+    "cat": "General"
+  },
+  {
+    "id": "q_5274",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o caixote do lixo'?",
+    "options": [
+      "Where is the bathroom?",
+      "the rubbish bin",
+      "Bread with butter",
+      "Don't hold your breath"
+    ],
+    "answer": "the rubbish bin",
+    "sourceItem": "o caixote do lixo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5275",
+    "type": "multipleChoice",
+    "question": "How do you say 'the rubbish bin' in Portuguese?",
+    "options": [
+      "o caixote do lixo",
+      "Beber água",
+      "São 19h15",
+      "Tenho dor de cabeça"
+    ],
+    "answer": "o caixote do lixo",
+    "sourceItem": "o caixote do lixo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5276",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o caixote do ______' (the rubbish bin)",
+    "options": [
+      "fresca",
+      "lixo",
+      "análises",
+      "hoje"
+    ],
+    "answer": "lixo",
+    "sourceItem": "o caixote do lixo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5277",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as cortinas'?",
+    "options": [
+      "Can you lend me your pen?",
+      "to wish",
+      "room temperature water",
+      "the curtains"
+    ],
+    "answer": "the curtains",
+    "sourceItem": "as cortinas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5278",
+    "type": "multipleChoice",
+    "question": "How do you say 'the curtains' in Portuguese?",
+    "options": [
+      "as cortinas",
+      "os pés",
+      "Eu começo a trabalhar",
+      "Surpreendido"
+    ],
+    "answer": "as cortinas",
+    "sourceItem": "as cortinas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5279",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os lençóis'?",
+    "options": [
+      "the bed sheets",
+      "Hills",
+      "Turn left",
+      "The train"
+    ],
+    "answer": "the bed sheets",
+    "sourceItem": "os lençóis",
+    "cat": "General"
+  },
+  {
+    "id": "q_5280",
+    "type": "multipleChoice",
+    "question": "How do you say 'the bed sheets' in Portuguese?",
+    "options": [
+      "E contigo?",
+      "os lençóis",
+      "a gaveta",
+      "tamanho"
+    ],
+    "answer": "os lençóis",
+    "sourceItem": "os lençóis",
+    "cat": "General"
+  },
+  {
+    "id": "q_5281",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o edredão'?",
+    "options": [
+      "Ask Ana for the newspaper",
+      "I take a quick shower",
+      "the duvet",
+      "The university"
+    ],
+    "answer": "the duvet",
+    "sourceItem": "o edredão",
+    "cat": "General"
+  },
+  {
+    "id": "q_5282",
+    "type": "multipleChoice",
+    "question": "How do you say 'the duvet' in Portuguese?",
+    "options": [
+      "o edredão",
+      "Ele está",
+      "Esquerda",
+      "Saúde!"
+    ],
+    "answer": "o edredão",
+    "sourceItem": "o edredão",
+    "cat": "General"
+  },
+  {
+    "id": "q_5283",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a panela'?",
+    "options": [
+      "The avenue",
+      "the pot / saucepan",
+      "I am going to the Algarve",
+      "I like ... very much"
+    ],
+    "answer": "the pot / saucepan",
+    "sourceItem": "a panela",
+    "cat": "General"
+  },
+  {
+    "id": "q_5284",
+    "type": "multipleChoice",
+    "question": "How do you say 'the pot / saucepan' in Portuguese?",
+    "options": [
+      "sala de espetáculos",
+      "Partidas",
+      "Isso",
+      "a panela"
+    ],
+    "answer": "a panela",
+    "sourceItem": "a panela",
+    "cat": "General"
+  },
+  {
+    "id": "q_5285",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a frigideira'?",
+    "options": [
+      "the frying pan",
+      "To win/earn",
+      "The ceiling",
+      "With a sea view"
+    ],
+    "answer": "the frying pan",
+    "sourceItem": "a frigideira",
+    "cat": "General"
+  },
+  {
+    "id": "q_5286",
+    "type": "multipleChoice",
+    "question": "How do you say 'the frying pan' in Portuguese?",
+    "options": [
+      "Eu vou para a cama",
+      "a frigideira",
+      "Tomate",
+      "Eu sou vegetariano"
+    ],
+    "answer": "a frigideira",
+    "sourceItem": "a frigideira",
+    "cat": "General"
+  },
+  {
+    "id": "q_5287",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os talheres'?",
+    "options": [
+      "How do you say this in Portuguese?",
+      "prefer the second apartment",
+      "the cutlery",
+      "high"
+    ],
+    "answer": "the cutlery",
+    "sourceItem": "os talheres",
+    "cat": "General"
+  },
+  {
+    "id": "q_5288",
+    "type": "multipleChoice",
+    "question": "How do you say 'the cutlery' in Portuguese?",
+    "options": [
+      "duplo vê",
+      "os talheres",
+      "É meio-dia",
+      "Vamos de férias no próximo verão."
+    ],
+    "answer": "os talheres",
+    "sourceItem": "os talheres",
+    "cat": "General"
+  },
+  {
+    "id": "q_5289",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o garfo'?",
+    "options": [
+      "the afternoon or da tarde, but after a time it is de tarde",
+      "scissors on top",
+      "the fork",
+      "Rich"
+    ],
+    "answer": "the fork",
+    "sourceItem": "o garfo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5290",
+    "type": "multipleChoice",
+    "question": "How do you say 'the fork' in Portuguese?",
+    "options": [
+      "o garfo",
+      "A equipa nacional portuguesa tem jogadores do benfica, do sporting e do Porto",
+      "vou,vais,vai,vamos,vão",
+      "Ontem à noite"
+    ],
+    "answer": "o garfo",
+    "sourceItem": "o garfo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5291",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a faca'?",
+    "options": [
+      "The bridge",
+      "the knife",
+      "To take vitamins",
+      "Do you (collective) have/take"
+    ],
+    "answer": "the knife",
+    "sourceItem": "a faca",
+    "cat": "General"
+  },
+  {
+    "id": "q_5292",
+    "type": "multipleChoice",
+    "question": "How do you say 'the knife' in Portuguese?",
+    "options": [
+      "dezembro",
+      "Eles vivem em Lisboa desde 2018",
+      "a faca",
+      "metro"
+    ],
+    "answer": "a faca",
+    "sourceItem": "a faca",
+    "cat": "General"
+  },
+  {
+    "id": "q_5293",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a colher'?",
+    "options": [
+      "Signed",
+      "to decide",
+      "the spoon",
+      "ATV"
+    ],
+    "answer": "the spoon",
+    "sourceItem": "a colher",
+    "cat": "General"
+  },
+  {
+    "id": "q_5294",
+    "type": "multipleChoice",
+    "question": "How do you say 'the spoon' in Portuguese?",
+    "options": [
+      "O seu",
+      "leventar-se",
+      "está sol",
+      "a colher"
+    ],
+    "answer": "a colher",
+    "sourceItem": "a colher",
+    "cat": "General"
+  },
+  {
+    "id": "q_5295",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o prato'?",
+    "options": [
+      "Isabel is going to spend the weekend with Vitória because they are friends.",
+      "the nails",
+      "the plate",
+      "especially where I live"
+    ],
+    "answer": "the plate",
+    "sourceItem": "o prato",
+    "cat": "General"
+  },
+  {
+    "id": "q_5296",
+    "type": "multipleChoice",
+    "question": "How do you say 'the plate' in Portuguese?",
+    "options": [
+      "Mais tarde",
+      "A chaminé",
+      "A rotunda",
+      "o prato"
+    ],
+    "answer": "o prato",
+    "sourceItem": "o prato",
+    "cat": "General"
+  },
+  {
+    "id": "q_5297",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o copo'?",
+    "options": [
+      "terrace",
+      "the rat is gnawing the cork of the bottle of the king of russia",
+      "Are you afraid of cockroaches?",
+      "the glass"
+    ],
+    "answer": "the glass",
+    "sourceItem": "o copo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5298",
+    "type": "multipleChoice",
+    "question": "How do you say 'the glass' in Portuguese?",
+    "options": [
+      "A poltrona",
+      "seiscentos, setecentos",
+      "sobre",
+      "o copo"
+    ],
+    "answer": "o copo",
+    "sourceItem": "o copo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5299",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a chávena'?",
+    "options": [
+      "the cup / mug",
+      "Summer is my favorite season.",
+      "The street",
+      "laundromat"
+    ],
+    "answer": "the cup / mug",
+    "sourceItem": "a chávena",
+    "cat": "General"
+  },
+  {
+    "id": "q_5300",
+    "type": "multipleChoice",
+    "question": "How do you say 'the cup / mug' in Portuguese?",
+    "options": [
+      "a chávena",
+      "Ler",
+      "Quando viajam pela Península Ibérica, os turistas americanos acham que Portugal é tão bonito como Espanha",
+      "ainda"
+    ],
+    "answer": "a chávena",
+    "sourceItem": "a chávena",
+    "cat": "General"
+  },
+  {
+    "id": "q_5301",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a torneira'?",
+    "options": [
+      "they see",
+      "my journey/trip",
+      "the tap / faucet",
+      "this \\- far from both"
+    ],
+    "answer": "the tap / faucet",
+    "sourceItem": "a torneira",
+    "cat": "General"
+  },
+  {
+    "id": "q_5302",
+    "type": "multipleChoice",
+    "question": "How do you say 'the tap / faucet' in Portuguese?",
+    "options": [
+      "Telefona-me antes de saíres.",
+      "a torneira",
+      "A entrada é gratuita",
+      "já nāo"
+    ],
+    "answer": "a torneira",
+    "sourceItem": "a torneira",
+    "cat": "General"
+  },
+  {
+    "id": "q_5303",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a cabeça'?",
+    "options": [
+      "the head",
+      "Not possible",
+      "We want",
+      "I have classes every day"
+    ],
+    "answer": "the head",
+    "sourceItem": "a cabeça",
+    "cat": "General"
+  },
+  {
+    "id": "q_5304",
+    "type": "multipleChoice",
+    "question": "How do you say 'the head' in Portuguese?",
+    "options": [
+      "a cabeça",
+      "com ele",
+      "connosco",
+      "As aulas de kizomba são tão divertidas como as aulas de samba"
+    ],
+    "answer": "a cabeça",
+    "sourceItem": "a cabeça",
+    "cat": "General"
+  },
+  {
+    "id": "q_5305",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os olhos'?",
+    "options": [
+      "It is true",
+      "I do",
+      "the eyes",
+      "I have an allergy"
+    ],
+    "answer": "the eyes",
+    "sourceItem": "os olhos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5306",
+    "type": "multipleChoice",
+    "question": "How do you say 'the eyes' in Portuguese?",
+    "options": [
+      "Queres ir beber um café?",
+      "Abraços",
+      "os olhos",
+      "queque"
+    ],
+    "answer": "os olhos",
+    "sourceItem": "os olhos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5307",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o nariz'?",
+    "options": [
+      "João bought as many apples as oranges",
+      "the nose",
+      "To play",
+      "I leave the house"
+    ],
+    "answer": "the nose",
+    "sourceItem": "o nariz",
+    "cat": "General"
+  },
+  {
+    "id": "q_5308",
+    "type": "multipleChoice",
+    "question": "How do you say 'the nose' in Portuguese?",
+    "options": [
+      "ventoso",
+      "pare",
+      "o nariz",
+      "barco"
+    ],
+    "answer": "o nariz",
+    "sourceItem": "o nariz",
+    "cat": "General"
+  },
+  {
+    "id": "q_5309",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a boca'?",
+    "options": [
+      "the mouth",
+      "How cool (slang)",
+      "chairs",
+      "Nurse"
+    ],
+    "answer": "the mouth",
+    "sourceItem": "a boca",
+    "cat": "General"
+  },
+  {
+    "id": "q_5310",
+    "type": "multipleChoice",
+    "question": "How do you say 'the mouth' in Portuguese?",
+    "options": [
+      "O banho",
+      "Vou para Lisboa",
+      "a boca",
+      "Dormir"
+    ],
+    "answer": "a boca",
+    "sourceItem": "a boca",
+    "cat": "General"
+  },
+  {
+    "id": "q_5311",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os lábios'?",
+    "options": [
+      "the lips",
+      "the cup / mug",
+      "to finish",
+      "with her"
+    ],
+    "answer": "the lips",
+    "sourceItem": "os lábios",
+    "cat": "General"
+  },
+  {
+    "id": "q_5312",
+    "type": "multipleChoice",
+    "question": "How do you say 'the lips' in Portuguese?",
+    "options": [
+      "Nós queremos jantar com vocês",
+      "Moro em Lisboa",
+      "os lábios",
+      "Eu não tenho tanto dinheiro como ele"
+    ],
+    "answer": "os lábios",
+    "sourceItem": "os lábios",
+    "cat": "General"
+  },
+  {
+    "id": "q_5313",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os dentes'?",
+    "options": [
+      "The backpack",
+      "the teeth",
+      "He didn't buy the ticket, therefore he cannot enter.",
+      "your husband"
+    ],
+    "answer": "the teeth",
+    "sourceItem": "os dentes",
+    "cat": "General"
+  },
+  {
+    "id": "q_5314",
+    "type": "multipleChoice",
+    "question": "How do you say 'the teeth' in Portuguese?",
+    "options": [
+      "O sul",
+      "os dentes",
+      "Nós vamos",
+      "As habilitações literárias"
+    ],
+    "answer": "os dentes",
+    "sourceItem": "os dentes",
+    "cat": "General"
+  },
+  {
+    "id": "q_5315",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a língua'?",
+    "options": [
+      "I return to work",
+      "the tongue",
+      "I feel sick",
+      "The bonus"
+    ],
+    "answer": "the tongue",
+    "sourceItem": "a língua",
+    "cat": "General"
+  },
+  {
+    "id": "q_5316",
+    "type": "multipleChoice",
+    "question": "How do you say 'the tongue' in Portuguese?",
+    "options": [
+      "a língua",
+      "A avó",
+      "O Diário de Notícias",
+      "eu andou de bicicleta"
+    ],
+    "answer": "a língua",
+    "sourceItem": "a língua",
+    "cat": "General"
+  },
+  {
+    "id": "q_5317",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a garganta'?",
+    "options": [
+      "Doctor \\- masculine",
+      "the throat",
+      "short period (masculine)",
+      "I need a tow truck"
+    ],
+    "answer": "the throat",
+    "sourceItem": "a garganta",
+    "cat": "General"
+  },
+  {
+    "id": "q_5318",
+    "type": "multipleChoice",
+    "question": "How do you say 'the throat' in Portuguese?",
+    "options": [
+      "a garganta",
+      "e+a=da",
+      "Eles chegaram depois da festa acabar.",
+      "Ele casou-se com a Rita há três anos"
+    ],
+    "answer": "a garganta",
+    "sourceItem": "a garganta",
+    "cat": "General"
+  },
+  {
+    "id": "q_5319",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os ouvidos'?",
+    "options": [
+      "My throat hurts.",
+      "pedestrian crossing",
+      "the ears (hearing)",
+      "Are you playing smart?"
+    ],
+    "answer": "the ears (hearing)",
+    "sourceItem": "os ouvidos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5320",
+    "type": "multipleChoice",
+    "question": "How do you say 'the ears (hearing)' in Portuguese?",
+    "options": [
+      "os ouvidos",
+      "namorado",
+      "seis, sete",
+      "contentes"
+    ],
+    "answer": "os ouvidos",
+    "sourceItem": "os ouvidos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5321",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as orelhas'?",
+    "options": [
+      "I have lived here for two years",
+      "To believe",
+      "Who sings?",
+      "the ears (outer)"
+    ],
+    "answer": "the ears (outer)",
+    "sourceItem": "as orelhas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5322",
+    "type": "multipleChoice",
+    "question": "How do you say 'the ears (outer)' in Portuguese?",
+    "options": [
+      "Fogo!",
+      "o valor da renda é diferente",
+      "as orelhas",
+      "Saio de casa às oito"
+    ],
+    "answer": "as orelhas",
+    "sourceItem": "as orelhas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5323",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o pescoço'?",
+    "options": [
+      "the neck",
+      "Call me before you leave.",
+      "therefore",
+      "The garage"
+    ],
+    "answer": "the neck",
+    "sourceItem": "o pescoço",
+    "cat": "General"
+  },
+  {
+    "id": "q_5324",
+    "type": "multipleChoice",
+    "question": "How do you say 'the neck' in Portuguese?",
+    "options": [
+      "Telefona-me antes de saíres.",
+      "o pescoço",
+      "Neste momento",
+      "O teu"
+    ],
+    "answer": "o pescoço",
+    "sourceItem": "o pescoço",
+    "cat": "General"
+  },
+  {
+    "id": "q_5325",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os ombros'?",
+    "options": [
+      "I agree",
+      "the mobile phone",
+      "Pedro has been studying Portuguese for six months",
+      "the shoulders"
+    ],
+    "answer": "the shoulders",
+    "sourceItem": "os ombros",
+    "cat": "General"
+  },
+  {
+    "id": "q_5326",
+    "type": "multipleChoice",
+    "question": "How do you say 'the shoulders' in Portuguese?",
+    "options": [
+      "Os quadros estão na parede",
+      "É meia-noite",
+      "os ombros",
+      "Vire à esquerda"
+    ],
+    "answer": "os ombros",
+    "sourceItem": "os ombros",
+    "cat": "General"
+  },
+  {
+    "id": "q_5327",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o peito'?",
+    "options": [
+      "It is going to snow tomorrow",
+      "the chest",
+      "The board",
+      "To be able to/Can"
+    ],
+    "answer": "the chest",
+    "sourceItem": "o peito",
+    "cat": "General"
+  },
+  {
+    "id": "q_5328",
+    "type": "multipleChoice",
+    "question": "How do you say 'the chest' in Portuguese?",
+    "options": [
+      "Estou a brincar",
+      "A cozinha",
+      "o peito",
+      "As aulas de kizomba são tão divertidas como as aulas de samba"
+    ],
+    "answer": "o peito",
+    "sourceItem": "o peito",
+    "cat": "General"
+  },
+  {
+    "id": "q_5329",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as costas'?",
+    "options": [
+      "Waiter",
+      "full",
+      "The internet is not working",
+      "the back"
+    ],
+    "answer": "the back",
+    "sourceItem": "as costas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5330",
+    "type": "multipleChoice",
+    "question": "How do you say 'the back' in Portuguese?",
+    "options": [
+      "Podes contar comigo",
+      "Eu lavo a roupa",
+      "as costas",
+      "O filme começa por volta das nove"
+    ],
+    "answer": "as costas",
+    "sourceItem": "as costas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5331",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os braços'?",
+    "options": [
+      "the arms",
+      "To eat",
+      "I arrive at home at 7:30pm",
+      "Mountain"
+    ],
+    "answer": "the arms",
+    "sourceItem": "os braços",
+    "cat": "General"
+  },
+  {
+    "id": "q_5332",
+    "type": "multipleChoice",
+    "question": "How do you say 'the arms' in Portuguese?",
+    "options": [
+      "Os macacos são animais espertos.",
+      "Eu só vou à praia quando está bom tempo",
+      "Vire à direita",
+      "os braços"
+    ],
+    "answer": "os braços",
+    "sourceItem": "os braços",
+    "cat": "General"
+  },
+  {
+    "id": "q_5333",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o cotovelo'?",
+    "options": [
+      "The beach",
+      "the elbow",
+      "high",
+      "g"
+    ],
+    "answer": "the elbow",
+    "sourceItem": "o cotovelo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5334",
+    "type": "multipleChoice",
+    "question": "How do you say 'the elbow' in Portuguese?",
+    "options": [
+      "o cotovelo",
+      "mil duzentos e trinta",
+      "Ela foi ao médico porque tinha febre alta.",
+      "Ladrão!"
+    ],
+    "answer": "o cotovelo",
+    "sourceItem": "o cotovelo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5335",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o pulso'?",
+    "options": [
+      "Kizomba classes are as fun as samba classes",
+      "The sand",
+      "the wrist",
+      "100,000"
+    ],
+    "answer": "the wrist",
+    "sourceItem": "o pulso",
+    "cat": "General"
+  },
+  {
+    "id": "q_5336",
+    "type": "multipleChoice",
+    "question": "How do you say 'the wrist' in Portuguese?",
+    "options": [
+      "o pulso",
+      "A sua",
+      "Com quem vais ao cinema?",
+      "Treinar"
+    ],
+    "answer": "o pulso",
+    "sourceItem": "o pulso",
+    "cat": "General"
+  },
+  {
+    "id": "q_5337",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as mãos'?",
+    "options": [
+      "stop (formal imperative)",
+      "I wash myself",
+      "the hands",
+      "We are happy"
+    ],
+    "answer": "the hands",
+    "sourceItem": "as mãos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5338",
+    "type": "multipleChoice",
+    "question": "How do you say 'the hands' in Portuguese?",
+    "options": [
+      "as mãos",
+      "A vassoura",
+      "A gramática é complexa",
+      "demência"
+    ],
+    "answer": "as mãos",
+    "sourceItem": "as mãos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5339",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os dedos'?",
+    "options": [
+      "The player made a very strong serve.",
+      "Pescatarian",
+      "Keep trying",
+      "the fingers"
+    ],
+    "answer": "the fingers",
+    "sourceItem": "os dedos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5340",
+    "type": "multipleChoice",
+    "question": "How do you say 'the fingers' in Portuguese?",
+    "options": [
+      "O ginásio",
+      "os dedos",
+      "em junho",
+      "Ela tem tantas amigas na universidade como na escola"
+    ],
+    "answer": "os dedos",
+    "sourceItem": "os dedos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5341",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as unhas'?",
+    "options": [
+      "Cancelled",
+      "the nails",
+      "despite",
+      "I am broke / exhausted"
+    ],
+    "answer": "the nails",
+    "sourceItem": "as unhas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5342",
+    "type": "multipleChoice",
+    "question": "How do you say 'the nails' in Portuguese?",
+    "options": [
+      "as unhas",
+      "Ela fala português tão bem como um nativo",
+      "galāo claro",
+      "comer fora"
+    ],
+    "answer": "as unhas",
+    "sourceItem": "as unhas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5343",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a barriga'?",
+    "options": [
+      "The town",
+      "the belly",
+      "Where are my house slippers?",
+      "niece"
+    ],
+    "answer": "the belly",
+    "sourceItem": "a barriga",
+    "cat": "General"
+  },
+  {
+    "id": "q_5344",
+    "type": "multipleChoice",
+    "question": "How do you say 'the belly' in Portuguese?",
+    "options": [
+      "Correr",
+      "Ainda não",
+      "É difícil",
+      "a barriga"
+    ],
+    "answer": "a barriga",
+    "sourceItem": "a barriga",
+    "cat": "General"
+  },
+  {
+    "id": "q_5345",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o estômago'?",
+    "options": [
+      "the stomach",
+      "Good job",
+      "to hope that",
+      "Turn up the volume"
+    ],
+    "answer": "the stomach",
+    "sourceItem": "o estômago",
+    "cat": "General"
+  },
+  {
+    "id": "q_5346",
+    "type": "multipleChoice",
+    "question": "How do you say 'the stomach' in Portuguese?",
+    "options": [
+      "É importante",
+      "o estômago",
+      "Nos damos",
+      "Ansioso"
+    ],
+    "answer": "o estômago",
+    "sourceItem": "o estômago",
+    "cat": "General"
+  },
+  {
+    "id": "q_5347",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as pernas'?",
+    "options": [
+      "He is well",
+      "the legs",
+      "the neck",
+      "theirs"
+    ],
+    "answer": "the legs",
+    "sourceItem": "as pernas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5348",
+    "type": "multipleChoice",
+    "question": "How do you say 'the legs' in Portuguese?",
+    "options": [
+      "inacreditável",
+      "tusso",
+      "as pernas",
+      "Poder"
+    ],
+    "answer": "as pernas",
+    "sourceItem": "as pernas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5349",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o joelho'?",
+    "options": [
+      "This car is as fast as the other",
+      "the knee",
+      "He does",
+      "Come here, I need to talk to you"
+    ],
+    "answer": "the knee",
+    "sourceItem": "o joelho",
+    "cat": "General"
+  },
+  {
+    "id": "q_5350",
+    "type": "multipleChoice",
+    "question": "How do you say 'the knee' in Portuguese?",
+    "options": [
+      "A toalha",
+      "Preciso do carro por 4 dias",
+      "O avô deixou um testamento detalhado",
+      "o joelho"
+    ],
+    "answer": "o joelho",
+    "sourceItem": "o joelho",
+    "cat": "General"
+  },
+  {
+    "id": "q_5351",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o tornozelo'?",
+    "options": [
+      "I go shopping",
+      "quarter",
+      "the ankle",
+      "to take the wallet out of the bag"
+    ],
+    "answer": "the ankle",
+    "sourceItem": "o tornozelo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5352",
+    "type": "multipleChoice",
+    "question": "How do you say 'the ankle' in Portuguese?",
+    "options": [
+      "Dói-me aqui",
+      "o tornozelo",
+      "Tomar vitaminas",
+      "Hoje"
+    ],
+    "answer": "o tornozelo",
+    "sourceItem": "o tornozelo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5353",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os pés'?",
+    "options": [
+      "the feet",
+      "They arrived after the party finished.",
+      "The teacher explains the lesson to us with patience.",
+      "I would like to speak with you"
+    ],
+    "answer": "the feet",
+    "sourceItem": "os pés",
+    "cat": "General"
+  },
+  {
+    "id": "q_5354",
+    "type": "multipleChoice",
+    "question": "How do you say 'the feet' in Portuguese?",
+    "options": [
+      "Cansado",
+      "os pés",
+      "Vens",
+      "decidem"
+    ],
+    "answer": "os pés",
+    "sourceItem": "os pés",
+    "cat": "General"
+  },
+  {
+    "id": "q_5355",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Dói-me a cabeça.'?",
+    "options": [
+      "Good evening/night",
+      "Checkout/Box",
+      "My head hurts.",
+      "The sidewalk"
+    ],
+    "answer": "My head hurts.",
+    "sourceItem": "Dói-me a cabeça.",
+    "cat": "General"
+  },
+  {
+    "id": "q_5356",
+    "type": "multipleChoice",
+    "question": "How do you say 'My head hurts.' in Portuguese?",
+    "options": [
+      "Dói-me a cabeça.",
+      "Bom dia",
+      "Um carro",
+      "não ventoso"
+    ],
+    "answer": "Dói-me a cabeça.",
+    "sourceItem": "Dói-me a cabeça.",
+    "cat": "General"
+  },
+  {
+    "id": "q_5357",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Dói-me a ______' (My head hurts.)",
+    "options": [
+      "cabeça",
+      "quinhentos",
+      "vestir",
+      "lembro-me"
+    ],
+    "answer": "cabeça",
+    "sourceItem": "Dói-me a cabeça.",
+    "cat": "General"
+  },
+  {
+    "id": "q_5358",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Dói-me a garganta.'?",
+    "options": [
+      "The CV",
+      "My throat hurts.",
+      "The sidewalk",
+      "I don't know"
+    ],
+    "answer": "My throat hurts.",
+    "sourceItem": "Dói-me a garganta.",
+    "cat": "General"
+  },
+  {
+    "id": "q_5359",
+    "type": "multipleChoice",
+    "question": "How do you say 'My throat hurts.' in Portuguese?",
+    "options": [
+      "O cruzamento",
+      "Tenho febre",
+      "Dói-me a garganta.",
+      "Abraços"
+    ],
+    "answer": "Dói-me a garganta.",
+    "sourceItem": "Dói-me a garganta.",
+    "cat": "General"
+  },
+  {
+    "id": "q_5360",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ a garganta.' (My throat hurts.)",
+    "options": [
+      "smash",
+      "vestir",
+      "táxi",
+      "Dói-me"
+    ],
+    "answer": "Dói-me",
+    "sourceItem": "Dói-me a garganta.",
+    "cat": "General"
+  },
+  {
+    "id": "q_5361",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Estou com dores nas costas.'?",
+    "options": [
+      "Left",
+      "I have back pain.",
+      "they see",
+      "his children"
+    ],
+    "answer": "I have back pain.",
+    "sourceItem": "Estou com dores nas costas.",
+    "cat": "General"
+  },
+  {
+    "id": "q_5362",
+    "type": "multipleChoice",
+    "question": "How do you say 'I have back pain.' in Portuguese?",
+    "options": [
+      "É meio-dia",
+      "Ervilhas",
+      "Estou com dores nas costas.",
+      "grande \\-\\> maior do que"
+    ],
+    "answer": "Estou com dores nas costas.",
+    "sourceItem": "Estou com dores nas costas.",
+    "cat": "General"
+  },
+  {
+    "id": "q_5363",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ com dores nas costas.' (I have back pain.)",
+    "options": [
+      "Estou",
+      "Vamos",
+      "em+o=no",
+      "benfica"
+    ],
+    "answer": "Estou",
+    "sourceItem": "Estou com dores nas costas.",
+    "cat": "General"
+  },
+  {
+    "id": "q_5364",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a febre'?",
+    "options": [
+      "Slowly one goes far (Idiom)",
+      "Your (m)",
+      "the fever",
+      "six, seven"
+    ],
+    "answer": "the fever",
+    "sourceItem": "a febre",
+    "cat": "General"
+  },
+  {
+    "id": "q_5365",
+    "type": "multipleChoice",
+    "question": "How do you say 'the fever' in Portuguese?",
+    "options": [
+      "O topo da montanha está coberto de neve.",
+      "a febre",
+      "me,te,se,nos,se",
+      "chegadas"
+    ],
+    "answer": "a febre",
+    "sourceItem": "a febre",
+    "cat": "General"
+  },
+  {
+    "id": "q_5366",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a tosse'?",
+    "options": [
+      "the cough",
+      "Pedro is from Viseu",
+      "Have you been to Brazil?",
+      "Do you (collective) have/take"
+    ],
+    "answer": "the cough",
+    "sourceItem": "a tosse",
+    "cat": "General"
+  },
+  {
+    "id": "q_5367",
+    "type": "multipleChoice",
+    "question": "How do you say 'the cough' in Portuguese?",
+    "options": [
+      "a tosse",
+      "A tempestade",
+      "abril",
+      "Dás-lhe o dinheiro"
+    ],
+    "answer": "a tosse",
+    "sourceItem": "a tosse",
+    "cat": "General"
+  },
+  {
+    "id": "q_5368",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o penso rápido'?",
+    "options": [
+      "What is the best way to get to the center?",
+      "Second",
+      "put",
+      "the plaster / band-aid"
+    ],
+    "answer": "the plaster / band-aid",
+    "sourceItem": "o penso rápido",
+    "cat": "General"
+  },
+  {
+    "id": "q_5369",
+    "type": "multipleChoice",
+    "question": "How do you say 'the plaster / band-aid' in Portuguese?",
+    "options": [
+      "o penso rápido",
+      "logo à noite",
+      "Não há duas sem três",
+      "disponivel"
+    ],
+    "answer": "o penso rápido",
+    "sourceItem": "o penso rápido",
+    "cat": "General"
+  },
+  {
+    "id": "q_5370",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o penso ______' (the plaster / band-aid)",
+    "options": [
+      "rápido",
+      "fumar",
+      "hoje",
+      "preferes"
+    ],
+    "answer": "rápido",
+    "sourceItem": "o penso rápido",
+    "cat": "General"
+  },
+  {
+    "id": "q_5371",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o telemóvel'?",
+    "options": [
+      "content",
+      "the mobile phone",
+      "To sleep",
+      "You can go to the cinema without me"
+    ],
+    "answer": "the mobile phone",
+    "sourceItem": "o telemóvel",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5372",
+    "type": "multipleChoice",
+    "question": "How do you say 'the mobile phone' in Portuguese?",
+    "options": [
+      "mirtilos",
+      "bom fim de semana\\!",
+      "partidas",
+      "o telemóvel"
+    ],
+    "answer": "o telemóvel",
+    "sourceItem": "o telemóvel",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5373",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o carregador'?",
+    "options": [
+      "the charger",
+      "our wedding / our marriage",
+      "Morning",
+      "The flowers bloom"
+    ],
+    "answer": "the charger",
+    "sourceItem": "o carregador",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5374",
+    "type": "multipleChoice",
+    "question": "How do you say 'the charger' in Portuguese?",
+    "options": [
+      "Cima",
+      "o carregador",
+      "ligar o computador",
+      "bom recomendações"
+    ],
+    "answer": "o carregador",
+    "sourceItem": "o carregador",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5375",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os auscultadores'?",
+    "options": [
+      "Where is the elétrico stop?",
+      "the headphones",
+      "It fits me well",
+      "The director is in the school"
+    ],
+    "answer": "the headphones",
+    "sourceItem": "os auscultadores",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5376",
+    "type": "multipleChoice",
+    "question": "How do you say 'the headphones' in Portuguese?",
+    "options": [
+      "os auscultadores",
+      "Fica longe",
+      "eu andou de bicicleta",
+      "Esse"
+    ],
+    "answer": "os auscultadores",
+    "sourceItem": "os auscultadores",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5377",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o computador portátil'?",
+    "options": [
+      "You have",
+      "A car (masculine)",
+      "the laptop",
+      "to bring"
+    ],
+    "answer": "the laptop",
+    "sourceItem": "o computador portátil",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5378",
+    "type": "multipleChoice",
+    "question": "How do you say 'the laptop' in Portuguese?",
+    "options": [
+      "o computador portátil",
+      "a febre",
+      "As baratas saem à noite.",
+      "esperar que"
+    ],
+    "answer": "o computador portátil",
+    "sourceItem": "o computador portátil",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5379",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o computador ______' (the laptop)",
+    "options": [
+      "pedal",
+      "aterra",
+      "portátil",
+      "água"
+    ],
+    "answer": "portátil",
+    "sourceItem": "o computador portátil",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5380",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a carteira'?",
+    "options": [
+      "the menu please",
+      "the wallet",
+      "With",
+      "This exercise is not as difficult as that one"
+    ],
+    "answer": "the wallet",
+    "sourceItem": "a carteira",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5381",
+    "type": "multipleChoice",
+    "question": "How do you say 'the wallet' in Portuguese?",
+    "options": [
+      "Poder",
+      "atender um cliente",
+      "a carteira",
+      "maio"
+    ],
+    "answer": "a carteira",
+    "sourceItem": "a carteira",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5382",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o porta-moedas'?",
+    "options": [
+      "Scared",
+      "The director speaks with the students",
+      "the first floor",
+      "the coin purse"
+    ],
+    "answer": "the coin purse",
+    "sourceItem": "o porta-moedas",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5383",
+    "type": "multipleChoice",
+    "question": "How do you say 'the coin purse' in Portuguese?",
+    "options": [
+      "o porta-moedas",
+      "Feliz aniversário!",
+      "meia de leite",
+      "Eu vejo televisão"
+    ],
+    "answer": "o porta-moedas",
+    "sourceItem": "o porta-moedas",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5384",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as chaves de casa'?",
+    "options": [
+      "the house keys",
+      "I am just looking, thanks",
+      "Where does the plane land?",
+      "lay down (go to sleep)"
+    ],
+    "answer": "the house keys",
+    "sourceItem": "as chaves de casa",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5385",
+    "type": "multipleChoice",
+    "question": "How do you say 'the house keys' in Portuguese?",
+    "options": [
+      "as chaves de casa",
+      "Onde é a casa de banho?",
+      "janeiro",
+      "o passe de transportes"
+    ],
+    "answer": "as chaves de casa",
+    "sourceItem": "as chaves de casa",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5386",
+    "type": "cloze",
+    "question": "Fill in the blank: 'as ______ de casa' (the house keys)",
+    "options": [
+      "costumo",
+      "Tentar",
+      "Carne",
+      "chaves"
+    ],
+    "answer": "chaves",
+    "sourceItem": "as chaves de casa",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5387",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o passe de transportes'?",
+    "options": [
+      "Live (transmission)",
+      "Ask Ana for the newspaper",
+      "the transit pass",
+      "content"
+    ],
+    "answer": "the transit pass",
+    "sourceItem": "o passe de transportes",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5388",
+    "type": "multipleChoice",
+    "question": "How do you say 'the transit pass' in Portuguese?",
+    "options": [
+      "despir",
+      "fica",
+      "o passe de transportes",
+      "jota"
+    ],
+    "answer": "o passe de transportes",
+    "sourceItem": "o passe de transportes",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5389",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o ______ de transportes' (the transit pass)",
+    "options": [
+      "Madeira",
+      "passe",
+      "carta",
+      "passaporte"
+    ],
+    "answer": "passe",
+    "sourceItem": "o passe de transportes",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5390",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os óculos de sol'?",
+    "options": [
+      "the sunglasses",
+      "double fault (tennis)",
+      "Do you accept debit card?",
+      "Retirement"
+    ],
+    "answer": "the sunglasses",
+    "sourceItem": "os óculos de sol",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5391",
+    "type": "multipleChoice",
+    "question": "How do you say 'the sunglasses' in Portuguese?",
+    "options": [
+      "A cortina",
+      "os óculos de sol",
+      "há",
+      "Eu gosto da doçaria portuguesa"
+    ],
+    "answer": "os óculos de sol",
+    "sourceItem": "os óculos de sol",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5392",
+    "type": "cloze",
+    "question": "Fill in the blank: 'os ______ de sol' (the sunglasses)",
+    "options": [
+      "óculos",
+      "dela",
+      "tranquila",
+      "cinema"
+    ],
+    "answer": "óculos",
+    "sourceItem": "os óculos de sol",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5393",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o guarda-chuva'?",
+    "options": [
+      "dream",
+      "the umbrella",
+      "The director speaks with the students",
+      "Want to go for a coffee?"
+    ],
+    "answer": "the umbrella",
+    "sourceItem": "o guarda-chuva",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5394",
+    "type": "multipleChoice",
+    "question": "How do you say 'the umbrella' in Portuguese?",
+    "options": [
+      "o guarda-chuva",
+      "A sala de aula",
+      "nh",
+      "O comboio parte às oito horas."
+    ],
+    "answer": "o guarda-chuva",
+    "sourceItem": "o guarda-chuva",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5395",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o relógio de pulso'?",
+    "options": [
+      "Meals",
+      "Near",
+      "I promise to help you tomorrow",
+      "the wristwatch"
+    ],
+    "answer": "the wristwatch",
+    "sourceItem": "o relógio de pulso",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5396",
+    "type": "multipleChoice",
+    "question": "How do you say 'the wristwatch' in Portuguese?",
+    "options": [
+      "smash",
+      "O imposto",
+      "o relógio de pulso",
+      "Eu quero"
+    ],
+    "answer": "o relógio de pulso",
+    "sourceItem": "o relógio de pulso",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5397",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o relógio de ______' (the wristwatch)",
+    "options": [
+      "inverno",
+      "pulso",
+      "apaixonado",
+      "Esperar"
+    ],
+    "answer": "pulso",
+    "sourceItem": "o relógio de pulso",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5398",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a mala de viagem'?",
+    "options": [
+      "the suitcase",
+      "Degrees",
+      "Summer nights are pleasant.",
+      "To start"
+    ],
+    "answer": "the suitcase",
+    "sourceItem": "a mala de viagem",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5399",
+    "type": "multipleChoice",
+    "question": "How do you say 'the suitcase' in Portuguese?",
+    "options": [
+      "a mala de viagem",
+      "Fogo!",
+      "O autocarro",
+      "Feliz Natal"
+    ],
+    "answer": "a mala de viagem",
+    "sourceItem": "a mala de viagem",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5400",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a ______ de viagem' (the suitcase)",
+    "options": [
+      "noite",
+      "saltam",
+      "mala",
+      "comboio"
+    ],
+    "answer": "mala",
+    "sourceItem": "a mala de viagem",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5401",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a garrafa de água'?",
+    "options": [
+      "the water bottle",
+      "I go to bed",
+      "I am sleepy",
+      "Dear colleague"
+    ],
+    "answer": "the water bottle",
+    "sourceItem": "a garrafa de água",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5402",
+    "type": "multipleChoice",
+    "question": "How do you say 'the water bottle' in Portuguese?",
+    "options": [
+      "Graus",
+      "a garrafa de água",
+      "está bem",
+      "receitas"
+    ],
+    "answer": "a garrafa de água",
+    "sourceItem": "a garrafa de água",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5403",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a garrafa de ______' (the water bottle)",
+    "options": [
+      "falar",
+      "Casa",
+      "água",
+      "saltam"
+    ],
+    "answer": "água",
+    "sourceItem": "a garrafa de água",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5404",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o lenço de papel'?",
+    "options": [
+      "I used to wake up early",
+      "the paper tissue",
+      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
+      "We have been friends since childhood"
+    ],
+    "answer": "the paper tissue",
+    "sourceItem": "o lenço de papel",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5405",
+    "type": "multipleChoice",
+    "question": "How do you say 'the paper tissue' in Portuguese?",
+    "options": [
+      "tanto",
+      "sonhar",
+      "chegadas",
+      "o lenço de papel"
+    ],
+    "answer": "o lenço de papel",
+    "sourceItem": "o lenço de papel",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5406",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o ______ de papel' (the paper tissue)",
+    "options": [
+      "paragem",
+      "preferido",
+      "Mais",
+      "lenço"
+    ],
+    "answer": "lenço",
+    "sourceItem": "o lenço de papel",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5407",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o Cartão de Cidadão'?",
+    "options": [
+      "The day today is very cloudy",
+      "the Citizen ID Card",
+      "niece",
+      "summarize"
+    ],
+    "answer": "the Citizen ID Card",
+    "sourceItem": "o Cartão de Cidadão",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5408",
+    "type": "multipleChoice",
+    "question": "How do you say 'the Citizen ID Card' in Portuguese?",
+    "options": [
+      "Triste",
+      "o Cartão de Cidadão",
+      "eu andou de bicicleta",
+      "formação"
+    ],
+    "answer": "o Cartão de Cidadão",
+    "sourceItem": "o Cartão de Cidadão",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5409",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o Cartão de ______' (the Citizen ID Card)",
+    "options": [
+      "porque",
+      "Cidadão",
+      "connosco",
+      "Direita"
+    ],
+    "answer": "Cidadão",
+    "sourceItem": "o Cartão de Cidadão",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5410",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a tomada elétrica'?",
+    "options": [
+      "fried egg",
+      "The plane is going to take off now",
+      "the electrical wall socket",
+      "k"
+    ],
+    "answer": "the electrical wall socket",
+    "sourceItem": "a tomada elétrica",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5411",
+    "type": "multipleChoice",
+    "question": "How do you say 'the electrical wall socket' in Portuguese?",
+    "options": [
+      "O aeroporto",
+      "Dás-lhe o dinheiro",
+      "A gramática é complexa",
+      "a tomada elétrica"
+    ],
+    "answer": "a tomada elétrica",
+    "sourceItem": "a tomada elétrica",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5412",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a ______ elétrica' (the electrical wall socket)",
+    "options": [
+      "isto",
+      "tomada",
+      "higiene",
+      "Moro"
+    ],
+    "answer": "tomada",
+    "sourceItem": "a tomada elétrica",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5413",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a gaveta'?",
+    "options": [
+      "lay down (go to sleep)",
+      "Can you repeat?",
+      "The contract",
+      "the drawer"
+    ],
+    "answer": "the drawer",
+    "sourceItem": "a gaveta",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5414",
+    "type": "multipleChoice",
+    "question": "How do you say 'the drawer' in Portuguese?",
+    "options": [
+      "A pasta de dentes",
+      "o computador portátil",
+      "a gaveta",
+      "Trazer"
+    ],
+    "answer": "a gaveta",
+    "sourceItem": "a gaveta",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5415",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Água (sem gás'?",
+    "options": [
+      "Here",
+      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
+      "Water (still",
+      "Potato"
+    ],
+    "answer": "Water (still",
+    "sourceItem": "Água (sem gás",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5416",
+    "type": "multipleChoice",
+    "question": "How do you say 'Water (still' in Portuguese?",
+    "options": [
+      "Velho",
+      "Está vento",
+      "segundo andar",
+      "Água (sem gás"
+    ],
+    "answer": "Água (sem gás",
+    "sourceItem": "Água (sem gás",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5417",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ (sem gás' (Water (still)",
+    "options": [
+      "Água",
+      "casa",
+      "lenço",
+      "consultam"
+    ],
+    "answer": "Água",
+    "sourceItem": "Água (sem gás",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5418",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'com gás)'?",
+    "options": [
+      "I am going to the cinema with him",
+      "Go promote monkeys (Get lost)",
+      "My (f)",
+      "sparkling)"
+    ],
+    "answer": "sparkling)",
+    "sourceItem": "com gás)",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5419",
+    "type": "multipleChoice",
+    "question": "How do you say 'sparkling)' in Portuguese?",
+    "options": [
+      "O meu",
+      "com gás)",
+      "Bom apetite",
+      "Por que choras?"
+    ],
+    "answer": "com gás)",
+    "sourceItem": "com gás)",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5420",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ouço'?",
+    "options": [
+      "listen",
+      "Green",
+      "Departures",
+      "after"
+    ],
+    "answer": "listen",
+    "sourceItem": "ouço",
+    "cat": "General"
+  },
+  {
+    "id": "q_5421",
+    "type": "multipleChoice",
+    "question": "How do you say 'listen' in Portuguese?",
+    "options": [
+      "Ele pede um café",
+      "os braços",
+      "sem",
+      "ouço"
+    ],
+    "answer": "ouço",
+    "sourceItem": "ouço",
+    "cat": "General"
+  },
+  {
+    "id": "q_5422",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'oiço'?",
+    "options": [
+      "part",
+      "s",
+      "It's worth it",
+      "hear"
+    ],
+    "answer": "hear",
+    "sourceItem": "oiço",
+    "cat": "General"
+  },
+  {
+    "id": "q_5423",
+    "type": "multipleChoice",
+    "question": "How do you say 'hear' in Portuguese?",
+    "options": [
+      "A greve",
+      "Tem um tamanho menor?",
+      "Ele sabe",
+      "oiço"
+    ],
+    "answer": "oiço",
+    "sourceItem": "oiço",
+    "cat": "General"
+  },
+  {
+    "id": "q_5424",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'frio'?",
+    "options": [
+      "I have a reservation",
+      "cold",
+      "The Director (masculine)",
+      "In summer it is very hot."
+    ],
+    "answer": "cold",
+    "sourceItem": "frio",
+    "cat": "General"
+  },
+  {
+    "id": "q_5425",
+    "type": "multipleChoice",
+    "question": "How do you say 'cold' in Portuguese?",
+    "options": [
+      "Eu não sei",
+      "Claro que não",
+      "frio",
+      "A ponte"
+    ],
+    "answer": "frio",
+    "sourceItem": "frio",
+    "cat": "General"
+  },
+  {
+    "id": "q_5426",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'conta à ordem'?",
+    "options": [
+      "Call me before you leave.",
+      "Are you silly/crazy?",
+      "account normal",
+      "The planet"
+    ],
+    "answer": "account normal",
+    "sourceItem": "conta à ordem",
+    "cat": "General"
+  },
+  {
+    "id": "q_5427",
+    "type": "multipleChoice",
+    "question": "How do you say 'account normal' in Portuguese?",
+    "options": [
+      "Às vezes",
+      "está calor",
+      "conta à ordem",
+      "claro que sim"
+    ],
+    "answer": "conta à ordem",
+    "sourceItem": "conta à ordem",
+    "cat": "General"
+  },
+  {
+    "id": "q_5428",
+    "type": "cloze",
+    "question": "Fill in the blank: 'conta à ______' (account normal)",
+    "options": [
+      "dentes",
+      "teto",
+      "ordem",
+      "tanto"
+    ],
+    "answer": "ordem",
+    "sourceItem": "conta à ordem",
+    "cat": "General"
+  },
+  {
+    "id": "q_5429",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a prazo'?",
+    "options": [
+      "savings",
+      "I cook dinner",
+      "the feet",
+      "To avoid sugar"
+    ],
+    "answer": "savings",
+    "sourceItem": "a prazo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5430",
+    "type": "multipleChoice",
+    "question": "How do you say 'savings' in Portuguese?",
+    "options": [
+      "a prazo",
+      "É giro",
+      "u",
+      "nublado"
+    ],
+    "answer": "a prazo",
+    "sourceItem": "a prazo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5431",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'depois de'?",
+    "options": [
+      "Singer",
+      "after the",
+      "This weekend",
+      "Umbrella"
+    ],
+    "answer": "after the",
+    "sourceItem": "depois de",
+    "cat": "General"
+  },
+  {
+    "id": "q_5432",
+    "type": "multipleChoice",
+    "question": "How do you say 'after the' in Portuguese?",
+    "options": [
+      "depois de",
+      "rés-do-chão",
+      "acaba",
+      "Onde fica a paragem de barco?"
+    ],
+    "answer": "depois de",
+    "sourceItem": "depois de",
+    "cat": "General"
   }
 ]

@@ -1,0 +1,477 @@
+[
+  {
+    "id": "day_q01",
+    "questionText": "A bateria do meu ____ acabou; não posso receber chamadas nem mensagens.",
+    "options": [
+      "telemóvel",
+      "guarda-chuva",
+      "carteira",
+      "casaco"
+    ],
+    "correctAnswer": "telemóvel",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_telemovel",
+      "portuguese": "o telemóvel",
+      "english": "the mobile phone",
+      "notes": "Everyday items: PT-PT telemóvel (not celular)"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q02",
+    "questionText": "Onde está o ____? Preciso de ligar o telemóvel à tomada da parede.",
+    "options": [
+      "carregador",
+      "guarda-chuva",
+      "bilhete",
+      "caderno"
+    ],
+    "correctAnswer": "carregador",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_carregador",
+      "portuguese": "o carregador",
+      "english": "the charger",
+      "notes": "Everyday electronics: carregador de bateria"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q03",
+    "questionText": "Esqueci-me das ____ de casa dentro do casaco e agora não consigo abrir a porta.",
+    "options": [
+      "chaves",
+      "canetas",
+      "garrafas",
+      "janelas"
+    ],
+    "correctAnswer": "chaves",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_chaves",
+      "portuguese": "as chaves",
+      "english": "the keys",
+      "notes": "Everyday belongings: chaves de casa"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q04",
+    "questionText": "Perdi a minha ____ com o dinheiro, o cartão bancário e o cartão de cidadão.",
+    "options": [
+      "carteira",
+      "garrafa",
+      "chave",
+      "janela"
+    ],
+    "correctAnswer": "carteira",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_carteira",
+      "portuguese": "a carteira",
+      "english": "the wallet",
+      "notes": "Personal belongings: carteira"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q05",
+    "questionText": "Em Lisboa, valido o meu ____ mensal nos validadores antes de entrar no metro.",
+    "options": [
+      "passe",
+      "guarda-chuva",
+      "óculo",
+      "carregador"
+    ],
+    "correctAnswer": "passe",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_passe",
+      "portuguese": "o passe de transportes",
+      "english": "the transit pass",
+      "notes": "Public transport: passe mensal de transportes"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q06",
+    "questionText": "Está a chover torrencialmente lá fora; leva o teu ____ para não te molhares.",
+    "options": [
+      "guarda-chuva",
+      "óculos de sol",
+      "telemóvel",
+      "carregador"
+    ],
+    "correctAnswer": "guarda-chuva",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_guardachuva",
+      "portuguese": "o guarda-chuva",
+      "english": "the umbrella",
+      "notes": "Weather accessories: proteger da chuva"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q07",
+    "questionText": "Para proteger os olhos do sol forte de verão, uso sempre uns ____ de sol escuros.",
+    "options": [
+      "óculos",
+      "auscultadores",
+      "passes",
+      "relógios"
+    ],
+    "correctAnswer": "óculos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_oculos_sol",
+      "portuguese": "os óculos de sol",
+      "english": "the sunglasses",
+      "notes": "Accessories: óculos de sol"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q08",
+    "questionText": "No comboio, ponho os ____ para ouvir música sem incomodar os outros passageiros.",
+    "options": [
+      "auscultadores",
+      "sapatos",
+      "óculos",
+      "carregadores"
+    ],
+    "correctAnswer": "auscultadores",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_auscultadores",
+      "portuguese": "os auscultadores",
+      "english": "the headphones / earphones",
+      "notes": "Everyday electronics: PT-PT auscultadores (not fones de ouvido)"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q09",
+    "questionText": "Guardo os meus cadernos e o computador portátil dentro da ____ para ir à faculdade.",
+    "options": [
+      "mochila",
+      "carteira",
+      "garrafa",
+      "tomada"
+    ],
+    "correctAnswer": "mochila",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_mochila",
+      "portuguese": "a mochila",
+      "english": "the backpack",
+      "notes": "Bags: mochila às costas"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q10",
+    "questionText": "Olhei para o meu relógio de ____ para ver quantos minutos faltavam para o comboio.",
+    "options": [
+      "pulso",
+      "parede",
+      "mesa",
+      "bolso"
+    ],
+    "correctAnswer": "pulso",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_relogio_pulso",
+      "portuguese": "o relógio de pulso",
+      "english": "the wristwatch",
+      "notes": "Accessories: relógio no pulso"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q11",
+    "questionText": "Tens uma ____ azul ou preta para eu assinar este contrato de arrendamento?",
+    "options": [
+      "caneta",
+      "chave",
+      "garrafa",
+      "moeda"
+    ],
+    "correctAnswer": "caneta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_caneta",
+      "portuguese": "a caneta",
+      "english": "the pen",
+      "notes": "Stationery: caneta para escrever"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q12",
+    "questionText": "Para me manter hidratado no ginásio, levo sempre uma ____ de água cheia.",
+    "options": [
+      "garrafa",
+      "carteira",
+      "caneta",
+      "tomada"
+    ],
+    "correctAnswer": "garrafa",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_garrafa_agua",
+      "portuguese": "a garrafa de água",
+      "english": "the water bottle",
+      "notes": "Daily essentials: garrafa de água"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q13",
+    "questionText": "Estou com alergia e a espirrar; tens um ____ de papel para assoar o nariz?",
+    "options": [
+      "lenço",
+      "passe",
+      "carregador",
+      "bilhete"
+    ],
+    "correctAnswer": "lenço",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_lenco_papel",
+      "portuguese": "o lenço de papel",
+      "english": "the paper tissue",
+      "notes": "Hygiene items: lenços de papel descartáveis"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q14",
+    "questionText": "Para pagar o café em moedas pequenas, tiro as moedas do meu ____.",
+    "options": [
+      "porta-moedas",
+      "guarda-chuva",
+      "computador",
+      "carregador"
+    ],
+    "correctAnswer": "porta-moedas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_portamoedas",
+      "portuguese": "o porta-moedas",
+      "english": "the coin purse",
+      "notes": "Accessories: porta-moedas"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q15",
+    "questionText": "O documento oficial de identificação dos cidadãos em Portugal é o Cartão de ____.",
+    "options": [
+      "Cidadão",
+      "Transportes",
+      "Visita",
+      "Crédito"
+    ],
+    "correctAnswer": "Cidadão",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_cartao_cidadao",
+      "portuguese": "o Cartão de Cidadão",
+      "english": "the Citizen Card / ID card",
+      "notes": "Identity documents: Cartão de Cidadão (Portugal)"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q16",
+    "questionText": "Como se diz 'cell phone / mobile phone' em Portugal?",
+    "options": [
+      "O telemóvel",
+      "O celular",
+      "O telefone de bolso",
+      "O aparelho"
+    ],
+    "correctAnswer": "O telemóvel",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "day_src_telemovel_trans",
+      "portuguese": "o telemóvel",
+      "english": "the mobile phone",
+      "notes": "PT-PT vs PT-BR distinction: telemóvel"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q17",
+    "questionText": "Como se diz 'headphones' em português europeu?",
+    "options": [
+      "Os auscultadores",
+      "Os fones de ouvido",
+      "Os capacetes",
+      "Os alto-falantes"
+    ],
+    "correctAnswer": "Os auscultadores",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "day_src_auscultadores_trans",
+      "portuguese": "os auscultadores",
+      "english": "the headphones",
+      "notes": "PT-PT term: auscultadores"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q18",
+    "questionText": "O cabo do carregador liga-se à ____ elétrica da parede para receber energia.",
+    "options": [
+      "tomada",
+      "chave",
+      "caneta",
+      "mochila"
+    ],
+    "correctAnswer": "tomada",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_tomada",
+      "portuguese": "a tomada",
+      "english": "the wall socket / outlet",
+      "notes": "Electrical fixtures: tomada elétrica"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q19",
+    "questionText": "Para a viagem de fim de semana ao Porto, levo apenas uma pequena ____ com roupa.",
+    "options": [
+      "mala",
+      "chave",
+      "caneta",
+      "tomada"
+    ],
+    "correctAnswer": "mala",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_mala",
+      "portuguese": "a mala de viagem",
+      "english": "the suitcase / bag",
+      "notes": "Travel: mala de viagem"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q20",
+    "questionText": "Durante as aulas, escrevo todos os apontamentos importantes no meu ____.",
+    "options": [
+      "caderno",
+      "guarda-chuva",
+      "auscultador",
+      "passe"
+    ],
+    "correctAnswer": "caderno",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_caderno",
+      "portuguese": "o caderno",
+      "english": "the notebook",
+      "notes": "Stationery: caderno de apontamentos"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q21",
+    "questionText": "Antes de sair de casa de manhã, verifico se tenho os quatro essenciais: telemóvel, carteira, passe e ____.",
+    "options": [
+      "chaves",
+      "candeeiros",
+      "fogões",
+      "panelas"
+    ],
+    "correctAnswer": "chaves",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_quatro_essenciais",
+      "portuguese": "as chaves",
+      "english": "the keys",
+      "notes": "Daily routine: telemóvel, carteira, passe e chaves"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q22",
+    "questionText": "Comprei um bilhete simples na máquina automática porque me esqueci do ____ em casa.",
+    "options": [
+      "passe",
+      "casaco",
+      "chapéu",
+      "óculo"
+    ],
+    "correctAnswer": "passe",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_bilhete_passe",
+      "portuguese": "o bilhete",
+      "english": "the ticket",
+      "notes": "Public transport: bilhete vs passe"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q23",
+    "questionText": "Para trabalhar no comboio ou na esplanada, levo o meu computador ____ na mochila.",
+    "options": [
+      "portátil",
+      "de mesa",
+      "grande",
+      "pesado"
+    ],
+    "correctAnswer": "portátil",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_portatil",
+      "portuguese": "o computador portátil",
+      "english": "the laptop",
+      "notes": "Electronics: computador portátil (laptop)"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q24",
+    "questionText": "Quando o dia está muito quente e abafado, uso um ____ para me abanar e refrescar.",
+    "options": [
+      "leque",
+      "ferro",
+      "casaco",
+      "edredão"
+    ],
+    "correctAnswer": "leque",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_leque",
+      "portuguese": "o leque",
+      "english": "the hand fan",
+      "notes": "Summer accessories: leque"
+    },
+    "category": "Objetos do Quotidiano"
+  },
+  {
+    "id": "day_q25",
+    "questionText": "Guardo os recibos de compras e os talões de pagamento num envelope dentro da ____.",
+    "options": [
+      "gaveta",
+      "panela",
+      "garrafa",
+      "tomada"
+    ],
+    "correctAnswer": "gaveta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "day_src_gaveta",
+      "portuguese": "a gaveta",
+      "english": "the drawer",
+      "notes": "Furniture: a gaveta da secretária"
+    },
+    "category": "Objetos do Quotidiano"
+  }
+]

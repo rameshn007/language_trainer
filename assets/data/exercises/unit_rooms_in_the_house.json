@@ -1,0 +1,477 @@
+[
+  {
+    "id": "room_q01",
+    "questionText": "A Maria está a preparar o almoço na ____.",
+    "options": [
+      "cozinha",
+      "garagem",
+      "casa de banho",
+      "varanda"
+    ],
+    "correctAnswer": "cozinha",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_cozinha",
+      "portuguese": "a cozinha",
+      "english": "the kitchen",
+      "notes": "Rooms in the house: onde se cozinha e preparam refeições"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q02",
+    "questionText": "À noite, nós dormimos numa cama confortável no ____.",
+    "options": [
+      "quarto",
+      "corredor",
+      "despensa",
+      "jardim"
+    ],
+    "correctAnswer": "quarto",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_quarto",
+      "portuguese": "o quarto",
+      "english": "the bedroom",
+      "notes": "Rooms in the house: onde se dorme"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q03",
+    "questionText": "Antes de sair para o trabalho, tomo sempre um duche na ____.",
+    "options": [
+      "casa de banho",
+      "cozinha",
+      "cave",
+      "sala de jantar"
+    ],
+    "correctAnswer": "casa de banho",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_casa_de_banho",
+      "portuguese": "a casa de banho",
+      "english": "the bathroom",
+      "notes": "Rooms in the house: PT-PT casa de banho (not banheiro)"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q04",
+    "questionText": "Depois do jantar, a família reúne-se no sofá para ver televisão na ____.",
+    "options": [
+      "sala de estar",
+      "despensa",
+      "garagem",
+      "casa de banho"
+    ],
+    "correctAnswer": "sala de estar",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_sala_de_estar",
+      "portuguese": "a sala de estar",
+      "english": "the living room",
+      "notes": "Rooms in the house: sala principal de convívio"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q05",
+    "questionText": "Guardamos os pacotes de arroz, as massas e o azeite na ____.",
+    "options": [
+      "despensa",
+      "varanda",
+      "casa de banho",
+      "sala de estar"
+    ],
+    "correctAnswer": "despensa",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_despensa",
+      "portuguese": "a despensa",
+      "english": "the pantry / larder",
+      "notes": "Rooms in the house: divisão pequena para mantimentos"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q06",
+    "questionText": "O carro da família fica estacionado e protegido dentro da ____.",
+    "options": [
+      "garagem",
+      "cozinha",
+      "marquise",
+      "sala de jantar"
+    ],
+    "correctAnswer": "garagem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_garagem",
+      "portuguese": "a garagem",
+      "english": "the garage",
+      "notes": "Rooms in the house: onde se guarda o carro"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q07",
+    "questionText": "No verão, gosto de apanhar ar fresco e beber café na ____ do apartamento.",
+    "options": [
+      "varanda",
+      "cave",
+      "despensa",
+      "escada"
+    ],
+    "correctAnswer": "varanda",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_varanda",
+      "portuguese": "a varanda",
+      "english": "the balcony",
+      "notes": "Rooms in the house: espaço exterior do apartamento"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q08",
+    "questionText": "O prédio tem elevador, mas prefiro subir a pé pelas ____ para fazer exercício.",
+    "options": [
+      "escadas",
+      "paredes",
+      "janelas",
+      "torradeiras"
+    ],
+    "correctAnswer": "escadas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_escadas",
+      "portuguese": "as escadas",
+      "english": "the stairs",
+      "notes": "House parts: degraus para subir de piso"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q09",
+    "questionText": "Em muitos apartamentos em Portugal, a varanda fechada com vidro chama-se ____.",
+    "options": [
+      "marquise",
+      "cave",
+      "sótão",
+      "lareira"
+    ],
+    "correctAnswer": "marquise",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_marquise",
+      "portuguese": "a marquise",
+      "english": "the enclosed balcony / sunroom",
+      "notes": "Rooms in the house: varanda envidraçada muito típica em PT"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q10",
+    "questionText": "O Manuel vive no rés do chão e a Ana mora no primeiro ____.",
+    "options": [
+      "andar",
+      "quarto",
+      "corredor",
+      "jardim"
+    ],
+    "correctAnswer": "andar",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_andar",
+      "portuguese": "o andar / piso",
+      "english": "the floor / storey",
+      "notes": "Housing: rés do chão, primeiro andar, etc."
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q11",
+    "questionText": "As malas de viagem e as caixas velhas estão arrumadas lá em cima no ____.",
+    "options": [
+      "sótão",
+      "jardim",
+      "cozinha",
+      "rés do chão"
+    ],
+    "correctAnswer": "sótão",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_sotao",
+      "portuguese": "o sótão",
+      "english": "the attic",
+      "notes": "Rooms in the house: espaço por baixo do telhado"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q12",
+    "questionText": "No piso subterrâneo da vivenda fica a ____, onde guardamos o vinho.",
+    "options": [
+      "cave",
+      "marquise",
+      "varanda",
+      "sala de jantar"
+    ],
+    "correctAnswer": "cave",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_cave",
+      "portuguese": "a cave",
+      "english": "the basement / cellar",
+      "notes": "Rooms in the house: piso inferior ou subterrâneo"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q13",
+    "questionText": "Para chegar aos quartos, temos de passar por um longo ____.",
+    "options": [
+      "corredor",
+      "fogão",
+      "jardim",
+      "telhado"
+    ],
+    "correctAnswer": "corredor",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_corredor",
+      "portuguese": "o corredor",
+      "english": "the corridor / hallway",
+      "notes": "Rooms in the house: passagem que liga as divisões"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q14",
+    "questionText": "Ao entrar em casa, tiramos os sapatos e penduramos os casacos no ____.",
+    "options": [
+      "hall de entrada",
+      "sótão",
+      "congelador",
+      "telhado"
+    ],
+    "correctAnswer": "hall de entrada",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_hall",
+      "portuguese": "o hall de entrada",
+      "english": "the entrance hall",
+      "notes": "Rooms in the house: entrada da habitação"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q15",
+    "questionText": "As crianças gostam de correr na relva e apanhar flores no ____ da casa.",
+    "options": [
+      "jardim",
+      "escritório",
+      "corredor",
+      "forno"
+    ],
+    "correctAnswer": "jardim",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_jardim",
+      "portuguese": "o jardim",
+      "english": "the garden",
+      "notes": "House spaces: espaço verde com plantas e relva"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q16",
+    "questionText": "Na sala de ____, temos uma mesa grande de madeira onde a família almoça aos domingos.",
+    "options": [
+      "jantar",
+      "espera",
+      "banho",
+      "dormir"
+    ],
+    "correctAnswer": "jantar",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_sala_jantar",
+      "portuguese": "a sala de jantar",
+      "english": "the dining room",
+      "notes": "Rooms in the house: sala dedicada às refeições"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q17",
+    "questionText": "O Pedro trabalha a partir de casa e montou a sua secretária no ____.",
+    "options": [
+      "escritório",
+      "caixote do lixo",
+      "frigorífico",
+      "fogão"
+    ],
+    "correctAnswer": "escritório",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_escritorio",
+      "portuguese": "o escritório",
+      "english": "the home office / study",
+      "notes": "Rooms in the house: divisão de trabalho e estudo"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q18",
+    "questionText": "Qual é a divisão onde normalmente se lavam os dentes e se toma duche?",
+    "options": [
+      "A casa de banho",
+      "A cozinha",
+      "A garagem",
+      "A despensa"
+    ],
+    "correctAnswer": "A casa de banho",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "room_src_casa_de_banho_func",
+      "portuguese": "a casa de banho",
+      "english": "the bathroom",
+      "notes": "Rooms in the house: higiene diária"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q19",
+    "questionText": "Como se diz 'ground floor' em português de Portugal?",
+    "options": [
+      "Rés do chão",
+      "Cave",
+      "Sótão",
+      "Primeiro andar"
+    ],
+    "correctAnswer": "Rés do chão",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "room_src_res_do_chao",
+      "portuguese": "o rés do chão",
+      "english": "the ground floor",
+      "notes": "Housing: piso ao nível da rua"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q20",
+    "questionText": "O último piso do edifício tem um grande ____ exterior com vista para o rio Tejo.",
+    "options": [
+      "terraço",
+      "corredor",
+      "guarda-roupa",
+      "armário"
+    ],
+    "correctAnswer": "terraço",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_terraco",
+      "portuguese": "o terraço",
+      "english": "the terrace",
+      "notes": "House spaces: terraço exterior amplo"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q21",
+    "questionText": "Como se traduz 'enclosed balcony' em português europeu?",
+    "options": [
+      "A marquise",
+      "O sótão",
+      "O telhado",
+      "A despensa"
+    ],
+    "correctAnswer": "A marquise",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "room_src_marquise_trans",
+      "portuguese": "a marquise",
+      "english": "the sunroom / enclosed balcony",
+      "notes": "European Portuguese distinctive vocabulary"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q22",
+    "questionText": "A roupa recém-lavada está estendida a secar ao sol na ____.",
+    "options": [
+      "varanda",
+      "cave",
+      "garagem",
+      "despensa"
+    ],
+    "correctAnswer": "varanda",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_varanda_roupa",
+      "portuguese": "a varanda",
+      "english": "the balcony",
+      "notes": "Daily activities: estender a roupa na varanda"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q23",
+    "questionText": "O roupeiro onde guardo as minhas roupas fica dentro do ____.",
+    "options": [
+      "quarto",
+      "hall de entrada",
+      "jardim",
+      "cozinha"
+    ],
+    "correctAnswer": "quarto",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_roupeiro_quarto",
+      "portuguese": "o roupeiro",
+      "english": "the wardrobe",
+      "notes": "Furniture & rooms: guarda-fatos / roupeiro no quarto"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q24",
+    "questionText": "A vizinha do terceiro andar queixou-se de que a ____ do teto está a pingar água.",
+    "options": [
+      "torneira",
+      "lareira",
+      "cortina",
+      "almofada"
+    ],
+    "correctAnswer": "torneira",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_torneira",
+      "portuguese": "a torneira",
+      "english": "the tap / faucet",
+      "notes": "House fixtures: torneira da casa de banho / cozinha"
+    },
+    "category": "Divisões da Casa"
+  },
+  {
+    "id": "room_q25",
+    "questionText": "No inverno, acendemos a ____ da sala de estar para aquecer a casa com lenha.",
+    "options": [
+      "lareira",
+      "marquise",
+      "despensa",
+      "banheira"
+    ],
+    "correctAnswer": "lareira",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "room_src_lareira",
+      "portuguese": "a lareira",
+      "english": "the fireplace",
+      "notes": "House heating: lareira a lenha"
+    },
+    "category": "Divisões da Casa"
+  }
+]

@@ -668,5 +668,45 @@
     "verb": "andar",
     "portuguese": "Andar de metro é tão rápido como andar de táxi.",
     "english": "Taking the metro is as fast as taking a taxi."
+  },
+  {
+    "verb": "engomar",
+    "portuguese": "Eu engomo a camisa com o ferro.",
+    "english": "I iron the shirt with the iron."
+  },
+  {
+    "verb": "aspirar",
+    "portuguese": "Nós aspiramos a sala todos os sábados.",
+    "english": "We vacuum the living room every Saturday."
+  },
+  {
+    "verb": "lavar",
+    "portuguese": "Ela lava a loiça na máquina de lavar.",
+    "english": "She washes the dishes in the dishwasher."
+  },
+  {
+    "verb": "torcer",
+    "portuguese": "O jogador torceu o tornozelo no treino.",
+    "english": "The player sprained his ankle in training."
+  },
+  {
+    "verb": "carregar",
+    "portuguese": "Eu carrego o meu telemóvel durante a noite.",
+    "english": "I charge my mobile phone overnight."
+  },
+  {
+    "verb": "estender",
+    "portuguese": "Eles estendem a roupa lavada na varanda.",
+    "english": "They hang the washed laundry on the balcony."
+  },
+  {
+    "verb": "doer",
+    "portuguese": "Dói-me o dente desde ontem à noite.",
+    "english": "My tooth has been hurting since last night."
+  },
+  {
+    "verb": "esquecer",
+    "portuguese": "Esqueci-me da carteira em casa.",
+    "english": "I forgot my wallet at home."
   }
 ]
