@@ -14,6 +14,15 @@ class QuestionLoaderService {
       final List<dynamic> jsonList = jsonDecode(content);
       final List<Question> result = [];
 
+      // Precompute lookup map for O(1) matching of legacy source items
+      final Map<String, LanguageItem> exactMap = {};
+      for (final i in sourceItems) {
+        final pt = i.portuguese.trim().toLowerCase();
+        final en = i.english.trim().toLowerCase();
+        if (pt.isNotEmpty) exactMap.putIfAbsent(pt, () => i);
+        if (en.isNotEmpty) exactMap.putIfAbsent(en, () => i);
+      }
+
       for (var obj in jsonList) {
         // Handle Source Item
         LanguageItem sourceItem;
@@ -31,31 +40,15 @@ class QuestionLoaderService {
         } else if (obj['sourceItem'] is String) {
           // Old format: Lookup by text
           final ptWord = obj['sourceItem'] as String;
-          // Find source item to link back for mastery tracking
-          // 1. Try exact match
-          // 2. Try contains match (for rows with multiple phrases)
-          sourceItem = sourceItems.firstWhere(
-            (i) =>
-                i.portuguese.trim() == ptWord.trim() ||
-                i.english.trim() == ptWord.trim(),
-            orElse: () => LanguageItem.empty(),
-          );
-
-          if (sourceItem.isEmpty) {
-            sourceItem = sourceItems.firstWhere(
-              (i) =>
-                  i.portuguese.toLowerCase().contains(ptWord.toLowerCase()) ||
-                  i.english.toLowerCase().contains(ptWord.toLowerCase()),
-              orElse: () {
-                debugPrint(
-                  'Warning: Could not find source item for "$ptWord". Using fallback.',
-                );
-                return sourceItems.isNotEmpty
-                    ? sourceItems.first
-                    : LanguageItem.empty();
-              },
-            );
-          }
+          final key = ptWord.trim().toLowerCase();
+          sourceItem = exactMap[key] ??
+              (sourceItems.isNotEmpty
+                  ? sourceItems.first
+                  : LanguageItem(
+                      id: 'legacy_${ptWord.hashCode}',
+                      portuguese: ptWord,
+                      english: '',
+                    ));
         } else {
           // No source item
           sourceItem = LanguageItem.empty();
