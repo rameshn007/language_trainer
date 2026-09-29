@@ -88,7 +88,7 @@ NEW_CONVERSATIONAL_PHRASES = [
         "notes": "Objetos: Frigorífico"
     },
     {
-        "portuguese": "Pomil a loiça suja na máquina de lavar loiça.",
+        "portuguese": "Pomos a loiça suja na máquina de lavar loiça.",
         "english": "We put the dirty dishes in the dishwasher.",
         "category": "Household Items",
         "notes": "Objetos: Máquina de Lavar Loiça"
