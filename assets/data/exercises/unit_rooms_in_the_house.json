@@ -16,7 +16,7 @@
       "english": "the kitchen",
       "notes": "Rooms in the house: onde se cozinha e preparam refeições"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q02",
@@ -35,7 +35,7 @@
       "english": "the bedroom",
       "notes": "Rooms in the house: onde se dorme"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q03",
@@ -54,7 +54,7 @@
       "english": "the bathroom",
       "notes": "Rooms in the house: PT-PT casa de banho (not banheiro)"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q04",
@@ -73,7 +73,7 @@
       "english": "the living room",
       "notes": "Rooms in the house: sala principal de convívio"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q05",
@@ -92,7 +92,7 @@
       "english": "the pantry / larder",
       "notes": "Rooms in the house: divisão pequena para mantimentos"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q06",
@@ -111,7 +111,7 @@
       "english": "the garage",
       "notes": "Rooms in the house: onde se guarda o carro"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q07",
@@ -130,7 +130,7 @@
       "english": "the balcony",
       "notes": "Rooms in the house: espaço exterior do apartamento"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q08",
@@ -149,7 +149,7 @@
       "english": "the stairs",
       "notes": "House parts: degraus para subir de piso"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q09",
@@ -168,7 +168,7 @@
       "english": "the enclosed balcony / sunroom",
       "notes": "Rooms in the house: varanda envidraçada muito típica em PT"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q10",
@@ -187,7 +187,7 @@
       "english": "the floor / storey",
       "notes": "Housing: rés do chão, primeiro andar, etc."
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q11",
@@ -206,7 +206,7 @@
       "english": "the attic",
       "notes": "Rooms in the house: espaço por baixo do telhado"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q12",
@@ -225,7 +225,7 @@
       "english": "the basement / cellar",
       "notes": "Rooms in the house: piso inferior ou subterrâneo"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q13",
@@ -244,7 +244,7 @@
       "english": "the corridor / hallway",
       "notes": "Rooms in the house: passagem que liga as divisões"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q14",
@@ -263,7 +263,7 @@
       "english": "the entrance hall",
       "notes": "Rooms in the house: entrada da habitação"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q15",
@@ -282,7 +282,7 @@
       "english": "the garden",
       "notes": "House spaces: espaço verde com plantas e relva"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q16",
@@ -301,7 +301,7 @@
       "english": "the dining room",
       "notes": "Rooms in the house: sala dedicada às refeições"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q17",
@@ -320,7 +320,7 @@
       "english": "the home office / study",
       "notes": "Rooms in the house: divisão de trabalho e estudo"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q18",
@@ -339,7 +339,7 @@
       "english": "the bathroom",
       "notes": "Rooms in the house: higiene diária"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q19",
@@ -358,7 +358,7 @@
       "english": "the ground floor",
       "notes": "Housing: piso ao nível da rua"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q20",
@@ -377,7 +377,7 @@
       "english": "the terrace",
       "notes": "House spaces: terraço exterior amplo"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q21",
@@ -396,7 +396,7 @@
       "english": "the sunroom / enclosed balcony",
       "notes": "European Portuguese distinctive vocabulary"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q22",
@@ -415,7 +415,7 @@
       "english": "the balcony",
       "notes": "Daily activities: estender a roupa na varanda"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q23",
@@ -434,7 +434,7 @@
       "english": "the wardrobe",
       "notes": "Furniture & rooms: guarda-fatos / roupeiro no quarto"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q24",
@@ -453,7 +453,7 @@
       "english": "the tap / faucet",
       "notes": "House fixtures: torneira da casa de banho / cozinha"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   },
   {
     "id": "room_q25",
@@ -472,6 +472,6 @@
       "english": "the fireplace",
       "notes": "House heating: lareira a lenha"
     },
-    "category": "Divisões da Casa"
+    "category": "House & Rooms"
   }
 ]

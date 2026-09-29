@@ -110,6 +110,40 @@ class QuizViewModel extends Notifier<QuizState> {
       debugPrint('Warning: Could not load combined_questions.json: $e');
     }
 
+    // Also load dedicated topic unit questions
+    try {
+      if (category == 'House & Rooms' || category == null) {
+        final houseQuestions = await _loader.loadQuestions(
+          'assets/data/exercises/unit_rooms_in_the_house.json',
+          items,
+        );
+        jsonQuestions.addAll(houseQuestions);
+      }
+      if (category == 'Household Items' || category == null) {
+        final householdQuestions = await _loader.loadQuestions(
+          'assets/data/exercises/unit_household_items.json',
+          items,
+        );
+        jsonQuestions.addAll(householdQuestions);
+      }
+      if (category == 'Body & Health' || category == null) {
+        final bodyQuestions = await _loader.loadQuestions(
+          'assets/data/exercises/unit_body_parts_and_health.json',
+          items,
+        );
+        jsonQuestions.addAll(bodyQuestions);
+      }
+      if (category == 'Everyday Items' || category == null) {
+        final everydayQuestions = await _loader.loadQuestions(
+          'assets/data/exercises/unit_everyday_items.json',
+          items,
+        );
+        jsonQuestions.addAll(everydayQuestions);
+      }
+    } catch (e) {
+      debugPrint('Warning: Could not load dedicated unit questions: $e');
+    }
+
     // Filter by category if specified
     if (category != null) {
       jsonQuestions = jsonQuestions

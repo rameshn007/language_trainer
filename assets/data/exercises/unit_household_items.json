@@ -16,7 +16,7 @@
       "english": "the refrigerator",
       "notes": "Household appliances: PT-PT frigorífico (not geladeira)"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q02",
@@ -35,7 +35,7 @@
       "english": "the dishwasher",
       "notes": "Household appliances: PT-PT loiça (spelled com i)"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q03",
@@ -54,7 +54,7 @@
       "english": "the washing machine",
       "notes": "Household appliances: máquina de lavar roupa"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q04",
@@ -73,7 +73,7 @@
       "english": "the vacuum cleaner",
       "notes": "Household appliances: aspirador de pó"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q05",
@@ -92,7 +92,7 @@
       "english": "the clothes iron",
       "notes": "Household items: PT-PT ferro de engomar / engomar a roupa"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q06",
@@ -111,7 +111,7 @@
       "english": "the microwave",
       "notes": "Kitchen appliances: micro-ondas para aquecer rápido"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q07",
@@ -130,7 +130,7 @@
       "english": "the oven",
       "notes": "Kitchen appliances: assar no forno"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q08",
@@ -149,7 +149,7 @@
       "english": "the stove / cooker",
       "notes": "Kitchen appliances: fogão a gás ou vitrocerâmica"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q09",
@@ -168,7 +168,7 @@
       "english": "the toaster",
       "notes": "Kitchen appliances: fazer torradas"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q10",
@@ -187,7 +187,7 @@
       "english": "the electric kettle",
       "notes": "Kitchen appliances: chaleira para ferver água"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q11",
@@ -206,7 +206,7 @@
       "english": "the rubbish bin",
       "notes": "Household items: PT-PT caixote do lixo (not lixeira)"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q12",
@@ -225,7 +225,7 @@
       "english": "the broom",
       "notes": "Cleaning items: varrer o chão"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q13",
@@ -244,7 +244,7 @@
       "english": "the mop",
       "notes": "Cleaning items: limpar com esfregona"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q14",
@@ -263,7 +263,7 @@
       "english": "the knife",
       "notes": "Cutlery: talher para cortar"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q15",
@@ -282,7 +282,7 @@
       "english": "the cup / mug",
       "notes": "Tableware: PT-PT chávena (not xícara)"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q16",
@@ -301,7 +301,7 @@
       "english": "the mirror",
       "notes": "Household items: ver o reflexo"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q17",
@@ -320,7 +320,7 @@
       "english": "the lamp",
       "notes": "Household items: PT-PT candeeiro (not luminária / abajur)"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q18",
@@ -339,7 +339,7 @@
       "english": "the duvet / quilt",
       "notes": "Bedding: edredão para a cama"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q19",
@@ -358,7 +358,7 @@
       "english": "the towel",
       "notes": "Bathroom items: secar com a toalha"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q20",
@@ -377,7 +377,7 @@
       "english": "the frying pan",
       "notes": "Cookware: frigideira para fritar"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q21",
@@ -396,7 +396,7 @@
       "english": "the refrigerator",
       "notes": "PT-PT vs PT-BR distinction: frigorífico"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q22",
@@ -415,7 +415,7 @@
       "english": "the pillow / cushion",
       "notes": "Bedding & living room: almofada"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q23",
@@ -434,7 +434,7 @@
       "english": "the curtains",
       "notes": "Furniture & decor: cortinas da janela"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q24",
@@ -453,7 +453,7 @@
       "english": "the cooking pot / saucepan",
       "notes": "Cookware: panela com tampa"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   },
   {
     "id": "house_q25",
@@ -472,6 +472,6 @@
       "english": "the bed sheets",
       "notes": "Bedding: lençóis da cama"
     },
-    "category": "Objetos da Casa"
+    "category": "Household Items"
   }
 ]

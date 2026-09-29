@@ -163,6 +163,10 @@ void main() {
       const screen = CategorySelectionScreen();
       expect(screen.categories, contains('Hobbies & Leisure'));
       expect(screen.categories, contains('Office & Work'));
+      expect(screen.categories, contains('House & Rooms'));
+      expect(screen.categories, contains('Household Items'));
+      expect(screen.categories, contains('Body & Health'));
+      expect(screen.categories, contains('Everyday Items'));
 
       final file = File('assets/data/questions.json');
       final List<dynamic> jsonList = jsonDecode(file.readAsStringSync());

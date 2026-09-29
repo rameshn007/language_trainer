@@ -16,7 +16,7 @@
       "english": "the head",
       "notes": "Body parts & symptoms: dor de cabeça"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q02",
@@ -35,7 +35,7 @@
       "english": "the eyes",
       "notes": "Body parts: visão e olhos"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q03",
@@ -54,7 +54,7 @@
       "english": "the nose",
       "notes": "Body parts: respiração e nariz"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q04",
@@ -73,7 +73,7 @@
       "english": "the throat",
       "notes": "Body parts & health: dor de garganta"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q05",
@@ -92,7 +92,7 @@
       "english": "the tooth",
       "notes": "Body parts & health: os dentes"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q06",
@@ -111,7 +111,7 @@
       "english": "the ankle",
       "notes": "Body parts & injuries: articulação do pé"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q07",
@@ -130,7 +130,7 @@
       "english": "the back",
       "notes": "Body parts & posture: dores nas costas"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q08",
@@ -149,7 +149,7 @@
       "english": "the hands",
       "notes": "Hygiene & body parts: lavar as mãos"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q09",
@@ -168,7 +168,7 @@
       "english": "the knee",
       "notes": "Body parts & accidents: o joelho"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q10",
@@ -187,7 +187,7 @@
       "english": "the neck",
       "notes": "Body parts: o pescoço"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q11",
@@ -206,7 +206,7 @@
       "english": "the stomach / belly",
       "notes": "Body parts & digestion: dores de estômago"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q12",
@@ -225,7 +225,7 @@
       "english": "the fingers",
       "notes": "Body parts: dedos da mão"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q13",
@@ -244,7 +244,7 @@
       "english": "the ear (hearing / inner)",
       "notes": "Body parts: ouvidos para audição (vs orelhas exteriores)"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q14",
@@ -263,7 +263,7 @@
       "english": "the chest",
       "notes": "Body parts: o peito / tórax"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q15",
@@ -282,7 +282,7 @@
       "english": "the elbow",
       "notes": "Body parts: o cotovelo"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q16",
@@ -301,7 +301,7 @@
       "english": "the feet",
       "notes": "Body parts: os pés"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q17",
@@ -320,7 +320,7 @@
       "english": "the shoulders",
       "notes": "Body parts: os ombros"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q18",
@@ -339,7 +339,7 @@
       "english": "the teeth",
       "notes": "Face & body: dentes e boca"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q19",
@@ -358,7 +358,7 @@
       "english": "My head hurts.",
       "notes": "Natural PT-PT pronoun placement: verbo + pronome clítico"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q20",
@@ -377,7 +377,7 @@
       "english": "the throat",
       "notes": "Body parts vocabulary"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q21",
@@ -396,7 +396,7 @@
       "english": "the fever",
       "notes": "Health: febre alta"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q22",
@@ -415,7 +415,7 @@
       "english": "the plaster / band-aid",
       "notes": "Health & first aid: PT-PT penso rápido (not band-aid)"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q23",
@@ -434,7 +434,7 @@
       "english": "the arm",
       "notes": "Body parts & injuries: o braço"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q24",
@@ -453,7 +453,7 @@
       "english": "the wrist",
       "notes": "Body parts: o pulso"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   },
   {
     "id": "body_q25",
@@ -472,6 +472,6 @@
       "english": "the cough",
       "notes": "Health & symptoms: tosse e dor de garganta"
     },
-    "category": "O Corpo Humano"
+    "category": "Body & Health"
   }
 ]
