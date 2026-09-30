@@ -8,8 +8,12 @@ import 'package:language_trainer/ui/widgets/word_star_field.dart';
 ///
 /// Keeps word list state and animation lifecycle completely isolated from
 /// filter selections, category tabs, and scroll updates on the Home Screen.
+/// Passing a new [refreshToken] invalidates the cached word pool, e.g. after
+/// resetting statistics or returning from quiz/learning sessions.
 class HomeScreenBackground extends ConsumerStatefulWidget {
-  const HomeScreenBackground({super.key});
+  final int refreshToken;
+
+  const HomeScreenBackground({super.key, this.refreshToken = 0});
 
   @override
   ConsumerState<HomeScreenBackground> createState() =>
@@ -21,6 +25,23 @@ class _HomeScreenBackgroundState extends ConsumerState<HomeScreenBackground> {
   int _cachedItemCount = -1;
   int _cachedLearnedCount = -1;
 
+  @override
+  void didUpdateWidget(HomeScreenBackground oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.refreshToken != oldWidget.refreshToken) {
+      // Invalidate the cache key so fresh item counts and mastery levels are
+      // re-read from storage after a reset or returning from quiz/exercises.
+      _cachedItemCount = -1;
+      _cachedLearnedCount = -1;
+    }
+  }
+
+  /// Retrieves or re-evaluates the active vocabulary pool for the background.
+  ///
+  /// Caches by `(items.length, learnedCount)` for O(1) checks. Note that this
+  /// key deliberately tracks item additions/deletions and mastery transitions,
+  /// but does not detect same-count content edits; explicit refresh is driven by
+  /// bumping [HomeScreenBackground.refreshToken].
   List<String> _getWords(List<LanguageItem> items) {
     if (items.isEmpty) return const [];
     final learnedCount = items.where((i) => i.masteryLevel > 0).length;
@@ -33,9 +54,9 @@ class _HomeScreenBackgroundState extends ConsumerState<HomeScreenBackground> {
     _cachedLearnedCount = learnedCount;
     _cachedWords = learnedCount > 25
         ? items
-            .where((i) => i.masteryLevel > 0)
-            .map((i) => i.portuguese)
-            .toList(growable: false)
+              .where((i) => i.masteryLevel > 0)
+              .map((i) => i.portuguese)
+              .toList(growable: false)
         : items.map((i) => i.portuguese).toList(growable: false);
     return _cachedWords;
   }
@@ -53,11 +74,10 @@ class _HomeScreenBackgroundState extends ConsumerState<HomeScreenBackground> {
       children: [
         if (words.isNotEmpty)
           Positioned.fill(
-            child: Opacity(
-              opacity: isDark ? 0.6 : 0.5,
-              child: WordStarField(
-                words: words,
-                wordCount: 25,
+            child: RepaintBoundary(
+              child: Opacity(
+                opacity: isDark ? 0.6 : 0.5,
+                child: WordStarField(words: words, wordCount: 25),
               ),
             ),
           ),
