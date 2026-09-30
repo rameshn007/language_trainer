@@ -17,7 +17,7 @@ import 'quiz/verb_conjugation_screen.dart';
 import 'quiz/verb_phrase_trainer_screen.dart';
 import 'quiz/quiz_screen.dart';
 import '../main.dart';
-import 'widgets/word_star_field.dart';
+import 'widgets/home_screen_background.dart';
 import 'settings_screen.dart';
 import 'stats_screen.dart';
 import '../services/verb_service.dart';
@@ -42,6 +42,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
   final ScrollController _landscapeScrollController = ScrollController();
   String _selectedCategory = 'all';
+  int _bgRefreshToken = 0;
 
   @override
   void dispose() {
@@ -202,7 +203,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref
         .read(progressServiceProvider.notifier)
         .refresh(ref.read(storageServiceProvider));
-    setState(() => _isLoading = false);
+    setState(() {
+      _isLoading = false;
+      _bgRefreshToken++;
+    });
   }
 
   Future<void> _confirmShuffle() async {
@@ -260,12 +264,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     if (result == true) {
       final progressService = ref.read(progressServiceProvider.notifier);
       await progressService.resetAll(ref.read(storageServiceProvider));
-      setState(() {});
+      setState(() {
+        _bgRefreshToken++;
+      });
     }
   }
 
-  Future<T?> _pushScreen<T>(Widget screen, [Offset? center]) {
-    return Navigator.push<T>(
+  Future<T?> _pushScreen<T>(Widget screen, [Offset? center]) async {
+    final result = await Navigator.push<T>(
       context,
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) => screen,
@@ -285,6 +291,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         transitionDuration: const Duration(milliseconds: 650),
       ),
     );
+    if (mounted) {
+      setState(() {
+        _bgRefreshToken++;
+      });
+    }
+    return result;
   }
 
   @override
@@ -292,11 +304,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final storage = ref.watch(storageServiceProvider);
     final items = storage.getAllItems();
     final progress = ref.watch(progressServiceProvider);
-    final learnedCount = items.where((i) => i.masteryLevel > 0).length;
     final isDuo = IPhoneDuoHelper.isDuo(context);
     final contentPadding = IPhoneDuoHelper.getContentHorizontalPadding(context);
-    final appBarRightPadding =
-        IPhoneDuoHelper.getAppBarActionsRightPadding(context);
+    final appBarRightPadding = IPhoneDuoHelper.getAppBarActionsRightPadding(
+      context,
+    );
     final fabLocation = IPhoneDuoHelper.getFabLocation(context);
     final isLandscape =
         MediaQuery.orientationOf(context) == Orientation.landscape;
@@ -314,9 +326,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         centerTitle: true,
         actions: [
           Padding(
-            padding: EdgeInsets.only(
-              right: appBarRightPadding,
-            ),
+            padding: EdgeInsets.only(right: appBarRightPadding),
             child: PopupMenuButton<String>(
               onSelected: (value) {
                 if (value == 'refresh') {
@@ -380,44 +390,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       body: SizedBox.expand(
         child: Stack(
           children: [
-            if (items.isNotEmpty)
-              Positioned.fill(
-                child: Opacity(
-                  opacity: isDark ? 0.6 : 0.5,
-                  child: WordStarField(
-                    words: learnedCount > 25
-                        ? items
-                              .where((i) => i.masteryLevel > 0)
-                              .map((i) => i.portuguese)
-                              .toList()
-                        : items.map((i) => i.portuguese).toList(),
-                    wordCount: 25,
-                  ),
-                ),
-              ),
-            // Bottom Scrim for readability and safe area
-            if (isDark)
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: isLandscape ? 80 : 150,
-                child: IgnorePointer(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withValues(alpha: 0.7),
-                          Colors.black,
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            Positioned.fill(
+              child: HomeScreenBackground(refreshToken: _bgRefreshToken),
+            ),
             if (isLandscape)
               _buildLandscapeBody(
                 context: context,
@@ -508,8 +483,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         : fallbackWidth;
     final availableTotalWidth =
         screenWidth - contentPadding.left - contentPadding.right;
-    final leftRailWidth =
-        (availableTotalWidth * 0.35).clamp(230.0, 280.0);
+    final leftRailWidth = (availableTotalWidth * 0.35).clamp(230.0, 280.0);
     const gap = 16.0;
     final rightAvailableWidth = availableTotalWidth - leftRailWidth - gap;
 
@@ -523,10 +497,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildCategoryPills(
-            categories: categories,
-            isDark: isDark,
-          ),
+          _buildCategoryPills(categories: categories, isDark: isDark),
           const SizedBox(height: 10),
           Expanded(
             child: Row(
@@ -564,7 +535,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 const Text('No vocabulary loaded.'),
                                 TextButton(
                                   onPressed: _loadData,
-                                  child: const Text('Tap here to load initial data'),
+                                  child: const Text(
+                                    'Tap here to load initial data',
+                                  ),
                                 ),
                               ],
                             ),
@@ -572,21 +545,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         )
                       else
                         SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) {
-                              final cat = filteredCategories[index];
-                              return _buildCategorySection(
-                                context: context,
-                                title: cat.title,
-                                icon: cat.icon,
-                                accentColor: cat.accentColor,
-                                exercises: cat.exercises,
-                                isDark: isDark,
-                                availableWidth: rightAvailableWidth,
-                              );
-                            },
-                            childCount: filteredCategories.length,
-                          ),
+                          delegate: SliverChildBuilderDelegate((
+                            context,
+                            index,
+                          ) {
+                            final cat = filteredCategories[index];
+                            return _buildCategorySection(
+                              context: context,
+                              title: cat.title,
+                              icon: cat.icon,
+                              accentColor: cat.accentColor,
+                              exercises: cat.exercises,
+                              isDark: isDark,
+                              availableWidth: rightAvailableWidth,
+                            );
+                          }, childCount: filteredCategories.length),
                         ),
                       const SliverPadding(padding: EdgeInsets.only(bottom: 60)),
                     ],
@@ -617,20 +590,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final screenWidth = MediaQuery.sizeOf(context).width > 0
         ? MediaQuery.sizeOf(context).width
         : fallbackWidth;
-    final availableWidth = screenWidth -
-        contentPadding.left -
-        contentPadding.right;
+    final availableWidth =
+        screenWidth - contentPadding.left - contentPadding.right;
 
     return Stack(
       children: [
         CustomScrollView(
           controller: _scrollController,
           slivers: [
-            const SliverPadding(
-              padding: EdgeInsets.only(
-                top: 172.0,
-              ),
-            ),
+            const SliverPadding(padding: EdgeInsets.only(top: 172.0)),
             SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.fromLTRB(
@@ -662,7 +630,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             const Text('No vocabulary loaded.'),
                             TextButton(
                               onPressed: _loadData,
-                              child: const Text('Tap here to load initial data'),
+                              child: const Text(
+                                'Tap here to load initial data',
+                              ),
                             ),
                           ],
                         ),
@@ -711,10 +681,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               }
               const minExtent = 64.0;
               const maxExtent = 162.0;
-              final currentHeight =
-                  (maxExtent - offset).clamp(minExtent, maxExtent);
-              final shrinkPercentage =
-                  (offset / (maxExtent - minExtent)).clamp(0.0, 1.0);
+              final currentHeight = (maxExtent - offset).clamp(
+                minExtent,
+                maxExtent,
+              );
+              final shrinkPercentage = (offset / (maxExtent - minExtent)).clamp(
+                0.0,
+                1.0,
+              );
 
               return _PinnedStatsCard(
                 progress: progress,
@@ -743,8 +717,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required List<_CategoryData> categories,
     required bool isDark,
   }) {
-    final totalCount =
-        categories.fold<int>(0, (sum, cat) => sum + cat.exercises.length);
+    final totalCount = categories.fold<int>(
+      0,
+      (sum, cat) => sum + cat.exercises.length,
+    );
     final pills = [
       _CategoryFilterItem(
         id: 'all',
@@ -787,8 +763,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 widthFactor: 1.0,
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     gradient: isSelected
                         ? LinearGradient(
@@ -801,15 +779,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     color: isSelected
                         ? null
                         : (isDark
-                            ? Colors.white.withValues(alpha: 0.08)
-                            : Colors.black.withValues(alpha: 0.05)),
+                              ? Colors.white.withValues(alpha: 0.08)
+                              : Colors.black.withValues(alpha: 0.05)),
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: isSelected
                           ? Colors.white.withValues(alpha: 0.4)
                           : (isDark
-                              ? Colors.white.withValues(alpha: 0.15)
-                              : Colors.black.withValues(alpha: 0.1)),
+                                ? Colors.white.withValues(alpha: 0.15)
+                                : Colors.black.withValues(alpha: 0.1)),
                       width: 1.2,
                     ),
                     boxShadow: isSelected
@@ -840,8 +818,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           pill.label,
                           style: TextStyle(
                             fontSize: 12,
-                            fontWeight:
-                                isSelected ? FontWeight.bold : FontWeight.w500,
+                            fontWeight: isSelected
+                                ? FontWeight.bold
+                                : FontWeight.w500,
                             color: isSelected
                                 ? Colors.white
                                 : (isDark ? Colors.white70 : Colors.black87),
@@ -857,8 +836,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             color: isSelected
                                 ? Colors.white.withValues(alpha: 0.25)
                                 : (isDark
-                                    ? Colors.white.withValues(alpha: 0.12)
-                                    : Colors.black.withValues(alpha: 0.08)),
+                                      ? Colors.white.withValues(alpha: 0.12)
+                                      : Colors.black.withValues(alpha: 0.08)),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
@@ -902,8 +881,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ? 1
         : (effectiveWidth >= 600 && scale <= 1.15 ? 3 : 2);
     const double cardSpacing = 10.0;
-    final double cardHeight =
-        scale > 1.5 ? 94.0 : (scale > 1.2 ? 86.0 : 72.0);
+    final double cardHeight = scale > 1.5 ? 94.0 : (scale > 1.2 ? 86.0 : 72.0);
 
     final List<Widget> cardRows = [];
     if (crossAxisCount == 1) {
@@ -988,8 +966,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding:
-                const EdgeInsets.only(bottom: 10.0, left: 2.0, right: 2.0),
+            padding: const EdgeInsets.only(bottom: 10.0, left: 2.0, right: 2.0),
             child: Row(
               children: [
                 Container(
@@ -1043,8 +1020,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       color: isEnabled
           ? item.color
           : (isDark
-              ? Colors.white.withValues(alpha: 0.12)
-              : Colors.grey.shade300),
+                ? Colors.white.withValues(alpha: 0.12)
+                : Colors.grey.shade300),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
         side: BorderSide(
@@ -1065,18 +1042,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: isEnabled
-                  ? [
-                      item.color.withValues(alpha: 0.88),
-                      item.color,
-                    ]
+                  ? [item.color.withValues(alpha: 0.88), item.color]
                   : [
                       Colors.grey.shade500.withValues(alpha: 0.6),
                       Colors.grey.shade600.withValues(alpha: 0.7),
                     ],
             ),
           ),
-          padding:
-              const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
           child: Row(
             children: [
               Container(
@@ -1164,9 +1137,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => const StatsScreen(),
-            ),
+            MaterialPageRoute(builder: (context) => const StatsScreen()),
           );
         },
         child: Container(
@@ -1222,10 +1193,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             onPressed: items.isEmpty || isLoading
                 ? null
                 : (offset) {
-                    _pushScreen(
-                      const CategorySelectionScreen(),
-                      offset,
-                    ).then((_) => setState(() {}));
+                    _pushScreen(const CategorySelectionScreen(), offset);
                   },
           ),
           _ExerciseItem(
@@ -1240,7 +1208,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     _pushScreen(
                       const QuizScreen(isVocabularyQuiz: true),
                       offset,
-                    ).then((_) => setState(() {}));
+                    );
                   },
           ),
         ],
@@ -1438,7 +1406,6 @@ class _CategoryData {
   });
 }
 
-
 class _StatsCardContent extends StatelessWidget {
   final ProgressSnapshot progress;
 
@@ -1505,9 +1472,7 @@ class _StatsCardContent extends StatelessWidget {
           child: LinearProgressIndicator(
             value: progress.dailyGoalProgress,
             minHeight: 8,
-            backgroundColor: Colors.white.withValues(
-              alpha: 0.15,
-            ),
+            backgroundColor: Colors.white.withValues(alpha: 0.15),
             valueColor: AlwaysStoppedAnimation<Color>(
               progress.dailyGoalMet
                   ? Colors.greenAccent.shade400
@@ -1519,8 +1484,7 @@ class _StatsCardContent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: List.generate(5, (tier) {
-            final count =
-                progress.masteryDistribution[tier] ?? 0;
+            final count = progress.masteryDistribution[tier] ?? 0;
             final tierColors = [
               Colors.white38,
               Colors.blue.shade200,
@@ -1549,9 +1513,7 @@ class _StatsCardContent extends StatelessWidget {
                     child: Text(
                       WordProgress.tierName(tier),
                       style: TextStyle(
-                        color: tierColors[tier].withValues(
-                          alpha: 0.7,
-                        ),
+                        color: tierColors[tier].withValues(alpha: 0.7),
                         fontSize: 9,
                       ),
                     ),
@@ -1571,10 +1533,7 @@ class _StatsCardContent extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Total XP: ${progress.totalXP}',
-                  style: const TextStyle(
-                    color: Colors.white54,
-                    fontSize: 11,
-                  ),
+                  style: const TextStyle(color: Colors.white54, fontSize: 11),
                 ),
               ),
             ),

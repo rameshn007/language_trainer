@@ -5,7 +5,11 @@ class WordStarField extends StatefulWidget {
   final List<String> words;
   final int wordCount;
 
-  const WordStarField({super.key, required this.words, this.wordCount = 15});
+  const WordStarField({
+    super.key,
+    required this.words,
+    this.wordCount = 15,
+  });
 
   @override
   State<WordStarField> createState() => _WordStarFieldState();
@@ -28,7 +32,7 @@ class _WordStarFieldState extends State<WordStarField>
     // Initial population
     if (widget.words.isNotEmpty) {
       for (int i = 0; i < widget.wordCount; i++) {
-        _stars.add(_generateStar(true));
+        _stars.add(_generateStar());
       }
     }
   }
@@ -36,12 +40,25 @@ class _WordStarFieldState extends State<WordStarField>
   @override
   void didUpdateWidget(WordStarField oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.words != oldWidget.words) {
-      _stars.clear();
-      if (widget.words.isNotEmpty) {
-        for (int i = 0; i < widget.wordCount; i++) {
-          _stars.add(_generateStar(true));
-        }
+    if (widget.words.isEmpty) {
+      if (_stars.isNotEmpty) {
+        _stars.clear();
+      }
+      return;
+    }
+    if (_stars.isEmpty && widget.words.isNotEmpty) {
+      for (int i = 0; i < widget.wordCount; i++) {
+        _stars.add(_generateStar());
+      }
+      return;
+    }
+    // If wordCount changed, adjust the number of stars
+    if (widget.wordCount != oldWidget.wordCount) {
+      while (_stars.length < widget.wordCount) {
+        _stars.add(_generateStar());
+      }
+      if (_stars.length > widget.wordCount) {
+        _stars.removeRange(widget.wordCount, _stars.length);
       }
     }
   }
@@ -52,7 +69,7 @@ class _WordStarFieldState extends State<WordStarField>
     super.dispose();
   }
 
-  _Star _generateStar(bool initial) {
+  _Star _generateStar() {
     final word = widget.words[_random.nextInt(widget.words.length)];
     // Random position
     // If initial, anywhere on screen. Else, maybe start from edges?
@@ -95,7 +112,7 @@ class _WordStarFieldState extends State<WordStarField>
 
   @override
   Widget build(BuildContext context) {
-    if (widget.words.isEmpty) return const SizedBox.shrink();
+    if (widget.words.isEmpty && _stars.isEmpty) return const SizedBox.shrink();
 
     return AnimatedBuilder(
       animation: _controller,
@@ -124,7 +141,13 @@ class _WordStarFieldState extends State<WordStarField>
                 // Wrap around
                 if (star.x < -0.1) star.x = 1.1;
                 if (star.x > 1.1) star.x = -0.1;
-                if (star.y < -0.1) star.y = 1.1;
+                if (star.y < -0.1) {
+                  star.y = 1.1;
+                  if (widget.words.isNotEmpty) {
+                    star.text =
+                        widget.words[_random.nextInt(widget.words.length)];
+                  }
+                }
                 if (star.y > 1.1) star.y = -0.1;
 
                 // Twinkle
