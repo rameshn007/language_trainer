@@ -410,7 +410,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                       children: [
                         // Previous button
                         ElevatedButton.icon(
-                          onPressed: _previousWord,
+                          onPressed: state.isAutoPlayActive ? _previousWord : null,
                           icon: const Icon(Icons.skip_previous_rounded),
                           label: const Text('Prev'),
                           style: ElevatedButton.styleFrom(
@@ -447,7 +447,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                         const SizedBox(width: 12),
                         // Next button
                         ElevatedButton.icon(
-                          onPressed: _nextWord,
+                          onPressed: state.isAutoPlayActive ? _nextWord : null,
                           icon: const Icon(Icons.skip_next_rounded),
                           label: const Text('Next'),
                           style: ElevatedButton.styleFrom(
@@ -472,7 +472,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         OutlinedButton.icon(
-                          onPressed: _shufflePool,
+                          onPressed: state.isAutoPlayActive ? _shufflePool : null,
                           icon: const Icon(Icons.shuffle_rounded),
                           label: const Text('Shuffle'),
                         ),

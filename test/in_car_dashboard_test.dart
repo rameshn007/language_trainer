@@ -42,7 +42,7 @@ class _MockDashboardLRViewModel extends ListenRepeatViewModel {
   }
 
   @override
-  Future<void> startSession({ListenRepeatMode? mode, String? subCategory}) async {}
+  Future<void> startSession({ListenRepeatMode? mode, String? subCategory, bool clearSubCategory = false}) async {}
 
   @override
   Future<void> togglePlayPause() async {

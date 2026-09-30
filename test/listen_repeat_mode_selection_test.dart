@@ -329,5 +329,32 @@ void main() {
     await vm.setMode(ListenRepeatMode.verbs);
     expect(state().mode, equals(ListenRepeatMode.verbs));
     expect(state().subCategory, isNull);
+
+    // Switching back to topics and explicitly setting null clears subCategory
+    await vm.setMode(ListenRepeatMode.topics);
+    await vm.setSubCategory('Household Items');
+    expect(state().subCategory, equals('Household Items'));
+    await vm.setSubCategory(null);
+    expect(state().subCategory, isNull);
+
+    // Setting 'All Topics' also clears subCategory
+    await vm.setSubCategory('Body & Health');
+    expect(state().subCategory, equals('Body & Health'));
+    await vm.setSubCategory('All Topics');
+    expect(state().subCategory, isNull);
+  });
+
+  test('stopSession clears pending restart to prevent phantom start races', () async {
+    setupContainer();
+    final vm = notifier();
+
+    // Start session and immediately stop before start finishes
+    final startFuture = vm.startSession(mode: ListenRepeatMode.topics);
+    await vm.stopSession();
+    await startFuture;
+
+    // After stopping, isAutoPlayActive and isPlaying must be false
+    expect(state().isAutoPlayActive, isFalse);
+    expect(state().isPlaying, isFalse);
   });
 }

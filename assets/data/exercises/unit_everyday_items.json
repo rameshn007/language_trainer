@@ -11,7 +11,7 @@
     "correctAnswer": "telemóvel",
     "type": "cloze",
     "sourceItem": {
-      "id": "day_src_telemovel",
+      "id": "vocab_465",
       "portuguese": "o telemóvel",
       "english": "the mobile phone",
       "notes": "Everyday items: PT-PT telemóvel (not celular)"
@@ -163,7 +163,7 @@
     "correctAnswer": "mochila",
     "type": "cloze",
     "sourceItem": {
-      "id": "day_src_mochila",
+      "id": "vocab_381",
       "portuguese": "a mochila",
       "english": "the backpack",
       "notes": "Bags: mochila às costas"
@@ -201,7 +201,7 @@
     "correctAnswer": "caneta",
     "type": "cloze",
     "sourceItem": {
-      "id": "day_src_caneta",
+      "id": "vocab_537",
       "portuguese": "a caneta",
       "english": "the pen",
       "notes": "Stationery: caneta para escrever"
@@ -296,7 +296,7 @@
     "correctAnswer": "O telemóvel",
     "type": "multipleChoice",
     "sourceItem": {
-      "id": "day_src_telemovel_trans",
+      "id": "vocab_465",
       "portuguese": "o telemóvel",
       "english": "the mobile phone",
       "notes": "PT-PT vs PT-BR distinction: telemóvel"
@@ -315,7 +315,7 @@
     "correctAnswer": "Os auscultadores",
     "type": "multipleChoice",
     "sourceItem": {
-      "id": "day_src_auscultadores_trans",
+      "id": "day_src_auscultadores",
       "portuguese": "os auscultadores",
       "english": "the headphones",
       "notes": "PT-PT term: auscultadores"
@@ -372,7 +372,7 @@
     "correctAnswer": "caderno",
     "type": "cloze",
     "sourceItem": {
-      "id": "day_src_caderno",
+      "id": "vocab_536",
       "portuguese": "o caderno",
       "english": "the notebook",
       "notes": "Stationery: caderno de apontamentos"
@@ -391,7 +391,7 @@
     "correctAnswer": "chaves",
     "type": "cloze",
     "sourceItem": {
-      "id": "day_src_quatro_essenciais",
+      "id": "day_src_chaves",
       "portuguese": "as chaves",
       "english": "the keys",
       "notes": "Daily routine: telemóvel, carteira, passe e chaves"
@@ -467,7 +467,7 @@
     "correctAnswer": "gaveta",
     "type": "cloze",
     "sourceItem": {
-      "id": "day_src_gaveta",
+      "id": "vocab_467",
       "portuguese": "a gaveta",
       "english": "the drawer",
       "notes": "Furniture: a gaveta da secretária"

@@ -125,7 +125,7 @@
     "correctAnswer": "costas",
     "type": "cloze",
     "sourceItem": {
-      "id": "body_src_costas",
+      "id": "vocab_415",
       "portuguese": "as costas",
       "english": "the back",
       "notes": "Body parts & posture: dores nas costas"
@@ -163,7 +163,7 @@
     "correctAnswer": "joelho",
     "type": "cloze",
     "sourceItem": {
-      "id": "body_src_joelho",
+      "id": "vocab_799",
       "portuguese": "o joelho",
       "english": "the knee",
       "notes": "Body parts & accidents: o joelho"
@@ -182,7 +182,7 @@
     "correctAnswer": "pescoço",
     "type": "cloze",
     "sourceItem": {
-      "id": "body_src_pescoco",
+      "id": "vocab_800",
       "portuguese": "o pescoço",
       "english": "the neck",
       "notes": "Body parts: o pescoço"
@@ -258,7 +258,7 @@
     "correctAnswer": "peito",
     "type": "cloze",
     "sourceItem": {
-      "id": "body_src_peito",
+      "id": "vocab_804",
       "portuguese": "o peito",
       "english": "the chest",
       "notes": "Body parts: o peito / tórax"
@@ -372,7 +372,7 @@
     "correctAnswer": "A garganta",
     "type": "multipleChoice",
     "sourceItem": {
-      "id": "body_src_garganta_trans",
+      "id": "body_src_garganta",
       "portuguese": "a garganta",
       "english": "the throat",
       "notes": "Body parts vocabulary"
@@ -429,7 +429,7 @@
     "correctAnswer": "braço",
     "type": "cloze",
     "sourceItem": {
-      "id": "body_src_braco_partido",
+      "id": "vocab_803",
       "portuguese": "o braço",
       "english": "the arm",
       "notes": "Body parts & injuries: o braço"

@@ -21,6 +21,7 @@ class ListenRepeatState {
   final List<LanguageItem> pool;
   final List<LanguageItem> shuffledPool;
   final bool isPlaying;
+  final bool isAutoPlayActive;
   final int totalWordsSeen;
   final bool isSpeaking;
   final double playbackSpeed;
@@ -36,6 +37,7 @@ class ListenRepeatState {
     this.pool = const [],
     this.shuffledPool = const [],
     this.isPlaying = false,
+    this.isAutoPlayActive = false,
     this.totalWordsSeen = 0,
     this.isSpeaking = false,
     this.playbackSpeed = 1.0,
@@ -50,6 +52,7 @@ class ListenRepeatState {
     List<LanguageItem>? pool,
     List<LanguageItem>? shuffledPool,
     bool? isPlaying,
+    bool? isAutoPlayActive,
     int? totalWordsSeen,
     bool? isSpeaking,
     double? playbackSpeed,
@@ -64,6 +67,7 @@ class ListenRepeatState {
       pool: pool ?? this.pool,
       shuffledPool: shuffledPool ?? this.shuffledPool,
       isPlaying: isPlaying ?? this.isPlaying,
+      isAutoPlayActive: isAutoPlayActive ?? this.isAutoPlayActive,
       totalWordsSeen: totalWordsSeen ?? this.totalWordsSeen,
       isSpeaking: isSpeaking ?? this.isSpeaking,
       playbackSpeed: playbackSpeed ?? this.playbackSpeed,
@@ -122,6 +126,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     
     ref.onDispose(() {
       WidgetsBinding.instance.removeObserver(this);
+      _pendingRestart = false;
       _pendingMode = null;
       if (_pendingCompleter != null && !_pendingCompleter!.isCompleted) {
         _pendingCompleter!.complete();
@@ -210,9 +215,20 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   /// attempt is invalidated via [_sessionId] and aborted at its next async checkpoint.
   /// The active start runner then immediately executes the latest requested mode
   /// rather than giving up after a fixed timeout.
-  Future<void> startSession({ListenRepeatMode? mode, String? subCategory}) async {
+  Future<void> startSession({
+    ListenRepeatMode? mode,
+    String? subCategory,
+    bool clearSubCategory = false,
+  }) async {
+    final bool effectiveClearSub = clearSubCategory ||
+        (subCategory == null && mode == null ? false : subCategory == null) ||
+        subCategory == 'All Topics' ||
+        (mode != null && mode != ListenRepeatMode.topics);
+    final targetMode = mode ?? state.mode;
+    final targetSubCategory = effectiveClearSub ? null : (subCategory ?? state.subCategory);
+
     // If no mode or subCategory specified and already active or starting, join existing start
-    if (mode == null && subCategory == null) {
+    if (mode == null && subCategory == null && !clearSubCategory) {
       if (_isAutoPlayActive || state.isPlaying) {
         return;
       }
@@ -221,19 +237,20 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       }
     }
 
-    final targetMode = mode ?? state.mode;
-    final bool shouldClearSubCategory = (mode != null && mode != ListenRepeatMode.topics);
-    final targetSubCategory = shouldClearSubCategory ? null : (subCategory ?? state.subCategory);
-
     // If mode and subCategory are specified and already playing with nothing pending
-    if (state.mode == targetMode && state.subCategory == targetSubCategory && _pendingMode == null && !_pendingRestart && (_isAutoPlayActive || state.isPlaying)) {
+    if (state.mode == targetMode &&
+        state.subCategory == targetSubCategory &&
+        _pendingMode == null &&
+        !_pendingRestart &&
+        (_isAutoPlayActive || state.isPlaying)) {
       return;
     }
 
     state = state.copyWith(
       mode: targetMode,
       subCategory: targetSubCategory,
-      clearSubCategory: shouldClearSubCategory,
+      clearSubCategory: effectiveClearSub,
+      isAutoPlayActive: false,
     );
 
     // Invalidate any in-flight generation so its current step aborts promptly
@@ -390,6 +407,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       pool: allItems,
       shuffledPool: List.unmodifiable(_shuffledPool),
       isPlaying: true,
+      isAutoPlayActive: false,
       playbackSpeed: state.playbackSpeed,
       mode: state.mode,
       subCategory: state.subCategory,
@@ -416,11 +434,13 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       }
       AppLogger.log('[LR] audio source set, ready to play.', name: 'ListenRepeat');
 
+      _isAutoPlayActive = true;
       state = ListenRepeatState(
         currentItem: _playlistWords.isNotEmpty ? _playlistWords.first : null,
         pool: allItems,
         shuffledPool: List.unmodifiable(_shuffledPool),
         isPlaying: true,
+        isAutoPlayActive: true,
         isSpeaking: true,
         totalWordsSeen: _sessionWordsOffset + 1,
         playbackSpeed: state.playbackSpeed,
@@ -878,6 +898,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     _fillingSessionId = null;
     _lastPlaybackWordIndex = 0;
     _pendingMode = null;
+    _pendingRestart = false;
     if (_pendingCompleter != null && !_pendingCompleter!.isCompleted) {
       _pendingCompleter!.complete();
     }
@@ -919,6 +940,7 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
       mode: state.mode,
       subCategory: state.subCategory,
       totalWordsSeen: recordProgress ? 0 : state.totalWordsSeen,
+      isAutoPlayActive: false,
     );
     return earnedXP;
   }
@@ -947,7 +969,11 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   }
 
   Future<void> setSubCategory(String? subCategory) async {
-    await startSession(mode: state.mode, subCategory: subCategory);
+    await startSession(
+      mode: state.mode,
+      subCategory: subCategory,
+      clearSubCategory: subCategory == null || subCategory == 'All Topics',
+    );
   }
 
   Future<ListenRepeatMode> cycleMode() async {

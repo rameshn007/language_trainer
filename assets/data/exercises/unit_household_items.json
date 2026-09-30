@@ -11,7 +11,7 @@
     "correctAnswer": "frigorífico",
     "type": "cloze",
     "sourceItem": {
-      "id": "house_src_frigorifico",
+      "id": "vocab_468",
       "portuguese": "o frigorífico",
       "english": "the refrigerator",
       "notes": "Household appliances: PT-PT frigorífico (not geladeira)"
@@ -144,7 +144,7 @@
     "correctAnswer": "fogão",
     "type": "cloze",
     "sourceItem": {
-      "id": "house_src_fogao",
+      "id": "vocab_816",
       "portuguese": "o fogão",
       "english": "the stove / cooker",
       "notes": "Kitchen appliances: fogão a gás ou vitrocerâmica"
@@ -296,7 +296,7 @@
     "correctAnswer": "espelho",
     "type": "cloze",
     "sourceItem": {
-      "id": "house_src_espelho",
+      "id": "vocab_504",
       "portuguese": "o espelho",
       "english": "the mirror",
       "notes": "Household items: ver o reflexo"
@@ -315,7 +315,7 @@
     "correctAnswer": "candeeiro",
     "type": "cloze",
     "sourceItem": {
-      "id": "house_src_candeeiro",
+      "id": "vocab_290",
       "portuguese": "o candeeiro",
       "english": "the lamp",
       "notes": "Household items: PT-PT candeeiro (not luminária / abajur)"
@@ -391,7 +391,7 @@
     "correctAnswer": "Frigorífico",
     "type": "multipleChoice",
     "sourceItem": {
-      "id": "house_src_frigo_trans",
+      "id": "vocab_468",
       "portuguese": "o frigorífico",
       "english": "the refrigerator",
       "notes": "PT-PT vs PT-BR distinction: frigorífico"

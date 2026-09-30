@@ -260,14 +260,7 @@ class _InCarDashboardScreenState extends ConsumerState<InCarDashboardScreen> {
     Map<ListenRepeatMode, int> modeCounts, {
     bool isCompact = false,
   }) {
-    const modes = [
-      ListenRepeatMode.all,
-      ListenRepeatMode.topics,
-      ListenRepeatMode.verbs,
-      ListenRepeatMode.prepositions,
-      ListenRepeatMode.phrases,
-      ListenRepeatMode.vocabulary,
-    ];
+    final modes = ListenRepeatMode.values;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

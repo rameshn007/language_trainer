@@ -11,7 +11,7 @@
     "correctAnswer": "cozinha",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_cozinha",
+      "id": "vocab_281",
       "portuguese": "a cozinha",
       "english": "the kitchen",
       "notes": "Rooms in the house: onde se cozinha e preparam refeições"
@@ -30,7 +30,7 @@
     "correctAnswer": "quarto",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_quarto",
+      "id": "vocab_278",
       "portuguese": "o quarto",
       "english": "the bedroom",
       "notes": "Rooms in the house: onde se dorme"
@@ -49,7 +49,7 @@
     "correctAnswer": "casa de banho",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_casa_de_banho",
+      "id": "vocab_279",
       "portuguese": "a casa de banho",
       "english": "the bathroom",
       "notes": "Rooms in the house: PT-PT casa de banho (not banheiro)"
@@ -68,7 +68,7 @@
     "correctAnswer": "sala de estar",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_sala_de_estar",
+      "id": "vocab_282",
       "portuguese": "a sala de estar",
       "english": "the living room",
       "notes": "Rooms in the house: sala principal de convívio"
@@ -87,7 +87,7 @@
     "correctAnswer": "despensa",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_despensa",
+      "id": "vocab_284",
       "portuguese": "a despensa",
       "english": "the pantry / larder",
       "notes": "Rooms in the house: divisão pequena para mantimentos"
@@ -106,7 +106,7 @@
     "correctAnswer": "garagem",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_garagem",
+      "id": "vocab_271",
       "portuguese": "a garagem",
       "english": "the garage",
       "notes": "Rooms in the house: onde se guarda o carro"
@@ -125,7 +125,7 @@
     "correctAnswer": "varanda",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_varanda",
+      "id": "vocab_265",
       "portuguese": "a varanda",
       "english": "the balcony",
       "notes": "Rooms in the house: espaço exterior do apartamento"
@@ -144,7 +144,7 @@
     "correctAnswer": "escadas",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_escadas",
+      "id": "vocab_280",
       "portuguese": "as escadas",
       "english": "the stairs",
       "notes": "House parts: degraus para subir de piso"
@@ -201,7 +201,7 @@
     "correctAnswer": "sótão",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_sotao",
+      "id": "vocab_272",
       "portuguese": "o sótão",
       "english": "the attic",
       "notes": "Rooms in the house: espaço por baixo do telhado"
@@ -220,7 +220,7 @@
     "correctAnswer": "cave",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_cave",
+      "id": "vocab_273",
       "portuguese": "a cave",
       "english": "the basement / cellar",
       "notes": "Rooms in the house: piso inferior ou subterrâneo"
@@ -277,7 +277,7 @@
     "correctAnswer": "jardim",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_jardim",
+      "id": "vocab_274",
       "portuguese": "o jardim",
       "english": "the garden",
       "notes": "House spaces: espaço verde com plantas e relva"
@@ -296,7 +296,7 @@
     "correctAnswer": "jantar",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_sala_jantar",
+      "id": "vocab_283",
       "portuguese": "a sala de jantar",
       "english": "the dining room",
       "notes": "Rooms in the house: sala dedicada às refeições"
@@ -315,7 +315,7 @@
     "correctAnswer": "escritório",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_escritorio",
+      "id": "vocab_213",
       "portuguese": "o escritório",
       "english": "the home office / study",
       "notes": "Rooms in the house: divisão de trabalho e estudo"
@@ -334,7 +334,7 @@
     "correctAnswer": "A casa de banho",
     "type": "multipleChoice",
     "sourceItem": {
-      "id": "room_src_casa_de_banho_func",
+      "id": "vocab_279",
       "portuguese": "a casa de banho",
       "english": "the bathroom",
       "notes": "Rooms in the house: higiene diária"
@@ -353,7 +353,7 @@
     "correctAnswer": "Rés do chão",
     "type": "multipleChoice",
     "sourceItem": {
-      "id": "room_src_res_do_chao",
+      "id": "vocab_656",
       "portuguese": "o rés do chão",
       "english": "the ground floor",
       "notes": "Housing: piso ao nível da rua"
@@ -391,7 +391,7 @@
     "correctAnswer": "A marquise",
     "type": "multipleChoice",
     "sourceItem": {
-      "id": "room_src_marquise_trans",
+      "id": "room_src_marquise",
       "portuguese": "a marquise",
       "english": "the sunroom / enclosed balcony",
       "notes": "European Portuguese distinctive vocabulary"
@@ -410,7 +410,7 @@
     "correctAnswer": "varanda",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_varanda_roupa",
+      "id": "vocab_265",
       "portuguese": "a varanda",
       "english": "the balcony",
       "notes": "Daily activities: estender a roupa na varanda"
@@ -429,7 +429,7 @@
     "correctAnswer": "quarto",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_roupeiro_quarto",
+      "id": "vocab_813",
       "portuguese": "o roupeiro",
       "english": "the wardrobe",
       "notes": "Furniture & rooms: guarda-fatos / roupeiro no quarto"
@@ -467,7 +467,7 @@
     "correctAnswer": "lareira",
     "type": "cloze",
     "sourceItem": {
-      "id": "room_src_lareira",
+      "id": "vocab_286",
       "portuguese": "a lareira",
       "english": "the fireplace",
       "notes": "House heating: lareira a lenha"

@@ -99,14 +99,13 @@ class ListenRepeatContentService {
     'Household Items',
     'Body & Health',
     'Everyday Items',
-    'house and home',
-    'Home',
   };
 
   static const Set<String> _targetTopicVerbs = {
     'cozinhar', 'dormir', 'descansar', 'guardar', 'arrumar', 'aquecer',
     'assar', 'ferver', 'varrer', 'escovar', 'lavar', 'doer', 'torcer',
     'carregar', 'esquecer', 'validar', 'proteger', 'levar',
+    'engomar', 'aspirar', 'estender',
   };
 
   /// Returns true if the item belongs to the newly added A2 topic sets:
@@ -115,6 +114,7 @@ class ListenRepeatContentService {
     if (_targetTopicCategories.contains(item.topicCategory)) return true;
     final note = item.notes.toLowerCase();
     if (note.contains('a casa:') ||
+        note.contains('rooms in the house:') ||
         note.contains('objetos:') ||
         note.contains('saúde:') ||
         note.contains('saude:') ||
@@ -133,7 +133,7 @@ class ListenRepeatContentService {
 
   static const Map<String, Set<String>> _topicVerbsByCategory = {
     'House & Rooms': {'cozinhar', 'dormir', 'descansar', 'guardar', 'arrumar'},
-    'Household Items': {'aquecer', 'assar', 'ferver', 'varrer'},
+    'Household Items': {'aquecer', 'assar', 'ferver', 'varrer', 'engomar', 'aspirar', 'estender'},
     'Body & Health': {'escovar', 'lavar', 'doer', 'torcer'},
     'Everyday Items': {'carregar', 'esquecer', 'validar', 'proteger', 'levar'},
   };
@@ -145,16 +145,33 @@ class ListenRepeatContentService {
     final note = item.notes.toLowerCase();
     switch (subCategory) {
       case 'House & Rooms':
-        if (note.contains('a casa:') || note.contains('casa')) return true;
+        if (note.contains('a casa:') ||
+            note.contains('rooms in the house:') ||
+            note.contains('house parts:') ||
+            note.contains('house spaces:') ||
+            note.contains('housing:') ||
+            note.contains('furniture & rooms:') ||
+            note.contains('house fixtures:') ||
+            note.contains('house heating:') ||
+            note.contains('casa de banho') ||
+            note.contains('divis')) {
+          return true;
+        }
         break;
       case 'Household Items':
-        if (note.contains('objetos:')) return true;
+        if (note.contains('objetos:')) {
+          return true;
+        }
         break;
       case 'Body & Health':
-        if (note.contains('saúde:') || note.contains('saude:')) return true;
+        if (note.contains('saúde:') || note.contains('saude:')) {
+          return true;
+        }
         break;
       case 'Everyday Items':
-        if (note.contains('quotidiano:')) return true;
+        if (note.contains('quotidiano:')) {
+          return true;
+        }
         break;
     }
     if (item.wordType == 'verb_phrase') {

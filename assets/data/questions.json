@@ -73199,7 +73199,7 @@
       "Playing handball is as dynamic as playing football",
       "I used to wake up early",
       "He is a thug/chav",
-      "close to you (here), far from you (there), far from both of us (over there)"
+      "Playing tennis is as relaxing as swimming"
     ],
     "answer": "Playing handball is as dynamic as playing football",
     "sourceItem": "Praticar andebol é tão dinâmico como praticar futebol",
@@ -73238,10 +73238,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'a casa de banho'?",
     "options": [
-      "There",
-      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
+      "the kitchen",
+      "the bedroom",
       "the bathroom",
-      "Carrot"
+      "the hallway"
     ],
     "answer": "the bathroom",
     "sourceItem": "a casa de banho",
@@ -73364,10 +73364,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'o corredor'?",
     "options": [
-      "care / esteemed \\- dear",
-      "Summer nights are pleasant.",
+      "the balcony",
+      "the staircase",
       "the corridor / hallway",
-      "Where can I rent a car?"
+      "the entrance hall"
     ],
     "answer": "the corridor / hallway",
     "sourceItem": "o corredor",
@@ -73644,10 +73644,10 @@
     "type": "multipleChoice",
     "question": "How do you say 'the wardrobe' in Portuguese?",
     "options": [
-      "A fatura",
-      "Semana passada, anteontem, ontem, hoje, amanhã, depois de amanhã, próxima semana",
+      "a gaveta",
+      "o candeeiro",
       "o roupeiro",
-      "Vinho branco"
+      "o espelho"
     ],
     "answer": "o roupeiro",
     "sourceItem": "o roupeiro",
@@ -73700,10 +73700,10 @@
     "type": "multipleChoice",
     "question": "How do you say 'the toaster' in Portuguese?",
     "options": [
-      "Castanho",
-      "gravação",
+      "o frigorífico",
+      "o micro-ondas",
       "a torradeira",
-      "pelo \\- por"
+      "a chaleira"
     ],
     "answer": "a torradeira",
     "sourceItem": "a torradeira",
@@ -73756,10 +73756,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'a tábua de engomar'?",
     "options": [
-      "boyfriend",
-      "I will go there in person to deliver the signed contract",
+      "the washing machine",
+      "the vacuum cleaner",
       "the ironing board",
-      "The Public (Newspaper)"
+      "the clothes line"
     ],
     "answer": "the ironing board",
     "sourceItem": "a tábua de engomar",
@@ -74036,10 +74036,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'o garfo'?",
     "options": [
-      "the afternoon or da tarde, but after a time it is de tarde",
-      "scissors on top",
+      "the spoon",
+      "the knife",
       "the fork",
-      "Rich"
+      "the plate"
     ],
     "answer": "the fork",
     "sourceItem": "o garfo",
@@ -74051,9 +74051,9 @@
     "question": "How do you say 'the fork' in Portuguese?",
     "options": [
       "o garfo",
-      "A equipa nacional portuguesa tem jogadores do benfica, do sporting e do Porto",
-      "vou,vais,vai,vamos,vão",
-      "Ontem à noite"
+      "a faca",
+      "a colher",
+      "o prato"
     ],
     "answer": "o garfo",
     "sourceItem": "o garfo",
@@ -74120,10 +74120,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'o prato'?",
     "options": [
-      "Isabel is going to spend the weekend with Vitória because they are friends.",
-      "the nails",
+      "the cup",
+      "the bowl",
       "the plate",
-      "especially where I live"
+      "the glass"
     ],
     "answer": "the plate",
     "sourceItem": "o prato",
@@ -74148,9 +74148,9 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'o copo'?",
     "options": [
-      "terrace",
-      "the rat is gnawing the cork of the bottle of the king of russia",
-      "Are you afraid of cockroaches?",
+      "the mug",
+      "the bottle",
+      "the plate",
       "the glass"
     ],
     "answer": "the glass",
@@ -74191,9 +74191,9 @@
     "question": "How do you say 'the cup / mug' in Portuguese?",
     "options": [
       "a chávena",
-      "Ler",
-      "Quando viajam pela Península Ibérica, os turistas americanos acham que Portugal é tão bonito como Espanha",
-      "ainda"
+      "o copo",
+      "a garrafa",
+      "o prato"
     ],
     "answer": "a chávena",
     "sourceItem": "a chávena",
@@ -74204,10 +74204,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'a torneira'?",
     "options": [
-      "they see",
-      "my journey/trip",
+      "the sink",
+      "the shower",
       "the tap / faucet",
-      "this \\- far from both"
+      "the drain"
     ],
     "answer": "the tap / faucet",
     "sourceItem": "a torneira",
@@ -74247,9 +74247,9 @@
     "question": "How do you say 'the head' in Portuguese?",
     "options": [
       "a cabeça",
-      "com ele",
-      "connosco",
-      "As aulas de kizomba são tão divertidas como as aulas de samba"
+      "o pescoço",
+      "as costas",
+      "os ombros"
     ],
     "answer": "a cabeça",
     "sourceItem": "a cabeça",
@@ -74372,10 +74372,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'os dentes'?",
     "options": [
-      "The backpack",
+      "the mouth",
       "the teeth",
-      "He didn't buy the ticket, therefore he cannot enter.",
-      "your husband"
+      "the eyes",
+      "the ears"
     ],
     "answer": "the teeth",
     "sourceItem": "os dentes",
@@ -74428,10 +74428,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'a garganta'?",
     "options": [
-      "Doctor \\- masculine",
+      "the stomach",
       "the throat",
-      "short period (masculine)",
-      "I need a tow truck"
+      "the chest",
+      "the back"
     ],
     "answer": "the throat",
     "sourceItem": "a garganta",
@@ -74582,10 +74582,10 @@
     "type": "multipleChoice",
     "question": "How do you say 'the chest' in Portuguese?",
     "options": [
-      "Estou a brincar",
-      "A cozinha",
+      "o braço",
+      "a garganta",
       "o peito",
-      "As aulas de kizomba são tão divertidas como as aulas de samba"
+      "as costas"
     ],
     "answer": "o peito",
     "sourceItem": "o peito",
@@ -74750,10 +74750,10 @@
     "type": "multipleChoice",
     "question": "How do you say 'the fingers' in Portuguese?",
     "options": [
-      "O ginásio",
+      "as mãos",
       "os dedos",
-      "em junho",
-      "Ela tem tantas amigas na universidade como na escola"
+      "os braços",
+      "as pernas"
     ],
     "answer": "os dedos",
     "sourceItem": "os dedos",
@@ -74933,9 +74933,9 @@
     "question": "What is the English translation of 'os pés'?",
     "options": [
       "the feet",
-      "They arrived after the party finished.",
-      "The teacher explains the lesson to us with patience.",
-      "I would like to speak with you"
+      "the knees",
+      "the legs",
+      "the hands"
     ],
     "answer": "the feet",
     "sourceItem": "os pés",
@@ -75058,10 +75058,10 @@
     "type": "multipleChoice",
     "question": "How do you say 'I have back pain.' in Portuguese?",
     "options": [
-      "É meio-dia",
-      "Ervilhas",
+      "Tenho dores de cabeça.",
+      "Dói-me a garganta.",
       "Estou com dores nas costas.",
-      "grande \\-\\> maior do que"
+      "Estou com gripe."
     ],
     "answer": "Estou com dores nas costas.",
     "sourceItem": "Estou com dores nas costas.",
@@ -75198,9 +75198,9 @@
     "type": "multipleChoice",
     "question": "How do you say 'the mobile phone' in Portuguese?",
     "options": [
-      "mirtilos",
-      "bom fim de semana\\!",
-      "partidas",
+      "o computador",
+      "o carregador",
+      "os auscultadores",
       "o telemóvel"
     ],
     "answer": "o telemóvel",
@@ -75646,10 +75646,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'o lenço de papel'?",
     "options": [
-      "I used to wake up early",
+      "the wallet",
       "the paper tissue",
-      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
-      "We have been friends since childhood"
+      "the backpack",
+      "the umbrella"
     ],
     "answer": "the paper tissue",
     "sourceItem": "o lenço de papel",
@@ -75800,10 +75800,10 @@
     "type": "multipleChoice",
     "question": "What is the English translation of 'Água (sem gás'?",
     "options": [
-      "Here",
-      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
+      "Sparkling water",
+      "Fruit juice",
       "Water (still",
-      "Potato"
+      "White coffee"
     ],
     "answer": "Water (still",
     "sourceItem": "Água (sem gás",

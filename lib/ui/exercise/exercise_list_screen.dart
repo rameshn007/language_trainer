@@ -211,7 +211,6 @@ class ExerciseListScreen extends StatelessWidget {
         return Icons.person;
       case 'home':
         return Icons.home;
-
       case 'build':
         return Icons.build;
       case 'chat':
