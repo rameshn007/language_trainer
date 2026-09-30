@@ -17,7 +17,7 @@ import 'quiz/verb_conjugation_screen.dart';
 import 'quiz/verb_phrase_trainer_screen.dart';
 import 'quiz/quiz_screen.dart';
 import '../main.dart';
-import 'widgets/word_star_field.dart';
+import 'widgets/home_screen_background.dart';
 import 'settings_screen.dart';
 import 'stats_screen.dart';
 import '../services/verb_service.dart';
@@ -292,7 +292,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final storage = ref.watch(storageServiceProvider);
     final items = storage.getAllItems();
     final progress = ref.watch(progressServiceProvider);
-    final learnedCount = items.where((i) => i.masteryLevel > 0).length;
     final isDuo = IPhoneDuoHelper.isDuo(context);
     final contentPadding = IPhoneDuoHelper.getContentHorizontalPadding(context);
     final appBarRightPadding =
@@ -380,44 +379,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       body: SizedBox.expand(
         child: Stack(
           children: [
-            if (items.isNotEmpty)
-              Positioned.fill(
-                child: Opacity(
-                  opacity: isDark ? 0.6 : 0.5,
-                  child: WordStarField(
-                    words: learnedCount > 25
-                        ? items
-                              .where((i) => i.masteryLevel > 0)
-                              .map((i) => i.portuguese)
-                              .toList()
-                        : items.map((i) => i.portuguese).toList(),
-                    wordCount: 25,
-                  ),
-                ),
-              ),
-            // Bottom Scrim for readability and safe area
-            if (isDark)
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                height: isLandscape ? 80 : 150,
-                child: IgnorePointer(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black.withValues(alpha: 0.7),
-                          Colors.black,
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            const Positioned.fill(
+              child: HomeScreenBackground(),
+            ),
             if (isLandscape)
               _buildLandscapeBody(
                 context: context,
