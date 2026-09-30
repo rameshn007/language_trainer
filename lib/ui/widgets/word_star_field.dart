@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 class WordStarField extends StatefulWidget {
   final List<String> words;
   final int wordCount;
-  final int resetToken;
 
   const WordStarField({
     super.key,
     required this.words,
     this.wordCount = 15,
-    this.resetToken = 0,
   });
 
   @override
@@ -42,16 +40,6 @@ class _WordStarFieldState extends State<WordStarField>
   @override
   void didUpdateWidget(WordStarField oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // Explicit re-seed requested via resetToken
-    if (widget.resetToken != oldWidget.resetToken) {
-      _stars.clear();
-      if (widget.words.isNotEmpty) {
-        for (int i = 0; i < widget.wordCount; i++) {
-          _stars.add(_generateStar());
-        }
-      }
-      return;
-    }
     if (widget.words.isEmpty) {
       if (_stars.isNotEmpty) {
         _stars.clear();

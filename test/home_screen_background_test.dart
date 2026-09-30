@@ -72,49 +72,6 @@ void main() {
         expect(afterRebuildTexts, equals(initialTexts));
       },
     );
-
-    testWidgets('re-seeds stars when resetToken is incremented', (
-      tester,
-    ) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: WordStarField(words: ['olá'], wordCount: 3, resetToken: 0),
-          ),
-        ),
-      );
-
-      final stateBefore = tester.state(find.byType(WordStarField));
-
-      // Rebuild with new resetToken and new word pool
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: Scaffold(
-            body: WordStarField(
-              words: ['obrigado'],
-              wordCount: 3,
-              resetToken: 1,
-            ),
-          ),
-        ),
-      );
-
-      final stateAfter = tester.state(find.byType(WordStarField));
-      expect(identical(stateBefore, stateAfter), isTrue);
-
-      final afterResetTexts = tester
-          .widgetList<Text>(
-            find.descendant(
-              of: find.byType(WordStarField),
-              matching: find.byType(Text),
-            ),
-          )
-          .map((t) => t.data)
-          .toList();
-
-      // All stars should now draw from the newly seeded word
-      expect(afterResetTexts, equals(['obrigado', 'obrigado', 'obrigado']));
-    });
   });
 
   group('HomeScreenBackground decoupling', () {
