@@ -53,6 +53,22 @@ void main() {
       validateExerciseFile('assets/data/exercises/unit_comparatives_and_duration.json');
     });
 
+    test('unit_rooms_in_the_house.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_rooms_in_the_house.json');
+    });
+
+    test('unit_household_items.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_household_items.json');
+    });
+
+    test('unit_body_parts_and_health.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_body_parts_and_health.json');
+    });
+
+    test('unit_everyday_items.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_everyday_items.json');
+    });
+
     test('indirect_object_pronouns.json adheres to exercise invariants and includes target items', () {
       validateExerciseFile('assets/data/exercises/indirect_object_pronouns.json');
 
@@ -63,25 +79,39 @@ void main() {
       expect(ids.contains('indir_pron_carlos_informal'), isTrue);
     });
 
-    test('phrases.json and verb_phrases.json have valid non-empty structures', () {
+    test('phrases.json and verb_phrases.json have valid non-empty structures and cover new topics', () {
       final phrasesFile = File('assets/data/phrases.json');
       expect(phrasesFile.existsSync(), isTrue);
       final List<dynamic> phrases = jsonDecode(phrasesFile.readAsStringSync());
       expect(phrases, isNotEmpty);
+      final phraseCategories = <String>{};
       for (final p in phrases) {
         expect((p['portuguese'] ?? '').toString().trim(), isNotEmpty);
         expect((p['english'] ?? '').toString().trim(), isNotEmpty);
+        if (p['category'] != null) {
+          phraseCategories.add(p['category'].toString());
+        }
       }
+      expect(phraseCategories, contains('House & Rooms'));
+      expect(phraseCategories, contains('Household Items'));
+      expect(phraseCategories, contains('Body & Health'));
+      expect(phraseCategories, contains('Everyday Items'));
 
       final verbPhrasesFile = File('assets/data/verb_phrases.json');
       expect(verbPhrasesFile.existsSync(), isTrue);
       final List<dynamic> verbPhrases = jsonDecode(verbPhrasesFile.readAsStringSync());
       expect(verbPhrases, isNotEmpty);
+      final verbSet = <String>{};
       for (final vp in verbPhrases) {
         expect((vp['verb'] ?? '').toString().trim(), isNotEmpty);
         expect((vp['portuguese'] ?? '').toString().trim(), isNotEmpty);
         expect((vp['english'] ?? '').toString().trim(), isNotEmpty);
+        verbSet.add(vp['verb'].toString());
       }
+      expect(verbSet, contains('cozinhar'));
+      expect(verbSet, contains('dormir'));
+      expect(verbSet, contains('doer'));
+      expect(verbSet, contains('carregar'));
     });
 
     test('verbs.csv includes atender, tirar, herdar, and praticar with all conjugation fields populated', () {
@@ -137,12 +167,20 @@ void main() {
       expect(unitPaths.contains('assets/data/exercises/unit_conjunctions.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_sentence_transformations.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_comparatives_and_duration.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_rooms_in_the_house.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_household_items.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_body_parts_and_health.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_everyday_items.json'), isTrue);
     });
 
     test('CategorySelectionScreen covers all categories present in questions.json', () {
       const screen = CategorySelectionScreen();
       expect(screen.categories, contains('Hobbies & Leisure'));
       expect(screen.categories, contains('Office & Work'));
+      expect(screen.categories, contains('House & Rooms'));
+      expect(screen.categories, contains('Household Items'));
+      expect(screen.categories, contains('Body & Health'));
+      expect(screen.categories, contains('Everyday Items'));
 
       final file = File('assets/data/questions.json');
       final List<dynamic> jsonList = jsonDecode(file.readAsStringSync());

@@ -67,6 +67,14 @@ def parse_markdown(file_path):
                 category = "Office & Work"
             elif "sport" in notes_lower or "hobby" in notes_lower or "culture" in notes_lower or "free time" in notes_lower:
                 category = "Hobbies & Leisure"
+            elif "everyday" in notes_lower or "belonging" in notes_lower or "personal" in notes_lower:
+                category = "Everyday Items"
+            elif "home" in notes_lower or "room" in notes_lower or "divisões" in notes_lower:
+                category = "House & Rooms"
+            elif "household" in notes_lower or "appliance" in notes_lower or "eletrodoméstic" in notes_lower:
+                category = "Household Items"
+            elif "body" in notes_lower or "health" in notes_lower or "corpo" in notes_lower or "saúde" in notes_lower:
+                category = "Body & Health"
             elif "time" in notes_lower or "month" in notes_lower or "day" in notes_lower or "number" in notes_lower or "duration" in notes_lower or "há vs desde" in notes_lower:
                 category = "Time & Numbers"
             elif "comparative" in notes_lower or "verb" in notes_lower or "action" in notes_lower or "grammar" in notes_lower or "pronoun" in notes_lower:

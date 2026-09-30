@@ -16,6 +16,10 @@ class CategorySelectionScreen extends ConsumerWidget {
     'Grammar & Verbs',
     'Hobbies & Leisure',
     'Office & Work',
+    'House & Rooms',
+    'Household Items',
+    'Body & Health',
+    'Everyday Items',
     'General',
   ];
 
@@ -151,6 +155,14 @@ class _CategoryCard extends StatelessWidget {
         return Icons.sports_tennis;
       case 'Office & Work':
         return Icons.work_outline;
+      case 'House & Rooms':
+        return Icons.home_rounded;
+      case 'Household Items':
+        return Icons.kitchen_rounded;
+      case 'Body & Health':
+        return Icons.health_and_safety_rounded;
+      case 'Everyday Items':
+        return Icons.backpack_rounded;
       case 'General':
         return Icons.grid_view;
       default:

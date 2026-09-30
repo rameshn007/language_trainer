@@ -130,7 +130,15 @@ void main() {
 
     expect(state().mode, equals(ListenRepeatMode.all));
 
-    // all -> verbs
+    // all -> topics
+    final mode0 = await vm.cycleMode();
+    expect(mode0, equals(ListenRepeatMode.topics));
+    expect(state().mode, equals(ListenRepeatMode.topics));
+    expect(state().pool.first.id, equals('topics_1'));
+    expect(state().isPlaying, isTrue);
+    verify(() => contentService.loadContent(mode: ListenRepeatMode.topics)).called(1);
+
+    // topics -> verbs
     final mode1 = await vm.cycleMode();
     expect(mode1, equals(ListenRepeatMode.verbs));
     expect(state().mode, equals(ListenRepeatMode.verbs));
@@ -286,5 +294,67 @@ void main() {
     expect(state().pool.first.id, equals('phrases_1'));
     expect(state().isPlaying, isTrue);
     expect(state().failure, isNull);
+  });
+
+  test('setSubCategory updates state.subCategory, reloads deck and preserves selection', () async {
+    setupContainer();
+    final vm = notifier();
+
+    when(() => contentService.loadContent(
+          mode: any(named: 'mode'),
+          subCategory: any(named: 'subCategory'),
+        )).thenAnswer((invocation) async {
+      final sub = invocation.namedArguments[#subCategory] as String?;
+      return [
+        LanguageItem(
+          id: 'item_${sub ?? "all"}',
+          portuguese: 'casa',
+          english: 'house',
+          topicCategory: sub,
+        ),
+      ];
+    });
+
+    await vm.setMode(ListenRepeatMode.topics);
+    expect(state().mode, equals(ListenRepeatMode.topics));
+    expect(state().subCategory, isNull);
+
+    // Select subcategory
+    await vm.setSubCategory('House & Rooms');
+    expect(state().mode, equals(ListenRepeatMode.topics));
+    expect(state().subCategory, equals('House & Rooms'));
+    expect(state().isPlaying, isTrue);
+
+    // Switch to another mode clears subcategory
+    await vm.setMode(ListenRepeatMode.verbs);
+    expect(state().mode, equals(ListenRepeatMode.verbs));
+    expect(state().subCategory, isNull);
+
+    // Switching back to topics and explicitly setting null clears subCategory
+    await vm.setMode(ListenRepeatMode.topics);
+    await vm.setSubCategory('Household Items');
+    expect(state().subCategory, equals('Household Items'));
+    await vm.setSubCategory(null);
+    expect(state().subCategory, isNull);
+
+    // Setting 'All Topics' also clears subCategory
+    await vm.setSubCategory('Body & Health');
+    expect(state().subCategory, equals('Body & Health'));
+    await vm.setSubCategory('All Topics');
+    expect(state().subCategory, isNull);
+  });
+
+  test('stopSession clears pending restart to prevent phantom start races', () async {
+    setupContainer();
+    final vm = notifier();
+
+    // Start session and immediately stop before start finishes
+    final startFuture = vm.startSession(mode: ListenRepeatMode.topics);
+    await vm.stopSession();
+    await startFuture;
+
+    // After stopping, isAutoPlayActive and isPlaying must be false
+    expect(state().isAutoPlayActive, isFalse);
+    expect(state().isPlaying, isFalse);
   });
 }

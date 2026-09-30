@@ -68,7 +68,7 @@ class _TestLRViewModel extends ListenRepeatViewModel {
   }
 
   @override
-  Future<void> startSession({ListenRepeatMode? mode}) async {}
+  Future<void> startSession({ListenRepeatMode? mode, String? subCategory, bool clearSubCategory = false}) async {}
 
   @override
   Future<int> stopSession({bool recordProgress = true}) async => 10;
@@ -1236,6 +1236,7 @@ void main() {
         final vm = _TestLRViewModel(item, audioPlayer: mockAudioPlayer);
         final counts = {
           ListenRepeatMode.all: 20,
+          ListenRepeatMode.topics: 12,
           ListenRepeatMode.verbs: 10,
           ListenRepeatMode.prepositions: 5,
           ListenRepeatMode.phrases: 8,

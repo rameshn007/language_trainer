@@ -96,6 +96,30 @@ class ExerciseListScreen extends StatelessWidget {
       'path': 'assets/data/exercises/unit_sentence_transformations.json',
       'icon': 'school',
     },
+    {
+      'title': 'Unit 12: Rooms in the House',
+      'subtitle': 'As divisões da casa: cozinha, sala, quarto, casa de banho...',
+      'path': 'assets/data/exercises/unit_rooms_in_the_house.json',
+      'icon': 'home',
+    },
+    {
+      'title': 'Unit 13: Household Items & Appliances',
+      'subtitle': 'Objetos da casa: frigorífico, loiça, aspirador, utensílios...',
+      'path': 'assets/data/exercises/unit_household_items.json',
+      'icon': 'build',
+    },
+    {
+      'title': 'Unit 14: Parts of the Body & Health',
+      'subtitle': 'O corpo humano: partes do corpo, dores, sintomas e cuidados...',
+      'path': 'assets/data/exercises/unit_body_parts_and_health.json',
+      'icon': 'person',
+    },
+    {
+      'title': 'Unit 15: Everyday Items & Belongings',
+      'subtitle': 'Objetos do dia a dia: telemóvel, chaves, carteira, passe...',
+      'path': 'assets/data/exercises/unit_everyday_items.json',
+      'icon': 'school',
+    },
   ];
 
   @override
@@ -185,6 +209,8 @@ class ExerciseListScreen extends StatelessWidget {
         return Icons.school;
       case 'person':
         return Icons.person;
+      case 'home':
+        return Icons.home;
       case 'build':
         return Icons.build;
       case 'chat':

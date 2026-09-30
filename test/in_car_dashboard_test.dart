@@ -42,7 +42,7 @@ class _MockDashboardLRViewModel extends ListenRepeatViewModel {
   }
 
   @override
-  Future<void> startSession({ListenRepeatMode? mode}) async {}
+  Future<void> startSession({ListenRepeatMode? mode, String? subCategory, bool clearSubCategory = false}) async {}
 
   @override
   Future<void> togglePlayPause() async {
@@ -119,6 +119,7 @@ void main() {
   }) {
     final counts = modeCounts ?? {
       ListenRepeatMode.all: 20,
+      ListenRepeatMode.topics: 12,
       ListenRepeatMode.verbs: 10,
       ListenRepeatMode.prepositions: 5,
       ListenRepeatMode.phrases: 8,
@@ -164,8 +165,8 @@ void main() {
       expect(find.text('Verbs & Tenses'), findsOneWidget);
       expect(find.text('10 words'), findsOneWidget);
       expect(find.text('Prepositions'), findsOneWidget);
-      expect(find.text('5 words'), findsOneWidget);
-      expect(find.text('12 words'), findsNothing);
+      expect(find.text('A2 Everyday Topics'), findsOneWidget);
+      expect(find.text('12 words'), findsOneWidget);
       expect(find.byIcon(Icons.check_rounded), findsOneWidget); // Selected Verbs mode checkmark
 
       // Center Column: Flashcard & Status (infinite deck wrapping: word 8 of 1 -> Word 1 of 1)

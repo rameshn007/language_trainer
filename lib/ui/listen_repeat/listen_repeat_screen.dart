@@ -161,7 +161,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
             children: [
               // Content Focus Selector
               Padding(
-                padding: const EdgeInsets.only(bottom: 16),
+                padding: EdgeInsets.only(bottom: state.mode == ListenRepeatMode.topics ? 8 : 16),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -195,6 +195,55 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                 ),
               ),
 
+              // Sub-topic Category Filter (when in A2 Everyday Topics mode)
+              if (state.mode == ListenRepeatMode.topics) ...[
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ('All Topics', '✨ All Topics'),
+                        ('House & Rooms', '🏠 House & Rooms'),
+                        ('Household Items', '🍳 Household Items'),
+                        ('Body & Health', '🛡️ Body & Health'),
+                        ('Everyday Items', '🎒 Everyday Items'),
+                      ].map((t) {
+                        final currentSub = state.subCategory ?? 'All Topics';
+                        final isSelected = currentSub == t.$1;
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: ChoiceChip(
+                            key: Key('topic_filter_${t.$1.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '_')}'),
+                            selected: isSelected,
+                            label: Text(
+                              t.$2,
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: isSelected
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                              ),
+                            ),
+                            onSelected: (selected) {
+                              if (selected) {
+                                ref
+                                    .read(
+                                      listenRepeatViewModelProvider.notifier,
+                                    )
+                                    .setSubCategory(t.$1);
+                              }
+                            },
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ),
+              ],
+
               // Word display
               if (item != null) ...[
                 Builder(
@@ -207,113 +256,136 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                       glowColor: Colors.blue.shade300,
                       duration: const Duration(milliseconds: 2000),
                       repeat: true,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          color: Theme.of(
-                            context,
-                          ).colorScheme.surfaceContainerHighest,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                                vertical: 28,
-                              ),
-                              child: Center(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    // Grammar / Tense Badge
-                                    if (item.notes.isNotEmpty) ...[
-                                      Container(
-                                        margin: const EdgeInsets.only(
-                                          bottom: 12,
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 4,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(
-                                            context,
-                                          ).colorScheme.primaryContainer,
-                                          borderRadius: BorderRadius.circular(
-                                            12,
-                                          ),
-                                        ),
-                                        child: Text(
-                                          item.notes,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelSmall
-                                              ?.copyWith(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onPrimaryContainer,
-                                                fontWeight: FontWeight.bold,
+                      child: AnimatedSize(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOutCubic,
+                        child: Container(
+                          constraints: const BoxConstraints(
+                            minHeight: 200,
+                            minWidth: double.infinity,
+                          ),
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          decoration: BoxDecoration(
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.surfaceContainerHighest,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 24,
+                                  vertical: 28,
+                                ),
+                                child: Center(
+                                  child: AnimatedSwitcher(
+                                    duration: const Duration(milliseconds: 250),
+                                    switchInCurve: Curves.easeOut,
+                                    switchOutCurve: Curves.easeIn,
+                                    transitionBuilder: (child, animation) {
+                                      return FadeTransition(
+                                        opacity: animation,
+                                        child: child,
+                                      );
+                                    },
+                                    child: KeyedSubtree(
+                                      key: ValueKey(item.id),
+                                      child: Column(
+                                        key: ValueKey(item.id),
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          // Grammar / Tense Badge
+                                          if (item.notes.isNotEmpty) ...[
+                                            Container(
+                                              margin: const EdgeInsets.only(
+                                                bottom: 12,
                                               ),
-                                        ),
+                                              padding: const EdgeInsets.symmetric(
+                                                horizontal: 12,
+                                                vertical: 4,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.primaryContainer,
+                                                borderRadius: BorderRadius.circular(
+                                                  12,
+                                                ),
+                                              ),
+                                              child: Text(
+                                                item.notes,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelSmall
+                                                    ?.copyWith(
+                                                      color: Theme.of(context)
+                                                          .colorScheme
+                                                          .onPrimaryContainer,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                          // Portuguese word / phrase
+                                          Text(
+                                            item.portuguese,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineLarge
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(height: 12),
+                                          // English translation
+                                          Text(
+                                            item.english,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleMedium
+                                                ?.copyWith(
+                                                  color: Theme.of(
+                                                    context,
+                                                  ).colorScheme.onSurfaceVariant,
+                                                ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                    // Portuguese word / phrase
-                                    Text(
-                                      item.portuguese,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineLarge
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                      textAlign: TextAlign.center,
                                     ),
-                                    const SizedBox(height: 12),
-                                    // English translation
-                                    Text(
-                                      item.english,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                            color: Theme.of(
-                                              context,
-                                            ).colorScheme.onSurfaceVariant,
-                                          ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              top: 8,
-                              right: 8,
-                              child: IconButton(
-                                key: const Key('listen_repeat_star_button'),
-                                icon: Icon(
-                                  isFlagged
-                                      ? Icons.star_rounded
-                                      : Icons.star_border_rounded,
-                                  color: isFlagged
-                                      ? Colors.amber
-                                      : Theme.of(
-                                          context,
-                                        ).colorScheme.onSurfaceVariant,
-                                  size: 28,
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: IconButton(
+                                  key: const Key('listen_repeat_star_button'),
+                                  icon: Icon(
+                                    isFlagged
+                                        ? Icons.star_rounded
+                                        : Icons.star_border_rounded,
+                                    color: isFlagged
+                                        ? Colors.amber
+                                        : Theme.of(
+                                            context,
+                                          ).colorScheme.onSurfaceVariant,
+                                    size: 28,
+                                  ),
+                                  tooltip: isFlagged
+                                      ? 'Remove from review'
+                                      : 'Flag for review',
+                                  onPressed: () async {
+                                    await storage.toggleItemFlagged(item.id);
+                                    if (!mounted) return;
+                                    setState(() {});
+                                  },
                                 ),
-                                tooltip: isFlagged
-                                    ? 'Remove from review'
-                                    : 'Flag for review',
-                                onPressed: () async {
-                                  await storage.toggleItemFlagged(item.id);
-                                  if (!mounted) return;
-                                  setState(() {});
-                                },
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     );
@@ -338,7 +410,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                       children: [
                         // Previous button
                         ElevatedButton.icon(
-                          onPressed: _previousWord,
+                          onPressed: state.isAutoPlayActive ? _previousWord : null,
                           icon: const Icon(Icons.skip_previous_rounded),
                           label: const Text('Prev'),
                           style: ElevatedButton.styleFrom(
@@ -375,7 +447,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                         const SizedBox(width: 12),
                         // Next button
                         ElevatedButton.icon(
-                          onPressed: _nextWord,
+                          onPressed: state.isAutoPlayActive ? _nextWord : null,
                           icon: const Icon(Icons.skip_next_rounded),
                           label: const Text('Next'),
                           style: ElevatedButton.styleFrom(
@@ -400,7 +472,7 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         OutlinedButton.icon(
-                          onPressed: _shufflePool,
+                          onPressed: state.isAutoPlayActive ? _shufflePool : null,
                           icon: const Icon(Icons.shuffle_rounded),
                           label: const Text('Shuffle'),
                         ),
@@ -424,9 +496,32 @@ class _ListenRepeatScreenState extends ConsumerState<ListenRepeatScreen> {
                   ),
                 ),
               ] else if (state.isPlaying) ...[
-                const CircularProgressIndicator(),
-                const SizedBox(height: 16),
-                const Text('Loading words...'),
+                Container(
+                  constraints: const BoxConstraints(
+                    minHeight: 200,
+                    minWidth: double.infinity,
+                  ),
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest,
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Center(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 40),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CircularProgressIndicator(),
+                          SizedBox(height: 16),
+                          Text('Loading words...'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ] else if (state.failure != null) ...[
                 Icon(
                   Icons.error_outline_rounded,

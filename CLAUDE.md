@@ -30,5 +30,5 @@ No backend: TTS, STT and quiz generation run on-device.
 
 ## Verify before finishing
 
-- `flutter test` — all must pass (374 as of Sep 2026) · `flutter analyze` — zero issues · `flutter build ios --no-codesign --simulator` for native changes.
+- `flutter test` — all must pass (388 as of Sep 2026) · `flutter analyze` — zero issues · `flutter build ios --no-codesign --simulator` for native changes.
 - CarPlay/audio tests need `CarPlayService().resetForTesting()` in `tearDown` (cancels section-update timers, container subscriptions, debounce timestamps).

@@ -46,7 +46,9 @@ void main() {
         expect(mode.description, isNotEmpty);
       }
       expect(ListenRepeatMode.prepositions.badge, equals('Prepositions'));
+      expect(ListenRepeatMode.topics.badge, equals('Topics'));
       expect(ListenRepeatMode.all.description, contains('Mix'));
+      expect(ListenRepeatMode.topics.description, contains('House'));
       expect(ListenRepeatMode.verbs.description, contains('Conjugations'));
       expect(ListenRepeatMode.prepositions.description, contains('Prepositions'));
       expect(ListenRepeatMode.phrases.description, contains('Everyday phrases'));
@@ -289,6 +291,64 @@ void main() {
       // 'v2' is filtered out from pureVocab so 'Bom dia!' only appears once from the phrase pool
       final bomDiaCount = pool.where((i) => i.portuguese.trim().toLowerCase() == 'bom dia!').length;
       expect(bomDiaCount, equals(1));
+    });
+
+    test('loads and filters topic items in ListenRepeatMode.topics', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(
+          id: 'vocab_quarto',
+          portuguese: 'quarto',
+          english: 'bedroom',
+          topicCategory: 'House & Rooms',
+          notes: 'A Casa: Quarto',
+        ),
+        LanguageItem(
+          id: 'vocab_telemovel',
+          portuguese: 'telemóvel',
+          english: 'mobile phone',
+          topicCategory: 'Everyday Items',
+          notes: 'Quotidiano: Telemóvel',
+        ),
+        LanguageItem(
+          id: 'vocab_sol',
+          portuguese: 'sol',
+          english: 'sun',
+          topicCategory: 'Nature',
+        ),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => []);
+
+      // 1. All topics
+      final allTopicsPool = await contentService.loadContent(mode: ListenRepeatMode.topics);
+      expect(allTopicsPool, isNotEmpty);
+      expect(allTopicsPool.any((i) => i.id == 'vocab_sol'), isFalse);
+      expect(allTopicsPool.any((i) => i.id == 'vocab_quarto'), isTrue);
+      expect(allTopicsPool.any((i) => i.id == 'vocab_telemovel'), isTrue);
+
+      // 2. Filtered by subCategory: House & Rooms
+      final housePool = await contentService.loadContent(
+        mode: ListenRepeatMode.topics,
+        subCategory: 'House & Rooms',
+      );
+      expect(housePool, isNotEmpty);
+      expect(housePool.any((i) => i.id == 'vocab_quarto'), isTrue);
+      expect(housePool.any((i) => i.id == 'vocab_telemovel'), isFalse);
+    });
+
+    test('biases newly added topic phrases into early rotation in ListenRepeatMode.phrases', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'sol', english: 'sun'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => []);
+
+      final pool = await contentService.loadContent(mode: ListenRepeatMode.phrases);
+      expect(pool, isNotEmpty);
+
+      // In the first 10 items, there must be priority topic phrases
+      final firstTen = pool.take(10).toList();
+      final topicItemsInFirstTen = firstTen.where(ListenRepeatContentService.isTopicItem).length;
+      expect(topicItemsInFirstTen, greaterThanOrEqualTo(3),
+          reason: 'Biased phrases pool must feature topic phrases prominently in the first 10 items');
     });
   });
 }

@@ -1,0 +1,477 @@
+[
+  {
+    "id": "body_q01",
+    "questionText": "Passei horas em frente ao ecrã e agora dói-me muito a ____.",
+    "options": [
+      "cabeça",
+      "perna",
+      "unha",
+      "mão"
+    ],
+    "correctAnswer": "cabeça",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_cabeca",
+      "portuguese": "a cabeça",
+      "english": "the head",
+      "notes": "Body parts & symptoms: dor de cabeça"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q02",
+    "questionText": "Tenho os ____ irritados e vermelhos por causa do vento e do pó.",
+    "options": [
+      "olhos",
+      "dentes",
+      "ouvidos",
+      "ombros"
+    ],
+    "correctAnswer": "olhos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_olhos",
+      "portuguese": "os olhos",
+      "english": "the eyes",
+      "notes": "Body parts: visão e olhos"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q03",
+    "questionText": "Quando estamos com constipação, ficamos com o ____ entupido e espirramos.",
+    "options": [
+      "nariz",
+      "braço",
+      "cotovelo",
+      "joelho"
+    ],
+    "correctAnswer": "nariz",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_nariz",
+      "portuguese": "o nariz",
+      "english": "the nose",
+      "notes": "Body parts: respiração e nariz"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q04",
+    "questionText": "Estou com dores de ____ e custa-me engolir qualquer comida ou bebida.",
+    "options": [
+      "garganta",
+      "ouvido",
+      "dente",
+      "costas"
+    ],
+    "correctAnswer": "garganta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_garganta",
+      "portuguese": "a garganta",
+      "english": "the throat",
+      "notes": "Body parts & health: dor de garganta"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q05",
+    "questionText": "Fui ao dentista ontem para tratar de uma cárie num ____ molar.",
+    "options": [
+      "dente",
+      "olho",
+      "joelho",
+      "cotovelo"
+    ],
+    "correctAnswer": "dente",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_dente",
+      "portuguese": "o dente",
+      "english": "the tooth",
+      "notes": "Body parts & health: os dentes"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q06",
+    "questionText": "O atleta caiu durante a corrida e torceu o ____ do pé direito.",
+    "options": [
+      "tornozelo",
+      "pescoço",
+      "ombro",
+      "dente"
+    ],
+    "correctAnswer": "tornozelo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_tornozelo",
+      "portuguese": "o tornozelo",
+      "english": "the ankle",
+      "notes": "Body parts & injuries: articulação do pé"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q07",
+    "questionText": "Trabalho todo o dia sentado no escritório e agora tenho muitas dores nas ____.",
+    "options": [
+      "costas",
+      "orelhas",
+      "bochechas",
+      "unhas"
+    ],
+    "correctAnswer": "costas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vocab_415",
+      "portuguese": "as costas",
+      "english": "the back",
+      "notes": "Body parts & posture: dores nas costas"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q08",
+    "questionText": "Antes de comer, é fundamental lavar as ____ com água tépida e sabão.",
+    "options": [
+      "mãos",
+      "pernas",
+      "costas",
+      "orelhas"
+    ],
+    "correctAnswer": "mãos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_maos",
+      "portuguese": "as mãos",
+      "english": "the hands",
+      "notes": "Hygiene & body parts: lavar as mãos"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q09",
+    "questionText": "Ele escorregou nas pedras da calçada e esfolou o ____ ao cair.",
+    "options": [
+      "joelho",
+      "pescoço",
+      "estômago",
+      "cabelo"
+    ],
+    "correctAnswer": "joelho",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vocab_799",
+      "portuguese": "o joelho",
+      "english": "the knee",
+      "notes": "Body parts & accidents: o joelho"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q10",
+    "questionText": "Uso um cachecol de lã quentinho à volta do ____ para não apanhar frio.",
+    "options": [
+      "pescoço",
+      "braço",
+      "tornozelo",
+      "cotovelo"
+    ],
+    "correctAnswer": "pescoço",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vocab_800",
+      "portuguese": "o pescoço",
+      "english": "the neck",
+      "notes": "Body parts: o pescoço"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q11",
+    "questionText": "Depois da refeição muito pesada com gorduras, fiquei com dores no ____.",
+    "options": [
+      "estômago",
+      "ouvido",
+      "ombro",
+      "pulso"
+    ],
+    "correctAnswer": "estômago",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_estomago",
+      "portuguese": "o estômago / a barriga",
+      "english": "the stomach / belly",
+      "notes": "Body parts & digestion: dores de estômago"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q12",
+    "questionText": "Em cada mão humana temos cinco ____ com unhas na ponta.",
+    "options": [
+      "dedos",
+      "braços",
+      "ombros",
+      "cotovelos"
+    ],
+    "correctAnswer": "dedos",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_dedos",
+      "portuguese": "os dedos",
+      "english": "the fingers",
+      "notes": "Body parts: dedos da mão"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q13",
+    "questionText": "Não ouço nada porque tenho uma infeção no ____ direito.",
+    "options": [
+      "ouvido",
+      "olho",
+      "nariz",
+      "joelho"
+    ],
+    "correctAnswer": "ouvido",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_ouvido",
+      "portuguese": "o ouvido",
+      "english": "the ear (hearing / inner)",
+      "notes": "Body parts: ouvidos para audição (vs orelhas exteriores)"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q14",
+    "questionText": "O médico colocou o estetoscópio no ____ do doente para auscultar o coração.",
+    "options": [
+      "peito",
+      "tornozelo",
+      "cotovelo",
+      "pé"
+    ],
+    "correctAnswer": "peito",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vocab_804",
+      "portuguese": "o peito",
+      "english": "the chest",
+      "notes": "Body parts: o peito / tórax"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q15",
+    "questionText": "A articulação entre o braço e o antebraço chama-se ____.",
+    "options": [
+      "cotovelo",
+      "joelho",
+      "tornozelo",
+      "pescoço"
+    ],
+    "correctAnswer": "cotovelo",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "body_src_cotovelo",
+      "portuguese": "o cotovelo",
+      "english": "the elbow",
+      "notes": "Body parts: o cotovelo"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q16",
+    "questionText": "Andei mais de quinze quilómetros a pé e agora tenho bolhas nos ____.",
+    "options": [
+      "pés",
+      "ombros",
+      "olhos",
+      "dentes"
+    ],
+    "correctAnswer": "pés",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_pes",
+      "portuguese": "os pés",
+      "english": "the feet",
+      "notes": "Body parts: os pés"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q17",
+    "questionText": "A mochila pesada da escola provoca dores nos ____ dos estudantes.",
+    "options": [
+      "ombros",
+      "dentes",
+      "lábios",
+      "narizes"
+    ],
+    "correctAnswer": "ombros",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_ombros",
+      "portuguese": "os ombros",
+      "english": "the shoulders",
+      "notes": "Body parts: os ombros"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q18",
+    "questionText": "Quando sorrimos abertamente, mostramos os lábios e os ____.",
+    "options": [
+      "dentes",
+      "cotovelos",
+      "tornozelos",
+      "joelhos"
+    ],
+    "correctAnswer": "dentes",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_dentes_sorriso",
+      "portuguese": "os dentes",
+      "english": "the teeth",
+      "notes": "Face & body: dentes e boca"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q19",
+    "questionText": "Como se diz naturalmente em português de Portugal: 'My head hurts'?",
+    "options": [
+      "Dói-me a cabeça.",
+      "A cabeça dói a mim.",
+      "Eu tenho dor de cabeça grande.",
+      "Me dói a cabeça."
+    ],
+    "correctAnswer": "Dói-me a cabeça.",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "body_src_doi_me_cabeca",
+      "portuguese": "Dói-me a cabeça.",
+      "english": "My head hurts.",
+      "notes": "Natural PT-PT pronoun placement: verbo + pronome clítico"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q20",
+    "questionText": "Como se diz 'throat' em português?",
+    "options": [
+      "A garganta",
+      "O pescoço",
+      "A barriga",
+      "O ombro"
+    ],
+    "correctAnswer": "A garganta",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "body_src_garganta",
+      "portuguese": "a garganta",
+      "english": "the throat",
+      "notes": "Body parts vocabulary"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q21",
+    "questionText": "O médico mediu a temperatura com um termómetro porque o doente tinha ____ alta.",
+    "options": [
+      "febre",
+      "sede",
+      "fome",
+      "sono"
+    ],
+    "correctAnswer": "febre",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_febre",
+      "portuguese": "a febre",
+      "english": "the fever",
+      "notes": "Health: febre alta"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q22",
+    "questionText": "A enfermeira colocou um penso rápido no corte do meu ____.",
+    "options": [
+      "dedo",
+      "olho",
+      "coração",
+      "pulmão"
+    ],
+    "correctAnswer": "dedo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_penso_dedo",
+      "portuguese": "o penso rápido",
+      "english": "the plaster / band-aid",
+      "notes": "Health & first aid: PT-PT penso rápido (not band-aid)"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q23",
+    "questionText": "Ele caiu de bicicleta e partiu o ____ esquerdo; agora tem o gesso até à mão.",
+    "options": [
+      "braço",
+      "nariz",
+      "pescoço",
+      "ouvido"
+    ],
+    "correctAnswer": "braço",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vocab_803",
+      "portuguese": "o braço",
+      "english": "the arm",
+      "notes": "Body parts & injuries: o braço"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q24",
+    "questionText": "Usamos o relógio no ____ esquerdo para ver as horas.",
+    "options": [
+      "pulso",
+      "ombro",
+      "nariz",
+      "calcanhar"
+    ],
+    "correctAnswer": "pulso",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_pulso",
+      "portuguese": "o pulso",
+      "english": "the wrist",
+      "notes": "Body parts: o pulso"
+    },
+    "category": "Body & Health"
+  },
+  {
+    "id": "body_q25",
+    "questionText": "Tenho uma tosse seca e muita comichão na ____; vou beber chá com mel.",
+    "options": [
+      "garganta",
+      "perna",
+      "costela",
+      "orelha"
+    ],
+    "correctAnswer": "garganta",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "body_src_tosse_garganta",
+      "portuguese": "a tosse",
+      "english": "the cough",
+      "notes": "Health & symptoms: tosse e dor de garganta"
+    },
+    "category": "Body & Health"
+  }
+]

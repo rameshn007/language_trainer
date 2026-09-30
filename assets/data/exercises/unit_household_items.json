@@ -1,0 +1,477 @@
+[
+  {
+    "id": "house_q01",
+    "questionText": "Guarda o iogurte e o queijo no ____ para não se estragarem com o calor.",
+    "options": [
+      "frigorífico",
+      "forno",
+      "armário",
+      "aspirador"
+    ],
+    "correctAnswer": "frigorífico",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vocab_468",
+      "portuguese": "o frigorífico",
+      "english": "the refrigerator",
+      "notes": "Household appliances: PT-PT frigorífico (not geladeira)"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q02",
+    "questionText": "Depois do almoço, pomos os pratos, copos e talheres na máquina de lavar ____.",
+    "options": [
+      "loiça",
+      "roupa",
+      "café",
+      "pão"
+    ],
+    "correctAnswer": "loiça",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_maquina_loica",
+      "portuguese": "a máquina de lavar loiça",
+      "english": "the dishwasher",
+      "notes": "Household appliances: PT-PT loiça (spelled com i)"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q03",
+    "questionText": "A roupa suja deve ser lavada na máquina de lavar ____ a quarenta graus.",
+    "options": [
+      "roupa",
+      "loiça",
+      "mão",
+      "carro"
+    ],
+    "correctAnswer": "roupa",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_maquina_roupa",
+      "portuguese": "a máquina de lavar roupa",
+      "english": "the washing machine",
+      "notes": "Household appliances: máquina de lavar roupa"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q04",
+    "questionText": "O tapete da sala tem muito pó; vou passar o ____ para limpar tudo.",
+    "options": [
+      "aspirador",
+      "ferro",
+      "frigorífico",
+      "candeeiro"
+    ],
+    "correctAnswer": "aspirador",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_aspirador",
+      "portuguese": "o aspirador",
+      "english": "the vacuum cleaner",
+      "notes": "Household appliances: aspirador de pó"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q05",
+    "questionText": "Para alisar a camisa antes da entrevista, uso o ferro de ____ e a tábua.",
+    "options": [
+      "engomar",
+      "lavar",
+      "cozinhar",
+      "aspirar"
+    ],
+    "correctAnswer": "engomar",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_ferro_engomar",
+      "portuguese": "o ferro de engomar",
+      "english": "the clothes iron",
+      "notes": "Household items: PT-PT ferro de engomar / engomar a roupa"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q06",
+    "questionText": "Se a sopa estiver fria, podemos aquecê-la em dois minutos no ____.",
+    "options": [
+      "micro-ondas",
+      "congelador",
+      "frigorífico",
+      "aspirador"
+    ],
+    "correctAnswer": "micro-ondas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_microondas",
+      "portuguese": "o micro-ondas",
+      "english": "the microwave",
+      "notes": "Kitchen appliances: micro-ondas para aquecer rápido"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q07",
+    "questionText": "Vamos assar o peixe e as batatas no ____ bem quente.",
+    "options": [
+      "forno",
+      "congelador",
+      "lava-loiça",
+      "tapete"
+    ],
+    "correctAnswer": "forno",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_forno",
+      "portuguese": "o forno",
+      "english": "the oven",
+      "notes": "Kitchen appliances: assar no forno"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q08",
+    "questionText": "Coloca a panela com água a ferver em cima do bico do ____.",
+    "options": [
+      "fogão",
+      "sofá",
+      "espelho",
+      "guarda-roupa"
+    ],
+    "correctAnswer": "fogão",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vocab_816",
+      "portuguese": "o fogão",
+      "english": "the stove / cooker",
+      "notes": "Kitchen appliances: fogão a gás ou vitrocerâmica"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q09",
+    "questionText": "De manhã, ponho duas fatias de pão na ____ para ficarem crocantes.",
+    "options": [
+      "torradeira",
+      "máquina de lavar",
+      "batedeira",
+      "chaleira"
+    ],
+    "correctAnswer": "torradeira",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_torradeira",
+      "portuguese": "a torradeira",
+      "english": "the toaster",
+      "notes": "Kitchen appliances: fazer torradas"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q10",
+    "questionText": "Para fazer chá rapidamente, fervemos água na ____ elétrica.",
+    "options": [
+      "chaleira",
+      "frigideira",
+      "panela",
+      "torradeira"
+    ],
+    "correctAnswer": "chaleira",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_chaleira",
+      "portuguese": "a chaleira elétrica",
+      "english": "the electric kettle",
+      "notes": "Kitchen appliances: chaleira para ferver água"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q11",
+    "questionText": "O caixote do ____ da cozinha está cheio; deita o saco fora, por favor.",
+    "options": [
+      "lixo",
+      "pão",
+      "azeite",
+      "açúcar"
+    ],
+    "correctAnswer": "lixo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_caixote_lixo",
+      "portuguese": "o caixote do lixo",
+      "english": "the rubbish bin",
+      "notes": "Household items: PT-PT caixote do lixo (not lixeira)"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q12",
+    "questionText": "Varri as migalhas do chão com a ____ e depois passei a esfregona húmida.",
+    "options": [
+      "vassoura",
+      "toalha",
+      "almofada",
+      "faca"
+    ],
+    "correctAnswer": "vassoura",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_vassoura",
+      "portuguese": "a vassoura",
+      "english": "the broom",
+      "notes": "Cleaning items: varrer o chão"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q13",
+    "questionText": "Para lavar o chão da cozinha e da casa de banho, uso um balde e uma ____.",
+    "options": [
+      "esfregona",
+      "torradeira",
+      "chaleira",
+      "tábua"
+    ],
+    "correctAnswer": "esfregona",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_esfregona",
+      "portuguese": "a esfregona",
+      "english": "the mop",
+      "notes": "Cleaning items: limpar com esfregona"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q14",
+    "questionText": "Para comer bife com batatas, precisamos de dois talheres: um garfo e uma ____.",
+    "options": [
+      "faca",
+      "colher",
+      "chávena",
+      "concha"
+    ],
+    "correctAnswer": "faca",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_faca",
+      "portuguese": "a faca",
+      "english": "the knife",
+      "notes": "Cutlery: talher para cortar"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q15",
+    "questionText": "Em Portugal, o café expresso é servido numa pequena ____ de porcelana.",
+    "options": [
+      "chávena",
+      "panela",
+      "frigideira",
+      "garrafa"
+    ],
+    "correctAnswer": "chávena",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_chavena",
+      "portuguese": "a chávena",
+      "english": "the cup / mug",
+      "notes": "Tableware: PT-PT chávena (not xícara)"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q16",
+    "questionText": "Na casa de banho, ela olha-se ao ____ enquanto penteia o cabelo.",
+    "options": [
+      "espelho",
+      "tapete",
+      "candeeiro",
+      "guarda-roupa"
+    ],
+    "correctAnswer": "espelho",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vocab_504",
+      "portuguese": "o espelho",
+      "english": "the mirror",
+      "notes": "Household items: ver o reflexo"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q17",
+    "questionText": "À noite, acendo o ____ da mesa de cabeceira para ler um livro sem perturbar.",
+    "options": [
+      "candeeiro",
+      "frigorífico",
+      "aspirador",
+      "fogão"
+    ],
+    "correctAnswer": "candeeiro",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "vocab_290",
+      "portuguese": "o candeeiro",
+      "english": "the lamp",
+      "notes": "Household items: PT-PT candeeiro (not luminária / abajur)"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q18",
+    "questionText": "No inverno, cobrimos a cama com um ____ quente para não sentir frio à noite.",
+    "options": [
+      "edredão",
+      "espelho",
+      "garfo",
+      "balde"
+    ],
+    "correctAnswer": "edredão",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_edredao",
+      "portuguese": "o edredão",
+      "english": "the duvet / quilt",
+      "notes": "Bedding: edredão para a cama"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q19",
+    "questionText": "Depois de tomar duche, seco o corpo com uma ____ de banho turca.",
+    "options": [
+      "toalha",
+      "almofada",
+      "cortina",
+      "tábua"
+    ],
+    "correctAnswer": "toalha",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_toalha",
+      "portuguese": "a toalha",
+      "english": "the towel",
+      "notes": "Bathroom items: secar com a toalha"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q20",
+    "questionText": "O António fritou dois ovos com azeite na ____ antiaderente.",
+    "options": [
+      "frigideira",
+      "chávena",
+      "colher",
+      "chaleira"
+    ],
+    "correctAnswer": "frigideira",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_frigideira",
+      "portuguese": "a frigideira",
+      "english": "the frying pan",
+      "notes": "Cookware: frigideira para fritar"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q21",
+    "questionText": "Como se diz 'refrigerator' em português de Portugal?",
+    "options": [
+      "Frigorífico",
+      "Geladeira",
+      "Congelador",
+      "Micro-ondas"
+    ],
+    "correctAnswer": "Frigorífico",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "vocab_468",
+      "portuguese": "o frigorífico",
+      "english": "the refrigerator",
+      "notes": "PT-PT vs PT-BR distinction: frigorífico"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q22",
+    "questionText": "Qual é o objeto usado para apoiar a cabeça confortavelmente na cama ou no sofá?",
+    "options": [
+      "A almofada",
+      "A tábua",
+      "A vassoura",
+      "A cortina"
+    ],
+    "correctAnswer": "A almofada",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "house_src_almofada",
+      "portuguese": "a almofada",
+      "english": "the pillow / cushion",
+      "notes": "Bedding & living room: almofada"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q23",
+    "questionText": "Fechei as ____ da sala para bloquear a luz do sol durante a tarde.",
+    "options": [
+      "cortinas",
+      "toalhas",
+      "almofadas",
+      "torradeiras"
+    ],
+    "correctAnswer": "cortinas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_cortinas",
+      "portuguese": "as cortinas",
+      "english": "the curtains",
+      "notes": "Furniture & decor: cortinas da janela"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q24",
+    "questionText": "Para cozer o arroz e fazer sopa, utilizamos uma ____ grande com tampa.",
+    "options": [
+      "panela",
+      "chávena",
+      "faca",
+      "tábua"
+    ],
+    "correctAnswer": "panela",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_panela",
+      "portuguese": "a panela",
+      "english": "the cooking pot / saucepan",
+      "notes": "Cookware: panela com tampa"
+    },
+    "category": "Household Items"
+  },
+  {
+    "id": "house_q25",
+    "questionText": "Mudamos os ____ da cama todas as semanas para manter os lençóis limpos e perfumados.",
+    "options": [
+      "lençóis",
+      "espelhos",
+      "garfos",
+      "pratos"
+    ],
+    "correctAnswer": "lençóis",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "house_src_lencois",
+      "portuguese": "os lençóis",
+      "english": "the bed sheets",
+      "notes": "Bedding: lençóis da cama"
+    },
+    "category": "Household Items"
+  }
+]

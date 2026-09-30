@@ -194,5 +194,311 @@
   {
     "portuguese": "Desde quando é que conheces a Maria?",
     "english": "Since when have you known Maria?"
+  },
+  {
+    "portuguese": "Onde fica a casa de banho?",
+    "english": "Where is the bathroom?"
+  },
+  {
+    "portuguese": "A Maria está a cozinhar na cozinha.",
+    "english": "Maria is cooking in the kitchen."
+  },
+  {
+    "portuguese": "Dói-me muito a cabeça hoje.",
+    "english": "My head hurts a lot today."
+  },
+  {
+    "portuguese": "Estou com dores de garganta e febre.",
+    "english": "I have a sore throat and fever."
+  },
+  {
+    "portuguese": "Esqueci-me das chaves dentro de casa.",
+    "english": "I forgot the keys inside the house."
+  },
+  {
+    "portuguese": "A bateria do meu telemóvel acabou.",
+    "english": "My mobile phone battery ran out."
+  },
+  {
+    "portuguese": "Põe o leite no frigorífico, por favor.",
+    "english": "Put the milk in the fridge, please."
+  },
+  {
+    "portuguese": "Está a chover, não te esqueças do guarda-chuva.",
+    "english": "It is raining, do not forget the umbrella."
+  },
+  {
+    "portuguese": "Validei o passe antes de entrar no metro.",
+    "english": "I validated the pass before entering the metro."
+  },
+  {
+    "portuguese": "Lavo sempre as mãos antes de comer.",
+    "english": "I always wash my hands before eating."
+  },
+  {
+    "portuguese": "Vou passar o aspirador na sala de estar.",
+    "english": "I am going to vacuum the living room."
+  },
+  {
+    "portuguese": "Ele partiu o braço numa queda de bicicleta.",
+    "english": "He broke his arm in a bicycle fall."
+  },
+  {
+    "portuguese": "A Maria está a cozinhar o almoço na cozinha.",
+    "english": "Maria is cooking lunch in the kitchen.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Cozinha"
+  },
+  {
+    "portuguese": "À noite, durmo numa cama confortável no quarto.",
+    "english": "At night, I sleep in a comfortable bed in the bedroom.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Quarto"
+  },
+  {
+    "portuguese": "Tomo um duche quente na casa de banho todas as manhãs.",
+    "english": "I take a warm shower in the bathroom every morning.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Casa de Banho"
+  },
+  {
+    "portuguese": "A família reúne-se na sala de estar para ver televisão.",
+    "english": "The family gathers in the living room to watch TV.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Sala de Estar"
+  },
+  {
+    "portuguese": "Guardamos o arroz, as massas e o azeite na despensa.",
+    "english": "We keep rice, pasta, and olive oil in the pantry.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Despensa"
+  },
+  {
+    "portuguese": "Gosto de beber café na varanda quando está sol.",
+    "english": "I like drinking coffee on the balcony when it is sunny.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Varanda"
+  },
+  {
+    "portuguese": "Estendemos a roupa lavada na marquise.",
+    "english": "We hang the washed laundry in the sunroom.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Marquise"
+  },
+  {
+    "portuguese": "O carro fica protegido dentro da garagem.",
+    "english": "The car stays protected inside the garage.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Garagem"
+  },
+  {
+    "portuguese": "As crianças brincam na relva do jardim.",
+    "english": "The children play on the garden grass.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Jardim"
+  },
+  {
+    "portuguese": "Prefiro subir as escadas a pé em vez do elevador.",
+    "english": "I prefer taking the stairs on foot instead of the lift.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Escadas"
+  },
+  {
+    "portuguese": "Põe o leite no frigorífico para não se estragar.",
+    "english": "Put the milk in the fridge so it doesn't spoil.",
+    "category": "Household Items",
+    "notes": "Objetos: Frigorífico"
+  },
+  {
+    "portuguese": "Pomos a loiça suja na máquina de lavar loiça.",
+    "english": "We put the dirty dishes in the dishwasher.",
+    "category": "Household Items",
+    "notes": "Objetos: Máquina de Lavar Loiça"
+  },
+  {
+    "portuguese": "Vou passar o aspirador na carpete da sala.",
+    "english": "I am going to vacuum the living room carpet.",
+    "category": "Household Items",
+    "notes": "Objetos: Aspirador"
+  },
+  {
+    "portuguese": "Preciso do ferro de engomar para passar esta camisa.",
+    "english": "I need the iron to iron this shirt.",
+    "category": "Household Items",
+    "notes": "Objetos: Ferro de Engomar"
+  },
+  {
+    "portuguese": "Aqueço a sopa no micro-ondas em dois minutos.",
+    "english": "I heat the soup in the microwave in two minutes.",
+    "category": "Household Items",
+    "notes": "Objetos: Micro-ondas"
+  },
+  {
+    "portuguese": "O peixe assa no forno a duzentos graus.",
+    "english": "The fish bakes in the oven at two hundred degrees.",
+    "category": "Household Items",
+    "notes": "Objetos: Forno"
+  },
+  {
+    "portuguese": "Fervemos água na chaleira elétrica para o chá.",
+    "english": "We boil water in the electric kettle for tea.",
+    "category": "Household Items",
+    "notes": "Objetos: Chaleira"
+  },
+  {
+    "portuguese": "De manhã, faço torradas na torradeira com manteiga.",
+    "english": "In the morning, I make toast in the toaster with butter.",
+    "category": "Household Items",
+    "notes": "Objetos: Torradeira"
+  },
+  {
+    "portuguese": "O caixote do lixo está cheio, deita o saco fora.",
+    "english": "The rubbish bin is full, throw the bag out.",
+    "category": "Household Items",
+    "notes": "Objetos: Caixote do Lixo"
+  },
+  {
+    "portuguese": "Varro o chão com a vassoura e limpo com a esfregona.",
+    "english": "I sweep the floor with the broom and clean with the mop.",
+    "category": "Household Items",
+    "notes": "Objetos: Vassoura e Esfregona"
+  },
+  {
+    "portuguese": "Tomamos o café expresso numa chávena pequena.",
+    "english": "We drink espresso coffee in a small cup.",
+    "category": "Household Items",
+    "notes": "Objetos: Chávena"
+  },
+  {
+    "portuguese": "Na casa de banho, ela olha-se ao espelho.",
+    "english": "In the bathroom, she looks at herself in the mirror.",
+    "category": "Household Items",
+    "notes": "Objetos: Espelho"
+  },
+  {
+    "portuguese": "Dói-me muito a cabeça depois de trabalhar tanto tempo.",
+    "english": "My head hurts a lot after working for so long.",
+    "category": "Body & Health",
+    "notes": "Saúde: Dor de Cabeça"
+  },
+  {
+    "portuguese": "Estou com dores de garganta e febre alta.",
+    "english": "I have a sore throat and a high fever.",
+    "category": "Body & Health",
+    "notes": "Saúde: Garganta e Febre"
+  },
+  {
+    "portuguese": "Trabalho sentado e estou com dores nas costas.",
+    "english": "I work sitting down and I have back pain.",
+    "category": "Body & Health",
+    "notes": "Saúde: Costas"
+  },
+  {
+    "portuguese": "Lavo sempre as mãos com sabão antes das refeições.",
+    "english": "I always wash my hands with soap before meals.",
+    "category": "Body & Health",
+    "notes": "Saúde: Lavar as Mãos"
+  },
+  {
+    "portuguese": "O jogador caiu no relvado e torceu o tornozelo.",
+    "english": "The player fell on the pitch and sprained his ankle.",
+    "category": "Body & Health",
+    "notes": "Saúde: Tornozelo"
+  },
+  {
+    "portuguese": "Fui ao dentista ontem porque me doía um dente.",
+    "english": "I went to the dentist yesterday because a tooth hurt.",
+    "category": "Body & Health",
+    "notes": "Saúde: Dentista"
+  },
+  {
+    "portuguese": "Tenho os olhos cansados de olhar para o ecrã.",
+    "english": "My eyes are tired from looking at the screen.",
+    "category": "Body & Health",
+    "notes": "Saúde: Olhos"
+  },
+  {
+    "portuguese": "Ponho um cachecol de lã no pescoço para não apanhar frio.",
+    "english": "I put a wool scarf around my neck not to catch cold.",
+    "category": "Body & Health",
+    "notes": "Saúde: Pescoço"
+  },
+  {
+    "portuguese": "Caminhei dez quilómetros e agora doem-me os pés.",
+    "english": "I walked ten kilometres and now my feet hurt.",
+    "category": "Body & Health",
+    "notes": "Saúde: Pés"
+  },
+  {
+    "portuguese": "Coloquei um penso rápido no dedo para proteger o corte.",
+    "english": "I put a plaster on my finger to protect the cut.",
+    "category": "Body & Health",
+    "notes": "Saúde: Penso Rápido"
+  },
+  {
+    "portuguese": "A bateria do meu telemóvel acabou, preciso do carregador.",
+    "english": "My mobile phone battery ran out, I need the charger.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Telemóvel"
+  },
+  {
+    "portuguese": "Onde está o carregador para ligar o telemóvel à tomada?",
+    "english": "Where is the charger to plug the phone into the socket?",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Carregador e Tomada"
+  },
+  {
+    "portuguese": "Esqueci-me das chaves de casa e não consigo abrir a porta.",
+    "english": "I forgot my house keys and I cannot open the door.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Chaves"
+  },
+  {
+    "portuguese": "Perdi a minha carteira com o dinheiro e o Cartão de Cidadão.",
+    "english": "I lost my wallet with money and Citizen Card.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Carteira"
+  },
+  {
+    "portuguese": "Valido o meu passe de transportes antes de entrar no metro.",
+    "english": "I validate my transit pass before entering the metro.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Passe de Transportes"
+  },
+  {
+    "portuguese": "Está a chover muito, leva o teu guarda-chuva.",
+    "english": "It is raining heavily, take your umbrella.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Guarda-chuva"
+  },
+  {
+    "portuguese": "Uso auscultadores no comboio para ouvir música.",
+    "english": "I wear headphones on the train to listen to music.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Auscultadores"
+  },
+  {
+    "portuguese": "Guardo os cadernos e o computador portátil na mochila.",
+    "english": "I keep the notebooks and the laptop in the backpack.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Mochila e Portátil"
+  },
+  {
+    "portuguese": "Olho para o meu relógio de pulso para ver as horas.",
+    "english": "I look at my wristwatch to see the time.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Relógio de Pulso"
+  },
+  {
+    "portuguese": "Quando está muito sol, uso óculos de sol escuros.",
+    "english": "When it is very sunny, I wear dark sunglasses.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Óculos de Sol"
+  },
+  {
+    "portuguese": "Levo uma garrafa de água fresca para a caminhada.",
+    "english": "I take a bottle of fresh water for the walk.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Garrafa de Água"
   }
 ]
