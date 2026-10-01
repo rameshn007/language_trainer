@@ -313,10 +313,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final isLandscape =
         MediaQuery.orientationOf(context) == Orientation.landscape;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final allCategories = _getCategories(context, items, _isLoading);
-    final filteredCategories = _selectedCategory == 'all'
-        ? allCategories
-        : allCategories.where((c) => c.id == _selectedCategory).toList();
+    final pills = _getPills(context, items, _isLoading);
+    final displaySections = _getDisplaySections(
+      context: context,
+      items: items,
+      isLoading: _isLoading,
+      selectedCategory: _selectedCategory,
+    );
 
     return Scaffold(
       extendBody: true,
@@ -401,8 +404,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 isDuo: isDuo,
                 isDark: isDark,
                 contentPadding: contentPadding,
-                categories: allCategories,
-                filteredCategories: filteredCategories,
+                pills: pills,
+                displaySections: displaySections,
               )
             else
               _buildPortraitBody(
@@ -412,8 +415,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 isDuo: isDuo,
                 isDark: isDark,
                 contentPadding: contentPadding,
-                categories: allCategories,
-                filteredCategories: filteredCategories,
+                pills: pills,
+                displaySections: displaySections,
               ),
           ],
         ),
@@ -471,8 +474,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required bool isDuo,
     required bool isDark,
     required EdgeInsets contentPadding,
-    required List<_CategoryData> categories,
-    required List<_CategoryData> filteredCategories,
+    required List<_CategoryFilterItem> pills,
+    required List<_CategoryData> displaySections,
   }) {
     final view = View.maybeOf(context);
     final fallbackWidth = view != null && view.devicePixelRatio > 0
@@ -497,7 +500,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildCategoryPills(categories: categories, isDark: isDark),
+          _buildCategoryPills(pills: pills, isDark: isDark),
           const SizedBox(height: 10),
           Expanded(
             child: Row(
@@ -549,7 +552,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             context,
                             index,
                           ) {
-                            final cat = filteredCategories[index];
+                            final cat = displaySections[index];
                             return _buildCategorySection(
                               context: context,
                               title: cat.title,
@@ -558,8 +561,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               exercises: cat.exercises,
                               isDark: isDark,
                               availableWidth: rightAvailableWidth,
+                              actionLabel: cat.actionLabel,
+                              onActionTap: cat.onActionTap,
                             );
-                          }, childCount: filteredCategories.length),
+                          }, childCount: displaySections.length),
                         ),
                       const SliverPadding(padding: EdgeInsets.only(bottom: 60)),
                     ],
@@ -580,8 +585,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required bool isDuo,
     required bool isDark,
     required EdgeInsets contentPadding,
-    required List<_CategoryData> categories,
-    required List<_CategoryData> filteredCategories,
+    required List<_CategoryFilterItem> pills,
+    required List<_CategoryData> displaySections,
   }) {
     final view = View.maybeOf(context);
     final fallbackWidth = view != null && view.devicePixelRatio > 0
@@ -643,11 +648,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           _buildCategoryPills(
-                            categories: categories,
+                            pills: pills,
                             isDark: isDark,
                           ),
                           const SizedBox(height: 14),
-                          ...filteredCategories.map(
+                          ...displaySections.map(
                             (cat) => _buildCategorySection(
                               context: context,
                               title: cat.title,
@@ -656,6 +661,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               exercises: cat.exercises,
                               isDark: isDark,
                               availableWidth: availableWidth,
+                              actionLabel: cat.actionLabel,
+                              onActionTap: cat.onActionTap,
                             ),
                           ),
                         ],
@@ -714,30 +721,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildCategoryPills({
-    required List<_CategoryData> categories,
+    required List<_CategoryFilterItem> pills,
     required bool isDark,
   }) {
-    final totalCount = categories.fold<int>(
-      0,
-      (sum, cat) => sum + cat.exercises.length,
-    );
-    final pills = [
-      _CategoryFilterItem(
-        id: 'all',
-        label: 'All',
-        icon: Icons.auto_awesome_mosaic_rounded,
-        count: totalCount,
-      ),
-      ...categories.map(
-        (cat) => _CategoryFilterItem(
-          id: cat.id,
-          label: cat.shortTitle,
-          icon: cat.icon,
-          count: cat.exercises.length,
-        ),
-      ),
-    ];
-
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -871,6 +857,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required List<_ExerciseItem> exercises,
     required bool isDark,
     required double availableWidth,
+    String? actionLabel,
+    VoidCallback? onActionTap,
   }) {
     final textScaler = MediaQuery.textScalerOf(context);
     final scale = textScaler.scale(1.0);
@@ -991,6 +979,50 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                   ),
                 ),
+                if (actionLabel != null && onActionTap != null) ...[
+                  const SizedBox(width: 6),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: (availableWidth * 0.45).clamp(60.0, 140.0),
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerRight,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: onActionTap,
+                          borderRadius: BorderRadius.circular(12),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  actionLabel,
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w700,
+                                    color: accentColor,
+                                  ),
+                                ),
+                                const SizedBox(width: 3),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  size: 10,
+                                  color: accentColor,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -1077,16 +1109,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        item.title,
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.bold,
-                          color: isEnabled
-                              ? fgColor
-                              : (isDark ? Colors.white38 : Colors.black38),
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              item.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 13.5,
+                                fontWeight: FontWeight.bold,
+                                color: isEnabled
+                                    ? fgColor
+                                    : (isDark ? Colors.white38 : Colors.black38),
+                              ),
+                            ),
+                          ),
+                          if (item.badge != null) ...[
+                            const SizedBox(width: 6),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5,
+                                vertical: 1.5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.22),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                item.badge!,
+                                style: const TextStyle(
+                                  fontSize: 8.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                       const SizedBox(height: 2),
                       Text(
@@ -1161,195 +1222,1023 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  List<_CategoryData> _getCategories(
+  List<_CategoryFilterItem> _getPills(
     BuildContext context,
     List<LanguageItem> items,
     bool isLoading,
   ) {
+    return const [
+      _CategoryFilterItem(
+        id: 'all',
+        label: 'All',
+        icon: Icons.auto_awesome_mosaic_rounded,
+        count: 18,
+      ),
+      _CategoryFilterItem(
+        id: 'exercises',
+        label: 'Exercises',
+        icon: Icons.assignment_rounded,
+        count: 19,
+      ),
+      _CategoryFilterItem(
+        id: 'topics',
+        label: 'Topics',
+        icon: Icons.category_rounded,
+        count: 13,
+      ),
+      _CategoryFilterItem(
+        id: 'vocab',
+        label: 'Vocabulary',
+        icon: Icons.menu_book_rounded,
+        count: 4,
+      ),
+      _CategoryFilterItem(
+        id: 'grammar',
+        label: 'Grammar',
+        icon: Icons.school_rounded,
+        count: 5,
+      ),
+      _CategoryFilterItem(
+        id: 'speaking',
+        label: 'Speaking',
+        icon: Icons.mic_rounded,
+        count: 4,
+      ),
+    ];
+  }
+
+  List<_CategoryData> _getDisplaySections({
+    required BuildContext context,
+    required List<LanguageItem> items,
+    required bool isLoading,
+    required String selectedCategory,
+  }) {
+    // ── Exercise Units ──
+    final sentenceBuilder = _ExerciseItem(
+      id: 'ex_unit_10',
+      title: 'Sentence Builder',
+      subtitle: 'Unit 10: Word Order & Pronouns',
+      icon: Icons.reorder_rounded,
+      color: Colors.indigo.shade600,
+      badge: 'Unit 10',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 10: Word Order & Pronouns',
+            unitPath: 'assets/data/exercises/unit_10.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final questionBuilder = _ExerciseItem(
+      id: 'ex_question_builder',
+      title: 'Question Builder',
+      subtitle: 'Make questions with interrogatives',
+      icon: Icons.chat_rounded,
+      color: Colors.lightBlue.shade700,
+      badge: 'Questions',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Question Builder: Make the Question',
+            unitPath: 'assets/data/exercises/question_builder.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final verbConjugationQuiz = _ExerciseItem(
+      id: 'ex_verb_quiz',
+      title: 'Verb Conjugation Quiz',
+      subtitle: 'Practice all verb conjugations',
+      icon: Icons.school_rounded,
+      color: Colors.purple.shade600,
+      badge: 'All Verbs',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Verb Conjugation Quiz',
+            unitPath: 'assets/data/exercises/verb_conjugation_quiz.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final prepositionalPronouns = _ExerciseItem(
+      id: 'ex_prep_pronouns',
+      title: 'Prepositional Pronouns',
+      subtitle: 'Comigo, contigo, connosco...',
+      icon: Icons.link_rounded,
+      color: Colors.pink.shade700,
+      badge: 'Pronouns',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Prepositional Pronouns',
+            unitPath: 'assets/data/exercises/prepositional_pronouns.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final indirectObjectPronouns = _ExerciseItem(
+      id: 'ex_indirect_obj',
+      title: 'Indirect Pronouns',
+      subtitle: 'Me, te, lhe, nos, vos, lhes',
+      icon: Icons.contact_mail_rounded,
+      color: Colors.cyan.shade700,
+      badge: 'Pronouns',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Indirect Object Pronouns',
+            unitPath: 'assets/data/exercises/indirect_object_pronouns.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final conjunctions = _ExerciseItem(
+      id: 'ex_conjunctions',
+      title: 'Conjunctions & Connectors',
+      subtitle: 'Quando, Porque, Mas, E',
+      icon: Icons.alt_route_rounded,
+      color: Colors.orange.shade700,
+      badge: 'Connectors',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Conjunctions: Quando, Porque, Mas, E',
+            unitPath: 'assets/data/exercises/unit_conjunctions.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final comparatives = _ExerciseItem(
+      id: 'ex_comparatives',
+      title: 'Comparatives & Duration',
+      subtitle: 'Tão... como, há vs desde',
+      icon: Icons.compare_arrows_rounded,
+      color: Colors.deepOrange.shade600,
+      badge: 'Unit 11',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 11: Comparatives, Time & Life Events',
+            unitPath:
+                'assets/data/exercises/unit_comparatives_and_duration.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final sentenceTransformations = _ExerciseItem(
+      id: 'ex_sentence_trans',
+      title: 'Transformations & Syntax',
+      subtitle: 'Future tense & comparatives',
+      icon: Icons.transform_rounded,
+      color: Colors.deepPurple.shade700,
+      badge: 'Advanced',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Sentence Transformations & Grammar',
+            unitPath: 'assets/data/exercises/unit_sentence_transformations.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit2IrregularVerbs = _ExerciseItem(
+      id: 'ex_unit_2',
+      title: 'Irregular Verbs (Pt 1)',
+      subtitle: 'Sentir, Dormir, etc. (Unit 2)',
+      icon: Icons.school_rounded,
+      color: Colors.deepPurple.shade600,
+      badge: 'Unit 2',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 2: Irregular Verbs (Part 1)',
+            unitPath: 'assets/data/exercises/unit_2.json',
+            hintPath: 'assets/images/unit_2_hint.png',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit3Ser = _ExerciseItem(
+      id: 'ex_unit_3',
+      title: 'Verbo Ser vs Ficar',
+      subtitle: 'Identity vs Location (Unit 3)',
+      icon: Icons.person_rounded,
+      color: Colors.blue.shade700,
+      badge: 'Unit 3',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 3: Verbo Ser',
+            unitPath: 'assets/data/exercises/unit_3.json',
+            hintPath: 'assets/images/unit_3_hint.png',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit4IrregularVerbs = _ExerciseItem(
+      id: 'ex_unit_4',
+      title: 'Irregular Verbs (Pt 2)',
+      subtitle: 'Ter, Ver, Fazer, Dizer (Unit 4)',
+      icon: Icons.build_rounded,
+      color: Colors.indigo.shade700,
+      badge: 'Unit 4',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 4: Irregular Verbs (Part 2)',
+            unitPath: 'assets/data/exercises/unit_4.json',
+            hintPath: 'assets/images/unit_4_hint.png',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit5RegularVerbs = _ExerciseItem(
+      id: 'ex_unit_5',
+      title: 'Regular Verbs',
+      subtitle: 'Presente: -ar, -er, -ir (Unit 5)',
+      icon: Icons.forum_rounded,
+      color: Colors.teal.shade700,
+      badge: 'Unit 5',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 5: Regular Verbs',
+            unitPath: 'assets/data/exercises/unit_5.json',
+            hintPath: 'assets/images/unit_5_hint.png',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit12Rooms = _ExerciseItem(
+      id: 'ex_unit_12',
+      title: 'Rooms in the House',
+      subtitle: 'Cozinha, sala, quarto (Unit 12)',
+      icon: Icons.home_rounded,
+      color: Colors.green.shade700,
+      badge: 'Unit 12',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 12: Rooms in the House',
+            unitPath: 'assets/data/exercises/unit_rooms_in_the_house.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit13HouseholdItems = _ExerciseItem(
+      id: 'ex_unit_13',
+      title: 'Household Items',
+      subtitle: 'Frigorífico, loiça, utensílios',
+      icon: Icons.kitchen_rounded,
+      color: Colors.teal.shade600,
+      badge: 'Unit 13',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 13: Household Items & Appliances',
+            unitPath: 'assets/data/exercises/unit_household_items.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit14BodyHealth = _ExerciseItem(
+      id: 'ex_unit_14',
+      title: 'Body Parts & Health',
+      subtitle: 'Corpo humano, dores, sintomas',
+      icon: Icons.health_and_safety_rounded,
+      color: Colors.red.shade700,
+      badge: 'Unit 14',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 14: Parts of the Body & Health',
+            unitPath: 'assets/data/exercises/unit_body_parts_and_health.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit15EverydayItems = _ExerciseItem(
+      id: 'ex_unit_15',
+      title: 'Everyday Items',
+      subtitle: 'Telemóvel, chaves, carteira',
+      icon: Icons.backpack_rounded,
+      color: Colors.amber.shade800,
+      badge: 'Unit 15',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 15: Everyday Items & Belongings',
+            unitPath: 'assets/data/exercises/unit_everyday_items.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit6NewVocab = _ExerciseItem(
+      id: 'ex_unit_6',
+      title: 'New Vocabulary',
+      subtitle: 'Practice words from new.md',
+      icon: Icons.menu_book_rounded,
+      color: Colors.blue.shade600,
+      badge: 'Unit 6',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 6: New Vocabulary',
+            unitPath: 'assets/data/exercises/unit_6.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit7MoreVocab = _ExerciseItem(
+      id: 'ex_unit_7',
+      title: 'More Vocabulary',
+      subtitle: 'From Even_More_words.md',
+      icon: Icons.auto_stories_rounded,
+      color: Colors.blue.shade800,
+      badge: 'Unit 7',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 7: Even More Vocabulary',
+            unitPath: 'assets/data/exercises/unit_7.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final unit8MonVocab = _ExerciseItem(
+      id: 'ex_unit_8',
+      title: 'Weekly Vocabulary',
+      subtitle: 'New words & related phrases',
+      icon: Icons.library_books_rounded,
+      color: Colors.indigo.shade800,
+      badge: 'Unit 8',
+      onPressed: (offset) {
+        _pushScreen(
+          const ExerciseScreen(
+            unitName: 'Unit 8: Monday Mar 9 Vocabulary',
+            unitPath: 'assets/data/exercises/unit_8.json',
+          ),
+          offset,
+        );
+      },
+    );
+
+    final allExercisesCard = _ExerciseItem(
+      id: 'ex_all_list',
+      title: 'All Units Directory',
+      subtitle: 'Browse all 18 units in list view',
+      icon: Icons.view_list_rounded,
+      color: Theme.of(context).colorScheme.secondary,
+      badge: 'All 18',
+      onPressed: (offset) {
+        _pushScreen(const ExerciseListScreen(), offset);
+      },
+    );
+
+    // ── Topic Items ──
+    final topicFood = _ExerciseItem(
+      id: 'topic_food',
+      title: 'Food & Drink',
+      subtitle: 'Meals, dining & groceries',
+      icon: Icons.restaurant_rounded,
+      color: Colors.amber.shade700,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(category: 'Food & Drink'), offset);
+            },
+    );
+
+    final topicHouse = _ExerciseItem(
+      id: 'topic_house',
+      title: 'House & Rooms',
+      subtitle: 'Divisões da casa & mobília',
+      icon: Icons.home_rounded,
+      color: Colors.green.shade700,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(category: 'House & Rooms'), offset);
+            },
+    );
+
+    final topicTravel = _ExerciseItem(
+      id: 'topic_travel',
+      title: 'Travel & Directions',
+      subtitle: 'Transport, city & navigation',
+      icon: Icons.explore_rounded,
+      color: Colors.cyan.shade700,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(
+                const QuizScreen(category: 'Travel & Directions'),
+                offset,
+              );
+            },
+    );
+
+    final topicHealth = _ExerciseItem(
+      id: 'topic_health',
+      title: 'Body & Health',
+      subtitle: 'Anatomy, symptoms & care',
+      icon: Icons.health_and_safety_rounded,
+      color: Colors.red.shade600,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(category: 'Body & Health'), offset);
+            },
+    );
+
+    final topicFamily = _ExerciseItem(
+      id: 'topic_family',
+      title: 'Family & People',
+      subtitle: 'Relatives & personal status',
+      icon: Icons.family_restroom_rounded,
+      color: Colors.pink.shade600,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(category: 'Family'), offset);
+            },
+    );
+
+    final topicTime = _ExerciseItem(
+      id: 'topic_time',
+      title: 'Time & Numbers',
+      subtitle: 'Hours, dates, calendar & math',
+      icon: Icons.schedule_rounded,
+      color: Colors.purple.shade600,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(category: 'Time & Numbers'), offset);
+            },
+    );
+
+    final topicEveryday = _ExerciseItem(
+      id: 'topic_everyday',
+      title: 'Everyday Items',
+      subtitle: 'Keys, phone, wallet, bags',
+      icon: Icons.backpack_rounded,
+      color: Colors.orange.shade700,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(category: 'Everyday Items'), offset);
+            },
+    );
+
+    final topicHousehold = _ExerciseItem(
+      id: 'topic_household',
+      title: 'Household Items',
+      subtitle: 'Appliances, utensils & tools',
+      icon: Icons.kitchen_rounded,
+      color: Colors.teal.shade700,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(
+                const QuizScreen(category: 'Household Items'),
+                offset,
+              );
+            },
+    );
+
+    final topicWork = _ExerciseItem(
+      id: 'topic_work',
+      title: 'Office & Work',
+      subtitle: 'Professions & workplace',
+      icon: Icons.work_rounded,
+      color: Colors.blue.shade700,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(category: 'Office & Work'), offset);
+            },
+    );
+
+    final topicHobbies = _ExerciseItem(
+      id: 'topic_hobbies',
+      title: 'Hobbies & Leisure',
+      subtitle: 'Sports, leisure & culture',
+      icon: Icons.sports_tennis_rounded,
+      color: Colors.indigo.shade600,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(
+                const QuizScreen(category: 'Hobbies & Leisure'),
+                offset,
+              );
+            },
+    );
+
+    final topicBasics = _ExerciseItem(
+      id: 'topic_basics',
+      title: 'Basics & Greetings',
+      subtitle: 'Essential daily responses',
+      icon: Icons.chat_bubble_outline_rounded,
+      color: Colors.blue.shade600,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(category: 'Basics'), offset);
+            },
+    );
+
+    final topicGrammarVerbs = _ExerciseItem(
+      id: 'topic_grammar_verbs',
+      title: 'Grammar & Verbs',
+      subtitle: 'Syntax, tenses & conjugations',
+      icon: Icons.school_rounded,
+      color: Colors.deepPurple.shade600,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(
+                const QuizScreen(category: 'Grammar & Verbs'),
+                offset,
+              );
+            },
+    );
+
+    final topicGeneral = _ExerciseItem(
+      id: 'topic_general',
+      title: 'General Mix',
+      subtitle: 'Comprehensive multi-topic test',
+      icon: Icons.grid_view_rounded,
+      color: Colors.blueGrey.shade700,
+      badge: 'Quiz',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(category: 'General'), offset);
+            },
+    );
+
+    final topicGridPicker = _ExerciseItem(
+      id: 'topic_all_grid',
+      title: 'Select Topic Grid',
+      subtitle: 'Full grid category selector',
+      icon: Icons.category_rounded,
+      color: Theme.of(context).colorScheme.primary,
+      badge: 'Grid',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const CategorySelectionScreen(), offset);
+            },
+    );
+
+    // ── Fast Practice ──
+    final fastVocabQuiz = _ExerciseItem(
+      id: 'fast_vocab_quiz',
+      title: 'Vocab Quiz',
+      subtitle: 'Rapid-fire 10-Q challenge',
+      icon: Icons.local_fire_department_rounded,
+      color: Colors.amber.shade700,
+      badge: 'Rapid',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(isVocabularyQuiz: true), offset);
+            },
+    );
+
+    final fastListenRepeat = _ExerciseItem(
+      id: 'fast_listen_repeat',
+      title: 'Listen & Repeat',
+      subtitle: 'Hands-free ear training',
+      icon: Icons.headset_rounded,
+      color: Colors.indigo.shade600,
+      badge: 'Audio',
+      onPressed: (offset) {
+        _pushScreen(const ListenRepeatScreen(), offset);
+      },
+    );
+
+    final fastLuckyQuiz = _ExerciseItem(
+      id: 'fast_lucky_quiz',
+      title: 'Lucky Challenge',
+      subtitle: 'Smart adaptive practice',
+      icon: Icons.auto_awesome_rounded,
+      color: Colors.purple.shade600,
+      badge: 'Adaptive',
+      onPressed: (offset) {
+        _pushScreen(const QuizScreen(isLuckyQuiz: true), offset);
+      },
+    );
+
+    final fastVoiceTrainer = _ExerciseItem(
+      id: 'fast_voice_trainer',
+      title: 'Voice Trainer',
+      subtitle: 'Speech & pronunciation',
+      icon: Icons.mic_rounded,
+      color: Colors.deepOrange.shade600,
+      badge: 'Speak',
+      onPressed: (offset) {
+        _pushScreen(const VoiceTrainerScreen(), offset);
+      },
+    );
+
+    // ── Core Skills ──
+    final vocabList = _ExerciseItem(
+      id: 'vocab_list',
+      title: 'Vocabulary',
+      subtitle: 'Browse, search & word graph',
+      icon: Icons.book_rounded,
+      color: Colors.blue.shade600,
+      badge: 'Search',
+      onPressed: (offset) {
+        _pushScreen(const VocabularyListScreen(), offset);
+      },
+    );
+
+    final vocabQuizCat = _ExerciseItem(
+      id: 'vocab_quiz_cat',
+      title: 'Start Quiz',
+      subtitle: 'Category multi-choice',
+      icon: Icons.quiz_rounded,
+      color: Theme.of(context).colorScheme.primary,
+      badge: 'Topics',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const CategorySelectionScreen(), offset);
+            },
+    );
+
+    final vocabQuizQuick = _ExerciseItem(
+      id: 'vocab_quiz_quick',
+      title: 'Vocab Quiz',
+      subtitle: 'Rapid-fire challenge',
+      icon: Icons.local_fire_department_rounded,
+      color: Colors.amber.shade700,
+      badge: 'Rapid',
+      onPressed: items.isEmpty || isLoading
+          ? null
+          : (offset) {
+              _pushScreen(const QuizScreen(isVocabularyQuiz: true), offset);
+            },
+    );
+
+    final vocab100Phrases = _ExerciseItem(
+      id: 'vocab_100_phrases',
+      title: '100 Phrases',
+      subtitle: 'Essential daily phrases',
+      icon: Icons.style_rounded,
+      color: Colors.teal.shade600,
+      badge: 'Daily',
+      onPressed: (offset) {
+        _pushScreen(const VerbPhraseTrainerScreen(), offset);
+      },
+    );
+
+    final phraseTrainer = _ExerciseItem(
+      id: 'phrase_trainer',
+      title: 'Phrase Trainer',
+      subtitle: 'Everyday conversation',
+      icon: Icons.translate_rounded,
+      color: Colors.green.shade700,
+      badge: 'Dialogues',
+      onPressed: (offset) {
+        _pushScreen(const PhraseTrainerScreen(), offset);
+      },
+    );
+
+    final verbTrainer = _ExerciseItem(
+      id: 'verb_trainer',
+      title: 'Verb Trainer',
+      subtitle: 'Conjugations & tenses',
+      icon: Icons.school_rounded,
+      color: Colors.purple.shade600,
+      badge: 'Verbs',
+      onPressed: (offset) {
+        _pushScreen(const VerbConjugationScreen(), offset);
+      },
+    );
+
+    final interrogatives = _ExerciseItem(
+      id: 'interrogatives',
+      title: 'Interrogatives',
+      subtitle: 'Question words & usage',
+      icon: Icons.contact_support_rounded,
+      color: Colors.cyan.shade700,
+      badge: 'Questions',
+      onPressed: (offset) {
+        _pushScreen(const InterrogativeQuizScreen(), offset);
+      },
+    );
+
+    final prepositions = _ExerciseItem(
+      id: 'prepositions',
+      title: 'Prepositions',
+      subtitle: 'Rules & connectors',
+      icon: Icons.link_rounded,
+      color: Colors.pink.shade700,
+      badge: 'Rules',
+      onPressed: (offset) {
+        _pushScreen(const PrepositionQuizScreen(), offset);
+      },
+    );
+
+    final grammarRules = _ExerciseItem(
+      id: 'grammar_rules',
+      title: 'Grammar Rules',
+      subtitle: 'Essential syntax & tips',
+      icon: Icons.menu_book_rounded,
+      color: Colors.blue.shade700,
+      badge: 'Syntax',
+      onPressed: (offset) {
+        _pushScreen(const GrammarQuizScreen(), offset);
+      },
+    );
+
+    final voiceTrainer = _ExerciseItem(
+      id: 'voice_trainer',
+      title: 'Voice Trainer',
+      subtitle: 'Speech & pronunciation',
+      icon: Icons.mic_rounded,
+      color: Colors.deepOrange.shade600,
+      badge: 'Speak',
+      onPressed: (offset) {
+        _pushScreen(const VoiceTrainerScreen(), offset);
+      },
+    );
+
+    final speakingListenRepeat = _ExerciseItem(
+      id: 'speaking_listen_repeat',
+      title: 'Listen & Repeat',
+      subtitle: 'Hands-free audio trainer',
+      icon: Icons.headset_rounded,
+      color: Colors.indigo.shade600,
+      badge: 'Audio',
+      onPressed: (offset) {
+        _pushScreen(const ListenRepeatScreen(), offset);
+      },
+    );
+
+    // ── Build Sections Depending on Selection ──
+    if (selectedCategory == 'exercises') {
+      return [
+        _CategoryData(
+          id: 'ex_section_structure',
+          title: 'Sentence & Structure (7 Units)',
+          shortTitle: 'Structure',
+          icon: Icons.reorder_rounded,
+          accentColor: Colors.indigo.shade400,
+          exercises: [
+            sentenceBuilder,
+            questionBuilder,
+            prepositionalPronouns,
+            indirectObjectPronouns,
+            conjunctions,
+            comparatives,
+            sentenceTransformations,
+          ],
+        ),
+        _CategoryData(
+          id: 'ex_section_verbs',
+          title: 'Verb Mastery (5 Units)',
+          shortTitle: 'Verbs',
+          icon: Icons.school_rounded,
+          accentColor: Colors.purple.shade400,
+          exercises: [
+            verbConjugationQuiz,
+            unit2IrregularVerbs,
+            unit3Ser,
+            unit4IrregularVerbs,
+            unit5RegularVerbs,
+          ],
+        ),
+        _CategoryData(
+          id: 'ex_section_thematic',
+          title: 'Thematic Vocabulary Units (7 Units)',
+          shortTitle: 'Thematic',
+          icon: Icons.home_work_rounded,
+          accentColor: Colors.teal.shade400,
+          exercises: [
+            unit12Rooms,
+            unit13HouseholdItems,
+            unit14BodyHealth,
+            unit15EverydayItems,
+            unit6NewVocab,
+            unit7MoreVocab,
+            unit8MonVocab,
+            allExercisesCard,
+          ],
+        ),
+      ];
+    }
+
+    if (selectedCategory == 'topics') {
+      return [
+        _CategoryData(
+          id: 'topics_all',
+          title: 'Explore by Topic (13 Topics)',
+          shortTitle: 'Topics',
+          icon: Icons.category_rounded,
+          accentColor: Colors.orange.shade500,
+          exercises: [
+            topicFood,
+            topicHouse,
+            topicTravel,
+            topicHealth,
+            topicFamily,
+            topicTime,
+            topicEveryday,
+            topicHousehold,
+            topicWork,
+            topicHobbies,
+            topicBasics,
+            topicGrammarVerbs,
+            topicGeneral,
+            topicGridPicker,
+          ],
+        ),
+      ];
+    }
+
+    if (selectedCategory == 'vocab') {
+      return [
+        _CategoryData(
+          id: 'vocab_all',
+          title: 'Vocabulary & Flashcards',
+          shortTitle: 'Vocabulary',
+          icon: Icons.menu_book_rounded,
+          accentColor: Colors.blue.shade500,
+          exercises: [
+            vocabList,
+            vocabQuizCat,
+            vocabQuizQuick,
+            vocab100Phrases,
+            phraseTrainer,
+          ],
+        ),
+      ];
+    }
+
+    if (selectedCategory == 'grammar') {
+      return [
+        _CategoryData(
+          id: 'grammar_all',
+          title: 'Grammar & Verbs',
+          shortTitle: 'Grammar',
+          icon: Icons.school_rounded,
+          accentColor: Colors.purple.shade400,
+          exercises: [
+            verbTrainer,
+            verbConjugationQuiz,
+            interrogatives,
+            prepositions,
+            grammarRules,
+            sentenceBuilder,
+          ],
+        ),
+      ];
+    }
+
+    if (selectedCategory == 'speaking') {
+      return [
+        _CategoryData(
+          id: 'speaking_all',
+          title: 'Speaking & Phrases',
+          shortTitle: 'Speaking',
+          icon: Icons.mic_rounded,
+          accentColor: Colors.deepOrange.shade400,
+          exercises: [
+            voiceTrainer,
+            phraseTrainer,
+            vocab100Phrases,
+            speakingListenRepeat,
+          ],
+        ),
+      ];
+    }
+
+    // Default: 'all' (Streamlined Overview)
     return [
       _CategoryData(
-        id: 'vocab',
-        title: 'Vocabulary & Flashcards',
+        id: 'fast_practice',
+        title: '⚡ Fast Practice',
+        shortTitle: 'Fast Practice',
+        icon: Icons.bolt_rounded,
+        accentColor: Colors.amber.shade600,
+        exercises: [
+          fastVocabQuiz,
+          fastListenRepeat,
+          fastLuckyQuiz,
+          fastVoiceTrainer,
+        ],
+      ),
+      _CategoryData(
+        id: 'exercises_featured',
+        title: '🎯 Practice & Exercises',
+        shortTitle: 'Exercises',
+        icon: Icons.assignment_rounded,
+        accentColor: Colors.teal.shade400,
+        actionLabel: 'All 18 Units',
+        onActionTap: () => setState(() => _selectedCategory = 'exercises'),
+        exercises: [
+          sentenceBuilder,
+          questionBuilder,
+          verbConjugationQuiz,
+          prepositionalPronouns,
+        ],
+      ),
+      _CategoryData(
+        id: 'topics_featured',
+        title: '🏷️ Explore Topics',
+        shortTitle: 'Topics',
+        icon: Icons.category_rounded,
+        accentColor: Colors.orange.shade500,
+        actionLabel: 'All 13 Topics',
+        onActionTap: () => setState(() => _selectedCategory = 'topics'),
+        exercises: [
+          topicFood,
+          topicHouse,
+          topicTravel,
+          topicHealth,
+        ],
+      ),
+      _CategoryData(
+        id: 'vocab_featured',
+        title: '📚 Vocabulary & Phrases',
         shortTitle: 'Vocabulary',
         icon: Icons.menu_book_rounded,
         accentColor: Colors.blue.shade500,
+        actionLabel: 'View All',
+        onActionTap: () => setState(() => _selectedCategory = 'vocab'),
         exercises: [
-          _ExerciseItem(
-            id: 'vocab_list',
-            title: 'Vocabulary',
-            subtitle: 'Browse & search words',
-            icon: Icons.book_rounded,
-            color: Colors.blue.shade600,
-            onPressed: (offset) {
-              _pushScreen(const VocabularyListScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'vocab_quiz_cat',
-            title: 'Start Quiz',
-            subtitle: 'Category multi-choice',
-            icon: Icons.quiz_rounded,
-            color: Theme.of(context).colorScheme.primary,
-            onPressed: items.isEmpty || isLoading
-                ? null
-                : (offset) {
-                    _pushScreen(const CategorySelectionScreen(), offset);
-                  },
-          ),
-          _ExerciseItem(
-            id: 'vocab_quiz_quick',
-            title: 'Vocab Quiz',
-            subtitle: 'Rapid-fire challenge',
-            icon: Icons.local_fire_department_rounded,
-            color: Colors.amber.shade700,
-            onPressed: items.isEmpty || isLoading
-                ? null
-                : (offset) {
-                    _pushScreen(
-                      const QuizScreen(isVocabularyQuiz: true),
-                      offset,
-                    );
-                  },
-          ),
+          vocabList,
+          vocab100Phrases,
         ],
       ),
       _CategoryData(
-        id: 'grammar',
-        title: 'Grammar & Verbs',
+        id: 'grammar_featured',
+        title: '🧠 Grammar & Verbs',
         shortTitle: 'Grammar',
         icon: Icons.school_rounded,
         accentColor: Colors.purple.shade400,
+        actionLabel: 'View All',
+        onActionTap: () => setState(() => _selectedCategory = 'grammar'),
         exercises: [
-          _ExerciseItem(
-            id: 'verb_trainer',
-            title: 'Verb Trainer',
-            subtitle: 'Conjugations & tenses',
-            icon: Icons.school_rounded,
-            color: Colors.purple,
-            onPressed: (offset) {
-              _pushScreen(const VerbConjugationScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'interrogatives',
-            title: 'Interrogatives',
-            subtitle: 'Question words & usage',
-            icon: Icons.contact_support_rounded,
-            color: Colors.cyan.shade700,
-            onPressed: (offset) {
-              _pushScreen(const InterrogativeQuizScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'prepositions',
-            title: 'Prepositions',
-            subtitle: 'Rules & connectors',
-            icon: Icons.link_rounded,
-            color: Colors.pink.shade700,
-            onPressed: (offset) {
-              _pushScreen(const PrepositionQuizScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'grammar_rules',
-            title: 'Grammar Rules',
-            subtitle: 'Essential syntax & tips',
-            icon: Icons.menu_book_rounded,
-            color: Colors.blue.shade700,
-            onPressed: (offset) {
-              _pushScreen(const GrammarQuizScreen(), offset);
-            },
-          ),
-        ],
-      ),
-      _CategoryData(
-        id: 'practice',
-        title: 'Practice & Exercises',
-        shortTitle: 'Practice',
-        icon: Icons.assignment_rounded,
-        accentColor: Colors.teal.shade400,
-        exercises: [
-          _ExerciseItem(
-            id: 'exercises_list',
-            title: 'Exercises',
-            subtitle: 'Structured practice units',
-            icon: Icons.assignment_rounded,
-            color: Theme.of(context).colorScheme.secondary,
-            onPressed: (offset) {
-              _pushScreen(const ExerciseListScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'sentence_builder',
-            title: 'Sentence Builder',
-            subtitle: 'Word order & pronouns',
-            icon: Icons.reorder_rounded,
-            color: Colors.indigo,
-            onPressed: (offset) {
-              _pushScreen(
-                const ExerciseScreen(
-                  unitName: 'Unit 10: Word Order & Pronouns',
-                  unitPath: 'assets/data/exercises/unit_10.json',
-                ),
-                offset,
-              );
-            },
-          ),
-          _ExerciseItem(
-            id: 'question_builder',
-            title: 'Question Builder',
-            subtitle: 'Make the question',
-            icon: Icons.chat_rounded,
-            color: Colors.lightBlue.shade600,
-            onPressed: (offset) {
-              _pushScreen(
-                const ExerciseScreen(
-                  unitName: 'Question Builder: Make the Question',
-                  unitPath: 'assets/data/exercises/question_builder.json',
-                ),
-                offset,
-              );
-            },
-          ),
-        ],
-      ),
-      _CategoryData(
-        id: 'speaking',
-        title: 'Speaking & Phrases',
-        shortTitle: 'Speaking',
-        icon: Icons.mic_rounded,
-        accentColor: Colors.deepOrange.shade400,
-        exercises: [
-          _ExerciseItem(
-            id: 'voice_trainer',
-            title: 'Voice Trainer',
-            subtitle: 'Speech & pronunciation',
-            icon: Icons.mic_rounded,
-            color: Colors.deepOrange,
-            onPressed: (offset) {
-              _pushScreen(const VoiceTrainerScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'phrase_trainer',
-            title: 'Phrase Trainer',
-            subtitle: 'Everyday conversation',
-            icon: Icons.translate_rounded,
-            color: Colors.green,
-            onPressed: (offset) {
-              _pushScreen(const PhraseTrainerScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: '100_phrases',
-            title: '100 Phrases',
-            subtitle: 'Essential daily phrases',
-            icon: Icons.style_rounded,
-            color: Colors.teal,
-            onPressed: (offset) {
-              _pushScreen(const VerbPhraseTrainerScreen(), offset);
-            },
-          ),
+          verbTrainer,
+          grammarRules,
+          prepositions,
+          interrogatives,
         ],
       ),
     ];
@@ -1362,6 +2251,7 @@ class _ExerciseItem {
   final String subtitle;
   final IconData icon;
   final Color color;
+  final String? badge;
   final void Function(Offset offset)? onPressed;
 
   const _ExerciseItem({
@@ -1370,6 +2260,7 @@ class _ExerciseItem {
     required this.subtitle,
     required this.icon,
     required this.color,
+    this.badge,
     required this.onPressed,
   });
 }
@@ -1395,6 +2286,8 @@ class _CategoryData {
   final IconData icon;
   final Color accentColor;
   final List<_ExerciseItem> exercises;
+  final String? actionLabel;
+  final VoidCallback? onActionTap;
 
   const _CategoryData({
     required this.id,
@@ -1403,6 +2296,8 @@ class _CategoryData {
     required this.icon,
     required this.accentColor,
     required this.exercises,
+    this.actionLabel,
+    this.onActionTap,
   });
 }
 
