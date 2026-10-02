@@ -532,5 +532,49 @@ void main() {
       expect(pool[1].portuguese, equals('O candeeiro novo ilumina o quarto todo.'));
       expect(pool[1].english, equals('The new lamp illuminates the whole room.'));
     });
+
+    test('_resolveTopicWords preserves all curated words even if keywords collide (no last-wins drop)', () {
+      final curatedWords = [
+        LanguageItem(
+          id: 'curated_1',
+          portuguese: 'o copo',
+          english: 'glass',
+          wordType: 'topic_word',
+          topicCategory: 'Household Items',
+        ),
+        LanguageItem(
+          id: 'curated_2',
+          portuguese: 'um copo',
+          english: 'a glass',
+          wordType: 'topic_word',
+          topicCategory: 'Household Items',
+        ),
+      ];
+
+      final storageItems = [
+        LanguageItem(
+          id: 'storage_1',
+          portuguese: 'copo',
+          english: 'glass',
+          wordType: 'topic_word',
+          topicCategory: 'Household Items',
+          masteryLevel: 4,
+        ),
+      ];
+
+      final resolved = contentService.resolveTopicWordsForTesting(
+        vocabItems: storageItems,
+        curatedTopicWords: curatedWords,
+      );
+
+      // Both curated items must be present (neither dropped by key collision)
+      expect(resolved.length, equals(2));
+      // First curated item merged with matching storage item to preserve id and mastery
+      expect(resolved[0].id, equals('storage_1'));
+      expect(resolved[0].masteryLevel, equals(4));
+      // Second curated item retained as-is
+      expect(resolved[1].id, equals('curated_2'));
+      expect(resolved[1].portuguese, equals('um copo'));
+    });
   });
 }

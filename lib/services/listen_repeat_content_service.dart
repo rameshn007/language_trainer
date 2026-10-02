@@ -299,49 +299,70 @@ class ListenRepeatContentService {
   /// Resolves the unified topic words list, merging storage items (preserving user IDs
   /// and mastery progress) with curated A2 topic words (preserving authentic orthography,
   /// articles, and paired target phrases).
+  ///
+  /// Iterates curated items directly so keyword collisions between two curated entries
+  /// can never overwrite or drop a word from the pool.
   List<LanguageItem> _resolveTopicWords(List<LanguageItem> vocabItems) {
     final allTopicWords = <LanguageItem>[];
-    final curatedByKey = <String, LanguageItem>{
-      for (final w in _cachedTopicWords ?? <LanguageItem>[])
-        _extractKeyword(w.portuguese): w,
-    };
-    final matchedKeys = <String>{};
+    final claimedVocabIds = <String>{};
 
+    for (final curated in _cachedTopicWords ?? <LanguageItem>[]) {
+      final curatedKw = _extractKeyword(curated.portuguese);
+
+      // Look for a matching unclaimed item in storage
+      LanguageItem? matchingStorageItem;
+      if (curatedKw.isNotEmpty) {
+        for (final v in vocabItems) {
+          if (claimedVocabIds.contains(v.id)) continue;
+          if (isTopicItem(v) &&
+              v.wordType != 'phrase' &&
+              v.wordType != 'verb_phrase' &&
+              v.wordType != 'example_sentence') {
+            if (_extractKeyword(v.portuguese) == curatedKw) {
+              matchingStorageItem = v;
+              break;
+            }
+          }
+        }
+      }
+
+      if (matchingStorageItem != null) {
+        claimedVocabIds.add(matchingStorageItem.id);
+        allTopicWords.add(
+          LanguageItem(
+            id: matchingStorageItem.id,
+            portuguese: curated.portuguese,
+            english: curated.english,
+            wordType: 'topic_word',
+            topicCategory: curated.topicCategory ?? matchingStorageItem.topicCategory,
+            notes: curated.notes,
+            exampleSentencePt: curated.exampleSentencePt,
+            exampleSentenceEn: curated.exampleSentenceEn,
+            masteryLevel: matchingStorageItem.masteryLevel,
+            lastReviewed: matchingStorageItem.lastReviewed,
+          ),
+        );
+      } else {
+        // Retain curated word as-is
+        allTopicWords.add(curated);
+      }
+    }
+
+    // Include any additional topic words found in storage that were not in curated list
+    final existingKeywords = {
+      for (final w in allTopicWords) _extractKeyword(w.portuguese),
+    };
     for (final v in vocabItems) {
+      if (claimedVocabIds.contains(v.id)) continue;
       if (isTopicItem(v) &&
           v.wordType != 'phrase' &&
           v.wordType != 'verb_phrase' &&
           v.wordType != 'example_sentence') {
         final kw = _extractKeyword(v.portuguese);
-        if (kw.isEmpty) continue;
-        final curated = curatedByKey[kw];
-        if (curated != null) {
-          allTopicWords.add(
-            LanguageItem(
-              id: v.id,
-              portuguese: curated.portuguese,
-              english: curated.english,
-              wordType: 'topic_word',
-              topicCategory: curated.topicCategory ?? v.topicCategory,
-              notes: curated.notes,
-              exampleSentencePt: curated.exampleSentencePt,
-              exampleSentenceEn: curated.exampleSentenceEn,
-              masteryLevel: v.masteryLevel,
-              lastReviewed: v.lastReviewed,
-            ),
-          );
-          matchedKeys.add(kw);
-        } else if (!matchedKeys.contains(kw)) {
+        if (kw.isNotEmpty && !existingKeywords.contains(kw)) {
           allTopicWords.add(v);
-          matchedKeys.add(kw);
+          existingKeywords.add(kw);
         }
-      }
-    }
-
-    for (final entry in curatedByKey.entries) {
-      if (!matchedKeys.contains(entry.key)) {
-        allTopicWords.add(entry.value);
-        matchedKeys.add(entry.key);
       }
     }
 
@@ -637,6 +658,20 @@ class ListenRepeatContentService {
   @visibleForTesting
   static bool matchesWordBoundaryForTesting(String text, String kw) =>
       _matchesWordBoundary(text, kw);
+
+  @visibleForTesting
+  List<LanguageItem> resolveTopicWordsForTesting({
+    required List<LanguageItem> vocabItems,
+    List<LanguageItem>? curatedTopicWords,
+  }) {
+    final oldCached = _cachedTopicWords;
+    if (curatedTopicWords != null) {
+      _cachedTopicWords = curatedTopicWords;
+    }
+    final result = _resolveTopicWords(vocabItems);
+    _cachedTopicWords = oldCached;
+    return result;
+  }
 
   Future<void> _ensureAuxiliaryDataLoaded() async {
     _cachedPhrases ??= await _loadPhrases();

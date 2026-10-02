@@ -357,4 +357,37 @@ void main() {
     expect(state().isAutoPlayActive, isFalse);
     expect(state().isPlaying, isFalse);
   });
+
+  test('shufflePool restarts playback session and preserves totalWordsSeen without XP farming', () async {
+    setupContainer();
+    final vm = notifier();
+
+    // 1. Start playback in topics mode
+    await vm.startSession(mode: ListenRepeatMode.topics);
+    expect(state().isPlaying, isTrue);
+    expect(state().mode, equals(ListenRepeatMode.topics));
+    verify(() => contentService.loadContent(mode: ListenRepeatMode.topics)).called(1);
+
+    // Simulate user having heard 5 words
+    vm.state = vm.state.copyWith(totalWordsSeen: 5);
+
+    // 2. Tap Shuffle mid-playback
+    await vm.shufflePool();
+
+    // Verify session restarted: loadContent was invoked a second time to build a freshly shuffled deck
+    verify(() => contentService.loadContent(mode: ListenRepeatMode.topics)).called(1);
+    expect(state().isPlaying, isTrue);
+    expect(state().mode, equals(ListenRepeatMode.topics));
+    // Verify totalWordsSeen was preserved and incremented from offset (5 + 1 word in new session)
+    expect(state().totalWordsSeen, equals(6));
+    // Verify reshuffle does not award premature session-completion XP (anti-farming invariant)
+    verifyNever(() => progressService.recordSessionComplete(
+          storage: any(named: 'storage'),
+          activityType: any(named: 'activityType'),
+          score: any(named: 'score'),
+          total: any(named: 'total'),
+          durationSeconds: any(named: 'durationSeconds'),
+          sessionXP: any(named: 'sessionXP'),
+        ));
+  });
 }
