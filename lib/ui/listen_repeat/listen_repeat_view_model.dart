@@ -389,7 +389,11 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     _sessionConsecutiveFailures = 0;
     _shuffledPool.clear();
     _shuffledPool.addAll(allItems);
-    _shuffledPool.shuffle(_random);
+    // For modes that are already interleaved or paired (like topics and balanced mix),
+    // keep the structure produced by loadContent() so words remain paired with their phrases.
+    if (state.mode != ListenRepeatMode.topics && state.mode != ListenRepeatMode.all) {
+      _shuffledPool.shuffle(_random);
+    }
     AppLogger.log('[LR] shuffled ${_shuffledPool.length} items', name: 'ListenRepeat');
 
     _sessionId++;
@@ -986,6 +990,15 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
 
   Future<void> shufflePool() async {
     if (state.pool.isEmpty) return;
+
+    if (state.mode == ListenRepeatMode.topics || state.mode == ListenRepeatMode.all) {
+      if (_isAutoPlayActive) {
+        _sessionWordsOffset = state.totalWordsSeen;
+        await stopSession(recordProgress: false);
+      }
+      await startSession();
+      return;
+    }
 
     _shuffledPool.clear();
     _shuffledPool.addAll(state.pool);

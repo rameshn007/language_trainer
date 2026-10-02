@@ -91,6 +91,7 @@ class ListenRepeatContentService {
   List<LanguageItem>? _cachedExampleSentences;
   List<LanguageItem>? _cachedConjugations;
   List<LanguageItem>? _cachedPrepositions;
+  List<LanguageItem>? _cachedTopicWords;
 
   ListenRepeatContentService(this._storageService, this._verbService);
 
@@ -112,13 +113,25 @@ class ListenRepeatContentService {
   /// House & Rooms, Household Items & Appliances, Body & Health, or Everyday Items.
   static bool isTopicItem(LanguageItem item) {
     if (_targetTopicCategories.contains(item.topicCategory)) return true;
+    if (item.wordType == 'topic_word') return true;
     final note = item.notes.toLowerCase();
-    if (note.contains('a casa:') ||
-        note.contains('rooms in the house:') ||
-        note.contains('objetos:') ||
-        note.contains('saúde:') ||
-        note.contains('saude:') ||
-        note.contains('quotidiano:')) {
+    if (note.contains('a casa') ||
+        note.contains('rooms in the house') ||
+        note.contains('house parts') ||
+        note.contains('house spaces') ||
+        note.contains('housing') ||
+        note.contains('house fixtures') ||
+        note.contains('house heating') ||
+        note.contains('furniture & rooms') ||
+        note.contains('objetos') ||
+        note.contains('saúde') ||
+        note.contains('saude') ||
+        note.contains('quotidiano') ||
+        note.contains('house & rooms') ||
+        note.contains('household items') ||
+        note.contains('body & health') ||
+        note.contains('everyday items') ||
+        note.contains('palavra •')) {
       return true;
     }
     if (item.wordType == 'verb_phrase') {
@@ -145,31 +158,52 @@ class ListenRepeatContentService {
     final note = item.notes.toLowerCase();
     switch (subCategory) {
       case 'House & Rooms':
-        if (note.contains('a casa:') ||
-            note.contains('rooms in the house:') ||
-            note.contains('house parts:') ||
-            note.contains('house spaces:') ||
-            note.contains('housing:') ||
-            note.contains('furniture & rooms:') ||
-            note.contains('house fixtures:') ||
-            note.contains('house heating:') ||
+        if (note.contains('a casa') ||
+            note.contains('rooms in the house') ||
+            note.contains('house parts') ||
+            note.contains('house spaces') ||
+            note.contains('housing') ||
+            note.contains('furniture & rooms') ||
+            note.contains('house fixtures') ||
+            note.contains('house heating') ||
             note.contains('casa de banho') ||
+            note.contains('house & rooms') ||
             note.contains('divis')) {
           return true;
         }
         break;
       case 'Household Items':
-        if (note.contains('objetos:')) {
+        if (note.contains('objetos') ||
+            note.contains('household items') ||
+            note.contains('household') ||
+            note.contains('eletrodomésticos') ||
+            note.contains('eletrodomesticos') ||
+            note.contains('kitchen appliances') ||
+            note.contains('bedding') ||
+            note.contains('cleaning items') ||
+            note.contains('cookware') ||
+            note.contains('tableware') ||
+            note.contains('cutlery')) {
           return true;
         }
         break;
       case 'Body & Health':
-        if (note.contains('saúde:') || note.contains('saude:')) {
+        if (note.contains('saúde') ||
+            note.contains('saude') ||
+            note.contains('body & health') ||
+            note.contains('body parts') ||
+            note.contains('corpo')) {
           return true;
         }
         break;
       case 'Everyday Items':
-        if (note.contains('quotidiano:')) {
+        if (note.contains('quotidiano') ||
+            note.contains('everyday items') ||
+            note.contains('stationery') ||
+            note.contains('personal belongings') ||
+            note.contains('everyday electronics') ||
+            note.contains('daily essentials') ||
+            note.contains('accessories')) {
           return true;
         }
         break;
@@ -241,10 +275,28 @@ class ListenRepeatContentService {
         .length;
     final allCount = vocabCount + phrasesCount + conjugations.length + prepCount;
 
+    final allTopicWords = <LanguageItem>[];
+    allTopicWords.addAll(_cachedTopicWords ?? []);
+    final existingWordPt = {
+      for (final w in allTopicWords) w.portuguese.trim().toLowerCase(),
+    };
+    for (final v in vocabItems) {
+      if (isTopicItem(v) &&
+          v.wordType != 'phrase' &&
+          v.wordType != 'verb_phrase' &&
+          v.wordType != 'example_sentence') {
+        final lowerPt = v.portuguese.trim().toLowerCase();
+        if (!existingWordPt.contains(lowerPt)) {
+          allTopicWords.add(v);
+          existingWordPt.add(lowerPt);
+        }
+      }
+    }
+
     final topicCandidates = [
       ...phrases.where(isTopicItem),
       ...verbPhrases.where(isTopicItem),
-      ...vocabItems.where(isTopicItem),
+      ...allTopicWords,
     ];
     final topicsCount = topicCandidates.length;
 
@@ -286,19 +338,34 @@ class ListenRepeatContentService {
 
     switch (mode) {
       case ListenRepeatMode.topics:
-        final list = <LanguageItem>[];
-        final allCandidates = <LanguageItem>[
-          ...phrases.where(isTopicItem),
-          ...verbPhrases.where(isTopicItem),
-          ...vocabItems.where(isTopicItem),
-        ];
-        if (subCategory != null && subCategory.isNotEmpty && subCategory != 'All Topics') {
-          list.addAll(allCandidates.where((i) => matchesSubCategory(i, subCategory)));
-        } else {
-          list.addAll(allCandidates);
+        final allTopicWords = <LanguageItem>[];
+        allTopicWords.addAll(_cachedTopicWords ?? []);
+
+        final existingWordPt = {
+          for (final w in allTopicWords) w.portuguese.trim().toLowerCase(),
+        };
+        for (final v in vocabItems) {
+          if (isTopicItem(v) &&
+              v.wordType != 'phrase' &&
+              v.wordType != 'verb_phrase' &&
+              v.wordType != 'example_sentence') {
+            final lowerPt = v.portuguese.trim().toLowerCase();
+            if (!existingWordPt.contains(lowerPt)) {
+              allTopicWords.add(v);
+              existingWordPt.add(lowerPt);
+            }
+          }
         }
-        list.shuffle();
-        return list;
+
+        final topicPhrases = phrases.where(isTopicItem).toList();
+        final topicVerbPhrases = verbPhrases.where(isTopicItem).toList();
+
+        return _buildTopicMixedPool(
+          words: allTopicWords,
+          phrases: topicPhrases,
+          verbPhrases: topicVerbPhrases,
+          subCategory: subCategory,
+        );
 
       case ListenRepeatMode.verbs:
         final list = <LanguageItem>[];
@@ -406,12 +473,161 @@ class ListenRepeatContentService {
     return result;
   }
 
+  static String _extractKeyword(String portuguese) {
+    String clean = portuguese.trim().toLowerCase();
+    clean = clean.replaceFirst(RegExp(r'^(a|o|as|os|um|uma|uns|umas)\s+', caseSensitive: false), '').trim();
+    if (clean.contains('/')) {
+      clean = clean.split('/').first.trim();
+    }
+    return clean;
+  }
+
+  /// Builds a mixed deck for A2 Everyday Topics where individual words are learned
+  /// and directly reinforced by phrases that use those words.
+  List<LanguageItem> _buildTopicMixedPool({
+    required List<LanguageItem> words,
+    required List<LanguageItem> phrases,
+    required List<LanguageItem> verbPhrases,
+    String? subCategory,
+  }) {
+    final activeWords = (subCategory != null && subCategory.isNotEmpty && subCategory != 'All Topics')
+        ? words.where((w) => matchesSubCategory(w, subCategory)).toList()
+        : List<LanguageItem>.from(words);
+
+    final activePhrases = (subCategory != null && subCategory.isNotEmpty && subCategory != 'All Topics')
+        ? phrases.where((p) => matchesSubCategory(p, subCategory)).toList()
+        : List<LanguageItem>.from(phrases);
+
+    final activeVerbPhrases = (subCategory != null && subCategory.isNotEmpty && subCategory != 'All Topics')
+        ? verbPhrases.where((vp) => matchesSubCategory(vp, subCategory)).toList()
+        : List<LanguageItem>.from(verbPhrases);
+
+    if (activeWords.isEmpty) {
+      final fallback = [...activePhrases, ...activeVerbPhrases]..shuffle();
+      return fallback;
+    }
+
+    final candidatePhrases = [...activePhrases, ...activeVerbPhrases];
+    final usedPhraseIds = <String>{};
+
+    // Build word-phrase pairs
+    final pairs = <List<LanguageItem>>[];
+
+    for (final word in activeWords) {
+      final pair = <LanguageItem>[word];
+
+      // 1. Try matching target phrase directly from exampleSentencePt
+      LanguageItem? matchingPhrase;
+      if (word.exampleSentencePt != null && word.exampleSentencePt!.isNotEmpty) {
+        for (final p in candidatePhrases) {
+          if (p.portuguese.trim().toLowerCase() == word.exampleSentencePt!.trim().toLowerCase()) {
+            matchingPhrase = p;
+            break;
+          }
+        }
+      }
+
+      // 2. If not found, try matching by base keyword
+      if (matchingPhrase == null) {
+        final kw = _extractKeyword(word.portuguese);
+        if (kw.isNotEmpty) {
+          for (final p in candidatePhrases) {
+            if (p.portuguese.toLowerCase().contains(kw) || p.notes.toLowerCase().contains(kw)) {
+              matchingPhrase = p;
+              break;
+            }
+          }
+        }
+      }
+
+      // 3. Fallback: if exampleSentencePt exists on word, create phrase item
+      if (matchingPhrase == null && word.exampleSentencePt != null && word.exampleSentencePt!.isNotEmpty) {
+        matchingPhrase = LanguageItem(
+          id: 'phrase_target_${word.id}',
+          portuguese: word.exampleSentencePt!,
+          english: word.exampleSentenceEn ?? '',
+          wordType: 'phrase',
+          topicCategory: word.topicCategory ?? 'Topic Phrase',
+          notes: '${word.topicCategory ?? "Tópico"}: ${word.portuguese}',
+        );
+      }
+
+      if (matchingPhrase != null) {
+        pair.add(matchingPhrase);
+        usedPhraseIds.add(matchingPhrase.id);
+      }
+
+      pairs.add(pair);
+    }
+
+    // Shuffle the word groups so playthrough order is fresh
+    pairs.shuffle();
+
+    // Remaining phrases that weren't the primary phrase for any word
+    final unusedPhrases = candidatePhrases.where((p) => !usedPhraseIds.contains(p.id)).toList()..shuffle();
+
+    // Flatten: each word is immediately followed by its phrase, with unused phrases smoothly dispersed
+    final result = <LanguageItem>[];
+    int unusedIdx = 0;
+
+    for (int i = 0; i < pairs.length; i++) {
+      result.addAll(pairs[i]);
+
+      // Every 3 word-pairs, insert an extra contextual/verb phrase if available
+      if ((i + 1) % 3 == 0 && unusedIdx < unusedPhrases.length) {
+        result.add(unusedPhrases[unusedIdx++]);
+      }
+    }
+
+    while (unusedIdx < unusedPhrases.length) {
+      result.add(unusedPhrases[unusedIdx++]);
+    }
+
+    return result;
+  }
+
   Future<void> _ensureAuxiliaryDataLoaded() async {
     _cachedPhrases ??= await _loadPhrases();
     _cachedVerbPhrases ??= await _loadVerbPhrases();
     _cachedExampleSentences ??= await _loadExampleSentences();
     _cachedConjugations ??= await _generateConjugationItems();
     _cachedPrepositions ??= await _loadPrepositions();
+    _cachedTopicWords ??= await _loadTopicWords();
+  }
+
+  /// Loads curated A2 individual topic words from assets/data/a2_topic_words.json
+  Future<List<LanguageItem>> _loadTopicWords() async {
+    final list = <LanguageItem>[];
+    try {
+      final jsonStr = await rootBundle.loadString('assets/data/a2_topic_words.json');
+      final List<dynamic> data = jsonDecode(jsonStr);
+      for (final item in data) {
+        final id = (item['id'] ?? '').toString();
+        final pt = (item['portuguese'] ?? '').toString().trim();
+        final en = (item['english'] ?? '').toString().trim();
+        final cat = (item['category'] ?? '').toString().trim();
+        final notes = (item['notes'] ?? 'Palavra').toString().trim();
+        final targetPt = (item['targetPhrasePt'] ?? '').toString().trim();
+        final targetEn = (item['targetPhraseEn'] ?? '').toString().trim();
+        if (pt.isNotEmpty && en.isNotEmpty) {
+          list.add(
+            LanguageItem(
+              id: id,
+              portuguese: pt,
+              english: en,
+              wordType: 'topic_word',
+              topicCategory: cat,
+              notes: notes,
+              exampleSentencePt: targetPt.isNotEmpty ? targetPt : null,
+              exampleSentenceEn: targetEn.isNotEmpty ? targetEn : null,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      AppLogger.error('Error loading a2_topic_words.json', name: 'ListenRepeatContent', error: e);
+    }
+    return list;
   }
 
   /// Loads general conversational phrases from assets/data/phrases.json

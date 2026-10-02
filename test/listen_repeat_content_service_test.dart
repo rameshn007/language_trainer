@@ -350,5 +350,76 @@ void main() {
       expect(topicItemsInFirstTen, greaterThanOrEqualTo(3),
           reason: 'Biased phrases pool must feature topic phrases prominently in the first 10 items');
     });
+
+    test('loads all individual topic words and pairs them with phrases in each section', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'sol', english: 'sun'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => []);
+
+      final sections = [
+        ('House & Rooms', 25),
+        ('Household Items', 32),
+        ('Body & Health', 29),
+        ('Everyday Items', 22),
+      ];
+
+      for (final (section, expectedWordCount) in sections) {
+        final pool = await contentService.loadContent(
+          mode: ListenRepeatMode.topics,
+          subCategory: section,
+        );
+
+        final words = pool.where((i) => i.wordType == 'topic_word').toList();
+        final phrases = pool.where((i) => i.wordType != 'topic_word').toList();
+
+        expect(
+          words.length,
+          greaterThanOrEqualTo(expectedWordCount),
+          reason: 'Section $section must contain at least $expectedWordCount individual words',
+        );
+
+        expect(
+          phrases,
+          isNotEmpty,
+          reason: 'Section $section must contain reinforcing phrases',
+        );
+
+        // Verify that in the mixed deck, words are interleaved with phrases (words and phrases both present)
+        expect(pool.length, greaterThan(words.length));
+
+        // Check word-phrase pairing: each word should be adjacent to a phrase
+        for (int i = 0; i < pool.length; i++) {
+          final item = pool[i];
+          if (item.wordType == 'topic_word') {
+            // Either the next item is a phrase or the previous item is a phrase
+            final hasAdjacentPhrase = (i + 1 < pool.length && pool[i + 1].wordType != 'topic_word') ||
+                (i - 1 >= 0 && pool[i - 1].wordType != 'topic_word');
+            expect(hasAdjacentPhrase, isTrue,
+                reason: 'Word ${item.portuguese} in $section must be paired with an adjacent phrase');
+          }
+        }
+      }
+    });
+
+    test('All Topics contains words across all four A2 everyday sections', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'sol', english: 'sun'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => []);
+
+      final pool = await contentService.loadContent(mode: ListenRepeatMode.topics);
+      final words = pool.where((i) => i.wordType == 'topic_word').toList();
+
+      expect(words.length, greaterThanOrEqualTo(108),
+          reason: 'All Topics must include all 108 individual words');
+
+      // Verify all 4 categories are represented in words
+      final categories = words.map((w) => w.topicCategory).toSet();
+      expect(categories, contains('House & Rooms'));
+      expect(categories, contains('Household Items'));
+      expect(categories, contains('Body & Health'));
+      expect(categories, contains('Everyday Items'));
+    });
   });
 }

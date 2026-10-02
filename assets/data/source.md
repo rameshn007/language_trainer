@@ -2272,37 +2272,63 @@
 
 | Portugues | English | Notes |
 | :---- | :---- | :---- |
-| a casa de banho | the bathroom | Home - Rooms |
-| a sala de estar | the living room | Home - Rooms |
-| a sala de jantar | the dining room | Home - Rooms |
-| o corredor | the corridor / hallway | Home - Rooms |
-| o hall de entrada | the entrance hall | Home - Rooms |
-| a despensa | the pantry / larder | Home - Rooms |
-| a marquise | the sunroom / enclosed balcony | Home - Rooms |
-| o rés do chão | the ground floor | Home - Rooms |
-| o primeiro andar | the first floor | Home - Rooms |
-| as escadas | the stairs | Home - Rooms |
-| a lareira | the fireplace | Home - Rooms |
-| o roupeiro | the wardrobe | Home - Rooms |
-| o congelador | the freezer | Household - Items |
-| a torradeira | the toaster | Household - Items |
-| a chaleira elétrica | the electric kettle | Household - Items |
-| a tábua de engomar | the ironing board | Household - Items |
-| a esfregona | the mop | Household - Items |
-| o caixote do lixo | the rubbish bin | Household - Items |
-| as cortinas | the curtains | Household - Items |
-| os lençóis | the bed sheets | Household - Items |
-| o edredão | the duvet | Household - Items |
-| a panela | the pot / saucepan | Household - Items |
-| a frigideira | the frying pan | Household - Items |
-| os talheres | the cutlery | Household - Items |
-| o garfo | the fork | Household - Items |
-| a faca | the knife | Household - Items |
-| a colher | the spoon | Household - Items |
-| o prato | the plate | Household - Items |
-| o copo | the glass | Household - Items |
-| a chávena | the cup / mug | Household - Items |
-| a torneira | the tap / faucet | Household - Items |
+| a cozinha | the kitchen | House & Rooms |
+| o quarto | the bedroom | House & Rooms |
+| a casa de banho | the bathroom | House & Rooms |
+| a sala de estar | the living room | House & Rooms |
+| a sala de jantar | the dining room | House & Rooms |
+| a despensa | the pantry / larder | House & Rooms |
+| a varanda | the balcony | House & Rooms |
+| a marquise | the enclosed balcony / sunroom | House & Rooms |
+| a garagem | the garage | House & Rooms |
+| o jardim | the garden | House & Rooms |
+| as escadas | the stairs | House & Rooms |
+| o corredor | the corridor / hallway | House & Rooms |
+| o hall de entrada | the entrance hall | House & Rooms |
+| o escritório | the home office / study | House & Rooms |
+| a cave | the basement / cellar | House & Rooms |
+| o sótão | the attic | House & Rooms |
+| o terraço | the terrace | House & Rooms |
+| o roupeiro | the wardrobe | House & Rooms |
+| a lareira | the fireplace | House & Rooms |
+| o rés do chão | the ground floor | House & Rooms |
+| o primeiro andar | the first floor | House & Rooms |
+| o andar / piso | the floor / storey | House & Rooms |
+| o telhado | the roof | House & Rooms |
+| a porta | the door | House & Rooms |
+| a janela | the window | House & Rooms |
+| o frigorífico | the refrigerator | Household Items |
+| o congelador | the freezer | Household Items |
+| a máquina de lavar loiça | the dishwasher | Household Items |
+| a máquina de lavar roupa | the washing machine | Household Items |
+| o fogão | the stove / cooker | Household Items |
+| o forno | the oven | Household Items |
+| o micro-ondas | the microwave | Household Items |
+| a torradeira | the toaster | Household Items |
+| a chaleira elétrica | the electric kettle | Household Items |
+| o aspirador | the vacuum cleaner | Household Items |
+| o ferro de engomar | the clothes iron | Household Items |
+| a tábua de engomar | the ironing board | Household Items |
+| a vassoura | the broom | Household Items |
+| a esfregona | the mop | Household Items |
+| o caixote do lixo | the rubbish bin | Household Items |
+| a almofada | the pillow / cushion | Household Items |
+| o edredão | the duvet / quilt | Household Items |
+| os lençóis | the bed sheets | Household Items |
+| as cortinas | the curtains | Household Items |
+| o candeeiro | the lamp | Household Items |
+| o espelho | the mirror | Household Items |
+| a toalha | the towel | Household Items |
+| a panela | the cooking pot / saucepan | Household Items |
+| a frigideira | the frying pan | Household Items |
+| os talheres | the cutlery | Household Items |
+| o garfo | the fork | Household Items |
+| a faca | the knife | Household Items |
+| a colher | the spoon | Household Items |
+| o prato | the plate | Household Items |
+| o copo | the glass | Household Items |
+| a chávena | the cup / mug | Household Items |
+| a torneira | the tap / faucet | Household Items |
 | a cabeça | the head | Body & Health |
 | os olhos | the eyes | Body & Health |
 | o nariz | the nose | Body & Health |
@@ -2311,7 +2337,7 @@
 | os dentes | the teeth | Body & Health |
 | a língua | the tongue | Body & Health |
 | a garganta | the throat | Body & Health |
-| os ouvidos | the ears (hearing) | Body & Health |
+| os ouvidos | the ears (hearing / inner) | Body & Health |
 | as orelhas | the ears (outer) | Body & Health |
 | o pescoço | the neck | Body & Health |
 | os ombros | the shoulders | Body & Health |
@@ -2329,26 +2355,28 @@
 | o joelho | the knee | Body & Health |
 | o tornozelo | the ankle | Body & Health |
 | os pés | the feet | Body & Health |
-| Dói-me a cabeça. | My head hurts. | Body & Health |
-| Dói-me a garganta. | My throat hurts. | Body & Health |
-| Estou com dores nas costas. | I have back pain. | Body & Health |
 | a febre | the fever | Body & Health |
 | a tosse | the cough | Body & Health |
 | o penso rápido | the plaster / band-aid | Body & Health |
 | o telemóvel | the mobile phone | Everyday Items |
 | o carregador | the charger | Everyday Items |
-| os auscultadores | the headphones | Everyday Items |
-| o computador portátil | the laptop | Everyday Items |
+| a tomada | the wall socket / outlet | Everyday Items |
+| as chaves | the keys | Everyday Items |
 | a carteira | the wallet | Everyday Items |
 | o porta-moedas | the coin purse | Everyday Items |
-| as chaves de casa | the house keys | Everyday Items |
+| o Cartão de Cidadão | the Citizen Card / ID card | Everyday Items |
 | o passe de transportes | the transit pass | Everyday Items |
-| os óculos de sol | the sunglasses | Everyday Items |
+| o bilhete | the ticket | Everyday Items |
 | o guarda-chuva | the umbrella | Everyday Items |
+| os auscultadores | the headphones / earphones | Everyday Items |
+| a mochila | the backpack | Everyday Items |
+| o computador portátil | the laptop | Everyday Items |
+| o caderno | the notebook | Everyday Items |
+| a caneta | the pen | Everyday Items |
 | o relógio de pulso | the wristwatch | Everyday Items |
-| a mala de viagem | the suitcase | Everyday Items |
+| os óculos de sol | the sunglasses | Everyday Items |
 | a garrafa de água | the water bottle | Everyday Items |
-| o lenço de papel | the paper tissue | Everyday Items |
-| o Cartão de Cidadão | the Citizen ID Card | Everyday Items |
-| a tomada elétrica | the electrical wall socket | Everyday Items |
+| a mala de viagem | the suitcase / bag | Everyday Items |
 | a gaveta | the drawer | Everyday Items |
+| o lenço de papel | the paper tissue | Everyday Items |
+| o leque | the hand fan | Everyday Items |
