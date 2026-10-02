@@ -991,20 +991,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
   Future<void> shufflePool() async {
     if (state.pool.isEmpty) return;
 
-    if (state.mode == ListenRepeatMode.topics || state.mode == ListenRepeatMode.all) {
-      if (_isAutoPlayActive) {
-        _sessionWordsOffset = state.totalWordsSeen;
-        await stopSession(recordProgress: false);
-      }
-      await startSession();
-      return;
-    }
-
-    _shuffledPool.clear();
-    _shuffledPool.addAll(state.pool);
-    _shuffledPool.shuffle(_random);
-    state = state.copyWith(shuffledPool: List.unmodifiable(_shuffledPool));
-
     // A plain startSession() while playing hits the "already playing" 
     // guard, so the reshuffled deck would be ignored and the current 
     // playlist would keep playing in its old order. Tear the session down

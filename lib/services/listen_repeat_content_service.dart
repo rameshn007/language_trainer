@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../main.dart';
@@ -275,23 +276,7 @@ class ListenRepeatContentService {
         .length;
     final allCount = vocabCount + phrasesCount + conjugations.length + prepCount;
 
-    final allTopicWords = <LanguageItem>[];
-    allTopicWords.addAll(_cachedTopicWords ?? []);
-    final existingWordPt = {
-      for (final w in allTopicWords) w.portuguese.trim().toLowerCase(),
-    };
-    for (final v in vocabItems) {
-      if (isTopicItem(v) &&
-          v.wordType != 'phrase' &&
-          v.wordType != 'verb_phrase' &&
-          v.wordType != 'example_sentence') {
-        final lowerPt = v.portuguese.trim().toLowerCase();
-        if (!existingWordPt.contains(lowerPt)) {
-          allTopicWords.add(v);
-          existingWordPt.add(lowerPt);
-        }
-      }
-    }
+    final allTopicWords = _resolveTopicWords(vocabItems);
 
     final topicCandidates = [
       ...phrases.where(isTopicItem),
@@ -309,6 +294,58 @@ class ListenRepeatContentService {
       ListenRepeatMode.vocabulary: vocabCount,
     };
     return _cachedModeCounts!;
+  }
+
+  /// Resolves the unified topic words list, merging storage items (preserving user IDs
+  /// and mastery progress) with curated A2 topic words (preserving authentic orthography,
+  /// articles, and paired target phrases).
+  List<LanguageItem> _resolveTopicWords(List<LanguageItem> vocabItems) {
+    final allTopicWords = <LanguageItem>[];
+    final curatedByKey = <String, LanguageItem>{
+      for (final w in _cachedTopicWords ?? <LanguageItem>[])
+        _extractKeyword(w.portuguese): w,
+    };
+    final matchedKeys = <String>{};
+
+    for (final v in vocabItems) {
+      if (isTopicItem(v) &&
+          v.wordType != 'phrase' &&
+          v.wordType != 'verb_phrase' &&
+          v.wordType != 'example_sentence') {
+        final kw = _extractKeyword(v.portuguese);
+        if (kw.isEmpty) continue;
+        final curated = curatedByKey[kw];
+        if (curated != null) {
+          allTopicWords.add(
+            LanguageItem(
+              id: v.id,
+              portuguese: curated.portuguese,
+              english: curated.english,
+              wordType: 'topic_word',
+              topicCategory: curated.topicCategory ?? v.topicCategory,
+              notes: curated.notes,
+              exampleSentencePt: curated.exampleSentencePt,
+              exampleSentenceEn: curated.exampleSentenceEn,
+              masteryLevel: v.masteryLevel,
+              lastReviewed: v.lastReviewed,
+            ),
+          );
+          matchedKeys.add(kw);
+        } else if (!matchedKeys.contains(kw)) {
+          allTopicWords.add(v);
+          matchedKeys.add(kw);
+        }
+      }
+    }
+
+    for (final entry in curatedByKey.entries) {
+      if (!matchedKeys.contains(entry.key)) {
+        allTopicWords.add(entry.value);
+        matchedKeys.add(entry.key);
+      }
+    }
+
+    return allTopicWords;
   }
 
   Future<List<LanguageItem>> loadContent({
@@ -338,25 +375,7 @@ class ListenRepeatContentService {
 
     switch (mode) {
       case ListenRepeatMode.topics:
-        final allTopicWords = <LanguageItem>[];
-        allTopicWords.addAll(_cachedTopicWords ?? []);
-
-        final existingWordPt = {
-          for (final w in allTopicWords) w.portuguese.trim().toLowerCase(),
-        };
-        for (final v in vocabItems) {
-          if (isTopicItem(v) &&
-              v.wordType != 'phrase' &&
-              v.wordType != 'verb_phrase' &&
-              v.wordType != 'example_sentence') {
-            final lowerPt = v.portuguese.trim().toLowerCase();
-            if (!existingWordPt.contains(lowerPt)) {
-              allTopicWords.add(v);
-              existingWordPt.add(lowerPt);
-            }
-          }
-        }
-
+        final allTopicWords = _resolveTopicWords(vocabItems);
         final topicPhrases = phrases.where(isTopicItem).toList();
         final topicVerbPhrases = verbPhrases.where(isTopicItem).toList();
 
@@ -482,6 +501,19 @@ class ListenRepeatContentService {
     return clean;
   }
 
+  static bool _matchesWordBoundary(String text, String kw) {
+    if (text.isEmpty || kw.isEmpty) return false;
+    final lowerText = text.toLowerCase();
+    final lowerKw = kw.toLowerCase();
+
+    if (lowerKw.contains(' ')) {
+      return lowerText.contains(lowerKw);
+    }
+
+    final regex = RegExp(r'(?:^|[^\p{L}\p{N}])' + RegExp.escape(lowerKw) + r'(?:[^\p{L}\p{N}]|$)', unicode: true);
+    return regex.hasMatch(lowerText);
+  }
+
   /// Builds a mixed deck for A2 Everyday Topics where individual words are learned
   /// and directly reinforced by phrases that use those words.
   List<LanguageItem> _buildTopicMixedPool({
@@ -519,20 +551,22 @@ class ListenRepeatContentService {
       // 1. Try matching target phrase directly from exampleSentencePt
       LanguageItem? matchingPhrase;
       if (word.exampleSentencePt != null && word.exampleSentencePt!.isNotEmpty) {
+        final targetPt = word.exampleSentencePt!.trim().toLowerCase();
         for (final p in candidatePhrases) {
-          if (p.portuguese.trim().toLowerCase() == word.exampleSentencePt!.trim().toLowerCase()) {
+          if (!usedPhraseIds.contains(p.id) && p.portuguese.trim().toLowerCase() == targetPt) {
             matchingPhrase = p;
             break;
           }
         }
       }
 
-      // 2. If not found, try matching by base keyword
+      // 2. If not found, try matching by base keyword with word boundary match
       if (matchingPhrase == null) {
         final kw = _extractKeyword(word.portuguese);
         if (kw.isNotEmpty) {
           for (final p in candidatePhrases) {
-            if (p.portuguese.toLowerCase().contains(kw) || p.notes.toLowerCase().contains(kw)) {
+            if (usedPhraseIds.contains(p.id)) continue;
+            if (_matchesWordBoundary(p.portuguese, kw) || _matchesWordBoundary(p.notes, kw)) {
               matchingPhrase = p;
               break;
             }
@@ -586,13 +620,34 @@ class ListenRepeatContentService {
     return result;
   }
 
+  @visibleForTesting
+  List<LanguageItem> buildTopicMixedPoolForTesting({
+    required List<LanguageItem> words,
+    required List<LanguageItem> phrases,
+    required List<LanguageItem> verbPhrases,
+    String? subCategory,
+  }) =>
+      _buildTopicMixedPool(
+        words: words,
+        phrases: phrases,
+        verbPhrases: verbPhrases,
+        subCategory: subCategory,
+      );
+
+  @visibleForTesting
+  static bool matchesWordBoundaryForTesting(String text, String kw) =>
+      _matchesWordBoundary(text, kw);
+
   Future<void> _ensureAuxiliaryDataLoaded() async {
     _cachedPhrases ??= await _loadPhrases();
     _cachedVerbPhrases ??= await _loadVerbPhrases();
     _cachedExampleSentences ??= await _loadExampleSentences();
     _cachedConjugations ??= await _generateConjugationItems();
     _cachedPrepositions ??= await _loadPrepositions();
-    _cachedTopicWords ??= await _loadTopicWords();
+    final loadedTopicWords = await _loadTopicWords();
+    if (loadedTopicWords.isNotEmpty) {
+      _cachedTopicWords = loadedTopicWords;
+    }
   }
 
   /// Loads curated A2 individual topic words from assets/data/a2_topic_words.json
@@ -602,26 +657,31 @@ class ListenRepeatContentService {
       final jsonStr = await rootBundle.loadString('assets/data/a2_topic_words.json');
       final List<dynamic> data = jsonDecode(jsonStr);
       for (final item in data) {
-        final id = (item['id'] ?? '').toString();
-        final pt = (item['portuguese'] ?? '').toString().trim();
-        final en = (item['english'] ?? '').toString().trim();
-        final cat = (item['category'] ?? '').toString().trim();
-        final notes = (item['notes'] ?? 'Palavra').toString().trim();
-        final targetPt = (item['targetPhrasePt'] ?? '').toString().trim();
-        final targetEn = (item['targetPhraseEn'] ?? '').toString().trim();
-        if (pt.isNotEmpty && en.isNotEmpty) {
-          list.add(
-            LanguageItem(
-              id: id,
-              portuguese: pt,
-              english: en,
-              wordType: 'topic_word',
-              topicCategory: cat,
-              notes: notes,
-              exampleSentencePt: targetPt.isNotEmpty ? targetPt : null,
-              exampleSentenceEn: targetEn.isNotEmpty ? targetEn : null,
-            ),
-          );
+        try {
+          if (item is! Map<String, dynamic>) continue;
+          final id = (item['id'] ?? '').toString();
+          final pt = (item['portuguese'] ?? '').toString().trim();
+          final en = (item['english'] ?? '').toString().trim();
+          final cat = (item['category'] ?? '').toString().trim();
+          final notes = (item['notes'] ?? 'Palavra').toString().trim();
+          final targetPt = (item['targetPhrasePt'] ?? '').toString().trim();
+          final targetEn = (item['targetPhraseEn'] ?? '').toString().trim();
+          if (pt.isNotEmpty && en.isNotEmpty) {
+            list.add(
+              LanguageItem(
+                id: id,
+                portuguese: pt,
+                english: en,
+                wordType: 'topic_word',
+                topicCategory: cat,
+                notes: notes,
+                exampleSentencePt: targetPt.isNotEmpty ? targetPt : null,
+                exampleSentenceEn: targetEn.isNotEmpty ? targetEn : null,
+              ),
+            );
+          }
+        } catch (e) {
+          AppLogger.error('Error parsing topic word entry: $item', name: 'ListenRepeatContent', error: e);
         }
       }
     } catch (e) {
