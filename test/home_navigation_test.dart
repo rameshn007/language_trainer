@@ -107,7 +107,7 @@ void main() {
 
       expect(find.text('Sentence & Structure (7 Units)'), findsOneWidget);
       expect(find.text('Verb Mastery (5 Units)'), findsOneWidget);
-      expect(find.text('Thematic Vocabulary Units (8 Units)'), findsOneWidget);
+      expect(find.text('Thematic Vocabulary Units (7 Units)'), findsOneWidget);
       // Fast Practice and Explore Topics should no longer be rendered
       expect(find.text('Fast Practice'), findsNothing);
       expect(find.text('Explore Topics'), findsNothing);
@@ -120,7 +120,7 @@ void main() {
       await tester.tap(topicsPill);
       await tester.pump(const Duration(milliseconds: 200));
 
-      expect(find.text('Explore by Topic (14 Topics)'), findsOneWidget);
+      expect(find.text('Explore by Topic (13 Topics)'), findsOneWidget);
       expect(find.text('Sentence & Structure (7 Units)'), findsNothing);
 
       // 3. Tap 'Vocabulary' pill
@@ -190,7 +190,7 @@ void main() {
       // Should now render the full Exercises sub-curricula
       expect(find.text('Sentence & Structure (7 Units)'), findsOneWidget);
       expect(find.text('Verb Mastery (5 Units)'), findsOneWidget);
-      expect(find.text('Thematic Vocabulary Units (8 Units)'), findsOneWidget);
+      expect(find.text('Thematic Vocabulary Units (7 Units)'), findsOneWidget);
     });
 
     testWidgets('gracefully renders 20-tile Exercises tab at compact iPhone SE (320x568) with 1.35x text scale without overflow', (tester) async {

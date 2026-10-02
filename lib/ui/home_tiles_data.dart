@@ -82,6 +82,8 @@ class HomeSectionsBuilder {
   final void Function(Widget screen, Offset offset) pushScreen;
   final void Function(String categoryId) selectCategory;
 
+  late final Map<String, List<HomeSectionData>> _sectionsByTab = _buildAllSections();
+
   HomeSectionsBuilder({
     required this.context,
     required this.isQuizDisabled,
@@ -132,12 +134,16 @@ class HomeSectionsBuilder {
   }
 
   int _countExercisesFor(String categoryId) {
-    final sections = getSections(categoryId);
+    final sections = _sectionsByTab[categoryId] ?? const [];
     return sections.fold<int>(0, (sum, sec) => sum + sec.exercises.length);
   }
 
-  /// Builds the sections and tiles for the currently selected filter tab.
+  /// Returns the sections and tiles for the currently selected filter tab.
   List<HomeSectionData> getSections(String selectedCategory) {
+    return _sectionsByTab[selectedCategory] ?? _sectionsByTab['all'] ?? const [];
+  }
+
+  Map<String, List<HomeSectionData>> _buildAllSections() {
     // ── Exercise Units (18 curriculum units + Question Builder + Directory) ──
     final sentenceBuilder = HomeTileItem(
       id: 'ex_unit_10',
@@ -720,127 +726,115 @@ class HomeSectionsBuilder {
       },
     );
 
-    // ── Tab Dispatch ──
-    if (selectedCategory == 'exercises') {
-      return [
-        HomeSectionData(
-          id: 'ex_section_structure',
-          title: 'Sentence & Structure (7 Units)',
-          icon: Icons.reorder_rounded,
-          accentColor: Colors.indigo.shade400,
-          exercises: [
-            sentenceBuilder,
-            questionBuilder,
-            prepositionalPronouns,
-            indirectObjectPronouns,
-            conjunctions,
-            comparatives,
-            sentenceTransformations,
-          ],
-        ),
-        HomeSectionData(
-          id: 'ex_section_verbs',
-          title: 'Verb Mastery (5 Units)',
-          icon: Icons.school_rounded,
-          accentColor: Colors.purple.shade400,
-          exercises: [
-            verbConjugationQuiz,
-            unit2IrregularVerbs,
-            unit3Ser,
-            unit4IrregularVerbs,
-            unit5RegularVerbs,
-          ],
-        ),
-        HomeSectionData(
-          id: 'ex_section_thematic',
-          title: 'Thematic Vocabulary Units (8 Units)',
-          icon: Icons.home_work_rounded,
-          accentColor: Colors.teal.shade400,
-          exercises: [
-            unit12Rooms,
-            unit13HouseholdItems,
-            unit14BodyHealth,
-            unit15EverydayItems,
-            unit6NewVocab,
-            unit7MoreVocab,
-            unit8MonVocab,
-            allExercisesCard,
-          ],
-        ),
-      ];
-    }
+    final exercisesSections = [
+      HomeSectionData(
+        id: 'ex_section_structure',
+        title: 'Sentence & Structure (7 Units)',
+        icon: Icons.reorder_rounded,
+        accentColor: Colors.indigo.shade400,
+        exercises: [
+          sentenceBuilder,
+          questionBuilder,
+          prepositionalPronouns,
+          indirectObjectPronouns,
+          conjunctions,
+          comparatives,
+          sentenceTransformations,
+        ],
+      ),
+      HomeSectionData(
+        id: 'ex_section_verbs',
+        title: 'Verb Mastery (5 Units)',
+        icon: Icons.school_rounded,
+        accentColor: Colors.purple.shade400,
+        exercises: [
+          verbConjugationQuiz,
+          unit2IrregularVerbs,
+          unit3Ser,
+          unit4IrregularVerbs,
+          unit5RegularVerbs,
+        ],
+      ),
+      HomeSectionData(
+        id: 'ex_section_thematic',
+        title: 'Thematic Vocabulary Units (7 Units)',
+        icon: Icons.home_work_rounded,
+        accentColor: Colors.teal.shade400,
+        exercises: [
+          unit12Rooms,
+          unit13HouseholdItems,
+          unit14BodyHealth,
+          unit15EverydayItems,
+          unit6NewVocab,
+          unit7MoreVocab,
+          unit8MonVocab,
+          allExercisesCard,
+        ],
+      ),
+    ];
 
-    if (selectedCategory == 'topics') {
-      return [
-        HomeSectionData(
-          id: 'topics_all',
-          title: 'Explore by Topic (14 Topics)',
-          icon: Icons.category_rounded,
-          accentColor: Colors.orange.shade500,
-          exercises: [
-            ...kQuizCategories.map((c) => topicTilesMap[c.name]!),
-            topicGridPicker,
-          ],
-        ),
-      ];
-    }
+    final topicsSections = [
+      HomeSectionData(
+        id: 'topics_all',
+        title: 'Explore by Topic (13 Topics)',
+        icon: Icons.category_rounded,
+        accentColor: Colors.orange.shade500,
+        exercises: [
+          ...kQuizCategories.map((c) => topicTilesMap[c.name]).whereType<HomeTileItem>(),
+          topicGridPicker,
+        ],
+      ),
+    ];
 
-    if (selectedCategory == 'vocab') {
-      return [
-        HomeSectionData(
-          id: 'vocab_all',
-          title: 'Vocabulary & Flashcards',
-          icon: Icons.menu_book_rounded,
-          accentColor: Colors.blue.shade500,
-          exercises: [
-            vocabList,
-            vocabQuizCat,
-            vocabQuizQuick,
-            vocab100Phrases,
-            phraseTrainer,
-          ],
-        ),
-      ];
-    }
+    final vocabSections = [
+      HomeSectionData(
+        id: 'vocab_all',
+        title: 'Vocabulary & Flashcards',
+        icon: Icons.menu_book_rounded,
+        accentColor: Colors.blue.shade500,
+        exercises: [
+          vocabList,
+          vocabQuizCat,
+          vocabQuizQuick,
+          vocab100Phrases,
+          phraseTrainer,
+        ],
+      ),
+    ];
 
-    if (selectedCategory == 'grammar') {
-      return [
-        HomeSectionData(
-          id: 'grammar_all',
-          title: 'Grammar & Verbs',
-          icon: Icons.school_rounded,
-          accentColor: Colors.purple.shade400,
-          exercises: [
-            verbTrainer,
-            verbConjugationQuiz,
-            interrogatives,
-            prepositions,
-            grammarRules,
-            sentenceBuilder,
-          ],
-        ),
-      ];
-    }
+    final grammarSections = [
+      HomeSectionData(
+        id: 'grammar_all',
+        title: 'Grammar & Verbs',
+        icon: Icons.school_rounded,
+        accentColor: Colors.purple.shade400,
+        exercises: [
+          verbTrainer,
+          verbConjugationQuiz,
+          interrogatives,
+          prepositions,
+          grammarRules,
+          sentenceBuilder,
+        ],
+      ),
+    ];
 
-    if (selectedCategory == 'speaking') {
-      return [
-        HomeSectionData(
-          id: 'speaking_all',
-          title: 'Speaking & Phrases',
-          icon: Icons.mic_rounded,
-          accentColor: Colors.deepOrange.shade400,
-          exercises: [
-            voiceTrainer,
-            phraseTrainer,
-            vocab100Phrases,
-            speakingListenRepeat,
-          ],
-        ),
-      ];
-    }
+    final speakingSections = [
+      HomeSectionData(
+        id: 'speaking_all',
+        title: 'Speaking & Phrases',
+        icon: Icons.mic_rounded,
+        accentColor: Colors.deepOrange.shade400,
+        exercises: [
+          voiceTrainer,
+          phraseTrainer,
+          vocab100Phrases,
+          speakingListenRepeat,
+        ],
+      ),
+    ];
 
-    // Default: 'all' (Streamlined Overview)
-    return [
+    final allSections = [
       HomeSectionData(
         id: 'fast_practice',
         title: 'Fast Practice',
@@ -875,10 +869,7 @@ class HomeSectionsBuilder {
         actionLabel: 'View All',
         onActionTap: () => selectCategory('topics'),
         exercises: [
-          topicTilesMap['Food & Drink']!,
-          topicTilesMap['House & Rooms']!,
-          topicTilesMap['Travel & Directions']!,
-          topicTilesMap['Body & Health']!,
+          ...kQuizCategories.take(4).map((c) => topicTilesMap[c.name]).whereType<HomeTileItem>(),
         ],
       ),
       HomeSectionData(
@@ -908,5 +899,14 @@ class HomeSectionsBuilder {
         ],
       ),
     ];
+
+    return {
+      'all': allSections,
+      'exercises': exercisesSections,
+      'topics': topicsSections,
+      'vocab': vocabSections,
+      'grammar': grammarSections,
+      'speaking': speakingSections,
+    };
   }
 }

@@ -7,7 +7,7 @@ import 'quiz_category.dart';
 class CategorySelectionScreen extends ConsumerWidget {
   const CategorySelectionScreen({super.key});
 
-  final List<String> categories = kAllQuizCategoryNames;
+  List<String> get categories => kAllQuizCategoryNames;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

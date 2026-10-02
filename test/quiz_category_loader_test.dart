@@ -45,8 +45,10 @@ void main() {
       final Map<String, int> countsByCategory = {};
 
       for (final q in jsonList) {
-        final cat = (q['category'] ?? q['cat'] ?? 'General') as String;
-        countsByCategory[cat] = (countsByCategory[cat] ?? 0) + 1;
+        final cat = (q['category'] ?? q['cat']) as String?;
+        if (cat != null) {
+          countsByCategory[cat] = (countsByCategory[cat] ?? 0) + 1;
+        }
       }
 
       for (final catInfo in kQuizCategories) {

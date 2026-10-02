@@ -113,21 +113,9 @@ const List<QuizCategoryInfo> kQuizCategories = [
 ];
 
 /// The full list of categories used by [CategorySelectionScreen], starting with 'All'.
-const List<String> kAllQuizCategoryNames = [
+List<String> get kAllQuizCategoryNames => [
   'All',
-  'Basics',
-  'Family',
-  'Food & Drink',
-  'Travel & Directions',
-  'Time & Numbers',
-  'Grammar & Verbs',
-  'Hobbies & Leisure',
-  'Office & Work',
-  'House & Rooms',
-  'Household Items',
-  'Body & Health',
-  'Everyday Items',
-  'General',
+  ...kQuizCategories.map((c) => c.name),
 ];
 
 /// Helper to get the canonical icon for a category string.
