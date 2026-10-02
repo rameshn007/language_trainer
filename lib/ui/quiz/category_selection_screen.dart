@@ -2,26 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
 import 'quiz_screen.dart';
+import 'quiz_category.dart';
 
 class CategorySelectionScreen extends ConsumerWidget {
   const CategorySelectionScreen({super.key});
 
-  final List<String> categories = const [
-    'All',
-    'Basics',
-    'Family',
-    'Food & Drink',
-    'Travel & Directions',
-    'Time & Numbers',
-    'Grammar & Verbs',
-    'Hobbies & Leisure',
-    'Office & Work',
-    'House & Rooms',
-    'Household Items',
-    'Body & Health',
-    'Everyday Items',
-    'General',
-  ];
+  List<String> get categories => kAllQuizCategoryNames;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -138,35 +124,6 @@ class _CategoryCard extends StatelessWidget {
   }
 
   IconData _getIconForCategory(String category) {
-    switch (category) {
-      case 'Basics':
-        return Icons.chat_bubble_outline;
-      case 'Family':
-        return Icons.family_restroom;
-      case 'Food & Drink':
-        return Icons.restaurant;
-      case 'Travel & Directions':
-        return Icons.map;
-      case 'Time & Numbers':
-        return Icons.schedule;
-      case 'Grammar & Verbs':
-        return Icons.school;
-      case 'Hobbies & Leisure':
-        return Icons.sports_tennis;
-      case 'Office & Work':
-        return Icons.work_outline;
-      case 'House & Rooms':
-        return Icons.home_rounded;
-      case 'Household Items':
-        return Icons.kitchen_rounded;
-      case 'Body & Health':
-        return Icons.health_and_safety_rounded;
-      case 'Everyday Items':
-        return Icons.backpack_rounded;
-      case 'General':
-        return Icons.grid_view;
-      default:
-        return Icons.all_inclusive;
-    }
+    return getIconForQuizCategory(category);
   }
 }

@@ -1,4 +1,5 @@
 /.dart_tool
+/.dart_home
 /.dartServer
 .flutter-plugins-dependencies
 /.idea

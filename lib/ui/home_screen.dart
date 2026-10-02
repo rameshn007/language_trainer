@@ -8,13 +8,6 @@ import 'package:animate_do/animate_do.dart';
 import '../services/markdown_parser.dart';
 import '../services/progress_service.dart';
 import '../models/progress_data.dart';
-import 'quiz/category_selection_screen.dart';
-import 'vocabulary/vocabulary_list_screen.dart';
-import 'exercise/exercise_list_screen.dart';
-import 'voice_trainer_screen.dart';
-import 'phrase_trainer_screen.dart';
-import 'quiz/verb_conjugation_screen.dart';
-import 'quiz/verb_phrase_trainer_screen.dart';
 import 'quiz/quiz_screen.dart';
 import '../main.dart';
 import 'widgets/home_screen_background.dart';
@@ -22,12 +15,9 @@ import 'settings_screen.dart';
 import 'stats_screen.dart';
 import '../services/verb_service.dart';
 import '../models/language_item.dart';
-import 'exercise/exercise_screen.dart';
-import 'quiz/interrogative_quiz_screen.dart';
-import 'quiz/grammar_quiz_screen.dart';
-import 'quiz/preposition_quiz_screen.dart';
 import 'listen_repeat/listen_repeat_screen.dart';
 import '../utils/iphone_duo_helper.dart';
+import 'home_tiles_data.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -313,10 +303,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final isLandscape =
         MediaQuery.orientationOf(context) == Orientation.landscape;
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final allCategories = _getCategories(context, items, _isLoading);
-    final filteredCategories = _selectedCategory == 'all'
-        ? allCategories
-        : allCategories.where((c) => c.id == _selectedCategory).toList();
+    final sectionsBuilder = HomeSectionsBuilder(
+      context: context,
+      isQuizDisabled: items.isEmpty || _isLoading,
+      pushScreen: _pushScreen,
+      selectCategory: (cat) => setState(() => _selectedCategory = cat),
+    );
+    final pills = sectionsBuilder.getPills();
+    final displaySections = sectionsBuilder.getSections(_selectedCategory);
 
     return Scaffold(
       extendBody: true,
@@ -401,8 +395,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 isDuo: isDuo,
                 isDark: isDark,
                 contentPadding: contentPadding,
-                categories: allCategories,
-                filteredCategories: filteredCategories,
+                pills: pills,
+                displaySections: displaySections,
               )
             else
               _buildPortraitBody(
@@ -412,8 +406,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 isDuo: isDuo,
                 isDark: isDark,
                 contentPadding: contentPadding,
-                categories: allCategories,
-                filteredCategories: filteredCategories,
+                pills: pills,
+                displaySections: displaySections,
               ),
           ],
         ),
@@ -471,8 +465,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required bool isDuo,
     required bool isDark,
     required EdgeInsets contentPadding,
-    required List<_CategoryData> categories,
-    required List<_CategoryData> filteredCategories,
+    required List<HomeCategoryPill> pills,
+    required List<HomeSectionData> displaySections,
   }) {
     final view = View.maybeOf(context);
     final fallbackWidth = view != null && view.devicePixelRatio > 0
@@ -497,7 +491,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildCategoryPills(categories: categories, isDark: isDark),
+          _buildCategoryPills(pills: pills, isDark: isDark),
           const SizedBox(height: 10),
           Expanded(
             child: Row(
@@ -549,7 +543,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             context,
                             index,
                           ) {
-                            final cat = filteredCategories[index];
+                            final cat = displaySections[index];
                             return _buildCategorySection(
                               context: context,
                               title: cat.title,
@@ -558,8 +552,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               exercises: cat.exercises,
                               isDark: isDark,
                               availableWidth: rightAvailableWidth,
+                              actionLabel: cat.actionLabel,
+                              onActionTap: cat.onActionTap,
                             );
-                          }, childCount: filteredCategories.length),
+                          }, childCount: displaySections.length),
                         ),
                       const SliverPadding(padding: EdgeInsets.only(bottom: 60)),
                     ],
@@ -580,8 +576,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required bool isDuo,
     required bool isDark,
     required EdgeInsets contentPadding,
-    required List<_CategoryData> categories,
-    required List<_CategoryData> filteredCategories,
+    required List<HomeCategoryPill> pills,
+    required List<HomeSectionData> displaySections,
   }) {
     final view = View.maybeOf(context);
     final fallbackWidth = view != null && view.devicePixelRatio > 0
@@ -643,11 +639,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           _buildCategoryPills(
-                            categories: categories,
+                            pills: pills,
                             isDark: isDark,
                           ),
                           const SizedBox(height: 14),
-                          ...filteredCategories.map(
+                          ...displaySections.map(
                             (cat) => _buildCategorySection(
                               context: context,
                               title: cat.title,
@@ -656,6 +652,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               exercises: cat.exercises,
                               isDark: isDark,
                               availableWidth: availableWidth,
+                              actionLabel: cat.actionLabel,
+                              onActionTap: cat.onActionTap,
                             ),
                           ),
                         ],
@@ -714,30 +712,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 
   Widget _buildCategoryPills({
-    required List<_CategoryData> categories,
+    required List<HomeCategoryPill> pills,
     required bool isDark,
   }) {
-    final totalCount = categories.fold<int>(
-      0,
-      (sum, cat) => sum + cat.exercises.length,
-    );
-    final pills = [
-      _CategoryFilterItem(
-        id: 'all',
-        label: 'All',
-        icon: Icons.auto_awesome_mosaic_rounded,
-        count: totalCount,
-      ),
-      ...categories.map(
-        (cat) => _CategoryFilterItem(
-          id: cat.id,
-          label: cat.shortTitle,
-          icon: cat.icon,
-          count: cat.exercises.length,
-        ),
-      ),
-    ];
-
     return Wrap(
       spacing: 8,
       runSpacing: 8,
@@ -868,9 +845,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required String title,
     required IconData icon,
     required Color accentColor,
-    required List<_ExerciseItem> exercises,
+    required List<HomeTileItem> exercises,
     required bool isDark,
     required double availableWidth,
+    String? actionLabel,
+    VoidCallback? onActionTap,
   }) {
     final textScaler = MediaQuery.textScalerOf(context);
     final scale = textScaler.scale(1.0);
@@ -991,6 +970,56 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ),
                   ),
                 ),
+                if (actionLabel != null && onActionTap != null) ...[
+                  const SizedBox(width: 6),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                      maxWidth: (availableWidth * 0.45).clamp(60.0, 140.0),
+                    ),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: Alignment.centerRight,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: onActionTap,
+                          borderRadius: BorderRadius.circular(12),
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(minHeight: 44.0),
+                            child: Center(
+                              widthFactor: 1.0,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      actionLabel,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w700,
+                                        color: accentColor,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 3),
+                                    Icon(
+                                      Icons.arrow_forward_ios_rounded,
+                                      size: 10,
+                                      color: accentColor,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -1002,7 +1031,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   Widget _buildActionCard({
     required BuildContext context,
-    required _ExerciseItem item,
+    required HomeTileItem item,
     required bool isDark,
   }) {
     final bool isEnabled = item.onPressed != null;
@@ -1077,16 +1106,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
-                        item.title,
-                        maxLines: 1,
-                        style: TextStyle(
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.bold,
-                          color: isEnabled
-                              ? fgColor
-                              : (isDark ? Colors.white38 : Colors.black38),
-                        ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              item.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 13.5,
+                                fontWeight: FontWeight.bold,
+                                color: isEnabled
+                                    ? fgColor
+                                    : (isDark ? Colors.white38 : Colors.black38),
+                              ),
+                            ),
+                          ),
+                          if (item.badge != null) ...[
+                            const SizedBox(width: 6),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 5,
+                                vertical: 1.5,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.22),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: Text(
+                                item.badge!,
+                                style: const TextStyle(
+                                  fontSize: 8.5,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ],
                       ),
                       const SizedBox(height: 2),
                       Text(
@@ -1161,249 +1219,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  List<_CategoryData> _getCategories(
-    BuildContext context,
-    List<LanguageItem> items,
-    bool isLoading,
-  ) {
-    return [
-      _CategoryData(
-        id: 'vocab',
-        title: 'Vocabulary & Flashcards',
-        shortTitle: 'Vocabulary',
-        icon: Icons.menu_book_rounded,
-        accentColor: Colors.blue.shade500,
-        exercises: [
-          _ExerciseItem(
-            id: 'vocab_list',
-            title: 'Vocabulary',
-            subtitle: 'Browse & search words',
-            icon: Icons.book_rounded,
-            color: Colors.blue.shade600,
-            onPressed: (offset) {
-              _pushScreen(const VocabularyListScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'vocab_quiz_cat',
-            title: 'Start Quiz',
-            subtitle: 'Category multi-choice',
-            icon: Icons.quiz_rounded,
-            color: Theme.of(context).colorScheme.primary,
-            onPressed: items.isEmpty || isLoading
-                ? null
-                : (offset) {
-                    _pushScreen(const CategorySelectionScreen(), offset);
-                  },
-          ),
-          _ExerciseItem(
-            id: 'vocab_quiz_quick',
-            title: 'Vocab Quiz',
-            subtitle: 'Rapid-fire challenge',
-            icon: Icons.local_fire_department_rounded,
-            color: Colors.amber.shade700,
-            onPressed: items.isEmpty || isLoading
-                ? null
-                : (offset) {
-                    _pushScreen(
-                      const QuizScreen(isVocabularyQuiz: true),
-                      offset,
-                    );
-                  },
-          ),
-        ],
-      ),
-      _CategoryData(
-        id: 'grammar',
-        title: 'Grammar & Verbs',
-        shortTitle: 'Grammar',
-        icon: Icons.school_rounded,
-        accentColor: Colors.purple.shade400,
-        exercises: [
-          _ExerciseItem(
-            id: 'verb_trainer',
-            title: 'Verb Trainer',
-            subtitle: 'Conjugations & tenses',
-            icon: Icons.school_rounded,
-            color: Colors.purple,
-            onPressed: (offset) {
-              _pushScreen(const VerbConjugationScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'interrogatives',
-            title: 'Interrogatives',
-            subtitle: 'Question words & usage',
-            icon: Icons.contact_support_rounded,
-            color: Colors.cyan.shade700,
-            onPressed: (offset) {
-              _pushScreen(const InterrogativeQuizScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'prepositions',
-            title: 'Prepositions',
-            subtitle: 'Rules & connectors',
-            icon: Icons.link_rounded,
-            color: Colors.pink.shade700,
-            onPressed: (offset) {
-              _pushScreen(const PrepositionQuizScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'grammar_rules',
-            title: 'Grammar Rules',
-            subtitle: 'Essential syntax & tips',
-            icon: Icons.menu_book_rounded,
-            color: Colors.blue.shade700,
-            onPressed: (offset) {
-              _pushScreen(const GrammarQuizScreen(), offset);
-            },
-          ),
-        ],
-      ),
-      _CategoryData(
-        id: 'practice',
-        title: 'Practice & Exercises',
-        shortTitle: 'Practice',
-        icon: Icons.assignment_rounded,
-        accentColor: Colors.teal.shade400,
-        exercises: [
-          _ExerciseItem(
-            id: 'exercises_list',
-            title: 'Exercises',
-            subtitle: 'Structured practice units',
-            icon: Icons.assignment_rounded,
-            color: Theme.of(context).colorScheme.secondary,
-            onPressed: (offset) {
-              _pushScreen(const ExerciseListScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'sentence_builder',
-            title: 'Sentence Builder',
-            subtitle: 'Word order & pronouns',
-            icon: Icons.reorder_rounded,
-            color: Colors.indigo,
-            onPressed: (offset) {
-              _pushScreen(
-                const ExerciseScreen(
-                  unitName: 'Unit 10: Word Order & Pronouns',
-                  unitPath: 'assets/data/exercises/unit_10.json',
-                ),
-                offset,
-              );
-            },
-          ),
-          _ExerciseItem(
-            id: 'question_builder',
-            title: 'Question Builder',
-            subtitle: 'Make the question',
-            icon: Icons.chat_rounded,
-            color: Colors.lightBlue.shade600,
-            onPressed: (offset) {
-              _pushScreen(
-                const ExerciseScreen(
-                  unitName: 'Question Builder: Make the Question',
-                  unitPath: 'assets/data/exercises/question_builder.json',
-                ),
-                offset,
-              );
-            },
-          ),
-        ],
-      ),
-      _CategoryData(
-        id: 'speaking',
-        title: 'Speaking & Phrases',
-        shortTitle: 'Speaking',
-        icon: Icons.mic_rounded,
-        accentColor: Colors.deepOrange.shade400,
-        exercises: [
-          _ExerciseItem(
-            id: 'voice_trainer',
-            title: 'Voice Trainer',
-            subtitle: 'Speech & pronunciation',
-            icon: Icons.mic_rounded,
-            color: Colors.deepOrange,
-            onPressed: (offset) {
-              _pushScreen(const VoiceTrainerScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: 'phrase_trainer',
-            title: 'Phrase Trainer',
-            subtitle: 'Everyday conversation',
-            icon: Icons.translate_rounded,
-            color: Colors.green,
-            onPressed: (offset) {
-              _pushScreen(const PhraseTrainerScreen(), offset);
-            },
-          ),
-          _ExerciseItem(
-            id: '100_phrases',
-            title: '100 Phrases',
-            subtitle: 'Essential daily phrases',
-            icon: Icons.style_rounded,
-            color: Colors.teal,
-            onPressed: (offset) {
-              _pushScreen(const VerbPhraseTrainerScreen(), offset);
-            },
-          ),
-        ],
-      ),
-    ];
-  }
-}
-
-class _ExerciseItem {
-  final String id;
-  final String title;
-  final String subtitle;
-  final IconData icon;
-  final Color color;
-  final void Function(Offset offset)? onPressed;
-
-  const _ExerciseItem({
-    required this.id,
-    required this.title,
-    required this.subtitle,
-    required this.icon,
-    required this.color,
-    required this.onPressed,
-  });
-}
-
-class _CategoryFilterItem {
-  final String id;
-  final String label;
-  final IconData icon;
-  final int count;
-
-  const _CategoryFilterItem({
-    required this.id,
-    required this.label,
-    required this.icon,
-    required this.count,
-  });
-}
-
-class _CategoryData {
-  final String id;
-  final String title;
-  final String shortTitle;
-  final IconData icon;
-  final Color accentColor;
-  final List<_ExerciseItem> exercises;
-
-  const _CategoryData({
-    required this.id,
-    required this.title,
-    required this.shortTitle,
-    required this.icon,
-    required this.accentColor,
-    required this.exercises,
-  });
 }
 
 class _StatsCardContent extends StatelessWidget {
