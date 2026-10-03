@@ -500,5 +500,407 @@
     "english": "I take a bottle of fresh water for the walk.",
     "category": "Everyday Items",
     "notes": "Quotidiano: Garrafa de Água"
+  },
+  {
+    "portuguese": "Jantamos todos os dias à mesa da sala de jantar.",
+    "english": "We have dinner every day at the dining room table.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Sala de Jantar"
+  },
+  {
+    "portuguese": "O corredor comprido liga a sala a todos os quartos.",
+    "english": "The long corridor connects the living room to all bedrooms.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Corredor"
+  },
+  {
+    "portuguese": "Deixo o casaco e as chaves no hall de entrada.",
+    "english": "I leave my coat and keys in the entrance hall.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Hall de Entrada"
+  },
+  {
+    "portuguese": "Trabalho em casa no computador dentro do escritório.",
+    "english": "I work from home on the computer inside the home office.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Escritório"
+  },
+  {
+    "portuguese": "Guardamos as ferramentas e caixas velhas na cave.",
+    "english": "We keep tools and old boxes in the basement.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Cave"
+  },
+  {
+    "portuguese": "O sótão fica por baixo do telhado e guarda recordações.",
+    "english": "The attic is under the roof and holds keepsakes.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Sótão"
+  },
+  {
+    "portuguese": "No verão aproveitamos o sol no terraço do prédio.",
+    "english": "In summer we enjoy the sunshine on the building terrace.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Terraço"
+  },
+  {
+    "portuguese": "Nós arrumamos as roupas limpas dentro do roupeiro.",
+    "english": "We tidy the clean clothes inside the wardrobe.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Roupeiro"
+  },
+  {
+    "portuguese": "No inverno acendemos a lareira a lenha para aquecer a sala.",
+    "english": "In winter we light the wood fireplace to warm the room.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Lareira"
+  },
+  {
+    "portuguese": "O prédio tem três andares e uma loja no rés do chão.",
+    "english": "The building has three storeys and a shop on the ground floor.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Rés do Chão"
+  },
+  {
+    "portuguese": "Os meus vizinhos simpáticos moram no primeiro andar.",
+    "english": "My friendly neighbours live on the first floor.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Primeiro Andar"
+  },
+  {
+    "portuguese": "O apartamento espaçoso fica no segundo piso.",
+    "english": "The spacious apartment is on the second floor.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Andar e Piso"
+  },
+  {
+    "portuguese": "O telhado da casa foi arranjado antes das chuvas de inverno.",
+    "english": "The house roof was repaired before the winter rains.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Telhado"
+  },
+  {
+    "portuguese": "Fecho sempre a porta à chave quando saio de casa.",
+    "english": "I always lock the door with the key when leaving home.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Porta"
+  },
+  {
+    "portuguese": "Abro a janela do quarto para deixar entrar ar fresco.",
+    "english": "I open the bedroom window to let fresh air in.",
+    "category": "House & Rooms",
+    "notes": "A Casa: Janela"
+  },
+  {
+    "portuguese": "Guardamos o peixe congelado e o gelo no congelador.",
+    "english": "We keep frozen fish and ice in the freezer.",
+    "category": "Household Items",
+    "notes": "Objetos: Congelador"
+  },
+  {
+    "portuguese": "Ponho a roupa suja e o detergente na máquina de lavar roupa.",
+    "english": "I put the dirty clothes and detergent in the washing machine.",
+    "category": "Household Items",
+    "notes": "Objetos: Máquina de Lavar Roupa"
+  },
+  {
+    "portuguese": "Cozinhamos a sopa em lume brando no fogão.",
+    "english": "We cook the soup over low heat on the stove.",
+    "category": "Household Items",
+    "notes": "Objetos: Fogão"
+  },
+  {
+    "portuguese": "Abro a tábua de engomar para engomar a roupa limpa.",
+    "english": "I set up the ironing board to iron the clean clothes.",
+    "category": "Household Items",
+    "notes": "Objetos: Tábua de Engomar"
+  },
+  {
+    "portuguese": "Varro o chão da cozinha com a vassoura nova.",
+    "english": "I sweep the kitchen floor with the new broom.",
+    "category": "Household Items",
+    "notes": "Objetos: Vassoura"
+  },
+  {
+    "portuguese": "Limpo o chão com a esfregona húmida e desinfetante.",
+    "english": "I clean the floor with the damp mop and disinfectant.",
+    "category": "Household Items",
+    "notes": "Objetos: Esfregona"
+  },
+  {
+    "portuguese": "Ajeito a almofada confortável na cama antes de dormir.",
+    "english": "I arrange the comfortable pillow on the bed before sleeping.",
+    "category": "Household Items",
+    "notes": "Objetos: Almofada"
+  },
+  {
+    "portuguese": "Temos um edredão muito quente para as noites frias de inverno.",
+    "english": "We have a very warm duvet for cold winter nights.",
+    "category": "Household Items",
+    "notes": "Objetos: Edredão"
+  },
+  {
+    "portuguese": "Mudamos os lençóis lavados e frescos todas as semanas.",
+    "english": "We change the fresh, washed bed sheets every week.",
+    "category": "Household Items",
+    "notes": "Objetos: Lençóis"
+  },
+  {
+    "portuguese": "Fecho as cortinas da sala ao anoitecer para ter privacidade.",
+    "english": "I close the living room curtains at dusk for privacy.",
+    "category": "Household Items",
+    "notes": "Objetos: Cortinas"
+  },
+  {
+    "portuguese": "Acendo o candeeiro da secretária para estudar à noite.",
+    "english": "I turn on the desk lamp to study at night.",
+    "category": "Household Items",
+    "notes": "Objetos: Candeeiro"
+  },
+  {
+    "portuguese": "Enxugo o rosto numa toalha macia e lavada.",
+    "english": "I dry my face on a soft, washed towel.",
+    "category": "Household Items",
+    "notes": "Objetos: Toalha"
+  },
+  {
+    "portuguese": "A água para a massa ferve dentro da panela grande.",
+    "english": "The water for the pasta is boiling inside the large pot.",
+    "category": "Household Items",
+    "notes": "Objetos: Panela"
+  },
+  {
+    "portuguese": "Frito dois ovos na frigideira com um pouco de azeite.",
+    "english": "I fry two eggs in the frying pan with a little olive oil.",
+    "category": "Household Items",
+    "notes": "Objetos: Frigideira"
+  },
+  {
+    "portuguese": "Arrumamos os talheres limpos na primeira gaveta da cozinha.",
+    "english": "We put the clean cutlery away in the first kitchen drawer.",
+    "category": "Household Items",
+    "notes": "Objetos: Talheres"
+  },
+  {
+    "portuguese": "Uso o garfo e a faca para comer o bife.",
+    "english": "I use the fork and knife to eat the steak.",
+    "category": "Household Items",
+    "notes": "Objetos: Garfo"
+  },
+  {
+    "portuguese": "Esta faca de cozinha corta os legumes com muita facilidade.",
+    "english": "This kitchen knife cuts vegetables very easily.",
+    "category": "Household Items",
+    "notes": "Objetos: Faca"
+  },
+  {
+    "portuguese": "Mexo o chá quente com uma colher pequena de sobremesa.",
+    "english": "I stir the hot tea with a small dessert spoon.",
+    "category": "Household Items",
+    "notes": "Objetos: Colher"
+  },
+  {
+    "portuguese": "Sirvo o peixe grelhado num prato branco grande.",
+    "english": "I serve the grilled fish on a large white plate.",
+    "category": "Household Items",
+    "notes": "Objetos: Prato"
+  },
+  {
+    "portuguese": "Bebo sempre um copo de água fresca ao acordar.",
+    "english": "I always drink a glass of fresh water upon waking.",
+    "category": "Household Items",
+    "notes": "Objetos: Copo"
+  },
+  {
+    "portuguese": "A torneira da casa de banho pinga e precisa de arranjo.",
+    "english": "The bathroom tap is dripping and needs repair.",
+    "category": "Household Items",
+    "notes": "Objetos: Torneira"
+  },
+  {
+    "portuguese": "Tenho o nariz entupido por causa da constipação de inverno.",
+    "english": "I have a blocked nose because of the winter cold.",
+    "category": "Body & Health",
+    "notes": "Saúde: Nariz"
+  },
+  {
+    "portuguese": "Abro a boca no consultório para o médico examinar a garganta.",
+    "english": "I open my mouth at the clinic for the doctor to examine my throat.",
+    "category": "Body & Health",
+    "notes": "Saúde: Boca"
+  },
+  {
+    "portuguese": "Ponho batom hidratante nos lábios ressequidos com o frio.",
+    "english": "I put moisturising lip balm on dry lips in the cold.",
+    "category": "Body & Health",
+    "notes": "Saúde: Lábios"
+  },
+  {
+    "portuguese": "Queimei a língua com a sopa que estava muito quente.",
+    "english": "I burned my tongue with the soup that was very hot.",
+    "category": "Body & Health",
+    "notes": "Saúde: Língua"
+  },
+  {
+    "portuguese": "Sinto uma dor ligeira nos ouvidos com o vento frio.",
+    "english": "I feel a slight pain in my ears from the cold wind.",
+    "category": "Body & Health",
+    "notes": "Saúde: Ouvidos"
+  },
+  {
+    "portuguese": "Tenho as orelhas geladas após caminhar na rua.",
+    "english": "My ears are freezing after walking outside.",
+    "category": "Body & Health",
+    "notes": "Saúde: Orelhas"
+  },
+  {
+    "portuguese": "Sinto uma grande tensão nos ombros após horas ao computador.",
+    "english": "I feel great tension in my shoulders after hours at the computer.",
+    "category": "Body & Health",
+    "notes": "Saúde: Ombros"
+  },
+  {
+    "portuguese": "Respiro fundo e sinto o ar fresco entrar no peito.",
+    "english": "I breathe deeply and feel fresh air entering my chest.",
+    "category": "Body & Health",
+    "notes": "Saúde: Peito"
+  },
+  {
+    "portuguese": "Fiz exercício no ginásio e sinto os braços cansados.",
+    "english": "I worked out at the gym and my arms feel tired.",
+    "category": "Body & Health",
+    "notes": "Saúde: Braços"
+  },
+  {
+    "portuguese": "Bati com o cotovelo na esquina da mesa e doeu muito.",
+    "english": "I knocked my elbow on the corner of the table and it hurt a lot.",
+    "category": "Body & Health",
+    "notes": "Saúde: Cotovelo"
+  },
+  {
+    "portuguese": "Coloco o relógio de pulso no meu pulso esquerdo.",
+    "english": "I put the wristwatch on my left wrist.",
+    "category": "Body & Health",
+    "notes": "Saúde: Pulso"
+  },
+  {
+    "portuguese": "Cortei acidentalmente o dedo com papel e arde um pouco.",
+    "english": "I accidentally cut my finger with paper and it stings a bit.",
+    "category": "Body & Health",
+    "notes": "Saúde: Dedos"
+  },
+  {
+    "portuguese": "Corto e limpo as unhas das mãos com cuidado.",
+    "english": "I trim and clean my fingernails carefully.",
+    "category": "Body & Health",
+    "notes": "Saúde: Unhas"
+  },
+  {
+    "portuguese": "Tenho dores de barriga ligeiras depois de almoçar depressa.",
+    "english": "I have slight stomach pains after having lunch too quickly.",
+    "category": "Body & Health",
+    "notes": "Saúde: Barriga"
+  },
+  {
+    "portuguese": "O meu estômago faz barulho quando estou muito tempo sem comer.",
+    "english": "My stomach rumbles when I go a long time without eating.",
+    "category": "Body & Health",
+    "notes": "Saúde: Estômago"
+  },
+  {
+    "portuguese": "Caminhei muito tempo a pé e sinto as pernas doridas.",
+    "english": "I walked for a long time on foot and my legs feel sore.",
+    "category": "Body & Health",
+    "notes": "Saúde: Pernas"
+  },
+  {
+    "portuguese": "Dói-me o joelho direito quando subo rampas ou escadas.",
+    "english": "My right knee hurts when I climb ramps or stairs.",
+    "category": "Body & Health",
+    "notes": "Saúde: Joelho"
+  },
+  {
+    "portuguese": "Tomei o medicamento indicado pelo médico para baixar a febre.",
+    "english": "I took the medicine prescribed by the doctor to lower the fever.",
+    "category": "Body & Health",
+    "notes": "Saúde: Febre"
+  },
+  {
+    "portuguese": "Bebo chá quente com limão e mel para aliviar a tosse.",
+    "english": "I drink hot tea with lemon and honey to relieve the cough.",
+    "category": "Body & Health",
+    "notes": "Saúde: Tosse"
+  },
+  {
+    "portuguese": "Ligo a ficha do computador diretamente à tomada da parede.",
+    "english": "I plug the computer plug directly into the wall socket.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Tomada"
+  },
+  {
+    "portuguese": "Guardo as moedas de troco dentro do pequeno porta-moedas.",
+    "english": "I keep change coins inside the small coin purse.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Porta-moedas"
+  },
+  {
+    "portuguese": "Mostro o meu Cartão de Cidadão na repartição pública.",
+    "english": "I show my Citizen Card at the public office.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Cartão de Cidadão"
+  },
+  {
+    "portuguese": "Comprei o bilhete simples na máquina automática da estação.",
+    "english": "I bought the single ticket at the station vending machine.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Bilhete"
+  },
+  {
+    "portuguese": "Levo o computador portátil e os cadernos na mochila.",
+    "english": "I take the laptop and notebooks in the backpack.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Mochila"
+  },
+  {
+    "portuguese": "Trabalho todos os dias no meu computador portátil.",
+    "english": "I work every day on my laptop.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Portátil"
+  },
+  {
+    "portuguese": "Escrevo os novos apontamentos da aula de português no caderno.",
+    "english": "I write new Portuguese class notes in the notebook.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Caderno"
+  },
+  {
+    "portuguese": "Emprestas-me uma caneta azul para assinar o documento?",
+    "english": "Will you lend me a blue pen to sign the document?",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Caneta"
+  },
+  {
+    "portuguese": "Arrumo as roupas com antecedência na mala de viagem.",
+    "english": "I pack my clothes in advance in the suitcase.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Mala de Viagem"
+  },
+  {
+    "portuguese": "Guardo os passaportes e faturas na gaveta da secretária.",
+    "english": "I keep passports and invoices in the desk drawer.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Gaveta"
+  },
+  {
+    "portuguese": "Tenho um pacote de lenços de papel no bolso do casaco.",
+    "english": "I have a packet of paper tissues in my coat pocket.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Lenço de Papel"
+  },
+  {
+    "portuguese": "Nos dias quentes de verão em Lisboa, uso um leque elegante.",
+    "english": "On hot summer days in Lisbon, I use an elegant hand fan.",
+    "category": "Everyday Items",
+    "notes": "Quotidiano: Leque"
   }
 ]

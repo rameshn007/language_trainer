@@ -389,7 +389,11 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
     _sessionConsecutiveFailures = 0;
     _shuffledPool.clear();
     _shuffledPool.addAll(allItems);
-    _shuffledPool.shuffle(_random);
+    // For modes that are already interleaved or paired (like topics and balanced mix),
+    // keep the structure produced by loadContent() so words remain paired with their phrases.
+    if (state.mode != ListenRepeatMode.topics && state.mode != ListenRepeatMode.all) {
+      _shuffledPool.shuffle(_random);
+    }
     AppLogger.log('[LR] shuffled ${_shuffledPool.length} items', name: 'ListenRepeat');
 
     _sessionId++;
@@ -986,11 +990,6 @@ class ListenRepeatViewModel extends Notifier<ListenRepeatState> with WidgetsBind
 
   Future<void> shufflePool() async {
     if (state.pool.isEmpty) return;
-
-    _shuffledPool.clear();
-    _shuffledPool.addAll(state.pool);
-    _shuffledPool.shuffle(_random);
-    state = state.copyWith(shuffledPool: List.unmodifiable(_shuffledPool));
 
     // A plain startSession() while playing hits the "already playing" 
     // guard, so the reshuffled deck would be ignored and the current 

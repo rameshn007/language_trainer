@@ -1,0 +1,974 @@
+[
+  {
+    "id": "topic_word_house_cozinha",
+    "portuguese": "a cozinha",
+    "english": "the kitchen",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "A Maria está a cozinhar o almoço na cozinha.",
+    "targetPhraseEn": "Maria is cooking lunch in the kitchen."
+  },
+  {
+    "id": "topic_word_house_quarto",
+    "portuguese": "o quarto",
+    "english": "the bedroom",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "À noite, durmo numa cama confortável no quarto.",
+    "targetPhraseEn": "At night, I sleep in a comfortable bed in the bedroom."
+  },
+  {
+    "id": "topic_word_house_casa_de_banho",
+    "portuguese": "a casa de banho",
+    "english": "the bathroom",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Tomo um duche quente na casa de banho todas as manhãs.",
+    "targetPhraseEn": "I take a warm shower in the bathroom every morning."
+  },
+  {
+    "id": "topic_word_house_sala_de_estar",
+    "portuguese": "a sala de estar",
+    "english": "the living room",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "A família reúne-se na sala de estar para ver televisão.",
+    "targetPhraseEn": "The family gathers in the living room to watch TV."
+  },
+  {
+    "id": "topic_word_house_sala_de_jantar",
+    "portuguese": "a sala de jantar",
+    "english": "the dining room",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Jantamos todos os dias à mesa da sala de jantar.",
+    "targetPhraseEn": "We have dinner every day at the dining room table."
+  },
+  {
+    "id": "topic_word_house_despensa",
+    "portuguese": "a despensa",
+    "english": "the pantry / larder",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Guardamos o arroz, as massas e o azeite na despensa.",
+    "targetPhraseEn": "We keep rice, pasta, and olive oil in the pantry."
+  },
+  {
+    "id": "topic_word_house_varanda",
+    "portuguese": "a varanda",
+    "english": "the balcony",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Gosto de beber café na varanda quando está sol.",
+    "targetPhraseEn": "I like drinking coffee on the balcony when it is sunny."
+  },
+  {
+    "id": "topic_word_house_marquise",
+    "portuguese": "a marquise",
+    "english": "the enclosed balcony / sunroom",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Estendemos a roupa lavada na marquise.",
+    "targetPhraseEn": "We hang the washed laundry in the sunroom."
+  },
+  {
+    "id": "topic_word_house_garagem",
+    "portuguese": "a garagem",
+    "english": "the garage",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "O carro fica protegido dentro da garagem.",
+    "targetPhraseEn": "The car stays protected inside the garage."
+  },
+  {
+    "id": "topic_word_house_jardim",
+    "portuguese": "o jardim",
+    "english": "the garden",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "As crianças brincam na relva do jardim.",
+    "targetPhraseEn": "The children play on the garden grass."
+  },
+  {
+    "id": "topic_word_house_escadas",
+    "portuguese": "as escadas",
+    "english": "the stairs",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Prefiro subir as escadas a pé em vez do elevador.",
+    "targetPhraseEn": "I prefer taking the stairs on foot instead of the lift."
+  },
+  {
+    "id": "topic_word_house_corredor",
+    "portuguese": "o corredor",
+    "english": "the corridor / hallway",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "O corredor comprido liga a sala a todos os quartos.",
+    "targetPhraseEn": "The long corridor connects the living room to all bedrooms."
+  },
+  {
+    "id": "topic_word_house_hall",
+    "portuguese": "o hall de entrada",
+    "english": "the entrance hall",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Deixo o casaco e as chaves no hall de entrada.",
+    "targetPhraseEn": "I leave my coat and keys in the entrance hall."
+  },
+  {
+    "id": "topic_word_house_escritorio",
+    "portuguese": "o escritório",
+    "english": "the home office / study",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Trabalho em casa no computador dentro do escritório.",
+    "targetPhraseEn": "I work from home on the computer inside the home office."
+  },
+  {
+    "id": "topic_word_house_cave",
+    "portuguese": "a cave",
+    "english": "the basement / cellar",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Guardamos as ferramentas e caixas velhas na cave.",
+    "targetPhraseEn": "We keep tools and old boxes in the basement."
+  },
+  {
+    "id": "topic_word_house_sotao",
+    "portuguese": "o sótão",
+    "english": "the attic",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "O sótão fica por baixo do telhado e guarda recordações.",
+    "targetPhraseEn": "The attic is under the roof and holds keepsakes."
+  },
+  {
+    "id": "topic_word_house_terraco",
+    "portuguese": "o terraço",
+    "english": "the terrace",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "No verão aproveitamos o sol no terraço do prédio.",
+    "targetPhraseEn": "In summer we enjoy the sunshine on the building terrace."
+  },
+  {
+    "id": "topic_word_house_roupeiro",
+    "portuguese": "o roupeiro",
+    "english": "the wardrobe",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Nós arrumamos as roupas limpas dentro do roupeiro.",
+    "targetPhraseEn": "We tidy the clean clothes inside the wardrobe."
+  },
+  {
+    "id": "topic_word_house_lareira",
+    "portuguese": "a lareira",
+    "english": "the fireplace",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "No inverno acendemos a lareira a lenha para aquecer a sala.",
+    "targetPhraseEn": "In winter we light the wood fireplace to warm the room."
+  },
+  {
+    "id": "topic_word_house_res_do_chao",
+    "portuguese": "o rés do chão",
+    "english": "the ground floor",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "O prédio tem três andares e uma loja no rés do chão.",
+    "targetPhraseEn": "The building has three storeys and a shop on the ground floor."
+  },
+  {
+    "id": "topic_word_house_primeiro_andar",
+    "portuguese": "o primeiro andar",
+    "english": "the first floor",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Os meus vizinhos simpáticos moram no primeiro andar.",
+    "targetPhraseEn": "My friendly neighbours live on the first floor."
+  },
+  {
+    "id": "topic_word_house_piso",
+    "portuguese": "o andar / piso",
+    "english": "the floor / storey",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "O apartamento espaçoso fica no segundo piso.",
+    "targetPhraseEn": "The spacious apartment is on the second floor."
+  },
+  {
+    "id": "topic_word_house_telhado",
+    "portuguese": "o telhado",
+    "english": "the roof",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "O telhado da casa foi arranjado antes das chuvas de inverno.",
+    "targetPhraseEn": "The house roof was repaired before the winter rains."
+  },
+  {
+    "id": "topic_word_house_porta",
+    "portuguese": "a porta",
+    "english": "the door",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Fecho sempre a porta à chave quando saio de casa.",
+    "targetPhraseEn": "I always lock the door with the key when leaving home."
+  },
+  {
+    "id": "topic_word_house_janela",
+    "portuguese": "a janela",
+    "english": "the window",
+    "category": "House & Rooms",
+    "notes": "Palavra • A Casa",
+    "targetPhrasePt": "Abro a janela do quarto para deixar entrar ar fresco.",
+    "targetPhraseEn": "I open the bedroom window to let fresh air in."
+  },
+  {
+    "id": "topic_word_household_frigorifico",
+    "portuguese": "o frigorífico",
+    "english": "the refrigerator",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Põe o leite no frigorífico para não se estragar.",
+    "targetPhraseEn": "Put the milk in the fridge so it does not spoil."
+  },
+  {
+    "id": "topic_word_household_congelador",
+    "portuguese": "o congelador",
+    "english": "the freezer",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Guardamos o peixe congelado e o gelo no congelador.",
+    "targetPhraseEn": "We keep frozen fish and ice in the freezer."
+  },
+  {
+    "id": "topic_word_household_maquina_loica",
+    "portuguese": "a máquina de lavar loiça",
+    "english": "the dishwasher",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Pomos a loiça suja na máquina de lavar loiça.",
+    "targetPhraseEn": "We put the dirty dishes in the dishwasher."
+  },
+  {
+    "id": "topic_word_household_maquina_roupa",
+    "portuguese": "a máquina de lavar roupa",
+    "english": "the washing machine",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Ponho a roupa suja e o detergente na máquina de lavar roupa.",
+    "targetPhraseEn": "I put the dirty clothes and detergent in the washing machine."
+  },
+  {
+    "id": "topic_word_household_fogao",
+    "portuguese": "o fogão",
+    "english": "the stove / cooker",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Cozinhamos a sopa em lume brando no fogão.",
+    "targetPhraseEn": "We cook the soup over low heat on the stove."
+  },
+  {
+    "id": "topic_word_household_forno",
+    "portuguese": "o forno",
+    "english": "the oven",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "O peixe assa no forno a duzentos graus.",
+    "targetPhraseEn": "The fish bakes in the oven at two hundred degrees."
+  },
+  {
+    "id": "topic_word_household_microondas",
+    "portuguese": "o micro-ondas",
+    "english": "the microwave",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Aqueço a sopa no micro-ondas em dois minutos.",
+    "targetPhraseEn": "I heat the soup in the microwave in two minutes."
+  },
+  {
+    "id": "topic_word_household_torradeira",
+    "portuguese": "a torradeira",
+    "english": "the toaster",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "De manhã, faço torradas na torradeira com manteiga.",
+    "targetPhraseEn": "In the morning, I make toast in the toaster with butter."
+  },
+  {
+    "id": "topic_word_household_chaleira",
+    "portuguese": "a chaleira elétrica",
+    "english": "the electric kettle",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Fervemos água na chaleira elétrica para o chá.",
+    "targetPhraseEn": "We boil water in the electric kettle for tea."
+  },
+  {
+    "id": "topic_word_household_aspirador",
+    "portuguese": "o aspirador",
+    "english": "the vacuum cleaner",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Vou passar o aspirador na carpete da sala.",
+    "targetPhraseEn": "I am going to vacuum the living room carpet."
+  },
+  {
+    "id": "topic_word_household_ferro",
+    "portuguese": "o ferro de engomar",
+    "english": "the clothes iron",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Preciso do ferro de engomar para passar esta camisa.",
+    "targetPhraseEn": "I need the iron to iron this shirt."
+  },
+  {
+    "id": "topic_word_household_tabua",
+    "portuguese": "a tábua de engomar",
+    "english": "the ironing board",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Abro a tábua de engomar para engomar a roupa limpa.",
+    "targetPhraseEn": "I set up the ironing board to iron the clean clothes."
+  },
+  {
+    "id": "topic_word_household_vassoura",
+    "portuguese": "a vassoura",
+    "english": "the broom",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Varro o chão da cozinha com a vassoura nova.",
+    "targetPhraseEn": "I sweep the kitchen floor with the new broom."
+  },
+  {
+    "id": "topic_word_household_esfregona",
+    "portuguese": "a esfregona",
+    "english": "the mop",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Limpo o chão com a esfregona húmida e desinfetante.",
+    "targetPhraseEn": "I clean the floor with the damp mop and disinfectant."
+  },
+  {
+    "id": "topic_word_household_caixote",
+    "portuguese": "o caixote do lixo",
+    "english": "the rubbish bin",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "O caixote do lixo está cheio, deita o saco fora.",
+    "targetPhraseEn": "The rubbish bin is full, throw the bag out."
+  },
+  {
+    "id": "topic_word_household_almofada",
+    "portuguese": "a almofada",
+    "english": "the pillow / cushion",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Ajeito a almofada confortável na cama antes de dormir.",
+    "targetPhraseEn": "I arrange the comfortable pillow on the bed before sleeping."
+  },
+  {
+    "id": "topic_word_household_edredao",
+    "portuguese": "o edredão",
+    "english": "the duvet / quilt",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Temos um edredão muito quente para as noites frias de inverno.",
+    "targetPhraseEn": "We have a very warm duvet for cold winter nights."
+  },
+  {
+    "id": "topic_word_household_lencois",
+    "portuguese": "os lençóis",
+    "english": "the bed sheets",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Mudamos os lençóis lavados e frescos todas as semanas.",
+    "targetPhraseEn": "We change the fresh, washed bed sheets every week."
+  },
+  {
+    "id": "topic_word_household_cortinas",
+    "portuguese": "as cortinas",
+    "english": "the curtains",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Fecho as cortinas da sala ao anoitecer para ter privacidade.",
+    "targetPhraseEn": "I close the living room curtains at dusk for privacy."
+  },
+  {
+    "id": "topic_word_household_candeeiro",
+    "portuguese": "o candeeiro",
+    "english": "the lamp",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Acendo o candeeiro da secretária para estudar à noite.",
+    "targetPhraseEn": "I turn on the desk lamp to study at night."
+  },
+  {
+    "id": "topic_word_household_espelho",
+    "portuguese": "o espelho",
+    "english": "the mirror",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Na casa de banho, ela olha-se ao espelho.",
+    "targetPhraseEn": "In the bathroom, she looks at herself in the mirror."
+  },
+  {
+    "id": "topic_word_household_toalha",
+    "portuguese": "a toalha",
+    "english": "the towel",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Enxugo o rosto numa toalha macia e lavada.",
+    "targetPhraseEn": "I dry my face on a soft, washed towel."
+  },
+  {
+    "id": "topic_word_household_panela",
+    "portuguese": "a panela",
+    "english": "the cooking pot / saucepan",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "A água para a massa ferve dentro da panela grande.",
+    "targetPhraseEn": "The water for the pasta is boiling inside the large pot."
+  },
+  {
+    "id": "topic_word_household_frigideira",
+    "portuguese": "a frigideira",
+    "english": "the frying pan",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Frito dois ovos na frigideira com um pouco de azeite.",
+    "targetPhraseEn": "I fry two eggs in the frying pan with a little olive oil."
+  },
+  {
+    "id": "topic_word_household_talheres",
+    "portuguese": "os talheres",
+    "english": "the cutlery",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Arrumamos os talheres limpos na primeira gaveta da cozinha.",
+    "targetPhraseEn": "We put the clean cutlery away in the first kitchen drawer."
+  },
+  {
+    "id": "topic_word_household_garfo",
+    "portuguese": "o garfo",
+    "english": "the fork",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Uso o garfo e a faca para comer o bife.",
+    "targetPhraseEn": "I use the fork and knife to eat the steak."
+  },
+  {
+    "id": "topic_word_household_faca",
+    "portuguese": "a faca",
+    "english": "the knife",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Esta faca de cozinha corta os legumes com muita facilidade.",
+    "targetPhraseEn": "This kitchen knife cuts vegetables very easily."
+  },
+  {
+    "id": "topic_word_household_colher",
+    "portuguese": "a colher",
+    "english": "the spoon",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Mexo o chá quente com uma colher pequena de sobremesa.",
+    "targetPhraseEn": "I stir the hot tea with a small dessert spoon."
+  },
+  {
+    "id": "topic_word_household_prato",
+    "portuguese": "o prato",
+    "english": "the plate",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Sirvo o peixe grelhado num prato branco grande.",
+    "targetPhraseEn": "I serve the grilled fish on a large white plate."
+  },
+  {
+    "id": "topic_word_household_copo",
+    "portuguese": "o copo",
+    "english": "the glass",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Bebo sempre um copo de água fresca ao acordar.",
+    "targetPhraseEn": "I always drink a glass of fresh water upon waking."
+  },
+  {
+    "id": "topic_word_household_chavena",
+    "portuguese": "a chávena",
+    "english": "the cup / mug",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "Tomamos o café expresso numa chávena pequena.",
+    "targetPhraseEn": "We drink espresso coffee in a small cup."
+  },
+  {
+    "id": "topic_word_household_torneira",
+    "portuguese": "a torneira",
+    "english": "the tap / faucet",
+    "category": "Household Items",
+    "notes": "Palavra • Objetos",
+    "targetPhrasePt": "A torneira da casa de banho pinga e precisa de arranjo.",
+    "targetPhraseEn": "The bathroom tap is dripping and needs repair."
+  },
+  {
+    "id": "topic_word_body_cabeca",
+    "portuguese": "a cabeça",
+    "english": "the head",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Dói-me muito a cabeça depois de trabalhar tanto tempo.",
+    "targetPhraseEn": "My head hurts a lot after working for so long."
+  },
+  {
+    "id": "topic_word_body_olhos",
+    "portuguese": "os olhos",
+    "english": "the eyes",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Tenho os olhos cansados de olhar para o ecrã.",
+    "targetPhraseEn": "My eyes are tired from looking at the screen."
+  },
+  {
+    "id": "topic_word_body_nariz",
+    "portuguese": "o nariz",
+    "english": "the nose",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Tenho o nariz entupido por causa da constipação de inverno.",
+    "targetPhraseEn": "I have a blocked nose because of the winter cold."
+  },
+  {
+    "id": "topic_word_body_boca",
+    "portuguese": "a boca",
+    "english": "the mouth",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Abro a boca no consultório para o médico examinar a garganta.",
+    "targetPhraseEn": "I open my mouth at the clinic for the doctor to examine my throat."
+  },
+  {
+    "id": "topic_word_body_labios",
+    "portuguese": "os lábios",
+    "english": "the lips",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Ponho batom hidratante nos lábios ressequidos com o frio.",
+    "targetPhraseEn": "I put moisturising lip balm on dry lips in the cold."
+  },
+  {
+    "id": "topic_word_body_dentes",
+    "portuguese": "os dentes",
+    "english": "the teeth",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Fui ao dentista ontem porque me doía um dente.",
+    "targetPhraseEn": "I went to the dentist yesterday because a tooth hurt."
+  },
+  {
+    "id": "topic_word_body_lingua",
+    "portuguese": "a língua",
+    "english": "the tongue",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Queimei a língua com a sopa que estava muito quente.",
+    "targetPhraseEn": "I burned my tongue with the soup that was very hot."
+  },
+  {
+    "id": "topic_word_body_garganta",
+    "portuguese": "a garganta",
+    "english": "the throat",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Estou com dores de garganta e febre alta.",
+    "targetPhraseEn": "I have a sore throat and a high fever."
+  },
+  {
+    "id": "topic_word_body_ouvidos",
+    "portuguese": "os ouvidos",
+    "english": "the ears (hearing / inner)",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Sinto uma dor ligeira nos ouvidos com o vento frio.",
+    "targetPhraseEn": "I feel a slight pain in my ears from the cold wind."
+  },
+  {
+    "id": "topic_word_body_orelhas",
+    "portuguese": "as orelhas",
+    "english": "the ears (outer)",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Tenho as orelhas geladas após caminhar na rua.",
+    "targetPhraseEn": "My ears are freezing after walking outside."
+  },
+  {
+    "id": "topic_word_body_pescoco",
+    "portuguese": "o pescoço",
+    "english": "the neck",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Ponho um cachecol de lã no pescoço para não apanhar frio.",
+    "targetPhraseEn": "I put a wool scarf around my neck not to catch cold."
+  },
+  {
+    "id": "topic_word_body_ombros",
+    "portuguese": "os ombros",
+    "english": "the shoulders",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Sinto uma grande tensão nos ombros após horas ao computador.",
+    "targetPhraseEn": "I feel great tension in my shoulders after hours at the computer."
+  },
+  {
+    "id": "topic_word_body_peito",
+    "portuguese": "o peito",
+    "english": "the chest",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Respiro fundo e sinto o ar fresco entrar no peito.",
+    "targetPhraseEn": "I breathe deeply and feel fresh air entering my chest."
+  },
+  {
+    "id": "topic_word_body_costas",
+    "portuguese": "as costas",
+    "english": "the back",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Trabalho sentado e estou com dores nas costas.",
+    "targetPhraseEn": "I work sitting down and I have back pain."
+  },
+  {
+    "id": "topic_word_body_bracos",
+    "portuguese": "os braços",
+    "english": "the arms",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Fiz exercício no ginásio e sinto os braços cansados.",
+    "targetPhraseEn": "I worked out at the gym and my arms feel tired."
+  },
+  {
+    "id": "topic_word_body_cotovelo",
+    "portuguese": "o cotovelo",
+    "english": "the elbow",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Bati com o cotovelo na esquina da mesa e doeu muito.",
+    "targetPhraseEn": "I knocked my elbow on the corner of the table and it hurt a lot."
+  },
+  {
+    "id": "topic_word_body_pulso",
+    "portuguese": "o pulso",
+    "english": "the wrist",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Coloco o relógio de pulso no meu pulso esquerdo.",
+    "targetPhraseEn": "I put the wristwatch on my left wrist."
+  },
+  {
+    "id": "topic_word_body_maos",
+    "portuguese": "as mãos",
+    "english": "the hands",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Lavo sempre as mãos com sabão antes das refeições.",
+    "targetPhraseEn": "I always wash my hands with soap before meals."
+  },
+  {
+    "id": "topic_word_body_dedos",
+    "portuguese": "os dedos",
+    "english": "the fingers",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Cortei acidentalmente o dedo com papel e arde um pouco.",
+    "targetPhraseEn": "I accidentally cut my finger with paper and it stings a bit."
+  },
+  {
+    "id": "topic_word_body_unhas",
+    "portuguese": "as unhas",
+    "english": "the nails",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Corto e limpo as unhas das mãos com cuidado.",
+    "targetPhraseEn": "I trim and clean my fingernails carefully."
+  },
+  {
+    "id": "topic_word_body_barriga",
+    "portuguese": "a barriga",
+    "english": "the belly",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Tenho dores de barriga ligeiras depois de almoçar depressa.",
+    "targetPhraseEn": "I have slight stomach pains after having lunch too quickly."
+  },
+  {
+    "id": "topic_word_body_estomago",
+    "portuguese": "o estômago",
+    "english": "the stomach",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "O meu estômago faz barulho quando estou muito tempo sem comer.",
+    "targetPhraseEn": "My stomach rumbles when I go a long time without eating."
+  },
+  {
+    "id": "topic_word_body_pernas",
+    "portuguese": "as pernas",
+    "english": "the legs",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Caminhei muito tempo a pé e sinto as pernas doridas.",
+    "targetPhraseEn": "I walked for a long time on foot and my legs feel sore."
+  },
+  {
+    "id": "topic_word_body_joelho",
+    "portuguese": "o joelho",
+    "english": "the knee",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Dói-me o joelho direito quando subo rampas ou escadas.",
+    "targetPhraseEn": "My right knee hurts when I climb ramps or stairs."
+  },
+  {
+    "id": "topic_word_body_tornozelo",
+    "portuguese": "o tornozelo",
+    "english": "the ankle",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "O jogador caiu no relvado e torceu o tornozelo.",
+    "targetPhraseEn": "The player fell on the pitch and sprained his ankle."
+  },
+  {
+    "id": "topic_word_body_pes",
+    "portuguese": "os pés",
+    "english": "the feet",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Caminhei dez quilómetros e agora doem-me os pés.",
+    "targetPhraseEn": "I walked ten kilometres and now my feet hurt."
+  },
+  {
+    "id": "topic_word_body_febre",
+    "portuguese": "a febre",
+    "english": "the fever",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Tomei o medicamento indicado pelo médico para baixar a febre.",
+    "targetPhraseEn": "I took the medicine prescribed by the doctor to lower the fever."
+  },
+  {
+    "id": "topic_word_body_tosse",
+    "portuguese": "a tosse",
+    "english": "the cough",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Bebo chá quente com limão e mel para aliviar a tosse.",
+    "targetPhraseEn": "I drink hot tea with lemon and honey to relieve the cough."
+  },
+  {
+    "id": "topic_word_body_penso",
+    "portuguese": "o penso rápido",
+    "english": "the plaster / band-aid",
+    "category": "Body & Health",
+    "notes": "Palavra • Saúde",
+    "targetPhrasePt": "Coloquei um penso rápido no dedo para proteger o corte.",
+    "targetPhraseEn": "I put a plaster on my finger to protect the cut."
+  },
+  {
+    "id": "topic_word_everyday_telemovel",
+    "portuguese": "o telemóvel",
+    "english": "the mobile phone",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "A bateria do meu telemóvel acabou, preciso do carregador.",
+    "targetPhraseEn": "My mobile phone battery ran out, I need the charger."
+  },
+  {
+    "id": "topic_word_everyday_carregador",
+    "portuguese": "o carregador",
+    "english": "the charger",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Onde está o carregador para ligar o telemóvel à tomada?",
+    "targetPhraseEn": "Where is the charger to plug the phone into the socket?"
+  },
+  {
+    "id": "topic_word_everyday_tomada",
+    "portuguese": "a tomada",
+    "english": "the wall socket / outlet",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Ligo a ficha do computador diretamente à tomada da parede.",
+    "targetPhraseEn": "I plug the computer plug directly into the wall socket."
+  },
+  {
+    "id": "topic_word_everyday_chaves",
+    "portuguese": "as chaves",
+    "english": "the keys",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Esqueci-me das chaves de casa e não consigo abrir a porta.",
+    "targetPhraseEn": "I forgot my house keys and I cannot open the door."
+  },
+  {
+    "id": "topic_word_everyday_carteira",
+    "portuguese": "a carteira",
+    "english": "the wallet",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Perdi a minha carteira com o dinheiro e o Cartão de Cidadão.",
+    "targetPhraseEn": "I lost my wallet with money and Citizen Card."
+  },
+  {
+    "id": "topic_word_everyday_portamoedas",
+    "portuguese": "o porta-moedas",
+    "english": "the coin purse",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Guardo as moedas de troco dentro do pequeno porta-moedas.",
+    "targetPhraseEn": "I keep change coins inside the small coin purse."
+  },
+  {
+    "id": "topic_word_everyday_cartao_cidadao",
+    "portuguese": "o Cartão de Cidadão",
+    "english": "the Citizen Card / ID card",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Mostro o meu Cartão de Cidadão na repartição pública.",
+    "targetPhraseEn": "I show my Citizen Card at the public office."
+  },
+  {
+    "id": "topic_word_everyday_passe",
+    "portuguese": "o passe de transportes",
+    "english": "the transit pass",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Valido o meu passe de transportes antes de entrar no metro.",
+    "targetPhraseEn": "I validate my transit pass before entering the metro."
+  },
+  {
+    "id": "topic_word_everyday_bilhete",
+    "portuguese": "o bilhete",
+    "english": "the ticket",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Comprei o bilhete simples na máquina automática da estação.",
+    "targetPhraseEn": "I bought the single ticket at the station vending machine."
+  },
+  {
+    "id": "topic_word_everyday_guardachuva",
+    "portuguese": "o guarda-chuva",
+    "english": "the umbrella",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Está a chover muito, leva o teu guarda-chuva.",
+    "targetPhraseEn": "It is raining heavily, take your umbrella."
+  },
+  {
+    "id": "topic_word_everyday_auscultadores",
+    "portuguese": "os auscultadores",
+    "english": "the headphones / earphones",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Uso auscultadores no comboio para ouvir música.",
+    "targetPhraseEn": "I wear headphones on the train to listen to music."
+  },
+  {
+    "id": "topic_word_everyday_mochila",
+    "portuguese": "a mochila",
+    "english": "the backpack",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Levo o computador portátil e os cadernos na mochila.",
+    "targetPhraseEn": "I take the laptop and notebooks in the backpack."
+  },
+  {
+    "id": "topic_word_everyday_portatil",
+    "portuguese": "o computador portátil",
+    "english": "the laptop",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Trabalho todos os dias no meu computador portátil.",
+    "targetPhraseEn": "I work every day on my laptop."
+  },
+  {
+    "id": "topic_word_everyday_caderno",
+    "portuguese": "o caderno",
+    "english": "the notebook",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Escrevo os novos apontamentos da aula de português no caderno.",
+    "targetPhraseEn": "I write new Portuguese class notes in the notebook."
+  },
+  {
+    "id": "topic_word_everyday_caneta",
+    "portuguese": "a caneta",
+    "english": "the pen",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Emprestas-me uma caneta azul para assinar o documento?",
+    "targetPhraseEn": "Will you lend me a blue pen to sign the document?"
+  },
+  {
+    "id": "topic_word_everyday_relogio",
+    "portuguese": "o relógio de pulso",
+    "english": "the wristwatch",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Olho para o meu relógio de pulso para ver as horas.",
+    "targetPhraseEn": "I look at my wristwatch to see the time."
+  },
+  {
+    "id": "topic_word_everyday_oculos_sol",
+    "portuguese": "os óculos de sol",
+    "english": "the sunglasses",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Quando está muito sol, uso óculos de sol escuros.",
+    "targetPhraseEn": "When it is very sunny, I wear dark sunglasses."
+  },
+  {
+    "id": "topic_word_everyday_garrafa_agua",
+    "portuguese": "a garrafa de água",
+    "english": "the water bottle",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Levo uma garrafa de água fresca para a caminhada.",
+    "targetPhraseEn": "I take a bottle of fresh water for the walk."
+  },
+  {
+    "id": "topic_word_everyday_mala",
+    "portuguese": "a mala de viagem",
+    "english": "the suitcase / bag",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Arrumo as roupas com antecedência na mala de viagem.",
+    "targetPhraseEn": "I pack my clothes in advance in the suitcase."
+  },
+  {
+    "id": "topic_word_everyday_gaveta",
+    "portuguese": "a gaveta",
+    "english": "the drawer",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Guardo os passaportes e faturas na gaveta da secretária.",
+    "targetPhraseEn": "I keep passports and invoices in the desk drawer."
+  },
+  {
+    "id": "topic_word_everyday_lenco_papel",
+    "portuguese": "o lenço de papel",
+    "english": "the paper tissue",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Tenho um pacote de lenços de papel no bolso do casaco.",
+    "targetPhraseEn": "I have a packet of paper tissues in my coat pocket."
+  },
+  {
+    "id": "topic_word_everyday_leque",
+    "portuguese": "o leque",
+    "english": "the hand fan",
+    "category": "Everyday Items",
+    "notes": "Palavra • Quotidiano",
+    "targetPhrasePt": "Nos dias quentes de verão em Lisboa, uso um leque elegante.",
+    "targetPhraseEn": "On hot summer days in Lisbon, I use an elegant hand fan."
+  }
+]

@@ -350,5 +350,231 @@ void main() {
       expect(topicItemsInFirstTen, greaterThanOrEqualTo(3),
           reason: 'Biased phrases pool must feature topic phrases prominently in the first 10 items');
     });
+
+    test('loads all individual topic words and pairs them with phrases in each section', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'sol', english: 'sun'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => []);
+
+      final sections = [
+        ('House & Rooms', 25),
+        ('Household Items', 32),
+        ('Body & Health', 29),
+        ('Everyday Items', 22),
+      ];
+
+      for (final (section, expectedWordCount) in sections) {
+        final pool = await contentService.loadContent(
+          mode: ListenRepeatMode.topics,
+          subCategory: section,
+        );
+
+        final words = pool.where((i) => i.wordType == 'topic_word').toList();
+        final phrases = pool.where((i) => i.wordType != 'topic_word').toList();
+
+        expect(
+          words.length,
+          greaterThanOrEqualTo(expectedWordCount),
+          reason: 'Section $section must contain at least $expectedWordCount individual words',
+        );
+
+        expect(
+          phrases,
+          isNotEmpty,
+          reason: 'Section $section must contain reinforcing phrases',
+        );
+
+        // Verify that in the mixed deck, words are interleaved with phrases (words and phrases both present)
+        expect(pool.length, greaterThan(words.length));
+
+        // Check word-phrase pairing: each word must be followed immediately by its reinforcing phrase
+        for (int i = 0; i < pool.length; i++) {
+          final item = pool[i];
+          if (item.wordType == 'topic_word') {
+            expect(i + 1 < pool.length, isTrue,
+                reason: 'Word ${item.portuguese} at index $i must be followed by its paired phrase');
+            final nextItem = pool[i + 1];
+            expect(nextItem.wordType, isNot(equals('topic_word')),
+                reason: 'Item immediately after ${item.portuguese} must be a phrase');
+            if (item.exampleSentencePt != null && item.exampleSentencePt!.isNotEmpty) {
+              expect(
+                nextItem.portuguese.trim().toLowerCase(),
+                equals(item.exampleSentencePt!.trim().toLowerCase()),
+                reason: 'Word ${item.portuguese} must be paired with its exact target phrase',
+              );
+            }
+          }
+        }
+
+        // Verify no duplicate words exist in this section
+        final wordPtList = words.map((w) => w.portuguese.trim().toLowerCase()).toList();
+        expect(wordPtList.toSet().length, equals(wordPtList.length),
+            reason: 'Section $section must contain no duplicate words');
+      }
+    });
+
+    test('All Topics contains exactly 108 unique words across all four A2 everyday sections', () async {
+      when(() => storage.getAllItems()).thenReturn([
+        LanguageItem(id: 'v1', portuguese: 'sol', english: 'sun'),
+      ]);
+      when(() => verbService.loadVerbs()).thenAnswer((_) async => []);
+
+      final pool = await contentService.loadContent(mode: ListenRepeatMode.topics);
+      final words = pool.where((i) => i.wordType == 'topic_word').toList();
+
+      expect(words.length, equals(108),
+          reason: 'All Topics must parse to exactly 108 individual words');
+
+      // Verify all items are well-formed
+      for (final w in words) {
+        expect(w.portuguese.trim(), isNotEmpty);
+        expect(w.english.trim(), isNotEmpty);
+        expect(w.topicCategory, isNotNull);
+      }
+
+      // Verify no duplicates across the entire 108-word dataset
+      final allWordPtList = words.map((w) => w.portuguese.trim().toLowerCase()).toList();
+      expect(allWordPtList.toSet().length, equals(108),
+          reason: 'All Topics must contain no duplicate words');
+
+      // Verify all 4 categories are represented in words
+      final categories = words.map((w) => w.topicCategory).toSet();
+      expect(categories, contains('House & Rooms'));
+      expect(categories, contains('Household Items'));
+      expect(categories, contains('Body & Health'));
+      expect(categories, contains('Everyday Items'));
+    });
+
+    test('Word boundary matcher rejects substring collisions and matches whole words', () {
+      expect(ListenRepeatContentService.matchesWordBoundaryForTesting('O carro fica na garagem.', 'garagem'), isTrue);
+      expect(ListenRepeatContentService.matchesWordBoundaryForTesting('Tenho muita coragem.', 'cor'), isFalse);
+      expect(ListenRepeatContentService.matchesWordBoundaryForTesting('A cor da casa é branca.', 'cor'), isTrue);
+      expect(ListenRepeatContentService.matchesWordBoundaryForTesting('Dói-me a boca.', 'boca'), isTrue);
+      expect(ListenRepeatContentService.matchesWordBoundaryForTesting('A sala de estar é ampla.', 'sala de estar'), isTrue);
+    });
+
+    test('_buildTopicMixedPool keyword fallback respects word boundaries and skips already-used phrases', () {
+      final words = [
+        LanguageItem(
+          id: 'w1',
+          portuguese: 'o garfo',
+          english: 'fork',
+          wordType: 'topic_word',
+          topicCategory: 'Household Items',
+        ),
+        LanguageItem(
+          id: 'w2',
+          portuguese: 'a faca',
+          english: 'knife',
+          wordType: 'topic_word',
+          topicCategory: 'Household Items',
+        ),
+      ];
+
+      final candidatePhrases = [
+        LanguageItem(
+          id: 'p1',
+          portuguese: 'Uso o garfo e a faca para comer.',
+          english: 'I use the fork and knife to eat.',
+          wordType: 'phrase',
+          topicCategory: 'Household Items',
+        ),
+        LanguageItem(
+          id: 'p2',
+          portuguese: 'A faca está muito afiada.',
+          english: 'The knife is very sharp.',
+          wordType: 'phrase',
+          topicCategory: 'Household Items',
+        ),
+      ];
+
+      final pool = contentService.buildTopicMixedPoolForTesting(
+        words: words,
+        phrases: candidatePhrases,
+        verbPhrases: [],
+        subCategory: 'Household Items',
+      );
+
+      expect(pool.length, equals(4));
+      // Word 1 pairs with p1 (which mentions garfo)
+      // Word 2 cannot reuse p1 because p1 is already used, so it must pair with p2
+      final w1Index = pool.indexWhere((i) => i.id == 'w1');
+      final w2Index = pool.indexWhere((i) => i.id == 'w2');
+
+      expect(pool[w1Index + 1].id, equals('p1'));
+      expect(pool[w2Index + 1].id, equals('p2'));
+    });
+
+    test('_buildTopicMixedPool synthesizes fallback phrase when target phrase is missing from pool', () {
+      final words = [
+        LanguageItem(
+          id: 'w_fallback',
+          portuguese: 'o candeeiro',
+          english: 'lamp',
+          wordType: 'topic_word',
+          topicCategory: 'Household Items',
+          exampleSentencePt: 'O candeeiro novo ilumina o quarto todo.',
+          exampleSentenceEn: 'The new lamp illuminates the whole room.',
+        ),
+      ];
+
+      final pool = contentService.buildTopicMixedPoolForTesting(
+        words: words,
+        phrases: [],
+        verbPhrases: [],
+        subCategory: 'Household Items',
+      );
+
+      expect(pool.length, equals(2));
+      expect(pool[0].id, equals('w_fallback'));
+      expect(pool[1].id, equals('phrase_target_w_fallback'));
+      expect(pool[1].portuguese, equals('O candeeiro novo ilumina o quarto todo.'));
+      expect(pool[1].english, equals('The new lamp illuminates the whole room.'));
+    });
+
+    test('_resolveTopicWords preserves all curated words even if keywords collide (no last-wins drop)', () {
+      final curatedWords = [
+        LanguageItem(
+          id: 'curated_1',
+          portuguese: 'o copo',
+          english: 'glass',
+          wordType: 'topic_word',
+          topicCategory: 'Household Items',
+        ),
+        LanguageItem(
+          id: 'curated_2',
+          portuguese: 'um copo',
+          english: 'a glass',
+          wordType: 'topic_word',
+          topicCategory: 'Household Items',
+        ),
+      ];
+
+      final storageItems = [
+        LanguageItem(
+          id: 'storage_1',
+          portuguese: 'copo',
+          english: 'glass',
+          wordType: 'topic_word',
+          topicCategory: 'Household Items',
+          masteryLevel: 4,
+        ),
+      ];
+
+      final resolved = contentService.resolveTopicWordsForTesting(
+        vocabItems: storageItems,
+        curatedTopicWords: curatedWords,
+      );
+
+      // Both curated items must be present (neither dropped by key collision)
+      expect(resolved.length, equals(2));
+      // First curated item merged with matching storage item to preserve id and mastery
+      expect(resolved[0].id, equals('storage_1'));
+      expect(resolved[0].masteryLevel, equals(4));
+      // Second curated item retained as-is
+      expect(resolved[1].id, equals('curated_2'));
+      expect(resolved[1].portuguese, equals('um copo'));
+    });
   });
 }

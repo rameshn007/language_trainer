@@ -57,12 +57,25 @@ class MarkdownParser {
             en = _cleanCell(en);
             notes = _cleanCell(notes);
 
+            String? topicCategory;
+            final normalizedNote = notes.toLowerCase();
+            if (notes == 'House & Rooms' || notes == 'Home - Rooms' || normalizedNote == 'house') {
+              topicCategory = 'House & Rooms';
+            } else if (notes == 'Household Items' || notes == 'Household - Items' || normalizedNote == 'household') {
+              topicCategory = 'Household Items';
+            } else if (notes == 'Body & Health' || normalizedNote == 'body & health') {
+              topicCategory = 'Body & Health';
+            } else if (notes == 'Everyday Items' || normalizedNote == 'everyday items') {
+              topicCategory = 'Everyday Items';
+            }
+
             items.add(
               LanguageItem(
                 id: '${pt}_$en'.hashCode.toString(), // Simple hash as ID
                 portuguese: pt,
                 english: en,
                 notes: notes,
+                topicCategory: topicCategory,
               ),
             );
           } catch (e) {
