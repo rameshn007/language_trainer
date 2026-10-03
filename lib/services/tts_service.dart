@@ -9,6 +9,9 @@ class TtsService {
   final FlutterTts _flutterTts = FlutterTts();
   final StorageService _storageService;
 
+  double _configuredRate = 1.0;
+  double get configuredRate => _configuredRate;
+
   Map<String, String>? _bestPtVoice;
   Map<String, String>? _bestEnVoice;
 
@@ -203,7 +206,11 @@ class TtsService {
         }
       }
     } catch (e) {
-      AppLogger.error('Error in TtsService._init', name: 'TtsService', error: e);
+      AppLogger.error(
+        'Error in TtsService._init',
+        name: 'TtsService',
+        error: e,
+      );
     }
 
     await _flutterTts.setPitch(1.0);
@@ -240,6 +247,8 @@ class TtsService {
   }
 
   Future<void> setRate(double multiplier) async {
+    if (_configuredRate == multiplier) return;
+    _configuredRate = multiplier;
     // Base rate is 0.5 (as defined in original code as "good" speed)
     // We multiply that by the user's preference.
     // Example: 0.8x -> 0.4 actual rate.
@@ -510,7 +519,11 @@ class TtsService {
       try {
         await _synthLock!.timeout(lockWaitTimeout);
       } catch (e) {
-        AppLogger.error('TTS lock wait timed out, breaking lock', name: 'TtsService', error: e);
+        AppLogger.error(
+          'TTS lock wait timed out, breaking lock',
+          name: 'TtsService',
+          error: e,
+        );
         try {
           await _flutterTts.stop();
         } catch (_) {}
@@ -526,7 +539,10 @@ class TtsService {
       return await action().timeout(
         actionTimeout,
         onTimeout: () {
-          AppLogger.error('TTS action timed out after ${actionTimeout.inSeconds}s', name: 'TtsService');
+          AppLogger.error(
+            'TTS action timed out after ${actionTimeout.inSeconds}s',
+            name: 'TtsService',
+          );
           try {
             _flutterTts.stop();
           } catch (_) {}
@@ -543,7 +559,7 @@ class TtsService {
     }
   }
 
-  Future<void> speak(String text, {String? language}) async {
+  Future<void> speak(String text, {String? language, double? rate}) async {
     if (text.isEmpty) return;
 
     if (initFuture != null) {
@@ -554,11 +570,31 @@ class TtsService {
       if (language != null) {
         await _prepareVoice(language);
       }
-      await _flutterTts.speak(text);
+      final previousRate = _configuredRate;
+      final targetRate = rate ?? previousRate;
+      final needsRateChange = targetRate != previousRate;
+
+      if (needsRateChange) {
+        final actualRate = (0.5 * targetRate).clamp(0.1, 1.0);
+        await _flutterTts.setSpeechRate(actualRate);
+      }
+      try {
+        await _flutterTts.speak(text);
+      } finally {
+        if (needsRateChange) {
+          final restoreRate = (0.5 * previousRate).clamp(0.1, 1.0);
+          await _flutterTts.setSpeechRate(restoreRate);
+        }
+      }
     });
   }
 
-  Future<void> synthesizeToFile(String text, String fileName, {String? language}) async {
+  Future<void> synthesizeToFile(
+    String text,
+    String fileName, {
+    String? language,
+    double? rate,
+  }) async {
     if (text.isEmpty) return;
 
     if (initFuture != null) {
@@ -569,9 +605,25 @@ class TtsService {
       if (language != null) {
         await _prepareVoice(language);
       }
+      final previousRate = _configuredRate;
+      // Always enforce base rate (1.0 -> 0.5) for audio file synthesis unless explicitly specified,
+      // shielding Listen & Repeat cache from transient speech rates, but restore whatever the screen had set.
+      final targetRate = rate ?? 1.0;
+      final needsRateChange = targetRate != previousRate;
 
-      // On iOS, we MUST pass true for isFullPath if we provide an absolute path
-      await _flutterTts.synthesizeToFile(text, fileName, Platform.isIOS);
+      if (needsRateChange) {
+        final actualRate = (0.5 * targetRate).clamp(0.1, 1.0);
+        await _flutterTts.setSpeechRate(actualRate);
+      }
+      try {
+        // On iOS, we MUST pass true for isFullPath if we provide an absolute path
+        await _flutterTts.synthesizeToFile(text, fileName, Platform.isIOS);
+      } finally {
+        if (needsRateChange) {
+          final restoreRate = (0.5 * previousRate).clamp(0.1, 1.0);
+          await _flutterTts.setSpeechRate(restoreRate);
+        }
+      }
     });
   }
 
