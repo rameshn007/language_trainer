@@ -47,6 +47,8 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
   StreamSubscription<double>? _levelSubscription;
 
   int _sessionId = 0;
+  int _turnId = 0;
+  bool _isTurnInProgress = false;
   bool _isSessionStarting = false;
 
   bool _isPlaying = false;
@@ -147,9 +149,20 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
   @override
   void dispose() {
     _sessionId++;
+    _turnId++;
     _levelSubscription?.cancel();
-    _voiceService.stop();
+    unawaited(_voiceService.dispose());
     super.dispose();
+  }
+
+  void _turnCleanup(int currentSession, int currentTurn) {
+    if (mounted && _sessionId == currentSession && _turnId == currentTurn) {
+      setState(() {
+        _isTurnInProgress = false;
+        _isSpeaking = false;
+        _isListening = false;
+      });
+    }
   }
 
   Future<void> _startSession() async {
@@ -195,6 +208,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       setState(() {
         _statusText = "Session Complete!";
         _isPlaying = false;
+        _isTurnInProgress = false;
         _currentItem = null;
       });
       await _voiceService.speak("Session complete. Great job!");
@@ -222,7 +236,13 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       return;
     }
 
-    if (mounted) setState(() => _isSpeaking = true);
+    _turnId++;
+    final currentTurn = _turnId;
+
+    setState(() {
+      _isTurnInProgress = true;
+      _isSpeaking = true;
+    });
     try {
       await _voiceService.speakVocabularyChallenge(
         _currentItem!,
@@ -235,20 +255,41 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         error: e,
       );
     } finally {
-      if (mounted) setState(() => _isSpeaking = false);
+      if (mounted && _sessionId == currentSession && _turnId == currentTurn) {
+        setState(() => _isSpeaking = false);
+      }
     }
 
-    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
+    if (!mounted ||
+        !_isPlaying ||
+        _sessionId != currentSession ||
+        _turnId != currentTurn) {
+      _turnCleanup(currentSession, currentTurn);
+      return;
+    }
 
-    // Auto-listen after question
+    // Auto-listen after question (500 ms pre-listen delay)
     await Future.delayed(const Duration(milliseconds: 500));
-    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
-    await _listen(currentSession);
+    if (!mounted ||
+        !_isPlaying ||
+        _sessionId != currentSession ||
+        _turnId != currentTurn) {
+      _turnCleanup(currentSession, currentTurn);
+      return;
+    }
+    await _listen(currentSession, currentTurn);
   }
 
-  Future<void> _listen([int? sessionToken]) async {
+  Future<void> _listen([int? sessionToken, int? turnToken]) async {
     final currentSession = sessionToken ?? _sessionId;
-    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
+    final currentTurn = turnToken ?? _turnId;
+    if (!mounted ||
+        !_isPlaying ||
+        _sessionId != currentSession ||
+        _turnId != currentTurn) {
+      _turnCleanup(currentSession, currentTurn);
+      return;
+    }
 
     setState(() {
       _isListening = true;
@@ -258,7 +299,10 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
 
     _levelSubscription?.cancel();
     _levelSubscription = _voiceService.soundLevelStream.listen((level) {
-      if (mounted && _isListening) {
+      if (mounted &&
+          _isListening &&
+          _sessionId == currentSession &&
+          _turnId == currentTurn) {
         setState(() {
           _soundLevel = level.clamp(0.0, 10.0) / 10.0;
         });
@@ -275,7 +319,10 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       AppLogger.error("Listen error", name: 'VoiceTrainer', error: e);
     }
 
-    if (!mounted || _sessionId != currentSession) return;
+    if (!mounted || _sessionId != currentSession || _turnId != currentTurn) {
+      _turnCleanup(currentSession, currentTurn);
+      return;
+    }
 
     _levelSubscription?.cancel();
 
@@ -284,15 +331,27 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       _userSpokenText = spoken ?? "(No speech detected)";
     });
 
-    if (!_isPlaying || _sessionId != currentSession) return;
+    if (!_isPlaying || _sessionId != currentSession || _turnId != currentTurn) {
+      _turnCleanup(currentSession, currentTurn);
+      return;
+    }
 
-    await _processAnswer(spoken, currentSession);
+    await _processAnswer(spoken, currentSession, currentTurn);
   }
 
-  Future<void> _processAnswer(String? spoken, [int? sessionToken]) async {
+  Future<void> _processAnswer(
+    String? spoken, [
+    int? sessionToken,
+    int? turnToken,
+  ]) async {
     final currentSession = sessionToken ?? _sessionId;
+    final currentTurn = turnToken ?? _turnId;
     final currentItem = _currentItem;
-    if (currentItem == null || !_isPlaying || _sessionId != currentSession) {
+    if (currentItem == null ||
+        !_isPlaying ||
+        _sessionId != currentSession ||
+        _turnId != currentTurn) {
+      _turnCleanup(currentSession, currentTurn);
       return;
     }
 
@@ -308,11 +367,12 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       }
     }
 
-    // Verify session and item identity before updating UI or speaking feedback
+    // Verify session and turn identity before updating UI or speaking feedback
     if (!mounted ||
         !_isPlaying ||
         _sessionId != currentSession ||
-        _currentItem?.id != currentItem.id) {
+        _turnId != currentTurn) {
+      _turnCleanup(currentSession, currentTurn);
       return;
     }
 
@@ -331,7 +391,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         if (!mounted ||
             !_isPlaying ||
             _sessionId != currentSession ||
-            _currentItem?.id != currentItem.id) {
+            _turnId != currentTurn) {
           return;
         }
 
@@ -344,11 +404,11 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
           ); // "It is..."
         }
 
-        // Re-check playing and item identity before awarding XP
+        // Re-check playing, session, and turn identity before awarding XP
         if (!mounted ||
             !_isPlaying ||
             _sessionId != currentSession ||
-            _currentItem?.id != currentItem.id) {
+            _turnId != currentTurn) {
           return;
         }
 
@@ -359,7 +419,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
           correct: true,
           firstAttempt: true,
         );
-        if (mounted && _sessionId == currentSession) {
+        if (mounted && _sessionId == currentSession && _turnId == currentTurn) {
           setState(() {
             _sessionXP += xp;
           });
@@ -376,7 +436,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         if (!mounted ||
             !_isPlaying ||
             _sessionId != currentSession ||
-            _currentItem?.id != currentItem.id) {
+            _turnId != currentTurn) {
           return;
         }
 
@@ -389,7 +449,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         if (!mounted ||
             !_isPlaying ||
             _sessionId != currentSession ||
-            _currentItem?.id != currentItem.id) {
+            _turnId != currentTurn) {
           return;
         }
 
@@ -399,7 +459,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
           itemId: currentItem.id,
           correct: false,
         );
-        if (mounted && _sessionId == currentSession) {
+        if (mounted && _sessionId == currentSession && _turnId == currentTurn) {
           setState(() {
             _sessionXP += xp;
           });
@@ -419,25 +479,32 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         error: e,
       );
     } finally {
-      if (mounted) setState(() => _isSpeaking = false);
+      if (mounted && _sessionId == currentSession && _turnId == currentTurn) {
+        setState(() => _isSpeaking = false);
+      }
     }
 
     if (!mounted ||
         !_isPlaying ||
         _sessionId != currentSession ||
-        _currentItem?.id != currentItem.id) {
+        _turnId != currentTurn) {
+      _turnCleanup(currentSession, currentTurn);
       return;
     }
 
-    // Delay before next
+    // Delay before next (2 s inter-question delay)
     await Future.delayed(const Duration(seconds: 2));
-    if (mounted && _isPlaying && _sessionId == currentSession) {
-      await _nextItem(currentSession);
+    if (mounted && _sessionId == currentSession && _turnId == currentTurn) {
+      setState(() => _isTurnInProgress = false);
+      if (_isPlaying) {
+        await _nextItem(currentSession);
+      }
     }
   }
 
   Future<void> _stopSession() async {
     _sessionId++;
+    _turnId++;
     _levelSubscription?.cancel();
     await _voiceService.stop();
     // Record partial session if any questions were answered
@@ -449,7 +516,9 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         _isPlaying = false;
         _isListening = false;
         _isSpeaking = false;
-        _statusText = "Stopped";
+        _isTurnInProgress = false;
+        _soundLevel = 0.0;
+        _statusText = "Session paused";
       });
     }
   }
@@ -574,13 +643,13 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
               repeat: true,
               child: FloatingActionButton.large(
                 onPressed: _isPlaying
-                    ? ((_isListening || _isSpeaking)
+                    ? ((_isTurnInProgress || _isListening || _isSpeaking)
                           ? null
-                          : () => _listen(_sessionId))
+                          : () => _listen(_sessionId, _turnId))
                     : _startSession,
                 backgroundColor: _isListening
                     ? Colors.red
-                    : (_isSpeaking
+                    : ((_isSpeaking || _isTurnInProgress)
                           ? Colors.grey
                           : Theme.of(context).colorScheme.primary),
                 child: Transform.scale(
@@ -589,7 +658,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
                     _isPlaying
                         ? (_isListening
                               ? Icons.mic
-                              : (_isSpeaking
+                              : ((_isSpeaking || _isTurnInProgress)
                                     ? Icons.volume_up
                                     : Icons.mic_none))
                         : Icons.play_arrow,

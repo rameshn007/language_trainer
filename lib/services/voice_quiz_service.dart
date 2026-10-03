@@ -158,7 +158,9 @@ class VoiceQuizService {
           listenMode: ListenMode.confirmation,
         ),
         onSoundLevelChange: (level) {
-          _soundLevelController.add(level);
+          if (!_soundLevelController.isClosed) {
+            _soundLevelController.add(level);
+          }
         },
       );
 
@@ -288,6 +290,13 @@ class VoiceQuizService {
     try {
       await _ttsService.stop();
     } catch (_) {}
+  }
+
+  Future<void> dispose() async {
+    await stop();
+    if (!_soundLevelController.isClosed) {
+      await _soundLevelController.close();
+    }
   }
 
   // Feedback
