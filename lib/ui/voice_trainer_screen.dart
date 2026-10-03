@@ -39,7 +39,7 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
   String _statusText = "Ready to start";
   String _userSpokenText = "";
 
-  double _speechRate = 0.5; // 0.5 is often "normal" on iOS
+  double _speechRate = 1.0; // 1.0x default speed
   double _soundLevel = 0.0;
   DateTime? _sessionStartTime;
   int _sessionXP = 0;
@@ -62,15 +62,18 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
 
   void _cycleSpeed() {
     setState(() {
-      if (_speechRate == 0.4) {
+      if (_speechRate == 1.0) {
+        _speechRate = 0.4;
+      } else if (_speechRate == 0.4) {
         _speechRate = 0.5;
       } else if (_speechRate == 0.5) {
         _speechRate = 0.6;
       } else {
-        _speechRate = 0.4;
+        _speechRate = 1.0;
       }
     });
     _voiceService.setSpeechRate(_speechRate);
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text("Speed: ${_speechRate}x"),
@@ -258,10 +261,22 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
     if (spoken != null) {
       if (_isPortugueseQuestion) {
         // Asked: PT, Expected: EN check
-        correct = _voiceService.isCorrect(spoken, _currentItem!.english);
+        final res = await _voiceService.checkAnswerAsync(
+          spoken,
+          _currentItem!.english,
+          context: _currentItem!.portuguese,
+          locale: "en-US",
+        );
+        correct = res.isCorrect;
       } else {
         // Asked: EN, Expected: PT check
-        correct = _voiceService.isCorrect(spoken, _currentItem!.portuguese);
+        final res = await _voiceService.checkAnswerAsync(
+          spoken,
+          _currentItem!.portuguese,
+          context: _currentItem!.english,
+          locale: "pt-PT",
+        );
+        correct = res.isCorrect;
       }
     }
 

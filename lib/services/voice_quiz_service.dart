@@ -4,12 +4,20 @@ import '../models/question.dart';
 import '../models/language_item.dart';
 import '../utils/logger.dart';
 import 'tts_service.dart';
+import 'semantic_grading_service.dart';
 
 class VoiceQuizService {
   final TtsService _ttsService;
+  final SemanticGradingService _semanticGradingService;
   final SpeechToText _stt = SpeechToText();
 
-  VoiceQuizService(this._ttsService);
+  VoiceQuizService(
+    this._ttsService, [
+    SemanticGradingService? semanticGradingService,
+  ]) : _semanticGradingService =
+           semanticGradingService ?? SemanticGradingService();
+
+  SemanticGradingService get semanticGradingService => _semanticGradingService;
 
   String _lastRecognizedWords = '';
   final StreamController<double> _soundLevelController =
@@ -19,12 +27,12 @@ class VoiceQuizService {
 
   Future<void> init() async {
     AppLogger.log("init() called", name: 'VoiceService');
-    // TtsService is assumed to be already initialized by the main app,
-    // but we can ensure rate/volume if we wanted. Relying on TtsService defaults.
+    await _semanticGradingService.init();
     AppLogger.log("TTS ready via TtsService", name: 'VoiceService');
   }
 
-  double _currentRate = 0.5;
+  double _currentRate = 1.0;
+  double get currentRate => _currentRate;
 
   Future<void> setSpeechRate(double rate) async {
     _currentRate = rate;
@@ -214,6 +222,75 @@ class VoiceQuizService {
     );
 
     return similarity > 0.65; // Allow 35% error rate
+  }
+
+  /// 4-tier hybrid answer evaluation:
+  /// 1. Exact match (0 ms)
+  /// 2. Substring match (0 ms)
+  /// 3. High-confidence Levenshtein (>0.85 similarity, minor typo)
+  /// 4. On-Device Apple Neural Engine Core ML semantic evaluation (Laya)
+  /// Fallback: Levenshtein > 0.65 threshold (preserves baseline contract)
+  Future<SemanticGradingResult> checkAnswerAsync(
+    String spoken,
+    String correctOption, {
+    String context = '',
+    String locale = 'pt-PT',
+  }) async {
+    final s = _normalize(spoken);
+    final c = _normalize(correctOption);
+
+    // Tier 1: Direct match (0 ms)
+    if (s == c) {
+      return SemanticGradingResult.fastPathMatch();
+    }
+
+    // Tier 2: Contains match (0 ms)
+    if (s.contains(c) || c.contains(s)) {
+      return SemanticGradingResult.fastPathMatch();
+    }
+
+    // Tier 3: High-confidence Levenshtein (>0.85 similarity)
+    final distance = _levenshtein(s, c);
+    final maxLength = s.length > c.length ? s.length : c.length;
+    if (maxLength > 0) {
+      final similarity = 1.0 - (distance / maxLength);
+      if (similarity > 0.85) {
+        return SemanticGradingResult.fuzzyMatch(similarity);
+      }
+    }
+
+    // Tier 4: On-Device Apple Neural Engine / Core ML Semantic Evaluation
+    if (_semanticGradingService.isAvailable) {
+      final semanticRes = await _semanticGradingService.evaluate(
+        expected: correctOption,
+        spoken: spoken,
+        context: context,
+        locale: locale,
+      );
+
+      if (semanticRes != null) {
+        AppLogger.log(
+          "Laya ANE: '$spoken' vs '$correctOption' -> isCorrect: ${semanticRes.isCorrect}, "
+          "confidence: ${semanticRes.confidence}, errorType: ${semanticRes.errorType}",
+          name: 'VoiceService',
+        );
+
+        // Calibrated confidence gate: >= 0.80 probability accepted as correct
+        if (semanticRes.isCorrect && semanticRes.confidence >= 0.80) {
+          return semanticRes;
+        }
+      }
+    }
+
+    // Fallback: baseline Levenshtein > 0.65 threshold
+    if (maxLength == 0) {
+      return SemanticGradingResult.fallback(isCorrect: false, similarity: 0.0);
+    }
+    final similarity = 1.0 - (distance / maxLength);
+    return SemanticGradingResult.fallback(
+      isCorrect: similarity > 0.65,
+      similarity: similarity,
+    );
   }
 
   int _levenshtein(String s, String t) {
