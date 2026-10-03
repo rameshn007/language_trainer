@@ -83,9 +83,25 @@ class VoiceQuizService {
       name: 'VoiceService',
     );
 
-    // TtsService.speak inherently awaits speech completion due to flutter_tts behavior on iOS/Android
-    // if awaitSpeakCompletion is true. We'll simply await it.
-    await _ttsService.speak(text, language: language);
+    try {
+      // TtsService.speak inherently awaits speech completion due to flutter_tts behavior on iOS/Android
+      // if awaitSpeakCompletion is true. We'll simply await it.
+      await _ttsService.speak(text, language: language);
+    } on TimeoutException catch (e) {
+      AppLogger.log(
+        "TTS speak timed out on '$text': $e - resetting synthesizer",
+        name: 'VoiceService',
+      );
+      try {
+        await _ttsService.stop();
+      } catch (_) {}
+    } catch (e) {
+      AppLogger.error(
+        "TTS speak failed on '$text'",
+        name: 'VoiceService',
+        error: e,
+      );
+    }
 
     // Extra buffer if wait is explicitly requested to ensure clear pauses
     if (waitForCompletion) {
@@ -133,37 +149,51 @@ class VoiceQuizService {
 
     _lastRecognizedWords = '';
 
-    await _stt.listen(
-      onResult: (result) {
-        AppLogger.log(
-          "STT Result: '${result.recognizedWords}' (final: ${result.finalResult})",
-          name: 'VoiceService',
-        );
-        _lastRecognizedWords = result.recognizedWords;
-        // If final result (due to pause timeout), complete
-        if (result.finalResult) {
-          complete(_lastRecognizedWords);
-        }
-      },
-      listenOptions: SpeechListenOptions(
-        localeId: localeId, // Dynamic locale
-        listenFor: duration,
-        pauseFor: const Duration(seconds: 3),
-        listenMode: ListenMode.confirmation,
-      ),
-      onSoundLevelChange: (level) {
-        _soundLevelController.add(level);
-      },
-    );
+    try {
+      await _stt.listen(
+        onResult: (result) {
+          AppLogger.log(
+            "STT Result: '${result.recognizedWords}' (final: ${result.finalResult})",
+            name: 'VoiceService',
+          );
+          _lastRecognizedWords = result.recognizedWords;
+          // If final result (due to pause timeout), complete
+          if (result.finalResult) {
+            complete(_lastRecognizedWords);
+          }
+        },
+        listenOptions: SpeechListenOptions(
+          localeId: localeId, // Dynamic locale
+          listenFor: duration,
+          pauseFor: const Duration(seconds: 3),
+          listenMode: ListenMode.confirmation,
+        ),
+        onSoundLevelChange: (level) {
+          _soundLevelController.add(level);
+        },
+      );
 
-    // Timeout safety (max duration + buffer)
-    return completer.future.timeout(
-      duration + const Duration(seconds: 1),
-      onTimeout: () async {
+      // Timeout safety (max duration + buffer)
+      return await completer.future.timeout(
+        duration + const Duration(seconds: 1),
+        onTimeout: () async {
+          return _lastRecognizedWords.isNotEmpty ? _lastRecognizedWords : null;
+        },
+      );
+    } catch (e) {
+      AppLogger.error(
+        "Error during STT listen",
+        name: 'VoiceService',
+        error: e,
+      );
+      return _lastRecognizedWords.isNotEmpty ? _lastRecognizedWords : null;
+    } finally {
+      try {
         await _stt.stop();
-        return _lastRecognizedWords.isNotEmpty ? _lastRecognizedWords : null;
-      },
-    );
+      } catch (_) {}
+      // Give iOS AVAudioSession brief recovery window to teardown recording before TTS
+      await Future.delayed(const Duration(milliseconds: 150));
+    }
   }
 
   // Vocabulary Challenge
@@ -171,28 +201,40 @@ class VoiceQuizService {
     LanguageItem item, {
     bool isPortuguese = true,
   }) async {
-    await _ttsService.setRate(_currentRate);
-
-    if (isPortuguese) {
-      // Ask: "What does [Portuguese Word] mean?"
-      await speak("What does", waitForCompletion: false, language: "en-US");
-
+    try {
       await _ttsService.setRate(_currentRate);
-      await speak(item.portuguese, waitForCompletion: false, language: "pt-PT");
 
-      await _ttsService.setRate(_currentRate);
-      await speak(
-        "mean?",
-        waitForCompletion: true,
-        language: "en-US",
-      ); // Wait only for the last one
-    } else {
-      // Ask: "How do you say [English Word] in Portuguese?"
-      // Optimization: Merge EN string
-      await speak(
-        "How do you say ${item.english} in Portuguese?",
-        waitForCompletion: true,
-        language: "en-US",
+      if (isPortuguese) {
+        // Ask: "What does [Portuguese Word] mean?"
+        await speak("What does", waitForCompletion: false, language: "en-US");
+
+        await _ttsService.setRate(_currentRate);
+        await speak(
+          item.portuguese,
+          waitForCompletion: false,
+          language: "pt-PT",
+        );
+
+        await _ttsService.setRate(_currentRate);
+        await speak(
+          "mean?",
+          waitForCompletion: true,
+          language: "en-US",
+        ); // Wait only for the last one
+      } else {
+        // Ask: "How do you say [English Word] in Portuguese?"
+        // Optimization: Merge EN string
+        await speak(
+          "How do you say ${item.english} in Portuguese?",
+          waitForCompletion: true,
+          language: "en-US",
+        );
+      }
+    } catch (e) {
+      AppLogger.error(
+        "Error in speakVocabularyChallenge",
+        name: 'VoiceService',
+        error: e,
       );
     }
   }
@@ -326,26 +368,34 @@ class VoiceQuizService {
   }
 
   // Setup methods to stop/dispose
-  void stop() {
-    _ttsService.stop();
-    _stt.stop();
+  Future<void> stop() async {
+    try {
+      await _stt.stop();
+    } catch (_) {}
+    try {
+      await _ttsService.stop();
+    } catch (_) {}
   }
 
   // Feedback
   Future<void> speakFeedback(bool correct, {String locale = "en-US"}) async {
-    await _ttsService.setRate(_currentRate); // Re-apply user rate
-    if (locale == "pt-PT") {
-      if (correct) {
-        await speak("Correto!", language: locale);
+    try {
+      await _ttsService.setRate(_currentRate); // Re-apply user rate
+      if (locale == "pt-PT") {
+        if (correct) {
+          await speak("Correto!", language: locale);
+        } else {
+          await speak("Incorreto.", language: locale);
+        }
       } else {
-        await speak("Incorreto.", language: locale);
+        if (correct) {
+          await speak("Correct!", language: locale);
+        } else {
+          await speak("Incorrect.", language: locale);
+        }
       }
-    } else {
-      if (correct) {
-        await speak("Correct!", language: locale);
-      } else {
-        await speak("Incorrect.", language: locale);
-      }
+    } catch (e) {
+      AppLogger.error("Error in speakFeedback", name: 'VoiceService', error: e);
     }
   }
 }

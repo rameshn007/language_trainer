@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:language_trainer/models/language_item.dart';
 import 'package:language_trainer/services/voice_quiz_service.dart';
 import 'package:language_trainer/services/tts_service.dart';
 
@@ -166,6 +168,51 @@ void main() {
       expect(
         service.isCorrect('ola', 'esta é uma frase completamente diferente'),
         isFalse,
+      );
+    });
+  });
+
+  group('VoiceQuizService.speak — Timeout resilience', () {
+    test('speak handles TimeoutException gracefully without throwing', () async {
+      when(() => mockTts.speak(any(), language: any(named: 'language')))
+          .thenThrow(TimeoutException('TTS operation timed out'));
+      when(() => mockTts.stop()).thenAnswer((_) async {});
+
+      // Should complete normally and not throw TimeoutException
+      await expectLater(
+        service.speak('Test phrase', waitForCompletion: false),
+        completes,
+      );
+      verify(() => mockTts.stop()).called(1);
+    });
+
+    test('speakVocabularyChallenge handles TimeoutException without crashing', () async {
+      when(() => mockTts.setRate(any())).thenAnswer((_) async {});
+      when(() => mockTts.speak(any(), language: any(named: 'language')))
+          .thenThrow(TimeoutException('TTS operation timed out'));
+      when(() => mockTts.stop()).thenAnswer((_) async {});
+
+      final item = LanguageItem(
+        id: '1',
+        portuguese: 'o lucro',
+        english: 'profit',
+      );
+
+      await expectLater(
+        service.speakVocabularyChallenge(item, isPortuguese: false),
+        completes,
+      );
+    });
+
+    test('speakFeedback handles TimeoutException without crashing', () async {
+      when(() => mockTts.setRate(any())).thenAnswer((_) async {});
+      when(() => mockTts.speak(any(), language: any(named: 'language')))
+          .thenThrow(TimeoutException('TTS operation timed out'));
+      when(() => mockTts.stop()).thenAnswer((_) async {});
+
+      await expectLater(
+        service.speakFeedback(false, locale: 'pt-PT'),
+        completes,
       );
     });
   });

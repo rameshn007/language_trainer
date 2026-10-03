@@ -7,6 +7,7 @@ import '../models/progress_data.dart';
 import '../services/voice_quiz_service.dart';
 import '../services/progress_service.dart';
 import '../services/storage_service.dart';
+import '../utils/logger.dart';
 import '../main.dart';
 import 'dart:math';
 import 'vocabulary/vocabulary_list_screen.dart';
@@ -44,6 +45,9 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
   DateTime? _sessionStartTime;
   int _sessionXP = 0;
   StreamSubscription<double>? _levelSubscription;
+
+  int _sessionId = 0;
+  bool _isSessionStarting = false;
 
   bool _isPlaying = false;
   bool _isPortugueseQuestion =
@@ -142,39 +146,52 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
 
   @override
   void dispose() {
+    _sessionId++;
+    _levelSubscription?.cancel();
     _voiceService.stop();
     super.dispose();
   }
 
   Future<void> _startSession() async {
+    if (_isSessionStarting || _isPlaying) return;
     if (_sessionQueue.isEmpty && _currentItem == null) return;
 
-    if (_currentItem != null) {
-      // RESUME
-      setState(() {
-        _isPlaying = true;
-        _statusText = "Listen...";
-      });
-      await _playCurrentItem();
-    } else {
-      // START NEW
-      setState(() {
-        _isPlaying = true;
-        _correctCount = 0;
-        _totalAsked = 0;
-        _sessionXP = 0;
-        _sessionStartTime = DateTime.now();
-      });
-      await _nextItem();
+    _isSessionStarting = true;
+    _sessionId++;
+    final currentSession = _sessionId;
+
+    try {
+      if (_currentItem != null) {
+        // RESUME
+        setState(() {
+          _isPlaying = true;
+          _statusText = "Listen...";
+        });
+        await _playCurrentItem(currentSession);
+      } else {
+        // START NEW
+        setState(() {
+          _isPlaying = true;
+          _correctCount = 0;
+          _totalAsked = 0;
+          _sessionXP = 0;
+          _sessionStartTime = DateTime.now();
+        });
+        await _nextItem(currentSession);
+      }
+    } finally {
+      _isSessionStarting = false;
     }
   }
 
-  Future<void> _nextItem() async {
-    if (!mounted) return;
+  Future<void> _nextItem([int? sessionToken]) async {
+    final currentSession = sessionToken ?? _sessionId;
+    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
 
     if (_sessionQueue.isEmpty) {
       // Record session completion with the new progress system
       await _recordSessionComplete();
+      if (!mounted || _sessionId != currentSession) return;
       setState(() {
         _statusText = "Session Complete!";
         _isPlaying = false;
@@ -193,29 +210,45 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       _isPortugueseQuestion = Random().nextBool();
     });
 
-    await _playCurrentItem();
+    await _playCurrentItem(currentSession);
   }
 
-  Future<void> _playCurrentItem() async {
-    if (_currentItem == null) return;
+  Future<void> _playCurrentItem([int? sessionToken]) async {
+    final currentSession = sessionToken ?? _sessionId;
+    if (_currentItem == null ||
+        !mounted ||
+        !_isPlaying ||
+        _sessionId != currentSession) {
+      return;
+    }
 
     if (mounted) setState(() => _isSpeaking = true);
-    await _voiceService.speakVocabularyChallenge(
-      _currentItem!,
-      isPortuguese: _isPortugueseQuestion,
-    );
-    if (mounted) setState(() => _isSpeaking = false);
+    try {
+      await _voiceService.speakVocabularyChallenge(
+        _currentItem!,
+        isPortuguese: _isPortugueseQuestion,
+      );
+    } catch (e) {
+      AppLogger.error(
+        "Failed to speak vocabulary challenge",
+        name: 'VoiceTrainer',
+        error: e,
+      );
+    } finally {
+      if (mounted) setState(() => _isSpeaking = false);
+    }
 
-    if (!mounted || !_isPlaying) return;
+    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
 
-    // Auto-listen after question?
+    // Auto-listen after question
     await Future.delayed(const Duration(milliseconds: 500));
-    if (!mounted || !_isPlaying) return;
-    await _listen();
+    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
+    await _listen(currentSession);
   }
 
-  Future<void> _listen() async {
-    if (!mounted) return;
+  Future<void> _listen([int? sessionToken]) async {
+    final currentSession = sessionToken ?? _sessionId;
+    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
 
     setState(() {
       _isListening = true;
@@ -225,22 +258,24 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
 
     _levelSubscription?.cancel();
     _levelSubscription = _voiceService.soundLevelStream.listen((level) {
-      // Level is usually -10 to 10 or similar logic depending on library.
-      // normalize to 0.0 - 1.0 range if possible, or just raw.
-      // Assuming positive magnitude for visualization.
-      if (mounted) {
+      if (mounted && _isListening) {
         setState(() {
           _soundLevel = level.clamp(0.0, 10.0) / 10.0;
         });
       }
     });
 
-    final spoken = await _voiceService.listenForAnswer(
-      const Duration(seconds: 15),
-      localeId: _isPortugueseQuestion ? "en-US" : "pt-PT",
-    );
+    String? spoken;
+    try {
+      spoken = await _voiceService.listenForAnswer(
+        const Duration(seconds: 15),
+        localeId: _isPortugueseQuestion ? "en-US" : "pt-PT",
+      );
+    } catch (e) {
+      AppLogger.error("Listen error", name: 'VoiceTrainer', error: e);
+    }
 
-    if (!mounted) return;
+    if (!mounted || _sessionId != currentSession) return;
 
     _levelSubscription?.cancel();
 
@@ -249,122 +284,146 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       _userSpokenText = spoken ?? "(No speech detected)";
     });
 
-    if (!_isPlaying) return;
+    if (!_isPlaying || _sessionId != currentSession) return;
 
-    _processAnswer(spoken);
+    await _processAnswer(spoken, currentSession);
   }
 
-  Future<void> _processAnswer(String? spoken) async {
-    if (_currentItem == null || !_isPlaying) return;
+  Future<void> _processAnswer(String? spoken, [int? sessionToken]) async {
+    final currentSession = sessionToken ?? _sessionId;
+    if (_currentItem == null || !_isPlaying || _sessionId != currentSession) {
+      return;
+    }
 
     bool correct = false;
     if (spoken != null) {
-      if (_isPortugueseQuestion) {
-        // Asked: PT, Expected: EN check
-        final res = await _voiceService.checkAnswerAsync(
-          spoken,
-          _currentItem!.english,
-          context: _currentItem!.portuguese,
-          locale: "en-US",
+      try {
+        if (_isPortugueseQuestion) {
+          // Asked: PT, Expected: EN check
+          final res = await _voiceService.checkAnswerAsync(
+            spoken,
+            _currentItem!.english,
+            context: _currentItem!.portuguese,
+            locale: "en-US",
+          );
+          correct = res.isCorrect;
+        } else {
+          // Asked: EN, Expected: PT check
+          final res = await _voiceService.checkAnswerAsync(
+            spoken,
+            _currentItem!.portuguese,
+            context: _currentItem!.english,
+            locale: "pt-PT",
+          );
+          correct = res.isCorrect;
+        }
+      } catch (e) {
+        AppLogger.error(
+          "Error evaluating answer",
+          name: 'VoiceTrainer',
+          error: e,
         );
-        correct = res.isCorrect;
-      } else {
-        // Asked: EN, Expected: PT check
-        final res = await _voiceService.checkAnswerAsync(
-          spoken,
-          _currentItem!.portuguese,
-          context: _currentItem!.english,
-          locale: "pt-PT",
-        );
-        correct = res.isCorrect;
       }
     }
 
-    if (!mounted) return;
+    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
 
-    if (correct) {
-      setState(() {
-        _statusText = "Correct!";
-        _correctCount++;
-        _totalAsked++;
-      });
-      await _voiceService.speakFeedback(
-        true,
-        locale: _isPortugueseQuestion ? "en-US" : "pt-PT",
-      );
-      if (!mounted || !_isPlaying) return;
+    setState(() => _isSpeaking = true);
+    try {
+      if (correct) {
+        setState(() {
+          _statusText = "Correct!";
+          _correctCount++;
+          _totalAsked++;
+        });
+        await _voiceService.speakFeedback(
+          true,
+          locale: _isPortugueseQuestion ? "en-US" : "pt-PT",
+        );
+        if (!mounted || !_isPlaying || _sessionId != currentSession) return;
 
-      // Reinforce
-      if (_isPortugueseQuestion) {
-        await _voiceService.speak("It means ${_currentItem!.english}");
+        // Reinforce
+        if (_isPortugueseQuestion) {
+          await _voiceService.speak("It means ${_currentItem!.english}");
+        } else {
+          await _voiceService.speak(
+            "É ${_currentItem!.portuguese}",
+          ); // "It is..."
+        }
+
+        // Record via progress service for XP + mastery
+        final int xp = await _progressService.recordQuizAnswer(
+          storage: _storageService,
+          itemId: _currentItem!.id,
+          correct: true,
+          firstAttempt: true,
+        );
+        if (mounted && _sessionId == currentSession) {
+          setState(() {
+            _sessionXP += xp;
+          });
+        }
       } else {
-        // await _voiceService.setSpeechRate(0.85); // Slightly slower for PT
-        await _voiceService.speak(
-          "É ${_currentItem!.portuguese}",
-        ); // "It is..."
-        // await _voiceService.setSpeechRate(_speechRate); // Restore
+        setState(() {
+          _statusText = "Incorrect. It was: ${_currentItem!.english}";
+          _totalAsked++;
+        });
+        await _voiceService.speakFeedback(
+          false,
+          locale: _isPortugueseQuestion ? "en-US" : "pt-PT",
+        );
+        if (!mounted || !_isPlaying || _sessionId != currentSession) return;
+
+        if (_isPortugueseQuestion) {
+          await _voiceService.speak("The answer is ${_currentItem!.english}");
+        } else {
+          await _voiceService.speak("A resposta é ${_currentItem!.portuguese}");
+        }
+
+        // Record incorrect via progress service
+        final int xp = await _progressService.recordQuizAnswer(
+          storage: _storageService,
+          itemId: _currentItem!.id,
+          correct: false,
+        );
+        if (mounted && _sessionId == currentSession) {
+          setState(() {
+            _sessionXP += xp;
+          });
+        }
+
+        // RETRY LOGIC: Add back to queue (random position or simple append?)
+        // Append for now to retry at end of session (or sooner?)
+        // Let's insert it 3 spots later or at end if < 3 items.
+        if (_sessionQueue.length > 3) {
+          _sessionQueue.insert(3, _currentItem!);
+        } else {
+          _sessionQueue.add(_currentItem!);
+        }
       }
-
-      // Record via progress service for XP + mastery
-      final int xp = await _progressService.recordQuizAnswer(
-        storage: _storageService,
-        itemId: _currentItem!.id,
-        correct: true,
-        firstAttempt: true,
+    } catch (e) {
+      AppLogger.error(
+        "Error during answer feedback/reinforcement",
+        name: 'VoiceTrainer',
+        error: e,
       );
-      setState(() {
-        _sessionXP += xp;
-      });
-    } else {
-      setState(() {
-        _statusText = "Incorrect. It was: ${_currentItem!.english}";
-        _totalAsked++;
-      });
-      await _voiceService.speakFeedback(
-        false,
-        locale: _isPortugueseQuestion ? "en-US" : "pt-PT",
-      );
-      if (!mounted || !_isPlaying) return;
-
-      if (_isPortugueseQuestion) {
-        await _voiceService.speak("The answer is ${_currentItem!.english}");
-      } else {
-        // await _voiceService.setSpeechRate(0.85);
-        await _voiceService.speak("A resposta é ${_currentItem!.portuguese}");
-        // await _voiceService.setSpeechRate(_speechRate);
-      }
-
-      // Record incorrect via progress service
-      final int xp = await _progressService.recordQuizAnswer(
-        storage: _storageService,
-        itemId: _currentItem!.id,
-        correct: false,
-      );
-      setState(() {
-        _sessionXP += xp;
-      });
-
-      // RETRY LOGIC: Add back to queue (random position or simple append?)
-      // Append for now to retry at end of session (or sooner?)
-      // Let's insert it 3 spots later or at end if < 3 items.
-      if (_sessionQueue.length > 3) {
-        _sessionQueue.insert(3, _currentItem!);
-      } else {
-        _sessionQueue.add(_currentItem!);
-      }
+    } finally {
+      if (mounted) setState(() => _isSpeaking = false);
     }
 
-    if (!mounted) return;
+    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
 
     // Delay before next
     await Future.delayed(const Duration(seconds: 2));
-    if (mounted && _isPlaying) {
-      await _nextItem();
+    if (mounted && _isPlaying && _sessionId == currentSession) {
+      await _nextItem(currentSession);
     }
   }
 
   Future<void> _stopSession() async {
-    _voiceService.stop();
+    _sessionId++;
+    _levelSubscription?.cancel();
+    await _voiceService.stop();
     // Record partial session if any questions were answered
     if (_totalAsked > 0) {
       await _recordSessionComplete();
@@ -372,6 +431,8 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
     if (mounted) {
       setState(() {
         _isPlaying = false;
+        _isListening = false;
+        _isSpeaking = false;
         _statusText = "Stopped";
       });
     }
@@ -497,16 +558,24 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
               repeat: true,
               child: FloatingActionButton.large(
                 onPressed: _isPlaying
-                    ? (_isListening ? null : _listen) // Tap to listen retry?
+                    ? ((_isListening || _isSpeaking)
+                          ? null
+                          : () => _listen(_sessionId))
                     : _startSession,
                 backgroundColor: _isListening
                     ? Colors.red
-                    : Theme.of(context).colorScheme.primary,
+                    : (_isSpeaking
+                          ? Colors.grey
+                          : Theme.of(context).colorScheme.primary),
                 child: Transform.scale(
                   scale: 1.0 + (_soundLevel * 0.5), // Modulate size
                   child: Icon(
                     _isPlaying
-                        ? (_isListening ? Icons.mic : Icons.mic_none)
+                        ? (_isListening
+                              ? Icons.mic
+                              : (_isSpeaking
+                                    ? Icons.volume_up
+                                    : Icons.mic_none))
                         : Icons.play_arrow,
                     size: 40,
                     color: Colors.white,
