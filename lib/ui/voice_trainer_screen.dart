@@ -291,42 +291,30 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
 
   Future<void> _processAnswer(String? spoken, [int? sessionToken]) async {
     final currentSession = sessionToken ?? _sessionId;
-    if (_currentItem == null || !_isPlaying || _sessionId != currentSession) {
+    final currentItem = _currentItem;
+    if (currentItem == null || !_isPlaying || _sessionId != currentSession) {
       return;
     }
 
+    // 3-tier grading contract: exact -> substring -> Levenshtein > 0.65
     bool correct = false;
     if (spoken != null) {
-      try {
-        if (_isPortugueseQuestion) {
-          // Asked: PT, Expected: EN check
-          final res = await _voiceService.checkAnswerAsync(
-            spoken,
-            _currentItem!.english,
-            context: _currentItem!.portuguese,
-            locale: "en-US",
-          );
-          correct = res.isCorrect;
-        } else {
-          // Asked: EN, Expected: PT check
-          final res = await _voiceService.checkAnswerAsync(
-            spoken,
-            _currentItem!.portuguese,
-            context: _currentItem!.english,
-            locale: "pt-PT",
-          );
-          correct = res.isCorrect;
-        }
-      } catch (e) {
-        AppLogger.error(
-          "Error evaluating answer",
-          name: 'VoiceTrainer',
-          error: e,
-        );
+      if (_isPortugueseQuestion) {
+        // Asked: PT, Expected: EN check
+        correct = _voiceService.isCorrect(spoken, currentItem.english);
+      } else {
+        // Asked: EN, Expected: PT check
+        correct = _voiceService.isCorrect(spoken, currentItem.portuguese);
       }
     }
 
-    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
+    // Verify session and item identity before updating UI or speaking feedback
+    if (!mounted ||
+        !_isPlaying ||
+        _sessionId != currentSession ||
+        _currentItem?.id != currentItem.id) {
+      return;
+    }
 
     setState(() => _isSpeaking = true);
     try {
@@ -340,21 +328,34 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
           true,
           locale: _isPortugueseQuestion ? "en-US" : "pt-PT",
         );
-        if (!mounted || !_isPlaying || _sessionId != currentSession) return;
+        if (!mounted ||
+            !_isPlaying ||
+            _sessionId != currentSession ||
+            _currentItem?.id != currentItem.id) {
+          return;
+        }
 
         // Reinforce
         if (_isPortugueseQuestion) {
-          await _voiceService.speak("It means ${_currentItem!.english}");
+          await _voiceService.speak("It means ${currentItem.english}");
         } else {
           await _voiceService.speak(
-            "É ${_currentItem!.portuguese}",
+            "É ${currentItem.portuguese}",
           ); // "It is..."
+        }
+
+        // Re-check playing and item identity before awarding XP
+        if (!mounted ||
+            !_isPlaying ||
+            _sessionId != currentSession ||
+            _currentItem?.id != currentItem.id) {
+          return;
         }
 
         // Record via progress service for XP + mastery
         final int xp = await _progressService.recordQuizAnswer(
           storage: _storageService,
-          itemId: _currentItem!.id,
+          itemId: currentItem.id,
           correct: true,
           firstAttempt: true,
         );
@@ -365,25 +366,37 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         }
       } else {
         setState(() {
-          _statusText = "Incorrect. It was: ${_currentItem!.english}";
+          _statusText = "Incorrect. It was: ${currentItem.english}";
           _totalAsked++;
         });
         await _voiceService.speakFeedback(
           false,
           locale: _isPortugueseQuestion ? "en-US" : "pt-PT",
         );
-        if (!mounted || !_isPlaying || _sessionId != currentSession) return;
+        if (!mounted ||
+            !_isPlaying ||
+            _sessionId != currentSession ||
+            _currentItem?.id != currentItem.id) {
+          return;
+        }
 
         if (_isPortugueseQuestion) {
-          await _voiceService.speak("The answer is ${_currentItem!.english}");
+          await _voiceService.speak("The answer is ${currentItem.english}");
         } else {
-          await _voiceService.speak("A resposta é ${_currentItem!.portuguese}");
+          await _voiceService.speak("A resposta é ${currentItem.portuguese}");
+        }
+
+        if (!mounted ||
+            !_isPlaying ||
+            _sessionId != currentSession ||
+            _currentItem?.id != currentItem.id) {
+          return;
         }
 
         // Record incorrect via progress service
         final int xp = await _progressService.recordQuizAnswer(
           storage: _storageService,
-          itemId: _currentItem!.id,
+          itemId: currentItem.id,
           correct: false,
         );
         if (mounted && _sessionId == currentSession) {
@@ -393,12 +406,10 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
         }
 
         // RETRY LOGIC: Add back to queue (random position or simple append?)
-        // Append for now to retry at end of session (or sooner?)
-        // Let's insert it 3 spots later or at end if < 3 items.
         if (_sessionQueue.length > 3) {
-          _sessionQueue.insert(3, _currentItem!);
+          _sessionQueue.insert(3, currentItem);
         } else {
-          _sessionQueue.add(_currentItem!);
+          _sessionQueue.add(currentItem);
         }
       }
     } catch (e) {
@@ -411,7 +422,12 @@ class _VoiceTrainerScreenState extends ConsumerState<VoiceTrainerScreen> {
       if (mounted) setState(() => _isSpeaking = false);
     }
 
-    if (!mounted || !_isPlaying || _sessionId != currentSession) return;
+    if (!mounted ||
+        !_isPlaying ||
+        _sessionId != currentSession ||
+        _currentItem?.id != currentItem.id) {
+      return;
+    }
 
     // Delay before next
     await Future.delayed(const Duration(seconds: 2));

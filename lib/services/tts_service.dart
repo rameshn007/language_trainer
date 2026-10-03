@@ -203,7 +203,11 @@ class TtsService {
         }
       }
     } catch (e) {
-      AppLogger.error('Error in TtsService._init', name: 'TtsService', error: e);
+      AppLogger.error(
+        'Error in TtsService._init',
+        name: 'TtsService',
+        error: e,
+      );
     }
 
     await _flutterTts.setPitch(1.0);
@@ -510,7 +514,11 @@ class TtsService {
       try {
         await _synthLock!.timeout(lockWaitTimeout);
       } catch (e) {
-        AppLogger.error('TTS lock wait timed out, breaking lock', name: 'TtsService', error: e);
+        AppLogger.error(
+          'TTS lock wait timed out, breaking lock',
+          name: 'TtsService',
+          error: e,
+        );
         try {
           await _flutterTts.stop();
         } catch (_) {}
@@ -526,7 +534,10 @@ class TtsService {
       return await action().timeout(
         actionTimeout,
         onTimeout: () {
-          AppLogger.error('TTS action timed out after ${actionTimeout.inSeconds}s', name: 'TtsService');
+          AppLogger.error(
+            'TTS action timed out after ${actionTimeout.inSeconds}s',
+            name: 'TtsService',
+          );
           try {
             _flutterTts.stop();
           } catch (_) {}
@@ -543,7 +554,7 @@ class TtsService {
     }
   }
 
-  Future<void> speak(String text, {String? language}) async {
+  Future<void> speak(String text, {String? language, double? rate}) async {
     if (text.isEmpty) return;
 
     if (initFuture != null) {
@@ -554,11 +565,25 @@ class TtsService {
       if (language != null) {
         await _prepareVoice(language);
       }
-      await _flutterTts.speak(text);
+      if (rate != null) {
+        await setRate(rate);
+      }
+      try {
+        await _flutterTts.speak(text);
+      } finally {
+        if (rate != null) {
+          await setRate(1.0); // Always restore to base rate
+        }
+      }
     });
   }
 
-  Future<void> synthesizeToFile(String text, String fileName, {String? language}) async {
+  Future<void> synthesizeToFile(
+    String text,
+    String fileName, {
+    String? language,
+    double? rate,
+  }) async {
     if (text.isEmpty) return;
 
     if (initFuture != null) {
@@ -569,9 +594,17 @@ class TtsService {
       if (language != null) {
         await _prepareVoice(language);
       }
-
-      // On iOS, we MUST pass true for isFullPath if we provide an absolute path
-      await _flutterTts.synthesizeToFile(text, fileName, Platform.isIOS);
+      // Always enforce base rate (1.0 -> 0.5) for audio file synthesis unless explicitly specified,
+      // shielding Listen & Repeat cache from transient speech rates.
+      await setRate(rate ?? 1.0);
+      try {
+        // On iOS, we MUST pass true for isFullPath if we provide an absolute path
+        await _flutterTts.synthesizeToFile(text, fileName, Platform.isIOS);
+      } finally {
+        if (rate != null) {
+          await setRate(1.0);
+        }
+      }
     });
   }
 

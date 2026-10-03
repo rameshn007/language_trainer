@@ -3,15 +3,12 @@ import UIKit
 import CarPlay
 import MediaPlayer
 import ObjectiveC
-import CoreML
-import NaturalLanguage
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
   lazy var flutterEngine = FlutterEngine(name: "shared_engine")
 
   let carPlaySceneObserver = CarPlaySceneObserver()
-  let layaSemanticEvaluator = LayaSemanticEvaluator()
 
   override func application(
     _ application: UIApplication,
@@ -20,7 +17,6 @@ import NaturalLanguage
     flutterEngine.run()
     GeneratedPluginRegistrant.register(with: self.flutterEngine)
     carPlaySceneObserver.attach(to: flutterEngine)
-    layaSemanticEvaluator.attach(to: flutterEngine)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
@@ -247,191 +243,6 @@ final class RemoteCommandInterceptor {
     #endif
 
     hasSwizzled = true
-  }
-}
-
-/// Evaluates user spoken responses semantically on-device.
-/// If `LayaMultilingual.mlmodelc` is bundled, leverages Apple Neural Engine
-/// via Core ML (`.cpuAndNeuralEngine`). Also integrates Portuguese dialect
-/// guardrails (PT-PT vs PT-BR) and NaturalLanguage semantic embeddings.
-final class LayaSemanticEvaluator: NSObject {
-  private var channel: FlutterMethodChannel?
-  private var coreMLModel: MLModel?
-  private var isModelLoaded = false
-  private let queue = DispatchQueue(label: "com.languageTrainer.layaQueue", qos: .userInitiated)
-
-  // PT-BR -> PT-PT common dialect replacements
-  private let brazilianToEuropean: [String: String] = [
-    "geladeira": "frigorífico",
-    "trem": "comboio",
-    "onibus": "autocarro",
-    "ônibus": "autocarro",
-    "celular": "telemóvel",
-    "banheiro": "casa de banho",
-    "cafe da manha": "pequeno-almoço",
-    "café da manhã": "pequeno-almoço",
-    "acougue": "talho",
-    "açougue": "talho",
-    "bala": "rebuçado",
-    "abacaxi": "ananás",
-    "grampeador": "agrafador",
-    "faixa de pedestres": "passadeira",
-    "carteira de motorista": "carta de condução",
-    "pedestre": "peão",
-    "suco": "sumo",
-    "carona": "boleia",
-    "time": "equipa",
-    "esporte": "desporto"
-  ]
-
-  func attach(to engine: FlutterEngine) {
-    let channel = FlutterMethodChannel(
-      name: "language_trainer/semantic_grading",
-      binaryMessenger: engine.binaryMessenger
-    )
-    self.channel = channel
-    channel.setMethodCallHandler { [weak self] call, result in
-      guard let self = self else { return }
-      switch call.method {
-      case "isAvailable":
-        result(true)
-
-      case "preload":
-        self.preloadModel { success in
-          result(success)
-        }
-
-      case "evaluate":
-        guard let args = call.arguments as? [String: Any],
-              let expected = args["expected"] as? String,
-              let spoken = args["spoken"] as? String else {
-          result(FlutterError(code: "INVALID_ARGS", message: "Missing arguments", details: nil))
-          return
-        }
-        let context = args["context"] as? String ?? ""
-        let locale = args["locale"] as? String ?? "pt-PT"
-
-        self.evaluate(expected: expected, spoken: spoken, context: context, locale: locale) { evalResult in
-          result(evalResult)
-        }
-
-      default:
-        result(FlutterMethodNotImplemented)
-      }
-    }
-  }
-
-  private func preloadModel(completion: @escaping (Bool) -> Void) {
-    queue.async { [weak self] in
-      guard let self = self else { return }
-      if self.coreMLModel != nil {
-        DispatchQueue.main.async { completion(true) }
-        return
-      }
-
-      if let modelUrl = Bundle.main.url(forResource: "LayaMultilingual", withExtension: "mlmodelc") {
-        let config = MLModelConfiguration()
-        if #available(iOS 16.0, *) {
-          config.computeUnits = .cpuAndNeuralEngine
-        } else {
-          config.computeUnits = .all
-        }
-        do {
-          self.coreMLModel = try MLModel(contentsOf: modelUrl, configuration: config)
-          self.isModelLoaded = true
-          NSLog("[LayaSemanticEvaluator] Loaded LayaMultilingual.mlmodelc onto Apple Neural Engine")
-          DispatchQueue.main.async { completion(true) }
-          return
-        } catch {
-          NSLog("[LayaSemanticEvaluator] CoreML initialization error: \(error)")
-        }
-      } else {
-        NSLog("[LayaSemanticEvaluator] LayaMultilingual.mlmodelc not found in bundle, using native NL embedding fallback")
-      }
-      DispatchQueue.main.async { completion(true) }
-    }
-  }
-
-  private func evaluate(
-    expected: String,
-    spoken: String,
-    context: String,
-    locale: String,
-    completion: @escaping ([String: Any]) -> Void
-  ) {
-    queue.async { [weak self] in
-      guard let self = self else { return }
-
-      let cleanExpected = self.normalize(expected)
-      let cleanSpoken = self.normalize(spoken)
-
-      // 1. Dialect check: Did user use Brazilian Portuguese in place of European Portuguese?
-      if locale.starts(with: "pt") {
-        for (br, pt) in self.brazilianToEuropean {
-          if cleanSpoken.contains(br) {
-            let feedback = "In European Portuguese, we use '\(pt)' instead of '\(br)'"
-            if cleanExpected.contains(pt) {
-              let res: [String: Any] = [
-                "isCorrect": true,
-                "confidence": 0.85,
-                "errorType": "brazilian_variant",
-                "feedbackMessage": feedback
-              ]
-              DispatchQueue.main.async { completion(res) }
-              return
-            }
-          }
-        }
-
-        // Check Brazilian gerund (-ando/-endo/-indo) vs European "a + infinitivo"
-        if (cleanSpoken.hasSuffix("ando") || cleanSpoken.hasSuffix("endo") || cleanSpoken.hasSuffix("indo")) &&
-           cleanExpected.contains(" a ") {
-          let res: [String: Any] = [
-            "isCorrect": true,
-            "confidence": 0.80,
-            "errorType": "brazilian_variant",
-            "feedbackMessage": "European PT uses 'a + infinitivo' rather than the gerund"
-          ]
-          DispatchQueue.main.async { completion(res) }
-          return
-        }
-      }
-
-      // 2. Apple NaturalLanguage sentence/word embedding semantic similarity
-      if #available(iOS 13.0, *) {
-        let nlLang: NLLanguage = locale.starts(with: "pt") ? .portuguese : .english
-        if let embedding = NLEmbedding.sentenceEmbedding(for: nlLang) ?? NLEmbedding.wordEmbedding(for: nlLang) {
-          let distance = embedding.distance(between: cleanExpected, and: cleanSpoken)
-          // Cosine distance ranges from 0.0 (identical) to 2.0 (opposite).
-          // Distance < 0.35 indicates high semantic similarity.
-          if distance < 0.35 {
-            let similarity = max(0.0, 1.0 - (distance / 2.0))
-            let res: [String: Any] = [
-              "isCorrect": true,
-              "confidence": similarity,
-              "errorType": "none"
-            ]
-            DispatchQueue.main.async { completion(res) }
-            return
-          }
-        }
-      }
-
-      // Default: Not recognized as semantic match
-      let res: [String: Any] = [
-        "isCorrect": false,
-        "confidence": 0.0,
-        "errorType": "unrecognized"
-      ]
-      DispatchQueue.main.async { completion(res) }
-    }
-  }
-
-  private func normalize(_ text: String) -> String {
-    return text.lowercased()
-      .trimmingCharacters(in: .whitespacesAndNewlines)
-      .folding(options: .diacriticInsensitive, locale: .current)
-      .replacingOccurrences(of: "[^a-z0-9\\s]", with: "", options: .regularExpression)
   }
 }
 

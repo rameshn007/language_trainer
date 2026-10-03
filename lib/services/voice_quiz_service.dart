@@ -4,20 +4,12 @@ import '../models/question.dart';
 import '../models/language_item.dart';
 import '../utils/logger.dart';
 import 'tts_service.dart';
-import 'semantic_grading_service.dart';
 
 class VoiceQuizService {
   final TtsService _ttsService;
-  final SemanticGradingService _semanticGradingService;
   final SpeechToText _stt = SpeechToText();
 
-  VoiceQuizService(
-    this._ttsService, [
-    SemanticGradingService? semanticGradingService,
-  ]) : _semanticGradingService =
-           semanticGradingService ?? SemanticGradingService();
-
-  SemanticGradingService get semanticGradingService => _semanticGradingService;
+  VoiceQuizService(this._ttsService);
 
   String _lastRecognizedWords = '';
   final StreamController<double> _soundLevelController =
@@ -27,7 +19,6 @@ class VoiceQuizService {
 
   Future<void> init() async {
     AppLogger.log("init() called", name: 'VoiceService');
-    await _semanticGradingService.init();
     AppLogger.log("TTS ready via TtsService", name: 'VoiceService');
   }
 
@@ -36,13 +27,11 @@ class VoiceQuizService {
 
   Future<void> setSpeechRate(double rate) async {
     _currentRate = rate;
-    await _ttsService.setRate(rate);
   }
 
   // Play the full question flow
   Future<void> playQuestion(Question q) async {
     // 1. Speak the English part (Context)
-    await _ttsService.setRate(_currentRate);
     await speak("Translate this:", language: "en-US");
 
     // REMOVED: await speak(q.sourceItem.english);
@@ -86,7 +75,7 @@ class VoiceQuizService {
     try {
       // TtsService.speak inherently awaits speech completion due to flutter_tts behavior on iOS/Android
       // if awaitSpeakCompletion is true. We'll simply await it.
-      await _ttsService.speak(text, language: language);
+      await _ttsService.speak(text, language: language, rate: _currentRate);
     } on TimeoutException catch (e) {
       AppLogger.log(
         "TTS speak timed out on '$text': $e - resetting synthesizer",
@@ -202,20 +191,14 @@ class VoiceQuizService {
     bool isPortuguese = true,
   }) async {
     try {
-      await _ttsService.setRate(_currentRate);
-
       if (isPortuguese) {
         // Ask: "What does [Portuguese Word] mean?"
         await speak("What does", waitForCompletion: false, language: "en-US");
-
-        await _ttsService.setRate(_currentRate);
         await speak(
           item.portuguese,
           waitForCompletion: false,
           language: "pt-PT",
         );
-
-        await _ttsService.setRate(_currentRate);
         await speak(
           "mean?",
           waitForCompletion: true,
@@ -239,7 +222,7 @@ class VoiceQuizService {
     }
   }
 
-  // Fuzzy match logic
+  // 3-tier grading contract: exact -> substring -> Levenshtein fuzzy at >0.65 similarity
   bool isCorrect(String spoken, String correctOption) {
     // Normalize
     final s = _normalize(spoken);
@@ -252,7 +235,6 @@ class VoiceQuizService {
     if (s.contains(c) || c.contains(s)) return true;
 
     // 3. Levenshtein Distance (for typos/accent misinterpretations)
-    // Allow for ~30% difference
     final distance = _levenshtein(s, c);
     final maxLength = s.length > c.length ? s.length : c.length;
     if (maxLength == 0) return false;
@@ -264,75 +246,6 @@ class VoiceQuizService {
     );
 
     return similarity > 0.65; // Allow 35% error rate
-  }
-
-  /// 4-tier hybrid answer evaluation:
-  /// 1. Exact match (0 ms)
-  /// 2. Substring match (0 ms)
-  /// 3. High-confidence Levenshtein (>0.85 similarity, minor typo)
-  /// 4. On-Device Apple Neural Engine Core ML semantic evaluation (Laya)
-  /// Fallback: Levenshtein > 0.65 threshold (preserves baseline contract)
-  Future<SemanticGradingResult> checkAnswerAsync(
-    String spoken,
-    String correctOption, {
-    String context = '',
-    String locale = 'pt-PT',
-  }) async {
-    final s = _normalize(spoken);
-    final c = _normalize(correctOption);
-
-    // Tier 1: Direct match (0 ms)
-    if (s == c) {
-      return SemanticGradingResult.fastPathMatch();
-    }
-
-    // Tier 2: Contains match (0 ms)
-    if (s.contains(c) || c.contains(s)) {
-      return SemanticGradingResult.fastPathMatch();
-    }
-
-    // Tier 3: High-confidence Levenshtein (>0.85 similarity)
-    final distance = _levenshtein(s, c);
-    final maxLength = s.length > c.length ? s.length : c.length;
-    if (maxLength > 0) {
-      final similarity = 1.0 - (distance / maxLength);
-      if (similarity > 0.85) {
-        return SemanticGradingResult.fuzzyMatch(similarity);
-      }
-    }
-
-    // Tier 4: On-Device Apple Neural Engine / Core ML Semantic Evaluation
-    if (_semanticGradingService.isAvailable) {
-      final semanticRes = await _semanticGradingService.evaluate(
-        expected: correctOption,
-        spoken: spoken,
-        context: context,
-        locale: locale,
-      );
-
-      if (semanticRes != null) {
-        AppLogger.log(
-          "Laya ANE: '$spoken' vs '$correctOption' -> isCorrect: ${semanticRes.isCorrect}, "
-          "confidence: ${semanticRes.confidence}, errorType: ${semanticRes.errorType}",
-          name: 'VoiceService',
-        );
-
-        // Calibrated confidence gate: >= 0.80 probability accepted as correct
-        if (semanticRes.isCorrect && semanticRes.confidence >= 0.80) {
-          return semanticRes;
-        }
-      }
-    }
-
-    // Fallback: baseline Levenshtein > 0.65 threshold
-    if (maxLength == 0) {
-      return SemanticGradingResult.fallback(isCorrect: false, similarity: 0.0);
-    }
-    final similarity = 1.0 - (distance / maxLength);
-    return SemanticGradingResult.fallback(
-      isCorrect: similarity > 0.65,
-      similarity: similarity,
-    );
   }
 
   int _levenshtein(String s, String t) {
@@ -380,7 +293,6 @@ class VoiceQuizService {
   // Feedback
   Future<void> speakFeedback(bool correct, {String locale = "en-US"}) async {
     try {
-      await _ttsService.setRate(_currentRate); // Re-apply user rate
       if (locale == "pt-PT") {
         if (correct) {
           await speak("Correto!", language: locale);
