@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'exercise/exercise_list_screen.dart';
 import 'exercise/exercise_screen.dart';
 import 'listen_repeat/listen_repeat_screen.dart';
+import 'flashcards/flashcards_screen.dart';
 import 'phrase_trainer_screen.dart';
 import 'quiz/category_selection_screen.dart';
 import 'quiz/grammar_quiz_screen.dart';
@@ -590,6 +591,18 @@ class HomeSectionsBuilder {
     );
 
     // ── Core Skills ──
+    final flashcardsTile = HomeTileItem(
+      id: 'vocab_flashcards',
+      title: 'Flashcards',
+      subtitle: '865 cards with audio & 3D flip',
+      icon: Icons.style_rounded,
+      color: Colors.indigo.shade600,
+      badge: '865 Cards',
+      onPressed: (offset) {
+        pushScreen(const FlashcardsScreen(), offset);
+      },
+    );
+
     final vocabList = HomeTileItem(
       id: 'vocab_list',
       title: 'Vocabulary',
@@ -793,6 +806,7 @@ class HomeSectionsBuilder {
         icon: Icons.menu_book_rounded,
         accentColor: Colors.blue.shade500,
         exercises: [
+          flashcardsTile,
           vocabList,
           vocabQuizCat,
           vocabQuizQuick,
@@ -880,6 +894,7 @@ class HomeSectionsBuilder {
         actionLabel: 'View All',
         onActionTap: () => selectCategory('vocab'),
         exercises: [
+          flashcardsTile,
           vocabList,
           vocab100Phrases,
         ],

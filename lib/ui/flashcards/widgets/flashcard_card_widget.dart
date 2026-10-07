@@ -1,0 +1,644 @@
+import 'dart:math';
+import 'package:flutter/material.dart';
+import '../../../models/flashcard_item.dart';
+import 'conjugation_table_widget.dart';
+
+/// Interactive 3D flip card widget with front (Portuguese) and back (English) faces.
+class FlashcardCardWidget extends StatelessWidget {
+  final FlashcardItem item;
+  final double flipProgress; // 0.0 (front) to 1.0 (back)
+  final VoidCallback onFlip;
+  final VoidCallback onSpeak;
+  final VoidCallback onSpeakSlow;
+  final VoidCallback? onSpeakEnglish;
+  final bool isSpeaking;
+  final bool isFlagged;
+  final VoidCallback onToggleFlag;
+  final void Function(int masteryLevel)? onRateMastery;
+  final int currentMastery;
+
+  const FlashcardCardWidget({
+    super.key,
+    required this.item,
+    required this.flipProgress,
+    required this.onFlip,
+    required this.onSpeak,
+    required this.onSpeakSlow,
+    this.onSpeakEnglish,
+    this.isSpeaking = false,
+    this.isFlagged = false,
+    required this.onToggleFlag,
+    this.onRateMastery,
+    this.currentMastery = 0,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final angle = flipProgress * pi;
+    final isFront = flipProgress <= 0.5;
+
+    return GestureDetector(
+      onTap: onFlip,
+      behavior: HitTestBehavior.opaque,
+      child: Transform(
+        transform: Matrix4.identity()
+          ..setEntry(3, 2, 0.0012) // 3D Perspective
+          ..rotateY(angle),
+        alignment: Alignment.center,
+        child: isFront
+            ? _buildFrontFace(context)
+            : Transform(
+                // Mirror back face so text renders forward
+                transform: Matrix4.identity()..rotateY(pi),
+                alignment: Alignment.center,
+                child: _buildBackFace(context),
+              ),
+      ),
+    );
+  }
+
+  /// Front Face: Portuguese, Phonetic pronunciation, Category, Audio
+  Widget _buildFrontFace(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final accentColor = item.categoryColor;
+
+    return Card(
+      elevation: 6,
+      shadowColor: accentColor.withValues(alpha: 0.25),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+        side: BorderSide(
+          color: accentColor.withValues(alpha: 0.4),
+          width: 2,
+        ),
+      ),
+      color: isDark ? const Color(0xFF1E222B) : Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Top Bar: Card Number, Category Pill, Flag
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: isDark ? Colors.white24 : Colors.grey.shade300,
+                      width: 1,
+                    ),
+                  ),
+                  child: Text(
+                    item.cardNumber,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                      color: isDark ? Colors.white70 : Colors.black87,
+                      fontFamily: 'monospace',
+                    ),
+                  ),
+                ),
+                // Category Banner
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: accentColor,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: accentColor.withValues(alpha: 0.35),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        item.categoryIcon,
+                        size: 14,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        item.category.toUpperCase(),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                          letterSpacing: 1.0,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Flag / Bookmark Button
+                IconButton(
+                  icon: Icon(
+                    isFlagged ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
+                    color: isFlagged ? Colors.amber.shade600 : Colors.grey.shade400,
+                  ),
+                  tooltip: isFlagged ? 'Remove Bookmark' : 'Bookmark Card',
+                  onPressed: onToggleFlag,
+                ),
+              ],
+            ),
+
+            const Spacer(),
+
+            // Center: Portuguese Word / Phrase
+            Center(
+              child: Hero(
+                tag: 'flashcard_pt_${item.id}',
+                child: Material(
+                  color: Colors.transparent,
+                  child: Text(
+                    item.portuguese,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: item.portuguese.length > 25 ? 26 : 34,
+                      fontWeight: FontWeight.w800,
+                      color: isDark ? Colors.white : Colors.black87,
+                      letterSpacing: -0.5,
+                      height: 1.2,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            // Phonetic Pronunciation Guide
+            if (item.formattedPronunciation != null) ...[
+              const SizedBox(height: 12),
+              Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: accentColor.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    item.formattedPronunciation!,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: accentColor,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+
+            const Spacer(),
+
+            // Bottom Audio & Action Bar
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Slow Audio Button
+                IconButton.filledTonal(
+                  icon: const Icon(Icons.slow_motion_video_rounded, size: 20),
+                  tooltip: 'Listen slowly (0.5x)',
+                  style: IconButton.styleFrom(
+                    backgroundColor: isDark
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.grey.shade100,
+                  ),
+                  onPressed: onSpeakSlow,
+                ),
+                const SizedBox(width: 14),
+                // Main Speaker Button
+                ElevatedButton.icon(
+                  onPressed: onSpeak,
+                  icon: Icon(
+                    isSpeaking ? Icons.volume_up_rounded : Icons.volume_up_outlined,
+                    size: 22,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    isSpeaking ? 'Speaking...' : 'Listen',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      color: Colors.white,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: accentColor,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    elevation: 3,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 14),
+
+            // Flip Hint
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.touch_app_rounded,
+                  size: 14,
+                  color: isDark ? Colors.white38 : Colors.black38,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  'Tap anywhere to flip card',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w500,
+                    color: isDark ? Colors.white38 : Colors.black38,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// Back Face: English Translation, Grammar details, Verb Conjugation, Rating
+  Widget _buildBackFace(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final accentColor = item.categoryColor;
+
+    return Card(
+      elevation: 6,
+      shadowColor: accentColor.withValues(alpha: 0.25),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24),
+        side: BorderSide(
+          color: accentColor.withValues(alpha: 0.3),
+          width: 1.5,
+        ),
+      ),
+      color: isDark ? const Color(0xFF1E222B) : Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Top Bar: CEFR Badge, Type / Gender Pill, Flip Button
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // CEFR Level
+                if (item.cefrLevel != null && item.cefrLevel!.isNotEmpty)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: accentColor.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      item.cefrLevel!.toUpperCase(),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w800,
+                        color: accentColor,
+                      ),
+                    ),
+                  )
+                else
+                  const SizedBox.shrink(),
+
+                // Type & Gender
+                if (item.typeDetailsString.isNotEmpty)
+                  Flexible(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? Colors.white.withValues(alpha: 0.08)
+                            : Colors.grey.shade100,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          item.typeDetailsString,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: isDark ? Colors.white70 : Colors.black87,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                // Flip Back Icon
+                IconButton(
+                  icon: const Icon(Icons.flip_camera_android_rounded, size: 22),
+                  tooltip: 'Flip back to Portuguese',
+                  onPressed: onFlip,
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 10),
+
+            // Scrollable & Vertically Balanced Content area
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  // Compute dynamic font size for English translation
+                  final int len = item.english.length;
+                  final double englishFontSize = len > 35
+                      ? 26.0
+                      : len > 22
+                          ? 30.0
+                          : len > 12
+                              ? 34.0
+                              : 38.0;
+
+                  return SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
+                      child: Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            const SizedBox(height: 8),
+
+                            // English Translation (Significantly Enlarged with Speaker Button)
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Text(
+                                    item.english,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: englishFontSize,
+                                      fontWeight: FontWeight.w800,
+                                      color: isDark ? Colors.white : Colors.black87,
+                                      letterSpacing: -0.5,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                ),
+                                if (onSpeakEnglish != null) ...[
+                                  const SizedBox(width: 8),
+                                  IconButton(
+                                    icon: Icon(
+                                      isSpeaking ? Icons.volume_up_rounded : Icons.volume_up_outlined,
+                                      size: 24,
+                                      color: accentColor,
+                                    ),
+                                    tooltip: 'Listen in English',
+                                    onPressed: onSpeakEnglish,
+                                  ),
+                                ],
+                              ],
+                            ),
+
+                            // Plural form if available
+                            if (item.plural != null && item.plural!.isNotEmpty) ...[
+                              const SizedBox(height: 8),
+                              Text(
+                                'Plural: ${item.plural}',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: isDark ? Colors.white70 : Colors.black87,
+                                ),
+                              ),
+                            ],
+
+                            // Verb Conjugations Table (if verb)
+                            if (item.presentTense != null &&
+                                item.presentTense!.isNotEmpty) ...[
+                              const SizedBox(height: 12),
+                              ConjugationTableWidget(
+                                conjugations: item.presentTense!,
+                                accentColor: accentColor,
+                              ),
+                            ],
+
+                            // Grammar Rules Explanation (for #G1 - #G7)
+                            if (item.isGrammarCard &&
+                                item.grammarExplanation != null) ...[
+                              const SizedBox(height: 14),
+                              Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: accentColor.withValues(alpha: 0.08),
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: accentColor.withValues(alpha: 0.25),
+                                    width: 1.2,
+                                  ),
+                                ),
+                                child: Text(
+                                  item.grammarExplanation!,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    height: 1.55,
+                                    fontWeight: FontWeight.w500,
+                                    color: isDark ? Colors.white : Colors.black87,
+                                  ),
+                                ),
+                              ),
+                            ],
+
+                            // Example Sentence (if present)
+                            if (item.examplePt != null &&
+                                item.examplePt!.isNotEmpty) ...[
+                              const SizedBox(height: 14),
+                              Container(
+                                padding: const EdgeInsets.all(14),
+                                decoration: BoxDecoration(
+                                  color: isDark
+                                      ? Colors.white.withValues(alpha: 0.05)
+                                      : Colors.grey.shade50,
+                                  borderRadius: BorderRadius.circular(14),
+                                  border: Border.all(
+                                    color: isDark ? Colors.white10 : Colors.black12,
+                                  ),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Icon(
+                                          Icons.format_quote_rounded,
+                                          size: 18,
+                                          color: accentColor,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Expanded(
+                                          child: Text(
+                                            item.examplePt!,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    if (item.exampleEn != null &&
+                                        item.exampleEn!.isNotEmpty) ...[
+                                      const SizedBox(height: 6),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 26),
+                                        child: Text(
+                                          item.exampleEn!,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: isDark
+                                                ? Colors.white70
+                                                : Colors.black54,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ],
+                                ),
+                              ),
+                            ],
+                            const SizedBox(height: 8),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            const Divider(height: 16),
+
+            // Mastery Rating Controls
+            if (onRateMastery != null) ...[
+              Text(
+                'How well do you know this card?',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: isDark ? Colors.white54 : Colors.black45,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildRatingButton(
+                    context: context,
+                    label: 'Practice',
+                    icon: Icons.refresh_rounded,
+                    color: Colors.orange.shade700,
+                    isActive: currentMastery > 0 && currentMastery <= 2,
+                    onTap: () => onRateMastery!(1),
+                  ),
+                  _buildRatingButton(
+                    context: context,
+                    label: 'Familiar',
+                    icon: Icons.thumb_up_alt_outlined,
+                    color: Colors.blue.shade600,
+                    isActive: currentMastery >= 3 && currentMastery <= 4,
+                    onTap: () => onRateMastery!(3),
+                  ),
+                  _buildRatingButton(
+                    context: context,
+                    label: 'Mastered',
+                    icon: Icons.star_rounded,
+                    color: Colors.green.shade600,
+                    isActive: currentMastery >= 5,
+                    onTap: () => onRateMastery!(5),
+                  ),
+                ],
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRatingButton({
+    required BuildContext context,
+    required String label,
+    required IconData icon,
+    required Color color,
+    required bool isActive,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        decoration: BoxDecoration(
+          color: isActive ? color.withValues(alpha: 0.2) : Colors.transparent,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: isActive ? color : color.withValues(alpha: 0.3),
+            width: isActive ? 1.5 : 1,
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 16, color: color),
+            const SizedBox(width: 6),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: isActive ? FontWeight.w800 : FontWeight.w600,
+                color: color,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
