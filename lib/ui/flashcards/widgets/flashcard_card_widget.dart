@@ -552,10 +552,9 @@ class FlashcardCardWidget extends StatelessWidget {
               ),
             ),
 
-            const Divider(height: 16),
-
-            // Mastery Rating Controls
-            if (onRateMastery != null) ...[
+            // Mastery Rating Controls (vocabulary cards only)
+            if (!item.isGrammarCard && onRateMastery != null) ...[
+              const Divider(height: 16),
               Text(
                 'How well do you know this card?',
                 textAlign: TextAlign.center,
@@ -574,7 +573,7 @@ class FlashcardCardWidget extends StatelessWidget {
                     label: 'Practice',
                     icon: Icons.refresh_rounded,
                     color: Colors.orange.shade700,
-                    isActive: currentMastery > 0 && currentMastery <= 2,
+                    isActive: currentMastery >= 1 && currentMastery <= 2,
                     onTap: () => onRateMastery!(1),
                   ),
                   _buildRatingButton(
@@ -582,7 +581,7 @@ class FlashcardCardWidget extends StatelessWidget {
                     label: 'Familiar',
                     icon: Icons.thumb_up_alt_outlined,
                     color: Colors.blue.shade600,
-                    isActive: currentMastery >= 3 && currentMastery <= 4,
+                    isActive: currentMastery == 3,
                     onTap: () => onRateMastery!(3),
                   ),
                   _buildRatingButton(
@@ -590,8 +589,8 @@ class FlashcardCardWidget extends StatelessWidget {
                     label: 'Mastered',
                     icon: Icons.star_rounded,
                     color: Colors.green.shade600,
-                    isActive: currentMastery >= 5,
-                    onTap: () => onRateMastery!(5),
+                    isActive: currentMastery >= 4,
+                    onTap: () => onRateMastery!(4),
                   ),
                 ],
               ),

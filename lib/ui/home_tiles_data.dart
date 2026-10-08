@@ -594,10 +594,10 @@ class HomeSectionsBuilder {
     final flashcardsTile = HomeTileItem(
       id: 'vocab_flashcards',
       title: 'Flashcards',
-      subtitle: '865 cards with audio & 3D flip',
+      subtitle: '878 cards with audio & 3D flip',
       icon: Icons.style_rounded,
       color: Colors.indigo.shade600,
-      badge: '865 Cards',
+      badge: '878 Cards',
       onPressed: (offset) {
         pushScreen(const FlashcardsScreen(), offset);
       },

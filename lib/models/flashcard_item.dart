@@ -120,9 +120,10 @@ class FlashcardItem {
 
   /// Construct from vocabulary.json item.
   factory FlashcardItem.fromVocabJson(Map<String, dynamic> json) {
-    final int rawId = json['id'] is int ? json['id'] as int : 0;
-    final String cardId = rawId > 0 ? '$rawId' : '${json.hashCode}';
-    final String cardNumber = rawId > 0 ? '#$rawId' : '#';
+    final dynamic rawId = json['id'];
+    final String cardId = rawId != null ? rawId.toString() : '${json.hashCode}';
+    final String cardNumber = rawId != null ? '#$rawId' : '#';
+    final String? languageItemId = rawId != null ? 'vocab_$rawId' : null;
 
     // Normalize topic category to PDF category if possible
     String category = _deriveCategory(json);
@@ -158,7 +159,7 @@ class FlashcardItem {
       exampleEn: json['example_sentence_en']?.toString(),
       presentTense: tenseMap,
       isGrammarCard: false,
-      languageItemId: 'vocab_$rawId',
+      languageItemId: languageItemId,
     );
   }
 
@@ -176,7 +177,7 @@ class FlashcardItem {
       cefrLevel: json['cefr_level']?.toString() ?? 'A1',
       grammarExplanation: json['explanation']?.toString(),
       isGrammarCard: true,
-      languageItemId: 'grammar_$id',
+      languageItemId: null,
     );
   }
 

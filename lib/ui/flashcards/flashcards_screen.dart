@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../main.dart';
 import '../../models/flashcard_item.dart';
-import '../../models/language_item.dart';
+import '../../models/progress_data.dart';
 import '../../services/progress_service.dart';
 import '../../services/storage_service.dart';
 import '../../services/tts_service.dart';
@@ -31,6 +31,9 @@ class FlashcardsScreen extends ConsumerStatefulWidget {
 
 class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     with SingleTickerProviderStateMixin {
+  // In-memory cache for decoded card deck across screen pushes
+  static List<FlashcardItem>? _cachedAllCards;
+
   // Master card list & filtered deck
   List<FlashcardItem> _allCards = [];
   List<FlashcardItem> _deck = [];
@@ -39,7 +42,6 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
   // Filters
   String _selectedCategory = 'ALL';
-  final String _selectedLevel = 'ALL';
   bool _filterFlaggedOnly = false;
   bool _isShuffled = false;
 
@@ -56,14 +58,22 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   bool _autoSpeak = true;
   double _speechRate = 0.8; // 0.8x default for clear EP pronunciation
 
-  // Auto-advance loop state
+  // Auto-advance loop state & cancellation token
   bool _isAutoAdvancing = false;
+  int _autoAdvanceGeneration = 0;
   Timer? _recallTimer;
   Timer? _autoAdvanceTimer;
   double _autoAdvanceProgress = 0.0;
   Timer? _autoAdvanceTicker;
+  Completer<void>? _stepCompleter;
   int _sessionCardsReviewed = 0;
   int _sessionXpEarned = 0;
+  DateTime _sessionStartTime = DateTime.now();
+
+  // Cached metadata for current card to prevent frame-by-frame Hive scans
+  int _currentCardMastery = 0;
+  bool _isCurrentCardFlagged = false;
+  final Set<String> _ratedCardKeysThisSession = {};
 
   final List<String> _availableCategories = [
     'ALL',
@@ -121,8 +131,21 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     super.dispose();
   }
 
-  /// Load grammar cards and vocabulary items from bundled JSON
+  /// Load grammar cards and vocabulary items from bundled JSON (or memory cache)
   Future<void> _loadAllCards() async {
+    if (_cachedAllCards != null && _cachedAllCards!.isNotEmpty) {
+      if (!mounted) return;
+      setState(() {
+        _allCards = List.from(_cachedAllCards!);
+        _applyFilters();
+        _isLoading = false;
+      });
+      if (_deck.isNotEmpty && _autoSpeak) {
+        _speakCurrent();
+      }
+      return;
+    }
+
     try {
       final List<FlashcardItem> loaded = [];
 
@@ -150,6 +173,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
         debugPrint('Error loading vocabulary.json: $e');
       }
 
+      _cachedAllCards = loaded;
+
       if (!mounted) return;
 
       setState(() {
@@ -168,25 +193,42 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     }
   }
 
-  /// Filter cards by category, CEFR level, and flagged status
+  /// Update cached metadata for the current card to avoid per-frame Hive scans
+  void _updateCurrentCardMetadata() {
+    if (_deck.isEmpty || _currentIndex >= _deck.length) {
+      _currentCardMastery = 0;
+      _isCurrentCardFlagged = false;
+      return;
+    }
+    final item = _deck[_currentIndex];
+    final flagKey = item.languageItemId ?? item.id;
+    _isCurrentCardFlagged = _storageService.isItemFlagged(flagKey);
+
+    if (item.isGrammarCard || item.languageItemId == null) {
+      _currentCardMastery = 0;
+    } else {
+      _currentCardMastery =
+          _storageService.getItem(item.languageItemId!)?.masteryLevel ?? 0;
+    }
+  }
+
+  /// Filter cards by category, and flagged status
   void _applyFilters() {
+    _stopAutoAdvance(updateState: false);
     List<FlashcardItem> result = List.from(_allCards);
 
     // Filter by Category
     if (_selectedCategory != 'ALL') {
-      result = result.where((c) => c.category.toUpperCase() == _selectedCategory).toList();
-    }
-
-    // Filter by CEFR Level
-    if (_selectedLevel != 'ALL') {
-      result = result.where((c) => (c.cefrLevel ?? '').toUpperCase() == _selectedLevel).toList();
+      result = result
+          .where((c) => c.category.toUpperCase() == _selectedCategory)
+          .toList();
     }
 
     // Filter by Flagged / Bookmarked
     if (_filterFlaggedOnly) {
       result = result.where((c) {
-        if (c.languageItemId == null) return false;
-        return _storageService.isItemFlagged(c.languageItemId!);
+        final flagKey = c.languageItemId ?? c.id;
+        return _storageService.isItemFlagged(flagKey);
       }).toList();
     }
 
@@ -207,6 +249,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     _deck = result;
     _currentIndex = 0;
     _resetFlip();
+    _updateCurrentCardMetadata();
   }
 
   void _resetFlip() {
@@ -284,11 +327,16 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   }
 
   void _nextCard() {
+    if (_deck.isEmpty) return;
+    if (_isAutoAdvancing) {
+      _stopAutoAdvance(updateState: false);
+    }
     if (_currentIndex < _deck.length - 1) {
       setState(() {
         _currentIndex++;
         _resetFlip();
         _sessionCardsReviewed++;
+        _updateCurrentCardMetadata();
       });
       if (_autoSpeak) {
         _speakCurrent();
@@ -299,10 +347,15 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   }
 
   void _prevCard() {
+    if (_deck.isEmpty) return;
+    if (_isAutoAdvancing) {
+      _stopAutoAdvance(updateState: false);
+    }
     if (_currentIndex > 0) {
       setState(() {
         _currentIndex--;
         _resetFlip();
+        _updateCurrentCardMetadata();
       });
       if (_autoSpeak) {
         _speakCurrent();
@@ -323,12 +376,17 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   }
 
   void _stopAutoAdvance({bool updateState = true}) {
+    _autoAdvanceGeneration++;
     _recallTimer?.cancel();
     _autoAdvanceTimer?.cancel();
     _autoAdvanceTicker?.cancel();
     _recallTimer = null;
     _autoAdvanceTimer = null;
     _autoAdvanceTicker = null;
+    if (_stepCompleter != null && !_stepCompleter!.isCompleted) {
+      _stepCompleter!.complete();
+    }
+    _stepCompleter = null;
     _isAutoAdvancing = false;
     _autoAdvanceProgress = 0.0;
     if (updateState && mounted) {
@@ -338,68 +396,86 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
   void _runAutoAdvanceStep() async {
     if (!_isAutoAdvancing || !mounted || _deck.isEmpty) return;
+    final stepGen = ++_autoAdvanceGeneration;
 
     // 1. Ensure front face is showing
     if (_isFlipped) {
       _resetFlip();
     }
 
-    // 2. Speak Portuguese
-    await _speakCurrent();
-    if (!_isAutoAdvancing || !mounted) return;
+    // 2. Speak Portuguese and await completion
+    if (_autoSpeak) {
+      await _speakCurrent();
+    }
+    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
-    // 3. Pause for recall using cancelable Timer
+    // 3. Pause for user recall with cancelable Timer
+    final recallCompleter = Completer<void>();
+    _stepCompleter = recallCompleter;
     _recallTimer?.cancel();
-    _recallTimer = Timer(const Duration(milliseconds: 2400), () {
-      if (!_isAutoAdvancing || !mounted) return;
-
-      // 4. Flip to back face
-      setState(() {
-        _flipController.forward();
-        _isFlipped = true;
-      });
-
-      if (_autoSpeak) {
-        _speakCurrentEnglish();
-      }
-
-      // 5. Reading timer countdown (3.2 seconds) with progress ticker
-      const int totalMillis = 3200;
-      const int tickMillis = 50;
-      int elapsed = 0;
-
-      _autoAdvanceTicker?.cancel();
-      _autoAdvanceTicker = Timer.periodic(
-        const Duration(milliseconds: tickMillis),
-        (timer) {
-          if (!_isAutoAdvancing || !mounted) {
-            timer.cancel();
-            return;
-          }
-          elapsed += tickMillis;
-          setState(() {
-            _autoAdvanceProgress = (elapsed / totalMillis).clamp(0.0, 1.0);
-          });
-          if (elapsed >= totalMillis) {
-            timer.cancel();
-          }
-        },
-      );
-
-      _autoAdvanceTimer?.cancel();
-      _autoAdvanceTimer = Timer(const Duration(milliseconds: totalMillis), () {
-        if (!_isAutoAdvancing || !mounted) return;
-        setState(() => _autoAdvanceProgress = 0.0);
-
-        if (_currentIndex < _deck.length - 1) {
-          _nextCard();
-          _runAutoAdvanceStep();
-        } else {
-          _stopAutoAdvance();
-          _showCompletionDialog();
-        }
-      });
+    _recallTimer = Timer(const Duration(milliseconds: 2000), () {
+      if (!recallCompleter.isCompleted) recallCompleter.complete();
     });
+    await recallCompleter.future;
+    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
+
+    // 4. Flip to back face
+    setState(() {
+      _flipController.forward();
+      _isFlipped = true;
+    });
+
+    // 5. Speak English and await completion so audio is NEVER truncated
+    if (_autoSpeak) {
+      await _speakCurrentEnglish();
+    }
+    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
+
+    // 6. Reading countdown with progress bar
+    const int totalMillis = 2600;
+    const int tickMillis = 50;
+    int elapsed = 0;
+    final readingCompleter = Completer<void>();
+    _stepCompleter = readingCompleter;
+
+    _autoAdvanceTicker?.cancel();
+    _autoAdvanceTicker = Timer.periodic(
+      const Duration(milliseconds: tickMillis),
+      (timer) {
+        if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) {
+          timer.cancel();
+          if (!readingCompleter.isCompleted) readingCompleter.complete();
+          return;
+        }
+        elapsed += tickMillis;
+        setState(() {
+          _autoAdvanceProgress = (elapsed / totalMillis).clamp(0.0, 1.0);
+        });
+        if (elapsed >= totalMillis) {
+          timer.cancel();
+          if (!readingCompleter.isCompleted) readingCompleter.complete();
+        }
+      },
+    );
+
+    await readingCompleter.future;
+    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
+
+    setState(() => _autoAdvanceProgress = 0.0);
+
+    // 7. Advance to next card without redundant _speakCurrent()
+    if (_currentIndex < _deck.length - 1) {
+      setState(() {
+        _currentIndex++;
+        _resetFlip();
+        _sessionCardsReviewed++;
+        _updateCurrentCardMetadata();
+      });
+      _runAutoAdvanceStep();
+    } else {
+      _stopAutoAdvance();
+      _showCompletionDialog();
+    }
   }
 
   /// Toggle Flag / Bookmark for the current card in StorageService
@@ -408,39 +484,30 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     final item = _deck[_currentIndex];
     final key = item.languageItemId ?? item.id;
     await _storageService.toggleItemFlagged(key);
-    setState(() {});
+    setState(() {
+      _updateCurrentCardMetadata();
+    });
   }
 
-  /// Self-assessment rating: updates mastery level and awards XP
+  /// Self-assessment rating: records quiz answer via ProgressService (earns real XP, obeys tier thresholds)
   Future<void> _rateCurrent(int level) async {
     if (_deck.isEmpty) return;
     final item = _deck[_currentIndex];
-    final key = item.languageItemId;
-    if (key == null) return;
+    if (item.isGrammarCard || item.languageItemId == null) return;
+    final key = item.languageItemId!;
 
-    final existing = _storageService.getAllItems().firstWhere(
-          (i) => i.id == key,
-          orElse: () => LanguageItem(
-            id: key,
-            portuguese: item.portuguese,
-            english: item.english,
-            masteryLevel: 0,
-          ),
-        );
+    final alreadyRated = _ratedCardKeysThisSession.contains(key);
+    final isCorrect = level >= 3;
 
-    existing.masteryLevel = level;
-    existing.lastReviewed = DateTime.now();
-    await _storageService.updateItem(existing);
-
-    // Award XP if mastered
-    if (level >= 4) {
-      _sessionXpEarned += 10;
-      await _storageService.updateWordProgress(
-        key,
-        true,
+    if (!alreadyRated) {
+      _ratedCardKeysThisSession.add(key);
+      final xp = await _progressService.recordQuizAnswer(
+        storage: _storageService,
+        itemId: key,
+        correct: isCorrect,
         firstAttempt: true,
       );
-      _progressService.refresh(_storageService);
+      _sessionXpEarned += xp;
 
       if (mounted) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -448,9 +515,17 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
           SnackBar(
             content: Row(
               children: [
-                const Icon(Icons.star_rounded, color: Colors.amber, size: 20),
+                Icon(
+                  isCorrect ? Icons.star_rounded : Icons.refresh_rounded,
+                  color: isCorrect ? Colors.amber : Colors.orange,
+                  size: 20,
+                ),
                 const SizedBox(width: 8),
-                Text('Mastered! +10 XP awarded'),
+                Text(
+                  xp > 0
+                      ? 'Progress saved! +$xp XP awarded'
+                      : (isCorrect ? 'Marked as known' : 'Marked for practice'),
+                ),
               ],
             ),
             duration: const Duration(seconds: 1),
@@ -458,22 +533,38 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
           ),
         );
       }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Card already reviewed this session'),
+            duration: Duration(milliseconds: 900),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
     }
 
-    setState(() {});
-  }
-
-  int _getCurrentMastery() {
-    if (_deck.isEmpty) return 0;
-    final item = _deck[_currentIndex];
-    final key = item.languageItemId;
-    if (key == null) return 0;
-    final found = _storageService.getAllItems().where((i) => i.id == key);
-    return found.isNotEmpty ? found.first.masteryLevel : 0;
+    setState(() {
+      _updateCurrentCardMetadata();
+    });
   }
 
   void _showCompletionDialog() {
+    if (_deck.isEmpty) return;
     final theme = Theme.of(context);
+    final durationSeconds =
+        DateTime.now().difference(_sessionStartTime).inSeconds;
+    _progressService.recordSessionComplete(
+      storage: _storageService,
+      activityType: ActivityType.vocabularyQuiz,
+      score: _sessionCardsReviewed > 0 ? _sessionCardsReviewed : 1,
+      total: _deck.length,
+      durationSeconds: durationSeconds,
+      sessionXP: _sessionXpEarned,
+    );
+
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -495,7 +586,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
             ),
             const SizedBox(height: 12),
             Text(
-              'Cards reviewed: ${_sessionCardsReviewed + 1}\nXP Earned: $_sessionXpEarned XP',
+              'Cards reviewed: ${_sessionCardsReviewed > 0 ? _sessionCardsReviewed : 1}\nXP Earned: $_sessionXpEarned XP',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: theme.colorScheme.primary,
@@ -510,6 +601,10 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
               setState(() {
                 _currentIndex = 0;
                 _resetFlip();
+                _sessionCardsReviewed = 0;
+                _sessionXpEarned = 0;
+                _sessionStartTime = DateTime.now();
+                _updateCurrentCardMetadata();
               });
             },
             child: const Text('Restart Deck'),
@@ -737,8 +832,6 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   /// Flashcard interactive gesture area (Swipe left/right, Tap to flip)
   Widget _buildCardGestureArea() {
     final currentItem = _deck[_currentIndex];
-    final isFlagged = currentItem.languageItemId != null &&
-        _storageService.isItemFlagged(currentItem.languageItemId!);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
@@ -764,10 +857,10 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
               onSpeakSlow: () => _speakCurrent(rate: 0.5),
               onSpeakEnglish: () => _speakCurrentEnglish(),
               isSpeaking: _isSpeaking,
-              isFlagged: isFlagged,
+              isFlagged: _isCurrentCardFlagged,
               onToggleFlag: _toggleFlagCurrent,
               onRateMastery: _rateCurrent,
-              currentMastery: _getCurrentMastery(),
+              currentMastery: _currentCardMastery,
             );
           },
         ),

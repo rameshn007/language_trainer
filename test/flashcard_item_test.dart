@@ -34,9 +34,20 @@ void main() {
       expect(item.isGrammarCard, false);
       expect(item.presentTense?['eu'], 'sou');
       expect(item.presentTense?['nos'], 'somos');
+      expect(item.languageItemId, 'vocab_1');
     });
 
-    test('Constructs from grammar json correctly', () {
+    test('Constructs from vocabulary json with null id without vocab_0 collisions', () {
+      final json = {
+        'portuguese': 'olá',
+        'english': 'hello',
+      };
+      final item = FlashcardItem.fromVocabJson(json);
+      expect(item.languageItemId, isNull);
+      expect(item.cardNumber, '#');
+    });
+
+    test('Constructs from grammar json correctly and prevents orphan Hive rows', () {
       final json = {
         'id': 'G1',
         'card_number': '#G1',
@@ -55,6 +66,7 @@ void main() {
       expect(item.category, 'EXPLANATION');
       expect(item.categoryColor, const Color(0xFF1E3A5F));
       expect(item.isGrammarCard, true);
+      expect(item.languageItemId, isNull);
       expect(item.grammarExplanation, contains('Used when subject and object are the same.'));
     });
 

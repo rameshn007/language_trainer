@@ -4,15 +4,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:language_trainer/main.dart';
 import 'package:language_trainer/models/flashcard_item.dart';
+import 'package:language_trainer/models/progress_data.dart';
 import 'package:language_trainer/services/storage_service.dart';
 import 'package:language_trainer/services/tts_service.dart';
 import 'package:language_trainer/ui/flashcards/flashcards_screen.dart';
 
 class _MockStorageService extends Mock implements StorageService {}
 class _MockTtsService extends Mock implements TtsService {}
+class _FakeSessionRecord extends Fake implements SessionRecord {}
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUpAll(() {
+    registerFallbackValue(_FakeSessionRecord());
+  });
 
   late _MockTtsService mockTts;
   late _MockStorageService mockStorage;
@@ -63,7 +69,7 @@ void main() {
       cefrLevel: 'A1',
       grammarExplanation: 'Used when subject and object are the same.',
       isGrammarCard: true,
-      languageItemId: 'grammar_G1',
+      languageItemId: null,
     ),
   ];
 
@@ -72,8 +78,22 @@ void main() {
     mockStorage = _MockStorageService();
 
     when(() => mockStorage.getAllItems()).thenReturn([]);
+    when(() => mockStorage.getItem(any())).thenReturn(null);
     when(() => mockStorage.isItemFlagged(any())).thenReturn(false);
     when(() => mockStorage.toggleItemFlagged(any())).thenAnswer((_) async => true);
+    when(() => mockStorage.getTodayXP()).thenReturn(0);
+    when(() => mockStorage.getDailyXPGoal()).thenReturn(50);
+    when(() => mockStorage.getCurrentStreak()).thenReturn(0);
+    when(() => mockStorage.getBestStreak()).thenReturn(0);
+    when(() => mockStorage.getTotalXP()).thenReturn(0);
+    when(() => mockStorage.getTodaySessions()).thenReturn(0);
+    when(() => mockStorage.getMasteryDistribution()).thenReturn({});
+    when(() => mockStorage.updateWordProgress(any(), any(), firstAttempt: any(named: 'firstAttempt')))
+        .thenAnswer((_) async => 10);
+    when(() => mockStorage.addXP(any())).thenAnswer((_) async {});
+    when(() => mockStorage.incrementWordsReviewed(any())).thenAnswer((_) async {});
+    when(() => mockStorage.incrementDailySessions()).thenAnswer((_) async {});
+    when(() => mockStorage.saveSession(any())).thenAnswer((_) async {});
     when(() => mockTts.setRate(any())).thenAnswer((_) async {});
     when(
       () => mockTts.speak(
@@ -321,8 +341,137 @@ void main() {
       expect(find.text('Eles/Vocês'), findsOneWidget);
       expect(find.text('aprendem'), findsOneWidget);
 
-      // Ensure no truncated ellipsis variants exist in the widget tree
-      expect(find.text('aprend...'), findsNothing);
+      // Verify that all conjugated verb Text widgets explicitly do not use TextOverflow.ellipsis
+      final formTexts = ['aprendo', 'aprendes', 'aprende', 'aprendemos', 'aprendem'];
+      for (final form in formTexts) {
+        final textFinder = find.text(form);
+        expect(textFinder, findsOneWidget);
+        final textWidget = tester.widget<Text>(textFinder);
+        expect(textWidget.overflow, isNot(TextOverflow.ellipsis));
+      }
+    });
+
+    testWidgets('toggles flag/bookmark on grammar card using fallback key and vocab card using languageItemId', (tester) async {
+      await pumpScreen(tester);
+
+      // Card 1 is G1 (grammar card with languageItemId: null)
+      expect(find.text('#G1'), findsOneWidget);
+      final flagBtn = find.byTooltip('Bookmark Card');
+      expect(flagBtn, findsOneWidget);
+
+      // Tap flag on grammar card -> toggleItemFlagged('G1')
+      await tester.tap(flagBtn);
+      await tester.pump();
+      verify(() => mockStorage.toggleItemFlagged('G1')).called(1);
+
+      // Advance to vocab card #1
+      final nextFinder = find.widgetWithIcon(IconButton, Icons.chevron_right_rounded);
+      await tester.tap(nextFinder);
+      await tester.pump();
+      expect(find.text('#1'), findsOneWidget);
+
+      // Tap flag on vocab card -> toggleItemFlagged('vocab_1')
+      await tester.tap(flagBtn);
+      await tester.pump();
+      verify(() => mockStorage.toggleItemFlagged('vocab_1')).called(1);
+    });
+
+    testWidgets('records quiz answer and awards real XP on rating, prevents repeat-tap XP farming, and disables for grammar cards', (tester) async {
+      await pumpScreen(tester);
+
+      // Card 1 is G1 (grammar card) - Flip to back
+      await tester.tap(find.text('Flip Card'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+
+      // Grammar card should NOT display mastery rating buttons
+      expect(find.text('How well do you know this card?'), findsNothing);
+      expect(find.text('Mastered'), findsNothing);
+
+      // Flip back and navigate to vocab card #1
+      await tester.tap(find.text('Show Front'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+
+      final nextFinder = find.widgetWithIcon(IconButton, Icons.chevron_right_rounded);
+      await tester.tap(nextFinder);
+      await tester.pump();
+      expect(find.text('#1'), findsOneWidget);
+
+      // Flip vocab card to back
+      await tester.tap(find.text('Flip Card'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
+
+      // Rating buttons should be visible
+      expect(find.text('How well do you know this card?'), findsOneWidget);
+      final masteredBtn = find.text('Mastered');
+      expect(masteredBtn, findsOneWidget);
+
+      // Tap "Mastered"
+      await tester.tap(masteredBtn);
+      await tester.pump();
+
+      // Verify updateWordProgress and addXP were called via ProgressService
+      verify(() => mockStorage.updateWordProgress('vocab_1', true, firstAttempt: true)).called(1);
+      verify(() => mockStorage.addXP(10)).called(1);
+      expect(find.text('Progress saved! +10 XP awarded'), findsOneWidget);
+
+      // Clear invocations to test duplicate tap guard
+      clearInteractions(mockStorage);
+
+      // Tap "Mastered" AGAIN on the same card -> should NOT call updateWordProgress or addXP again
+      await tester.tap(masteredBtn);
+      await tester.pump();
+
+      verifyNever(() => mockStorage.updateWordProgress(any(), any(), firstAttempt: any(named: 'firstAttempt')));
+      verifyNever(() => mockStorage.addXP(any()));
+      expect(find.text('Card already reviewed this session'), findsOneWidget);
+    });
+
+    testWidgets('auto-advance is cleanly cancelled on manual Next navigation without stale card jumps', (tester) async {
+      await pumpScreen(tester);
+
+      // Start auto-advance
+      final playFinder = find.widgetWithIcon(IconButton, Icons.play_arrow_rounded);
+      await tester.tap(playFinder);
+      await tester.pump();
+
+      // Pause icon is visible -> auto-advancing
+      expect(find.widgetWithIcon(IconButton, Icons.pause_rounded), findsOneWidget);
+
+      // Manually tap Next while auto-advance is waiting
+      final nextFinder = find.widgetWithIcon(IconButton, Icons.chevron_right_rounded);
+      await tester.tap(nextFinder);
+      await tester.pump();
+
+      // Card moved to 2 of 3 and auto-advance is cancelled
+      expect(find.text('Card 2 of 3'), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, Icons.play_arrow_rounded), findsOneWidget);
+
+      // Advance clock by 3 seconds - verify card does NOT jump to Card 3 from a stale timer
+      await tester.pump(const Duration(seconds: 3));
+      expect(find.text('Card 2 of 3'), findsOneWidget);
+    });
+
+    testWidgets('applying empty filter during run shows empty state without popping bogus Deck Completed dialog', (tester) async {
+      await pumpScreen(tester);
+
+      // Auto-advance
+      final playFinder = find.widgetWithIcon(IconButton, Icons.play_arrow_rounded);
+      await tester.tap(playFinder);
+      await tester.pump();
+
+      // Toggle flagged filter when no cards are flagged
+      final flaggedChip = find.widgetWithText(FilterChip, 'Bookmarked');
+      expect(flaggedChip, findsOneWidget);
+      await tester.tap(flaggedChip);
+      await tester.pump();
+
+      // Empty state should be visible
+      expect(find.text('No cards found'), findsOneWidget);
+      // No completion dialog
+      expect(find.text('Deck Completed!'), findsNothing);
     });
   });
 }
