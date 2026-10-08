@@ -513,6 +513,20 @@ class FlashcardCardWidget extends StatelessWidget {
                                             ),
                                           ),
                                         ),
+                                        if (onSpeakEnglish != null) ...[
+                                          const SizedBox(width: 4),
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.volume_up_rounded,
+                                              size: 20,
+                                              color: accentColor,
+                                            ),
+                                            padding: EdgeInsets.zero,
+                                            constraints: const BoxConstraints(),
+                                            tooltip: 'Listen to example sentence',
+                                            onPressed: onSpeakEnglish,
+                                          ),
+                                        ],
                                       ],
                                     ),
                                     if (item.exampleEn != null &&

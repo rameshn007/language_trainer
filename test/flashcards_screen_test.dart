@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -105,7 +106,11 @@ void main() {
     when(() => mockTts.stop()).thenAnswer((_) async {});
   });
 
-  Future<void> pumpScreen(WidgetTester tester, {List<FlashcardItem>? cards}) async {
+  Future<void> pumpScreen(
+    WidgetTester tester, {
+    List<FlashcardItem>? cards,
+    bool initialShuffle = false,
+  }) async {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -113,7 +118,10 @@ void main() {
           ttsServiceProvider.overrideWithValue(mockTts),
         ],
         child: MaterialApp(
-          home: FlashcardsScreen(initialCards: cards ?? sampleCards),
+          home: FlashcardsScreen(
+            initialCards: cards ?? sampleCards,
+            initialShuffle: initialShuffle,
+          ),
         ),
       ),
     );
@@ -546,6 +554,138 @@ void main() {
       // Verify recordSessionComplete was NOT called again (once-per-pass invariant preserved)
       verifyNever(() => mockStorage.saveSession(any()));
       verifyNever(() => mockStorage.incrementDailySessions());
+    });
+
+    testWidgets('defaults to shuffled deck on startup and toggles to sequential', (tester) async {
+      await pumpScreen(tester, initialShuffle: true);
+
+      // App bar shuffle button tooltip indicates shuffled mode
+      expect(find.byTooltip('Shuffled (tap for sequential)'), findsOneWidget);
+
+      // Tap to toggle to sequential
+      await tester.tap(find.byTooltip('Shuffled (tap for sequential)'));
+      await tester.pump();
+      expect(find.byTooltip('Sequential (tap to shuffle)'), findsOneWidget);
+    });
+
+    testWidgets('on flipped side, reads example sentence in both pt-PT and en-US after English definition', (tester) async {
+      const exampleCard = FlashcardItem(
+        id: '10',
+        cardNumber: '#10',
+        portuguese: 'aprender',
+        english: 'to learn',
+        category: 'VERBS',
+        examplePt: 'Eu aprendo português todos os dias.',
+        exampleEn: 'I learn Portuguese every day.',
+      );
+
+      await pumpScreen(tester, cards: [exampleCard]);
+
+      clearInteractions(mockTts);
+
+      // Flip card to back
+      await tester.tap(find.text('Flip Card'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400)); // flip animation
+
+      // Advance delay for Portuguese sentence
+      await tester.pump(const Duration(milliseconds: 350));
+
+      // Advance delay for English sentence
+      await tester.pump(const Duration(milliseconds: 300));
+
+      // Verify sequence of calls in exact order
+      verifyInOrder([
+        () => mockTts.speak('to learn', language: 'en-US', rate: 1.0),
+        () => mockTts.speak('Eu aprendo português todos os dias.', language: 'pt-PT', rate: any(named: 'rate')),
+        () => mockTts.speak('I learn Portuguese every day.', language: 'en-US', rate: 1.0),
+      ]);
+
+      // Also verify example sentence audio replay button
+      clearInteractions(mockTts);
+      final exampleSpeakerFinder = find.byTooltip('Listen to example sentence');
+      expect(exampleSpeakerFinder, findsOneWidget);
+      await tester.tap(exampleSpeakerFinder);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+      await tester.pump(const Duration(milliseconds: 300));
+
+      verifyInOrder([
+        () => mockTts.speak('to learn', language: 'en-US', rate: 1.0),
+        () => mockTts.speak('Eu aprendo português todos os dias.', language: 'pt-PT', rate: any(named: 'rate')),
+        () => mockTts.speak('I learn Portuguese every day.', language: 'en-US', rate: 1.0),
+      ]);
+    });
+
+    testWidgets('auto-advance waits for example sentence speech and gives generous reading time before advancing', (tester) async {
+      final ttsCompleter = Completer<void>();
+      when(() => mockTts.speak(
+        'Eu aprendo português todos os dias.',
+        language: 'pt-PT',
+        rate: any(named: 'rate'),
+      )).thenAnswer((_) => ttsCompleter.future);
+
+      const card1 = FlashcardItem(
+        id: '10',
+        cardNumber: '#10',
+        portuguese: 'aprender',
+        english: 'to learn',
+        category: 'VERBS',
+        examplePt: 'Eu aprendo português todos os dias.',
+        exampleEn: 'I learn Portuguese every day.',
+      );
+      const card2 = FlashcardItem(
+        id: '11',
+        cardNumber: '#11',
+        portuguese: 'falar',
+        english: 'to speak',
+        category: 'VERBS',
+      );
+
+      await pumpScreen(tester, cards: [card1, card2]);
+
+      // Start auto-advance
+      final playFinder = find.widgetWithIcon(IconButton, Icons.play_arrow_rounded);
+      await tester.tap(playFinder);
+      await tester.pump();
+
+      // Step 2 (speak PT) completes immediately. Step 3 recall timer is 2000ms.
+      await tester.pump(const Duration(milliseconds: 2000));
+      await tester.pump(); // Flip to back face occurs
+
+      // English speaks, then 350ms delay
+      await tester.pump(const Duration(milliseconds: 350));
+
+      // Now Portuguese sentence is speaking and held by ttsCompleter
+      expect(find.text('to learn'), findsOneWidget);
+      expect(find.text('Card 1 of 2'), findsOneWidget);
+
+      // Even after 5 seconds while TTS is speaking, it MUST NOT advance
+      await tester.pump(const Duration(seconds: 5));
+      expect(find.text('to learn'), findsOneWidget);
+      expect(find.text('Card 1 of 2'), findsOneWidget);
+
+      // Complete TTS
+      ttsCompleter.complete();
+      await tester.pump();
+
+      // English sentence delay (300ms)
+      await tester.pump(const Duration(milliseconds: 300));
+      await tester.pump();
+
+      // Now generous reading window (4200ms) begins. Halfway through (2000ms), still on Card 1
+      await tester.pump(const Duration(milliseconds: 2000));
+      expect(find.text('to learn'), findsOneWidget);
+      expect(find.text('Card 1 of 2'), findsOneWidget);
+
+      // After completing reading window (remaining 2300ms)
+      await tester.pump(const Duration(milliseconds: 2300));
+      await tester.pumpAndSettle();
+
+      // NOW it advances to Card 2!
+      expect(find.text('Card 2 of 2'), findsOneWidget);
+      expect(find.text('#11'), findsOneWidget);
+      expect(find.text('falar'), findsOneWidget);
     });
   });
 }

@@ -21,7 +21,7 @@ class FlashcardsScreen extends ConsumerStatefulWidget {
   const FlashcardsScreen({
     super.key,
     this.initialCategory,
-    this.initialShuffle = false,
+    this.initialShuffle = true,
     this.initialCards,
   });
 
@@ -268,6 +268,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       if (_isFlipped) {
         _flipController.reverse();
         _isFlipped = false;
+        _ttsService.stop();
+        _isSpeaking = false;
       } else {
         _flipController.forward();
         _isFlipped = true;
@@ -327,6 +329,29 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
         language: 'en-US',
         rate: rate ?? 1.0,
       );
+
+      // If there is an example use in a sentence, read it in both pt-PT and en-US
+      if (item.examplePt != null && item.examplePt!.trim().isNotEmpty) {
+        if (!_isSpeaking || !mounted) return;
+        await Future.delayed(const Duration(milliseconds: 350));
+        if (!_isSpeaking || !mounted) return;
+        await _ttsService.speak(
+          item.examplePt!.trim(),
+          language: 'pt-PT',
+          rate: rate ?? _speechRate,
+        );
+
+        if (item.exampleEn != null && item.exampleEn!.trim().isNotEmpty) {
+          if (!_isSpeaking || !mounted) return;
+          await Future.delayed(const Duration(milliseconds: 300));
+          if (!_isSpeaking || !mounted) return;
+          await _ttsService.speak(
+            item.exampleEn!.trim(),
+            language: 'en-US',
+            rate: rate ?? 1.0,
+          );
+        }
+      }
     } catch (_) {
     } finally {
       if (mounted) setState(() => _isSpeaking = false);
@@ -338,6 +363,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     if (_isAutoAdvancing) {
       _stopAutoAdvance(updateState: false);
     }
+    _ttsService.stop();
+    _isSpeaking = false;
     if (_currentIndex < _deck.length - 1) {
       setState(() {
         _currentIndex++;
@@ -357,6 +384,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     if (_isAutoAdvancing) {
       _stopAutoAdvance(updateState: false);
     }
+    _ttsService.stop();
+    _isSpeaking = false;
     if (_currentIndex > 0) {
       setState(() {
         _currentIndex--;
@@ -390,6 +419,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     _autoAdvanceTimer = null;
     _autoAdvanceTicker = null;
     _ttsService.stop();
+    _isSpeaking = false;
     if (_stepCompleter != null && !_stepCompleter!.isCompleted) {
       _stepCompleter!.complete();
     }
@@ -435,14 +465,16 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       }
     });
 
-    // 5. Speak English and await completion so audio is NEVER truncated
+    // 5. Speak English (and example sentence in PT & EN) and await completion so audio is NEVER truncated
     if (_autoSpeak) {
       await _speakCurrentEnglish();
     }
     if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
-    // 6. Reading countdown with progress bar
-    const int totalMillis = 2600;
+    // 6. Reading countdown with progress bar - generous reading window so user has ample time to read sentence
+    final currentCard = _deck[_currentIndex];
+    final hasExample = currentCard.examplePt != null && currentCard.examplePt!.trim().isNotEmpty;
+    final int totalMillis = hasExample ? 4200 : 2600;
     const int tickMillis = 50;
     int elapsed = 0;
     final readingCompleter = Completer<void>();
