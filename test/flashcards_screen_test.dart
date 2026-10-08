@@ -1029,6 +1029,42 @@ void main() {
 
       verify(() => mockTts.speak('Plural, os livros', language: 'pt-PT', rate: any(named: 'rate'))).called(1);
     });
+
+    testWidgets('disposing screen during auto-advance and speech does not throw defunct element assertion', (tester) async {
+      const card = FlashcardItem(
+        id: '1',
+        cardNumber: '#1',
+        portuguese: 'olá',
+        english: 'hello',
+        category: 'GENERAL',
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(mockStorage),
+            ttsServiceProvider.overrideWithValue(mockTts),
+          ],
+          child: const MaterialApp(
+            home: FlashcardsScreen(
+              initialCards: [card],
+              initialAutoAdvance: true,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      // Card is currently auto-advancing and speaking. Now unmount by pumping a different widget.
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(body: Text('Unmounted')),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('Unmounted'), findsOneWidget);
+    });
   });
 }
 

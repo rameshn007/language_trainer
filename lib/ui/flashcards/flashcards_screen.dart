@@ -82,14 +82,14 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     return completer.future;
   }
 
-  void _stopSpeech() {
+  void _stopSpeech({bool updateState = true}) {
     _speechChainToken++;
     _cancelSpeechDelay();
     _ttsService.stop();
-    if (_isSpeaking && mounted) {
-      setState(() => _isSpeaking = false);
-    } else {
-      _isSpeaking = false;
+    final wasSpeaking = _isSpeaking;
+    _isSpeaking = false;
+    if (updateState && wasSpeaking && mounted && !_isDisposed) {
+      setState(() {});
     }
   }
 
@@ -103,6 +103,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
   // Auto-advance loop state & cancellation token
   bool _isAutoAdvancing = false;
+  bool _isDisposed = false;
   int _autoAdvanceGeneration = 0;
   final Set<String> _cardsStudiedThisPass = {};
   bool _hasAwardedCompletionThisPass = false;
@@ -167,8 +168,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
   @override
   void dispose() {
+    _isDisposed = true;
     _stopAutoAdvance(updateState: false);
-    _stopSpeech();
     _countdownController.dispose();
     _flipController.dispose();
     super.dispose();
@@ -187,7 +188,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   /// Load grammar cards and vocabulary items from bundled JSON (or memory cache)
   Future<void> _loadAllCards() async {
     if (_cachedAllCards != null && _cachedAllCards!.isNotEmpty) {
-      if (!mounted) return;
+      if (!mounted || _isDisposed) return;
       setState(() {
         _allCards = List.from(_cachedAllCards!);
         _applyFilters(stopAutoAdvance: false);
@@ -227,7 +228,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
       _cachedAllCards = loaded;
 
-      if (!mounted) return;
+      if (!mounted || _isDisposed) return;
 
       setState(() {
         _allCards = loaded;
@@ -239,7 +240,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       _startInitialPlayback();
     } catch (e) {
       debugPrint('Error initializing flashcards: $e');
-      if (mounted) setState(() => _isLoading = false);
+      if (mounted && !_isDisposed) setState(() => _isLoading = false);
     }
   }
 
@@ -318,7 +319,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       if (_isFlipped) {
         _flipController.reverse();
         _isFlipped = false;
-        _stopSpeech();
+        _stopSpeech(updateState: false);
       } else {
         _flipController.forward();
         _isFlipped = true;
@@ -350,10 +351,11 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
     final token = ++_speechChainToken;
     _cancelSpeechDelay();
+    if (!mounted || _isDisposed) return;
     setState(() => _isSpeaking = true);
     try {
       await _ttsService.stop();
-      if (token != _speechChainToken || !mounted) return;
+      if (token != _speechChainToken || !mounted || _isDisposed) return;
       await _ttsService.speak(
         text,
         language: 'pt-PT',
@@ -361,8 +363,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       );
     } catch (_) {
     } finally {
-      if (token == _speechChainToken && mounted) {
-        setState(() => _isSpeaking = false);
+      if (token == _speechChainToken) {
+        if (mounted && !_isDisposed) {
+          setState(() => _isSpeaking = false);
+        } else {
+          _isSpeaking = false;
+        }
       }
     }
   }
@@ -394,10 +400,11 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
     final token = ++_speechChainToken;
     _cancelSpeechDelay();
+    if (!mounted || _isDisposed) return;
     setState(() => _isSpeaking = true);
     try {
       await _ttsService.stop();
-      if (token != _speechChainToken || !mounted) return;
+      if (token != _speechChainToken || !mounted || _isDisposed) return;
       await _ttsService.speak(
         text,
         language: 'pt-PT',
@@ -405,8 +412,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       );
     } catch (_) {
     } finally {
-      if (token == _speechChainToken && mounted) {
-        setState(() => _isSpeaking = false);
+      if (token == _speechChainToken) {
+        if (mounted && !_isDisposed) {
+          setState(() => _isSpeaking = false);
+        } else {
+          _isSpeaking = false;
+        }
       }
     }
   }
@@ -418,10 +429,11 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
     final token = ++_speechChainToken;
     _cancelSpeechDelay();
+    if (!mounted || _isDisposed) return;
     setState(() => _isSpeaking = true);
     try {
       await _ttsService.stop();
-      if (token != _speechChainToken || !mounted) return;
+      if (token != _speechChainToken || !mounted || _isDisposed) return;
       await _ttsService.speak(
         'Plural, ${item.plural!.trim()}',
         language: 'pt-PT',
@@ -429,8 +441,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       );
     } catch (_) {
     } finally {
-      if (token == _speechChainToken && mounted) {
-        setState(() => _isSpeaking = false);
+      if (token == _speechChainToken) {
+        if (mounted && !_isDisposed) {
+          setState(() => _isSpeaking = false);
+        } else {
+          _isSpeaking = false;
+        }
       }
     }
   }
@@ -445,16 +461,17 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
     final token = ++_speechChainToken;
     _cancelSpeechDelay();
+    if (!mounted || _isDisposed) return;
     setState(() => _isSpeaking = true);
     try {
       await _ttsService.stop();
-      if (token != _speechChainToken || !mounted) return;
+      if (token != _speechChainToken || !mounted || _isDisposed) return;
       await _ttsService.speak(
         cleanText,
         language: 'en-US',
         rate: rate ?? 1.0,
       );
-      if (token != _speechChainToken || !mounted) return;
+      if (token != _speechChainToken || !mounted || _isDisposed) return;
 
       // 1. If plural form is present, speak it in pt-PT
       if (item.plural != null && item.plural!.trim().isNotEmpty) {
@@ -525,8 +542,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       }
     } catch (_) {
     } finally {
-      if (token == _speechChainToken && mounted) {
-        setState(() => _isSpeaking = false);
+      if (token == _speechChainToken) {
+        if (mounted && !_isDisposed) {
+          setState(() => _isSpeaking = false);
+        } else {
+          _isSpeaking = false;
+        }
       }
     }
   }
@@ -536,7 +557,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     if (_isAutoAdvancing) {
       _stopAutoAdvance(updateState: false);
     }
-    _stopSpeech();
+    _stopSpeech(updateState: false);
     if (_currentIndex < _deck.length - 1) {
       setState(() {
         _currentIndex++;
@@ -556,7 +577,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     if (_isAutoAdvancing) {
       _stopAutoAdvance(updateState: false);
     }
-    _stopSpeech();
+    _stopSpeech(updateState: false);
     if (_currentIndex > 0) {
       setState(() {
         _currentIndex--;
@@ -583,17 +604,17 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
   void _stopAutoAdvance({bool updateState = true}) {
     _autoAdvanceGeneration++;
-    _stopSpeech();
+    _stopSpeech(updateState: updateState);
     _countdownController.stop();
     _countdownController.reset();
     _isAutoAdvancing = false;
-    if (updateState && mounted) {
+    if (updateState && mounted && !_isDisposed) {
       setState(() {});
     }
   }
 
   void _runAutoAdvanceStep() async {
-    if (!_isAutoAdvancing || !mounted || _deck.isEmpty) return;
+    if (!_isAutoAdvancing || !mounted || _isDisposed || _deck.isEmpty) return;
     final stepGen = ++_autoAdvanceGeneration;
 
     // 1. Ensure front face is showing
@@ -605,7 +626,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     if (_autoSpeak) {
       await _speakCurrent();
     }
-    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
+    if (!_isAutoAdvancing || !mounted || _isDisposed || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
     // 3. Recall countdown with progress bar before flipping to back face
     final currentCard = _deck[_currentIndex];
@@ -623,13 +644,13 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     } on TickerCanceled {
       return;
     }
-    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
+    if (!_isAutoAdvancing || !mounted || _isDisposed || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
     _countdownController.reset();
 
     // 4. Flip to back face
     await _flipController.forward();
-    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
+    if (!_isAutoAdvancing || !mounted || _isDisposed || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
     setState(() {
       _isFlipped = true;
       if (_deck.isNotEmpty && _currentIndex < _deck.length) {
@@ -641,7 +662,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     if (_autoSpeak) {
       await _speakCurrentEnglish();
     }
-    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
+    if (!_isAutoAdvancing || !mounted || _isDisposed || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
     // 6. Reading countdown with progress bar post speech reading
     final cardBack = _deck[_currentIndex];
@@ -658,12 +679,13 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     } on TickerCanceled {
       return;
     }
-    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
+    if (!_isAutoAdvancing || !mounted || _isDisposed || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
     _countdownController.reset();
 
     // 7. Advance to next card without redundant _speakCurrent()
     if (_currentIndex < _deck.length - 1) {
+      if (!mounted || _isDisposed) return;
       setState(() {
         _currentIndex++;
         _resetFlip();
@@ -672,7 +694,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       _runAutoAdvanceStep();
     } else {
       _stopAutoAdvance();
-      _showCompletionDialog();
+      if (mounted && !_isDisposed) {
+        _showCompletionDialog();
+      }
     }
   }
 
@@ -682,6 +706,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     final item = _deck[_currentIndex];
     final key = item.languageItemId ?? item.id;
     await _storageService.toggleItemFlagged(key);
+    if (!mounted || _isDisposed) return;
     setState(() {
       _updateCurrentCardMetadata();
     });
@@ -708,7 +733,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       );
       _sessionXpEarned += xp;
 
-      if (mounted) {
+      if (mounted && !_isDisposed) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -733,7 +758,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
         );
       }
     } else {
-      if (mounted) {
+      if (mounted && !_isDisposed) {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -745,13 +770,15 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       }
     }
 
-    setState(() {
-      _updateCurrentCardMetadata();
-    });
+    if (mounted && !_isDisposed) {
+      setState(() {
+        _updateCurrentCardMetadata();
+      });
+    }
   }
 
   void _showCompletionDialog() {
-    if (_deck.isEmpty) return;
+    if (_deck.isEmpty || !mounted || _isDisposed) return;
     final theme = Theme.of(context);
     final durationSeconds =
         DateTime.now().difference(_sessionStartTime).inSeconds;
