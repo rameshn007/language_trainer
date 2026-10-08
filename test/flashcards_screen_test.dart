@@ -673,13 +673,13 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
       await tester.pump();
 
-      // Now generous reading window (4200ms) begins. Halfway through (2000ms), still on Card 1
-      await tester.pump(const Duration(milliseconds: 2000));
+      // Now post-reading timer (2000ms) begins. Halfway through (1000ms), still on Card 1
+      await tester.pump(const Duration(milliseconds: 1000));
       expect(find.text('to learn'), findsOneWidget);
       expect(find.text('Card 1 of 2'), findsOneWidget);
 
-      // After completing reading window (remaining 2300ms)
-      await tester.pump(const Duration(milliseconds: 2300));
+      // After completing post-reading window (remaining 1050ms)
+      await tester.pump(const Duration(milliseconds: 1050));
       await tester.pumpAndSettle();
 
       // NOW it advances to Card 2!

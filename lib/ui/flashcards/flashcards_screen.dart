@@ -499,10 +499,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     }
     if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
-    // 6. Reading countdown with progress bar - generous reading window so user has ample time to read sentence
+    // 6. Reading countdown with progress bar post speech reading
     final cardBack = _deck[_currentIndex];
     final hasExample = cardBack.examplePt != null && cardBack.examplePt!.trim().isNotEmpty;
-    final int totalMillis = hasExample ? 4200 : 2600;
+    final int totalMillis = cardBack.isGrammarCard
+        ? 2200
+        : (hasExample ? 2000 : 1400);
     int elapsed = 0;
     final readingCompleter = Completer<void>();
     _stepCompleter = readingCompleter;
