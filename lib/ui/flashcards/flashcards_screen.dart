@@ -32,7 +32,7 @@ class FlashcardsScreen extends ConsumerStatefulWidget {
 }
 
 class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   // Intentionally process-lifetime in-memory cache for bundled flashcard deck data.
   // Deck items are static asset-bundled data and do not change during runtime.
   static List<FlashcardItem>? _cachedAllCards;
@@ -53,6 +53,19 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   late Animation<double> _flipAnimation;
   bool _isFlipped = false;
 
+  // Countdown Animation for Hands-Free Auto-Advance
+  late AnimationController _countdownController;
+  Timer? _speechDelayTimer;
+
+  Future<void> _speechDelay(Duration duration) {
+    _speechDelayTimer?.cancel();
+    final completer = Completer<void>();
+    _speechDelayTimer = Timer(duration, () {
+      if (!completer.isCompleted) completer.complete();
+    });
+    return completer.future;
+  }
+
   // Audio & Speed
   late final TtsService _ttsService;
   late final StorageService _storageService;
@@ -64,11 +77,6 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   // Auto-advance loop state & cancellation token
   bool _isAutoAdvancing = false;
   int _autoAdvanceGeneration = 0;
-  Timer? _recallTimer;
-  Timer? _autoAdvanceTimer;
-  double _autoAdvanceProgress = 0.0;
-  Timer? _autoAdvanceTicker;
-  Completer<void>? _stepCompleter;
   final Set<String> _cardsStudiedThisPass = {};
   bool _hasAwardedCompletionThisPass = false;
   int _sessionXpEarned = 0;
@@ -116,6 +124,10 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       curve: Curves.easeInOutCubic,
     );
 
+    _countdownController = AnimationController(
+      vsync: this,
+    );
+
     if (widget.initialCards != null) {
       _allCards = List.from(widget.initialCards!);
       _applyFilters(stopAutoAdvance: false);
@@ -129,6 +141,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   @override
   void dispose() {
     _stopAutoAdvance(updateState: false);
+    _speechDelayTimer?.cancel();
+    _countdownController.dispose();
     _flipController.dispose();
     _ttsService.stop();
     super.dispose();
@@ -340,10 +354,30 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
         rate: rate ?? 1.0,
       );
 
+      // If grammar card, speak the grammar explanation aloud rather than having it read silently
+      if (item.isGrammarCard &&
+          item.grammarExplanation != null &&
+          item.grammarExplanation!.trim().isNotEmpty) {
+        if (!_isSpeaking || !mounted) return;
+        await _speechDelay(const Duration(milliseconds: 350));
+        if (!_isSpeaking || !mounted) return;
+        final cleanExplanation = item.grammarExplanation!
+            .replaceAll('•', '')
+            .replaceAll('->', ' becomes ')
+            .replaceAll(RegExp(r'\n+'), '. ')
+            .replaceAll(RegExp(r'\.{2,}'), '.')
+            .trim();
+        await _ttsService.speak(
+          cleanExplanation,
+          language: 'en-US',
+          rate: rate ?? 1.0,
+        );
+      }
+
       // If there is an example use in a sentence, read it in both pt-PT and en-US
       if (item.examplePt != null && item.examplePt!.trim().isNotEmpty) {
         if (!_isSpeaking || !mounted) return;
-        await Future.delayed(const Duration(milliseconds: 350));
+        await _speechDelay(const Duration(milliseconds: 350));
         if (!_isSpeaking || !mounted) return;
         await _ttsService.speak(
           item.examplePt!.trim(),
@@ -353,7 +387,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
         if (item.exampleEn != null && item.exampleEn!.trim().isNotEmpty) {
           if (!_isSpeaking || !mounted) return;
-          await Future.delayed(const Duration(milliseconds: 300));
+          await _speechDelay(const Duration(milliseconds: 300));
           if (!_isSpeaking || !mounted) return;
           await _ttsService.speak(
             item.exampleEn!.trim(),
@@ -422,20 +456,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
   void _stopAutoAdvance({bool updateState = true}) {
     _autoAdvanceGeneration++;
-    _recallTimer?.cancel();
-    _autoAdvanceTimer?.cancel();
-    _autoAdvanceTicker?.cancel();
-    _recallTimer = null;
-    _autoAdvanceTimer = null;
-    _autoAdvanceTicker = null;
+    _speechDelayTimer?.cancel();
+    _countdownController.stop();
+    _countdownController.reset();
     _ttsService.stop();
     _isSpeaking = false;
-    if (_stepCompleter != null && !_stepCompleter!.isCompleted) {
-      _stepCompleter!.complete();
-    }
-    _stepCompleter = null;
     _isAutoAdvancing = false;
-    _autoAdvanceProgress = 0.0;
     if (updateState && mounted) {
       setState(() {});
     }
@@ -464,46 +490,29 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     final int recallMillis = hasLongPhrase
         ? 2600
         : (hasPronunciation ? 2200 : 2000);
-    const int tickMillis = 50;
-    int recallElapsed = 0;
-    final recallCompleter = Completer<void>();
-    _stepCompleter = recallCompleter;
 
-    _recallTimer?.cancel();
-    _recallTimer = Timer.periodic(
-      const Duration(milliseconds: tickMillis),
-      (timer) {
-        if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) {
-          timer.cancel();
-          if (!recallCompleter.isCompleted) recallCompleter.complete();
-          return;
-        }
-        recallElapsed += tickMillis;
-        setState(() {
-          _autoAdvanceProgress = (recallElapsed / recallMillis).clamp(0.0, 1.0);
-        });
-        if (recallElapsed >= recallMillis) {
-          timer.cancel();
-          if (!recallCompleter.isCompleted) recallCompleter.complete();
-        }
-      },
-    );
-
-    await recallCompleter.future;
+    _countdownController.duration = Duration(milliseconds: recallMillis);
+    _countdownController.reset();
+    try {
+      await _countdownController.forward().orCancel;
+    } on TickerCanceled {
+      return;
+    }
     if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
-    setState(() => _autoAdvanceProgress = 0.0);
+    _countdownController.reset();
 
     // 4. Flip to back face
+    await _flipController.forward();
+    if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
     setState(() {
-      _flipController.forward();
       _isFlipped = true;
       if (_deck.isNotEmpty && _currentIndex < _deck.length) {
         _cardsStudiedThisPass.add(_deck[_currentIndex].id);
       }
     });
 
-    // 5. Speak English (and example sentence in PT & EN) and await completion so audio is NEVER truncated
+    // 5. Speak English (and example sentence in PT & EN, or grammar explanation) and await completion
     if (_autoSpeak) {
       await _speakCurrentEnglish();
     }
@@ -513,36 +522,19 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     final cardBack = _deck[_currentIndex];
     final hasExample = cardBack.examplePt != null && cardBack.examplePt!.trim().isNotEmpty;
     final int totalMillis = cardBack.isGrammarCard
-        ? 7500
+        ? 3000
         : (hasExample ? 2000 : 1400);
-    int elapsed = 0;
-    final readingCompleter = Completer<void>();
-    _stepCompleter = readingCompleter;
 
-    _autoAdvanceTicker?.cancel();
-    _autoAdvanceTicker = Timer.periodic(
-      const Duration(milliseconds: tickMillis),
-      (timer) {
-        if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) {
-          timer.cancel();
-          if (!readingCompleter.isCompleted) readingCompleter.complete();
-          return;
-        }
-        elapsed += tickMillis;
-        setState(() {
-          _autoAdvanceProgress = (elapsed / totalMillis).clamp(0.0, 1.0);
-        });
-        if (elapsed >= totalMillis) {
-          timer.cancel();
-          if (!readingCompleter.isCompleted) readingCompleter.complete();
-        }
-      },
-    );
-
-    await readingCompleter.future;
+    _countdownController.duration = Duration(milliseconds: totalMillis);
+    _countdownController.reset();
+    try {
+      await _countdownController.forward().orCancel;
+    } on TickerCanceled {
+      return;
+    }
     if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
-    setState(() => _autoAdvanceProgress = 0.0);
+    _countdownController.reset();
 
     // 7. Advance to next card without redundant _speakCurrent()
     if (_currentIndex < _deck.length - 1) {
@@ -832,19 +824,22 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
                 // Auto-Advance countdown bar
                 if (_isAutoAdvancing && _deck.isNotEmpty)
-                  LinearProgressIndicator(
-                    value: _autoAdvanceProgress,
-                    backgroundColor: isDark
-                        ? Colors.white.withValues(alpha: 0.06)
-                        : Colors.black.withValues(alpha: 0.06),
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      _isFlipped
-                          ? Colors.amber.shade600
-                          : (_currentIndex < _deck.length
-                              ? _deck[_currentIndex].categoryColor
-                              : theme.colorScheme.primary),
+                  AnimatedBuilder(
+                    animation: _countdownController,
+                    builder: (context, _) => LinearProgressIndicator(
+                      value: _countdownController.value,
+                      backgroundColor: isDark
+                          ? Colors.white.withValues(alpha: 0.06)
+                          : Colors.black.withValues(alpha: 0.06),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        _isFlipped
+                            ? Colors.amber.shade600
+                            : (_currentIndex < _deck.length
+                                ? _deck[_currentIndex].categoryColor
+                                : theme.colorScheme.primary),
+                      ),
+                      minHeight: 3.5,
                     ),
-                    minHeight: 3.5,
                   ),
 
                 // Main Flashcard View
@@ -944,7 +939,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
           }
         },
         child: AnimatedBuilder(
-          animation: _flipAnimation,
+          animation: Listenable.merge([_flipAnimation, _countdownController]),
           builder: (context, child) {
             return FlashcardCardWidget(
               item: currentItem,
@@ -958,7 +953,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
               onToggleFlag: _toggleFlagCurrent,
               onRateMastery: _rateCurrent,
               currentMastery: _currentCardMastery,
-              autoAdvanceProgress: _autoAdvanceProgress,
+              autoAdvanceProgress: _countdownController.value,
               isAutoAdvancing: _isAutoAdvancing,
             );
           },

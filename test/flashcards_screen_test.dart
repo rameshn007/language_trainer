@@ -213,6 +213,7 @@ void main() {
       // Tap English speaker button
       await tester.tap(enSpeakerFinder);
       await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400));
 
       // Verify English was spoken again
       verify(() => mockTts.speak('Reflexive Verbs', language: 'en-US', rate: any(named: 'rate'))).called(1);
@@ -652,11 +653,14 @@ void main() {
       await tester.pump();
 
       // Step 2 (speak PT) completes immediately. Step 3 recall timer is 2000ms.
-      await tester.pump(const Duration(milliseconds: 2000));
-      await tester.pump(); // Flip to back face occurs
+      await tester.pump(const Duration(milliseconds: 2050));
+      // Flip to back face occurs (380ms)
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pump();
 
       // English speaks, then 350ms delay
-      await tester.pump(const Duration(milliseconds: 350));
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pump();
 
       // Now Portuguese sentence is speaking and held by ttsCompleter
       expect(find.text('to learn'), findsOneWidget);
@@ -674,6 +678,7 @@ void main() {
       // English sentence delay (300ms)
       await tester.pump(const Duration(milliseconds: 300));
       await tester.pump();
+      await tester.pump();
 
       // Now post-reading timer (2000ms) begins. Halfway through (1000ms), still on Card 1
       await tester.pump(const Duration(milliseconds: 1000));
@@ -682,7 +687,8 @@ void main() {
 
       // After completing post-reading window (remaining 1050ms)
       await tester.pump(const Duration(milliseconds: 1050));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
 
       // NOW it advances to Card 2!
       expect(find.text('Card 2 of 2'), findsOneWidget);
@@ -721,6 +727,7 @@ void main() {
 
       // Now complete Portuguese speech
       ptSpeechCompleter.complete();
+      await tester.pump();
       await tester.pump();
 
       // Step 3: Now the front-face countdown timer begins.
@@ -796,7 +803,7 @@ void main() {
       expect(find.byType(LinearProgressIndicator), findsNothing);
     });
 
-    testWidgets('grammar card gets 7500ms reading window on back face before auto-advancing', (tester) async {
+    testWidgets('grammar card explanation is spoken aloud by TTS rather than read silently and advances via AnimationController', (tester) async {
       const grammarCard = FlashcardItem(
         id: 'G1',
         cardNumber: '#G1',
@@ -827,15 +834,24 @@ void main() {
       expect(find.text('Reflexive Verbs'), findsOneWidget);
       expect(find.text('Show Front'), findsOneWidget);
 
-      // Back face ticker starts. At 3000ms, still on grammar card (window is 7500ms)
-      await tester.pump(const Duration(milliseconds: 3000));
+      // Verify that the grammar explanation is SPOKEN aloud by TTS in English
+      verify(() => mockTts.speak('Reflexive Verbs', language: 'en-US', rate: any(named: 'rate'))).called(1);
+      // Wait for delay between title and explanation speech (350ms)
+      await tester.pump(const Duration(milliseconds: 400));
+      verify(() => mockTts.speak(any(that: contains('Used when subject and object are the same')), language: 'en-US', rate: any(named: 'rate'))).called(1);
+      await tester.pump();
+
+      // Back face reading countdown starts with AnimationController (3000ms). Halfway through (1500ms):
+      await tester.pump(const Duration(milliseconds: 1500));
       expect(find.text('Reflexive Verbs'), findsOneWidget);
       expect(find.text('Advancing to next card...'), findsOneWidget);
 
-      // Advance through remainder of 7500ms (remaining 4600ms) + flip animation reset (400ms)
-      await tester.pump(const Duration(milliseconds: 4600));
+      // Advance through remainder of countdown (1600ms) + flip animation reset (400ms)
+      await tester.pump(const Duration(milliseconds: 1600));
+      await tester.pump();
       await tester.pump(const Duration(milliseconds: 400));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
 
       // Now advanced to next card
       expect(find.text('falar'), findsOneWidget);
@@ -864,18 +880,19 @@ void main() {
 
       await pumpScreen(tester, cards: [card1, card2], initialShuffle: false, initialAutoAdvance: true);
       await tester.pump();
+      await tester.pump();
 
-      // Front countdown (2000ms) + flip animation (400ms)
-      await tester.pump(const Duration(milliseconds: 2000));
+      // Front countdown (2050ms) + flip animation (400ms)
+      await tester.pump(const Duration(milliseconds: 2050));
       await tester.pump(const Duration(milliseconds: 400));
       await tester.pump();
 
-      // Back face audio is now playing ('hello' in en-US)
       expect(find.text('hello'), findsOneWidget);
       expect(find.text('Listening...'), findsOneWidget);
 
       // Complete TTS
       completer.complete();
+      await tester.pump();
       await tester.pump();
 
       // Once TTS finishes and step 6 reading ticker starts:

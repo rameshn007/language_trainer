@@ -482,14 +482,58 @@ class FlashcardCardWidget extends StatelessWidget {
                                     width: 1.2,
                                   ),
                                 ),
-                                child: Text(
-                                  item.grammarExplanation!,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    height: 1.55,
-                                    fontWeight: FontWeight.w500,
-                                    color: isDark ? Colors.white : Colors.black87,
-                                  ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(
+                                              Icons.menu_book_rounded,
+                                              size: 16,
+                                              color: accentColor,
+                                            ),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              'Grammar Rule',
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w700,
+                                                color: accentColor,
+                                                letterSpacing: 0.5,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        if (onSpeakEnglish != null)
+                                          IconButton(
+                                            icon: Icon(
+                                              isSpeaking
+                                                  ? Icons.volume_up_rounded
+                                                  : Icons.volume_up_outlined,
+                                              size: 18,
+                                              color: accentColor,
+                                            ),
+                                            padding: EdgeInsets.zero,
+                                            constraints: const BoxConstraints(),
+                                            tooltip: 'Listen to grammar explanation',
+                                            onPressed: onSpeakEnglish,
+                                          ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      item.grammarExplanation!,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        height: 1.55,
+                                        fontWeight: FontWeight.w500,
+                                        color: isDark ? Colors.white : Colors.black87,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
