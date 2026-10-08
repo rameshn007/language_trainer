@@ -1008,30 +1008,44 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
                     ),
                   ),
 
-                // Auto-Advance countdown bar
-                if (_isAutoAdvancing && _deck.isNotEmpty)
+                // Auto-Advance countdown bar (fixed height container so card never shifts on pause/play)
+                if (_deck.isNotEmpty)
                   Padding(
                     padding: EdgeInsets.only(
                       left: contentPadding.left,
                       right: contentPadding.right,
                     ),
-                    child: AnimatedBuilder(
-                      animation: _countdownController,
-                      builder: (context, _) => LinearProgressIndicator(
-                        value: _countdownController.value,
-                        backgroundColor: isDark
-                            ? Colors.white.withValues(alpha: 0.06)
-                            : Colors.black.withValues(alpha: 0.06),
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          _isFlipped
-                              ? Colors.amber.shade600
-                              : (_currentIndex < _deck.length
-                                  ? _deck[_currentIndex].categoryColor
-                                  : theme.colorScheme.primary),
-                        ),
-                        minHeight: 3.5,
-                      ),
+                    child: SizedBox(
+                      height: 3.5,
+                      child: _isAutoAdvancing
+                          ? AnimatedBuilder(
+                              animation: _countdownController,
+                              builder: (context, _) => LinearProgressIndicator(
+                                value: _countdownController.value,
+                                backgroundColor: isDark
+                                    ? Colors.white.withValues(alpha: 0.06)
+                                    : Colors.black.withValues(alpha: 0.06),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  _isFlipped
+                                      ? Colors.amber.shade600
+                                      : (_currentIndex < _deck.length
+                                          ? _deck[_currentIndex].categoryColor
+                                          : theme.colorScheme.primary),
+                                ),
+                                minHeight: 3.5,
+                              ),
+                            )
+                          : const SizedBox(height: 3.5),
                     ),
+                  ),
+
+                // Fixed-height status indicator strip (never collapses, so card below never shifts)
+                if (_deck.isNotEmpty)
+                  _buildStatusStrip(
+                    theme: theme,
+                    isDark: isDark,
+                    isLandscape: isLandscape,
+                    contentPadding: contentPadding,
                   ),
 
                 // Main Flashcard View
@@ -1051,6 +1065,71 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
                 ),
               ],
             ),
+    );
+  }
+
+  /// Fixed-height status indicator strip outside the card.
+  /// Never collapses or shifts the card below during audio or timer transitions.
+  Widget _buildStatusStrip({
+    required ThemeData theme,
+    required bool isDark,
+    required bool isLandscape,
+    required EdgeInsets contentPadding,
+  }) {
+    return AnimatedBuilder(
+      animation: _countdownController,
+      builder: (context, _) {
+        final currentCard =
+            _currentIndex < _deck.length ? _deck[_currentIndex] : null;
+        final accentColor =
+            currentCard?.categoryColor ?? theme.colorScheme.primary;
+
+        String? text;
+        IconData? icon;
+        Color? color;
+
+        if (_isSpeaking) {
+          text = 'Listening...';
+          icon = Icons.volume_up_rounded;
+          color = accentColor;
+        } else if (_isAutoAdvancing && _countdownController.value > 0) {
+          if (_isFlipped) {
+            text = 'Advancing to next card...';
+            icon = Icons.arrow_forward_rounded;
+            color = Colors.amber.shade700;
+          } else {
+            text = 'Flipping card soon...';
+            icon = Icons.timer_rounded;
+            color = accentColor;
+          }
+        }
+
+        return Container(
+          height: isLandscape ? 18 : 22,
+          padding: EdgeInsets.only(
+            left: contentPadding.left,
+            right: contentPadding.right,
+          ),
+          alignment: Alignment.center,
+          child: text != null
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(icon, size: 13, color: color),
+                    const SizedBox(width: 5),
+                    Text(
+                      text,
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                        color: color,
+                      ),
+                    ),
+                  ],
+                )
+              : const SizedBox.shrink(),
+        );
+      },
     );
   }
 
