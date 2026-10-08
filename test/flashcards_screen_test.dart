@@ -687,5 +687,54 @@ void main() {
       expect(find.text('#11'), findsOneWidget);
       expect(find.text('falar'), findsOneWidget);
     });
+
+    testWidgets('auto-advance displays timer on front face, awaits Portuguese speech, and waits for timer before flipping', (tester) async {
+      final ptSpeechCompleter = Completer<void>();
+      when(() => mockTts.speak(
+        'falar',
+        language: 'pt-PT',
+        rate: any(named: 'rate'),
+      )).thenAnswer((_) => ptSpeechCompleter.future);
+
+      const card = FlashcardItem(
+        id: '1',
+        cardNumber: '#1',
+        portuguese: 'falar',
+        english: 'to speak',
+        category: 'VERBS',
+      );
+
+      await pumpScreen(tester, cards: [card]);
+
+      // Start auto-advance
+      final playFinder = find.widgetWithIcon(IconButton, Icons.play_arrow_rounded);
+      await tester.tap(playFinder);
+      await tester.pump();
+
+      // Step 2: Portuguese is speaking and held by ptSpeechCompleter
+      // Even after 3 seconds, card MUST NOT flip while Portuguese is still being read
+      await tester.pump(const Duration(seconds: 3));
+      expect(find.text('falar'), findsOneWidget);
+      expect(find.text('Flip Card'), findsOneWidget);
+
+      // Now complete Portuguese speech
+      ptSpeechCompleter.complete();
+      await tester.pump();
+
+      // Step 3: Now the front-face countdown timer begins.
+      // Halfway through (1000ms), card is still on the front face, showing timer hint
+      await tester.pump(const Duration(milliseconds: 1000));
+      expect(find.text('falar'), findsOneWidget);
+      expect(find.text('Flip Card'), findsOneWidget);
+      expect(find.text('Flipping card soon...'), findsOneWidget);
+
+      // After the full 2000ms countdown elapses:
+      await tester.pump(const Duration(milliseconds: 1050));
+      await tester.pumpAndSettle();
+
+      // NOW the card has flipped to the back side!
+      expect(find.text('to speak'), findsOneWidget);
+      expect(find.text('Show Front'), findsOneWidget);
+    });
   });
 }

@@ -446,15 +446,43 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     }
     if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
-    // 3. Pause for user recall with cancelable Timer
+    // 3. Recall countdown with progress bar before flipping to back face
+    final currentCard = _deck[_currentIndex];
+    final bool hasPronunciation = currentCard.formattedPronunciation != null &&
+        currentCard.formattedPronunciation!.trim().isNotEmpty;
+    final bool hasLongPhrase = currentCard.portuguese.length > 25 || currentCard.isGrammarCard;
+    final int recallMillis = hasLongPhrase
+        ? 2600
+        : (hasPronunciation ? 2200 : 2000);
+    const int tickMillis = 50;
+    int recallElapsed = 0;
     final recallCompleter = Completer<void>();
     _stepCompleter = recallCompleter;
+
     _recallTimer?.cancel();
-    _recallTimer = Timer(const Duration(milliseconds: 2000), () {
-      if (!recallCompleter.isCompleted) recallCompleter.complete();
-    });
+    _recallTimer = Timer.periodic(
+      const Duration(milliseconds: tickMillis),
+      (timer) {
+        if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) {
+          timer.cancel();
+          if (!recallCompleter.isCompleted) recallCompleter.complete();
+          return;
+        }
+        recallElapsed += tickMillis;
+        setState(() {
+          _autoAdvanceProgress = (recallElapsed / recallMillis).clamp(0.0, 1.0);
+        });
+        if (recallElapsed >= recallMillis) {
+          timer.cancel();
+          if (!recallCompleter.isCompleted) recallCompleter.complete();
+        }
+      },
+    );
+
     await recallCompleter.future;
     if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
+
+    setState(() => _autoAdvanceProgress = 0.0);
 
     // 4. Flip to back face
     setState(() {
@@ -472,10 +500,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     if (!_isAutoAdvancing || !mounted || _autoAdvanceGeneration != stepGen || _deck.isEmpty) return;
 
     // 6. Reading countdown with progress bar - generous reading window so user has ample time to read sentence
-    final currentCard = _deck[_currentIndex];
-    final hasExample = currentCard.examplePt != null && currentCard.examplePt!.trim().isNotEmpty;
+    final cardBack = _deck[_currentIndex];
+    final hasExample = cardBack.examplePt != null && cardBack.examplePt!.trim().isNotEmpty;
     final int totalMillis = hasExample ? 4200 : 2600;
-    const int tickMillis = 50;
     int elapsed = 0;
     final readingCompleter = Completer<void>();
     _stepCompleter = readingCompleter;
@@ -793,11 +820,15 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
                 if (_isAutoAdvancing)
                   LinearProgressIndicator(
                     value: _autoAdvanceProgress,
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: isDark
+                        ? Colors.white.withValues(alpha: 0.06)
+                        : Colors.black.withValues(alpha: 0.06),
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      Colors.amber.shade600,
+                      _isFlipped
+                          ? Colors.amber.shade600
+                          : _deck[_currentIndex].categoryColor,
                     ),
-                    minHeight: 2.5,
+                    minHeight: 3.5,
                   ),
 
                 // Main Flashcard View
@@ -911,6 +942,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
               onToggleFlag: _toggleFlagCurrent,
               onRateMastery: _rateCurrent,
               currentMastery: _currentCardMastery,
+              autoAdvanceProgress: _autoAdvanceProgress,
+              isAutoAdvancing: _isAutoAdvancing,
             );
           },
         ),

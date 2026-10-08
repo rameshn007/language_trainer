@@ -16,6 +16,8 @@ class FlashcardCardWidget extends StatelessWidget {
   final VoidCallback onToggleFlag;
   final void Function(int masteryLevel)? onRateMastery;
   final int currentMastery;
+  final double autoAdvanceProgress;
+  final bool isAutoAdvancing;
 
   const FlashcardCardWidget({
     super.key,
@@ -30,6 +32,8 @@ class FlashcardCardWidget extends StatelessWidget {
     required this.onToggleFlag,
     this.onRateMastery,
     this.currentMastery = 0,
+    this.autoAdvanceProgress = 0.0,
+    this.isAutoAdvancing = false,
   });
 
   @override
@@ -66,6 +70,7 @@ class FlashcardCardWidget extends StatelessWidget {
     return Card(
       elevation: 6,
       shadowColor: accentColor.withValues(alpha: 0.25),
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
         side: BorderSide(
@@ -74,11 +79,22 @@ class FlashcardCardWidget extends StatelessWidget {
         ),
       ),
       color: isDark ? const Color(0xFF1E222B) : Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (isAutoAdvancing && autoAdvanceProgress > 0)
+            LinearProgressIndicator(
+              value: autoAdvanceProgress,
+              backgroundColor: accentColor.withValues(alpha: 0.12),
+              valueColor: AlwaysStoppedAnimation<Color>(accentColor),
+              minHeight: 3.5,
+            ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
             // Top Bar: Card Number, Category Pill, Flag
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -257,17 +273,27 @@ class FlashcardCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.touch_app_rounded,
+                  (isAutoAdvancing && autoAdvanceProgress > 0)
+                      ? Icons.timer_rounded
+                      : Icons.touch_app_rounded,
                   size: 14,
-                  color: isDark ? Colors.white38 : Colors.black38,
+                  color: (isAutoAdvancing && autoAdvanceProgress > 0)
+                      ? accentColor
+                      : (isDark ? Colors.white38 : Colors.black38),
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  'Tap anywhere to flip card',
+                  (isAutoAdvancing && autoAdvanceProgress > 0)
+                      ? 'Flipping card soon...'
+                      : 'Tap anywhere to flip card',
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: isDark ? Colors.white38 : Colors.black38,
+                    fontWeight: (isAutoAdvancing && autoAdvanceProgress > 0)
+                        ? FontWeight.w600
+                        : FontWeight.w500,
+                    color: (isAutoAdvancing && autoAdvanceProgress > 0)
+                        ? accentColor
+                        : (isDark ? Colors.white38 : Colors.black38),
                   ),
                 ),
               ],
@@ -275,6 +301,9 @@ class FlashcardCardWidget extends StatelessWidget {
           ],
         ),
       ),
+    ),
+  ],
+),
     );
   }
 
@@ -287,6 +316,7 @@ class FlashcardCardWidget extends StatelessWidget {
     return Card(
       elevation: 6,
       shadowColor: accentColor.withValues(alpha: 0.25),
+      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
         side: BorderSide(
@@ -295,11 +325,22 @@ class FlashcardCardWidget extends StatelessWidget {
         ),
       ),
       color: isDark ? const Color(0xFF1E222B) : Colors.white,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (isAutoAdvancing && autoAdvanceProgress > 0)
+            LinearProgressIndicator(
+              value: autoAdvanceProgress,
+              backgroundColor: Colors.amber.withValues(alpha: 0.12),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.amber.shade600),
+              minHeight: 3.5,
+            ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
             // Top Bar: CEFR Badge, Type / Gender Pill, Flip Button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -603,9 +644,34 @@ class FlashcardCardWidget extends StatelessWidget {
                 ],
               ),
             ],
+            if (isAutoAdvancing && autoAdvanceProgress > 0) ...[
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.arrow_forward_rounded,
+                    size: 13,
+                    color: Colors.amber.shade700,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    'Advancing to next card...',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.amber.shade700,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ],
         ),
       ),
+    ),
+  ],
+),
     );
   }
 
