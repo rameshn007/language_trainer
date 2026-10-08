@@ -16,6 +16,7 @@ class FlashcardCardWidget extends StatelessWidget {
   final VoidCallback onToggleFlag;
   final void Function(int masteryLevel)? onRateMastery;
   final int currentMastery;
+  final Animation<double>? countdownAnimation;
   final double autoAdvanceProgress;
   final bool isAutoAdvancing;
 
@@ -32,6 +33,7 @@ class FlashcardCardWidget extends StatelessWidget {
     required this.onToggleFlag,
     this.onRateMastery,
     this.currentMastery = 0,
+    this.countdownAnimation,
     this.autoAdvanceProgress = 0.0,
     this.isAutoAdvancing = false,
   });
@@ -256,40 +258,8 @@ class FlashcardCardWidget extends StatelessWidget {
 
             const SizedBox(height: 14),
 
-            // Flip Hint
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  isSpeaking
-                      ? Icons.volume_up_rounded
-                      : (isAutoAdvancing && autoAdvanceProgress > 0)
-                          ? Icons.timer_rounded
-                          : Icons.touch_app_rounded,
-                  size: 14,
-                  color: (isSpeaking || (isAutoAdvancing && autoAdvanceProgress > 0))
-                      ? accentColor
-                      : (isDark ? Colors.white38 : Colors.black38),
-                ),
-                const SizedBox(width: 6),
-                Text(
-                  isSpeaking
-                      ? 'Listening...'
-                      : (isAutoAdvancing && autoAdvanceProgress > 0)
-                          ? 'Flipping card soon...'
-                          : 'Tap anywhere to flip card',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: (isSpeaking || (isAutoAdvancing && autoAdvanceProgress > 0))
-                        ? FontWeight.w600
-                        : FontWeight.w500,
-                    color: (isSpeaking || (isAutoAdvancing && autoAdvanceProgress > 0))
-                        ? accentColor
-                        : (isDark ? Colors.white38 : Colors.black38),
-                  ),
-                ),
-              ],
-            ),
+            // Flip Hint / Status Row
+            _buildFrontStatusRow(context, accentColor, isDark),
           ],
         ),
       ),
@@ -665,49 +635,8 @@ class FlashcardCardWidget extends StatelessWidget {
                 ],
               ),
             ],
-            if (isSpeaking) ...[
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.volume_up_rounded,
-                    size: 14,
-                    color: accentColor,
-                  ),
-                  const SizedBox(width: 6),
-                  Text(
-                    'Listening...',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: accentColor,
-                    ),
-                  ),
-                ],
-              ),
-            ] else if (isAutoAdvancing && autoAdvanceProgress > 0) ...[
-              const SizedBox(height: 8),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.arrow_forward_rounded,
-                    size: 13,
-                    color: Colors.amber.shade700,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    'Advancing to next card...',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.amber.shade700,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+            // Back Status Row
+            _buildBackStatusRow(context, accentColor),
           ],
         ),
       ),
@@ -752,5 +681,117 @@ class FlashcardCardWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildFrontStatusRow(
+    BuildContext context,
+    Color accentColor,
+    bool isDark,
+  ) {
+    Widget buildRow(double progress) {
+      final isCountdown = isAutoAdvancing && progress > 0;
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            isSpeaking
+                ? Icons.volume_up_rounded
+                : isCountdown
+                    ? Icons.timer_rounded
+                    : Icons.touch_app_rounded,
+            size: 14,
+            color: (isSpeaking || isCountdown)
+                ? accentColor
+                : (isDark ? Colors.white38 : Colors.black38),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            isSpeaking
+                ? 'Listening...'
+                : isCountdown
+                    ? 'Flipping card soon...'
+                    : 'Tap anywhere to flip card',
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: (isSpeaking || isCountdown)
+                  ? FontWeight.w600
+                  : FontWeight.w500,
+              color: (isSpeaking || isCountdown)
+                  ? accentColor
+                  : (isDark ? Colors.white38 : Colors.black38),
+            ),
+          ),
+        ],
+      );
+    }
+
+    if (countdownAnimation != null) {
+      return AnimatedBuilder(
+        animation: countdownAnimation!,
+        builder: (context, _) => buildRow(countdownAnimation!.value),
+      );
+    }
+    return buildRow(autoAdvanceProgress);
+  }
+
+  Widget _buildBackStatusRow(BuildContext context, Color accentColor) {
+    Widget buildRow(double progress) {
+      if (isSpeaking) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.volume_up_rounded,
+                size: 14,
+                color: accentColor,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                'Listening...',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: accentColor,
+                ),
+              ),
+            ],
+          ),
+        );
+      } else if (isAutoAdvancing && progress > 0) {
+        return Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.arrow_forward_rounded,
+                size: 13,
+                color: Colors.amber.shade700,
+              ),
+              const SizedBox(width: 5),
+              Text(
+                'Advancing to next card...',
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.amber.shade700,
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+      return const SizedBox.shrink();
+    }
+
+    if (countdownAnimation != null) {
+      return AnimatedBuilder(
+        animation: countdownAnimation!,
+        builder: (context, _) => buildRow(countdownAnimation!.value),
+      );
+    }
+    return buildRow(autoAdvanceProgress);
   }
 }

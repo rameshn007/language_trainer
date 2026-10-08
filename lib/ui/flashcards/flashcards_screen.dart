@@ -56,14 +56,41 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   // Countdown Animation for Hands-Free Auto-Advance
   late AnimationController _countdownController;
   Timer? _speechDelayTimer;
+  Completer<void>? _speechDelayCompleter;
+  int _speechChainToken = 0;
+
+  void _cancelSpeechDelay() {
+    _speechDelayTimer?.cancel();
+    _speechDelayTimer = null;
+    if (_speechDelayCompleter != null && !_speechDelayCompleter!.isCompleted) {
+      _speechDelayCompleter!.complete();
+    }
+    _speechDelayCompleter = null;
+  }
 
   Future<void> _speechDelay(Duration duration) {
-    _speechDelayTimer?.cancel();
+    _cancelSpeechDelay();
     final completer = Completer<void>();
+    _speechDelayCompleter = completer;
     _speechDelayTimer = Timer(duration, () {
       if (!completer.isCompleted) completer.complete();
+      if (_speechDelayCompleter == completer) {
+        _speechDelayCompleter = null;
+        _speechDelayTimer = null;
+      }
     });
     return completer.future;
+  }
+
+  void _stopSpeech() {
+    _speechChainToken++;
+    _cancelSpeechDelay();
+    _ttsService.stop();
+    if (_isSpeaking && mounted) {
+      setState(() => _isSpeaking = false);
+    } else {
+      _isSpeaking = false;
+    }
   }
 
   // Audio & Speed
@@ -141,10 +168,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   @override
   void dispose() {
     _stopAutoAdvance(updateState: false);
-    _speechDelayTimer?.cancel();
+    _stopSpeech();
     _countdownController.dispose();
     _flipController.dispose();
-    _ttsService.stop();
     super.dispose();
   }
 
@@ -292,8 +318,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       if (_isFlipped) {
         _flipController.reverse();
         _isFlipped = false;
-        _ttsService.stop();
-        _isSpeaking = false;
+        _stopSpeech();
       } else {
         _flipController.forward();
         _isFlipped = true;
@@ -323,9 +348,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     text = text.replaceAll(RegExp(r'\s+'), ' ').trim();
     if (text.isEmpty) return;
 
+    final token = ++_speechChainToken;
+    _cancelSpeechDelay();
     setState(() => _isSpeaking = true);
     try {
       await _ttsService.stop();
+      if (token != _speechChainToken || !mounted) return;
       await _ttsService.speak(
         text,
         language: 'pt-PT',
@@ -333,7 +361,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       );
     } catch (_) {
     } finally {
-      if (mounted) setState(() => _isSpeaking = false);
+      if (token == _speechChainToken && mounted) {
+        setState(() => _isSpeaking = false);
+      }
     }
   }
 
@@ -345,22 +375,25 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
     final cleanText = text.replaceAll('/', ', ');
 
+    final token = ++_speechChainToken;
+    _cancelSpeechDelay();
     setState(() => _isSpeaking = true);
     try {
       await _ttsService.stop();
+      if (token != _speechChainToken || !mounted) return;
       await _ttsService.speak(
         cleanText,
         language: 'en-US',
         rate: rate ?? 1.0,
       );
+      if (token != _speechChainToken || !mounted) return;
 
       // If grammar card, speak the grammar explanation aloud rather than having it read silently
       if (item.isGrammarCard &&
           item.grammarExplanation != null &&
           item.grammarExplanation!.trim().isNotEmpty) {
-        if (!_isSpeaking || !mounted) return;
         await _speechDelay(const Duration(milliseconds: 350));
-        if (!_isSpeaking || !mounted) return;
+        if (token != _speechChainToken || !mounted) return;
         final cleanExplanation = item.grammarExplanation!
             .replaceAll('•', '')
             .replaceAll('->', ' becomes ')
@@ -372,33 +405,36 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
           language: 'en-US',
           rate: rate ?? 1.0,
         );
+        if (token != _speechChainToken || !mounted) return;
       }
 
       // If there is an example use in a sentence, read it in both pt-PT and en-US
       if (item.examplePt != null && item.examplePt!.trim().isNotEmpty) {
-        if (!_isSpeaking || !mounted) return;
         await _speechDelay(const Duration(milliseconds: 350));
-        if (!_isSpeaking || !mounted) return;
+        if (token != _speechChainToken || !mounted) return;
         await _ttsService.speak(
           item.examplePt!.trim(),
           language: 'pt-PT',
           rate: rate ?? _speechRate,
         );
+        if (token != _speechChainToken || !mounted) return;
 
         if (item.exampleEn != null && item.exampleEn!.trim().isNotEmpty) {
-          if (!_isSpeaking || !mounted) return;
           await _speechDelay(const Duration(milliseconds: 300));
-          if (!_isSpeaking || !mounted) return;
+          if (token != _speechChainToken || !mounted) return;
           await _ttsService.speak(
             item.exampleEn!.trim(),
             language: 'en-US',
             rate: rate ?? 1.0,
           );
+          if (token != _speechChainToken || !mounted) return;
         }
       }
     } catch (_) {
     } finally {
-      if (mounted) setState(() => _isSpeaking = false);
+      if (token == _speechChainToken && mounted) {
+        setState(() => _isSpeaking = false);
+      }
     }
   }
 
@@ -407,8 +443,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     if (_isAutoAdvancing) {
       _stopAutoAdvance(updateState: false);
     }
-    _ttsService.stop();
-    _isSpeaking = false;
+    _stopSpeech();
     if (_currentIndex < _deck.length - 1) {
       setState(() {
         _currentIndex++;
@@ -428,8 +463,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     if (_isAutoAdvancing) {
       _stopAutoAdvance(updateState: false);
     }
-    _ttsService.stop();
-    _isSpeaking = false;
+    _stopSpeech();
     if (_currentIndex > 0) {
       setState(() {
         _currentIndex--;
@@ -456,11 +490,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
   void _stopAutoAdvance({bool updateState = true}) {
     _autoAdvanceGeneration++;
-    _speechDelayTimer?.cancel();
+    _stopSpeech();
     _countdownController.stop();
     _countdownController.reset();
-    _ttsService.stop();
-    _isSpeaking = false;
     _isAutoAdvancing = false;
     if (updateState && mounted) {
       setState(() {});
@@ -939,7 +971,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
           }
         },
         child: AnimatedBuilder(
-          animation: Listenable.merge([_flipAnimation, _countdownController]),
+          animation: _flipAnimation,
           builder: (context, child) {
             return FlashcardCardWidget(
               item: currentItem,
@@ -953,7 +985,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
               onToggleFlag: _toggleFlagCurrent,
               onRateMastery: _rateCurrent,
               currentMastery: _currentCardMastery,
-              autoAdvanceProgress: _countdownController.value,
+              countdownAnimation: _countdownController,
               isAutoAdvancing: _isAutoAdvancing,
             );
           },

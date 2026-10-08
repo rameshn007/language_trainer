@@ -899,5 +899,60 @@ void main() {
       await tester.pump(const Duration(milliseconds: 100));
       expect(find.text('Advancing to next card...'), findsOneWidget);
     });
+
+    testWidgets('pausing during speech delay unblocks completer immediately and cancels subsequent speech', (tester) async {
+      const card1 = FlashcardItem(
+        id: '1',
+        cardNumber: '#1',
+        portuguese: 'olá',
+        english: 'hello',
+        category: 'GENERAL',
+        examplePt: 'Olá, como está?',
+        exampleEn: 'Hello, how are you?',
+      );
+      const card2 = FlashcardItem(
+        id: '2',
+        cardNumber: '#2',
+        portuguese: 'obrigado',
+        english: 'thank you',
+        category: 'GENERAL',
+      );
+
+      await pumpScreen(tester, cards: [card1, card2], initialShuffle: false, initialAutoAdvance: true);
+      await tester.pump();
+      await tester.pump();
+
+      // Front countdown (2050ms) + flip animation (400ms)
+      await tester.pump(const Duration(milliseconds: 2050));
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pump();
+
+      // Card is flipped to back face. English "hello" has been spoken.
+      verify(() => mockTts.speak('hello', language: 'en-US', rate: any(named: 'rate'))).called(1);
+
+      // Now execution is waiting in _speechDelay(350ms) before speaking examplePt.
+      // Pause auto-advance mid-delay.
+      final pauseFinder = find.widgetWithIcon(IconButton, Icons.pause_rounded);
+      await tester.tap(pauseFinder);
+      await tester.pump();
+
+      // Advance time past the delay duration (500ms)
+      await tester.pump(const Duration(milliseconds: 500));
+
+      // Verify that the example sentences were NEVER spoken because the chain token cancelled it
+      verifyNever(() => mockTts.speak(
+        'Olá, como está?',
+        language: 'pt-PT',
+        rate: any(named: 'rate'),
+      ));
+      verifyNever(() => mockTts.speak(
+        'Hello, how are you?',
+        language: 'en-US',
+        rate: any(named: 'rate'),
+      ));
+
+      // There must be no pending timers left
+    });
   });
 }
+
