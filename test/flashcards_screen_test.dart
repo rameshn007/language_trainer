@@ -473,5 +473,79 @@ void main() {
       // No completion dialog
       expect(find.text('Deck Completed!'), findsNothing);
     });
+
+    testWidgets('guards session completion XP: awards once per pass only if cards were studied, and blocks repeat-swipe XP farming', (tester) async {
+      await pumpScreen(tester);
+
+      // Start on card 1 (#G1)
+      // Navigate to last card without studying/flipping any cards
+      final nextFinder = find.widgetWithIcon(IconButton, Icons.chevron_right_rounded);
+      await tester.tap(nextFinder);
+      await tester.pump();
+      await tester.tap(nextFinder);
+      await tester.pump();
+      expect(find.text('#2'), findsOneWidget); // last card
+
+      // Clear any setup calls
+      clearInteractions(mockStorage);
+
+      // Swipe left on last card with ZERO cards studied
+      await tester.fling(find.text('estar'), const Offset(-500, 0), 1000);
+      await tester.pumpAndSettle();
+
+      // Completion dialog should show, but recordSessionComplete should NOT have awarded XP or saved a session
+      expect(find.text('Deck Completed!'), findsOneWidget);
+      verifyNever(() => mockStorage.saveSession(any()));
+      verifyNever(() => mockStorage.incrementDailySessions());
+
+      // Dismiss dialog by tapping Restart Deck
+      await tester.tap(find.text('Restart Deck'));
+      await tester.pumpAndSettle();
+
+      // Deck restarted to card 0 (#G1)
+      expect(find.text('#G1'), findsOneWidget);
+
+      // Advance to card #1 and study it by flipping
+      await tester.tap(nextFinder);
+      await tester.pumpAndSettle();
+      expect(find.text('#1'), findsOneWidget);
+
+      // Flip card to reveal back face (study it)
+      await tester.tap(find.text('Flip Card'));
+      await tester.pumpAndSettle();
+      expect(find.text('Show Front'), findsOneWidget);
+
+      // Navigate to the last card (#2)
+      await tester.tap(nextFinder);
+      await tester.pumpAndSettle();
+      expect(find.text('#2'), findsOneWidget);
+
+      clearInteractions(mockStorage);
+
+      // Swipe left on last card to complete deck
+      await tester.fling(find.text('estar'), const Offset(-500, 0), 1000);
+      await tester.pumpAndSettle();
+
+      // Verify completion dialog is shown AND session was saved with ActivityType.flashcards
+      expect(find.text('Deck Completed!'), findsOneWidget);
+      verify(() => mockStorage.saveSession(any(
+        that: isA<SessionRecord>().having((s) => s.activityType, 'activityType', ActivityType.flashcards),
+      ))).called(1);
+      verify(() => mockStorage.incrementDailySessions()).called(1);
+
+      // Dismiss dialog via Navigator pop (simulating barrier dismissal)
+      Navigator.of(tester.element(find.text('Deck Completed!'))).pop();
+      await tester.pumpAndSettle();
+
+      clearInteractions(mockStorage);
+
+      // Attempt repeat swipe-left on the same pass to farm XP
+      await tester.fling(find.text('estar'), const Offset(-500, 0), 1000);
+      await tester.pumpAndSettle();
+
+      // Verify recordSessionComplete was NOT called again (once-per-pass invariant preserved)
+      verifyNever(() => mockStorage.saveSession(any()));
+      verifyNever(() => mockStorage.incrementDailySessions());
+    });
   });
 }

@@ -31,7 +31,8 @@ class FlashcardsScreen extends ConsumerStatefulWidget {
 
 class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     with SingleTickerProviderStateMixin {
-  // In-memory cache for decoded card deck across screen pushes
+  // Intentionally process-lifetime in-memory cache for bundled flashcard deck data.
+  // Deck items are static asset-bundled data and do not change during runtime.
   static List<FlashcardItem>? _cachedAllCards;
 
   // Master card list & filtered deck
@@ -66,7 +67,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   double _autoAdvanceProgress = 0.0;
   Timer? _autoAdvanceTicker;
   Completer<void>? _stepCompleter;
-  final Set<String> _reviewedCardIdsThisSession = {};
+  final Set<String> _cardsStudiedThisPass = {};
+  bool _hasAwardedCompletionThisPass = false;
   int _sessionXpEarned = 0;
   DateTime _sessionStartTime = DateTime.now();
 
@@ -201,7 +203,6 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       return;
     }
     final item = _deck[_currentIndex];
-    _reviewedCardIdsThisSession.add(item.id);
     final flagKey = item.languageItemId ?? item.id;
     _isCurrentCardFlagged = _storageService.isItemFlagged(flagKey);
 
@@ -216,6 +217,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   /// Filter cards by category, and flagged status
   void _applyFilters() {
     _stopAutoAdvance(updateState: false);
+    _cardsStudiedThisPass.clear();
+    _hasAwardedCompletionThisPass = false;
     List<FlashcardItem> result = List.from(_allCards);
 
     // Filter by Category
@@ -268,6 +271,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       } else {
         _flipController.forward();
         _isFlipped = true;
+        if (_deck.isNotEmpty && _currentIndex < _deck.length) {
+          _cardsStudiedThisPass.add(_deck[_currentIndex].id);
+        }
       }
     });
 
@@ -383,6 +389,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     _recallTimer = null;
     _autoAdvanceTimer = null;
     _autoAdvanceTicker = null;
+    _ttsService.stop();
     if (_stepCompleter != null && !_stepCompleter!.isCompleted) {
       _stepCompleter!.complete();
     }
@@ -423,6 +430,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     setState(() {
       _flipController.forward();
       _isFlipped = true;
+      if (_deck.isNotEmpty && _currentIndex < _deck.length) {
+        _cardsStudiedThisPass.add(_deck[_currentIndex].id);
+      }
     });
 
     // 5. Speak English and await completion so audio is NEVER truncated
@@ -499,6 +509,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     final isCorrect = level >= 3;
 
     if (!alreadyRated) {
+      _cardsStudiedThisPass.add(item.id);
       _ratedCardKeysThisSession.add(key);
       final xp = await _progressService.recordQuizAnswer(
         storage: _storageService,
@@ -555,15 +566,20 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     final theme = Theme.of(context);
     final durationSeconds =
         DateTime.now().difference(_sessionStartTime).inSeconds;
-    final cardsReviewed = _reviewedCardIdsThisSession.length;
-    _progressService.recordSessionComplete(
-      storage: _storageService,
-      activityType: ActivityType.vocabularyQuiz,
-      score: cardsReviewed > 0 ? cardsReviewed : 1,
-      total: _deck.length,
-      durationSeconds: durationSeconds,
-      sessionXP: _sessionXpEarned,
-    );
+    final cardsReviewed = _cardsStudiedThisPass.length;
+
+    // Guard: Only award session completion once per pass, and only if cards were actually studied
+    if (!_hasAwardedCompletionThisPass && cardsReviewed > 0) {
+      _hasAwardedCompletionThisPass = true;
+      _progressService.recordSessionComplete(
+        storage: _storageService,
+        activityType: ActivityType.flashcards,
+        score: cardsReviewed,
+        total: cardsReviewed,
+        durationSeconds: durationSeconds,
+        sessionXP: _sessionXpEarned,
+      );
+    }
 
     showDialog(
       context: context,
@@ -601,7 +617,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
               setState(() {
                 _currentIndex = 0;
                 _resetFlip();
-                _reviewedCardIdsThisSession.clear();
+                _cardsStudiedThisPass.clear();
+                _ratedCardKeysThisSession.clear();
+                _hasAwardedCompletionThisPass = false;
                 _sessionXpEarned = 0;
                 _sessionStartTime = DateTime.now();
                 _updateCurrentCardMetadata();

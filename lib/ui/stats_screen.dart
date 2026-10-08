@@ -546,6 +546,8 @@ class _SessionTile extends StatelessWidget {
         return 'Grammar Rules';
       case ActivityType.listenRepeat:
         return 'Listen & Repeat';
+      case ActivityType.flashcards:
+        return 'Flashcards';
     }
   }
 
@@ -571,6 +573,8 @@ class _SessionTile extends StatelessWidget {
         return Icons.menu_book_rounded;
       case ActivityType.listenRepeat:
         return Icons.headset_rounded;
+      case ActivityType.flashcards:
+        return Icons.style_rounded;
     }
   }
 
