@@ -1223,6 +1223,57 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
+    final prevButton = IconButton.filledTonal(
+      visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
+      icon: const Icon(Icons.chevron_left_rounded, size: 28),
+      tooltip: 'Previous Card (Swipe Right)',
+      onPressed: _currentIndex > 0 ? _prevCard : null,
+    );
+
+    final flipButton = OutlinedButton.icon(
+      onPressed: _toggleFlip,
+      icon: Icon(
+        _isFlipped
+            ? Icons.flip_to_front_rounded
+            : Icons.flip_to_back_rounded,
+        size: 20,
+      ),
+      label: Text(_isFlipped ? 'Show Front' : 'Flip Card'),
+      style: OutlinedButton.styleFrom(
+        padding: EdgeInsets.symmetric(
+          horizontal: isLandscape ? 14 : 16,
+          vertical: isLandscape ? 6 : 10,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+    );
+
+    final autoAdvanceButton = IconButton.filled(
+      visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
+      icon: Icon(
+        _isAutoAdvancing ? Icons.pause_rounded : Icons.play_arrow_rounded,
+        size: 26,
+      ),
+      tooltip: _isAutoAdvancing
+          ? 'Pause Auto-Advance'
+          : 'Start Auto-Advance (Hands-Free)',
+      style: IconButton.styleFrom(
+        backgroundColor: _isAutoAdvancing
+            ? Colors.amber.shade700
+            : theme.colorScheme.primary,
+      ),
+      onPressed: _deck.isNotEmpty ? _toggleAutoAdvance : null,
+    );
+
+    final nextButton = IconButton.filledTonal(
+      visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
+      icon: const Icon(Icons.chevron_right_rounded, size: 28),
+      tooltip: 'Next Card (Swipe Left)',
+      onPressed: _currentIndex < _deck.length - 1 ? _nextCard : null,
+    );
+
     return Container(
       padding: EdgeInsets.fromLTRB(
         contentPadding.left,
@@ -1245,71 +1296,36 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
         right: false,
         child: LayoutBuilder(
           builder: (context, constraints) {
-            return FittedBox(
-              fit: BoxFit.scaleDown,
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minWidth: constraints.maxWidth,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Previous Card
-                    IconButton.filledTonal(
-                      visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
-                      icon: const Icon(Icons.chevron_left_rounded, size: 28),
-                      tooltip: 'Previous Card (Swipe Right)',
-                      onPressed: _currentIndex > 0 ? _prevCard : null,
-                    ),
-
-                    // Tap to Flip
-                    OutlinedButton.icon(
-                      onPressed: _toggleFlip,
-                      icon: Icon(
-                        _isFlipped
-                            ? Icons.flip_to_front_rounded
-                            : Icons.flip_to_back_rounded,
-                        size: 20,
-                      ),
-                      label: Text(_isFlipped ? 'Show Front' : 'Flip Card'),
-                      style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: isLandscape ? 12 : 16,
-                          vertical: isLandscape ? 6 : 10,
+            return Center(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: isLandscape
+                    ? Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          prevButton,
+                          const SizedBox(width: 20),
+                          flipButton,
+                          const SizedBox(width: 20),
+                          autoAdvanceButton,
+                          const SizedBox(width: 20),
+                          nextButton,
+                        ],
+                      )
+                    : ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minWidth: constraints.maxWidth,
                         ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            prevButton,
+                            flipButton,
+                            autoAdvanceButton,
+                            nextButton,
+                          ],
                         ),
                       ),
-                    ),
-
-                    // Auto-Advance Play / Pause
-                    IconButton.filled(
-                      visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
-                      icon: Icon(
-                        _isAutoAdvancing ? Icons.pause_rounded : Icons.play_arrow_rounded,
-                        size: 26,
-                      ),
-                      tooltip: _isAutoAdvancing
-                          ? 'Pause Auto-Advance'
-                          : 'Start Auto-Advance (Hands-Free)',
-                      style: IconButton.styleFrom(
-                        backgroundColor: _isAutoAdvancing
-                            ? Colors.amber.shade700
-                            : theme.colorScheme.primary,
-                      ),
-                      onPressed: _deck.isNotEmpty ? _toggleAutoAdvance : null,
-                    ),
-
-                    // Next Card
-                    IconButton.filledTonal(
-                      visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
-                      icon: const Icon(Icons.chevron_right_rounded, size: 28),
-                      tooltip: 'Next Card (Swipe Left)',
-                      onPressed: _currentIndex < _deck.length - 1 ? _nextCard : null,
-                    ),
-                  ],
-                ),
               ),
             );
           },

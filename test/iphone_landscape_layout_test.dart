@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -1334,16 +1333,19 @@ void main() {
               reason: 'Shuffle action right margin on ${device.name} must clear 56 pt reservation');
         }
 
-        // Verify bottom action bar does not double-apply right safe area inset
-        if (device.insets.right > 0 && !isDuo) {
-          final nextButtonFinder = find.byTooltip('Next Card (Swipe Left)');
-          expect(nextButtonFinder, findsOneWidget);
-          final nextButtonRect = tester.getRect(nextButtonFinder);
-          final expectedRightInset = math.max(20.0, device.insets.right);
+        // Verify bottom action bar controls in landscape are compactly clustered
+        final isLandscape = device.logicalSize.width > device.logicalSize.height;
+        if (isLandscape) {
+          final prevFinder = find.byTooltip('Previous Card (Swipe Right)');
+          final nextFinder = find.byTooltip('Next Card (Swipe Left)');
+          expect(prevFinder, findsOneWidget);
+          expect(nextFinder, findsOneWidget);
+          final prevRect = tester.getRect(prevFinder);
+          final nextRect = tester.getRect(nextFinder);
           expect(
-            device.logicalSize.width - nextButtonRect.right,
-            lessThan(expectedRightInset + 40.0),
-            reason: 'Bottom action bar should not double-apply right safe area inset on ${device.name}',
+            nextRect.right - prevRect.left,
+            lessThan(420.0),
+            reason: 'Bottom action bar controls on ${device.name} should be compactly grouped in landscape',
           );
         }
 
