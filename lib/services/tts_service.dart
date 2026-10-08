@@ -225,6 +225,7 @@ class TtsService {
   String? _currentConfiguredLanguage;
   String? _currentConfiguredVoiceIdentifier;
   Future<void>? _synthLock;
+  Completer<void>? _activeLockCompleter;
 
   Future<void> setExplicitVoice(String language, String identifier) async {
     _currentConfiguredLanguage = null;
@@ -349,6 +350,13 @@ class TtsService {
   Future<Map<String, String>?> _findBestAvailableVoice(
     String langPrefix,
   ) async {
+    if (langPrefix.startsWith('pt') && availablePtVoices.isNotEmpty) {
+      return availablePtVoices.first;
+    }
+    if (langPrefix.startsWith('en') && availableEnVoices.isNotEmpty) {
+      return availableEnVoices.first;
+    }
+
     try {
       final voices = await _flutterTts.getVoices;
       if (voices == null || voices.isEmpty) return null;
@@ -533,6 +541,7 @@ class TtsService {
     }
 
     final completer = Completer<void>();
+    _activeLockCompleter = completer;
     _synthLock = completer.future;
 
     try {
@@ -555,6 +564,9 @@ class TtsService {
       }
       if (identical(_synthLock, completer.future)) {
         _synthLock = null;
+      }
+      if (identical(_activeLockCompleter, completer)) {
+        _activeLockCompleter = null;
       }
     }
   }
@@ -628,10 +640,13 @@ class TtsService {
   }
 
   Future<void> stop() async {
-    _currentConfiguredLanguage = null;
-    _currentConfiguredVoiceIdentifier = null;
     try {
       await _flutterTts.stop();
     } catch (_) {}
+    if (_activeLockCompleter != null && !_activeLockCompleter!.isCompleted) {
+      _activeLockCompleter!.complete();
+    }
+    _activeLockCompleter = null;
+    _synthLock = null;
   }
 }

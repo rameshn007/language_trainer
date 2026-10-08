@@ -1286,6 +1286,35 @@ void main() {
       expect(375.0 - cardRect.right, closeTo(20.0, 0.5));
       expect(cardRect.left, closeTo(20.0, 0.5));
     });
+
+    testWidgets('when auto-advance is paused, flipping to next card manually while viewing back of card immediately plays front of new card', (tester) async {
+      await pumpScreen(
+        tester,
+        cards: [sampleCards[0], sampleCards[1]],
+        initialShuffle: false,
+        initialAutoAdvance: false,
+      );
+      await tester.pump();
+
+      // Card 0 front was spoken
+      verify(() => mockTts.speak('ser', language: 'pt-PT', rate: any(named: 'rate'))).called(1);
+
+      // Flip to back of Card 0
+      await tester.tap(find.text('Flip Card'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400)); // Flip animation
+
+      // Card 0 back was spoken in en-US
+      verify(() => mockTts.speak('to be (permanent)', language: 'en-US', rate: any(named: 'rate'))).called(1);
+
+      // Now while viewing back of Card 0, tap Next Card
+      final nextFinder = find.widgetWithIcon(IconButton, Icons.chevron_right_rounded);
+      await tester.tap(nextFinder);
+      await tester.pump();
+
+      // Card 1 front must immediately be spoken in pt-PT
+      verify(() => mockTts.speak('estar', language: 'pt-PT', rate: any(named: 'rate'))).called(1);
+    });
   });
 }
 

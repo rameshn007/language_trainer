@@ -184,6 +184,64 @@ void main() {
       expect(ttsService, isNotNull);
     });
 
+    test('stop() breaks _synthLock immediately so subsequent speak executes without waiting', () async {
+      final hangingSpeechCompleter = Completer<int>();
+      bool secondCallStarted = false;
+
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(const MethodChannel('flutter_tts'), (call) async {
+        if (call.method == 'speak') {
+          final text = call.arguments is String
+              ? call.arguments as String
+              : (call.arguments as dynamic)?['text'] as String?;
+          if (text == 'first long speech') {
+            return hangingSpeechCompleter.future; // Holds platform channel
+          } else if (text == 'second speech') {
+            secondCallStarted = true;
+            return 1;
+          }
+        } else if (call.method == 'stop') {
+          return 1;
+        }
+        return 1;
+      });
+
+      // Start long speech (holds _synthLock)
+      unawaited(ttsService.speak('first long speech', language: 'en-US'));
+      await Future.delayed(Duration.zero);
+
+      // Stop speech
+      await ttsService.stop();
+
+      // Start second speech (Portuguese front face)
+      final secondFuture = ttsService.speak('second speech', language: 'pt-PT');
+      await Future.delayed(Duration.zero);
+
+      // Second speech must have entered and executed immediately without waiting for hangingSpeechCompleter
+      expect(secondCallStarted, isTrue);
+
+      await secondFuture;
+    });
+
+    test('voice switching uses availablePtVoices cache without querying getVoices platform channel', () async {
+      int getVoicesCalls = 0;
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(const MethodChannel('flutter_tts'), (call) async {
+        if (call.method == 'getVoices') {
+          getVoicesCalls++;
+          return [
+            {'name': 'Joana', 'locale': 'pt-PT', 'identifier': 'test_pt_voice'},
+          ];
+        }
+        return 1;
+      });
+
+      // Speak in Portuguese after English should not query getVoices
+      await ttsService.speak('Hello', language: 'en-US');
+      await ttsService.speak('Olá', language: 'pt-PT');
+      expect(getVoicesCalls, equals(0));
+    });
+
     test('setExplicitVoice invalidates cached configured voice and language', () async {
       await ttsService.setExplicitVoice('pt-PT', 'test_pt_voice');
       verify(() => storage.saveSetting('tts_voice_pt', 'test_pt_voice')).called(1);
