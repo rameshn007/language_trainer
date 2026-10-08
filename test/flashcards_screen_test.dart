@@ -110,6 +110,7 @@ void main() {
     WidgetTester tester, {
     List<FlashcardItem>? cards,
     bool initialShuffle = false,
+    bool initialAutoAdvance = false,
   }) async {
     await tester.pumpWidget(
       ProviderScope(
@@ -121,6 +122,7 @@ void main() {
           home: FlashcardsScreen(
             initialCards: cards ?? sampleCards,
             initialShuffle: initialShuffle,
+            initialAutoAdvance: initialAutoAdvance,
           ),
         ),
       ),
@@ -734,6 +736,38 @@ void main() {
 
       // NOW the card has flipped to the back side!
       expect(find.text('to speak'), findsOneWidget);
+      expect(find.text('Show Front'), findsOneWidget);
+    });
+
+    testWidgets('starts auto-advance immediately on first launch with initialAutoAdvance true (default)', (tester) async {
+      const card = FlashcardItem(
+        id: '1',
+        cardNumber: '#1',
+        portuguese: 'olá',
+        english: 'hello',
+        category: 'GENERAL',
+      );
+
+      // Default pump with initialAutoAdvance: true
+      await pumpScreen(tester, cards: [card], initialAutoAdvance: true);
+
+      // Verify it immediately shows Pause button (active auto-advance)
+      expect(find.widgetWithIcon(IconButton, Icons.pause_rounded), findsOneWidget);
+
+      // First word spoken
+      verify(() => mockTts.speak('olá', language: 'pt-PT', rate: any(named: 'rate'))).called(1);
+
+      // Timer runs on front face (halfway)
+      await tester.pump(const Duration(milliseconds: 1000));
+      expect(find.text('olá'), findsOneWidget);
+      expect(find.text('Flipping card soon...'), findsOneWidget);
+
+      // Complete timer
+      await tester.pump(const Duration(milliseconds: 1050));
+      await tester.pumpAndSettle();
+
+      // Card flips to backside automatically!
+      expect(find.text('hello'), findsOneWidget);
       expect(find.text('Show Front'), findsOneWidget);
     });
   });

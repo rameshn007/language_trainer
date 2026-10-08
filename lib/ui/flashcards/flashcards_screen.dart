@@ -16,12 +16,14 @@ import 'widgets/flashcard_card_widget.dart';
 class FlashcardsScreen extends ConsumerStatefulWidget {
   final String? initialCategory;
   final bool initialShuffle;
+  final bool initialAutoAdvance;
   final List<FlashcardItem>? initialCards;
 
   const FlashcardsScreen({
     super.key,
     this.initialCategory,
     this.initialShuffle = true,
+    this.initialAutoAdvance = true,
     this.initialCards,
   });
 
@@ -100,6 +102,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     _progressService = ref.read(progressServiceProvider.notifier);
 
     _isShuffled = widget.initialShuffle;
+    _isAutoAdvancing = widget.initialAutoAdvance;
     if (widget.initialCategory != null) {
       _selectedCategory = widget.initialCategory!.toUpperCase();
     }
@@ -115,11 +118,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
     if (widget.initialCards != null) {
       _allCards = List.from(widget.initialCards!);
-      _applyFilters();
+      _applyFilters(stopAutoAdvance: false);
       _isLoading = false;
-      if (_deck.isNotEmpty && _autoSpeak) {
-        _speakCurrent();
-      }
+      _startInitialPlayback();
     } else {
       _loadAllCards();
     }
@@ -133,18 +134,27 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     super.dispose();
   }
 
+  void _startInitialPlayback() {
+    if (_deck.isNotEmpty) {
+      if (_isAutoAdvancing) {
+        _runAutoAdvanceStep();
+      } else if (_autoSpeak) {
+        _speakCurrent();
+      }
+    }
+  }
+
   /// Load grammar cards and vocabulary items from bundled JSON (or memory cache)
   Future<void> _loadAllCards() async {
     if (_cachedAllCards != null && _cachedAllCards!.isNotEmpty) {
       if (!mounted) return;
       setState(() {
         _allCards = List.from(_cachedAllCards!);
-        _applyFilters();
+        _applyFilters(stopAutoAdvance: false);
         _isLoading = false;
+        _isAutoAdvancing = widget.initialAutoAdvance;
       });
-      if (_deck.isNotEmpty && _autoSpeak) {
-        _speakCurrent();
-      }
+      _startInitialPlayback();
       return;
     }
 
@@ -181,14 +191,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
       setState(() {
         _allCards = loaded;
-        _applyFilters();
+        _applyFilters(stopAutoAdvance: false);
         _isLoading = false;
+        _isAutoAdvancing = widget.initialAutoAdvance;
       });
 
-      // Speak initial card if auto-speak enabled
-      if (_deck.isNotEmpty && _autoSpeak) {
-        _speakCurrent();
-      }
+      _startInitialPlayback();
     } catch (e) {
       debugPrint('Error initializing flashcards: $e');
       if (mounted) setState(() => _isLoading = false);
@@ -215,8 +223,10 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   }
 
   /// Filter cards by category, and flagged status
-  void _applyFilters() {
-    _stopAutoAdvance(updateState: false);
+  void _applyFilters({bool stopAutoAdvance = true}) {
+    if (stopAutoAdvance) {
+      _stopAutoAdvance(updateState: false);
+    }
     _cardsStudiedThisPass.clear();
     _hasAwardedCompletionThisPass = false;
     List<FlashcardItem> result = List.from(_allCards);
