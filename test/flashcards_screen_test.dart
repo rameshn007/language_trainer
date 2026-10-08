@@ -441,7 +441,7 @@ void main() {
       expect(find.text('Card already reviewed this session'), findsOneWidget);
     });
 
-    testWidgets('auto-advance is cleanly cancelled on manual Next navigation without stale card jumps', (tester) async {
+    testWidgets('auto-advance continues playing on manual Next navigation and swiping next without stale card jumps', (tester) async {
       await pumpScreen(tester);
 
       // Start auto-advance
@@ -452,18 +452,118 @@ void main() {
       // Pause icon is visible -> auto-advancing
       expect(find.widgetWithIcon(IconButton, Icons.pause_rounded), findsOneWidget);
 
-      // Manually tap Next while auto-advance is waiting
+      clearInteractions(mockTts);
+
+      // Manually tap Next while auto-advance is playing
       final nextFinder = find.widgetWithIcon(IconButton, Icons.chevron_right_rounded);
       await tester.tap(nextFinder);
       await tester.pump();
+      await tester.pump();
 
-      // Card moved to 2 of 3 and auto-advance is cancelled
+      // Card moved to 2 of 3 and auto-advance REMAINS active
+      expect(find.text('Card 2 of 3'), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, Icons.pause_rounded), findsOneWidget);
+
+      // Portuguese for Card 2 ('ser') is spoken
+      verify(() => mockTts.speak(
+        'ser',
+        language: 'pt-PT',
+        rate: any(named: 'rate'),
+      )).called(1);
+
+      // Advance clock past recall countdown (2200 ms) and flip animation (380 ms)
+      await tester.pump(const Duration(milliseconds: 2500));
+      await tester.pumpAndSettle();
+
+      // Card flipped to back as part of continuing auto-advance
+      expect(find.text('Show Front'), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, Icons.pause_rounded), findsOneWidget);
+    });
+
+    testWidgets('auto-advance continues playing when swiping back', (tester) async {
+      await pumpScreen(tester);
+
+      // Start auto-advance
+      final playFinder = find.widgetWithIcon(IconButton, Icons.play_arrow_rounded);
+      await tester.tap(playFinder);
+      await tester.pump();
+
+      // Advance to Card 2
+      final nextFinder = find.widgetWithIcon(IconButton, Icons.chevron_right_rounded);
+      await tester.tap(nextFinder);
+      await tester.pump();
+      expect(find.text('Card 2 of 3'), findsOneWidget);
+
+      clearInteractions(mockTts);
+
+      // Swipe right to go back to Card 1
+      await tester.fling(find.text('ser'), const Offset(500, 0), 1000);
+      await tester.pump();
+
+      // Card moved to 1 of 3 and auto-advance REMAINS active
+      expect(find.text('Card 1 of 3'), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, Icons.pause_rounded), findsOneWidget);
+
+      // Front of Card 1 ('Verbos Reflexivos (-se)') is spoken
+      verify(() => mockTts.speak(
+        'Verbos Reflexivos (-se)',
+        language: 'pt-PT',
+        rate: any(named: 'rate'),
+      )).called(1);
+    });
+
+    testWidgets('when not auto-advancing, swipe next and swipe back play front of card but do not auto-advance', (tester) async {
+      await pumpScreen(tester);
+
+      // Auto-advance is NOT active
+      expect(find.widgetWithIcon(IconButton, Icons.play_arrow_rounded), findsOneWidget);
+      expect(find.text('Card 1 of 3'), findsOneWidget);
+
+      clearInteractions(mockTts);
+
+      // Swipe left to go to Card 2
+      await tester.fling(find.text('Verbos Reflexivos (-se)'), const Offset(-500, 0), 1000);
+      await tester.pump();
+
+      // Card moved to 2 of 3 and auto-advance is NOT active
       expect(find.text('Card 2 of 3'), findsOneWidget);
       expect(find.widgetWithIcon(IconButton, Icons.play_arrow_rounded), findsOneWidget);
 
-      // Advance clock by 3 seconds - verify card does NOT jump to Card 3 from a stale timer
-      await tester.pump(const Duration(seconds: 3));
+      // Front of Card 2 ('ser') is spoken
+      verify(() => mockTts.speak(
+        'ser',
+        language: 'pt-PT',
+        rate: any(named: 'rate'),
+      )).called(1);
+
+      // Advance clock by 4 seconds - card should NOT flip or auto-advance
+      await tester.pump(const Duration(seconds: 4));
       expect(find.text('Card 2 of 3'), findsOneWidget);
+      expect(find.text('Flip Card'), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, Icons.play_arrow_rounded), findsOneWidget);
+
+      clearInteractions(mockTts);
+
+      // Swipe right to go back to Card 1
+      await tester.fling(find.text('ser'), const Offset(500, 0), 1000);
+      await tester.pump();
+
+      // Card moved back to 1 of 3 and auto-advance is NOT active
+      expect(find.text('Card 1 of 3'), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, Icons.play_arrow_rounded), findsOneWidget);
+
+      // Front of Card 1 is spoken
+      verify(() => mockTts.speak(
+        'Verbos Reflexivos (-se)',
+        language: 'pt-PT',
+        rate: any(named: 'rate'),
+      )).called(1);
+
+      // Advance clock by 4 seconds - card should NOT flip or auto-advance
+      await tester.pump(const Duration(seconds: 4));
+      expect(find.text('Card 1 of 3'), findsOneWidget);
+      expect(find.text('Flip Card'), findsOneWidget);
+      expect(find.widgetWithIcon(IconButton, Icons.play_arrow_rounded), findsOneWidget);
     });
 
     testWidgets('applying empty filter during run shows empty state without popping bogus Deck Completed dialog', (tester) async {

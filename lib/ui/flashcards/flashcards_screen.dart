@@ -555,39 +555,50 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
 
   void _nextCard() {
     if (_deck.isEmpty) return;
-    if (_isAutoAdvancing) {
-      _stopAutoAdvance(updateState: false);
-    }
+    final wasAutoAdvancing = _isAutoAdvancing;
+    _autoAdvanceGeneration++;
     _stopSpeech(updateState: false);
+    _countdownController.stop();
+    _countdownController.reset();
+
     if (_currentIndex < _deck.length - 1) {
       setState(() {
         _currentIndex++;
         _resetFlip();
         _updateCurrentCardMetadata();
       });
-      if (_autoSpeak) {
+      if (wasAutoAdvancing) {
+        _runAutoAdvanceStep();
+      } else if (_autoSpeak) {
         _speakCurrent();
       }
     } else {
+      if (wasAutoAdvancing) {
+        _stopAutoAdvance();
+      }
       _showCompletionDialog();
     }
   }
 
   void _prevCard() {
     if (_deck.isEmpty) return;
-    if (_isAutoAdvancing) {
-      _stopAutoAdvance(updateState: false);
-    }
+    if (_currentIndex <= 0) return;
+    final wasAutoAdvancing = _isAutoAdvancing;
+    _autoAdvanceGeneration++;
     _stopSpeech(updateState: false);
-    if (_currentIndex > 0) {
-      setState(() {
-        _currentIndex--;
-        _resetFlip();
-        _updateCurrentCardMetadata();
-      });
-      if (_autoSpeak) {
-        _speakCurrent();
-      }
+    _countdownController.stop();
+    _countdownController.reset();
+
+    setState(() {
+      _currentIndex--;
+      _resetFlip();
+      _updateCurrentCardMetadata();
+    });
+
+    if (wasAutoAdvancing) {
+      _runAutoAdvanceStep();
+    } else if (_autoSpeak) {
+      _speakCurrent();
     }
   }
 
