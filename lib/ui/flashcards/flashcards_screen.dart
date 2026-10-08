@@ -66,7 +66,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   double _autoAdvanceProgress = 0.0;
   Timer? _autoAdvanceTicker;
   Completer<void>? _stepCompleter;
-  int _sessionCardsReviewed = 0;
+  final Set<String> _reviewedCardIdsThisSession = {};
   int _sessionXpEarned = 0;
   DateTime _sessionStartTime = DateTime.now();
 
@@ -201,6 +201,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       return;
     }
     final item = _deck[_currentIndex];
+    _reviewedCardIdsThisSession.add(item.id);
     final flagKey = item.languageItemId ?? item.id;
     _isCurrentCardFlagged = _storageService.isItemFlagged(flagKey);
 
@@ -335,7 +336,6 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       setState(() {
         _currentIndex++;
         _resetFlip();
-        _sessionCardsReviewed++;
         _updateCurrentCardMetadata();
       });
       if (_autoSpeak) {
@@ -468,7 +468,6 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       setState(() {
         _currentIndex++;
         _resetFlip();
-        _sessionCardsReviewed++;
         _updateCurrentCardMetadata();
       });
       _runAutoAdvanceStep();
@@ -556,10 +555,11 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     final theme = Theme.of(context);
     final durationSeconds =
         DateTime.now().difference(_sessionStartTime).inSeconds;
+    final cardsReviewed = _reviewedCardIdsThisSession.length;
     _progressService.recordSessionComplete(
       storage: _storageService,
       activityType: ActivityType.vocabularyQuiz,
-      score: _sessionCardsReviewed > 0 ? _sessionCardsReviewed : 1,
+      score: cardsReviewed > 0 ? cardsReviewed : 1,
       total: _deck.length,
       durationSeconds: durationSeconds,
       sessionXP: _sessionXpEarned,
@@ -586,7 +586,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
             ),
             const SizedBox(height: 12),
             Text(
-              'Cards reviewed: ${_sessionCardsReviewed > 0 ? _sessionCardsReviewed : 1}\nXP Earned: $_sessionXpEarned XP',
+              'Cards reviewed: $cardsReviewed\nXP Earned: $_sessionXpEarned XP',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: theme.colorScheme.primary,
@@ -601,7 +601,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
               setState(() {
                 _currentIndex = 0;
                 _resetFlip();
-                _sessionCardsReviewed = 0;
+                _reviewedCardIdsThisSession.clear();
                 _sessionXpEarned = 0;
                 _sessionStartTime = DateTime.now();
                 _updateCurrentCardMetadata();

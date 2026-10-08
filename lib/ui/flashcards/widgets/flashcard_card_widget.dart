@@ -162,21 +162,15 @@ class FlashcardCardWidget extends StatelessWidget {
 
             // Center: Portuguese Word / Phrase
             Center(
-              child: Hero(
-                tag: 'flashcard_pt_${item.id}',
-                child: Material(
-                  color: Colors.transparent,
-                  child: Text(
-                    item.portuguese,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: item.portuguese.length > 25 ? 26 : 34,
-                      fontWeight: FontWeight.w800,
-                      color: isDark ? Colors.white : Colors.black87,
-                      letterSpacing: -0.5,
-                      height: 1.2,
-                    ),
-                  ),
+              child: Text(
+                item.portuguese,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: item.portuguese.length > 25 ? 26 : 34,
+                  fontWeight: FontWeight.w800,
+                  color: isDark ? Colors.white : Colors.black87,
+                  letterSpacing: -0.5,
+                  height: 1.2,
                 ),
               ),
             ),
