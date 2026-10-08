@@ -261,25 +261,29 @@ class FlashcardCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  (isAutoAdvancing && autoAdvanceProgress > 0)
-                      ? Icons.timer_rounded
-                      : Icons.touch_app_rounded,
+                  isSpeaking
+                      ? Icons.volume_up_rounded
+                      : (isAutoAdvancing && autoAdvanceProgress > 0)
+                          ? Icons.timer_rounded
+                          : Icons.touch_app_rounded,
                   size: 14,
-                  color: (isAutoAdvancing && autoAdvanceProgress > 0)
+                  color: (isSpeaking || (isAutoAdvancing && autoAdvanceProgress > 0))
                       ? accentColor
                       : (isDark ? Colors.white38 : Colors.black38),
                 ),
                 const SizedBox(width: 6),
                 Text(
-                  (isAutoAdvancing && autoAdvanceProgress > 0)
-                      ? 'Flipping card soon...'
-                      : 'Tap anywhere to flip card',
+                  isSpeaking
+                      ? 'Listening...'
+                      : (isAutoAdvancing && autoAdvanceProgress > 0)
+                          ? 'Flipping card soon...'
+                          : 'Tap anywhere to flip card',
                   style: TextStyle(
                     fontSize: 12,
-                    fontWeight: (isAutoAdvancing && autoAdvanceProgress > 0)
+                    fontWeight: (isSpeaking || (isAutoAdvancing && autoAdvanceProgress > 0))
                         ? FontWeight.w600
                         : FontWeight.w500,
-                    color: (isAutoAdvancing && autoAdvanceProgress > 0)
+                    color: (isSpeaking || (isAutoAdvancing && autoAdvanceProgress > 0))
                         ? accentColor
                         : (isDark ? Colors.white38 : Colors.black38),
                   ),
@@ -617,7 +621,28 @@ class FlashcardCardWidget extends StatelessWidget {
                 ],
               ),
             ],
-            if (isAutoAdvancing && autoAdvanceProgress > 0) ...[
+            if (isSpeaking) ...[
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.volume_up_rounded,
+                    size: 14,
+                    color: accentColor,
+                  ),
+                  const SizedBox(width: 6),
+                  Text(
+                    'Listening...',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: accentColor,
+                    ),
+                  ),
+                ],
+              ),
+            ] else if (isAutoAdvancing && autoAdvanceProgress > 0) ...[
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

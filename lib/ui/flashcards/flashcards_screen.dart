@@ -513,7 +513,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     final cardBack = _deck[_currentIndex];
     final hasExample = cardBack.examplePt != null && cardBack.examplePt!.trim().isNotEmpty;
     final int totalMillis = cardBack.isGrammarCard
-        ? 2200
+        ? 7500
         : (hasExample ? 2000 : 1400);
     int elapsed = 0;
     final readingCompleter = Completer<void>();
@@ -823,13 +823,15 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
                     value: (_currentIndex + 1) / _deck.length,
                     backgroundColor: isDark ? Colors.white10 : Colors.black12,
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      _deck[_currentIndex].categoryColor,
+                      _currentIndex < _deck.length
+                          ? _deck[_currentIndex].categoryColor
+                          : theme.colorScheme.primary,
                     ),
                     minHeight: 3,
                   ),
 
                 // Auto-Advance countdown bar
-                if (_isAutoAdvancing)
+                if (_isAutoAdvancing && _deck.isNotEmpty)
                   LinearProgressIndicator(
                     value: _autoAdvanceProgress,
                     backgroundColor: isDark
@@ -838,7 +840,9 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
                     valueColor: AlwaysStoppedAnimation<Color>(
                       _isFlipped
                           ? Colors.amber.shade600
-                          : _deck[_currentIndex].categoryColor,
+                          : (_currentIndex < _deck.length
+                              ? _deck[_currentIndex].categoryColor
+                              : theme.colorScheme.primary),
                     ),
                     minHeight: 3.5,
                   ),

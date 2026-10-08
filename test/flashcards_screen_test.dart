@@ -770,5 +770,117 @@ void main() {
       expect(find.text('hello'), findsOneWidget);
       expect(find.text('Show Front'), findsOneWidget);
     });
+
+    testWidgets('empty deck with initialCards: [] and default initialAutoAdvance renders No cards found without throwing RangeError', (tester) async {
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(mockStorage),
+            ttsServiceProvider.overrideWithValue(mockTts),
+          ],
+          child: const MaterialApp(
+            home: FlashcardsScreen(
+              initialCards: [],
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      // Empty state renders cleanly
+      expect(find.text('No cards found'), findsOneWidget);
+      expect(find.text('Try clearing your active filters or bookmarks.'), findsOneWidget);
+      expect(find.text('Reset Filters'), findsOneWidget);
+
+      // Countdown bar and sibling deck progress bar do not render
+      expect(find.byType(LinearProgressIndicator), findsNothing);
+    });
+
+    testWidgets('grammar card gets 7500ms reading window on back face before auto-advancing', (tester) async {
+      const grammarCard = FlashcardItem(
+        id: 'G1',
+        cardNumber: '#G1',
+        category: 'EXPLANATION',
+        portuguese: 'Verbos Reflexivos',
+        english: 'Reflexive Verbs',
+        wordType: 'grammar',
+        grammarExplanation: 'Used when subject and object are the same.',
+        isGrammarCard: true,
+      );
+      const nextCard = FlashcardItem(
+        id: '1',
+        cardNumber: '#1',
+        category: 'VERBS',
+        portuguese: 'falar',
+        english: 'to speak',
+      );
+
+      await pumpScreen(tester, cards: [grammarCard, nextCard], initialShuffle: false, initialAutoAdvance: true);
+      await tester.pump();
+
+      // Front face countdown for grammar card (2600ms) + flip animation (400ms)
+      await tester.pump(const Duration(milliseconds: 2650));
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pump();
+
+      // Flipped to back face
+      expect(find.text('Reflexive Verbs'), findsOneWidget);
+      expect(find.text('Show Front'), findsOneWidget);
+
+      // Back face ticker starts. At 3000ms, still on grammar card (window is 7500ms)
+      await tester.pump(const Duration(milliseconds: 3000));
+      expect(find.text('Reflexive Verbs'), findsOneWidget);
+      expect(find.text('Advancing to next card...'), findsOneWidget);
+
+      // Advance through remainder of 7500ms (remaining 4600ms) + flip animation reset (400ms)
+      await tester.pump(const Duration(milliseconds: 4600));
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pumpAndSettle();
+
+      // Now advanced to next card
+      expect(find.text('falar'), findsOneWidget);
+    });
+
+    testWidgets('displays Listening... indicator while back-face audio is playing', (tester) async {
+      final completer = Completer<void>();
+      when(
+        () => mockTts.speak('hello', language: 'en-US', rate: any(named: 'rate')),
+      ).thenAnswer((_) => completer.future);
+
+      const card1 = FlashcardItem(
+        id: '1',
+        cardNumber: '#1',
+        portuguese: 'olá',
+        english: 'hello',
+        category: 'GENERAL',
+      );
+      const card2 = FlashcardItem(
+        id: '2',
+        cardNumber: '#2',
+        portuguese: 'tchau',
+        english: 'bye',
+        category: 'GENERAL',
+      );
+
+      await pumpScreen(tester, cards: [card1, card2], initialShuffle: false, initialAutoAdvance: true);
+      await tester.pump();
+
+      // Front countdown (2000ms) + flip animation (400ms)
+      await tester.pump(const Duration(milliseconds: 2000));
+      await tester.pump(const Duration(milliseconds: 400));
+      await tester.pump();
+
+      // Back face audio is now playing ('hello' in en-US)
+      expect(find.text('hello'), findsOneWidget);
+      expect(find.text('Listening...'), findsOneWidget);
+
+      // Complete TTS
+      completer.complete();
+      await tester.pump();
+
+      // Once TTS finishes and step 6 reading ticker starts:
+      await tester.pump(const Duration(milliseconds: 100));
+      expect(find.text('Advancing to next card...'), findsOneWidget);
+    });
   });
 }
