@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,6 +11,7 @@ import '../../models/progress_data.dart';
 import '../../services/progress_service.dart';
 import '../../services/storage_service.dart';
 import '../../services/tts_service.dart';
+import '../../utils/iphone_duo_helper.dart';
 import 'widgets/flashcard_card_widget.dart';
 
 /// Interactive Flashcards Learning Screen for European Portuguese.
@@ -879,6 +881,16 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final isDuo = IPhoneDuoHelper.isDuo(context);
+    final mediaPadding = MediaQuery.paddingOf(context);
+    final double rightInset = isDuo
+        ? IPhoneDuoHelper.systemIconReservedWidth
+        : mediaPadding.right;
+    final double appBarRightPadding =
+        IPhoneDuoHelper.getAppBarActionsRightPadding(context);
+
+    final orientation = MediaQuery.orientationOf(context);
+    final isLandscape = orientation == Orientation.landscape;
 
     return Scaffold(
       backgroundColor: isDark ? const Color(0xFF13161C) : const Color(0xFFF7F9FC),
@@ -902,56 +914,64 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
           ],
         ),
         actions: [
-          // Speech Speed Button
-          IconButton(
-            icon: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(
-                  color: isDark ? Colors.white38 : Colors.black38,
+          Padding(
+            padding: EdgeInsets.only(right: appBarRightPadding),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // Speech Speed Button
+                IconButton(
+                  icon: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(
+                        color: isDark ? Colors.white38 : Colors.black38,
+                      ),
+                    ),
+                    child: Text(
+                      '${_speechRate}x',
+                      style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                  tooltip: 'Change speech speed (${_speechRate}x)',
+                  onPressed: _cycleSpeechSpeed,
                 ),
-              ),
-              child: Text(
-                '${_speechRate}x',
-                style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w700),
-              ),
-            ),
-            tooltip: 'Change speech speed (${_speechRate}x)',
-            onPressed: _cycleSpeechSpeed,
-          ),
-          // Auto-Speak Toggle
-          IconButton(
-            icon: Icon(
-              _autoSpeak ? Icons.volume_up_rounded : Icons.volume_off_rounded,
-              color: _autoSpeak ? theme.colorScheme.primary : Colors.grey,
-            ),
-            tooltip: _autoSpeak ? 'Auto-speak ON' : 'Auto-speak OFF',
-            onPressed: () {
-              setState(() => _autoSpeak = !_autoSpeak);
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(_autoSpeak ? 'Auto-speak enabled' : 'Auto-speak muted'),
-                  duration: const Duration(seconds: 1),
-                  behavior: SnackBarBehavior.floating,
+                // Auto-Speak Toggle
+                IconButton(
+                  icon: Icon(
+                    _autoSpeak ? Icons.volume_up_rounded : Icons.volume_off_rounded,
+                    color: _autoSpeak ? theme.colorScheme.primary : Colors.grey,
+                  ),
+                  tooltip: _autoSpeak ? 'Auto-speak ON' : 'Auto-speak OFF',
+                  onPressed: () {
+                    setState(() => _autoSpeak = !_autoSpeak);
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(_autoSpeak ? 'Auto-speak enabled' : 'Auto-speak muted'),
+                        duration: const Duration(seconds: 1),
+                        behavior: SnackBarBehavior.floating,
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
-          // Shuffle Toggle
-          IconButton(
-            icon: Icon(
-              Icons.shuffle_rounded,
-              color: _isShuffled ? theme.colorScheme.primary : Colors.grey,
+                // Shuffle Toggle
+                IconButton(
+                  icon: Icon(
+                    Icons.shuffle_rounded,
+                    color: _isShuffled ? theme.colorScheme.primary : Colors.grey,
+                  ),
+                  tooltip: _isShuffled ? 'Shuffled (tap for sequential)' : 'Sequential (tap to shuffle)',
+                  onPressed: () {
+                    setState(() {
+                      _isShuffled = !_isShuffled;
+                      _applyFilters();
+                    });
+                  },
+                ),
+              ],
             ),
-            tooltip: _isShuffled ? 'Shuffled (tap for sequential)' : 'Sequential (tap to shuffle)',
-            onPressed: () {
-              setState(() {
-                _isShuffled = !_isShuffled;
-                _applyFilters();
-              });
-            },
           ),
         ],
       ),
@@ -960,68 +980,81 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
           : Column(
               children: [
                 // Deck Filter Row
-                _buildFilterBar(),
+                _buildFilterBar(rightInset: rightInset, isLandscape: isLandscape),
 
                 // Linear Deck Progress Indicator
                 if (_deck.isNotEmpty)
-                  LinearProgressIndicator(
-                    value: (_currentIndex + 1) / _deck.length,
-                    backgroundColor: isDark ? Colors.white10 : Colors.black12,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      _currentIndex < _deck.length
-                          ? _deck[_currentIndex].categoryColor
-                          : theme.colorScheme.primary,
+                  Padding(
+                    padding: EdgeInsets.only(right: rightInset),
+                    child: LinearProgressIndicator(
+                      value: (_currentIndex + 1) / _deck.length,
+                      backgroundColor: isDark ? Colors.white10 : Colors.black12,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        _currentIndex < _deck.length
+                            ? _deck[_currentIndex].categoryColor
+                            : theme.colorScheme.primary,
+                      ),
+                      minHeight: 3,
                     ),
-                    minHeight: 3,
                   ),
 
                 // Auto-Advance countdown bar
                 if (_isAutoAdvancing && _deck.isNotEmpty)
-                  AnimatedBuilder(
-                    animation: _countdownController,
-                    builder: (context, _) => LinearProgressIndicator(
-                      value: _countdownController.value,
-                      backgroundColor: isDark
-                          ? Colors.white.withValues(alpha: 0.06)
-                          : Colors.black.withValues(alpha: 0.06),
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        _isFlipped
-                            ? Colors.amber.shade600
-                            : (_currentIndex < _deck.length
-                                ? _deck[_currentIndex].categoryColor
-                                : theme.colorScheme.primary),
+                  Padding(
+                    padding: EdgeInsets.only(right: rightInset),
+                    child: AnimatedBuilder(
+                      animation: _countdownController,
+                      builder: (context, _) => LinearProgressIndicator(
+                        value: _countdownController.value,
+                        backgroundColor: isDark
+                            ? Colors.white.withValues(alpha: 0.06)
+                            : Colors.black.withValues(alpha: 0.06),
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          _isFlipped
+                              ? Colors.amber.shade600
+                              : (_currentIndex < _deck.length
+                                  ? _deck[_currentIndex].categoryColor
+                                  : theme.colorScheme.primary),
+                        ),
+                        minHeight: 3.5,
                       ),
-                      minHeight: 3.5,
                     ),
                   ),
 
                 // Main Flashcard View
                 Expanded(
                   child: _deck.isEmpty
-                      ? _buildEmptyState()
-                      : _buildCardGestureArea(),
+                      ? _buildEmptyState(rightInset: rightInset)
+                      : _buildCardGestureArea(rightInset: rightInset, isLandscape: isLandscape),
                 ),
 
                 // Bottom Action Bar
-                _buildBottomControls(),
+                _buildBottomControls(rightInset: rightInset, isLandscape: isLandscape),
               ],
             ),
     );
   }
 
   /// Horizontal scrolling category chips & bookmark toggle
-  Widget _buildFilterBar() {
+  Widget _buildFilterBar({double rightInset = 0.0, bool isLandscape = false}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      height: 48,
-      margin: const EdgeInsets.symmetric(vertical: 4),
+      height: isLandscape ? 38 : 48,
+      margin: EdgeInsets.only(
+        top: isLandscape ? 2 : 4,
+        bottom: isLandscape ? 2 : 4,
+        right: rightInset,
+      ),
       child: ListView(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 12),
         children: [
           // Bookmark Filter Chip
           FilterChip(
+            visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            padding: isLandscape ? const EdgeInsets.symmetric(horizontal: 4) : null,
             label: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -1046,10 +1079,13 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
             return Padding(
               padding: const EdgeInsets.only(right: 6),
               child: FilterChip(
+                visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                padding: isLandscape ? const EdgeInsets.symmetric(horizontal: 4) : null,
                 label: Text(
                   cat == 'ALL' ? 'All (${_allCards.length})' : cat,
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: isLandscape ? 11 : 12,
                     fontWeight: isSelected ? FontWeight.w800 : FontWeight.w500,
                   ),
                 ),
@@ -1075,11 +1111,16 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   }
 
   /// Flashcard interactive gesture area (Swipe left/right, Tap to flip)
-  Widget _buildCardGestureArea() {
+  Widget _buildCardGestureArea({double rightInset = 0.0, bool isLandscape = false}) {
     final currentItem = _deck[_currentIndex];
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+      padding: EdgeInsets.fromLTRB(
+        18,
+        isLandscape ? 4 : 12,
+        math.max(18.0, rightInset),
+        isLandscape ? 4 : 12,
+      ),
       child: GestureDetector(
         onHorizontalDragEnd: (details) {
           // Swipe Left -> Next Card
@@ -1117,49 +1158,57 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     );
   }
 
-  Widget _buildEmptyState() {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            Icons.style_outlined,
-            size: 64,
-            color: Colors.grey.shade400,
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'No cards found',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Try clearing your active filters or bookmarks.',
-            style: TextStyle(color: Colors.grey),
-          ),
-          const SizedBox(height: 16),
-          FilledButton.tonal(
-            onPressed: () {
-              setState(() {
-                _selectedCategory = 'ALL';
-                _filterFlaggedOnly = false;
-                _applyFilters();
-              });
-            },
-            child: const Text('Reset Filters'),
-          ),
-        ],
+  Widget _buildEmptyState({double rightInset = 0.0}) {
+    return Padding(
+      padding: EdgeInsets.only(right: rightInset),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.style_outlined,
+              size: 64,
+              color: Colors.grey.shade400,
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'No cards found',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Try clearing your active filters or bookmarks.',
+              style: TextStyle(color: Colors.grey),
+            ),
+            const SizedBox(height: 16),
+            FilledButton.tonal(
+              onPressed: () {
+                setState(() {
+                  _selectedCategory = 'ALL';
+                  _filterFlaggedOnly = false;
+                  _applyFilters();
+                });
+              },
+              child: const Text('Reset Filters'),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   /// Bottom navigation controls (Previous, Flip, Auto-Advance, Next)
-  Widget _buildBottomControls() {
+  Widget _buildBottomControls({double rightInset = 0.0, bool isLandscape = false}) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      padding: EdgeInsets.fromLTRB(
+        20,
+        isLandscape ? 4 : 12,
+        math.max(20.0, rightInset),
+        isLandscape ? 4 : 12,
+      ),
       decoration: BoxDecoration(
         color: isDark ? const Color(0xFF1A1D24) : Colors.white,
         border: Border(
@@ -1171,58 +1220,76 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       ),
       child: SafeArea(
         top: false,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // Previous Card
-            IconButton.filledTonal(
-              icon: const Icon(Icons.chevron_left_rounded, size: 28),
-              tooltip: 'Previous Card (Swipe Right)',
-              onPressed: _currentIndex > 0 ? _prevCard : null,
-            ),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return FittedBox(
+              fit: BoxFit.scaleDown,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: constraints.maxWidth,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Previous Card
+                    IconButton.filledTonal(
+                      visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
+                      icon: const Icon(Icons.chevron_left_rounded, size: 28),
+                      tooltip: 'Previous Card (Swipe Right)',
+                      onPressed: _currentIndex > 0 ? _prevCard : null,
+                    ),
 
-            // Tap to Flip
-            OutlinedButton.icon(
-              onPressed: _toggleFlip,
-              icon: Icon(
-                _isFlipped
-                    ? Icons.flip_to_front_rounded
-                    : Icons.flip_to_back_rounded,
-                size: 20,
-              ),
-              label: Text(_isFlipped ? 'Show Front' : 'Flip Card'),
-              style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                    // Tap to Flip
+                    OutlinedButton.icon(
+                      onPressed: _toggleFlip,
+                      icon: Icon(
+                        _isFlipped
+                            ? Icons.flip_to_front_rounded
+                            : Icons.flip_to_back_rounded,
+                        size: 20,
+                      ),
+                      label: Text(_isFlipped ? 'Show Front' : 'Flip Card'),
+                      style: OutlinedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isLandscape ? 12 : 16,
+                          vertical: isLandscape ? 6 : 10,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                    ),
+
+                    // Auto-Advance Play / Pause
+                    IconButton.filled(
+                      visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
+                      icon: Icon(
+                        _isAutoAdvancing ? Icons.pause_rounded : Icons.play_arrow_rounded,
+                        size: 26,
+                      ),
+                      tooltip: _isAutoAdvancing
+                          ? 'Pause Auto-Advance'
+                          : 'Start Auto-Advance (Hands-Free)',
+                      style: IconButton.styleFrom(
+                        backgroundColor: _isAutoAdvancing
+                            ? Colors.amber.shade700
+                            : theme.colorScheme.primary,
+                      ),
+                      onPressed: _deck.isNotEmpty ? _toggleAutoAdvance : null,
+                    ),
+
+                    // Next Card
+                    IconButton.filledTonal(
+                      visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
+                      icon: const Icon(Icons.chevron_right_rounded, size: 28),
+                      tooltip: 'Next Card (Swipe Left)',
+                      onPressed: _currentIndex < _deck.length - 1 ? _nextCard : null,
+                    ),
+                  ],
                 ),
               ),
-            ),
-
-            // Auto-Advance Play / Pause
-            IconButton.filled(
-              icon: Icon(
-                _isAutoAdvancing ? Icons.pause_rounded : Icons.play_arrow_rounded,
-                size: 26,
-              ),
-              tooltip: _isAutoAdvancing
-                  ? 'Pause Auto-Advance'
-                  : 'Start Auto-Advance (Hands-Free)',
-              style: IconButton.styleFrom(
-                backgroundColor: _isAutoAdvancing
-                    ? Colors.amber.shade700
-                    : theme.colorScheme.primary,
-              ),
-              onPressed: _deck.isNotEmpty ? _toggleAutoAdvance : null,
-            ),
-
-            // Next Card
-            IconButton.filledTonal(
-              icon: const Icon(Icons.chevron_right_rounded, size: 28),
-              tooltip: 'Next Card (Swipe Left)',
-              onPressed: _currentIndex < _deck.length - 1 ? _nextCard : null,
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

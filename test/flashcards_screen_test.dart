@@ -9,6 +9,7 @@ import 'package:language_trainer/models/progress_data.dart';
 import 'package:language_trainer/services/storage_service.dart';
 import 'package:language_trainer/services/tts_service.dart';
 import 'package:language_trainer/ui/flashcards/flashcards_screen.dart';
+import 'package:language_trainer/utils/iphone_duo_helper.dart';
 
 class _MockStorageService extends Mock implements StorageService {}
 class _MockTtsService extends Mock implements TtsService {}
@@ -1064,6 +1065,125 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('Unmounted'), findsOneWidget);
+    });
+
+    testWidgets('insets right side on Duo inside portrait (669x951) to clear system status capsule', (tester) async {
+      tester.view.physicalSize = const Size(669 * 3.0, 951 * 3.0);
+      tester.view.devicePixelRatio = 3.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        IPhoneDuoHelper.resetForTesting();
+      });
+
+      IPhoneDuoHelper.debugOverride = DuoScreenOverride.insidePortrait;
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(mockStorage),
+            ttsServiceProvider.overrideWithValue(mockTts),
+          ],
+          child: MaterialApp(
+            theme: ThemeData(platform: TargetPlatform.iOS),
+            home: FlashcardsScreen(
+              initialCards: sampleCards,
+              initialShuffle: false,
+              initialAutoAdvance: false,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      // Card right margin must clear 76 pt reservation
+      final cardFinder = find.byType(Card);
+      expect(cardFinder, findsOneWidget);
+      final cardRect = tester.getRect(cardFinder);
+      expect(669.0 - cardRect.right, greaterThanOrEqualTo(76.0 - 1.0));
+
+      // Rightmost AppBar action (shuffle) must clear 56 pt reservation
+      final shuffleFinder = find.byIcon(Icons.shuffle_rounded);
+      expect(shuffleFinder, findsOneWidget);
+      final shuffleRect = tester.getRect(shuffleFinder);
+      expect(669.0 - shuffleRect.right, greaterThanOrEqualTo(56.0 - 1.0));
+    });
+
+    testWidgets('insets right side on Duo inside landscape (951x669) to clear system status capsule', (tester) async {
+      tester.view.physicalSize = const Size(951 * 3.0, 669 * 3.0);
+      tester.view.devicePixelRatio = 3.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        IPhoneDuoHelper.resetForTesting();
+      });
+
+      IPhoneDuoHelper.debugOverride = DuoScreenOverride.insideLandscape;
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(mockStorage),
+            ttsServiceProvider.overrideWithValue(mockTts),
+          ],
+          child: MaterialApp(
+            theme: ThemeData(platform: TargetPlatform.iOS),
+            home: FlashcardsScreen(
+              initialCards: sampleCards,
+              initialShuffle: false,
+              initialAutoAdvance: false,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      // Card right margin must clear 76 pt reservation
+      final cardFinder = find.byType(Card);
+      expect(cardFinder, findsOneWidget);
+      final cardRect = tester.getRect(cardFinder);
+      expect(951.0 - cardRect.right, greaterThanOrEqualTo(76.0 - 1.0));
+
+      // Rightmost AppBar action (shuffle) must clear 56 pt reservation
+      final shuffleFinder = find.byIcon(Icons.shuffle_rounded);
+      expect(shuffleFinder, findsOneWidget);
+      final shuffleRect = tester.getRect(shuffleFinder);
+      expect(951.0 - shuffleRect.right, greaterThanOrEqualTo(56.0 - 1.0));
+    });
+
+    testWidgets('keeps standard 18 pt margin on non-Duo standard screen', (tester) async {
+      tester.view.physicalSize = const Size(375 * 2.0, 667 * 2.0);
+      tester.view.devicePixelRatio = 2.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        IPhoneDuoHelper.resetForTesting();
+      });
+
+      IPhoneDuoHelper.debugOverride = DuoScreenOverride.none;
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(mockStorage),
+            ttsServiceProvider.overrideWithValue(mockTts),
+          ],
+          child: MaterialApp(
+            theme: ThemeData(platform: TargetPlatform.iOS),
+            home: FlashcardsScreen(
+              initialCards: sampleCards,
+              initialShuffle: false,
+              initialAutoAdvance: false,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+
+      final cardFinder = find.byType(Card);
+      expect(cardFinder, findsOneWidget);
+      final cardRect = tester.getRect(cardFinder);
+      expect(375.0 - cardRect.right, closeTo(18.0, 0.5));
     });
   });
 }

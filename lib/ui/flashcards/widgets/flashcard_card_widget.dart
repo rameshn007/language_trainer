@@ -73,6 +73,9 @@ class FlashcardCardWidget extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final accentColor = item.categoryColor;
 
+    final isLandscape =
+        MediaQuery.orientationOf(context) == Orientation.landscape;
+
     return Card(
       elevation: 6,
       shadowColor: accentColor.withValues(alpha: 0.25),
@@ -85,7 +88,10 @@ class FlashcardCardWidget extends StatelessWidget {
       ),
       color: isDark ? const Color(0xFF1E222B) : Colors.white,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: isLandscape ? 6 : 16,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -94,9 +100,9 @@ class FlashcardCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 10,
-                    vertical: 4,
+                    vertical: isLandscape ? 2 : 4,
                   ),
                   decoration: BoxDecoration(
                     color: isDark
@@ -120,9 +126,9 @@ class FlashcardCardWidget extends StatelessWidget {
                 ),
                 // Category Banner
                 Container(
-                  padding: const EdgeInsets.symmetric(
+                  padding: EdgeInsets.symmetric(
                     horizontal: 14,
-                    vertical: 6,
+                    vertical: isLandscape ? 3 : 6,
                   ),
                   decoration: BoxDecoration(
                     color: accentColor,
@@ -158,6 +164,7 @@ class FlashcardCardWidget extends StatelessWidget {
                 ),
                 // Flag / Bookmark Button
                 IconButton(
+                  visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
                   icon: Icon(
                     isFlagged ? Icons.bookmark_rounded : Icons.bookmark_outline_rounded,
                     color: isFlagged ? Colors.amber.shade600 : Colors.grey.shade400,
@@ -168,99 +175,110 @@ class FlashcardCardWidget extends StatelessWidget {
               ],
             ),
 
-            const Spacer(),
-
-            // Center: Portuguese Word / Phrase
-            Center(
-              child: Text(
-                item.portuguese,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: item.portuguese.length > 25 ? 26 : 34,
-                  fontWeight: FontWeight.w800,
-                  color: isDark ? Colors.white : Colors.black87,
-                  letterSpacing: -0.5,
-                  height: 1.2,
+            // Center: Portuguese Word / Phrase & Phonetic Guide
+            Expanded(
+              child: Center(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        item.portuguese,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: item.portuguese.length > 25
+                              ? (isLandscape ? 22 : 26)
+                              : (isLandscape ? 28 : 34),
+                          fontWeight: FontWeight.w800,
+                          color: isDark ? Colors.white : Colors.black87,
+                          letterSpacing: -0.5,
+                          height: 1.2,
+                        ),
+                      ),
+                      if (item.formattedPronunciation != null) ...[
+                        SizedBox(height: isLandscape ? 6 : 12),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: accentColor.withValues(alpha: 0.08),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            item.formattedPronunciation!,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: isLandscape ? 14 : 16,
+                              fontWeight: FontWeight.w600,
+                              color: accentColor,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  ),
                 ),
               ),
             ),
 
-            // Phonetic Pronunciation Guide
-            if (item.formattedPronunciation != null) ...[
-              const SizedBox(height: 12),
-              Center(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: accentColor.withValues(alpha: 0.08),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    item.formattedPronunciation!,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: accentColor,
-                      fontStyle: FontStyle.italic,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-
-            const Spacer(),
+            SizedBox(height: isLandscape ? 4 : 8),
 
             // Bottom Audio & Action Bar
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Slow Audio Button
-                IconButton.filledTonal(
-                  icon: const Icon(Icons.slow_motion_video_rounded, size: 20),
-                  tooltip: 'Listen slowly (0.5x)',
-                  style: IconButton.styleFrom(
-                    backgroundColor: isDark
-                        ? Colors.white.withValues(alpha: 0.08)
-                        : Colors.grey.shade100,
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Slow Audio Button
+                  IconButton.filledTonal(
+                    visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
+                    icon: const Icon(Icons.slow_motion_video_rounded, size: 20),
+                    tooltip: 'Listen slowly (0.5x)',
+                    style: IconButton.styleFrom(
+                      backgroundColor: isDark
+                          ? Colors.white.withValues(alpha: 0.08)
+                          : Colors.grey.shade100,
+                    ),
+                    onPressed: onSpeakSlow,
                   ),
-                  onPressed: onSpeakSlow,
-                ),
-                const SizedBox(width: 14),
-                // Main Speaker Button
-                ElevatedButton.icon(
-                  onPressed: onSpeak,
-                  icon: Icon(
-                    isSpeaking ? Icons.volume_up_rounded : Icons.volume_up_outlined,
-                    size: 22,
-                    color: Colors.white,
-                  ),
-                  label: Text(
-                    isSpeaking ? 'Speaking...' : 'Listen',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w700,
+                  SizedBox(width: isLandscape ? 8 : 14),
+                  // Main Speaker Button
+                  ElevatedButton.icon(
+                    onPressed: onSpeak,
+                    icon: Icon(
+                      isSpeaking ? Icons.volume_up_rounded : Icons.volume_up_outlined,
+                      size: isLandscape ? 18 : 22,
                       color: Colors.white,
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: accentColor,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 12,
+                    label: Text(
+                      isSpeaking ? 'Speaking...' : 'Listen',
+                      style: TextStyle(
+                        fontSize: isLandscape ? 13 : 14,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: accentColor,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: isLandscape ? 16 : 24,
+                        vertical: isLandscape ? 6 : 12,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      elevation: 3,
                     ),
-                    elevation: 3,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
 
-            const SizedBox(height: 14),
+            SizedBox(height: isLandscape ? 4 : 14),
 
             // Flip Hint / Status Row
             _buildFrontStatusRow(context, accentColor, isDark),
@@ -276,6 +294,9 @@ class FlashcardCardWidget extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final accentColor = item.categoryColor;
 
+    final isLandscape =
+        MediaQuery.orientationOf(context) == Orientation.landscape;
+
     return Card(
       elevation: 6,
       shadowColor: accentColor.withValues(alpha: 0.25),
@@ -288,7 +309,10 @@ class FlashcardCardWidget extends StatelessWidget {
       ),
       color: isDark ? const Color(0xFF1E222B) : Colors.white,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+        padding: EdgeInsets.symmetric(
+          horizontal: 18,
+          vertical: isLandscape ? 6 : 14,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -299,9 +323,9 @@ class FlashcardCardWidget extends StatelessWidget {
                 // CEFR Level
                 if (item.cefrLevel != null && item.cefrLevel!.isNotEmpty)
                   Container(
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       horizontal: 10,
-                      vertical: 5,
+                      vertical: isLandscape ? 3 : 5,
                     ),
                     decoration: BoxDecoration(
                       color: accentColor.withValues(alpha: 0.15),
@@ -323,9 +347,9 @@ class FlashcardCardWidget extends StatelessWidget {
                 if (item.typeDetailsString.isNotEmpty)
                   Flexible(
                     child: Container(
-                      padding: const EdgeInsets.symmetric(
+                      padding: EdgeInsets.symmetric(
                         horizontal: 12,
-                        vertical: 5,
+                        vertical: isLandscape ? 3 : 5,
                       ),
                       decoration: BoxDecoration(
                         color: isDark
@@ -349,6 +373,7 @@ class FlashcardCardWidget extends StatelessWidget {
 
                 // Flip Back Icon
                 IconButton(
+                  visualDensity: isLandscape ? VisualDensity.compact : VisualDensity.standard,
                   icon: const Icon(Icons.flip_camera_android_rounded, size: 22),
                   tooltip: 'Flip back to Portuguese',
                   onPressed: onFlip,
@@ -356,7 +381,7 @@ class FlashcardCardWidget extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: isLandscape ? 4 : 10),
 
             // Scrollable & Vertically Balanced Content area
             Expanded(
@@ -619,7 +644,7 @@ class FlashcardCardWidget extends StatelessWidget {
 
             // Mastery Rating Controls (vocabulary cards only)
             if (!item.isGrammarCard && onRateMastery != null) ...[
-              const Divider(height: 16),
+              Divider(height: isLandscape ? 8 : 16),
               Text(
                 'How well do you know this card?',
                 textAlign: TextAlign.center,
@@ -629,7 +654,7 @@ class FlashcardCardWidget extends StatelessWidget {
                   color: isDark ? Colors.white54 : Colors.black45,
                 ),
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: isLandscape ? 4 : 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -639,6 +664,7 @@ class FlashcardCardWidget extends StatelessWidget {
                     icon: Icons.refresh_rounded,
                     color: Colors.orange.shade700,
                     isActive: currentMastery >= 1 && currentMastery <= 2,
+                    isLandscape: isLandscape,
                     onTap: () => onRateMastery!(1),
                   ),
                   _buildRatingButton(
@@ -647,6 +673,7 @@ class FlashcardCardWidget extends StatelessWidget {
                     icon: Icons.thumb_up_alt_outlined,
                     color: Colors.blue.shade600,
                     isActive: currentMastery == 3,
+                    isLandscape: isLandscape,
                     onTap: () => onRateMastery!(3),
                   ),
                   _buildRatingButton(
@@ -655,6 +682,7 @@ class FlashcardCardWidget extends StatelessWidget {
                     icon: Icons.star_rounded,
                     color: Colors.green.shade600,
                     isActive: currentMastery >= 4,
+                    isLandscape: isLandscape,
                     onTap: () => onRateMastery!(4),
                   ),
                 ],
@@ -675,12 +703,16 @@ class FlashcardCardWidget extends StatelessWidget {
     required Color color,
     required bool isActive,
     required VoidCallback onTap,
+    bool isLandscape = false,
   }) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        padding: EdgeInsets.symmetric(
+          horizontal: isLandscape ? 10 : 14,
+          vertical: isLandscape ? 4 : 8,
+        ),
         decoration: BoxDecoration(
           color: isActive ? color.withValues(alpha: 0.2) : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
@@ -715,38 +747,41 @@ class FlashcardCardWidget extends StatelessWidget {
   ) {
     Widget buildRow(double progress) {
       final isCountdown = isAutoAdvancing && progress > 0;
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            isSpeaking
-                ? Icons.volume_up_rounded
-                : isCountdown
-                    ? Icons.timer_rounded
-                    : Icons.touch_app_rounded,
-            size: 14,
-            color: (isSpeaking || isCountdown)
-                ? accentColor
-                : (isDark ? Colors.white38 : Colors.black38),
-          ),
-          const SizedBox(width: 6),
-          Text(
-            isSpeaking
-                ? 'Listening...'
-                : isCountdown
-                    ? 'Flipping card soon...'
-                    : 'Tap anywhere to flip card',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: (isSpeaking || isCountdown)
-                  ? FontWeight.w600
-                  : FontWeight.w500,
+      return FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              isSpeaking
+                  ? Icons.volume_up_rounded
+                  : isCountdown
+                      ? Icons.timer_rounded
+                      : Icons.touch_app_rounded,
+              size: 14,
               color: (isSpeaking || isCountdown)
                   ? accentColor
                   : (isDark ? Colors.white38 : Colors.black38),
             ),
-          ),
-        ],
+            const SizedBox(width: 6),
+            Text(
+              isSpeaking
+                  ? 'Listening...'
+                  : isCountdown
+                      ? 'Flipping card soon...'
+                      : 'Tap anywhere to flip card',
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: (isSpeaking || isCountdown)
+                    ? FontWeight.w600
+                    : FontWeight.w500,
+                color: (isSpeaking || isCountdown)
+                    ? accentColor
+                    : (isDark ? Colors.white38 : Colors.black38),
+              ),
+            ),
+          ],
+        ),
       );
     }
 
@@ -764,47 +799,53 @@ class FlashcardCardWidget extends StatelessWidget {
       if (isSpeaking) {
         return Padding(
           padding: const EdgeInsets.only(top: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.volume_up_rounded,
-                size: 14,
-                color: accentColor,
-              ),
-              const SizedBox(width: 6),
-              Text(
-                'Listening...',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.volume_up_rounded,
+                  size: 14,
                   color: accentColor,
                 ),
-              ),
-            ],
+                const SizedBox(width: 6),
+                Text(
+                  'Listening...',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: accentColor,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       } else if (isAutoAdvancing && progress > 0) {
         return Padding(
           padding: const EdgeInsets.only(top: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.arrow_forward_rounded,
-                size: 13,
-                color: Colors.amber.shade700,
-              ),
-              const SizedBox(width: 5),
-              Text(
-                'Advancing to next card...',
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.arrow_forward_rounded,
+                  size: 13,
                   color: Colors.amber.shade700,
                 ),
-              ),
-            ],
+                const SizedBox(width: 5),
+                Text(
+                  'Advancing to next card...',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.amber.shade700,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       }
