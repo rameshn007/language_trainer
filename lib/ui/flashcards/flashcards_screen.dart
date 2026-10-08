@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -881,11 +880,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final isDuo = IPhoneDuoHelper.isDuo(context);
-    final mediaPadding = MediaQuery.paddingOf(context);
-    final double rightInset = isDuo
-        ? IPhoneDuoHelper.systemIconReservedWidth
-        : mediaPadding.right;
+    final contentPadding =
+        IPhoneDuoHelper.getContentHorizontalPadding(context, hasFab: false);
     final double appBarRightPadding =
         IPhoneDuoHelper.getAppBarActionsRightPadding(context);
 
@@ -980,12 +976,15 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
           : Column(
               children: [
                 // Deck Filter Row
-                _buildFilterBar(rightInset: rightInset, isLandscape: isLandscape),
+                _buildFilterBar(contentPadding: contentPadding, isLandscape: isLandscape),
 
                 // Linear Deck Progress Indicator
                 if (_deck.isNotEmpty)
                   Padding(
-                    padding: EdgeInsets.only(right: rightInset),
+                    padding: EdgeInsets.only(
+                      left: contentPadding.left,
+                      right: contentPadding.right,
+                    ),
                     child: LinearProgressIndicator(
                       value: (_currentIndex + 1) / _deck.length,
                       backgroundColor: isDark ? Colors.white10 : Colors.black12,
@@ -1001,7 +1000,10 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
                 // Auto-Advance countdown bar
                 if (_isAutoAdvancing && _deck.isNotEmpty)
                   Padding(
-                    padding: EdgeInsets.only(right: rightInset),
+                    padding: EdgeInsets.only(
+                      left: contentPadding.left,
+                      right: contentPadding.right,
+                    ),
                     child: AnimatedBuilder(
                       animation: _countdownController,
                       builder: (context, _) => LinearProgressIndicator(
@@ -1024,19 +1026,28 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
                 // Main Flashcard View
                 Expanded(
                   child: _deck.isEmpty
-                      ? _buildEmptyState(rightInset: rightInset)
-                      : _buildCardGestureArea(rightInset: rightInset, isLandscape: isLandscape),
+                      ? _buildEmptyState(contentPadding: contentPadding)
+                      : _buildCardGestureArea(
+                          contentPadding: contentPadding,
+                          isLandscape: isLandscape,
+                        ),
                 ),
 
                 // Bottom Action Bar
-                _buildBottomControls(rightInset: rightInset, isLandscape: isLandscape),
+                _buildBottomControls(
+                  contentPadding: contentPadding,
+                  isLandscape: isLandscape,
+                ),
               ],
             ),
     );
   }
 
   /// Horizontal scrolling category chips & bookmark toggle
-  Widget _buildFilterBar({double rightInset = 0.0, bool isLandscape = false}) {
+  Widget _buildFilterBar({
+    EdgeInsets contentPadding = EdgeInsets.zero,
+    bool isLandscape = false,
+  }) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
@@ -1044,11 +1055,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       margin: EdgeInsets.only(
         top: isLandscape ? 2 : 4,
         bottom: isLandscape ? 2 : 4,
-        right: rightInset,
+        left: contentPadding.left,
+        right: contentPadding.right,
       ),
       child: ListView(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 4),
         children: [
           // Bookmark Filter Chip
           FilterChip(
@@ -1111,14 +1123,17 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   }
 
   /// Flashcard interactive gesture area (Swipe left/right, Tap to flip)
-  Widget _buildCardGestureArea({double rightInset = 0.0, bool isLandscape = false}) {
+  Widget _buildCardGestureArea({
+    EdgeInsets contentPadding = EdgeInsets.zero,
+    bool isLandscape = false,
+  }) {
     final currentItem = _deck[_currentIndex];
 
     return Padding(
       padding: EdgeInsets.fromLTRB(
-        18,
+        contentPadding.left,
         isLandscape ? 4 : 12,
-        math.max(18.0, rightInset),
+        contentPadding.right,
         isLandscape ? 4 : 12,
       ),
       child: GestureDetector(
@@ -1158,9 +1173,12 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     );
   }
 
-  Widget _buildEmptyState({double rightInset = 0.0}) {
+  Widget _buildEmptyState({EdgeInsets contentPadding = EdgeInsets.zero}) {
     return Padding(
-      padding: EdgeInsets.only(right: rightInset),
+      padding: EdgeInsets.only(
+        left: contentPadding.left,
+        right: contentPadding.right,
+      ),
       child: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -1198,15 +1216,18 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
   }
 
   /// Bottom navigation controls (Previous, Flip, Auto-Advance, Next)
-  Widget _buildBottomControls({double rightInset = 0.0, bool isLandscape = false}) {
+  Widget _buildBottomControls({
+    EdgeInsets contentPadding = EdgeInsets.zero,
+    bool isLandscape = false,
+  }) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
     return Container(
       padding: EdgeInsets.fromLTRB(
-        20,
+        contentPadding.left,
         isLandscape ? 4 : 12,
-        math.max(20.0, rightInset),
+        contentPadding.right,
         isLandscape ? 4 : 12,
       ),
       decoration: BoxDecoration(
@@ -1220,6 +1241,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       ),
       child: SafeArea(
         top: false,
+        left: false,
         right: false,
         child: LayoutBuilder(
           builder: (context, constraints) {

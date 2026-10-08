@@ -1151,7 +1151,7 @@ void main() {
       expect(951.0 - shuffleRect.right, greaterThanOrEqualTo(56.0 - 1.0));
     });
 
-    testWidgets('keeps standard 18 pt margin on non-Duo standard screen', (tester) async {
+    testWidgets('keeps standard 20 pt margin on non-Duo standard screen', (tester) async {
       tester.view.physicalSize = const Size(375 * 2.0, 667 * 2.0);
       tester.view.devicePixelRatio = 2.0;
       addTearDown(() {
@@ -1183,7 +1183,8 @@ void main() {
       final cardFinder = find.byType(Card);
       expect(cardFinder, findsOneWidget);
       final cardRect = tester.getRect(cardFinder);
-      expect(375.0 - cardRect.right, closeTo(18.0, 0.5));
+      expect(375.0 - cardRect.right, closeTo(20.0, 0.5));
+      expect(cardRect.left, closeTo(20.0, 0.5));
     });
   });
 }

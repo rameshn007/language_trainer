@@ -1346,6 +1346,27 @@ void main() {
             reason: 'Bottom action bar should not double-apply right safe area inset on ${device.name}',
           );
         }
+
+        // Verify card and bottom action bar clear left cutout (e.g. Dynamic Island on landscape left)
+        if (device.insets.left > 0 && !isDuo) {
+          final cardFinder = find.byType(Card);
+          expect(cardFinder, findsOneWidget);
+          final cardRect = tester.getRect(cardFinder);
+          expect(
+            cardRect.left,
+            greaterThanOrEqualTo(device.insets.left),
+            reason: 'Card on ${device.name} must clear left cutout at x=${device.insets.left}',
+          );
+
+          final prevButtonFinder = find.byTooltip('Previous Card (Swipe Right)');
+          expect(prevButtonFinder, findsOneWidget);
+          final prevButtonRect = tester.getRect(prevButtonFinder);
+          expect(
+            prevButtonRect.left,
+            greaterThanOrEqualTo(device.insets.left),
+            reason: 'Bottom action bar on ${device.name} must clear left cutout at x=${device.insets.left}',
+          );
+        }
       });
 
       testWidgets('FlashcardsScreen with auto-advance enabled renders at ${device.name} without overflow', (tester) async {
