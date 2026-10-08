@@ -25,6 +25,8 @@ enum ActivityType {
   grammarQuiz,
   @HiveField(9)
   listenRepeat,
+  @HiveField(10)
+  flashcards,
 }
 
 /// A record of XP and activity for a single calendar day.

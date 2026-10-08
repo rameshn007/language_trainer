@@ -126,8 +126,8 @@ void main() {
       // 3. Tap 'Vocabulary' pill
       final vocabPill = find.widgetWithText(InkWell, 'Vocabulary');
       expect(vocabPill, findsOneWidget);
-      expect(find.descendant(of: vocabPill, matching: find.text('5')), findsOneWidget,
-          reason: 'Vocabulary pill should compute 5 tiles dynamically');
+      expect(find.descendant(of: vocabPill, matching: find.text('6')), findsOneWidget,
+          reason: 'Vocabulary pill should compute 6 tiles dynamically');
       await tester.tap(vocabPill);
       await tester.pump(const Duration(milliseconds: 200));
 
@@ -156,8 +156,8 @@ void main() {
       // 6. Return to 'All'
       final allPill = find.widgetWithText(InkWell, 'All');
       expect(allPill, findsOneWidget);
-      expect(find.descendant(of: allPill, matching: find.text('18')), findsOneWidget,
-          reason: 'All pill should compute 18 tiles dynamically');
+      expect(find.descendant(of: allPill, matching: find.text('19')), findsOneWidget,
+          reason: 'All pill should compute 19 tiles dynamically');
       await tester.tap(allPill);
       await tester.pump(const Duration(milliseconds: 200));
 

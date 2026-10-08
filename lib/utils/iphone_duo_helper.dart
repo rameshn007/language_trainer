@@ -255,7 +255,14 @@ class IPhoneDuoHelper {
 
   /// Returns horizontal insets (left, right) for main content to avoid Dynamic Island
   /// obstruction and prevent overlap with right-aligned FABs in landscape or on Duo.
-  static EdgeInsets getContentHorizontalPadding(BuildContext context) {
+  ///
+  /// Set [hasFab] to false for screens without a FloatingActionButton (e.g. FlashcardsScreen)
+  /// so that landscape content is symmetrically inset against safe area edges without
+  /// allocating extra clearance for a non-existent FAB.
+  static EdgeInsets getContentHorizontalPadding(
+    BuildContext context, {
+    bool hasFab = true,
+  }) {
     if (isDuo(context)) {
       return const EdgeInsets.only(
         left: 20.0,
@@ -269,7 +276,7 @@ class IPhoneDuoHelper {
     final double left =
         math.max(20.0, mediaPadding.left + (isLandscape ? 16.0 : 0.0));
     final double right = isLandscape
-        ? mediaPadding.right + 84.0
+        ? (hasFab ? mediaPadding.right + 84.0 : math.max(20.0, mediaPadding.right + 16.0))
         : math.max(20.0, mediaPadding.right);
 
     return EdgeInsets.only(left: left, right: right);

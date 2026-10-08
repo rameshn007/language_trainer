@@ -12,6 +12,8 @@ import 'package:language_trainer/services/progress_service.dart';
 import 'package:language_trainer/services/verb_service.dart';
 import 'package:language_trainer/ui/home_screen.dart';
 import 'package:language_trainer/ui/listen_repeat/listen_repeat_screen.dart';
+import 'package:language_trainer/models/flashcard_item.dart';
+import 'package:language_trainer/ui/flashcards/flashcards_screen.dart';
 import 'package:language_trainer/ui/listen_repeat/listen_repeat_view_model.dart';
 import 'package:language_trainer/ui/vocabulary/vocabulary_list_screen.dart';
 import 'package:language_trainer/utils/iphone_duo_helper.dart';
@@ -1270,6 +1272,148 @@ void main() {
           expect(cardRect.right, lessThanOrEqualTo(device.logicalSize.width + 0.5));
           expect(cardRect.left, greaterThanOrEqualTo(0.0));
         }
+      });
+
+      testWidgets('FlashcardsScreen renders at ${device.name} without overflow', (tester) async {
+        configureDevice(tester, device);
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+          tester.view.resetPadding();
+          tester.view.resetViewPadding();
+          IPhoneDuoHelper.resetForTesting();
+        });
+
+        final fakeStorage = FakeStorageService(initialItems: []);
+        final mockTts = MockTtsService();
+        when(() => mockTts.setRate(any())).thenAnswer((_) async {});
+        when(() => mockTts.speak(any(), language: any(named: 'language'), rate: any(named: 'rate')))
+            .thenAnswer((_) async {});
+        when(() => mockTts.stop()).thenAnswer((_) async {});
+
+        const card = FlashcardItem(
+          id: '1',
+          cardNumber: '#1',
+          portuguese: 'olá',
+          english: 'hello',
+          category: 'GENERAL',
+        );
+
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              storageServiceProvider.overrideWithValue(fakeStorage),
+              ttsServiceProvider.overrideWithValue(mockTts),
+            ],
+            child: testApp(
+              home: const FlashcardsScreen(
+                initialCards: [card],
+                initialShuffle: false,
+                initialAutoAdvance: false,
+              ),
+            ),
+          ),
+        );
+
+        await tester.pump();
+        expect(tester.takeException(), isNull);
+
+        final isDuo = device.name.contains('Duo');
+        if (isDuo) {
+          final cardFinder = find.byType(Card);
+          expect(cardFinder, findsOneWidget);
+          final cardRect = tester.getRect(cardFinder);
+          expect(device.logicalSize.width - cardRect.right, greaterThanOrEqualTo(76.0 - 1.0),
+              reason: 'Flashcard right margin on ${device.name} must clear 76 pt reservation');
+
+          final shuffleFinder = find.byIcon(Icons.shuffle_rounded);
+          expect(shuffleFinder, findsOneWidget);
+          final shuffleRect = tester.getRect(shuffleFinder);
+          expect(device.logicalSize.width - shuffleRect.right, greaterThanOrEqualTo(56.0 - 1.0),
+              reason: 'Shuffle action right margin on ${device.name} must clear 56 pt reservation');
+        }
+
+        // Verify bottom action bar controls in landscape are compactly clustered
+        final isLandscape = device.logicalSize.width > device.logicalSize.height;
+        if (isLandscape) {
+          final prevFinder = find.byTooltip('Previous Card (Swipe Right)');
+          final nextFinder = find.byTooltip('Next Card (Swipe Left)');
+          expect(prevFinder, findsOneWidget);
+          expect(nextFinder, findsOneWidget);
+          final prevRect = tester.getRect(prevFinder);
+          final nextRect = tester.getRect(nextFinder);
+          expect(
+            nextRect.right - prevRect.left,
+            lessThan(420.0),
+            reason: 'Bottom action bar controls on ${device.name} should be compactly grouped in landscape',
+          );
+        }
+
+        // Verify card and bottom action bar clear left cutout (e.g. Dynamic Island on landscape left)
+        if (device.insets.left > 0 && !isDuo) {
+          final cardFinder = find.byType(Card);
+          expect(cardFinder, findsOneWidget);
+          final cardRect = tester.getRect(cardFinder);
+          expect(
+            cardRect.left,
+            greaterThanOrEqualTo(device.insets.left),
+            reason: 'Card on ${device.name} must clear left cutout at x=${device.insets.left}',
+          );
+
+          final prevButtonFinder = find.byTooltip('Previous Card (Swipe Right)');
+          expect(prevButtonFinder, findsOneWidget);
+          final prevButtonRect = tester.getRect(prevButtonFinder);
+          expect(
+            prevButtonRect.left,
+            greaterThanOrEqualTo(device.insets.left),
+            reason: 'Bottom action bar on ${device.name} must clear left cutout at x=${device.insets.left}',
+          );
+        }
+      });
+
+      testWidgets('FlashcardsScreen with auto-advance enabled renders at ${device.name} without overflow', (tester) async {
+        configureDevice(tester, device);
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+          tester.view.resetPadding();
+          tester.view.resetViewPadding();
+          IPhoneDuoHelper.resetForTesting();
+        });
+
+        final fakeStorage = FakeStorageService(initialItems: []);
+        final mockTts = MockTtsService();
+        when(() => mockTts.setRate(any())).thenAnswer((_) async {});
+        when(() => mockTts.speak(any(), language: any(named: 'language'), rate: any(named: 'rate')))
+            .thenAnswer((_) async {});
+        when(() => mockTts.stop()).thenAnswer((_) async {});
+
+        const card = FlashcardItem(
+          id: '1',
+          cardNumber: '#1',
+          portuguese: 'olá',
+          english: 'hello',
+          category: 'GENERAL',
+        );
+
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              storageServiceProvider.overrideWithValue(fakeStorage),
+              ttsServiceProvider.overrideWithValue(mockTts),
+            ],
+            child: testApp(
+              home: const FlashcardsScreen(
+                initialCards: [card],
+                initialShuffle: false,
+                initialAutoAdvance: true,
+              ),
+            ),
+          ),
+        );
+
+        await tester.pump();
+        expect(tester.takeException(), isNull);
       });
     }
   });

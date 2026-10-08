@@ -54,6 +54,11 @@ class StorageService {
     return _itemsBox!.values.toList();
   }
 
+  LanguageItem? getItem(String id) {
+    if (_itemsBox == null) return null;
+    return _itemsBox!.get(id);
+  }
+
   Future<void> saveItems(List<LanguageItem> items) async {
     if (_itemsBox == null) return;
     // We can use a map to put all at once which is faster

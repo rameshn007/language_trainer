@@ -1,0 +1,79 @@
+[
+  {
+    "id": "G1",
+    "card_number": "#G1",
+    "category": "EXPLANATION",
+    "portuguese": "Verbos Reflexivos (-se)",
+    "english": "Reflexive Verbs",
+    "pronunciation": "vehr-boosh reh-flehk-SEE-voosh",
+    "cefr_level": "A1",
+    "word_type": "grammar",
+    "explanation": "Used when the subject and object are the same. Add '-se' to the infinitive.\n\n• Eu: me\n• Tu: te\n• Ele/Ela/Você: se\n• Nós: nos\n• Eles/Elas/Vocês: se\n\nEx: Lavar-se (to wash oneself):\nEu lavo-me, Tu lavas-te, Ele lava-se."
+  },
+  {
+    "id": "G2",
+    "card_number": "#G2",
+    "category": "EXPLANATION",
+    "portuguese": "Pluralização: Regras Básicas",
+    "english": "Pluralization Rules",
+    "pronunciation": "ploo-rah-lee-zah-SOWNG",
+    "cefr_level": "A1",
+    "word_type": "grammar",
+    "explanation": "Rules for forming plurals in Portuguese:\n\n• Vogais: +s (o tempo -> os tempos)\n• Consoantes: +es (a vez -> as vezes)\n• -m: replace with -ns (o homem -> os homens)\n• -l: replace with -is (o final -> os finais)\n• -ão: usually becomes -ões (a relação -> as relações)\n\nEx: pão -> pães (exception), lição -> lições."
+  },
+  {
+    "id": "G3",
+    "card_number": "#G3",
+    "category": "EXPLANATION",
+    "portuguese": "Conjugação: Verbos em -AR",
+    "english": "-AR Verb Conjugation",
+    "pronunciation": "kohn-zhoo-gah-SOWNG",
+    "cefr_level": "A1",
+    "word_type": "grammar",
+    "explanation": "Regular pattern for verbs like Cantar, Falar:\n\n• Eu: -o (Eu falo)\n• Tu: -as (Tu falas)\n• Ele/Ela/Você: -a (Ele fala)\n• Nós: -amos (Nós falamos)\n• Eles/Elas/Vocês: -am (Eles falam)\n\nEx: Falar: Eu falo, Tu falas, Ele fala, Nós falamos, Eles falam."
+  },
+  {
+    "id": "G4",
+    "card_number": "#G4",
+    "category": "EXPLANATION",
+    "portuguese": "Conjugação: Verbos em -ER",
+    "english": "-ER Verb Conjugation",
+    "pronunciation": "kohn-zhoo-gah-SOWNG",
+    "cefr_level": "A1",
+    "word_type": "grammar",
+    "explanation": "Regular pattern for verbs like Comer, Beber:\n\n• Eu: -o (Eu como)\n• Tu: -es (Tu comes)\n• Ele/Ela/Você: -e (Ele come)\n• Nós: -emos (Nós comemos)\n• Eles/Elas/Vocês: -em (Eles comem)\n\nEx: Comer: Eu como, Tu comes, Ele come, Nós comemos, Eles comem."
+  },
+  {
+    "id": "G5",
+    "card_number": "#G5",
+    "category": "EXPLANATION",
+    "portuguese": "Conjugação: Verbos em -IR",
+    "english": "-IR Verb Conjugation",
+    "pronunciation": "kohn-zhoo-gah-SOWNG",
+    "cefr_level": "A1",
+    "word_type": "grammar",
+    "explanation": "Regular pattern for verbs like Abrir, Partir:\n\n• Eu: -o (Eu abro)\n• Tu: -es (Tu abres)\n• Ele/Ela/Você: -e (Ele abre)\n• Nós: -imos (Nós abrimos)\n• Eles/Elas/Vocês: -em (Eles abrem)\n\nEx: Abrir: Eu abro, Tu abres, Ele abre, Nós abrimos, Eles abrem."
+  },
+  {
+    "id": "G6",
+    "card_number": "#G6",
+    "category": "EXPLANATION",
+    "portuguese": "Ser vs Estar",
+    "english": "Permanent vs Temporary",
+    "pronunciation": "SAIR vehr-soosh esh-TAR",
+    "cefr_level": "A1",
+    "word_type": "grammar",
+    "explanation": "Ser vs Estar usage in European Portuguese:\n\n• Ser: Permanent traits (identity, origin, nationality, profession).\n  Ex: Eu sou médico. Eu sou de Lisboa.\n\n• Estar: Temporary states (mood, health, conditions, physical location).\n  Ex: Eu estou doente. Eu estou em casa."
+  },
+  {
+    "id": "G7",
+    "card_number": "#G7",
+    "category": "EXPLANATION",
+    "portuguese": "Artigos Definidos",
+    "english": "Definite Articles (The)",
+    "pronunciation": "ar-TEE-goosh deh-fee-NEE-doosh",
+    "cefr_level": "A1",
+    "word_type": "grammar",
+    "explanation": "Definite articles in Portuguese indicate specific nouns:\n\n• Masculine Singular: o (o livro)\n• Masculine Plural: os (os carros)\n• Feminine Singular: a (a casa)\n• Feminine Plural: as (as meninas)\n\nIn European Portuguese, definite articles are also used before people's names and possessive pronouns: o meu livro, a Maria."
+  }
+]
