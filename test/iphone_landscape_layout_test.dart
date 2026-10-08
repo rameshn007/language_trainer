@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -1332,6 +1333,64 @@ void main() {
           expect(device.logicalSize.width - shuffleRect.right, greaterThanOrEqualTo(56.0 - 1.0),
               reason: 'Shuffle action right margin on ${device.name} must clear 56 pt reservation');
         }
+
+        // Verify bottom action bar does not double-apply right safe area inset
+        if (device.insets.right > 0 && !isDuo) {
+          final nextButtonFinder = find.byTooltip('Next Card (Swipe Left)');
+          expect(nextButtonFinder, findsOneWidget);
+          final nextButtonRect = tester.getRect(nextButtonFinder);
+          final expectedRightInset = math.max(20.0, device.insets.right);
+          expect(
+            device.logicalSize.width - nextButtonRect.right,
+            lessThan(expectedRightInset + 40.0),
+            reason: 'Bottom action bar should not double-apply right safe area inset on ${device.name}',
+          );
+        }
+      });
+
+      testWidgets('FlashcardsScreen with auto-advance enabled renders at ${device.name} without overflow', (tester) async {
+        configureDevice(tester, device);
+        addTearDown(() {
+          tester.view.resetPhysicalSize();
+          tester.view.resetDevicePixelRatio();
+          tester.view.resetPadding();
+          tester.view.resetViewPadding();
+          IPhoneDuoHelper.resetForTesting();
+        });
+
+        final fakeStorage = FakeStorageService(initialItems: []);
+        final mockTts = MockTtsService();
+        when(() => mockTts.setRate(any())).thenAnswer((_) async {});
+        when(() => mockTts.speak(any(), language: any(named: 'language'), rate: any(named: 'rate')))
+            .thenAnswer((_) async {});
+        when(() => mockTts.stop()).thenAnswer((_) async {});
+
+        const card = FlashcardItem(
+          id: '1',
+          cardNumber: '#1',
+          portuguese: 'olá',
+          english: 'hello',
+          category: 'GENERAL',
+        );
+
+        await tester.pumpWidget(
+          ProviderScope(
+            overrides: [
+              storageServiceProvider.overrideWithValue(fakeStorage),
+              ttsServiceProvider.overrideWithValue(mockTts),
+            ],
+            child: testApp(
+              home: const FlashcardsScreen(
+                initialCards: [card],
+                initialShuffle: false,
+                initialAutoAdvance: true,
+              ),
+            ),
+          ),
+        );
+
+        await tester.pump();
+        expect(tester.takeException(), isNull);
       });
     }
   });

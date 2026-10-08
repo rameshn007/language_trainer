@@ -1220,6 +1220,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       ),
       child: SafeArea(
         top: false,
+        right: false,
         child: LayoutBuilder(
           builder: (context, constraints) {
             return FittedBox(
