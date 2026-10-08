@@ -953,6 +953,83 @@ void main() {
 
       // There must be no pending timers left
     });
+
+    testWidgets('verb flashcard reads out conjugations on flipped side and via dedicated speaker icon', (tester) async {
+      const verbCard = FlashcardItem(
+        id: '7',
+        cardNumber: '#7',
+        portuguese: 'saber',
+        english: 'to know (facts)',
+        category: 'VERBS',
+        presentTense: {
+          'eu': 'sei',
+          'tu': 'sabes',
+          'ele_ela_voce': 'sabe',
+          'nos': 'sabemos',
+          'voces_eles': 'sabem',
+        },
+      );
+
+      await pumpScreen(tester, cards: [verbCard], initialShuffle: false, initialAutoAdvance: false);
+      await tester.pump();
+
+      // Tap Flip Card
+      await tester.tap(find.text('Flip Card'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400)); // Flip animation
+      await tester.pump(const Duration(milliseconds: 400)); // Delay between English and conjugations
+
+      // Verify English translation was spoken, followed by conjugations in pt-PT
+      verifyInOrder([
+        () => mockTts.speak('to know (facts)', language: 'en-US', rate: 1.0),
+        () => mockTts.speak('Eu sei. Tu sabes. Ele sabe. Nós sabemos. Eles sabem.', language: 'pt-PT', rate: any(named: 'rate')),
+      ]);
+
+      // Verify dedicated conjugation speaker icon exists and tapping it reads conjugations
+      final conjSpeakerFinder = find.byTooltip('Listen to conjugations');
+      expect(conjSpeakerFinder, findsOneWidget);
+
+      await tester.tap(conjSpeakerFinder);
+      await tester.pump();
+
+      verify(() => mockTts.speak('Eu sei. Tu sabes. Ele sabe. Nós sabemos. Eles sabem.', language: 'pt-PT', rate: any(named: 'rate'))).called(1);
+    });
+
+    testWidgets('noun flashcard reads out plural form on flipped side and via dedicated speaker icon', (tester) async {
+      const nounCard = FlashcardItem(
+        id: '20',
+        cardNumber: '#20',
+        portuguese: 'o livro',
+        english: 'the book',
+        category: 'HOME',
+        plural: 'os livros',
+      );
+
+      await pumpScreen(tester, cards: [nounCard], initialShuffle: false, initialAutoAdvance: false);
+      await tester.pump();
+
+      // Tap Flip Card
+      await tester.tap(find.text('Flip Card'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 400)); // Flip animation
+      await tester.pump(const Duration(milliseconds: 400)); // Delay between English and plural
+
+      // Verify English was spoken, followed by plural in pt-PT
+      verifyInOrder([
+        () => mockTts.speak('the book', language: 'en-US', rate: 1.0),
+        () => mockTts.speak('Plural, os livros', language: 'pt-PT', rate: any(named: 'rate')),
+      ]);
+
+      // Verify dedicated plural speaker icon exists and tapping it reads plural
+      final pluralSpeakerFinder = find.byTooltip('Listen to plural');
+      expect(pluralSpeakerFinder, findsOneWidget);
+
+      await tester.tap(pluralSpeakerFinder);
+      await tester.pump();
+
+      verify(() => mockTts.speak('Plural, os livros', language: 'pt-PT', rate: any(named: 'rate'))).called(1);
+    });
   });
 }
+
 

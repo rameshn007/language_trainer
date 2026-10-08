@@ -11,6 +11,8 @@ class FlashcardCardWidget extends StatelessWidget {
   final VoidCallback onSpeak;
   final VoidCallback onSpeakSlow;
   final VoidCallback? onSpeakEnglish;
+  final VoidCallback? onSpeakConjugations;
+  final VoidCallback? onSpeakPlural;
   final bool isSpeaking;
   final bool isFlagged;
   final VoidCallback onToggleFlag;
@@ -28,6 +30,8 @@ class FlashcardCardWidget extends StatelessWidget {
     required this.onSpeak,
     required this.onSpeakSlow,
     this.onSpeakEnglish,
+    this.onSpeakConjugations,
+    this.onSpeakPlural,
     this.isSpeaking = false,
     this.isFlagged = false,
     required this.onToggleFlag,
@@ -417,14 +421,33 @@ class FlashcardCardWidget extends StatelessWidget {
                             // Plural form if available
                             if (item.plural != null && item.plural!.isNotEmpty) ...[
                               const SizedBox(height: 8),
-                              Text(
-                                'Plural: ${item.plural}',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: isDark ? Colors.white70 : Colors.black87,
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Plural: ${item.plural}',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: isDark ? Colors.white70 : Colors.black87,
+                                    ),
+                                  ),
+                                  if (onSpeakPlural != null) ...[
+                                    const SizedBox(width: 6),
+                                    IconButton(
+                                      icon: Icon(
+                                        isSpeaking ? Icons.volume_up_rounded : Icons.volume_up_outlined,
+                                        size: 16,
+                                        color: accentColor,
+                                      ),
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(),
+                                      tooltip: 'Listen to plural',
+                                      onPressed: onSpeakPlural,
+                                    ),
+                                  ],
+                                ],
                               ),
                             ],
 
@@ -435,6 +458,8 @@ class FlashcardCardWidget extends StatelessWidget {
                               ConjugationTableWidget(
                                 conjugations: item.presentTense!,
                                 accentColor: accentColor,
+                                onSpeak: onSpeakConjugations,
+                                isSpeaking: isSpeaking,
                               ),
                             ],
 

@@ -855,6 +855,7 @@ class HomeSectionsBuilder {
         icon: Icons.bolt_rounded,
         accentColor: Colors.amber.shade600,
         exercises: [
+          flashcardsTile,
           fastVocabQuiz,
           fastListenRepeat,
           fastLuckyQuiz,
@@ -894,7 +895,6 @@ class HomeSectionsBuilder {
         actionLabel: 'View All',
         onActionTap: () => selectCategory('vocab'),
         exercises: [
-          flashcardsTile,
           vocabList,
           vocab100Phrases,
         ],

@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 class ConjugationTableWidget extends StatelessWidget {
   final Map<String, String> conjugations;
   final Color accentColor;
+  final VoidCallback? onSpeak;
+  final bool isSpeaking;
 
   const ConjugationTableWidget({
     super.key,
     required this.conjugations,
     this.accentColor = const Color(0xFF0288D1),
+    this.onSpeak,
+    this.isSpeaking = false,
   });
 
   @override
@@ -44,22 +48,41 @@ class ConjugationTableWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Icon(
-                Icons.grid_view_rounded,
-                size: 16,
-                color: accentColor,
+              Row(
+                children: [
+                  Icon(
+                    Icons.grid_view_rounded,
+                    size: 16,
+                    color: accentColor,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'Presente do Indicativo',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                      color: accentColor,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 8),
-              Text(
-                'Presente do Indicativo',
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  color: accentColor,
-                  letterSpacing: 0.5,
+              if (onSpeak != null)
+                IconButton(
+                  icon: Icon(
+                    isSpeaking
+                        ? Icons.volume_up_rounded
+                        : Icons.volume_up_outlined,
+                    size: 18,
+                    color: accentColor,
+                  ),
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
+                  tooltip: 'Listen to conjugations',
+                  onPressed: onSpeak,
                 ),
-              ),
             ],
           ),
           const SizedBox(height: 12),

@@ -367,6 +367,74 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     }
   }
 
+  String? _getConjugationsSpokenText(Map<String, String>? presentTense) {
+    if (presentTense == null || presentTense.isEmpty) return null;
+    final eu = presentTense['eu']?.trim() ?? '';
+    final tu = presentTense['tu']?.trim() ?? '';
+    final ele = (presentTense['ele_ela_voce'] ?? presentTense['ele'])?.trim() ?? '';
+    final nos = presentTense['nos']?.trim() ?? '';
+    final eles = (presentTense['voces_eles'] ?? presentTense['voces'] ?? presentTense['eles'])?.trim() ?? '';
+
+    final parts = <String>[];
+    if (eu.isNotEmpty) parts.add('Eu $eu');
+    if (tu.isNotEmpty) parts.add('Tu $tu');
+    if (ele.isNotEmpty) parts.add('Ele $ele');
+    if (nos.isNotEmpty) parts.add('Nós $nos');
+    if (eles.isNotEmpty) parts.add('Eles $eles');
+
+    if (parts.isEmpty) return null;
+    return '${parts.join('. ')}.';
+  }
+
+  Future<void> _speakConjugationsOnly({double? rate}) async {
+    if (_deck.isEmpty || _currentIndex >= _deck.length) return;
+    final item = _deck[_currentIndex];
+    final text = _getConjugationsSpokenText(item.presentTense);
+    if (text == null || text.isEmpty) return;
+
+    final token = ++_speechChainToken;
+    _cancelSpeechDelay();
+    setState(() => _isSpeaking = true);
+    try {
+      await _ttsService.stop();
+      if (token != _speechChainToken || !mounted) return;
+      await _ttsService.speak(
+        text,
+        language: 'pt-PT',
+        rate: rate ?? _speechRate,
+      );
+    } catch (_) {
+    } finally {
+      if (token == _speechChainToken && mounted) {
+        setState(() => _isSpeaking = false);
+      }
+    }
+  }
+
+  Future<void> _speakPluralOnly({double? rate}) async {
+    if (_deck.isEmpty || _currentIndex >= _deck.length) return;
+    final item = _deck[_currentIndex];
+    if (item.plural == null || item.plural!.trim().isEmpty) return;
+
+    final token = ++_speechChainToken;
+    _cancelSpeechDelay();
+    setState(() => _isSpeaking = true);
+    try {
+      await _ttsService.stop();
+      if (token != _speechChainToken || !mounted) return;
+      await _ttsService.speak(
+        'Plural, ${item.plural!.trim()}',
+        language: 'pt-PT',
+        rate: rate ?? _speechRate,
+      );
+    } catch (_) {
+    } finally {
+      if (token == _speechChainToken && mounted) {
+        setState(() => _isSpeaking = false);
+      }
+    }
+  }
+
   Future<void> _speakCurrentEnglish({double? rate}) async {
     if (_deck.isEmpty || _currentIndex >= _deck.length) return;
     final item = _deck[_currentIndex];
@@ -388,7 +456,32 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
       );
       if (token != _speechChainToken || !mounted) return;
 
-      // If grammar card, speak the grammar explanation aloud rather than having it read silently
+      // 1. If plural form is present, speak it in pt-PT
+      if (item.plural != null && item.plural!.trim().isNotEmpty) {
+        await _speechDelay(const Duration(milliseconds: 350));
+        if (token != _speechChainToken || !mounted) return;
+        await _ttsService.speak(
+          'Plural, ${item.plural!.trim()}',
+          language: 'pt-PT',
+          rate: rate ?? _speechRate,
+        );
+        if (token != _speechChainToken || !mounted) return;
+      }
+
+      // 2. If verb with present tense conjugations, read out the conjugations in pt-PT
+      final conjugationsText = _getConjugationsSpokenText(item.presentTense);
+      if (conjugationsText != null && conjugationsText.isNotEmpty) {
+        await _speechDelay(const Duration(milliseconds: 350));
+        if (token != _speechChainToken || !mounted) return;
+        await _ttsService.speak(
+          conjugationsText,
+          language: 'pt-PT',
+          rate: rate ?? _speechRate,
+        );
+        if (token != _speechChainToken || !mounted) return;
+      }
+
+      // 3. If grammar card, speak the grammar explanation aloud rather than having it read silently
       if (item.isGrammarCard &&
           item.grammarExplanation != null &&
           item.grammarExplanation!.trim().isNotEmpty) {
@@ -408,7 +501,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
         if (token != _speechChainToken || !mounted) return;
       }
 
-      // If there is an example use in a sentence, read it in both pt-PT and en-US
+      // 4. If there is an example use in a sentence, read it in both pt-PT and en-US
       if (item.examplePt != null && item.examplePt!.trim().isNotEmpty) {
         await _speechDelay(const Duration(milliseconds: 350));
         if (token != _speechChainToken || !mounted) return;
@@ -553,9 +646,10 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     // 6. Reading countdown with progress bar post speech reading
     final cardBack = _deck[_currentIndex];
     final hasExample = cardBack.examplePt != null && cardBack.examplePt!.trim().isNotEmpty;
+    final hasConjugations = cardBack.presentTense != null && cardBack.presentTense!.isNotEmpty;
     final int totalMillis = cardBack.isGrammarCard
         ? 3000
-        : (hasExample ? 2000 : 1400);
+        : ((hasExample || hasConjugations) ? 2000 : 1400);
 
     _countdownController.duration = Duration(milliseconds: totalMillis);
     _countdownController.reset();
@@ -980,6 +1074,8 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
               onSpeak: () => _speakCurrent(),
               onSpeakSlow: () => _speakCurrent(rate: 0.5),
               onSpeakEnglish: () => _speakCurrentEnglish(),
+              onSpeakConjugations: _speakConjugationsOnly,
+              onSpeakPlural: _speakPluralOnly,
               isSpeaking: _isSpeaking,
               isFlagged: _isCurrentCardFlagged,
               onToggleFlag: _toggleFlagCurrent,
