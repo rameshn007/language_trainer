@@ -70,7 +70,6 @@ class FlashcardCardWidget extends StatelessWidget {
     return Card(
       elevation: 6,
       shadowColor: accentColor.withValues(alpha: 0.25),
-      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
         side: BorderSide(
@@ -79,22 +78,11 @@ class FlashcardCardWidget extends StatelessWidget {
         ),
       ),
       color: isDark ? const Color(0xFF1E222B) : Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (isAutoAdvancing && autoAdvanceProgress > 0)
-            LinearProgressIndicator(
-              value: autoAdvanceProgress,
-              backgroundColor: accentColor.withValues(alpha: 0.12),
-              valueColor: AlwaysStoppedAnimation<Color>(accentColor),
-              minHeight: 3.5,
-            ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
             // Top Bar: Card Number, Category Pill, Flag
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -301,9 +289,6 @@ class FlashcardCardWidget extends StatelessWidget {
           ],
         ),
       ),
-    ),
-  ],
-),
     );
   }
 
@@ -316,7 +301,6 @@ class FlashcardCardWidget extends StatelessWidget {
     return Card(
       elevation: 6,
       shadowColor: accentColor.withValues(alpha: 0.25),
-      clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(24),
         side: BorderSide(
@@ -325,22 +309,11 @@ class FlashcardCardWidget extends StatelessWidget {
         ),
       ),
       color: isDark ? const Color(0xFF1E222B) : Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (isAutoAdvancing && autoAdvanceProgress > 0)
-            LinearProgressIndicator(
-              value: autoAdvanceProgress,
-              backgroundColor: Colors.amber.withValues(alpha: 0.12),
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.amber.shade600),
-              minHeight: 3.5,
-            ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
             // Top Bar: CEFR Badge, Type / Gender Pill, Flip Button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -669,9 +642,6 @@ class FlashcardCardWidget extends StatelessWidget {
           ],
         ),
       ),
-    ),
-  ],
-),
     );
   }
 
