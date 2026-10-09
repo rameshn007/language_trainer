@@ -880,7 +880,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               context: context,
               item: exercises[i],
               isDark: isDark,
-              textScaler: textScaler,
             ),
           ),
         );
@@ -900,24 +899,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     context: context,
                     item: first,
                     isDark: isDark,
-                    textScaler: textScaler,
                   ),
                 ),
               ),
-              if (second != null) ...[
-                const SizedBox(width: cardSpacing),
-                Expanded(
-                  child: SizedBox(
-                    height: cardHeight,
-                    child: _buildActionCard(
-                      context: context,
-                      item: second,
-                      isDark: isDark,
-                      textScaler: textScaler,
-                    ),
-                  ),
-                ),
-              ],
+              // An odd last tile used to sit in a lone Expanded and stretch to
+              // the full row width, misaligning it with the paired row above.
+              // The empty slot keeps the gutter and the column width.
+              const SizedBox(width: cardSpacing),
+              Expanded(
+                child: second == null
+                    ? const SizedBox.shrink()
+                    : SizedBox(
+                        height: cardHeight,
+                        child: _buildActionCard(
+                          context: context,
+                          item: second,
+                          isDark: isDark,
+                        ),
+                      ),
+              ),
             ],
           ),
         );
@@ -929,18 +929,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         cardRows.add(
           Row(
             children: [
-              for (int j = 0; j < chunk.length; j++) ...[
+              // Three slots rather than `chunk.length`: a short last row keeps
+              // its empty columns so its tiles stay the width of the row above.
+              for (int j = 0; j < 3; j++) ...[
                 if (j > 0) const SizedBox(width: cardSpacing),
                 Expanded(
-                  child: SizedBox(
-                    height: cardHeight,
-                    child: _buildActionCard(
-                      context: context,
-                      item: chunk[j],
-                      isDark: isDark,
-                      textScaler: textScaler,
-                    ),
-                  ),
+                  child: j < chunk.length
+                      ? SizedBox(
+                          height: cardHeight,
+                          child: _buildActionCard(
+                            context: context,
+                            item: chunk[j],
+                            isDark: isDark,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                 ),
               ],
             ],
@@ -1043,7 +1046,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     required BuildContext context,
     required HomeTileItem item,
     required bool isDark,
-    required TextScaler textScaler,
   }) {
     final bool isEnabled = item.onPressed != null;
 
@@ -1129,7 +1131,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: textScaler.scale(tileTitleSize),
+                                // Design size plus an explicit line height:
+                                // `Text` applies the ambient
+                                // `MediaQuery.textScaler` itself, and with no
+                                // `height` here it also inherits the theme's
+                                // `bodyMedium` - neither of which
+                                // `measureTileTextBlock` can see, which is how
+                                // the tile ended up sized for a shorter block
+                                // than it painted.
+                                fontSize: tileTitleSize,
+                                height: tileLineHeight,
                                 fontWeight: FontWeight.bold,
                                 color: isEnabled
                                     ? fgColor
@@ -1141,8 +1152,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             const SizedBox(width: tileBadgeGap),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: tileBadgePaddingH / 2,
-                                vertical: tileBadgePaddingV / 2,
+                                horizontal: tileBadgePaddingHorizontal,
+                                vertical: tileBadgePaddingVertical,
                               ),
                               decoration: BoxDecoration(
                                 color: Colors.white.withValues(alpha: 0.22),
@@ -1151,7 +1162,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               child: Text(
                                 item.badge!,
                                 style: TextStyle(
-                                  fontSize: textScaler.scale(tileBadgeSize),
+                                  fontSize: tileBadgeSize,
+                                  height: tileLineHeight,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.white,
                                 ),
@@ -1166,7 +1178,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: textScaler.scale(tileSubtitleSize),
+                          fontSize: tileSubtitleSize,
+                          height: tileLineHeight,
                           fontWeight: FontWeight.w500,
                           color: isEnabled
                               ? subtitleColor

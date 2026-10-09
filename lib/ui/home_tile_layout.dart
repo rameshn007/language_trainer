@@ -24,9 +24,20 @@ const double tileTitleSize = 15.5;
 const double tileSubtitleSize = 12.5;
 const double tileBadgeSize = 9.5;
 const double tileBadgeGap = 6.0;
-const double tileBadgePaddingH = 10.0; // 5 pt each side
-const double tileBadgePaddingV = 3.0; // 1.5 pt each side
+/// Badge box padding, per side, like [tileHorizontalPadding]. A badge adds two
+/// of each to the text it wraps, and both the measurement below and the tile's
+/// `EdgeInsets.symmetric` spell that `2 *` out instead of halving a total.
+const double tileBadgePaddingHorizontal = 5.0;
+const double tileBadgePaddingVertical = 1.5;
 const double tileLineGap = 2.0;
+
+/// Line-height multiplier the tile's three text styles paint with, and the one
+/// [measureTileTextBlock] measures with. `_buildActionCard` states it instead
+/// of inheriting the theme's `bodyMedium` (also 1.43): with no `height` of its
+/// own the measurement ran ~43% shorter than the painted block, which only
+/// bites once text is scaled - at 2x system text a 66 pt tile was asked to
+/// hold an 82 pt block, so the FittedBox shrank the copy to fit the height.
+const double tileLineHeight = 1.43;
 const double tileIconBox = 38.0;
 const double tileIconTextGap = 10.0;
 const double tileChevronWidth = 18.0;
@@ -55,14 +66,17 @@ const double tileMaxCardHeight = 120.0;
 Size measureTileTextBlock(List<HomeTileItem> items, TextScaler scaler) {
   final titleStyle = TextStyle(
     fontSize: scaler.scale(tileTitleSize),
+    height: tileLineHeight,
     fontWeight: FontWeight.bold,
   );
   final subtitleStyle = TextStyle(
     fontSize: scaler.scale(tileSubtitleSize),
+    height: tileLineHeight,
     fontWeight: FontWeight.w500,
   );
   final badgeStyle = TextStyle(
     fontSize: scaler.scale(tileBadgeSize),
+    height: tileLineHeight,
     fontWeight: FontWeight.w700,
   );
 
@@ -77,10 +91,10 @@ Size measureTileTextBlock(List<HomeTileItem> items, TextScaler scaler) {
     final badge = item.badge;
     if (badge != null) {
       final badgeSize = _measureText(badge, badgeStyle);
-      headWidth += tileBadgeGap + tileBadgePaddingH + badgeSize.width;
+      headWidth += tileBadgeGap + 2 * tileBadgePaddingHorizontal + badgeSize.width;
       headHeight = math.max(
         headHeight,
-        badgeSize.height + tileBadgePaddingV,
+        badgeSize.height + 2 * tileBadgePaddingVertical,
       );
     }
 
@@ -118,6 +132,12 @@ double tileCardHeight(Size textBlock) => math.min(
   math.max(tileMinCardHeight, textBlock.height + 2 * tileVerticalPadding),
 );
 
+/// Measures one line with a style whose `fontSize` the caller already ran
+/// through the active [TextScaler]. `TextPainter.textScaler` defaults to
+/// `TextScaler.noScaling`, so this scales once; the tile paints the same size by
+/// handing `Text` its design size and letting `MediaQuery.textScaler` scale it
+/// once. Scaling on both sides doubles it, which is what made a tile at 1.5x
+/// system text paint at 2.25x and then get shrunk back by the FittedBox.
 Size _measureText(String text, TextStyle style) {
   final painter = TextPainter(
     text: TextSpan(text: text, style: style),
