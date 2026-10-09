@@ -179,9 +179,140 @@ void main() {
       expect(stopCount, greaterThanOrEqualTo(1));
     });
 
-    test('stop() clears cached voice configuration', () async {
+    test('stop() preserves cached voice configuration across playback stops', () async {
+      await ttsService.speak('Olá', language: 'pt-PT');
+      expect(ttsService.currentConfiguredVoiceIdentifier, equals('test_pt_voice'));
+
+      int setVoiceCalls = 0;
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(const MethodChannel('flutter_tts'), (call) async {
+        if (call.method == 'setVoice') {
+          setVoiceCalls++;
+        }
+        return 1;
+      });
+
       await ttsService.stop();
-      expect(ttsService, isNotNull);
+
+      // Voice configuration is preserved across stop()
+      expect(ttsService.currentConfiguredVoiceIdentifier, equals('test_pt_voice'));
+
+      // Subsequent speak in same language does not issue redundant setVoice call
+      await ttsService.speak('Tudo bem?', language: 'pt-PT');
+      expect(setVoiceCalls, equals(0));
+    });
+
+    test('stop() breaks _synthLock immediately so subsequent speak executes without waiting', () async {
+      final hangingSpeechCompleter = Completer<int>();
+      bool secondCallStarted = false;
+
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(const MethodChannel('flutter_tts'), (call) async {
+        if (call.method == 'speak') {
+          final text = call.arguments is String
+              ? call.arguments as String
+              : (call.arguments as dynamic)?['text'] as String?;
+          if (text == 'first long speech') {
+            return hangingSpeechCompleter.future; // Holds platform channel
+          } else if (text == 'second speech') {
+            secondCallStarted = true;
+            return 1;
+          }
+        } else if (call.method == 'stop') {
+          return 1;
+        }
+        return 1;
+      });
+
+      // Start long speech (holds _synthLock)
+      unawaited(ttsService.speak('first long speech', language: 'en-US'));
+      await Future.delayed(Duration.zero);
+
+      // Stop speech
+      await ttsService.stop();
+
+      // Start second speech (Portuguese front face)
+      final secondFuture = ttsService.speak('second speech', language: 'pt-PT');
+      await Future.delayed(Duration.zero);
+
+      // Second speech must have entered and executed immediately without waiting for hangingSpeechCompleter
+      expect(secondCallStarted, isTrue);
+
+      await secondFuture;
+    });
+
+    test('voice fallback skips already-failed voice and picks alternative from cached voices', () async {
+      ttsService.availablePtVoices = [
+        {'name': 'Joana', 'locale': 'pt-PT', 'identifier': 'failed_pt_voice'},
+        {'name': 'Catarina', 'locale': 'pt-PT', 'identifier': 'alt_cached_pt_voice'},
+      ];
+      await ttsService.setExplicitVoice('pt-PT', 'failed_pt_voice');
+
+      final setVoiceAttempts = <String>[];
+      int getVoicesCalls = 0;
+
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(const MethodChannel('flutter_tts'), (call) async {
+        if (call.method == 'setVoice') {
+          final voiceMap = Map<String, dynamic>.from(call.arguments as Map);
+          final id = voiceMap['identifier'] as String;
+          setVoiceAttempts.add(id);
+          if (id == 'failed_pt_voice') {
+            return 0;
+          }
+          return 1;
+        } else if (call.method == 'getVoices') {
+          getVoicesCalls++;
+          return [];
+        }
+        return 1;
+      });
+
+      await ttsService.speak('Olá', language: 'pt-PT');
+
+      expect(setVoiceAttempts, contains('failed_pt_voice'));
+      expect(setVoiceAttempts.last, equals('alt_cached_pt_voice'));
+      expect(setVoiceAttempts.last, isNot(equals('failed_pt_voice')));
+      expect(ttsService.currentConfiguredVoiceIdentifier, equals('alt_cached_pt_voice'));
+      expect(getVoicesCalls, equals(0));
+    });
+
+    test('voice fallback queries system voices when no cached alternative and picks different voice', () async {
+      ttsService.availablePtVoices = [
+        {'name': 'Joana', 'locale': 'pt-PT', 'identifier': 'failed_pt_voice'},
+      ];
+      await ttsService.setExplicitVoice('pt-PT', 'failed_pt_voice');
+
+      final setVoiceAttempts = <String>[];
+      int getVoicesCalls = 0;
+
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(const MethodChannel('flutter_tts'), (call) async {
+        if (call.method == 'setVoice') {
+          final voiceMap = Map<String, dynamic>.from(call.arguments as Map);
+          final id = voiceMap['identifier'] as String;
+          setVoiceAttempts.add(id);
+          if (id == 'failed_pt_voice') {
+            return 0;
+          }
+          return 1;
+        } else if (call.method == 'getVoices') {
+          getVoicesCalls++;
+          return [
+            {'name': 'Joana', 'locale': 'pt-PT', 'identifier': 'failed_pt_voice'},
+            {'name': 'Duarte', 'locale': 'pt-PT', 'identifier': 'system_alt_pt_voice', 'quality': 'enhanced'},
+          ];
+        }
+        return 1;
+      });
+
+      await ttsService.speak('Olá', language: 'pt-PT');
+
+      expect(getVoicesCalls, equals(1));
+      expect(setVoiceAttempts, contains('failed_pt_voice'));
+      expect(setVoiceAttempts.last, equals('system_alt_pt_voice'));
+      expect(setVoiceAttempts.last, isNot(equals('failed_pt_voice')));
+      expect(ttsService.currentConfiguredVoiceIdentifier, equals('system_alt_pt_voice'));
     });
 
     test('setExplicitVoice invalidates cached configured voice and language', () async {

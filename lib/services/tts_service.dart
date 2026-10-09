@@ -225,6 +225,11 @@ class TtsService {
   String? _currentConfiguredLanguage;
   String? _currentConfiguredVoiceIdentifier;
   Future<void>? _synthLock;
+  Completer<void>? _activeLockCompleter;
+
+  @visibleForTesting
+  String? get currentConfiguredVoiceIdentifier =>
+      _currentConfiguredVoiceIdentifier;
 
   Future<void> setExplicitVoice(String language, String identifier) async {
     _currentConfiguredLanguage = null;
@@ -344,11 +349,30 @@ class TtsService {
     return score;
   }
 
-  /// Dynamically find the best available voice for a language by querying
-  /// the system at speak-time. This avoids stale cached data and guessed identifiers.
+  /// Dynamically find the best available voice for a language.
+  /// Checks remaining cached voices first (skipping [skipIdentifier] if already tried),
+  /// and falls back to querying system voices dynamically if no alternative is cached.
   Future<Map<String, String>?> _findBestAvailableVoice(
-    String langPrefix,
-  ) async {
+    String langPrefix, {
+    String? skipIdentifier,
+  }) async {
+    if (langPrefix.startsWith('pt') && availablePtVoices.isNotEmpty) {
+      final cachedAlt = availablePtVoices.where(
+        (v) => skipIdentifier == null || v['identifier'] != skipIdentifier,
+      ).firstOrNull;
+      if (cachedAlt != null) {
+        return cachedAlt;
+      }
+    }
+    if (langPrefix.startsWith('en') && availableEnVoices.isNotEmpty) {
+      final cachedAlt = availableEnVoices.where(
+        (v) => skipIdentifier == null || v['identifier'] != skipIdentifier,
+      ).firstOrNull;
+      if (cachedAlt != null) {
+        return cachedAlt;
+      }
+    }
+
     try {
       final voices = await _flutterTts.getVoices;
       if (voices == null || voices.isEmpty) return null;
@@ -356,6 +380,10 @@ class TtsService {
       final matching = voices.where((v) {
         try {
           final locale = v['locale'].toString().toLowerCase();
+          final id = (v['identifier'] ?? '').toString();
+          if (skipIdentifier != null && id == skipIdentifier) {
+            return false;
+          }
           return locale.startsWith(langPrefix);
         } catch (_) {
           return false;
@@ -427,7 +455,10 @@ class TtsService {
           "EN: Cached voice failed, querying system voices dynamically...",
           name: "TtsService",
         );
-        final dynamicVoice = await _findBestAvailableVoice('en');
+        final dynamicVoice = await _findBestAvailableVoice(
+          'en',
+          skipIdentifier: _bestEnVoice?['identifier'],
+        );
         if (dynamicVoice != null) {
           try {
             final result = await _flutterTts.setVoice(dynamicVoice);
@@ -482,7 +513,10 @@ class TtsService {
           "PT: Cached voice failed, querying system voices dynamically...",
           name: "TtsService",
         );
-        final dynamicVoice = await _findBestAvailableVoice('pt');
+        final dynamicVoice = await _findBestAvailableVoice(
+          'pt',
+          skipIdentifier: _bestPtVoice?['identifier'],
+        );
         if (dynamicVoice != null) {
           try {
             final result = await _flutterTts.setVoice(dynamicVoice);
@@ -533,6 +567,7 @@ class TtsService {
     }
 
     final completer = Completer<void>();
+    _activeLockCompleter = completer;
     _synthLock = completer.future;
 
     try {
@@ -555,6 +590,9 @@ class TtsService {
       }
       if (identical(_synthLock, completer.future)) {
         _synthLock = null;
+      }
+      if (identical(_activeLockCompleter, completer)) {
+        _activeLockCompleter = null;
       }
     }
   }
@@ -628,10 +666,13 @@ class TtsService {
   }
 
   Future<void> stop() async {
-    _currentConfiguredLanguage = null;
-    _currentConfiguredVoiceIdentifier = null;
     try {
       await _flutterTts.stop();
     } catch (_) {}
+    if (_activeLockCompleter != null && !_activeLockCompleter!.isCompleted) {
+      _activeLockCompleter!.complete();
+    }
+    _activeLockCompleter = null;
+    _synthLock = null;
   }
 }

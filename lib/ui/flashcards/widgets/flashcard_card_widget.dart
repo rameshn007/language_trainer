@@ -18,9 +18,6 @@ class FlashcardCardWidget extends StatelessWidget {
   final VoidCallback onToggleFlag;
   final void Function(int masteryLevel)? onRateMastery;
   final int currentMastery;
-  final Animation<double>? countdownAnimation;
-  final double autoAdvanceProgress;
-  final bool isAutoAdvancing;
 
   const FlashcardCardWidget({
     super.key,
@@ -37,9 +34,6 @@ class FlashcardCardWidget extends StatelessWidget {
     required this.onToggleFlag,
     this.onRateMastery,
     this.currentMastery = 0,
-    this.countdownAnimation,
-    this.autoAdvanceProgress = 0.0,
-    this.isAutoAdvancing = false,
   });
 
   @override
@@ -277,11 +271,6 @@ class FlashcardCardWidget extends StatelessWidget {
                 ],
               ),
             ),
-
-            SizedBox(height: isLandscape ? 4 : 14),
-
-            // Flip Hint / Status Row
-            _buildFrontStatusRow(context, accentColor, isDark),
           ],
         ),
       ),
@@ -688,8 +677,6 @@ class FlashcardCardWidget extends StatelessWidget {
                 ],
               ),
             ],
-            // Back Status Row
-            _buildBackStatusRow(context, accentColor),
           ],
         ),
       ),
@@ -738,126 +725,5 @@ class FlashcardCardWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _buildFrontStatusRow(
-    BuildContext context,
-    Color accentColor,
-    bool isDark,
-  ) {
-    Widget buildRow(double progress) {
-      final isCountdown = isAutoAdvancing && progress > 0;
-      return FittedBox(
-        fit: BoxFit.scaleDown,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              isSpeaking
-                  ? Icons.volume_up_rounded
-                  : isCountdown
-                      ? Icons.timer_rounded
-                      : Icons.touch_app_rounded,
-              size: 14,
-              color: (isSpeaking || isCountdown)
-                  ? accentColor
-                  : (isDark ? Colors.white38 : Colors.black38),
-            ),
-            const SizedBox(width: 6),
-            Text(
-              isSpeaking
-                  ? 'Listening...'
-                  : isCountdown
-                      ? 'Flipping card soon...'
-                      : 'Tap anywhere to flip card',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: (isSpeaking || isCountdown)
-                    ? FontWeight.w600
-                    : FontWeight.w500,
-                color: (isSpeaking || isCountdown)
-                    ? accentColor
-                    : (isDark ? Colors.white38 : Colors.black38),
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-
-    if (countdownAnimation != null) {
-      return AnimatedBuilder(
-        animation: countdownAnimation!,
-        builder: (context, _) => buildRow(countdownAnimation!.value),
-      );
-    }
-    return buildRow(autoAdvanceProgress);
-  }
-
-  Widget _buildBackStatusRow(BuildContext context, Color accentColor) {
-    Widget buildRow(double progress) {
-      if (isSpeaking) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.volume_up_rounded,
-                  size: 14,
-                  color: accentColor,
-                ),
-                const SizedBox(width: 6),
-                Text(
-                  'Listening...',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: accentColor,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      } else if (isAutoAdvancing && progress > 0) {
-        return Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.arrow_forward_rounded,
-                  size: 13,
-                  color: Colors.amber.shade700,
-                ),
-                const SizedBox(width: 5),
-                Text(
-                  'Advancing to next card...',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.amber.shade700,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      }
-      return const SizedBox.shrink();
-    }
-
-    if (countdownAnimation != null) {
-      return AnimatedBuilder(
-        animation: countdownAnimation!,
-        builder: (context, _) => buildRow(countdownAnimation!.value),
-      );
-    }
-    return buildRow(autoAdvanceProgress);
   }
 }
