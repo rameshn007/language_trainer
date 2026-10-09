@@ -102,6 +102,12 @@ class HomeSectionsBuilder {
         count: _countExercisesFor('all'),
       ),
       HomeCategoryPill(
+        id: 'fast',
+        label: 'Fast Practice',
+        icon: Icons.bolt_rounded,
+        count: _countExercisesFor('fast'),
+      ),
+      HomeCategoryPill(
         id: 'exercises',
         label: 'Exercises',
         icon: Icons.assignment_rounded,
@@ -552,32 +558,6 @@ class HomeSectionsBuilder {
             },
     );
 
-    final fastListenRepeat = HomeTileItem(
-      id: 'fast_listen_repeat',
-      title: 'Listen & Repeat',
-      subtitle: 'Hands-free ear training',
-      icon: Icons.headset_rounded,
-      color: Colors.indigo.shade600,
-      badge: 'Audio',
-      onPressed: (offset) {
-        pushScreen(const ListenRepeatScreen(), offset);
-      },
-    );
-
-    final fastLuckyQuiz = HomeTileItem(
-      id: 'fast_lucky_quiz',
-      title: 'Lucky Challenge',
-      subtitle: 'Smart adaptive practice',
-      icon: Icons.auto_awesome_rounded,
-      color: Colors.purple.shade600,
-      badge: 'Adaptive',
-      onPressed: isQuizDisabled
-          ? null
-          : (offset) {
-              pushScreen(const QuizScreen(isLuckyQuiz: true), offset);
-            },
-    );
-
     final fastVoiceTrainer = HomeTileItem(
       id: 'fast_voice_trainer',
       title: 'Voice Trainer',
@@ -848,20 +828,22 @@ class HomeSectionsBuilder {
       ),
     ];
 
+    // Fast Practice doubles as its own filter tab, so the section is built once
+    // and shared: the pill's count and the 'All' feed cannot drift apart.
+    final fastPractice = HomeSectionData(
+      id: 'fast_practice',
+      title: 'Fast Practice',
+      icon: Icons.bolt_rounded,
+      accentColor: Colors.amber.shade600,
+      exercises: [
+        flashcardsTile,
+        fastVocabQuiz,
+        fastVoiceTrainer,
+      ],
+    );
+
     final allSections = [
-      HomeSectionData(
-        id: 'fast_practice',
-        title: 'Fast Practice',
-        icon: Icons.bolt_rounded,
-        accentColor: Colors.amber.shade600,
-        exercises: [
-          flashcardsTile,
-          fastVocabQuiz,
-          fastListenRepeat,
-          fastLuckyQuiz,
-          fastVoiceTrainer,
-        ],
-      ),
+      fastPractice,
       HomeSectionData(
         id: 'exercises_featured',
         title: 'Practice & Exercises',
@@ -917,6 +899,7 @@ class HomeSectionsBuilder {
 
     return {
       'all': allSections,
+      'fast': [fastPractice],
       'exercises': exercisesSections,
       'topics': topicsSections,
       'vocab': vocabSections,
