@@ -179,9 +179,27 @@ void main() {
       expect(stopCount, greaterThanOrEqualTo(1));
     });
 
-    test('stop() clears cached voice configuration', () async {
+    test('stop() preserves cached voice configuration across playback stops', () async {
+      await ttsService.speak('Olá', language: 'pt-PT');
+      expect(ttsService.currentConfiguredVoiceIdentifier, equals('test_pt_voice'));
+
+      int setVoiceCalls = 0;
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMethodCallHandler(const MethodChannel('flutter_tts'), (call) async {
+        if (call.method == 'setVoice') {
+          setVoiceCalls++;
+        }
+        return 1;
+      });
+
       await ttsService.stop();
-      expect(ttsService, isNotNull);
+
+      // Voice configuration is preserved across stop()
+      expect(ttsService.currentConfiguredVoiceIdentifier, equals('test_pt_voice'));
+
+      // Subsequent speak in same language does not issue redundant setVoice call
+      await ttsService.speak('Tudo bem?', language: 'pt-PT');
+      expect(setVoiceCalls, equals(0));
     });
 
     test('stop() breaks _synthLock immediately so subsequent speak executes without waiting', () async {
