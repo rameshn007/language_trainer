@@ -18,9 +18,6 @@ class FlashcardCardWidget extends StatelessWidget {
   final VoidCallback onToggleFlag;
   final void Function(int masteryLevel)? onRateMastery;
   final int currentMastery;
-  final Animation<double>? countdownAnimation;
-  final double autoAdvanceProgress;
-  final bool isAutoAdvancing;
 
   const FlashcardCardWidget({
     super.key,
@@ -37,9 +34,6 @@ class FlashcardCardWidget extends StatelessWidget {
     required this.onToggleFlag,
     this.onRateMastery,
     this.currentMastery = 0,
-    this.countdownAnimation,
-    this.autoAdvanceProgress = 0.0,
-    this.isAutoAdvancing = false,
   });
 
   @override

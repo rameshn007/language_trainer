@@ -1089,7 +1089,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
         Color? color;
 
         if (_isSpeaking) {
-          text = 'Listening...';
+          text = 'Playing...';
           icon = Icons.volume_up_rounded;
           color = accentColor;
         } else if (_isAutoAdvancing && _countdownController.value > 0) {
@@ -1112,20 +1112,23 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
           ),
           alignment: Alignment.center,
           child: text != null
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(icon, size: 13, color: color),
-                    const SizedBox(width: 5),
-                    Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                        color: color,
+              ? FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(icon, size: 13, color: color),
+                      const SizedBox(width: 5),
+                      Text(
+                        text,
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600,
+                          color: color,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 )
               : const SizedBox.shrink(),
         );
@@ -1254,8 +1257,6 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
               onToggleFlag: _toggleFlagCurrent,
               onRateMastery: _rateCurrent,
               currentMastery: _currentCardMastery,
-              countdownAnimation: _countdownController,
-              isAutoAdvancing: _isAutoAdvancing,
             );
           },
         ),

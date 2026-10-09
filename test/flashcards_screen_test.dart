@@ -958,7 +958,7 @@ void main() {
       expect(find.text('falar'), findsOneWidget);
     });
 
-    testWidgets('displays Listening... indicator while back-face audio is playing', (tester) async {
+    testWidgets('displays Playing... indicator while back-face audio is playing', (tester) async {
       final completer = Completer<void>();
       when(
         () => mockTts.speak('hello', language: 'en-US', rate: any(named: 'rate')),
@@ -989,7 +989,7 @@ void main() {
       await tester.pump();
 
       expect(find.text('hello'), findsOneWidget);
-      expect(find.text('Listening...'), findsOneWidget);
+      expect(find.text('Playing...'), findsOneWidget);
 
       // Complete TTS
       completer.complete();

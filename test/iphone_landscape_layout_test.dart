@@ -1416,6 +1416,79 @@ void main() {
         expect(tester.takeException(), isNull);
       });
     }
+
+    testWidgets('FlashcardsScreen status strip and countdown bar render at 320x568 @2.0x text scale without overflow under load', (tester) async {
+      tester.view.physicalSize = const Size(640, 1136); // 320x568 @ 2.0x
+      tester.view.devicePixelRatio = 2.0;
+      tester.view.padding = const FakeViewPadding(left: 0, top: 20, right: 0, bottom: 0);
+      tester.view.viewPadding = const FakeViewPadding(left: 0, top: 20, right: 0, bottom: 0);
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+        tester.view.resetPadding();
+        tester.view.resetViewPadding();
+        IPhoneDuoHelper.resetForTesting();
+      });
+
+      final fakeStorage = FakeStorageService(initialItems: []);
+      final mockTts = MockTtsService();
+      when(() => mockTts.setRate(any())).thenAnswer((_) async {});
+      when(() => mockTts.speak(any(), language: any(named: 'language'), rate: any(named: 'rate')))
+          .thenAnswer((_) async {});
+      when(() => mockTts.stop()).thenAnswer((_) async {});
+
+      const card = FlashcardItem(
+        id: '1',
+        cardNumber: '1',
+        portuguese: 'olá',
+        english: 'hi',
+        category: 'A',
+      );
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            storageServiceProvider.overrideWithValue(fakeStorage),
+            ttsServiceProvider.overrideWithValue(mockTts),
+          ],
+          child: testApp(
+            home: Builder(
+              builder: (context) => MediaQuery(
+                data: MediaQuery.of(context).copyWith(
+                  textScaler: const TextScaler.linear(2.0),
+                ),
+                child: const FlashcardsScreen(
+                  initialCards: [card],
+                  initialShuffle: false,
+                  initialAutoAdvance: true,
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(milliseconds: 500));
+
+      expect(tester.takeException(), isNull);
+
+      final fittedBoxFinder = find.byType(FittedBox);
+      expect(fittedBoxFinder, findsWidgets);
+
+      // Verify countdown bar and status strip text are visible under load (Phase 1: recall)
+      expect(find.byType(LinearProgressIndicator), findsNWidgets(2));
+      expect(find.text('Flipping card soon...'), findsOneWidget);
+
+      final statusStripFinder = find.byWidgetPredicate(
+        (w) => w is Container && w.child is FittedBox,
+      );
+      expect(statusStripFinder, findsOneWidget);
+      final statusRect = tester.getRect(statusStripFinder);
+      expect(statusRect.right, lessThanOrEqualTo(320.0 + 0.5));
+      expect(statusRect.left, greaterThanOrEqualTo(-0.5));
+    });
   });
 
   group('IPhoneDuoHelper Debug Override Tests', () {

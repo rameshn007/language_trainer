@@ -227,6 +227,10 @@ class TtsService {
   Future<void>? _synthLock;
   Completer<void>? _activeLockCompleter;
 
+  @visibleForTesting
+  String? get currentConfiguredVoiceIdentifier =>
+      _currentConfiguredVoiceIdentifier;
+
   Future<void> setExplicitVoice(String language, String identifier) async {
     _currentConfiguredLanguage = null;
     _currentConfiguredVoiceIdentifier = null;
@@ -345,16 +349,28 @@ class TtsService {
     return score;
   }
 
-  /// Dynamically find the best available voice for a language by querying
-  /// the system at speak-time. This avoids stale cached data and guessed identifiers.
+  /// Dynamically find the best available voice for a language.
+  /// Checks remaining cached voices first (skipping [skipIdentifier] if already tried),
+  /// and falls back to querying system voices dynamically if no alternative is cached.
   Future<Map<String, String>?> _findBestAvailableVoice(
-    String langPrefix,
-  ) async {
+    String langPrefix, {
+    String? skipIdentifier,
+  }) async {
     if (langPrefix.startsWith('pt') && availablePtVoices.isNotEmpty) {
-      return availablePtVoices.first;
+      final cachedAlt = availablePtVoices.where(
+        (v) => skipIdentifier == null || v['identifier'] != skipIdentifier,
+      ).firstOrNull;
+      if (cachedAlt != null) {
+        return cachedAlt;
+      }
     }
     if (langPrefix.startsWith('en') && availableEnVoices.isNotEmpty) {
-      return availableEnVoices.first;
+      final cachedAlt = availableEnVoices.where(
+        (v) => skipIdentifier == null || v['identifier'] != skipIdentifier,
+      ).firstOrNull;
+      if (cachedAlt != null) {
+        return cachedAlt;
+      }
     }
 
     try {
@@ -364,6 +380,10 @@ class TtsService {
       final matching = voices.where((v) {
         try {
           final locale = v['locale'].toString().toLowerCase();
+          final id = (v['identifier'] ?? '').toString();
+          if (skipIdentifier != null && id == skipIdentifier) {
+            return false;
+          }
           return locale.startsWith(langPrefix);
         } catch (_) {
           return false;
@@ -435,7 +455,10 @@ class TtsService {
           "EN: Cached voice failed, querying system voices dynamically...",
           name: "TtsService",
         );
-        final dynamicVoice = await _findBestAvailableVoice('en');
+        final dynamicVoice = await _findBestAvailableVoice(
+          'en',
+          skipIdentifier: _bestEnVoice?['identifier'],
+        );
         if (dynamicVoice != null) {
           try {
             final result = await _flutterTts.setVoice(dynamicVoice);
@@ -490,7 +513,10 @@ class TtsService {
           "PT: Cached voice failed, querying system voices dynamically...",
           name: "TtsService",
         );
-        final dynamicVoice = await _findBestAvailableVoice('pt');
+        final dynamicVoice = await _findBestAvailableVoice(
+          'pt',
+          skipIdentifier: _bestPtVoice?['identifier'],
+        );
         if (dynamicVoice != null) {
           try {
             final result = await _flutterTts.setVoice(dynamicVoice);
