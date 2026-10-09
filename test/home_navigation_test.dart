@@ -92,8 +92,10 @@ void main() {
 
       expect(tester.takeException(), isNull);
 
-      // Default 'All' tab: verify section titles
-      expect(find.text('Fast Practice'), findsOneWidget);
+      // Default 'All' tab: verify the section content renders.
+      // 'Fast Practice' is also a filter pill label now, so the Flashcards tile
+      // is the marker that the section itself rendered.
+      expect(find.text('Flashcards'), findsOneWidget);
       expect(find.text('Practice & Exercises'), findsOneWidget);
       expect(find.text('Explore Topics'), findsOneWidget);
 
@@ -109,7 +111,7 @@ void main() {
       expect(find.text('Verb Mastery (5 Units)'), findsOneWidget);
       expect(find.text('Thematic Vocabulary Units (7 Units)'), findsOneWidget);
       // Fast Practice and Explore Topics should no longer be rendered
-      expect(find.text('Fast Practice'), findsNothing);
+      expect(find.text('Flashcards'), findsNothing);
       expect(find.text('Explore Topics'), findsNothing);
 
       // 2. Tap 'Topics' pill
@@ -153,15 +155,29 @@ void main() {
 
       expect(find.text('Speaking & Phrases'), findsOneWidget);
 
-      // 6. Return to 'All'
+      // 6. Tap 'Fast Practice' pill
+      final fastPill = find.widgetWithText(InkWell, 'Fast Practice');
+      expect(fastPill, findsOneWidget);
+      expect(find.descendant(of: fastPill, matching: find.text('3')), findsOneWidget,
+          reason: 'Fast Practice pill should compute 3 tiles dynamically');
+      await tester.tap(fastPill);
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(find.text('Flashcards'), findsOneWidget);
+      expect(find.text('Vocab Quiz'), findsOneWidget);
+      expect(find.text('Voice Trainer'), findsOneWidget);
+      expect(find.text('Practice & Exercises'), findsNothing);
+      expect(find.text('Speaking & Phrases'), findsNothing);
+
+      // 7. Return to 'All'
       final allPill = find.widgetWithText(InkWell, 'All');
       expect(allPill, findsOneWidget);
-      expect(find.descendant(of: allPill, matching: find.text('19')), findsOneWidget,
-          reason: 'All pill should compute 19 tiles dynamically');
+      expect(find.descendant(of: allPill, matching: find.text('17')), findsOneWidget,
+          reason: 'All pill should compute 17 tiles dynamically');
       await tester.tap(allPill);
       await tester.pump(const Duration(milliseconds: 200));
 
-      expect(find.text('Fast Practice'), findsOneWidget);
+      expect(find.text('Flashcards'), findsOneWidget);
       expect(find.text('Practice & Exercises'), findsOneWidget);
     });
 

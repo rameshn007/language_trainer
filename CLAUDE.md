@@ -36,6 +36,8 @@ No backend: TTS, STT and quiz generation run on-device.
 - Never stack manual horizontal padding on top of an active horizontal `SafeArea`: `SafeArea` re-applies `MediaQuery.padding.right`, so the insets add up (bottom bar once measured 88 pt against the card's 44). Either let `SafeArea` do it, or use `SafeArea(top: false, left: false, right: false)` plus helper padding.
 - The left edge needs the same treatment as the right: in island-left landscape the system band is 44–59 pt, so fixed 18–20 pt padding puts content under the cutout.
 - Keep card content and the bottom control bar on the same inset — misalignment between the two reads as a bug even when nothing overflows.
+- Home tile grids are content-driven, not breakpoint-driven: `chooseTileColumnCount` (`lib/ui/home_tile_layout.dart`) measures the section's copy and takes the widest grid that fits it, so a phone renders one full-width tile per row. Tile text sits in a `FittedBox(fit: scaleDown)`, and `RenderFittedBox` lays its child out *unbounded* — a column too narrow for the copy never ellipsizes it, it just paints the text smaller (the old 2-column phone grid rendered tile text at 40–70% of its `fontSize`). Type sizes, chrome width and the column floor live in that file; `test/home_tile_layout_test.dart` pins the rule.
+- Two pairings keep tile measurement and paint agreeing, and both broke silently once: the tile's `TextStyle`s state `height: tileLineHeight` instead of inheriting the theme's `bodyMedium` (also 1.43 — a bare style measured ~43% shorter than it painted, so big system text got shrunk), and the text scaler is applied on exactly one side (`measureTileTextBlock` pre-scales its font sizes with `TextPainter` at `noScaling`, so the `Text` widgets must pass *design* sizes and let `MediaQuery.textScaler` scale them once). A 2- or 3-column section pads a short last row with empty `Expanded` slots: an odd row without them stretches across the grid.
 
 ## Test harness gotchas
 
@@ -52,7 +54,7 @@ No backend: TTS, STT and quiz generation run on-device.
 
 ## Verify before finishing
 
-- `flutter test` — all must pass (478 as of Oct 2026) · `flutter analyze` — zero issues · `flutter build ios --no-codesign --simulator` for native changes.
+- `flutter test` — all must pass (494 as of Oct 2026) · `flutter analyze` — zero issues · `flutter build ios --no-codesign --simulator` for native changes.
 - Run the suite twice when touching flashcards or layout: unseeded deck shuffle and audio pacing are non-deterministic, so one green run proves less than it looks like.
 - CarPlay/audio tests need `CarPlayService().resetForTesting()` in `tearDown` (cancels section-update timers, container subscriptions, debounce timestamps).
 - Any test that sets `IPhoneDuoHelper.debugOverride` must reset it (`IPhoneDuoHelper.resetForTesting()`, e.g. in `addTearDown`), or the override leaks into later layout tests; also reset `tester.view` size/padding after changing it.

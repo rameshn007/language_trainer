@@ -18,6 +18,7 @@ import '../models/language_item.dart';
 import 'listen_repeat/listen_repeat_screen.dart';
 import '../utils/iphone_duo_helper.dart';
 import 'home_tiles_data.dart';
+import 'home_tile_layout.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -852,15 +853,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     VoidCallback? onActionTap,
   }) {
     final textScaler = MediaQuery.textScalerOf(context);
-    final scale = textScaler.scale(1.0);
     final effectiveWidth = math.max(60.0, availableWidth);
-    // 1 column on narrow viewports (<340pt) or large text scales (>1.25x);
-    // 3 columns on tablet/desktop/DeX widths (>=600pt); 2 columns on standard phones.
-    final int crossAxisCount = (effectiveWidth < 340 || scale > 1.25)
-        ? 1
-        : (effectiveWidth >= 600 && scale <= 1.15 ? 3 : 2);
     const double cardSpacing = 10.0;
-    final double cardHeight = scale > 1.5 ? 94.0 : (scale > 1.2 ? 86.0 : 72.0);
+
+    // Grid follows the copy: the widest column count in which every tile still
+    // gets one full-size line of text. A narrower column would not truncate —
+    // text is laid out unbounded inside a FittedBox — it shrinks instead, and
+    // two columns on a 430 pt phone shrank this section's copy to ~9 pt.
+    final Size textBlock = measureTileTextBlock(exercises, textScaler);
+    final int crossAxisCount = chooseTileColumnCount(
+      availableWidth: effectiveWidth,
+      textWidth: textBlock.width,
+      gutter: cardSpacing,
+    );
+    final double cardHeight = tileCardHeight(textBlock);
 
     final List<Widget> cardRows = [];
     if (crossAxisCount == 1) {
@@ -896,19 +902,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ),
-              if (second != null) ...[
-                const SizedBox(width: cardSpacing),
-                Expanded(
-                  child: SizedBox(
-                    height: cardHeight,
-                    child: _buildActionCard(
-                      context: context,
-                      item: second,
-                      isDark: isDark,
-                    ),
-                  ),
-                ),
-              ],
+              // An odd last tile used to sit in a lone Expanded and stretch to
+              // the full row width, misaligning it with the paired row above.
+              // The empty slot keeps the gutter and the column width.
+              const SizedBox(width: cardSpacing),
+              Expanded(
+                child: second == null
+                    ? const SizedBox.shrink()
+                    : SizedBox(
+                        height: cardHeight,
+                        child: _buildActionCard(
+                          context: context,
+                          item: second,
+                          isDark: isDark,
+                        ),
+                      ),
+              ),
             ],
           ),
         );
@@ -920,17 +929,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         cardRows.add(
           Row(
             children: [
-              for (int j = 0; j < chunk.length; j++) ...[
+              // Three slots rather than `chunk.length`: a short last row keeps
+              // its empty columns so its tiles stay the width of the row above.
+              for (int j = 0; j < 3; j++) ...[
                 if (j > 0) const SizedBox(width: cardSpacing),
                 Expanded(
-                  child: SizedBox(
-                    height: cardHeight,
-                    child: _buildActionCard(
-                      context: context,
-                      item: chunk[j],
-                      isDark: isDark,
-                    ),
-                  ),
+                  child: j < chunk.length
+                      ? SizedBox(
+                          height: cardHeight,
+                          child: _buildActionCard(
+                            context: context,
+                            item: chunk[j],
+                            isDark: isDark,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
                 ),
               ],
             ],
@@ -1078,12 +1091,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     ],
             ),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: tileHorizontalPadding,
+            vertical: tileVerticalPadding,
+          ),
           child: Row(
             children: [
               Container(
-                width: 38,
-                height: 38,
+                width: tileIconBox,
+                height: tileIconBox,
                 decoration: BoxDecoration(
                   color: isEnabled ? iconBoxColor : Colors.white12,
                   borderRadius: BorderRadius.circular(10),
@@ -1096,7 +1112,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: tileIconTextGap),
               Expanded(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
@@ -1115,7 +1131,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
-                                fontSize: 13.5,
+                                // Design size plus an explicit line height:
+                                // `Text` applies the ambient
+                                // `MediaQuery.textScaler` itself, and with no
+                                // `height` here it also inherits the theme's
+                                // `bodyMedium` - neither of which
+                                // `measureTileTextBlock` can see, which is how
+                                // the tile ended up sized for a shorter block
+                                // than it painted.
+                                fontSize: tileTitleSize,
+                                height: tileLineHeight,
                                 fontWeight: FontWeight.bold,
                                 color: isEnabled
                                     ? fgColor
@@ -1124,11 +1149,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             ),
                           ),
                           if (item.badge != null) ...[
-                            const SizedBox(width: 6),
+                            const SizedBox(width: tileBadgeGap),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 5,
-                                vertical: 1.5,
+                                horizontal: tileBadgePaddingHorizontal,
+                                vertical: tileBadgePaddingVertical,
                               ),
                               decoration: BoxDecoration(
                                 color: Colors.white.withValues(alpha: 0.22),
@@ -1136,8 +1161,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               ),
                               child: Text(
                                 item.badge!,
-                                style: const TextStyle(
-                                  fontSize: 8.5,
+                                style: TextStyle(
+                                  fontSize: tileBadgeSize,
+                                  height: tileLineHeight,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.white,
                                 ),
@@ -1146,13 +1172,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ],
                         ],
                       ),
-                      const SizedBox(height: 2),
+                      const SizedBox(height: tileLineGap),
                       Text(
                         item.subtitle,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: 10.5,
+                          fontSize: tileSubtitleSize,
+                          height: tileLineHeight,
                           fontWeight: FontWeight.w500,
                           color: isEnabled
                               ? subtitleColor
@@ -1165,7 +1192,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               Icon(
                 Icons.chevron_right_rounded,
-                size: 18,
+                size: tileChevronWidth,
                 color: isEnabled ? chevronColor : Colors.transparent,
               ),
             ],
