@@ -8,7 +8,10 @@ build/
 .opencode/
 *.log
 
-# Screenshots and binary assets (source still references these paths)
+# Screenshots and binary assets. Nothing here is absent: assets/images/unit_2..5_hint.png are
+# loaded at runtime (passed as `hintPath`), app_icon*.png are flutter_launcher_icons build
+# inputs, and home_illustration.png is referenced by nothing. These entries only keep binaries
+# out of search output — they do not affect the bundle.
 screenshots/
 assets/images/
 *.png
