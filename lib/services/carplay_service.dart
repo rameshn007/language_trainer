@@ -15,8 +15,11 @@ import 'storage_service.dart';
 /// Design goals:
 ///  * Tapping the app icon in CarPlay drops the driver straight into a
 ///    running Listen & Repeat session - no intermediate "Start Session" menu.
-///  * Word-level playback controls live on a CarPlay list template:
-///    Pause/Resume, Replay word, Previous/Next word, Shuffle, Speed, Stop.
+///  * Word-level playback controls live on a CarPlay list template, capped at
+///    8 rows in 3 sections: Current Word (now-playing indicator + Flag for
+///    Review), Playback (Pause/Resume, Previous word, Next word), Session
+///    (Focus cycle, Speed, Stop). Tapping the word row replays that word and
+///    pushes Now Playing — there is no separate Replay row, and no Shuffle row.
 ///  * The session reuses the same [ListenRepeatViewModel] (and its
 ///    just_audio playlist) as the phone UI, so audio keeps flowing to the
 ///    car regardless of which template is on screen.
@@ -47,8 +50,11 @@ class CarPlayService {
   ProviderSubscription<ListenRepeatState>? _stateSubscription;
 
   /// Dedicated app channel: pushes `sceneWillEnterForeground` events and
-  /// answers `sceneStatus` pulls. Implemented natively (AppDelegate.swift);
-  /// absent on Android/tests, where calls fail harmlessly.
+  /// answers `sceneStatus` pulls, carries the steering-wheel / lock-screen
+  /// remote commands (`remoteNextWord`, `remotePreviousWord`,
+  /// `remoteToggleFlag`), and carries Dart's calls to push Now Playing and
+  /// refresh its star + artwork. Implemented natively (AppDelegate.swift);
+  /// absent on Android/tests, where every call is caught and degrades to a no-op.
   static const MethodChannel _sceneChannel =
       MethodChannel('language_trainer/carplay_scene');
 
