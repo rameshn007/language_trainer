@@ -1,6 +1,6 @@
 ---
 name: listen-repeat-audio
-description: Listen & Repeat audio engine contract — 6-source word layout, buffer refill / speech shielding, starvation guards, TTS concurrency, session invalidation. Use for lib/ui/listen_repeat/ and audio gap, stutter, underrun or deck-race bugs.
+description: Listen & Repeat audio engine contract — 6-source word layout, buffer refill / speech shielding, starvation guards, TTS concurrency, session invalidation, CarPlay remote skips. Use for lib/ui/listen_repeat/ and audio gap, stutter, underrun, dropped repetition or deck-race bugs.
 ---
 
 # Listen & Repeat audio engine
@@ -12,25 +12,29 @@ Passive training — no speech recognition; the user repeats silently.
 
 `[pt1, silence1 (1.0s), pt2, silence2 (adaptive 0.5–1.5s), en, silence3 (1.0s)]`
 
-- `_kSourcesPerWord = 6`; `index % 6` is odd for silence chunks, even for speech.
-- Word-level seek math assumes exactly 6 sources per word (CarPlay / steering-wheel skips use `(wordIndex ± 1) * 6`). Changing the layout requires updating that math in `carplay_service.dart` and `AppDelegate.swift`.
+- `_kSourcesPerWord = 6`; `index % 6` is odd for silence chunks, even for speech. `assert(sequence.length == _kSourcesPerWord)` catches a layout/constant mismatch in **debug builds only** — release plays a mismatched sequence silently, and the only other guard is the hard-coded `6` in `test/listen_repeat_remote_control_test.dart`.
+- Silence 2 comes from `SilenceAudioService.calculatePreEnglishPause(item)`: 0.5 s floor, +0.15 s per word over 2, +0.15/0.3 s for length, clamped to 1.5 s.
+- `pt2` is a **copy** of the PT file (`pt_v2_<id>_<hash>_rep.<ext>`), not a second reference to the same URL: AVPlayerItem deduplicates back-to-back identical URLs, so sharing the file silently drops the repetition and the word plays in ~2/3 of its budgeted time.
+- Word-level seek math assumes exactly 6 sources per word. `replayCurrentWord()` / `nextWord()` / `previousWord()` seek `(wordIndex ± 1) * _kSourcesPerWord` (replay seeks `wordIndex * 6`) and that math lives **only** in this file — `carplay_service.dart` forwards to these three methods and `AppDelegate.swift` does no seek arithmetic, it just fires `remoteNextWord` / `remotePreviousWord`.
 - Files are synthesized on demand to temp files by `TtsService.synthesizeToFile` (pt-PT + en-US), then streamed through a `ConcatenatingAudioSource` owned by `_bgAudioPlayer`.
-- Every source needs `MediaItem.copyWith(id: '${item.id}_...')` — required by `just_audio_background`.
+- Every source needs `MediaItem.copyWith(id: '${item.id}_...')` — required by `just_audio_background`; six distinct suffixes per word (`_pt1 _silence1 _pt2 _silence2 _en _silence3`).
 
-## Buffer refill contract (`_syncCurrentIndex`)
+## Buffer refill contract (`_syncCurrentIndex` → `_appendNextWordInBackground`)
 
-- Target: 4 words ahead. Background refill only fires on silence chunks while `remainingWords < 4`.
-- Speech shielding: no synthesis / disk I/O / PNG encoding / queue mutation during `pt1`, `pt2`, `en` when `remainingWords >= 2`.
-- Emergency starvation guard: `remainingWords <= 2 && sourceInWord >= 4` → refill during speech (needed at 1.25×/1.5× speed), synthesizes 1 word then breaks.
-- Post-starvation recovery: if `remaining <= 1`, the loop rebuilds up to 2 words max per pass; 200ms yield between syntheses.
+- Target: 4 words ahead; the pass breaks at `remaining >= 4`.
+- Normal trigger fires only on silence chunks with `remainingWords < 4`. Speech shielding also breaks inside the loop: no synthesis / disk I/O / PNG encoding / queue mutation during `pt1`, `pt2`, `en` while `remaining >= 2`.
+- Emergency starvation guard: `remainingWords <= 2 && (sourceInWord >= 4 || currentIndex == null)` → refill during speech (needed at 1.25×/1.5×). The `null` case is the dropped-stream-event path: iOS can suspend the isolate so `currentIndexStream` never delivers the last chunks, and `currentIndex == null` means "queue is about to run dry", not "no idea where we are".
+- A non-starved pass appends exactly 1 word. A starved (`remaining <= 1`) or forced pass rebuilds up to 2 words, yielding 200 ms *before* each synthesis.
+- One refill pass at a time: `_appendNextWordInBackground` returns immediately if `_fillingSessionId == sessionId` and clears it in `finally`. `_fillingSessionId` is per-session, so a session restart can pre-empt a stuck pass.
 - App resume (`didChangeAppLifecycleState.resumed`): audio stopped/paused → `forceRefill` bypasses shielding (max 2 words); audio playing (CarPlay streaming) → shielding stays to avoid stutter.
 
 ## Concurrency & state safety
 
-- "Latest request wins": `_runStartLoop` + `_sessionId` invalidation abort in-flight builds; every async loop re-checks `sessionId == _sessionId`.
-- `_generationFuture` mutex: one deck build / synthesis at a time. `_fillingSessionId` prevents overlapping refill passes.
-- Poison pill: an item failing synthesis twice is added to `_failedItemIds` and skipped; 6 consecutive failures aborts the session with `_reportFailure`.
+- "Latest request wins": `_runStartLoop` + `_sessionId` invalidation abort in-flight builds; every async loop re-checks `sessionId == _sessionId`. `_activeStartFuture` / `_pendingMode` / `_pendingCompleter` queue a mode change requested mid-start instead of dropping it.
+- `_generationFuture` mutex: one deck build / synthesis at a time.
+- Poison pill, two counters. `_consecutiveFailures` (per item, reset by any success) marks an item failed after 2 tries and adds it to `_failedItemIds`; `_sessionConsecutiveFailures` (session-wide) aborts the session via `_reportFailure` at 6 in a row. A failed build also pops the word it had just appended to `_playlistWords` so queue and counters stay in step.
 - `_bgAudioPlayer.play()` is fired un-awaited so it never blocks word skipping.
+- `nextWord()` at the end of the playlist appends the next word before seeking, so a driver skipping forward never hits a dead end.
 
 ## Progress rules
 
@@ -38,4 +42,4 @@ Mode switch and reshuffle use `recordProgress: false` + `_sessionWordsOffset` ca
 
 ## Testing
 
-`test/listen_repeat_*_test.dart` covers buffer timing, failure states, remote control, orientation/Duo. Keep timing constants in tests and code in sync — tests assert on the 6-source layout and refill thresholds.
+`test/listen_repeat_*_test.dart` covers buffer timing, failure states, remote control, orientation/Duo. `test/listen_repeat_remote_control_test.dart` hard-codes the layout: `expect(sources.length, 6)` and `verify(seek(Duration.zero, index: 6))`. Changing `_kSourcesPerWord` means editing those literals and the `AppDelegate.swift` doc block (its "6 audio sources" comment), not just the constant. Keep timing constants in tests and code in sync.

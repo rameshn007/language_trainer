@@ -1,12 +1,15 @@
 # Language Quiz Data Generator Prompt
 
-**Role:** You are a helpful Language Learning Assistant and Data Formatting Expert.
+**Historical prompt, kept for provenance.** `generate_quiz.py` (repo root) now does this job deterministically: it reads `assets/data/source.md` and appends to `assets/data/questions.json`. Prefer the script; use this prompt only when you need something it cannot generate. Whatever produces the JSON, these are the live loading rules (`lib/services/question_loader_service.dart`):
 
-**Goal:** Your task is to extract vocabulary and phrases from the provided Markdown file (written by a student learning Portuguese) and convert them into a structured JSON format suitable for a language learning quiz app.
+- Key aliases are both accepted: `question`/`questionText`, `answer`/`correctAnswer`, `cat`/`category`.
+- `_parseType` (`lib/services/question_loader_service.dart`) resolves exactly four strings — `cloze`, `trueFalse`, `jumble`, `reorderAndConjugate`. Everything else becomes `multipleChoice`: a literal `"multipleChoice"`, typos, and the three engine-only types included. Those three (`vocabularyMatch`, `interrogativeMatch`, `prepositionFill`) do run in the app — `quiz_engine_service.dart` builds them at runtime from `interrogatives.json`, `prepositions.json` and the vocabulary pool — they just cannot be requested from a questions JSON. Adding a real type means editing `_parseType`, `QuestionType` in `lib/models/question.dart`, and the `seen_questions` registration.
+- A string `sourceItem` is matched against the deck (exact, then contains). No match still loads, but as `legacy_<hash>` with empty English — no mastery link, no translation hint. A `sourceItem` given as a **map** is accepted as well.
+- Pin a stable `id` on every object. Without one a question becomes `json_<timestamp>_<index>`, and a map-form `sourceItem` without an id becomes `generated_<timestamp>` — both are re-randomised on every launch, so the question never registers in the `seen_questions` box (it repeats forever) and never links to mastery. If you cannot name the item, omit `sourceItem` rather than inventing one.
 
 **Input Source:**
-- Use the attached/provided Markdown file (e.g., `Ramesh __ Filomena - Aula de português (Portuguese class).md`).
-- This file contains tables with columns like "Portugues", "English", and "Notes".
+- Canonical input is `assets/data/source.md` (pipe-delimited `| Portugues | English | Notes |` rows). The `Ramesh __ Filomena - Aula de português (Portuguese class).md` named below survives only as a `.bak` at the repo root; the readable class notes are `docs/class_materials/classes_6_7/Ramesh __ Filomena - Aula de português (Portuguese class) (6).md` and `(7).md`, and nothing parses them automatically — treat them as research, not a pipeline path.
+The whole pipeline (inbox → `source.md` → `questions.json`) is described in `.agents/skills/expand-vocabulary/SKILL.md`.
 
 **Output Requirements:**
 - Generate a single valid JSON array containing "Question" objects.
@@ -34,7 +37,7 @@ Each item in the array must follow this schema:
     *   Generate a unique string for each question (e.g., `"q1"`, `"q2"`, or `"question_timestamp"`).
 
 2.  **`type`**:
-    *   Must be one of the following strings: `"multipleChoice"`, `"cloze"`, `"trueFalse"`, `"jumble"`.
+    *   Usable strings: `"multipleChoice"`, `"cloze"`, `"trueFalse"`, `"jumble"`, `"reorderAndConjugate"`. Anything else loads as `multipleChoice` — see the loading rules at the top.
     *   *Recommendation:* Use `"multipleChoice"` for most vocabulary items. Use `"cloze"` (fill-in-the-blank) for sentences or phrases.
 
 3.  **`question`**:

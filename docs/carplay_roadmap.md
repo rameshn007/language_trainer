@@ -1,10 +1,13 @@
 # CarPlay Listen & Repeat Roadmap & Implementation Plan
 
-This document tracks the phased architecture, design, and roadmap for the **Listen & Repeat CarPlay integration**. It serves as the persistent single source of truth across development sessions.
+This document records the phased design history of the **Listen & Repeat CarPlay integration** and the phases still open (6-8). It is a record of what was decided, not the live contract: the audio-word layout, buffer/refill contract and TTS concurrency rules are specified in `.agents/skills/listen-repeat-audio/SKILL.md`, and the CarPlay surface (scene gating, 8-row template limit, IPC debouncing, remote commands) in `.agents/skills/carplay-integration/SKILL.md`. Read those first when implementing.
+
+> **Audio layout:** the shipped word layout is **6 sources** — `[pt1, silence1, pt2, silence2, en, silence3]`, `_kSourcesPerWord = 6` in `lib/ui/listen_repeat/listen_repeat_view_model.dart`. The 5-source layout described under Phase 2 is what existed *before* that phase shipped, and the repeated Portuguese added afterwards is what made it 6. Do not implement against the numbers below.
+>
+> Nothing outside the view model computes a source index: `carplay_service.dart` forwards remote skips to `nextWord()` / `previousWord()`, and `AppDelegate.swift` only fires `remoteNextWord` / `remotePreviousWord` (its "6 audio sources" text is a doc comment). A layout change therefore means: the constant + the `assert` in `_generateNextWordSequence`, the odd-is-silence rule, `test/listen_repeat_remote_control_test.dart` (`expect(sources.length, 6)`, `seek(Duration.zero, index: 6)`), that Swift doc block, and `.agents/skills/listen-repeat-audio/SKILL.md`.
 
 ---
 
-## Progress Overview
 
 | Phase | Feature | Status | Description | Primary Files |
 | :--- | :--- | :---: | :--- | :--- |
@@ -33,7 +36,7 @@ This document tracks the phased architecture, design, and roadmap for the **List
 
 ### Phase 2: Steering Wheel & Native Media Controls ✅ (Merged)
 #### Problem
-Each word contains 5 audio sources (`PT`, `silence1`, `silence2`, `EN`, `silence3`) inside a `ConcatenatingAudioSource`.
+Each word then contained 5 audio sources (`PT`, `silence1`, `silence2`, `EN`, `silence3`) inside a `ConcatenatingAudioSource`; the repeated PT added afterwards makes the shipped layout 6 (see the note at the top of this file).
 When the driver presses ⏭️ (Next Track) or ⏮️ (Previous Track) on physical steering wheel controls, iOS invokes `seekToNext()` / `seekToPrevious()` on the playlist, advancing only by 1 silence chunk rather than skipping to the next full word.
 
 #### Technical Design & Architecture
@@ -61,11 +64,11 @@ When the driver presses ⏭️ (Next Track) or ⏮️ (Previous Track) on physic
      }
      ```
 3. **Word Skip Logic (`lib/ui/listen_repeat/listen_repeat_view_model.dart`):**
-   - Ensure `nextWord()` and `previousWord()` correctly seek to `(currentWordIndex ± 1) * _kSourcesPerWord` (where `_kSourcesPerWord = 5`).
+   - Ensure `nextWord()` and `previousWord()` seek by a whole word: `(currentWordIndex ± 1) * _kSourcesPerWord`. The constant's value at the time was 5; read the live value from `listen_repeat_view_model.dart` (now 6) before touching any of this math.
    - If `nextWord()` reaches the end of the playlist, ensure it appends the next word sequence before seeking so the driver never hits a dead end.
 4. **Verification:**
    - Test Control Center / Lock Screen / Steering Wheel remote commands in iOS Simulator.
-   - Verify pressing Next advances by **1 full word** (5 audio sources), never landing on a silence track.
+   - Verify pressing Next advances by **1 full word** (`_kSourcesPerWord` sources, now 6), never landing on a silence track.
 
 ---
 
@@ -141,10 +144,9 @@ Commutes often have background road noise making a single pass hard to hear. Fur
    - Add `ListenRepeatOrder order = ListenRepeatOrder.targetFirst` (`targetFirst`, `promptFirst`).
    - Add `bool doubleListen = false`.
 2. **Audio Sequence Generation (`listen_repeat_view_model.dart`):**
-   - Adjust `_generateNextWordSequence`:
-     - **Standard:** `[PT -> pause -> EN -> pause]`
-     - **Active Recall:** `[EN prompt -> pause to recall & speak -> PT confirmation -> pause]`
-     - **Double Listen:** `[PT -> pause -> PT again -> pause -> EN -> pause]`
+   - Read this phase carefully: the shipped layout is *already* Double Listen — `[pt1, silence1, pt2, silence2, en, silence3]` plays Portuguese twice before the English prompt. The "Standard / Double Listen" pair below is the 5-source-era draft, kept for provenance.
+   - The live delta is ordering: `promptFirst` = `[EN prompt -> pause to recall -> PT (x2 with the repetition pause) -> pause]`, plus whatever `doubleListen` means once doubled-PT is the default.
+   - Any change here moves `_kSourcesPerWord` and the `index % 6` odd-is-silence rule; see the file header for everything that has to move with it.
 3. **CarPlay Setting Item:**
    - Add a toggle or cycling item under Session controls in CarPlay.
 
@@ -152,14 +154,14 @@ Commutes often have background road noise making a single pass hard to hear. Fur
 
 ### Phase 8: Apple CarPlay HIG Layout Streamlining & In-Car Error Recovery
 #### Problem
-- Redundant items ("Replay word" when tapping the word row already replays).
+- ~~Redundant items~~ — resolved: the Replay and Shuffle rows are gone, and tapping the word row replays (`replayCurrentWord()`) while pushing `CPNowPlayingTemplate`.
 - If TTS fails, the driver cannot retry from CarPlay.
 
 #### Technical Design
-1. **Streamlined Player Template:**
-   - Group high-frequency controls:
-     - Section 1: Current Word & Flag Action (2 items)
-     - Section 2: Playback (Pause/Resume, Prev, Next — 3 items)
-     - Section 3: Session (Focus, Speed, Stop — 3 items)
+1. **Streamlined Player Template:** — shipped, this is exactly the current 8-row layout:
+   - Section 1: Current Word & Flag Action (2 items)
+   - Section 2: Playback (Pause/Resume, Previous word, Next word — 3 items)
+   - Section 3: Session (Focus, Speed, Stop — 3 items)
+   Remaining here is only the accepted trade-offs: the 250 ms `updateSections` debounce and the resulting `#N-1` section-header lag.
 2. **In-Car Error Recovery:**
    - When `state.failure != null`, dynamically inject a `"Try Again"` `CPListItem` with detail text `'Tap to retry speech synthesis'` that calls `notifier.startSession()`.
