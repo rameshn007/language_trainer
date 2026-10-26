@@ -34,8 +34,8 @@ lib/                     70 Dart files (67 hand-written + 3 generated .g.dart)
 └── utils/               iphone_duo_helper · circular_reveal_clipper ·
                          tts_text_sanitizer · logger
 
-test/                    32 `*_test.dart` files, 494 tests; 10 of them import helpers/carplay_test_helpers.dart
-assets/vocabulary.json   871 entries → 878 flashcards once `grammar_flashcards.json` (7) is added
+test/                    32 `*_test.dart` files, 498 tests; 10 of them import helpers/carplay_test_helpers.dart
+assets/vocabulary.json   984 entries → 991 flashcards once `grammar_flashcards.json` (7) is added
 assets/data/             source.md · questions.json · combined_questions.json · verbs.csv ·
                          phrases.json · verb_phrases.json · prepositions.json ·
                          interrogatives.json · grammar_rules.json · grammar_flashcards.json ·
@@ -59,7 +59,7 @@ iOS is the platform that is actually exercised (CarPlay, Now Playing, steering-w
 ```bash
 flutter pub get
 flutter run
-flutter test            # 494 tests
+flutter test            # 498 tests
 flutter analyze         # must stay clean
 flutter build ios --no-codesign --simulator
 ```

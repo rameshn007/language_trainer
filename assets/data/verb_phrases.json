@@ -798,5 +798,20 @@
     "verb": "levar",
     "portuguese": "Levo o computador portátil e os cadernos na mochila.",
     "english": "I take the laptop and notebooks in the backpack."
+  },
+  {
+    "verb": "traduzir",
+    "portuguese": "Eu preciso de traduzir este documento para português.",
+    "english": "I need to translate this document into Portuguese."
+  },
+  {
+    "verb": "sentar-se",
+    "portuguese": "Sente-se aqui, por favor, enquanto espera.",
+    "english": "Sit here, please, while you wait."
+  },
+  {
+    "verb": "espirrar",
+    "portuguese": "Tenho alergias e não paro de espirrar.",
+    "english": "I have allergies and I can't stop sneezing."
   }
 ]

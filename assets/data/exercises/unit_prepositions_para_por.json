@@ -1,0 +1,344 @@
+[
+  {
+    "id": "para_por_q1",
+    "questionText": "Ele trabalha muito ____ ganhar mais dinheiro. (objetivo / finalidade)",
+    "options": [
+      "para",
+      "por",
+      "pelo",
+      "pela"
+    ],
+    "correctAnswer": "para",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_1",
+      "portuguese": "Ele trabalha muito para ganhar mais dinheiro.",
+      "english": "He works a lot in order to earn more money.",
+      "notes": "Image 2 - Para (objetivo)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q2",
+    "questionText": "Os meus pais vão viajar ____ Lisboa no próximo sábado. (direção / destino)",
+    "options": [
+      "para",
+      "por",
+      "pelo",
+      "pela"
+    ],
+    "correctAnswer": "para",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_2",
+      "portuguese": "Os meus pais vão para Lisboa.",
+      "english": "My parents are going to Lisbon.",
+      "notes": "Image 2 - Para (direção / destino)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q3",
+    "questionText": "____ nós, este é o melhor restaurante de sushi da cidade. (opinião)",
+    "options": [
+      "Para",
+      "Por",
+      "Pelo",
+      "Pela"
+    ],
+    "correctAnswer": "Para",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_3",
+      "portuguese": "Para nós, este é o melhor restaurante de sushi.",
+      "english": "In our opinion, this is the best sushi restaurant.",
+      "notes": "Image 2 - Para (opinião)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q4",
+    "questionText": "A Marta espirra muito ____ ter alergias ao pólen. (motivo / causa)",
+    "options": [
+      "por",
+      "para",
+      "pelo",
+      "pela"
+    ],
+    "correctAnswer": "por",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_4",
+      "portuguese": "A Marta espirra muito por ter alergias.",
+      "english": "Marta sneezes a lot due to having allergies.",
+      "notes": "Image 2 - Por (motivo)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q5",
+    "questionText": "Os meus pais passam ____ Coimbra no caminho para o norte. (caminho / trajeto)",
+    "options": [
+      "por",
+      "para",
+      "pelo",
+      "pela"
+    ],
+    "correctAnswer": "por",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_5",
+      "portuguese": "Os meus pais passam por Coimbra.",
+      "english": "My parents pass through Coimbra.",
+      "notes": "Image 2 - Por (caminho / trajeto)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q6",
+    "questionText": "Ele vai viajar pelo estrangeiro ____ um mês. (período de tempo / duração)",
+    "options": [
+      "por",
+      "para",
+      "pelo",
+      "pela"
+    ],
+    "correctAnswer": "por",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_6",
+      "portuguese": "Ele vai viajar por um mês.",
+      "english": "He is going to travel for a month.",
+      "notes": "Image 2 - Por (período de tempo)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q7",
+    "questionText": "A esplanada do café fecha ____ onze da noite. (tempo aproximado: por + as)",
+    "options": [
+      "pelas",
+      "para as",
+      "por as",
+      "pelos"
+    ],
+    "correctAnswer": "pelas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_7",
+      "portuguese": "A esplanada fecha pelas onze da noite.",
+      "english": "The terrace closes around eleven at night.",
+      "notes": "Image 2 - Por (tempo aproximado / contração)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q8",
+    "questionText": "No regresso, ele passa ____ supermercado para comprar pão. (por + o)",
+    "options": [
+      "pelo",
+      "para o",
+      "por o",
+      "pela"
+    ],
+    "correctAnswer": "pelo",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_8",
+      "portuguese": "No regresso, ele passa pelo supermercado.",
+      "english": "On the way back, he stops by the supermarket.",
+      "notes": "Image 2 - Contração por + o = pelo"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q9",
+    "questionText": "Como há muito trânsito na autoestrada, temos de ir ____ esta estrada nacional. (trajeto)",
+    "options": [
+      "por",
+      "para",
+      "pelo",
+      "pela"
+    ],
+    "correctAnswer": "por",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_9",
+      "portuguese": "Temos de ir por esta rua.",
+      "english": "We must go through this street.",
+      "notes": "Image 2 - Por (trajeto)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q10",
+    "questionText": "O telemóvel novo tem garantia ____ um ano. (período de tempo)",
+    "options": [
+      "por",
+      "para",
+      "pelo",
+      "pela"
+    ],
+    "correctAnswer": "por",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_10",
+      "portuguese": "O telemóvel tem garantia por um ano.",
+      "english": "The mobile phone has a warranty for one year.",
+      "notes": "Image 2 - Por (duração)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q11",
+    "questionText": "Nós devemos chegar à paragem de autocarro ____ 20:00. (tempo aproximado: por + as)",
+    "options": [
+      "pelas",
+      "para as",
+      "por as",
+      "pelos"
+    ],
+    "correctAnswer": "pelas",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_11",
+      "portuguese": "Nós devemos chegar ao Porto pelas 20:00.",
+      "english": "We should arrive in Porto around 8:00 PM.",
+      "notes": "Image 2 - Por (tempo aproximado)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q12",
+    "questionText": "____ ti, qual é o melhor filme de sempre? (opinião pessoal)",
+    "options": [
+      "Para",
+      "Por",
+      "Pelo",
+      "Pela"
+    ],
+    "correctAnswer": "Para",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_12",
+      "portuguese": "Para ti, qual é o melhor filme de sempre?",
+      "english": "In your opinion, which film is the best ever?",
+      "notes": "Image 2 - Para (opinião)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q13",
+    "questionText": "Eu ando cansado ____ ter muito trabalho esta semana. (motivo)",
+    "options": [
+      "por",
+      "para",
+      "pelo",
+      "pela"
+    ],
+    "correctAnswer": "por",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_13",
+      "portuguese": "Eu ando cansado por ter muito trabalho.",
+      "english": "I am feeling tired because of having a lot of work.",
+      "notes": "Image 2 - Por (motivo)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q14",
+    "questionText": "Faça uma dieta equilibrada ____ melhorar a sua saúde. (objetivo)",
+    "options": [
+      "para",
+      "por",
+      "pelo",
+      "pela"
+    ],
+    "correctAnswer": "para",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "pp_src_14",
+      "portuguese": "Faça uma dieta para melhorar a sua saúde.",
+      "english": "Follow a diet to improve your health.",
+      "notes": "Image 2 - Para (objetivo)"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q15",
+    "questionText": "Na frase \"Os meus pais passam por Coimbra\", a preposição 'por' indica:",
+    "options": [
+      "caminho / trajeto",
+      "objetivo / finalidade",
+      "opinião pessoal",
+      "destino final"
+    ],
+    "correctAnswer": "caminho / trajeto",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "pp_src_15",
+      "portuguese": "Os meus pais passam por Coimbra (caminho/trajeto).",
+      "english": "My parents pass through Coimbra (route/path).",
+      "notes": "Image 2 - Teoria: por indica trajeto"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q16",
+    "questionText": "Na frase \"Ele trabalha muito para ganhar mais dinheiro\", a preposição 'para' indica:",
+    "options": [
+      "objetivo / finalidade",
+      "motivo / causa",
+      "caminho / trajeto",
+      "período de tempo"
+    ],
+    "correctAnswer": "objetivo / finalidade",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "pp_src_16",
+      "portuguese": "Ele trabalha muito para ganhar mais dinheiro (objetivo).",
+      "english": "He works a lot in order to earn more money (purpose).",
+      "notes": "Image 2 - Teoria: para indica objetivo"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q17",
+    "questionText": "Qual é a contração correta da preposição 'por' com o artigo 'os' (por + os peões)?",
+    "options": [
+      "pelos",
+      "paras",
+      "poros",
+      "palos"
+    ],
+    "correctAnswer": "pelos",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "pp_src_17",
+      "portuguese": "por + os = pelos",
+      "english": "por + os = pelos",
+      "notes": "Image 2 - Tabela de contrações: por + os"
+    },
+    "category": "Prepositions: Para vs. Por"
+  },
+  {
+    "id": "para_por_q18",
+    "questionText": "Qual é a contração correta da preposição 'por' com o artigo 'a' (por + a janela)?",
+    "options": [
+      "pela",
+      "para",
+      "pora",
+      "pelo"
+    ],
+    "correctAnswer": "pela",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "pp_src_18",
+      "portuguese": "por + a = pela",
+      "english": "por + a = pela",
+      "notes": "Image 2 - Tabela de contrações: por + a"
+    },
+    "category": "Prepositions: Para vs. Por"
+  }
+]

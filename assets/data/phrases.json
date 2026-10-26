@@ -902,5 +902,485 @@
     "english": "On hot summer days in Lisbon, I use an elegant hand fan.",
     "category": "Everyday Items",
     "notes": "Quotidiano: Leque"
+  },
+  {
+    "portuguese": "você veja",
+    "english": "you see / take a look (formal)",
+    "category": "Grammar & Verbs",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Imprima este relatório, por favor",
+    "english": "Print this report, please (formal)",
+    "category": "Office & Work",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Vai buscar as crianças à escola",
+    "english": "Go pick up the children from school (informal)",
+    "category": "Family",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Abre o livro na página 12",
+    "english": "Open the book to page 12 (informal)",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Sente-se aqui, por favor",
+    "english": "Sit here, please (formal)",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Sente-te aqui, por favor",
+    "english": "Sit here, please (informal)",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Traz pão e legumes do supermercado",
+    "english": "Bring bread and vegetables from the supermarket (informal)",
+    "category": "Food & Drink",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Apague esta luz, por favor. É muito forte!",
+    "english": "Switch off this light, please. It is very strong!",
+    "category": "Household Items",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Aquece o leite, por favor",
+    "english": "Heat the milk, please (informal)",
+    "category": "Food & Drink",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Aqueça o leite, por favor",
+    "english": "Heat the milk, please (formal)",
+    "category": "Food & Drink",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Tira os sapatos do armário",
+    "english": "Take the shoes out of the wardrobe (informal)",
+    "category": "Household Items",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Põe os livros no armário",
+    "english": "Put the books in the cupboard (informal)",
+    "category": "Household Items",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Tome este antibiótico e volte daqui a uma semana",
+    "english": "Take this antibiotic and return in a week (formal)",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Fale mais devagar, por favor, porque não entendo o que diz",
+    "english": "Speak slower, please, because I don't understand what you say (formal)",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Faça uma dieta para melhorar a sua saúde",
+    "english": "Follow a diet to improve your health (formal)",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Tem calma",
+    "english": "Stay calm / Take it easy (informal)",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Toma atenção aos peões",
+    "english": "Watch out for pedestrians (informal)",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Queria enviar esta carta registada para a Irlanda com aviso de receção",
+    "english": "I would like to send this registered letter to Ireland with receipt notice",
+    "category": "Office & Work",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "O Greg vai para o trabalho de metro",
+    "english": "Greg goes to work by metro",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Eu ando cansado por ter muito trabalho",
+    "english": "I have been feeling tired lately due to having a lot of work",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Como há muito trânsito, temos de ir por esta rua",
+    "english": "Because there is a lot of traffic, we have to take this street",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "O Manuel telefona aos pais para saber se eles estão bem",
+    "english": "Manuel calls his parents to find out if they are well",
+    "category": "Family",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Nós devemos chegar ao Porto pelas 20:00",
+    "english": "We should arrive in Porto around 8:00 PM",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Para ti, qual é o melhor filme de sempre?",
+    "english": "In your opinion, which film is the best ever? (informal)",
+    "category": "Hobbies & Leisure",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "para mim",
+    "english": "in my opinion / for me",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "por mim",
+    "english": "fine by me / as for me",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "O telemóvel tem garantia por um ano",
+    "english": "The mobile phone has a warranty for one year",
+    "category": "Everyday Items",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Eu durmo oito horas por dia",
+    "english": "I sleep eight hours a day",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "A Sofia traz sempre uma garrafa de água na mochila",
+    "english": "Sofia always brings a bottle of water in her backpack",
+    "category": "Everyday Items",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "O Paulo pede o telemóvel à mãe",
+    "english": "Paulo asks his mother for the mobile phone",
+    "category": "Family",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "perdidos e achados",
+    "english": "lost and found",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Tu perdes a carteira frequentemente?",
+    "english": "Do you lose your wallet frequently? (informal)",
+    "category": "Everyday Items",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Eu sei falar várias línguas",
+    "english": "I can speak several languages",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Vocês vêm para casa de carro ou a pé?",
+    "english": "Are you coming home by car or on foot? (plural)",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "tomar um comprimido",
+    "english": "to take a pill / tablet",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "levar uma injeção",
+    "english": "to get an injection",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "tomar uma vacina",
+    "english": "to take / receive a vaccine",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "doer a barriga",
+    "english": "to have a stomach ache (belly hurts)",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "fazer um raio-X",
+    "english": "to get / take an X-ray",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "sentir-se enjoado",
+    "english": "to feel nauseous / motion sick",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "apanhar uma constipação",
+    "english": "to catch a cold",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "estou constipado",
+    "english": "I have a cold / I am congested",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Ele vai de autocarro, porque não mora muito perto da farmácia",
+    "english": "He goes by bus, because he doesn't live very close to the pharmacy",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado",
+    "english": "On the way back, he walks home because he needs to stop by the supermarket",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Eu fui na segunda-feira de manhã",
+    "english": "I went on Monday morning",
+    "category": "Time & Numbers",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "e voltei ontem",
+    "english": "and I returned yesterday",
+    "category": "Time & Numbers",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "falharam muitas oportunidades",
+    "english": "they missed many opportunities",
+    "category": "Office & Work",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "para trabalho",
+    "english": "for work",
+    "category": "Office & Work",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Ele tem gripe",
+    "english": "He has the flu",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "dói-me a cabeça",
+    "english": "my head hurts / I have a headache",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "doem-me as pernas",
+    "english": "my legs hurt",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "A Marisa tem férias por duas semanas",
+    "english": "Marisa has vacation for two weeks",
+    "category": "Office & Work",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Para vocês, qual é o melhor filme do Tom Cruise?",
+    "english": "In your (plural) opinion, what is Tom Cruise's best film?",
+    "category": "Hobbies & Leisure",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "O autocarro passa por aquela rua",
+    "english": "The bus passes along that street",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Eu peço uma francesinha ao empregado",
+    "english": "I order a francesinha from the waiter",
+    "category": "Food & Drink",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Sr. Silva, faça mais exercício",
+    "english": "Mr. Silva, do more exercise (formal recommendation)",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Dói-te a cabeça?",
+    "english": "Does your head hurt? / Do you have a headache? (informal)",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Onde vão?",
+    "english": "Where are you (plural) going?",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Quantas horas dormem por dia?",
+    "english": "How many hours do you (plural) sleep a day?",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Podes passar na minha casa na sexta-feira?",
+    "english": "Can you drop by my house on Friday? (informal)",
+    "category": "House & Rooms",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Sentes-te melhor?",
+    "english": "Are you feeling better? (informal)",
+    "category": "Body & Health",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Porque estás irritado?",
+    "english": "Why are you irritated / annoyed? (informal)",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Que horas são?",
+    "english": "What time is it?",
+    "category": "Time & Numbers",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Tu falas bem português?",
+    "english": "Do you speak Portuguese well? (informal)",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "algumas coisas",
+    "english": "some things / a few things",
+    "category": "Everyday Items",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Ainda não consigo falar",
+    "english": "I still can't speak (fluently)",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "numa empresa",
+    "english": "in a company / at a firm",
+    "category": "Office & Work",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "entre eles",
+    "english": "between them / among them",
+    "category": "Family",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Ah, pois",
+    "english": "Ah, of course / Ah, right",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "pois pois",
+    "english": "right right / I see (conversational feedback)",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Estamos quase lá",
+    "english": "We are almost there",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "O jantar está mesmo bom!",
+    "english": "Dinner is really good!",
+    "category": "Food & Drink",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Eu quero o mesmo",
+    "english": "I want the same (thing)",
+    "category": "Food & Drink",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Então, hoje não vens mesmo ao jantar?",
+    "english": "So, are you really not coming to dinner today? (informal)",
+    "category": "Food & Drink",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Claro, eu compreendo",
+    "english": "Of course, I understand",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Vemo-nos",
+    "english": "See you / We'll see each other",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Vou ficar aí durante toda a semana",
+    "english": "I will stay there for the whole week",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Que entusiasmo!",
+    "english": "How exciting! / What enthusiasm!",
+    "category": "Basics",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "de Cabo Verde",
+    "english": "from Cape Verde",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "em Cabo Verde",
+    "english": "in Cape Verde",
+    "category": "Travel & Directions",
+    "notes": "Sheet1 Conversation"
   }
 ]

@@ -1,0 +1,344 @@
+[
+  {
+    "id": "imp_q1",
+    "questionText": "Ele compra os medicamentos. -> (Tu - informal) ____ os medicamentos na farmácia!",
+    "options": [
+      "Compra",
+      "Compre",
+      "Comprei",
+      "Compras"
+    ],
+    "correctAnswer": "Compra",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_1",
+      "portuguese": "Ele compra -> (Tu) Compra os medicamentos na farmácia.",
+      "english": "He buys -> (Tu) Buy the medicine at the pharmacy.",
+      "notes": "Image 3 - Imperativo informal regular (-ar)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q2",
+    "questionText": "Eu procuro o arquivo. -> Fátima, (você - formal) ____ a ficha do doente no arquivo, por favor.",
+    "options": [
+      "procure",
+      "procura",
+      "procuro",
+      "procuras"
+    ],
+    "correctAnswer": "procure",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_2",
+      "portuguese": "Eu procuro -> Fátima, procure a ficha do doente no arquivo.",
+      "english": "Eu procuro -> Fátima, look for the patient file in the archive.",
+      "notes": "Image 3 - Imperativo formal (-ar: -e)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q3",
+    "questionText": "Eu como fruta. -> Rita, (você - formal) ____ alimentos mais saudáveis.",
+    "options": [
+      "coma",
+      "come",
+      "comas",
+      "comi"
+    ],
+    "correctAnswer": "coma",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_3",
+      "portuguese": "Eu como -> Rita, coma alimentos mais saudáveis.",
+      "english": "Eu como -> Rita, eat healthier foods.",
+      "notes": "Image 3 - Imperativo formal (-er: -a)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q4",
+    "questionText": "Eu visto o casaco. -> Sr. António, (você - formal) ____ roupa mais quente.",
+    "options": [
+      "vista",
+      "veste",
+      "vistas",
+      "visto"
+    ],
+    "correctAnswer": "vista",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_4",
+      "portuguese": "Eu visto -> Sr. António, vista roupa mais quente.",
+      "english": "Eu visto -> Mr. António, wear warmer clothes.",
+      "notes": "Image 3 - Imperativo formal (-ir: -a)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q5",
+    "questionText": "Eu ponho o livro. -> Manuel, (você - formal) ____ a carta em cima daquela mesa.",
+    "options": [
+      "ponha",
+      "põe",
+      "pões",
+      "ponho"
+    ],
+    "correctAnswer": "ponha",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_5",
+      "portuguese": "Eu ponho -> Manuel, ponha a carta em cima daquela mesa.",
+      "english": "Eu ponho -> Manuel, put the letter on that table.",
+      "notes": "Image 3 - Imperativo formal (verbo pôr: ponha)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q6",
+    "questionText": "Ele abre o livro. -> (Tu - informal) ____ o livro na página 12.",
+    "options": [
+      "Abre",
+      "Abra",
+      "Abres",
+      "Abri"
+    ],
+    "correctAnswer": "Abre",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_6",
+      "portuguese": "Ele abre -> (Tu) Abre o livro na página 12.",
+      "english": "He opens -> (Tu) Open the book to page 12.",
+      "notes": "Image 3 - Imperativo informal (-ir: abre)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q7",
+    "questionText": "Eu apago a luz. -> Por favor, (você - formal) ____ esta luz porque é muito forte.",
+    "options": [
+      "apague",
+      "apaga",
+      "apagas",
+      "apago"
+    ],
+    "correctAnswer": "apague",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_7",
+      "portuguese": "Eu apago -> Apague esta luz, por favor.",
+      "english": "Eu apago -> Turn off this light, please.",
+      "notes": "Image 3 - Imperativo formal (-ar: apague)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q8",
+    "questionText": "Ele aquece o leite. -> (Tu - informal) ____ o leite, por favor, para o café.",
+    "options": [
+      "Aquece",
+      "Aqueça",
+      "Aqueces",
+      "Aqueci"
+    ],
+    "correctAnswer": "Aquece",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_8",
+      "portuguese": "Ele aquece -> (Tu) Aquece o leite, por favor.",
+      "english": "He heats -> (Tu) Heat the milk, please.",
+      "notes": "Image 3 - Imperativo informal (-er: aquece)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q9",
+    "questionText": "Eu aqueço o leite. -> (Você - formal) ____ o leite, por favor, para o senhor tomar.",
+    "options": [
+      "Aqueça",
+      "Aquece",
+      "Aqueces",
+      "Aquecido"
+    ],
+    "correctAnswer": "Aqueça",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_9",
+      "portuguese": "Eu aqueço -> (Você) Aqueça o leite, por favor.",
+      "english": "Eu aqueço -> (Você) Heat the milk, please.",
+      "notes": "Image 3 - Imperativo formal (-er: aqueça)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q10",
+    "questionText": "Eu imprimo o documento. -> Por favor, (você - formal) ____ este relatório para a reunião.",
+    "options": [
+      "imprima",
+      "imprime",
+      "imprimes",
+      "imprimi"
+    ],
+    "correctAnswer": "imprima",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_10",
+      "portuguese": "Eu imprimo -> Imprima este relatório, por favor.",
+      "english": "Eu imprimo -> Print this report, please.",
+      "notes": "Image 3 - Imperativo formal (-ir: imprima)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q11",
+    "questionText": "Eu tomo o remédio. -> Sr. Silva, (você - formal) ____ este antibiótico e volte daqui a uma semana.",
+    "options": [
+      "tome",
+      "toma",
+      "tomas",
+      "tomei"
+    ],
+    "correctAnswer": "tome",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_11",
+      "portuguese": "Eu tomo -> Tome este antibiótico e volte daqui a uma semana.",
+      "english": "Eu tomo -> Take this antibiotic and return in a week.",
+      "notes": "Image 3 - Imperativo formal (-ar: tome)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q12",
+    "questionText": "Eu falo devagar. -> (Você - formal) ____ mais devagar, por favor, porque não entendo o que diz.",
+    "options": [
+      "Fale",
+      "Fala",
+      "Falas",
+      "Falou"
+    ],
+    "correctAnswer": "Fale",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_12",
+      "portuguese": "Eu falo -> Fale mais devagar, por favor.",
+      "english": "Eu falo -> Speak slower, please.",
+      "notes": "Image 3 - Imperativo formal (-ar: fale)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q13",
+    "questionText": "Eu faço uma dieta. -> (Você - formal) ____ uma dieta equilibrada para melhorar a sua saúde.",
+    "options": [
+      "Faça",
+      "Faz",
+      "Fazes",
+      "Fazia"
+    ],
+    "correctAnswer": "Faça",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_13",
+      "portuguese": "Eu faço -> Faça uma dieta para melhorar a sua saúde.",
+      "english": "Eu faço -> Follow a diet to improve your health.",
+      "notes": "Image 3 - Imperativo formal (fazer: faça)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q14",
+    "questionText": "Ele tem calma. -> João, (tu - informal) ____ calma, tudo vai correr bem.",
+    "options": [
+      "tem",
+      "tenha",
+      "tens",
+      "teve"
+    ],
+    "correctAnswer": "tem",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_14",
+      "portuguese": "Ele tem -> (Tu) Tem calma.",
+      "english": "He has -> (Tu) Stay calm.",
+      "notes": "Image 3 - Imperativo informal (ter: tem)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q15",
+    "questionText": "Ele tira os sapatos. -> (Tu - informal) ____ os sapatos do armário antes de sair.",
+    "options": [
+      "Tira",
+      "Tire",
+      "Tiras",
+      "Tirou"
+    ],
+    "correctAnswer": "Tira",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_15",
+      "portuguese": "Ele tira -> (Tu) Tira os sapatos do armário.",
+      "english": "He takes -> (Tu) Take the shoes out of the cupboard.",
+      "notes": "Image 3 - Imperativo informal (-ar: tira)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q16",
+    "questionText": "Ele põe os livros. -> (Tu - informal) ____ os livros no armário da sala.",
+    "options": [
+      "Põe",
+      "Ponha",
+      "Pões",
+      "Pôs"
+    ],
+    "correctAnswer": "Põe",
+    "type": "cloze",
+    "sourceItem": {
+      "id": "imp_src_16",
+      "portuguese": "Ele põe -> (Tu) Põe os livros no armário.",
+      "english": "He puts -> (Tu) Put the books in the cupboard.",
+      "notes": "Image 3 - Imperativo informal (pôr: põe)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q17",
+    "questionText": "Como se forma a afirmativa do imperativo informal (tu) em português europeu?",
+    "options": [
+      "A partir da 3.ª pessoa do singular do Presente do Indicativo",
+      "A partir da 1.ª pessoa do singular do Presente do Indicativo",
+      "A partir do Infinitivo retirando o -r",
+      "A partir do Pretérito Perfeito Simples"
+    ],
+    "correctAnswer": "A partir da 3.ª pessoa do singular do Presente do Indicativo",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "imp_src_17",
+      "portuguese": "Imperativo informal (tu) forma-se a partir da 3.ª pessoa do singular do Presente do Indicativo.",
+      "english": "Informal imperative (tu) is formed from the 3rd person singular of the Present Indicative.",
+      "notes": "Image 3 - Regra gramatical: Imperativo informal (tu)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  },
+  {
+    "id": "imp_q18",
+    "questionText": "Como se forma o imperativo formal (você) para verbos terminados em -ar (ex: procurar)?",
+    "options": [
+      "1.ª pessoa do singular retirando -o e adicionando -e (Eu procuro -> procure)",
+      "3.ª pessoa do singular mantendo a terminação -a (Ele procura -> procura)",
+      "Adicionando -i à raiz do verbo (procuri)",
+      "Mantendo o infinitivo completo (procurar)"
+    ],
+    "correctAnswer": "1.ª pessoa do singular retirando -o e adicionando -e (Eu procuro -> procure)",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "imp_src_18",
+      "portuguese": "Imperativo formal (você) para verbos em -ar: Eu procuro - o + e -> procure.",
+      "english": "Formal imperative (você) for -ar verbs: Eu procuro - o + e -> procure.",
+      "notes": "Image 3 - Regra gramatical: Imperativo formal (você)"
+    },
+    "category": "Imperative: Tu vs. Você"
+  }
+]
