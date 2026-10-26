@@ -58,7 +58,7 @@ No backend: TTS, STT and quiz generation run on-device.
 
 ## Verify before finishing
 
-- `flutter test` — all must pass (497 tests in 32 files as of Oct 2026; the count drifts, trust the run over this line) · `flutter analyze` — zero issues · `flutter build ios --no-codesign --simulator` for native changes.
+- `flutter test` — all must pass (498 tests in 32 files as of Oct 2026; the count drifts, trust the run over this line) · `flutter analyze` — zero issues · `flutter build ios --no-codesign --simulator` for native changes.
 - Run the suite twice when touching flashcards or layout: unseeded deck shuffle and audio pacing are non-deterministic, so one green run proves less than it looks like.
 - CarPlay/audio tests need `CarPlayService().resetForTesting()` in `tearDown` (cancels section-update timers, container subscriptions, debounce timestamps).
 - Any test that sets `IPhoneDuoHelper.debugOverride` must reset it (`IPhoneDuoHelper.resetForTesting()`, e.g. in `addTearDown`), or the override leaks into later layout tests; also reset `tester.view` size/padding after changing it.

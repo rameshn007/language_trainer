@@ -126,12 +126,12 @@ void main() {
       expect(verbSet, contains('carregar'));
     });
 
-    test('verbs.csv includes atender, tirar, herdar, and praticar with all conjugation fields populated', () {
+    test('verbs.csv includes traduzir, sentar, espirrar, herdar, and praticar with all conjugation fields populated', () {
       final verbsFile = File('assets/data/verbs.csv');
       expect(verbsFile.existsSync(), isTrue);
       final lines = verbsFile.readAsLinesSync();
 
-      for (final verb in ['atender', 'tirar', 'herdar', 'praticar']) {
+      for (final verb in ['traduzir', 'sentar', 'espirrar', 'herdar', 'praticar', 'atender', 'tirar']) {
         final verbLine = lines.firstWhere((l) => l.startsWith('$verb,'), orElse: () => '');
         expect(verbLine, isNotEmpty, reason: 'verbs.csv must contain an entry for $verb');
         final parts = verbLine.split(',');
@@ -157,6 +157,32 @@ void main() {
         final answer = q['answer'] ?? q['correctAnswer'];
         expect(options.contains(answer), isTrue,
             reason: 'Question $id: answer "$answer" must be in options');
+      }
+    });
+
+    test('combined_questions.json has zero question text overlap with any exercise unit file', () {
+      final combinedFile = File('assets/data/combined_questions.json');
+      expect(combinedFile.existsSync(), isTrue);
+      final List<dynamic> combinedList = jsonDecode(combinedFile.readAsStringSync());
+      final combinedQuestions = combinedList
+          .map((q) => (q['question'] ?? q['questionText'] ?? '').toString().trim())
+          .where((t) => t.isNotEmpty)
+          .toSet();
+
+      final exercisesDir = Directory('assets/data/exercises');
+      expect(exercisesDir.existsSync(), isTrue);
+
+      for (final entity in exercisesDir.listSync()) {
+        if (entity is File && entity.path.endsWith('.json')) {
+          final List<dynamic> exerciseList = jsonDecode(entity.readAsStringSync());
+          for (final eq in exerciseList) {
+            final text = (eq['questionText'] ?? eq['question'] ?? '').toString().trim();
+            if (text.isNotEmpty) {
+              expect(combinedQuestions.contains(text), isFalse,
+                  reason: 'Question "$text" in ${entity.path} must not be duplicated in combined_questions.json');
+            }
+          }
+        }
       }
     });
 
