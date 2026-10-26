@@ -120,6 +120,24 @@ class ExerciseListScreen extends StatelessWidget {
       'path': 'assets/data/exercises/unit_everyday_items.json',
       'icon': 'school',
     },
+    {
+      'title': 'Unit 16: Question Formation',
+      'subtitle': 'Faça perguntas para as respostas dadas (Quem, Onde, Porque, Como...)',
+      'path': 'assets/data/exercises/unit_question_formation.json',
+      'icon': 'chat',
+    },
+    {
+      'title': 'Unit 17: Prepositions: Para vs. Por',
+      'subtitle': 'Objetivo, destino, opinião vs. motivo, trajeto, duração e contrações',
+      'path': 'assets/data/exercises/unit_prepositions_para_por.json',
+      'icon': 'school',
+    },
+    {
+      'title': 'Unit 18: The Imperative: Tu vs. Você',
+      'subtitle': 'Formas afirmativas formais e informais: conselhos, pedidos e instruções',
+      'path': 'assets/data/exercises/unit_imperative_formal_informal.json',
+      'icon': 'build',
+    },
   ];
 
   @override

@@ -299,6 +299,7 @@ class QuizViewModel extends Notifier<QuizState> {
     final List<Question> generalJsonPool = [];
     final List<Question> interrogPool = [];
     final List<Question> prepPool = [];
+    final List<Question> exercisePool = [];
 
     if (!vocabOnly) {
       builderPool.addAll(
@@ -319,6 +320,24 @@ class QuizViewModel extends Notifier<QuizState> {
       generalJsonPool.addAll(
         await _loader.loadQuestions(
           'assets/data/combined_questions.json',
+          items,
+        ),
+      );
+      exercisePool.addAll(
+        await _loader.loadQuestions(
+          'assets/data/exercises/unit_question_formation.json',
+          items,
+        ),
+      );
+      exercisePool.addAll(
+        await _loader.loadQuestions(
+          'assets/data/exercises/unit_prepositions_para_por.json',
+          items,
+        ),
+      );
+      exercisePool.addAll(
+        await _loader.loadQuestions(
+          'assets/data/exercises/unit_imperative_formal_informal.json',
           items,
         ),
       );
@@ -365,6 +384,7 @@ class QuizViewModel extends Notifier<QuizState> {
         onlyUnseen(generalJsonPool),
         onlyUnseen(interrogPool),
         onlyUnseen(prepPool),
+        onlyUnseen(exercisePool),
       ]);
     }
 

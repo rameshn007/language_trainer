@@ -76046,5 +76046,4219 @@
     "answer": "depois de",
     "sourceItem": "depois de",
     "cat": "General"
+  },
+  {
+    "id": "q_5433",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o escritório'?",
+    "options": [
+      "Here",
+      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
+      "the home office / study",
+      "Potato"
+    ],
+    "answer": "the home office / study",
+    "sourceItem": "o escritório",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5434",
+    "type": "multipleChoice",
+    "question": "How do you say 'the home office / study' in Portuguese?",
+    "options": [
+      "Velho",
+      "os pés",
+      "o escritório",
+      "Está vento"
+    ],
+    "answer": "o escritório",
+    "sourceItem": "o escritório",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5435",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o andar / piso'?",
+    "options": [
+      "Reservation",
+      "Retirement",
+      "How funny",
+      "the floor / storey"
+    ],
+    "answer": "the floor / storey",
+    "sourceItem": "o andar / piso",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5436",
+    "type": "multipleChoice",
+    "question": "How do you say 'the floor / storey' in Portuguese?",
+    "options": [
+      "o andar / piso",
+      "o tornozelo",
+      "ir ate a rua",
+      "Vai pentear macacos"
+    ],
+    "answer": "o andar / piso",
+    "sourceItem": "o andar / piso",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5437",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o ______ / piso' (the floor / storey)",
+    "options": [
+      "sorte",
+      "antigo",
+      "andar",
+      "presencial"
+    ],
+    "answer": "andar",
+    "sourceItem": "o andar / piso",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5438",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a tomada'?",
+    "options": [
+      "Young",
+      "What time do you get up?",
+      "the wall socket / outlet",
+      "Departures"
+    ],
+    "answer": "the wall socket / outlet",
+    "sourceItem": "a tomada",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5439",
+    "type": "multipleChoice",
+    "question": "How do you say 'the wall socket / outlet' in Portuguese?",
+    "options": [
+      "O sapo é verde e rugoso.",
+      "a tomada",
+      "A praça",
+      "sem"
+    ],
+    "answer": "a tomada",
+    "sourceItem": "a tomada",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5440",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as chaves'?",
+    "options": [
+      "the keys",
+      "before",
+      "to say / to tell",
+      "Open"
+    ],
+    "answer": "the keys",
+    "sourceItem": "as chaves",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5441",
+    "type": "multipleChoice",
+    "question": "How do you say 'the keys' in Portuguese?",
+    "options": [
+      "Que entusiasmo!",
+      "Siga em frente",
+      "Vale a pena",
+      "as chaves"
+    ],
+    "answer": "as chaves",
+    "sourceItem": "as chaves",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5442",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o leque'?",
+    "options": [
+      "The strike",
+      "Do you have a smaller size?",
+      "He knows",
+      "the hand fan"
+    ],
+    "answer": "the hand fan",
+    "sourceItem": "o leque",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5443",
+    "type": "multipleChoice",
+    "question": "How do you say 'the hand fan' in Portuguese?",
+    "options": [
+      "Tenho uma reserva",
+      "o leque",
+      "O Diretor",
+      "No verão faz muito calor."
+    ],
+    "answer": "o leque",
+    "sourceItem": "o leque",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5444",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'caminhada'?",
+    "options": [
+      "I don't know",
+      "Of course not",
+      "walk / hike / hiking",
+      "The bridge"
+    ],
+    "answer": "walk / hike / hiking",
+    "sourceItem": "caminhada",
+    "cat": "General"
+  },
+  {
+    "id": "q_5445",
+    "type": "multipleChoice",
+    "question": "How do you say 'walk / hike / hiking' in Portuguese?",
+    "options": [
+      "caminhada",
+      "Tome este antibiótico e volte daqui a uma semana",
+      "O planeta",
+      "Telefona-me antes de saíres."
+    ],
+    "answer": "caminhada",
+    "sourceItem": "caminhada",
+    "cat": "General"
+  },
+  {
+    "id": "q_5446",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'traduzir'?",
+    "options": [
+      "to translate",
+      "Sometimes",
+      "also what \\+ verb?  What do you do this weekend? (specific) What do you do on weekends? (general)",
+      "The invoice"
+    ],
+    "answer": "to translate",
+    "sourceItem": "traduzir",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5447",
+    "type": "multipleChoice",
+    "question": "How do you say 'to translate' in Portuguese?",
+    "options": [
+      "No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado",
+      "A irmã",
+      "traduzir",
+      "Tive boa nota"
+    ],
+    "answer": "traduzir",
+    "sourceItem": "traduzir",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5448",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'dizer'?",
+    "options": [
+      "I have many family recipes",
+      "The food is delicious",
+      "to say / to tell",
+      "Write in your notebook"
+    ],
+    "answer": "to say / to tell",
+    "sourceItem": "dizer",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5449",
+    "type": "multipleChoice",
+    "question": "How do you say 'to say / to tell' in Portuguese?",
+    "options": [
+      "dizer",
+      "penúltima",
+      "a torneira",
+      "A chave"
+    ],
+    "answer": "dizer",
+    "sourceItem": "dizer",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5450",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'fazer'?",
+    "options": [
+      "u",
+      "It is cute/nice",
+      "to do / to make",
+      "I have lunch with colleagues"
+    ],
+    "answer": "to do / to make",
+    "sourceItem": "fazer",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5451",
+    "type": "multipleChoice",
+    "question": "How do you say 'to do / to make' in Portuguese?",
+    "options": [
+      "Cantor",
+      "fazer",
+      "O céu está limpo",
+      "O que fazes?"
+    ],
+    "answer": "fazer",
+    "sourceItem": "fazer",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5452",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'pois'?",
+    "options": [
+      "Where is the barco stop?",
+      "because / since / as",
+      "I am going to have an online meeting",
+      "I go to work by train."
+    ],
+    "answer": "because / since / as",
+    "sourceItem": "pois",
+    "cat": "General"
+  },
+  {
+    "id": "q_5453",
+    "type": "multipleChoice",
+    "question": "How do you say 'because / since / as' in Portuguese?",
+    "options": [
+      "A portagem",
+      "Café",
+      "pois",
+      "a frigideira"
+    ],
+    "answer": "pois",
+    "sourceItem": "pois",
+    "cat": "General"
+  },
+  {
+    "id": "q_5454",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'vejo'?",
+    "options": [
+      "to lend",
+      "small vegetable gardens (closed vegetable garden)",
+      "And with you? (informal)",
+      "I see"
+    ],
+    "answer": "I see",
+    "sourceItem": "vejo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5455",
+    "type": "multipleChoice",
+    "question": "How do you say 'I see' in Portuguese?",
+    "options": [
+      "ninguém",
+      "arrumam a sala",
+      "Agora mesmo",
+      "vejo"
+    ],
+    "answer": "vejo",
+    "sourceItem": "vejo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5456",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'você veja'?",
+    "options": [
+      "nobody / no one",
+      "The sky is clear",
+      "you see / take a look (formal)",
+      "I am here to help you"
+    ],
+    "answer": "you see / take a look (formal)",
+    "sourceItem": "você veja",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5457",
+    "type": "multipleChoice",
+    "question": "How do you say 'you see / take a look (formal)' in Portuguese?",
+    "options": [
+      "Concordo",
+      "relatório",
+      "São catorze horas",
+      "você veja"
+    ],
+    "answer": "você veja",
+    "sourceItem": "você veja",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5458",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'análises'?",
+    "options": [
+      "Are you sad?",
+      "The backpack",
+      "The football field",
+      "blood tests / medical tests"
+    ],
+    "answer": "blood tests / medical tests",
+    "sourceItem": "análises",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5459",
+    "type": "multipleChoice",
+    "question": "How do you say 'blood tests / medical tests' in Portuguese?",
+    "options": [
+      "análises",
+      "Amar",
+      "o forno",
+      "Vire à direita"
+    ],
+    "answer": "análises",
+    "sourceItem": "análises",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5460",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ponha'?",
+    "options": [
+      "the pen",
+      "I like this song",
+      "put! / you put (formal imperative)",
+      "The crosswalk"
+    ],
+    "answer": "put! / you put (formal imperative)",
+    "sourceItem": "ponha",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5461",
+    "type": "multipleChoice",
+    "question": "How do you say 'put! / you put (formal imperative)' in Portuguese?",
+    "options": [
+      "ponha",
+      "cheia",
+      "está sol",
+      "Ela veste-se muito bem."
+    ],
+    "answer": "ponha",
+    "sourceItem": "ponha",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5462",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a bagagem'?",
+    "options": [
+      "Go to the doctor regularly",
+      "Kisses",
+      "To run",
+      "luggage / baggage"
+    ],
+    "answer": "luggage / baggage",
+    "sourceItem": "a bagagem",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5463",
+    "type": "multipleChoice",
+    "question": "How do you say 'luggage / baggage' in Portuguese?",
+    "options": [
+      "O prejuízo",
+      "Eu gosto ler",
+      "Vai pentear macacos",
+      "a bagagem"
+    ],
+    "answer": "a bagagem",
+    "sourceItem": "a bagagem",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5464",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o relatório'?",
+    "options": [
+      "Accounting",
+      "Last (Past) week, day before yesterday, yesterday, today, tomorrow, day after tomorrow, next week",
+      "the report",
+      "Red wine"
+    ],
+    "answer": "the report",
+    "sourceItem": "o relatório",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5465",
+    "type": "multipleChoice",
+    "question": "How do you say 'the report' in Portuguese?",
+    "options": [
+      "o relatório",
+      "O Diário de Notícias",
+      "esperar que",
+      "O teu"
+    ],
+    "answer": "o relatório",
+    "sourceItem": "o relatório",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5466",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Imprima este relatório, por favor'?",
+    "options": [
+      "the afternoon or da tarde, but after a time it is de tarde",
+      "How long have you been in Portugal?",
+      "Print this report, please (formal)",
+      "To win"
+    ],
+    "answer": "Print this report, please (formal)",
+    "sourceItem": "Imprima este relatório, por favor",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5467",
+    "type": "multipleChoice",
+    "question": "How do you say 'Print this report, please (formal)' in Portuguese?",
+    "options": [
+      "tesouro",
+      "Imprima este relatório, por favor",
+      "muito tranquila",
+      "lojas"
+    ],
+    "answer": "Imprima este relatório, por favor",
+    "sourceItem": "Imprima este relatório, por favor",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5468",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ este relatório, por favor' (Print this report, please (formal))",
+    "options": [
+      "tinto",
+      "aquele",
+      "segundo",
+      "Imprima"
+    ],
+    "answer": "Imprima",
+    "sourceItem": "Imprima este relatório, por favor",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5469",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Vai buscar as crianças à escola'?",
+    "options": [
+      "the mirror",
+      "Go pick up the children from school (informal)",
+      "I would like to go with you to the concert",
+      "Life is beautiful"
+    ],
+    "answer": "Go pick up the children from school (informal)",
+    "sourceItem": "Vai buscar as crianças à escola",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5470",
+    "type": "multipleChoice",
+    "question": "How do you say 'Go pick up the children from school (informal)' in Portuguese?",
+    "options": [
+      "A atleta olímpica pratica natação há mais de dez anos",
+      "O sabonete",
+      "O teu",
+      "Vai buscar as crianças à escola"
+    ],
+    "answer": "Vai buscar as crianças à escola",
+    "sourceItem": "Vai buscar as crianças à escola",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5471",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Vai ______ as crianças à escola' (Go pick up the children from school (informal))",
+    "options": [
+      "falo",
+      "vezes",
+      "buscar",
+      "vens"
+    ],
+    "answer": "buscar",
+    "sourceItem": "Vai buscar as crianças à escola",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5472",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Abre o livro na página 12'?",
+    "options": [
+      "your husband",
+      "This city has as much history as Lisbon",
+      "Open the book to page 12 (informal)",
+      "I read Portuguese newspapers"
+    ],
+    "answer": "Open the book to page 12 (informal)",
+    "sourceItem": "Abre o livro na página 12",
+    "cat": "General"
+  },
+  {
+    "id": "q_5473",
+    "type": "multipleChoice",
+    "question": "How do you say 'Open the book to page 12 (informal)' in Portuguese?",
+    "options": [
+      "Abre o livro na página 12",
+      "ventoso",
+      "Cheguei antes de ti.",
+      "Um dia"
+    ],
+    "answer": "Abre o livro na página 12",
+    "sourceItem": "Abre o livro na página 12",
+    "cat": "General"
+  },
+  {
+    "id": "q_5474",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Abre o ______ na página 12' (Open the book to page 12 (informal))",
+    "options": [
+      "cansado",
+      "Atenciosamente",
+      "livro",
+      "três"
+    ],
+    "answer": "livro",
+    "sourceItem": "Abre o livro na página 12",
+    "cat": "General"
+  },
+  {
+    "id": "q_5475",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Sente-se aqui, por favor'?",
+    "options": [
+      "Which month are we in?",
+      "the chest",
+      "much cheap",
+      "Sit here, please (formal)"
+    ],
+    "answer": "Sit here, please (formal)",
+    "sourceItem": "Sente-se aqui, por favor",
+    "cat": "General"
+  },
+  {
+    "id": "q_5476",
+    "type": "multipleChoice",
+    "question": "How do you say 'Sit here, please (formal)' in Portuguese?",
+    "options": [
+      "porque estou doente",
+      "Boa noite",
+      "a janela",
+      "Sente-se aqui, por favor"
+    ],
+    "answer": "Sente-se aqui, por favor",
+    "sourceItem": "Sente-se aqui, por favor",
+    "cat": "General"
+  },
+  {
+    "id": "q_5477",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ aqui, por favor' (Sit here, please (formal))",
+    "options": [
+      "custa",
+      "casa",
+      "Sente-se",
+      "mais"
+    ],
+    "answer": "Sente-se",
+    "sourceItem": "Sente-se aqui, por favor",
+    "cat": "General"
+  },
+  {
+    "id": "q_5478",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Sente-te aqui, por favor'?",
+    "options": [
+      "cross",
+      "Sit here, please (informal)",
+      "dezanove e quinze (sete e um quarto da tarde)",
+      "I have a fever"
+    ],
+    "answer": "Sit here, please (informal)",
+    "sourceItem": "Sente-te aqui, por favor",
+    "cat": "General"
+  },
+  {
+    "id": "q_5479",
+    "type": "multipleChoice",
+    "question": "How do you say 'Sit here, please (informal)' in Portuguese?",
+    "options": [
+      "A borracha",
+      "esplanada",
+      "Sente-te aqui, por favor",
+      "O sinal"
+    ],
+    "answer": "Sente-te aqui, por favor",
+    "sourceItem": "Sente-te aqui, por favor",
+    "cat": "General"
+  },
+  {
+    "id": "q_5480",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Sente-te ______ por favor' (Sit here, please (informal))",
+    "options": [
+      "gravação",
+      "aqui",
+      "Estou",
+      "logo"
+    ],
+    "answer": "aqui",
+    "sourceItem": "Sente-te aqui, por favor",
+    "cat": "General"
+  },
+  {
+    "id": "q_5481",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Traz pão e legumes do supermercado'?",
+    "options": [
+      "I watch movies in Portuguese",
+      "I go to work",
+      "Bring bread and vegetables from the supermarket (informal)",
+      "the knife"
+    ],
+    "answer": "Bring bread and vegetables from the supermarket (informal)",
+    "sourceItem": "Traz pão e legumes do supermercado",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5482",
+    "type": "multipleChoice",
+    "question": "How do you say 'Bring bread and vegetables from the supermarket (informal)' in Portuguese?",
+    "options": [
+      "comer fora",
+      "Onde é a casa de banho?",
+      "Traz pão e legumes do supermercado",
+      "Correr"
+    ],
+    "answer": "Traz pão e legumes do supermercado",
+    "sourceItem": "Traz pão e legumes do supermercado",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5483",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Traz pão e legumes do ______' (Bring bread and vegetables from the supermarket (informal))",
+    "options": [
+      "caro",
+      "supermercado",
+      "portuguesa",
+      "autocarro"
+    ],
+    "answer": "supermercado",
+    "sourceItem": "Traz pão e legumes do supermercado",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5484",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Apague esta luz, por favor. É muito forte!'?",
+    "options": [
+      "I wake up at 7 AM",
+      "Lunch",
+      "The square",
+      "Switch off this light, please. It is very strong!"
+    ],
+    "answer": "Switch off this light, please. It is very strong!",
+    "sourceItem": "Apague esta luz, por favor. É muito forte!",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5485",
+    "type": "multipleChoice",
+    "question": "How do you say 'Switch off this light, please. It is very strong!' in Portuguese?",
+    "options": [
+      "O professor é exigente",
+      "O oeste",
+      "Apague esta luz, por favor. É muito forte!",
+      "Tu estás"
+    ],
+    "answer": "Apague esta luz, por favor. É muito forte!",
+    "sourceItem": "Apague esta luz, por favor. É muito forte!",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5486",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Apague esta luz, por favor. É muito ______' (Switch off this light, please. It is very strong!)",
+    "options": [
+      "Quem…",
+      "médico",
+      "me,te,se,nos,se",
+      "forte"
+    ],
+    "answer": "forte",
+    "sourceItem": "Apague esta luz, por favor. É muito forte!",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5487",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Aquece o leite, por favor'?",
+    "options": [
+      "in",
+      "That (f)",
+      "Heat the milk, please (informal)",
+      "Since"
+    ],
+    "answer": "Heat the milk, please (informal)",
+    "sourceItem": "Aquece o leite, por favor",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5488",
+    "type": "multipleChoice",
+    "question": "How do you say 'Heat the milk, please (informal)' in Portuguese?",
+    "options": [
+      "Quarto duplo ou individual?",
+      "Aquece o leite, por favor",
+      "eles sabem tocar guitarra",
+      "caminhada"
+    ],
+    "answer": "Aquece o leite, por favor",
+    "sourceItem": "Aquece o leite, por favor",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5489",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ o leite, por favor' (Heat the milk, please (informal))",
+    "options": [
+      "Tenho",
+      "Aquece",
+      "16h45",
+      "Estar"
+    ],
+    "answer": "Aquece",
+    "sourceItem": "Aquece o leite, por favor",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5490",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Aqueça o leite, por favor'?",
+    "options": [
+      "in the afternoon",
+      "both",
+      "Heat the milk, please (formal)",
+      "To think"
+    ],
+    "answer": "Heat the milk, please (formal)",
+    "sourceItem": "Aqueça o leite, por favor",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5491",
+    "type": "multipleChoice",
+    "question": "How do you say 'Heat the milk, please (formal)' in Portuguese?",
+    "options": [
+      "Aqueça o leite, por favor",
+      "A universidade é antiga",
+      "Feio",
+      "O duche"
+    ],
+    "answer": "Aqueça o leite, por favor",
+    "sourceItem": "Aqueça o leite, por favor",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5492",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Aqueça o leite, por ______' (Heat the milk, please (formal))",
+    "options": [
+      "sufficiente",
+      "favor",
+      "vida",
+      "tudo"
+    ],
+    "answer": "favor",
+    "sourceItem": "Aqueça o leite, por favor",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5493",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Tira os sapatos do armário'?",
+    "options": [
+      "every weekend",
+      "Take the shoes out of the wardrobe (informal)",
+      "What time is it?",
+      "Whenever I can"
+    ],
+    "answer": "Take the shoes out of the wardrobe (informal)",
+    "sourceItem": "Tira os sapatos do armário",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5494",
+    "type": "multipleChoice",
+    "question": "How do you say 'Take the shoes out of the wardrobe (informal)' in Portuguese?",
+    "options": [
+      "Cozinheiro",
+      "Apanhei o comboio errado hoje.",
+      "Tira os sapatos do armário",
+      "dezembro"
+    ],
+    "answer": "Tira os sapatos do armário",
+    "sourceItem": "Tira os sapatos do armário",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5495",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Tira os ______ do armário' (Take the shoes out of the wardrobe (informal))",
+    "options": [
+      "minhas",
+      "Onde",
+      "sapatos",
+      "cento"
+    ],
+    "answer": "sapatos",
+    "sourceItem": "Tira os sapatos do armário",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5496",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Põe os livros no armário'?",
+    "options": [
+      "Your (f)",
+      "I’m used to wake up early",
+      "The plane is going to take off now",
+      "Put the books in the cupboard (informal)"
+    ],
+    "answer": "Put the books in the cupboard (informal)",
+    "sourceItem": "Põe os livros no armário",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5497",
+    "type": "multipleChoice",
+    "question": "How do you say 'Put the books in the cupboard (informal)' in Portuguese?",
+    "options": [
+      "pronomes pessoais",
+      "o espelho",
+      "Põe os livros no armário",
+      "neblina"
+    ],
+    "answer": "Põe os livros no armário",
+    "sourceItem": "Põe os livros no armário",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5498",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Põe os livros no ______' (Put the books in the cupboard (informal))",
+    "options": [
+      "Preposição",
+      "Chumbei",
+      "baratas",
+      "armário"
+    ],
+    "answer": "armário",
+    "sourceItem": "Põe os livros no armário",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5499",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Tome este antibiótico e volte daqui a uma semana'?",
+    "options": [
+      "much cheap",
+      "100,000",
+      "Cockroaches come out at night.",
+      "Take this antibiotic and return in a week (formal)"
+    ],
+    "answer": "Take this antibiotic and return in a week (formal)",
+    "sourceItem": "Tome este antibiótico e volte daqui a uma semana",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5500",
+    "type": "multipleChoice",
+    "question": "How do you say 'Take this antibiotic and return in a week (formal)' in Portuguese?",
+    "options": [
+      "O sofá",
+      "mil duzentos e trinta",
+      "sobre",
+      "Tome este antibiótico e volte daqui a uma semana"
+    ],
+    "answer": "Tome este antibiótico e volte daqui a uma semana",
+    "sourceItem": "Tome este antibiótico e volte daqui a uma semana",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5501",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Tome este ______ e volte daqui a uma semana' (Take this antibiotic and return in a week (formal))",
+    "options": [
+      "estações",
+      "antibiótico",
+      "hora",
+      "loja"
+    ],
+    "answer": "antibiótico",
+    "sourceItem": "Tome este antibiótico e volte daqui a uma semana",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5502",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Fale mais devagar, por favor, porque não entendo o que diz'?",
+    "options": [
+      "Speak slower, please, because I don't understand what you say (formal)",
+      "I only go to the beach when the weather is good",
+      "to wish",
+      "complete"
+    ],
+    "answer": "Speak slower, please, because I don't understand what you say (formal)",
+    "sourceItem": "Fale mais devagar, por favor, porque não entendo o que diz",
+    "cat": "General"
+  },
+  {
+    "id": "q_5503",
+    "type": "multipleChoice",
+    "question": "How do you say 'Speak slower, please, because I don't understand what you say (formal)' in Portuguese?",
+    "options": [
+      "Fale mais devagar, por favor, porque não entendo o que diz",
+      "Imprima este relatório, por favor",
+      "Conhecer",
+      "e assim"
+    ],
+    "answer": "Fale mais devagar, por favor, porque não entendo o que diz",
+    "sourceItem": "Fale mais devagar, por favor, porque não entendo o que diz",
+    "cat": "General"
+  },
+  {
+    "id": "q_5504",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Fale mais devagar, por favor, porque não ______ o que diz' (Speak slower, please, because I don't understand what you say (formal))",
+    "options": [
+      "dinheiro",
+      "estudas",
+      "segurança",
+      "entendo"
+    ],
+    "answer": "entendo",
+    "sourceItem": "Fale mais devagar, por favor, porque não entendo o que diz",
+    "cat": "General"
+  },
+  {
+    "id": "q_5505",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Faça uma dieta para melhorar a sua saúde'?",
+    "options": [
+      "Follow a diet to improve your health (formal)",
+      "both",
+      "The university is old",
+      "fried (starred egg)"
+    ],
+    "answer": "Follow a diet to improve your health (formal)",
+    "sourceItem": "Faça uma dieta para melhorar a sua saúde",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5506",
+    "type": "multipleChoice",
+    "question": "How do you say 'Follow a diet to improve your health (formal)' in Portuguese?",
+    "options": [
+      "Desde quando é que conheces o Pedro?",
+      "Faça uma dieta para melhorar a sua saúde",
+      "Amanhã, vai chover, e, no fim de semana, vai estar sol.",
+      "Leio jornais portugueses"
+    ],
+    "answer": "Faça uma dieta para melhorar a sua saúde",
+    "sourceItem": "Faça uma dieta para melhorar a sua saúde",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5507",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Faça uma dieta ______ melhorar a sua saúde' (Follow a diet to improve your health (formal))",
+    "options": [
+      "para",
+      "Frequentemente",
+      "minha",
+      "este"
+    ],
+    "answer": "para",
+    "sourceItem": "Faça uma dieta para melhorar a sua saúde",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5508",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Tem calma'?",
+    "options": [
+      "Kisses",
+      "Let's go out tonight",
+      "I do not understand",
+      "Stay calm / Take it easy (informal)"
+    ],
+    "answer": "Stay calm / Take it easy (informal)",
+    "sourceItem": "Tem calma",
+    "cat": "General"
+  },
+  {
+    "id": "q_5509",
+    "type": "multipleChoice",
+    "question": "How do you say 'Stay calm / Take it easy (informal)' in Portuguese?",
+    "options": [
+      "Este casaco é tão confortável como elegante",
+      "Tem calma",
+      "Eu penteio o cabelo",
+      "Quando é que a professora lhes entrega os testes"
+    ],
+    "answer": "Tem calma",
+    "sourceItem": "Tem calma",
+    "cat": "General"
+  },
+  {
+    "id": "q_5510",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Toma atenção aos peões'?",
+    "options": [
+      "fog",
+      "when (time)",
+      "Watch out for pedestrians (informal)",
+      "I go by elétrico to school."
+    ],
+    "answer": "Watch out for pedestrians (informal)",
+    "sourceItem": "Toma atenção aos peões",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5511",
+    "type": "multipleChoice",
+    "question": "How do you say 'Watch out for pedestrians (informal)' in Portuguese?",
+    "options": [
+      "Toma atenção aos peões",
+      "Que seca",
+      "mais tempo",
+      "Médico"
+    ],
+    "answer": "Toma atenção aos peões",
+    "sourceItem": "Toma atenção aos peões",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5512",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ atenção aos peões' (Watch out for pedestrians (informal))",
+    "options": [
+      "Toma",
+      "nevar",
+      "vamos",
+      "para"
+    ],
+    "answer": "Toma",
+    "sourceItem": "Toma atenção aos peões",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5513",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'espirra'?",
+    "options": [
+      "when he/she receives / welcomes",
+      "with you (informal singular)",
+      "he/she sneezes",
+      "shelf"
+    ],
+    "answer": "he/she sneezes",
+    "sourceItem": "espirra",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5514",
+    "type": "multipleChoice",
+    "question": "How do you say 'he/she sneezes' in Portuguese?",
+    "options": [
+      "espirra",
+      "Nós vamos ao restaurante com eles",
+      "Comer fruta",
+      "O lixo"
+    ],
+    "answer": "espirra",
+    "sourceItem": "espirra",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5515",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'espirrar'?",
+    "options": [
+      "before",
+      "The chalk",
+      "Far",
+      "to sneeze"
+    ],
+    "answer": "to sneeze",
+    "sourceItem": "espirrar",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5516",
+    "type": "multipleChoice",
+    "question": "How do you say 'to sneeze' in Portuguese?",
+    "options": [
+      "A experiência profissional",
+      "espirrar",
+      "Faltam dez para as três",
+      "O norte"
+    ],
+    "answer": "espirrar",
+    "sourceItem": "espirrar",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5517",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Queria enviar esta carta registada para a Irlanda com aviso de receção'?",
+    "options": [
+      "I have lunch with colleagues",
+      "I would like to send this registered letter to Ireland with receipt notice",
+      "It is an emergency",
+      "The wage"
+    ],
+    "answer": "I would like to send this registered letter to Ireland with receipt notice",
+    "sourceItem": "Queria enviar esta carta registada para a Irlanda com aviso de receção",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5518",
+    "type": "multipleChoice",
+    "question": "How do you say 'I would like to send this registered letter to Ireland with receipt notice' in Portuguese?",
+    "options": [
+      "Queria enviar esta carta registada para a Irlanda com aviso de receção",
+      "A avó",
+      "O Público",
+      "sua"
+    ],
+    "answer": "Queria enviar esta carta registada para a Irlanda com aviso de receção",
+    "sourceItem": "Queria enviar esta carta registada para a Irlanda com aviso de receção",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5519",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Queria enviar esta carta registada para a ______ com aviso de receção' (I would like to send this registered letter to Ireland with receipt notice)",
+    "options": [
+      "Siga",
+      "Irlanda",
+      "maquilhagem",
+      "praticar"
+    ],
+    "answer": "Irlanda",
+    "sourceItem": "Queria enviar esta carta registada para a Irlanda com aviso de receção",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5520",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a alfândega'?",
+    "options": [
+      "This restaurant does not have as many customers as that one",
+      "The day after tomorrow is a holiday.",
+      "verb + mesmo (emphasis: really / actually)",
+      "customs / border control"
+    ],
+    "answer": "customs / border control",
+    "sourceItem": "a alfândega",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5521",
+    "type": "multipleChoice",
+    "question": "How do you say 'customs / border control' in Portuguese?",
+    "options": [
+      "virar",
+      "a alfândega",
+      "o prato",
+      "O nevoeiro está muito cerrado"
+    ],
+    "answer": "a alfândega",
+    "sourceItem": "a alfândega",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5522",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O Greg vai para o trabalho de metro'?",
+    "options": [
+      "your husband",
+      "1200",
+      "Right",
+      "Greg goes to work by metro"
+    ],
+    "answer": "Greg goes to work by metro",
+    "sourceItem": "O Greg vai para o trabalho de metro",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5523",
+    "type": "multipleChoice",
+    "question": "How do you say 'Greg goes to work by metro' in Portuguese?",
+    "options": [
+      "Praticar futebol tem tantas vantagens como praticar andebol",
+      "O Greg vai para o trabalho de metro",
+      "Gosto desta música",
+      "pôr do sol"
+    ],
+    "answer": "O Greg vai para o trabalho de metro",
+    "sourceItem": "O Greg vai para o trabalho de metro",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5524",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O Greg vai para o trabalho de ______' (Greg goes to work by metro)",
+    "options": [
+      "Entediado",
+      "metro",
+      "proposta",
+      "cima"
+    ],
+    "answer": "metro",
+    "sourceItem": "O Greg vai para o trabalho de metro",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5525",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu ando cansado por ter muito trabalho'?",
+    "options": [
+      "I arrived before you.",
+      "Go to Lisbon (destination)",
+      "I have been feeling tired lately due to having a lot of work",
+      "The terrace"
+    ],
+    "answer": "I have been feeling tired lately due to having a lot of work",
+    "sourceItem": "Eu ando cansado por ter muito trabalho",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5526",
+    "type": "multipleChoice",
+    "question": "How do you say 'I have been feeling tired lately due to having a lot of work' in Portuguese?",
+    "options": [
+      "Eu ando cansado por ter muito trabalho",
+      "Cheguei antes de ti.",
+      "aquilo",
+      "Essa casa é tua?"
+    ],
+    "answer": "Eu ando cansado por ter muito trabalho",
+    "sourceItem": "Eu ando cansado por ter muito trabalho",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5527",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu ______ cansado por ter muito trabalho' (I have been feeling tired lately due to having a lot of work)",
+    "options": [
+      "Artigos",
+      "quase",
+      "Qual",
+      "ando"
+    ],
+    "answer": "ando",
+    "sourceItem": "Eu ando cansado por ter muito trabalho",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5528",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Como há muito trânsito, temos de ir por esta rua'?",
+    "options": [
+      "The pictures are on the wall",
+      "Midnight",
+      "Because there is a lot of traffic, we have to take this street",
+      "Where is the bathroom?"
+    ],
+    "answer": "Because there is a lot of traffic, we have to take this street",
+    "sourceItem": "Como há muito trânsito, temos de ir por esta rua",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5529",
+    "type": "multipleChoice",
+    "question": "How do you say 'Because there is a lot of traffic, we have to take this street' in Portuguese?",
+    "options": [
+      "Está frio hoje",
+      "Como há muito trânsito, temos de ir por esta rua",
+      "A borracha",
+      "Querer"
+    ],
+    "answer": "Como há muito trânsito, temos de ir por esta rua",
+    "sourceItem": "Como há muito trânsito, temos de ir por esta rua",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5530",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Como há muito trânsito, temos de ir por ______ rua' (Because there is a lot of traffic, we have to take this street)",
+    "options": [
+      "Fora",
+      "esquece-se",
+      "esta",
+      "muito"
+    ],
+    "answer": "esta",
+    "sourceItem": "Como há muito trânsito, temos de ir por esta rua",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5531",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O Manuel telefona aos pais para saber se eles estão bem'?",
+    "options": [
+      "Cook/Chef",
+      "blueberry",
+      "What is the Wi-Fi password?",
+      "Manuel calls his parents to find out if they are well"
+    ],
+    "answer": "Manuel calls his parents to find out if they are well",
+    "sourceItem": "O Manuel telefona aos pais para saber se eles estão bem",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5532",
+    "type": "multipleChoice",
+    "question": "How do you say 'Manuel calls his parents to find out if they are well' in Portuguese?",
+    "options": [
+      "Confio em ti",
+      "Eu limpo a casa",
+      "O Manuel telefona aos pais para saber se eles estão bem",
+      "por volta"
+    ],
+    "answer": "O Manuel telefona aos pais para saber se eles estão bem",
+    "sourceItem": "O Manuel telefona aos pais para saber se eles estão bem",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5533",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O Manuel telefona aos pais para saber se eles ______ bem' (Manuel calls his parents to find out if they are well)",
+    "options": [
+      "estão",
+      "Está",
+      "Este",
+      "adjetivo"
+    ],
+    "answer": "estão",
+    "sourceItem": "O Manuel telefona aos pais para saber se eles estão bem",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5534",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nós devemos chegar ao Porto pelas 20:00'?",
+    "options": [
+      "We saw several monkeys at the zoo.",
+      "to clear the table",
+      "Turn left",
+      "We should arrive in Porto around 8:00 PM"
+    ],
+    "answer": "We should arrive in Porto around 8:00 PM",
+    "sourceItem": "Nós devemos chegar ao Porto pelas 20:00",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5535",
+    "type": "multipleChoice",
+    "question": "How do you say 'We should arrive in Porto around 8:00 PM' in Portuguese?",
+    "options": [
+      "O rio",
+      "Nós devemos chegar ao Porto pelas 20:00",
+      "arredores",
+      "é"
+    ],
+    "answer": "Nós devemos chegar ao Porto pelas 20:00",
+    "sourceItem": "Nós devemos chegar ao Porto pelas 20:00",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5536",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Nós devemos chegar ao Porto ______ 20:00' (We should arrive in Porto around 8:00 PM)",
+    "options": [
+      "pelas",
+      "devemos",
+      "visto",
+      "topo"
+    ],
+    "answer": "pelas",
+    "sourceItem": "Nós devemos chegar ao Porto pelas 20:00",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5537",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Para ti, qual é o melhor filme de sempre?'?",
+    "options": [
+      "Health",
+      "oven",
+      "The beach",
+      "In your opinion, which film is the best ever? (informal)"
+    ],
+    "answer": "In your opinion, which film is the best ever? (informal)",
+    "sourceItem": "Para ti, qual é o melhor filme de sempre?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5538",
+    "type": "multipleChoice",
+    "question": "How do you say 'In your opinion, which film is the best ever? (informal)' in Portuguese?",
+    "options": [
+      "esta, essa, aquela",
+      "Para ti, qual é o melhor filme de sempre?",
+      "Marcar",
+      "O autocarro passa por aquela rua"
+    ],
+    "answer": "Para ti, qual é o melhor filme de sempre?",
+    "sourceItem": "Para ti, qual é o melhor filme de sempre?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5539",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Para ti, qual é o melhor ______ de sempre?' (In your opinion, which film is the best ever? (informal))",
+    "options": [
+      "filme",
+      "portugueses",
+      "isso",
+      "estamos"
+    ],
+    "answer": "filme",
+    "sourceItem": "Para ti, qual é o melhor filme de sempre?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5540",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'para mim'?",
+    "options": [
+      "Monkey",
+      "This (n)",
+      "Our (f)",
+      "in my opinion / for me"
+    ],
+    "answer": "in my opinion / for me",
+    "sourceItem": "para mim",
+    "cat": "General"
+  },
+  {
+    "id": "q_5541",
+    "type": "multipleChoice",
+    "question": "How do you say 'in my opinion / for me' in Portuguese?",
+    "options": [
+      "É uma emergência",
+      "para mim",
+      "O treinador",
+      "ao meio-dia"
+    ],
+    "answer": "para mim",
+    "sourceItem": "para mim",
+    "cat": "General"
+  },
+  {
+    "id": "q_5542",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'por mim'?",
+    "options": [
+      "In February, we are going to do a training course",
+      "We have as much patience as you",
+      "Come with us to the beach on Saturday!",
+      "fine by me / as for me"
+    ],
+    "answer": "fine by me / as for me",
+    "sourceItem": "por mim",
+    "cat": "General"
+  },
+  {
+    "id": "q_5543",
+    "type": "multipleChoice",
+    "question": "How do you say 'fine by me / as for me' in Portuguese?",
+    "options": [
+      "por mim",
+      "É um guna",
+      "Perder",
+      "pôr do sol"
+    ],
+    "answer": "por mim",
+    "sourceItem": "por mim",
+    "cat": "General"
+  },
+  {
+    "id": "q_5544",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O telemóvel tem garantia por um ano'?",
+    "options": [
+      "The mobile phone has a warranty for one year",
+      "the door",
+      "Since when have you known Pedro?",
+      "put! / you put (formal imperative)"
+    ],
+    "answer": "The mobile phone has a warranty for one year",
+    "sourceItem": "O telemóvel tem garantia por um ano",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5545",
+    "type": "multipleChoice",
+    "question": "How do you say 'The mobile phone has a warranty for one year' in Portuguese?",
+    "options": [
+      "A cidade",
+      "O telemóvel tem garantia por um ano",
+      "Visto os meus chinelos quando chego a casa.",
+      "Emprestar"
+    ],
+    "answer": "O telemóvel tem garantia por um ano",
+    "sourceItem": "O telemóvel tem garantia por um ano",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5546",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O ______ tem garantia por um ano' (The mobile phone has a warranty for one year)",
+    "options": [
+      "Sinto-me",
+      "estamos",
+      "telemóvel",
+      "humanos"
+    ],
+    "answer": "telemóvel",
+    "sourceItem": "O telemóvel tem garantia por um ano",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5547",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'penúltima'?",
+    "options": [
+      "Have you ever taken a guided tour of Casa da Música?",
+      "Does anyone know where the nearest pharmacy is?",
+      "penultimate / second-to-last (feminine)",
+      "That (m)"
+    ],
+    "answer": "penultimate / second-to-last (feminine)",
+    "sourceItem": "penúltima",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5548",
+    "type": "multipleChoice",
+    "question": "How do you say 'penultimate / second-to-last (feminine)' in Portuguese?",
+    "options": [
+      "Cordialmente",
+      "penúltima",
+      "pê",
+      "quarto"
+    ],
+    "answer": "penúltima",
+    "sourceItem": "penúltima",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5549",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu durmo oito horas por dia'?",
+    "options": [
+      "To be able to/Can",
+      "the ironing board",
+      "Outside",
+      "I sleep eight hours a day"
+    ],
+    "answer": "I sleep eight hours a day",
+    "sourceItem": "Eu durmo oito horas por dia",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5550",
+    "type": "multipleChoice",
+    "question": "How do you say 'I sleep eight hours a day' in Portuguese?",
+    "options": [
+      "Bonito",
+      "Querer",
+      "Em fevereiro, vamos fazer uma formação",
+      "Eu durmo oito horas por dia"
+    ],
+    "answer": "Eu durmo oito horas por dia",
+    "sourceItem": "Eu durmo oito horas por dia",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5551",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu durmo ______ horas por dia' (I sleep eight hours a day)",
+    "options": [
+      "Desliga",
+      "vantagem",
+      "muito",
+      "oito"
+    ],
+    "answer": "oito",
+    "sourceItem": "Eu durmo oito horas por dia",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5552",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A Sofia traz sempre uma garrafa de água na mochila'?",
+    "options": [
+      "Milk",
+      "The cousin (female)",
+      "Sofia always brings a bottle of water in her backpack",
+      "it is raining"
+    ],
+    "answer": "Sofia always brings a bottle of water in her backpack",
+    "sourceItem": "A Sofia traz sempre uma garrafa de água na mochila",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5553",
+    "type": "multipleChoice",
+    "question": "How do you say 'Sofia always brings a bottle of water in her backpack' in Portuguese?",
+    "options": [
+      "O tempo está bom",
+      "O Paulo pede o telemóvel à mãe",
+      "A Sofia traz sempre uma garrafa de água na mochila",
+      "Tenho febre"
+    ],
+    "answer": "A Sofia traz sempre uma garrafa de água na mochila",
+    "sourceItem": "A Sofia traz sempre uma garrafa de água na mochila",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5554",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A ______ traz sempre uma garrafa de água na mochila' (Sofia always brings a bottle of water in her backpack)",
+    "options": [
+      "Sofia",
+      "tosse",
+      "resolver",
+      "qual"
+    ],
+    "answer": "Sofia",
+    "sourceItem": "A Sofia traz sempre uma garrafa de água na mochila",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5555",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eu peço'?",
+    "options": [
+      "hear",
+      "to call someone",
+      "Number of bedrooms",
+      "I ask for / I request / I order"
+    ],
+    "answer": "I ask for / I request / I order",
+    "sourceItem": "eu peço",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5556",
+    "type": "multipleChoice",
+    "question": "How do you say 'I ask for / I request / I order' in Portuguese?",
+    "options": [
+      "Ponha o cinto de segurança",
+      "Tive boa nota",
+      "A praça",
+      "eu peço"
+    ],
+    "answer": "eu peço",
+    "sourceItem": "eu peço",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5557",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ela pede'?",
+    "options": [
+      "to translate",
+      "I watch television",
+      "she asks for / she requests",
+      "Is it occupied/busy?"
+    ],
+    "answer": "she asks for / she requests",
+    "sourceItem": "ela pede",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5558",
+    "type": "multipleChoice",
+    "question": "How do you say 'she asks for / she requests' in Portuguese?",
+    "options": [
+      "O avô deixou uma grande herança",
+      "Eu vou viajar para a Grécia com elas",
+      "cascao",
+      "ela pede"
+    ],
+    "answer": "ela pede",
+    "sourceItem": "ela pede",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5559",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'tu pedes'?",
+    "options": [
+      "to borrow",
+      "you ask for / you order (informal)",
+      "I need help",
+      "I have"
+    ],
+    "answer": "you ask for / you order (informal)",
+    "sourceItem": "tu pedes",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5560",
+    "type": "multipleChoice",
+    "question": "How do you say 'you ask for / you order (informal)' in Portuguese?",
+    "options": [
+      "as pernas",
+      "tu pedes",
+      "Chá",
+      "mais tempo"
+    ],
+    "answer": "tu pedes",
+    "sourceItem": "tu pedes",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5561",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O Paulo pede o telemóvel à mãe'?",
+    "options": [
+      "The movie was interesting",
+      "The roundabout",
+      "I don't know",
+      "Paulo asks his mother for the mobile phone"
+    ],
+    "answer": "Paulo asks his mother for the mobile phone",
+    "sourceItem": "O Paulo pede o telemóvel à mãe",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5562",
+    "type": "multipleChoice",
+    "question": "How do you say 'Paulo asks his mother for the mobile phone' in Portuguese?",
+    "options": [
+      "tamanho",
+      "Eles podem",
+      "doem-me as pernas",
+      "O Paulo pede o telemóvel à mãe"
+    ],
+    "answer": "O Paulo pede o telemóvel à mãe",
+    "sourceItem": "O Paulo pede o telemóvel à mãe",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5563",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O Paulo pede o ______ à mãe' (Paulo asks his mother for the mobile phone)",
+    "options": [
+      "Iguana",
+      "telemóvel",
+      "como",
+      "almofada"
+    ],
+    "answer": "telemóvel",
+    "sourceItem": "O Paulo pede o telemóvel à mãe",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5564",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'perdidos e achados'?",
+    "options": [
+      "Midday",
+      "oven",
+      "lost and found",
+      "laundromat"
+    ],
+    "answer": "lost and found",
+    "sourceItem": "perdidos e achados",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5565",
+    "type": "multipleChoice",
+    "question": "How do you say 'lost and found' in Portuguese?",
+    "options": [
+      "A contabilidade",
+      "perdidos e achados",
+      "Alunos",
+      "Eu quero o mesmo"
+    ],
+    "answer": "perdidos e achados",
+    "sourceItem": "perdidos e achados",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5566",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ e achados' (lost and found)",
+    "options": [
+      "trazer",
+      "forma",
+      "perdidos",
+      "aviso"
+    ],
+    "answer": "perdidos",
+    "sourceItem": "perdidos e achados",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5567",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Tu perdes a carteira frequentemente?'?",
+    "options": [
+      "Do you lose your wallet frequently? (informal)",
+      "Come here, please",
+      "In July, I have to travel outside the country",
+      "Raincoat"
+    ],
+    "answer": "Do you lose your wallet frequently? (informal)",
+    "sourceItem": "Tu perdes a carteira frequentemente?",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5568",
+    "type": "multipleChoice",
+    "question": "How do you say 'Do you lose your wallet frequently? (informal)' in Portuguese?",
+    "options": [
+      "Tu perdes a carteira frequentemente?",
+      "Gosto de viajar",
+      "frito",
+      "A biblioteca"
+    ],
+    "answer": "Tu perdes a carteira frequentemente?",
+    "sourceItem": "Tu perdes a carteira frequentemente?",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5569",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Tu perdes a ______ frequentemente?' (Do you lose your wallet frequently? (informal))",
+    "options": [
+      "melhor",
+      "horas",
+      "quando",
+      "carteira"
+    ],
+    "answer": "carteira",
+    "sourceItem": "Tu perdes a carteira frequentemente?",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5570",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu sei falar várias línguas'?",
+    "options": [
+      "video recording",
+      "chickpeas",
+      "Snack",
+      "I can speak several languages"
+    ],
+    "answer": "I can speak several languages",
+    "sourceItem": "Eu sei falar várias línguas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5571",
+    "type": "multipleChoice",
+    "question": "How do you say 'I can speak several languages' in Portuguese?",
+    "options": [
+      "Eu sei falar várias línguas",
+      "Eles também se levantam às 6:30",
+      "O tempo cura tudo",
+      "disponivel"
+    ],
+    "answer": "Eu sei falar várias línguas",
+    "sourceItem": "Eu sei falar várias línguas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5572",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu sei falar várias ______' (I can speak several languages)",
+    "options": [
+      "dela",
+      "línguas",
+      "fumar",
+      "preferes"
+    ],
+    "answer": "línguas",
+    "sourceItem": "Eu sei falar várias línguas",
+    "cat": "General"
+  },
+  {
+    "id": "q_5573",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'várias'?",
+    "options": [
+      "You can",
+      "newsagents",
+      "Playing handball is as dynamic as playing football",
+      "several / various (feminine)"
+    ],
+    "answer": "several / various (feminine)",
+    "sourceItem": "várias",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5574",
+    "type": "multipleChoice",
+    "question": "How do you say 'several / various (feminine)' in Portuguese?",
+    "options": [
+      "a gaveta",
+      "E consigo?",
+      "ao pequeno-almoco",
+      "várias"
+    ],
+    "answer": "várias",
+    "sourceItem": "várias",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5575",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Vocês vêm para casa de carro ou a pé?'?",
+    "options": [
+      "Delayed",
+      "Kisses",
+      "Are you coming home by car or on foot? (plural)",
+      "Beef"
+    ],
+    "answer": "Are you coming home by car or on foot? (plural)",
+    "sourceItem": "Vocês vêm para casa de carro ou a pé?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5576",
+    "type": "multipleChoice",
+    "question": "How do you say 'Are you coming home by car or on foot? (plural)' in Portuguese?",
+    "options": [
+      "Vocês vêm para casa de carro ou a pé?",
+      "passatempo",
+      "ao longo",
+      "engolir"
+    ],
+    "answer": "Vocês vêm para casa de carro ou a pé?",
+    "sourceItem": "Vocês vêm para casa de carro ou a pé?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5577",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Vocês vêm para casa de ______ ou a pé?' (Are you coming home by car or on foot? (plural))",
+    "options": [
+      "catorze",
+      "casa",
+      "carro",
+      "mais"
+    ],
+    "answer": "carro",
+    "sourceItem": "Vocês vêm para casa de carro ou a pé?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5578",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'tomar um comprimido'?",
+    "options": [
+      "to take a pill / tablet",
+      "It is near",
+      "your formal",
+      "This (n)"
+    ],
+    "answer": "to take a pill / tablet",
+    "sourceItem": "tomar um comprimido",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5579",
+    "type": "multipleChoice",
+    "question": "How do you say 'to take a pill / tablet' in Portuguese?",
+    "options": [
+      "Eu tenho",
+      "Um carro",
+      "tomar um comprimido",
+      "Faço"
+    ],
+    "answer": "tomar um comprimido",
+    "sourceItem": "tomar um comprimido",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5580",
+    "type": "cloze",
+    "question": "Fill in the blank: 'tomar um ______' (to take a pill / tablet)",
+    "options": [
+      "comprimido",
+      "vou,vais,vai,vamos,vão",
+      "apartamento",
+      "todos"
+    ],
+    "answer": "comprimido",
+    "sourceItem": "tomar um comprimido",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5581",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'levar uma injeção'?",
+    "options": [
+      "The board",
+      "Once bitten, twice shy",
+      "to get an injection",
+      "Why are you irritated / annoyed? (informal)"
+    ],
+    "answer": "to get an injection",
+    "sourceItem": "levar uma injeção",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5582",
+    "type": "multipleChoice",
+    "question": "How do you say 'to get an injection' in Portuguese?",
+    "options": [
+      "menu",
+      "levar uma injeção",
+      "com",
+      "Há quanto tempo estás em Portugal?"
+    ],
+    "answer": "levar uma injeção",
+    "sourceItem": "levar uma injeção",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5583",
+    "type": "cloze",
+    "question": "Fill in the blank: 'levar uma ______' (to get an injection)",
+    "options": [
+      "chávena",
+      "casa",
+      "injeção",
+      "anos"
+    ],
+    "answer": "injeção",
+    "sourceItem": "levar uma injeção",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5584",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'tomar uma vacina'?",
+    "options": [
+      "Angry",
+      "play on words",
+      "the living room",
+      "to take / receive a vaccine"
+    ],
+    "answer": "to take / receive a vaccine",
+    "sourceItem": "tomar uma vacina",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5585",
+    "type": "multipleChoice",
+    "question": "How do you say 'to take / receive a vaccine' in Portuguese?",
+    "options": [
+      "tomar uma vacina",
+      "O outono tem cores lindas",
+      "uma peça",
+      "Eu lavo a loiça"
+    ],
+    "answer": "tomar uma vacina",
+    "sourceItem": "tomar uma vacina",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5586",
+    "type": "cloze",
+    "question": "Fill in the blank: 'tomar uma ______' (to take / receive a vaccine)",
+    "options": [
+      "vacina",
+      "volta",
+      "Reserva",
+      "melhor"
+    ],
+    "answer": "vacina",
+    "sourceItem": "tomar uma vacina",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5587",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'doer a barriga'?",
+    "options": [
+      "to have a stomach ache (belly hurts)",
+      "Cheese",
+      "January",
+      "the ears (hearing / inner)"
+    ],
+    "answer": "to have a stomach ache (belly hurts)",
+    "sourceItem": "doer a barriga",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5588",
+    "type": "multipleChoice",
+    "question": "How do you say 'to have a stomach ache (belly hurts)' in Portuguese?",
+    "options": [
+      "Cordialmente",
+      "velha",
+      "Graus",
+      "doer a barriga"
+    ],
+    "answer": "doer a barriga",
+    "sourceItem": "doer a barriga",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5589",
+    "type": "cloze",
+    "question": "Fill in the blank: 'doer a ______' (to have a stomach ache (belly hurts))",
+    "options": [
+      "jantar",
+      "passada",
+      "fora",
+      "barriga"
+    ],
+    "answer": "barriga",
+    "sourceItem": "doer a barriga",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5590",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'doer'?",
+    "options": [
+      "you can",
+      "v",
+      "to hurt / to ache",
+      "We wash the dishes together."
+    ],
+    "answer": "to hurt / to ache",
+    "sourceItem": "doer",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5591",
+    "type": "multipleChoice",
+    "question": "How do you say 'to hurt / to ache' in Portuguese?",
+    "options": [
+      "apanhar uma constipação",
+      "a que horas te levantas?",
+      "doer",
+      "a janela"
+    ],
+    "answer": "doer",
+    "sourceItem": "doer",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5592",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'fazer um raio-X'?",
+    "options": [
+      "Closed",
+      "to get / take an X-ray",
+      "I caught the wrong train today.",
+      "The football field"
+    ],
+    "answer": "to get / take an X-ray",
+    "sourceItem": "fazer um raio-X",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5593",
+    "type": "multipleChoice",
+    "question": "How do you say 'to get / take an X-ray' in Portuguese?",
+    "options": [
+      "desde",
+      "fazer um raio-X",
+      "A demissão",
+      "A cama"
+    ],
+    "answer": "fazer um raio-X",
+    "sourceItem": "fazer um raio-X",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5594",
+    "type": "cloze",
+    "question": "Fill in the blank: 'fazer um ______' (to get / take an X-ray)",
+    "options": [
+      "raio-X",
+      "saber",
+      "resumir",
+      "ambulância"
+    ],
+    "answer": "raio-X",
+    "sourceItem": "fazer um raio-X",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5595",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'sentir-se enjoado'?",
+    "options": [
+      "play on words",
+      "room with showroom",
+      "to feel nauseous / motion sick",
+      "The shampoo"
+    ],
+    "answer": "to feel nauseous / motion sick",
+    "sourceItem": "sentir-se enjoado",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5596",
+    "type": "multipleChoice",
+    "question": "How do you say 'to feel nauseous / motion sick' in Portuguese?",
+    "options": [
+      "sentir-se enjoado",
+      "No meu tempo livre gosto de ler e ouvir música",
+      "Médico",
+      "O diretor"
+    ],
+    "answer": "sentir-se enjoado",
+    "sourceItem": "sentir-se enjoado",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5597",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'apanhar uma constipação'?",
+    "options": [
+      "but",
+      "really / truly + adjective (intensifier)",
+      "that way (and like this)",
+      "to catch a cold"
+    ],
+    "answer": "to catch a cold",
+    "sourceItem": "apanhar uma constipação",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5598",
+    "type": "multipleChoice",
+    "question": "How do you say 'to catch a cold' in Portuguese?",
+    "options": [
+      "atividades",
+      "apanhar uma constipação",
+      "Longe",
+      "Na segunda-feira vou ao cinema"
+    ],
+    "answer": "apanhar uma constipação",
+    "sourceItem": "apanhar uma constipação",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5599",
+    "type": "cloze",
+    "question": "Fill in the blank: 'apanhar uma ______' (to catch a cold)",
+    "options": [
+      "sentar-se",
+      "constipação",
+      "Senhor",
+      "Isso"
+    ],
+    "answer": "constipação",
+    "sourceItem": "apanhar uma constipação",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5600",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a obstipação'?",
+    "options": [
+      "she knows where the restaurant is",
+      "Um quarto para as cinco da tarde (quarter to 5 in the afternoon)",
+      "those ones",
+      "constipation"
+    ],
+    "answer": "constipation",
+    "sourceItem": "a obstipação",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5601",
+    "type": "multipleChoice",
+    "question": "How do you say 'constipation' in Portuguese?",
+    "options": [
+      "a obstipação",
+      "Tentar",
+      "embora",
+      "O outono"
+    ],
+    "answer": "a obstipação",
+    "sourceItem": "a obstipação",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5602",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'mora'?",
+    "options": [
+      "lives / resides (he/she)",
+      "Help!",
+      "The car",
+      "A toast to our friendship"
+    ],
+    "answer": "lives / resides (he/she)",
+    "sourceItem": "mora",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5603",
+    "type": "multipleChoice",
+    "question": "How do you say 'lives / resides (he/she)' in Portuguese?",
+    "options": [
+      "mora",
+      "Tens um carregador?",
+      "A reunião de projeto vai ser online através do computador",
+      "O fogão"
+    ],
+    "answer": "mora",
+    "sourceItem": "mora",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5604",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ele vai de autocarro, porque não mora muito perto da farmácia'?",
+    "options": [
+      "I am going to have an in-person meeting",
+      "I read a book",
+      "He goes by bus, because he doesn't live very close to the pharmacy",
+      "Breakfast"
+    ],
+    "answer": "He goes by bus, because he doesn't live very close to the pharmacy",
+    "sourceItem": "Ele vai de autocarro, porque não mora muito perto da farmácia",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5605",
+    "type": "multipleChoice",
+    "question": "How do you say 'He goes by bus, because he doesn't live very close to the pharmacy' in Portuguese?",
+    "options": [
+      "deitar-se",
+      "Fale mais devagar, por favor, porque não entendo o que diz",
+      "Ele vai de autocarro, porque não mora muito perto da farmácia",
+      "O outono"
+    ],
+    "answer": "Ele vai de autocarro, porque não mora muito perto da farmácia",
+    "sourceItem": "Ele vai de autocarro, porque não mora muito perto da farmácia",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5606",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ele vai de autocarro, porque não mora muito ______ da farmácia' (He goes by bus, because he doesn't live very close to the pharmacy)",
+    "options": [
+      "perto",
+      "aniversário",
+      "Grécia",
+      "melhor"
+    ],
+    "answer": "perto",
+    "sourceItem": "Ele vai de autocarro, porque não mora muito perto da farmácia",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5607",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'perto de'?",
+    "options": [
+      "Waiter",
+      "summarize",
+      "close to / near",
+      "The CV"
+    ],
+    "answer": "close to / near",
+    "sourceItem": "perto de",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5608",
+    "type": "multipleChoice",
+    "question": "How do you say 'close to / near' in Portuguese?",
+    "options": [
+      "perto de",
+      "É um betinho",
+      "cá",
+      "aqui,aí,ali"
+    ],
+    "answer": "perto de",
+    "sourceItem": "perto de",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5609",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado'?",
+    "options": [
+      "winter",
+      "I wash the dishes",
+      "Hour",
+      "On the way back, he walks home because he needs to stop by the supermarket"
+    ],
+    "answer": "On the way back, he walks home because he needs to stop by the supermarket",
+    "sourceItem": "No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5610",
+    "type": "multipleChoice",
+    "question": "How do you say 'On the way back, he walks home because he needs to stop by the supermarket' in Portuguese?",
+    "options": [
+      "No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado",
+      "Preto",
+      "As habilitações literárias",
+      "Segundo"
+    ],
+    "answer": "No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado",
+    "sourceItem": "No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5611",
+    "type": "cloze",
+    "question": "Fill in the blank: 'No regresso, ele volta para casa a pé, porque ______ de passar pelo supermercado' (On the way back, he walks home because he needs to stop by the supermarket)",
+    "options": [
+      "mesmo",
+      "precisa",
+      "projeto",
+      "cura"
+    ],
+    "answer": "precisa",
+    "sourceItem": "No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5612",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o regresso'?",
+    "options": [
+      "Our (f)",
+      "months",
+      "will you come//appear",
+      "the return / coming back"
+    ],
+    "answer": "the return / coming back",
+    "sourceItem": "o regresso",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5613",
+    "type": "multipleChoice",
+    "question": "How do you say 'the return / coming back' in Portuguese?",
+    "options": [
+      "com ele",
+      "o regresso",
+      "com o senhor",
+      "Muda de canal"
+    ],
+    "answer": "o regresso",
+    "sourceItem": "o regresso",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5614",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu fui na segunda-feira de manhã'?",
+    "options": [
+      "h",
+      "the legs",
+      "boiled eggs",
+      "I went on Monday morning"
+    ],
+    "answer": "I went on Monday morning",
+    "sourceItem": "Eu fui na segunda-feira de manhã",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5615",
+    "type": "multipleChoice",
+    "question": "How do you say 'I went on Monday morning' in Portuguese?",
+    "options": [
+      "O saber não ocupa lugar",
+      "O Duarte conta-lhes uma história",
+      "Ouvir",
+      "Eu fui na segunda-feira de manhã"
+    ],
+    "answer": "Eu fui na segunda-feira de manhã",
+    "sourceItem": "Eu fui na segunda-feira de manhã",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5616",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu fui na ______ de manhã' (I went on Monday morning)",
+    "options": [
+      "manhã",
+      "segunda-feira",
+      "logo",
+      "leite"
+    ],
+    "answer": "segunda-feira",
+    "sourceItem": "Eu fui na segunda-feira de manhã",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5617",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'e voltei ontem'?",
+    "options": [
+      "Print this report, please (formal)",
+      "I need a tow truck",
+      "and I returned yesterday",
+      "Where is the bathroom?"
+    ],
+    "answer": "and I returned yesterday",
+    "sourceItem": "e voltei ontem",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5618",
+    "type": "multipleChoice",
+    "question": "How do you say 'and I returned yesterday' in Portuguese?",
+    "options": [
+      "Uma casa",
+      "Aquele",
+      "e voltei ontem",
+      "Não falo bem português"
+    ],
+    "answer": "e voltei ontem",
+    "sourceItem": "e voltei ontem",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5619",
+    "type": "cloze",
+    "question": "Fill in the blank: 'e ______ ontem' (and I returned yesterday)",
+    "options": [
+      "felizes",
+      "telemóvel",
+      "hoje",
+      "voltei"
+    ],
+    "answer": "voltei",
+    "sourceItem": "e voltei ontem",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5620",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'falharam muitas oportunidades'?",
+    "options": [
+      "2am",
+      "Entrance is free",
+      "they missed many opportunities",
+      "More or less (just okay)"
+    ],
+    "answer": "they missed many opportunities",
+    "sourceItem": "falharam muitas oportunidades",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5621",
+    "type": "multipleChoice",
+    "question": "How do you say 'they missed many opportunities' in Portuguese?",
+    "options": [
+      "Carne de porco",
+      "a sala de estar",
+      "comemos e fizemos compras",
+      "falharam muitas oportunidades"
+    ],
+    "answer": "falharam muitas oportunidades",
+    "sourceItem": "falharam muitas oportunidades",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5622",
+    "type": "cloze",
+    "question": "Fill in the blank: 'falharam ______ oportunidades' (they missed many opportunities)",
+    "options": [
+      "bonito",
+      "muitas",
+      "semana",
+      "supermercado"
+    ],
+    "answer": "muitas",
+    "sourceItem": "falharam muitas oportunidades",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5623",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'para trabalho'?",
+    "options": [
+      "do your homework",
+      "In summer, we go on holiday to the Algarve.",
+      "The director speaks with the students",
+      "for work"
+    ],
+    "answer": "for work",
+    "sourceItem": "para trabalho",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5624",
+    "type": "multipleChoice",
+    "question": "How do you say 'for work' in Portuguese?",
+    "options": [
+      "para trabalho",
+      "nós fizemos",
+      "a estante",
+      "Cozinheiro"
+    ],
+    "answer": "para trabalho",
+    "sourceItem": "para trabalho",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5625",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ele tem gripe'?",
+    "options": [
+      "fried (starred egg)",
+      "Where is the market?",
+      "He has the flu",
+      "I start working"
+    ],
+    "answer": "He has the flu",
+    "sourceItem": "Ele tem gripe",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5626",
+    "type": "multipleChoice",
+    "question": "How do you say 'He has the flu' in Portuguese?",
+    "options": [
+      "Ele tem gripe",
+      "Aqui",
+      "o guarda-chuva",
+      "Viseu"
+    ],
+    "answer": "Ele tem gripe",
+    "sourceItem": "Ele tem gripe",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5627",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ele tem ______' (He has the flu)",
+    "options": [
+      "febre",
+      "metro",
+      "Para",
+      "gripe"
+    ],
+    "answer": "gripe",
+    "sourceItem": "Ele tem gripe",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5628",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'dói-me a cabeça'?",
+    "options": [
+      "my head hurts / I have a headache",
+      "I am going to the bank with you",
+      "and both are furnished",
+      "The department"
+    ],
+    "answer": "my head hurts / I have a headache",
+    "sourceItem": "dói-me a cabeça",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5629",
+    "type": "multipleChoice",
+    "question": "How do you say 'my head hurts / I have a headache' in Portuguese?",
+    "options": [
+      "dói-me a cabeça",
+      "Entrada",
+      "A que horas descola o voo?",
+      "eu foi tomar brunch com a minha mulher e a minha filha mais nova"
+    ],
+    "answer": "dói-me a cabeça",
+    "sourceItem": "dói-me a cabeça",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5630",
+    "type": "cloze",
+    "question": "Fill in the blank: 'dói-me a ______' (my head hurts / I have a headache)",
+    "options": [
+      "Diana",
+      "Olhos",
+      "junto",
+      "cabeça"
+    ],
+    "answer": "cabeça",
+    "sourceItem": "dói-me a cabeça",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5631",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'doem-me as pernas'?",
+    "options": [
+      "Delayed",
+      "Blue",
+      "my legs hurt",
+      "we have to use the car the majority of the time"
+    ],
+    "answer": "my legs hurt",
+    "sourceItem": "doem-me as pernas",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5632",
+    "type": "multipleChoice",
+    "question": "How do you say 'my legs hurt' in Portuguese?",
+    "options": [
+      "doem-me as pernas",
+      "Nunca me deito cedo",
+      "Eu durmo oito horas por dia",
+      "Ouvir"
+    ],
+    "answer": "doem-me as pernas",
+    "sourceItem": "doem-me as pernas",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5633",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ as pernas' (my legs hurt)",
+    "options": [
+      "resumir",
+      "rússia",
+      "dias",
+      "doem-me"
+    ],
+    "answer": "doem-me",
+    "sourceItem": "doem-me as pernas",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5634",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A Marisa tem férias por duas semanas'?",
+    "options": [
+      "Ready / Okay (often used incorrectly for Pronto)",
+      "Online courses have as many advantages as in-person courses",
+      "Happy birthday!",
+      "Marisa has vacation for two weeks"
+    ],
+    "answer": "Marisa has vacation for two weeks",
+    "sourceItem": "A Marisa tem férias por duas semanas",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5635",
+    "type": "multipleChoice",
+    "question": "How do you say 'Marisa has vacation for two weeks' in Portuguese?",
+    "options": [
+      "A tua",
+      "A Marisa tem férias por duas semanas",
+      "pois pois",
+      "Chá"
+    ],
+    "answer": "A Marisa tem férias por duas semanas",
+    "sourceItem": "A Marisa tem férias por duas semanas",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5636",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A Marisa tem férias por ______ semanas' (Marisa has vacation for two weeks)",
+    "options": [
+      "duas",
+      "quando",
+      "passada",
+      "Falo"
+    ],
+    "answer": "duas",
+    "sourceItem": "A Marisa tem férias por duas semanas",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5637",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Para vocês, qual é o melhor filme do Tom Cruise?'?",
+    "options": [
+      "The Netherlands",
+      "As soon as possible",
+      "In your (plural) opinion, what is Tom Cruise's best film?",
+      "The bill, please"
+    ],
+    "answer": "In your (plural) opinion, what is Tom Cruise's best film?",
+    "sourceItem": "Para vocês, qual é o melhor filme do Tom Cruise?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5638",
+    "type": "multipleChoice",
+    "question": "How do you say 'In your (plural) opinion, what is Tom Cruise's best film?' in Portuguese?",
+    "options": [
+      "Para vocês, qual é o melhor filme do Tom Cruise?",
+      "O bilhete",
+      "o andar / piso",
+      "O quadro é bonito"
+    ],
+    "answer": "Para vocês, qual é o melhor filme do Tom Cruise?",
+    "sourceItem": "Para vocês, qual é o melhor filme do Tom Cruise?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5639",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Para vocês, qual é o ______ filme do Tom Cruise?' (In your (plural) opinion, what is Tom Cruise's best film?)",
+    "options": [
+      "melhor",
+      "conhecida",
+      "senhor",
+      "outra"
+    ],
+    "answer": "melhor",
+    "sourceItem": "Para vocês, qual é o melhor filme do Tom Cruise?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5640",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O autocarro passa por aquela rua'?",
+    "options": [
+      "There is or there are",
+      "I feel bad",
+      "The bus passes along that street",
+      "the return / coming back"
+    ],
+    "answer": "The bus passes along that street",
+    "sourceItem": "O autocarro passa por aquela rua",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5641",
+    "type": "multipleChoice",
+    "question": "How do you say 'The bus passes along that street' in Portuguese?",
+    "options": [
+      "O autocarro passa por aquela rua",
+      "O este",
+      "Estou doente",
+      "connosco"
+    ],
+    "answer": "O autocarro passa por aquela rua",
+    "sourceItem": "O autocarro passa por aquela rua",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5642",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O autocarro ______ por aquela rua' (The bus passes along that street)",
+    "options": [
+      "aqui",
+      "areia",
+      "chinelos",
+      "passa"
+    ],
+    "answer": "passa",
+    "sourceItem": "O autocarro passa por aquela rua",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5643",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu peço uma francesinha ao empregado'?",
+    "options": [
+      "Strawberry",
+      "a business proposal",
+      "I order a francesinha from the waiter",
+      "He has"
+    ],
+    "answer": "I order a francesinha from the waiter",
+    "sourceItem": "Eu peço uma francesinha ao empregado",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5644",
+    "type": "multipleChoice",
+    "question": "How do you say 'I order a francesinha from the waiter' in Portuguese?",
+    "options": [
+      "Quando..? Quando (é que) chegas a Portugal?",
+      "Eu peço uma francesinha ao empregado",
+      "Eu gosto passear",
+      "receitas"
+    ],
+    "answer": "Eu peço uma francesinha ao empregado",
+    "sourceItem": "Eu peço uma francesinha ao empregado",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5645",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu ______ uma francesinha ao empregado' (I order a francesinha from the waiter)",
+    "options": [
+      "azuis",
+      "muito",
+      "manhã",
+      "peço"
+    ],
+    "answer": "peço",
+    "sourceItem": "Eu peço uma francesinha ao empregado",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5646",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Sr. Silva, faça mais exercício'?",
+    "options": [
+      "prefer the second apartment",
+      "Mr. Silva, do more exercise (formal recommendation)",
+      "Help!",
+      "To stay/become"
+    ],
+    "answer": "Mr. Silva, do more exercise (formal recommendation)",
+    "sourceItem": "Sr. Silva, faça mais exercício",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5647",
+    "type": "multipleChoice",
+    "question": "How do you say 'Mr. Silva, do more exercise (formal recommendation)' in Portuguese?",
+    "options": [
+      "Queria enviar esta carta registada para a Irlanda com aviso de receção",
+      "à tesoura no topo",
+      "por isso",
+      "Sr. Silva, faça mais exercício"
+    ],
+    "answer": "Sr. Silva, faça mais exercício",
+    "sourceItem": "Sr. Silva, faça mais exercício",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5648",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Sr. Silva, faça mais ______' (Mr. Silva, do more exercise (formal recommendation))",
+    "options": [
+      "exercício",
+      "favor",
+      "inverno",
+      "Carla"
+    ],
+    "answer": "exercício",
+    "sourceItem": "Sr. Silva, faça mais exercício",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5649",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Dói-te a cabeça?'?",
+    "options": [
+      "general reference to transport",
+      "between them / among them",
+      "Does your head hurt? / Do you have a headache? (informal)",
+      "sunset"
+    ],
+    "answer": "Does your head hurt? / Do you have a headache? (informal)",
+    "sourceItem": "Dói-te a cabeça?",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5650",
+    "type": "multipleChoice",
+    "question": "How do you say 'Does your head hurt? / Do you have a headache? (informal)' in Portuguese?",
+    "options": [
+      "Dói-te a cabeça?",
+      "Aprendizes",
+      "é...singular..uma hora/meio-dia/meia-noite",
+      "Não importa"
+    ],
+    "answer": "Dói-te a cabeça?",
+    "sourceItem": "Dói-te a cabeça?",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5651",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ a cabeça?' (Does your head hurt? / Do you have a headache? (informal))",
+    "options": [
+      "Dói-te",
+      "minha",
+      "Saio",
+      "duas"
+    ],
+    "answer": "Dói-te",
+    "sourceItem": "Dói-te a cabeça?",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5652",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Onde vão?'?",
+    "options": [
+      "Where are you (plural) going?",
+      "They show them the historic city.",
+      "I promise",
+      "Open"
+    ],
+    "answer": "Where are you (plural) going?",
+    "sourceItem": "Onde vão?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5653",
+    "type": "multipleChoice",
+    "question": "How do you say 'Where are you (plural) going?' in Portuguese?",
+    "options": [
+      "É um guna",
+      "Estou surpreendido",
+      "deitar-se",
+      "Onde vão?"
+    ],
+    "answer": "Onde vão?",
+    "sourceItem": "Onde vão?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5654",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quantas horas dormem por dia?'?",
+    "options": [
+      "It is boring",
+      "How many hours do you (plural) sleep a day?",
+      "the roof",
+      "password"
+    ],
+    "answer": "How many hours do you (plural) sleep a day?",
+    "sourceItem": "Quantas horas dormem por dia?",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5655",
+    "type": "multipleChoice",
+    "question": "How do you say 'How many hours do you (plural) sleep a day?' in Portuguese?",
+    "options": [
+      "A escola secundária",
+      "Fica longe daqui?",
+      "Quantas horas dormem por dia?",
+      "Feio"
+    ],
+    "answer": "Quantas horas dormem por dia?",
+    "sourceItem": "Quantas horas dormem por dia?",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5656",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Quantas horas ______ por dia?' (How many hours do you (plural) sleep a day?)",
+    "options": [
+      "dormem",
+      "alergia",
+      "coração",
+      "dias"
+    ],
+    "answer": "dormem",
+    "sourceItem": "Quantas horas dormem por dia?",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5657",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Podes passar na minha casa na sexta-feira?'?",
+    "options": [
+      "ribs (bone)",
+      "Can you drop by my house on Friday? (informal)",
+      "not yet",
+      "to get an injection"
+    ],
+    "answer": "Can you drop by my house on Friday? (informal)",
+    "sourceItem": "Podes passar na minha casa na sexta-feira?",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5658",
+    "type": "multipleChoice",
+    "question": "How do you say 'Can you drop by my house on Friday? (informal)' in Portuguese?",
+    "options": [
+      "Estou à espera há uma hora",
+      "Podes passar na minha casa na sexta-feira?",
+      "deles",
+      "comigo"
+    ],
+    "answer": "Podes passar na minha casa na sexta-feira?",
+    "sourceItem": "Podes passar na minha casa na sexta-feira?",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5659",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Podes passar na ______ casa na sexta-feira?' (Can you drop by my house on Friday? (informal))",
+    "options": [
+      "hospital",
+      "minha",
+      "guarda-chuva",
+      "paragem"
+    ],
+    "answer": "minha",
+    "sourceItem": "Podes passar na minha casa na sexta-feira?",
+    "cat": "House & Rooms"
+  },
+  {
+    "id": "q_5660",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Sentes-te melhor?'?",
+    "options": [
+      "How many?",
+      "He wants",
+      "chicken",
+      "Are you feeling better? (informal)"
+    ],
+    "answer": "Are you feeling better? (informal)",
+    "sourceItem": "Sentes-te melhor?",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5661",
+    "type": "multipleChoice",
+    "question": "How do you say 'Are you feeling better? (informal)' in Portuguese?",
+    "options": [
+      "barco",
+      "o nosso casamento",
+      "gosto muito deste livro",
+      "Sentes-te melhor?"
+    ],
+    "answer": "Sentes-te melhor?",
+    "sourceItem": "Sentes-te melhor?",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5662",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Porque estás irritado?'?",
+    "options": [
+      "Walking is as healthy as running",
+      "hers / of her",
+      "Why are you irritated / annoyed? (informal)",
+      "roasted"
+    ],
+    "answer": "Why are you irritated / annoyed? (informal)",
+    "sourceItem": "Porque estás irritado?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5663",
+    "type": "multipleChoice",
+    "question": "How do you say 'Why are you irritated / annoyed? (informal)' in Portuguese?",
+    "options": [
+      "Polícia",
+      "sapos",
+      "Porque estás irritado?",
+      "Pobre"
+    ],
+    "answer": "Porque estás irritado?",
+    "sourceItem": "Porque estás irritado?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5664",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Porque estás ______' (Why are you irritated / annoyed? (informal))",
+    "options": [
+      "irritado",
+      "volei",
+      "sempre",
+      "paragem"
+    ],
+    "answer": "irritado",
+    "sourceItem": "Porque estás irritado?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5665",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Tu falas bem português?'?",
+    "options": [
+      "I have",
+      "Do you speak Portuguese well? (informal)",
+      "departures",
+      "motorcycle"
+    ],
+    "answer": "Do you speak Portuguese well? (informal)",
+    "sourceItem": "Tu falas bem português?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5666",
+    "type": "multipleChoice",
+    "question": "How do you say 'Do you speak Portuguese well? (informal)' in Portuguese?",
+    "options": [
+      "Nunca me deito cedo",
+      "esqueço",
+      "A mulher / A esposa",
+      "Tu falas bem português?"
+    ],
+    "answer": "Tu falas bem português?",
+    "sourceItem": "Tu falas bem português?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5667",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Tu falas bem ______' (Do you speak Portuguese well? (informal))",
+    "options": [
+      "esquecer-se",
+      "tenho",
+      "feito",
+      "português"
+    ],
+    "answer": "português",
+    "sourceItem": "Tu falas bem português?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5668",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'algumas coisas'?",
+    "options": [
+      "we are doing",
+      "some things / a few things",
+      "that have",
+      "seven hills"
+    ],
+    "answer": "some things / a few things",
+    "sourceItem": "algumas coisas",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5669",
+    "type": "multipleChoice",
+    "question": "How do you say 'some things / a few things' in Portuguese?",
+    "options": [
+      "Hoje em dia",
+      "Vou levantar dinheiro no banco.",
+      "algumas coisas",
+      "a alfândega"
+    ],
+    "answer": "algumas coisas",
+    "sourceItem": "algumas coisas",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5670",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ainda não consigo falar'?",
+    "options": [
+      "u",
+      "When traveling through the Iberian Peninsula, American tourists think Portugal is as beautiful as Spain.",
+      "shops",
+      "I still can't speak (fluently)"
+    ],
+    "answer": "I still can't speak (fluently)",
+    "sourceItem": "Ainda não consigo falar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5671",
+    "type": "multipleChoice",
+    "question": "How do you say 'I still can't speak (fluently)' in Portuguese?",
+    "options": [
+      "Habitualmente",
+      "O Diário de Notícias",
+      "Ainda não consigo falar",
+      "Os macacos são animais espertos."
+    ],
+    "answer": "Ainda não consigo falar",
+    "sourceItem": "Ainda não consigo falar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5672",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ não consigo falar' (I still can't speak (fluently))",
+    "options": [
+      "Onde",
+      "tarde",
+      "calor",
+      "Ainda"
+    ],
+    "answer": "Ainda",
+    "sourceItem": "Ainda não consigo falar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5673",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'numa empresa'?",
+    "options": [
+      "Be careful when lifting weights.",
+      "To win/earn",
+      "in a company / at a firm",
+      "I wash myself"
+    ],
+    "answer": "in a company / at a firm",
+    "sourceItem": "numa empresa",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5674",
+    "type": "multipleChoice",
+    "question": "How do you say 'in a company / at a firm' in Portuguese?",
+    "options": [
+      "um pinto",
+      "numa empresa",
+      "Tocas algum instrumento?",
+      "com"
+    ],
+    "answer": "numa empresa",
+    "sourceItem": "numa empresa",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5675",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'em + uma = numa'?",
+    "options": [
+      "She wants to speak with you after classes",
+      "in a / on a (contraction: em + uma)",
+      "They do",
+      "with them (feminine)"
+    ],
+    "answer": "in a / on a (contraction: em + uma)",
+    "sourceItem": "em + uma = numa",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5676",
+    "type": "multipleChoice",
+    "question": "How do you say 'in a / on a (contraction: em + uma)' in Portuguese?",
+    "options": [
+      "em + uma = numa",
+      "entre",
+      "É aborrecido",
+      "Trabalho aqui desde janeiro"
+    ],
+    "answer": "em + uma = numa",
+    "sourceItem": "em + uma = numa",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5677",
+    "type": "cloze",
+    "question": "Fill in the blank: 'em + uma = ______' (in a / on a (contraction: em + uma))",
+    "options": [
+      "antónimo",
+      "guiadas",
+      "numa",
+      "boca"
+    ],
+    "answer": "numa",
+    "sourceItem": "em + uma = numa",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5678",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'entre eles'?",
+    "options": [
+      "The shampoo",
+      "between them / among them",
+      "I have lunch with colleagues",
+      "I have not gone to the beach since september"
+    ],
+    "answer": "between them / among them",
+    "sourceItem": "entre eles",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5679",
+    "type": "multipleChoice",
+    "question": "How do you say 'between them / among them' in Portuguese?",
+    "options": [
+      "Escrever",
+      "Eu preciso de escrever um relatório hoje.",
+      "Eles fazem",
+      "entre eles"
+    ],
+    "answer": "entre eles",
+    "sourceItem": "entre eles",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5680",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'não ... nenhum'?",
+    "options": [
+      "Maria wants to marry him",
+      "Vera and her sister are very friendly.",
+      "none / not any (double negative)",
+      "I do not understand"
+    ],
+    "answer": "none / not any (double negative)",
+    "sourceItem": "não ... nenhum",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5681",
+    "type": "multipleChoice",
+    "question": "How do you say 'none / not any (double negative)' in Portuguese?",
+    "options": [
+      "colina",
+      "Eu vou ao mercado com vocês",
+      "não ... nenhum",
+      "vocês são"
+    ],
+    "answer": "não ... nenhum",
+    "sourceItem": "não ... nenhum",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5682",
+    "type": "cloze",
+    "question": "Fill in the blank: 'não ... ______' (none / not any (double negative))",
+    "options": [
+      "cheia",
+      "Puxar",
+      "nenhum",
+      "Comer"
+    ],
+    "answer": "nenhum",
+    "sourceItem": "não ... nenhum",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5683",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ah, pois'?",
+    "options": [
+      "I don’t forget (I no forget)",
+      "Happy",
+      "Ah, of course / Ah, right",
+      "the menu please"
+    ],
+    "answer": "Ah, of course / Ah, right",
+    "sourceItem": "Ah, pois",
+    "cat": "General"
+  },
+  {
+    "id": "q_5684",
+    "type": "multipleChoice",
+    "question": "How do you say 'Ah, of course / Ah, right' in Portuguese?",
+    "options": [
+      "Estou à espera do autocarro há vinte minutos",
+      "Ah, pois",
+      "Ele quer",
+      "Saio do trabalho às seis"
+    ],
+    "answer": "Ah, pois",
+    "sourceItem": "Ah, pois",
+    "cat": "General"
+  },
+  {
+    "id": "q_5685",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'pois pois'?",
+    "options": [
+      "I speak a little Portuguese",
+      "The table",
+      "right right / I see (conversational feedback)",
+      "I want to buy this"
+    ],
+    "answer": "right right / I see (conversational feedback)",
+    "sourceItem": "pois pois",
+    "cat": "General"
+  },
+  {
+    "id": "q_5686",
+    "type": "multipleChoice",
+    "question": "How do you say 'right right / I see (conversational feedback)' in Portuguese?",
+    "options": [
+      "Limão",
+      "O recreio",
+      "pois pois",
+      "Ele pode"
+    ],
+    "answer": "pois pois",
+    "sourceItem": "pois pois",
+    "cat": "General"
+  },
+  {
+    "id": "q_5687",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'quase'?",
+    "options": [
+      "pedestrian crossing",
+      "The pencil",
+      "the myth",
+      "almost / nearly"
+    ],
+    "answer": "almost / nearly",
+    "sourceItem": "quase",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5688",
+    "type": "multipleChoice",
+    "question": "How do you say 'almost / nearly' in Portuguese?",
+    "options": [
+      "Nós esperamos que o tempo melhore amanhã.",
+      "quase",
+      "com licença",
+      "o candeeiro"
+    ],
+    "answer": "quase",
+    "sourceItem": "quase",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5689",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Estamos quase lá'?",
+    "options": [
+      "I am tired",
+      "feeling",
+      "We are almost there",
+      "one rent costs more"
+    ],
+    "answer": "We are almost there",
+    "sourceItem": "Estamos quase lá",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5690",
+    "type": "multipleChoice",
+    "question": "How do you say 'We are almost there' in Portuguese?",
+    "options": [
+      "A mentira tem perna curta",
+      "Eu dou-lhe o livro quando terminar a leitura.",
+      "Estamos quase lá",
+      "É uma emergência"
+    ],
+    "answer": "Estamos quase lá",
+    "sourceItem": "Estamos quase lá",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5691",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Estamos ______ lá' (We are almost there)",
+    "options": [
+      "fruta",
+      "quase",
+      "trabalho",
+      "Lisboa"
+    ],
+    "answer": "quase",
+    "sourceItem": "Estamos quase lá",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5692",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'mesmo + adjetivo'?",
+    "options": [
+      "Cockroach",
+      "really / truly + adjective (intensifier)",
+      "Red wine",
+      "The diver can breathe underwater."
+    ],
+    "answer": "really / truly + adjective (intensifier)",
+    "sourceItem": "mesmo + adjetivo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5693",
+    "type": "multipleChoice",
+    "question": "How do you say 'really / truly + adjective (intensifier)' in Portuguese?",
+    "options": [
+      "mesmo + adjetivo",
+      "à",
+      "sobre",
+      "O avião"
+    ],
+    "answer": "mesmo + adjetivo",
+    "sourceItem": "mesmo + adjetivo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5694",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ + adjetivo' (really / truly + adjective (intensifier))",
+    "options": [
+      "Está",
+      "Correio",
+      "mesmo",
+      "matéria"
+    ],
+    "answer": "mesmo",
+    "sourceItem": "mesmo + adjetivo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5695",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O jantar está mesmo bom!'?",
+    "options": [
+      "May",
+      "you can",
+      "Happy Easter",
+      "Dinner is really good!"
+    ],
+    "answer": "Dinner is really good!",
+    "sourceItem": "O jantar está mesmo bom!",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5696",
+    "type": "multipleChoice",
+    "question": "How do you say 'Dinner is really good!' in Portuguese?",
+    "options": [
+      "O jantar está mesmo bom!",
+      "claro que sim",
+      "que tém",
+      "Ele recebeu uma nova proposta de trabalho."
+    ],
+    "answer": "O jantar está mesmo bom!",
+    "sourceItem": "O jantar está mesmo bom!",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5697",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O jantar ______ mesmo bom!' (Dinner is really good!)",
+    "options": [
+      "galo",
+      "1h00",
+      "está",
+      "Aguardo"
+    ],
+    "answer": "está",
+    "sourceItem": "O jantar está mesmo bom!",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5698",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu quero o mesmo'?",
+    "options": [
+      "I want the same (thing)",
+      "To close",
+      "Back",
+      "poached egg"
+    ],
+    "answer": "I want the same (thing)",
+    "sourceItem": "Eu quero o mesmo",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5699",
+    "type": "multipleChoice",
+    "question": "How do you say 'I want the same (thing)' in Portuguese?",
+    "options": [
+      "Eu quero o mesmo",
+      "bicicleta",
+      "Aquilo é muito bonito",
+      "Longe da vista, longe do coração"
+    ],
+    "answer": "Eu quero o mesmo",
+    "sourceItem": "Eu quero o mesmo",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5700",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu quero o ______' (I want the same (thing))",
+    "options": [
+      "baratas",
+      "alfândega",
+      "mesmo",
+      "Cinzento"
+    ],
+    "answer": "mesmo",
+    "sourceItem": "Eu quero o mesmo",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5701",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Então, hoje não vens mesmo ao jantar?'?",
+    "options": [
+      "In the old days",
+      "receives",
+      "So, are you really not coming to dinner today? (informal)",
+      "the fever"
+    ],
+    "answer": "So, are you really not coming to dinner today? (informal)",
+    "sourceItem": "Então, hoje não vens mesmo ao jantar?",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5702",
+    "type": "multipleChoice",
+    "question": "How do you say 'So, are you really not coming to dinner today? (informal)' in Portuguese?",
+    "options": [
+      "Então, hoje não vens mesmo ao jantar?",
+      "custumo",
+      "ando",
+      "galāo escuro"
+    ],
+    "answer": "Então, hoje não vens mesmo ao jantar?",
+    "sourceItem": "Então, hoje não vens mesmo ao jantar?",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5703",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Então, ______ não vens mesmo ao jantar?' (So, are you really not coming to dinner today? (informal))",
+    "options": [
+      "mesa",
+      "corre",
+      "garrafa",
+      "hoje"
+    ],
+    "answer": "hoje",
+    "sourceItem": "Então, hoje não vens mesmo ao jantar?",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5704",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'verbo + mesmo'?",
+    "options": [
+      "How old are you?",
+      "100",
+      "Far",
+      "verb + mesmo (emphasis: really / actually)"
+    ],
+    "answer": "verb + mesmo (emphasis: really / actually)",
+    "sourceItem": "verbo + mesmo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5705",
+    "type": "multipleChoice",
+    "question": "How do you say 'verb + mesmo (emphasis: really / actually)' in Portuguese?",
+    "options": [
+      "Amanhã, eu também vou fazer exercícios para rever a matéria.",
+      "consoantes",
+      "O que fazes?",
+      "verbo + mesmo"
+    ],
+    "answer": "verbo + mesmo",
+    "sourceItem": "verbo + mesmo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5706",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ + mesmo' (verb + mesmo (emphasis: really / actually))",
+    "options": [
+      "verbo",
+      "agora",
+      "anos",
+      "leio"
+    ],
+    "answer": "verbo",
+    "sourceItem": "verbo + mesmo",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5707",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Claro, eu compreendo'?",
+    "options": [
+      "Of course, I understand",
+      "Normally (usually)",
+      "On the way back, he walks home because he needs to stop by the supermarket",
+      "I like summer"
+    ],
+    "answer": "Of course, I understand",
+    "sourceItem": "Claro, eu compreendo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5708",
+    "type": "multipleChoice",
+    "question": "How do you say 'Of course, I understand' in Portuguese?",
+    "options": [
+      "Claro, eu compreendo",
+      "Ah, pois",
+      "Quanto custa isto?",
+      "com eles"
+    ],
+    "answer": "Claro, eu compreendo",
+    "sourceItem": "Claro, eu compreendo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5709",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Claro, eu ______' (Of course, I understand)",
+    "options": [
+      "outono",
+      "fundo",
+      "amigos",
+      "compreendo"
+    ],
+    "answer": "compreendo",
+    "sourceItem": "Claro, eu compreendo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5710",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Vemo-nos'?",
+    "options": [
+      "Where is the bicicleta stop?",
+      "At weekends, I play tennis with my brother.",
+      "a winner / winning point (tennis)",
+      "See you / We'll see each other"
+    ],
+    "answer": "See you / We'll see each other",
+    "sourceItem": "Vemo-nos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5711",
+    "type": "multipleChoice",
+    "question": "How do you say 'See you / We'll see each other' in Portuguese?",
+    "options": [
+      "Eu gosto de estar contigo",
+      "O Correio da Manhã",
+      "Vemo-nos",
+      "Tu vais"
+    ],
+    "answer": "Vemo-nos",
+    "sourceItem": "Vemo-nos",
+    "cat": "General"
+  },
+  {
+    "id": "q_5712",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Vou ficar aí durante toda a semana'?",
+    "options": [
+      "I will stay there for the whole week",
+      "Who are you going to the cinema with?",
+      "I finish work at 6pm",
+      "I drink a strong coffee"
+    ],
+    "answer": "I will stay there for the whole week",
+    "sourceItem": "Vou ficar aí durante toda a semana",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5713",
+    "type": "multipleChoice",
+    "question": "How do you say 'I will stay there for the whole week' in Portuguese?",
+    "options": [
+      "Tens medo de baratas?",
+      "Vai chover",
+      "cada vez",
+      "Vou ficar aí durante toda a semana"
+    ],
+    "answer": "Vou ficar aí durante toda a semana",
+    "sourceItem": "Vou ficar aí durante toda a semana",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5714",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Vou ficar aí durante ______ a semana' (I will stay there for the whole week)",
+    "options": [
+      "agora",
+      "Respeite",
+      "toda",
+      "Quem"
+    ],
+    "answer": "toda",
+    "sourceItem": "Vou ficar aí durante toda a semana",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5715",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'contente'?",
+    "options": [
+      "In winter, my family likes to go to the Christmas market",
+      "Daycare",
+      "I leave work at six",
+      "pleased / glad / content"
+    ],
+    "answer": "pleased / glad / content",
+    "sourceItem": "contente",
+    "cat": "General"
+  },
+  {
+    "id": "q_5716",
+    "type": "multipleChoice",
+    "question": "How do you say 'pleased / glad / content' in Portuguese?",
+    "options": [
+      "caminhada",
+      "Praticar futebol tem tantas vantagens como praticar andebol",
+      "Receber",
+      "contente"
+    ],
+    "answer": "contente",
+    "sourceItem": "contente",
+    "cat": "General"
+  },
+  {
+    "id": "q_5717",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'entusiasmada'?",
+    "options": [
+      "The divorce was settled amicably",
+      "excited / enthusiastic (feminine)",
+      "Where does the plane land?",
+      "the bathroom"
+    ],
+    "answer": "excited / enthusiastic (feminine)",
+    "sourceItem": "entusiasmada",
+    "cat": "General"
+  },
+  {
+    "id": "q_5718",
+    "type": "multipleChoice",
+    "question": "How do you say 'excited / enthusiastic (feminine)' in Portuguese?",
+    "options": [
+      "entusiasmada",
+      "garrafa",
+      "Tocar",
+      "Eu acabo o trabalho às 18h"
+    ],
+    "answer": "entusiasmada",
+    "sourceItem": "entusiasmada",
+    "cat": "General"
+  },
+  {
+    "id": "q_5719",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Que entusiasmo!'?",
+    "options": [
+      "the hand fan",
+      "How exciting! / What enthusiasm!",
+      "Better late than never",
+      "To help"
+    ],
+    "answer": "How exciting! / What enthusiasm!",
+    "sourceItem": "Que entusiasmo!",
+    "cat": "General"
+  },
+  {
+    "id": "q_5720",
+    "type": "multipleChoice",
+    "question": "How do you say 'How exciting! / What enthusiasm!' in Portuguese?",
+    "options": [
+      "Abrir",
+      "O céu está limpo",
+      "Que entusiasmo!",
+      "Nós ganhámos o ponto decisivo na rede."
+    ],
+    "answer": "Que entusiasmo!",
+    "sourceItem": "Que entusiasmo!",
+    "cat": "General"
+  },
+  {
+    "id": "q_5721",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'de Cabo Verde'?",
+    "options": [
+      "Are you afraid of cockroaches?",
+      "stove",
+      "from Cape Verde",
+      "Sincerely"
+    ],
+    "answer": "from Cape Verde",
+    "sourceItem": "de Cabo Verde",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5722",
+    "type": "multipleChoice",
+    "question": "How do you say 'from Cape Verde' in Portuguese?",
+    "options": [
+      "de Cabo Verde",
+      "Longe",
+      "a gaveta",
+      "O melhor dia da minha vida"
+    ],
+    "answer": "de Cabo Verde",
+    "sourceItem": "de Cabo Verde",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5723",
+    "type": "cloze",
+    "question": "Fill in the blank: 'de ______ Verde' (from Cape Verde)",
+    "options": [
+      "Cabo",
+      "curta",
+      "Liberdade",
+      "olhos"
+    ],
+    "answer": "Cabo",
+    "sourceItem": "de Cabo Verde",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5724",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'em Cabo Verde'?",
+    "options": [
+      "I arrive at home at 7:30pm",
+      "I can speak several languages",
+      "We are tired",
+      "in Cape Verde"
+    ],
+    "answer": "in Cape Verde",
+    "sourceItem": "em Cabo Verde",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5725",
+    "type": "multipleChoice",
+    "question": "How do you say 'in Cape Verde' in Portuguese?",
+    "options": [
+      "ao",
+      "Tu falas bem português?",
+      "Tenho de estudar para o exame",
+      "em Cabo Verde"
+    ],
+    "answer": "em Cabo Verde",
+    "sourceItem": "em Cabo Verde",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5726",
+    "type": "cloze",
+    "question": "Fill in the blank: 'em Cabo ______' (in Cape Verde)",
+    "options": [
+      "dinheiro",
+      "Verde",
+      "desde",
+      "esse"
+    ],
+    "answer": "Verde",
+    "sourceItem": "em Cabo Verde",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5727",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'agradável'?",
+    "options": [
+      "pleasant / agreeable / nice",
+      "And with you? (informal)",
+      "Since when?",
+      "couple room"
+    ],
+    "answer": "pleasant / agreeable / nice",
+    "sourceItem": "agradável",
+    "cat": "General"
+  },
+  {
+    "id": "q_5728",
+    "type": "multipleChoice",
+    "question": "How do you say 'pleasant / agreeable / nice' in Portuguese?",
+    "options": [
+      "agradável",
+      "Vou para o Porto",
+      "Quanto custa isto?",
+      "Por que choras?"
+    ],
+    "answer": "agradável",
+    "sourceItem": "agradável",
+    "cat": "General"
+  },
+  {
+    "id": "q_5729",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'tudo'?",
+    "options": [
+      "This sweater is very cheap.",
+      "everything / all (invariable pronoun)",
+      "To lose",
+      "What time does the flight take off?"
+    ],
+    "answer": "everything / all (invariable pronoun)",
+    "sourceItem": "tudo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5730",
+    "type": "multipleChoice",
+    "question": "How do you say 'everything / all (invariable pronoun)' in Portuguese?",
+    "options": [
+      "Andar de metro é tão barato como andar de autocarro",
+      "O golo",
+      "cada dia",
+      "tudo"
+    ],
+    "answer": "tudo",
+    "sourceItem": "tudo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5731",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'todo / toda / todos / todas'?",
+    "options": [
+      "Green",
+      "I am sleepy",
+      "Go to the doctor regularly",
+      "all / whole / every (+ noun)"
+    ],
+    "answer": "all / whole / every (+ noun)",
+    "sourceItem": "todo / toda / todos / todas",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5732",
+    "type": "multipleChoice",
+    "question": "How do you say 'all / whole / every (+ noun)' in Portuguese?",
+    "options": [
+      "todo / toda / todos / todas",
+      "a pé",
+      "Tenho trinta anos",
+      "Fazer análises"
+    ],
+    "answer": "todo / toda / todos / todas",
+    "sourceItem": "todo / toda / todos / todas",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5733",
+    "type": "cloze",
+    "question": "Fill in the blank: 'todo / ______ / todos / todas' (all / whole / every (+ noun))",
+    "options": [
+      "toda",
+      "máquina",
+      "Continue",
+      "Tira"
+    ],
+    "answer": "toda",
+    "sourceItem": "todo / toda / todos / todas",
+    "cat": "Grammar & Verbs"
   }
 ]

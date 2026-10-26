@@ -1,0 +1,287 @@
+[
+  {
+    "id": "qform_q1",
+    "questionText": "Resposta: \"Não, doem-me as pernas.\" -> Escolha a pergunta adequada:",
+    "options": [
+      "Dói-te a cabeça?",
+      "Para onde vais?",
+      "A que horas sais do trabalho?",
+      "Como te chamas?"
+    ],
+    "correctAnswer": "Dói-te a cabeça?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_1",
+      "portuguese": "Dói-te a cabeça? / Não, doem-me as pernas.",
+      "english": "Does your head hurt? / No, my legs hurt.",
+      "notes": "Image 1 - Item a (Sintomas e Dores)"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q2",
+    "questionText": "Resposta: \"Nós vamos para Braga.\" -> Escolha a pergunta adequada:",
+    "options": [
+      "Para onde vão?",
+      "De onde vocês vêm?",
+      "Quando chegam a Braga?",
+      "Com quem vão viajar?"
+    ],
+    "correctAnswer": "Para onde vão?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_2",
+      "portuguese": "Para onde vão? / Nós vamos para Braga.",
+      "english": "Where are you going? / We are going to Braga.",
+      "notes": "Image 1 - Item b (Destino / Viagem)"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q3",
+    "questionText": "Resposta: \"O Francisco e eu dormimos oito horas por dia.\" -> Escolha a pergunta correta:",
+    "options": [
+      "Quantas horas dormem por dia?",
+      "A que horas acordam de manhã?",
+      "Onde dorme o Francisco?",
+      "Quantos anos têm?"
+    ],
+    "correctAnswer": "Quantas horas dormem por dia?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_3",
+      "portuguese": "Quantas horas dormem por dia? / O Francisco e eu dormimos oito horas por dia.",
+      "english": "How many hours do you sleep a day? / Francisco and I sleep eight hours a day.",
+      "notes": "Image 1 - Item c (Rotina e Sono)"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q4",
+    "questionText": "Resposta: \"Desculpa, mas na sexta-feira não posso passar por tua casa.\" -> Qual foi a pergunta?",
+    "options": [
+      "Podes passar na minha casa na sexta-feira?",
+      "O que fazes na sexta-feira à noite?",
+      "Onde fica a tua casa nova?",
+      "Com quem vais sair na sexta-feira?"
+    ],
+    "correctAnswer": "Podes passar na minha casa na sexta-feira?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_4",
+      "portuguese": "Podes passar na minha casa na sexta-feira? / Desculpa, mas na sexta-feira não posso passar por tua casa.",
+      "english": "Can you drop by my house on Friday? / Sorry, but on Friday I can't drop by your house.",
+      "notes": "Image 1 - Item d (Convite e Disponibilidade)"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q5",
+    "questionText": "Resposta: \"Sim, felizmente, hoje sinto-me muito melhor.\" -> Qual é a pergunta correspondente?",
+    "options": [
+      "Sentes-te melhor?",
+      "Porque estás irritado?",
+      "A que horas tomaste o remédio?",
+      "Onde foste ao médico?"
+    ],
+    "correctAnswer": "Sentes-te melhor?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_5",
+      "portuguese": "Sentes-te melhor? / Sim, felizmente, hoje sinto-me muito melhor.",
+      "english": "Are you feeling better? / Yes, fortunately, today I feel much better.",
+      "notes": "Image 1 - Item e (Saúde e Bem-estar)"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q6",
+    "questionText": "Resposta: \"Hoje, estou irritado, porque tenho dores de cabeça.\" -> Qual é a pergunta correta?",
+    "options": [
+      "Porque estás irritado?",
+      "O que queres jantar hoje?",
+      "Onde estás a trabalhar?",
+      "Tens febre alta?"
+    ],
+    "correctAnswer": "Porque estás irritado?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_6",
+      "portuguese": "Porque estás irritado? / Hoje, estou irritado, porque tenho dores de cabeça.",
+      "english": "Why are you irritated? / Today, I am irritated because I have a headache.",
+      "notes": "Image 1 - Item f (Causa e Humor)"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q7",
+    "questionText": "Resposta: \"Desculpe, não sei que horas são.\" -> Qual foi a pergunta feita?",
+    "options": [
+      "Que horas são?",
+      "A que horas abre o banco?",
+      "Onde compraste o relógio?",
+      "Quanto tempo demorou o autocarro?"
+    ],
+    "correctAnswer": "Que horas são?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_7",
+      "portuguese": "Que horas são? / Desculpe, não sei que horas são.",
+      "english": "What time is it? / Excuse me, I don't know what time it is.",
+      "notes": "Image 1 - Item g (Horas e Polidez)"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q8",
+    "questionText": "Resposta: \"Eu ando cansado por ter muito trabalho.\" -> Escolha a pergunta adequada:",
+    "options": [
+      "Porque andas tão cansado?",
+      "Onde trabalhas habitualmente?",
+      "Quantas horas dormes por noite?",
+      "Gostas da tua empresa?"
+    ],
+    "correctAnswer": "Porque andas tão cansado?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_8",
+      "portuguese": "Porque andas tão cansado? / Eu ando cansado por ter muito trabalho.",
+      "english": "Why have you been feeling so tired? / I have been feeling tired due to having a lot of work.",
+      "notes": "Question Formation - Cansaço e Trabalho"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q9",
+    "questionText": "Resposta: \"Para nós, este é o melhor restaurante de sushi.\" -> Qual é a pergunta correspondente?",
+    "options": [
+      "Para vocês, qual é o melhor restaurante de sushi?",
+      "A que horas abre o restaurante japonês?",
+      "Quanto custa o menu de sushi?",
+      "Onde fica a praça da cidade?"
+    ],
+    "correctAnswer": "Para vocês, qual é o melhor restaurante de sushi?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_9",
+      "portuguese": "Para vocês, qual é o melhor restaurante de sushi? / Para nós, este é o melhor...",
+      "english": "In your opinion, what is the best sushi restaurant? / For us, this is the best...",
+      "notes": "Question Formation - Opinião (Para vocês)"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q10",
+    "questionText": "Resposta: \"Nós devemos chegar ao Porto pelas 20:00.\" -> Qual é a pergunta sobre o horário de chegada?",
+    "options": [
+      "A que horas devem chegar ao Porto?",
+      "De onde partem para o Porto?",
+      "Vão viajar de comboio ou de autocarro?",
+      "Onde vão jantar no Porto?"
+    ],
+    "correctAnswer": "A que horas devem chegar ao Porto?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_10",
+      "portuguese": "A que horas devem chegar ao Porto? / Nós devemos chegar ao Porto pelas 20:00.",
+      "english": "What time should you arrive in Porto? / We should arrive in Porto around 8:00 PM.",
+      "notes": "Question Formation - Horário e Chegada"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q11",
+    "questionText": "Resposta: \"Sim, eu falo várias línguas fluentemente.\" -> Qual é a pergunta correspondente?",
+    "options": [
+      "Tu falas várias línguas?",
+      "Onde aprendeste português?",
+      "Qual é a tua língua materna?",
+      "Gostas de viajar pela Europa?"
+    ],
+    "correctAnswer": "Tu falas várias línguas?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_11",
+      "portuguese": "Tu falas várias línguas? / Sim, eu falo várias línguas.",
+      "english": "Do you speak several languages? / Yes, I speak several languages.",
+      "notes": "Question Formation - Competências e Idiomas"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q12",
+    "questionText": "Resposta: \"Ele vai de autocarro, porque não mora muito perto da farmácia.\" -> Qual é a pergunta?",
+    "options": [
+      "Porque é que ele vai de autocarro?",
+      "Onde fica a farmácia de serviço?",
+      "A que horas passa o autocarro?",
+      "Quem é o farmacêutico?"
+    ],
+    "correctAnswer": "Porque é que ele vai de autocarro?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_12",
+      "portuguese": "Porque é que ele vai de autocarro? / Ele vai de autocarro, porque não mora perto...",
+      "english": "Why does he go by bus? / He goes by bus because he doesn't live close...",
+      "notes": "Question Formation - Meios de Transporte"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q13",
+    "questionText": "Resposta: \"Eu fui na segunda-feira de manhã e voltei ontem à tarde.\" -> Qual é a pergunta?",
+    "options": [
+      "Quando foste e quando voltaste?",
+      "Para onde viajaste no fim de semana?",
+      "Com quem estiveste na segunda-feira?",
+      "Como estava o tempo ontem?"
+    ],
+    "correctAnswer": "Quando foste e quando voltaste?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_13",
+      "portuguese": "Quando foste e quando voltaste? / Fui na segunda-feira de manhã e voltei ontem.",
+      "english": "When did you go and when did you return? / I went on Monday morning and returned yesterday.",
+      "notes": "Question Formation - Tempo e Viagem"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q14",
+    "questionText": "Resposta: \"Eu peço uma francesinha ao empregado de mesa.\" -> Qual é a pergunta adequada?",
+    "options": [
+      "O que pedes ao empregado?",
+      "Quanto custa a francesinha?",
+      "Gostas do restaurante?",
+      "Onde vais almoçar amanhã?"
+    ],
+    "correctAnswer": "O que pedes ao empregado?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_14",
+      "portuguese": "O que pedes ao empregado? / Eu peço uma francesinha ao empregado.",
+      "english": "What do you order from the waiter? / I order a francesinha from the waiter.",
+      "notes": "Question Formation - Restaurante e Pedidos"
+    },
+    "category": "Question Formation"
+  },
+  {
+    "id": "qform_q15",
+    "questionText": "Resposta: \"Vou ficar aí durante toda a semana.\" -> Qual é a pergunta correspondente?",
+    "options": [
+      "Quanto tempo vais ficar aí?",
+      "Onde fica o teu hotel?",
+      "Quando voltas para o trabalho?",
+      "Com quem vais ficar durante as férias?"
+    ],
+    "correctAnswer": "Quanto tempo vais ficar aí?",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "qform_src_15",
+      "portuguese": "Quanto tempo vais ficar aí? / Vou ficar aí durante toda a semana.",
+      "english": "How long will you stay there? / I will stay there for the whole week.",
+      "notes": "Question Formation - Duração da Estadia"
+    },
+    "category": "Question Formation"
+  }
+]

@@ -69,6 +69,18 @@ void main() {
       validateExerciseFile('assets/data/exercises/unit_everyday_items.json');
     });
 
+    test('unit_question_formation.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_question_formation.json');
+    });
+
+    test('unit_prepositions_para_por.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_prepositions_para_por.json');
+    });
+
+    test('unit_imperative_formal_informal.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_imperative_formal_informal.json');
+    });
+
     test('indirect_object_pronouns.json adheres to exercise invariants and includes target items', () {
       validateExerciseFile('assets/data/exercises/indirect_object_pronouns.json');
 
@@ -171,6 +183,9 @@ void main() {
       expect(unitPaths.contains('assets/data/exercises/unit_household_items.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_body_parts_and_health.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_everyday_items.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_question_formation.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_prepositions_para_por.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_imperative_formal_informal.json'), isTrue);
     });
 
     test('CategorySelectionScreen covers all categories present in questions.json', () {

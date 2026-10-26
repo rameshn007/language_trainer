@@ -2380,3 +2380,119 @@
 | a gaveta | the drawer | Everyday Items |
 | o lenço de papel | the paper tissue | Everyday Items |
 | o leque | the hand fan | Everyday Items |
+
+# More Words & Phrases (Sheet 1)
+
+| Portugues | English | Notes |
+| :---- | :---- | :---- |
+| caminhada | walk / hike / hiking | Hobbies & Leisure |
+| traduzir | to translate | Grammar & Verbs |
+| dizer | to say / to tell | Grammar & Verbs |
+| fazer | to do / to make | Grammar & Verbs |
+| pois | because / since / as | Basics |
+| vejo | I see | Grammar & Verbs |
+| você veja | you see / take a look (formal) | Grammar & Verbs |
+| análises | blood tests / medical tests | Body & Health |
+| ponha | put! / you put (formal imperative) | Grammar & Verbs |
+| a bagagem | luggage / baggage | Travel & Directions |
+| o relatório | the report | Office & Work |
+| Imprima este relatório, por favor | Print this report, please (formal) | Office & Work |
+| Vai buscar as crianças à escola | Go pick up the children from school (informal) | Family |
+| Abre o livro na página 12 | Open the book to page 12 (informal) | Basics |
+| Sente-se aqui, por favor | Sit here, please (formal) | Basics |
+| Sente-te aqui, por favor | Sit here, please (informal) | Basics |
+| Traz pão e legumes do supermercado | Bring bread and vegetables from the supermarket (informal) | Food & Drink |
+| Apague esta luz, por favor. É muito forte! | Switch off this light, please. It is very strong! | Household Items |
+| Aquece o leite, por favor | Heat the milk, please (informal) | Food & Drink |
+| Aqueça o leite, por favor | Heat the milk, please (formal) | Food & Drink |
+| Tira os sapatos do armário | Take the shoes out of the wardrobe (informal) | Household Items |
+| Põe os livros no armário | Put the books in the cupboard (informal) | Household Items |
+| Tome este antibiótico e volte daqui a uma semana | Take this antibiotic and return in a week (formal) | Body & Health |
+| Fale mais devagar, por favor, porque não entendo o que diz | Speak slower, please, because I don't understand what you say (formal) | Basics |
+| Faça uma dieta para melhorar a sua saúde | Follow a diet to improve your health (formal) | Body & Health |
+| Tem calma | Stay calm / Take it easy (informal) | Basics |
+| Toma atenção aos peões | Watch out for pedestrians (informal) | Travel & Directions |
+| espirra | he/she sneezes | Body & Health |
+| espirrar | to sneeze | Body & Health |
+| Queria enviar esta carta registada para a Irlanda com aviso de receção | I would like to send this registered letter to Ireland with receipt notice | Office & Work |
+| a alfândega | customs / border control | Travel & Directions |
+| O Greg vai para o trabalho de metro | Greg goes to work by metro | Travel & Directions |
+| Eu ando cansado por ter muito trabalho | I have been feeling tired lately due to having a lot of work | Body & Health |
+| Como há muito trânsito, temos de ir por esta rua | Because there is a lot of traffic, we have to take this street | Travel & Directions |
+| O Manuel telefona aos pais para saber se eles estão bem | Manuel calls his parents to find out if they are well | Family |
+| Nós devemos chegar ao Porto pelas 20:00 | We should arrive in Porto around 8:00 PM | Travel & Directions |
+| Para ti, qual é o melhor filme de sempre? | In your opinion, which film is the best ever? (informal) | Hobbies & Leisure |
+| para mim | in my opinion / for me | Basics |
+| por mim | fine by me / as for me | Basics |
+| O telemóvel tem garantia por um ano | The mobile phone has a warranty for one year | Everyday Items |
+| penúltima | penultimate / second-to-last (feminine) | Time & Numbers |
+| Eu durmo oito horas por dia | I sleep eight hours a day | Body & Health |
+| A Sofia traz sempre uma garrafa de água na mochila | Sofia always brings a bottle of water in her backpack | Everyday Items |
+| eu peço | I ask for / I request / I order | Food & Drink |
+| ela pede | she asks for / she requests | Grammar & Verbs |
+| tu pedes | you ask for / you order (informal) | Grammar & Verbs |
+| O Paulo pede o telemóvel à mãe | Paulo asks his mother for the mobile phone | Family |
+| perdidos e achados | lost and found | Travel & Directions |
+| Tu perdes a carteira frequentemente? | Do you lose your wallet frequently? (informal) | Everyday Items |
+| Eu sei falar várias línguas | I can speak several languages | Basics |
+| várias | several / various (feminine) | Time & Numbers |
+| Vocês vêm para casa de carro ou a pé? | Are you coming home by car or on foot? (plural) | Travel & Directions |
+| tomar um comprimido | to take a pill / tablet | Body & Health |
+| levar uma injeção | to get an injection | Body & Health |
+| tomar uma vacina | to take / receive a vaccine | Body & Health |
+| doer a barriga | to have a stomach ache (belly hurts) | Body & Health |
+| doer | to hurt / to ache | Body & Health |
+| fazer um raio-X | to get / take an X-ray | Body & Health |
+| sentir-se enjoado | to feel nauseous / motion sick | Body & Health |
+| apanhar uma constipação | to catch a cold | Body & Health |
+| a obstipação | constipation | Body & Health |
+| mora | lives / resides (he/she) | House & Rooms |
+| Ele vai de autocarro, porque não mora muito perto da farmácia | He goes by bus, because he doesn't live very close to the pharmacy | Travel & Directions |
+| perto de | close to / near | Travel & Directions |
+| No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado | On the way back, he walks home because he needs to stop by the supermarket | Travel & Directions |
+| o regresso | the return / coming back | Travel & Directions |
+| Eu fui na segunda-feira de manhã | I went on Monday morning | Time & Numbers |
+| e voltei ontem | and I returned yesterday | Time & Numbers |
+| falharam muitas oportunidades | they missed many opportunities | Office & Work |
+| para trabalho | for work | Office & Work |
+| Ele tem gripe | He has the flu | Body & Health |
+| dói-me a cabeça | my head hurts / I have a headache | Body & Health |
+| doem-me as pernas | my legs hurt | Body & Health |
+| A Marisa tem férias por duas semanas | Marisa has vacation for two weeks | Office & Work |
+| Para vocês, qual é o melhor filme do Tom Cruise? | In your (plural) opinion, what is Tom Cruise's best film? | Hobbies & Leisure |
+| O autocarro passa por aquela rua | The bus passes along that street | Travel & Directions |
+| Eu peço uma francesinha ao empregado | I order a francesinha from the waiter | Food & Drink |
+| Sr. Silva, faça mais exercício | Mr. Silva, do more exercise (formal recommendation) | Body & Health |
+| Dói-te a cabeça? | Does your head hurt? / Do you have a headache? (informal) | Body & Health |
+| Onde vão? | Where are you (plural) going? | Travel & Directions |
+| Quantas horas dormem por dia? | How many hours do you (plural) sleep a day? | Body & Health |
+| Podes passar na minha casa na sexta-feira? | Can you drop by my house on Friday? (informal) | House & Rooms |
+| Sentes-te melhor? | Are you feeling better? (informal) | Body & Health |
+| Porque estás irritado? | Why are you irritated / annoyed? (informal) | Basics |
+| Tu falas bem português? | Do you speak Portuguese well? (informal) | Basics |
+| algumas coisas | some things / a few things | Everyday Items |
+| Ainda não consigo falar | I still can't speak (fluently) | Basics |
+| numa empresa | in a company / at a firm | Office & Work |
+| em + uma = numa | in a / on a (contraction: em + uma) | Grammar & Verbs |
+| entre eles | between them / among them | Family |
+| não ... nenhum | none / not any (double negative) | Grammar & Verbs |
+| Ah, pois | Ah, of course / Ah, right | Basics |
+| pois pois | right right / I see (conversational feedback) | Basics |
+| quase | almost / nearly | Time & Numbers |
+| Estamos quase lá | We are almost there | Travel & Directions |
+| mesmo + adjetivo | really / truly + adjective (intensifier) | Grammar & Verbs |
+| O jantar está mesmo bom! | Dinner is really good! | Food & Drink |
+| Eu quero o mesmo | I want the same (thing) | Food & Drink |
+| Então, hoje não vens mesmo ao jantar? | So, are you really not coming to dinner today? (informal) | Food & Drink |
+| verbo + mesmo | verb + mesmo (emphasis: really / actually) | Grammar & Verbs |
+| Claro, eu compreendo | Of course, I understand | Basics |
+| Vemo-nos | See you / We'll see each other | Basics |
+| Vou ficar aí durante toda a semana | I will stay there for the whole week | Travel & Directions |
+| contente | pleased / glad / content | Basics |
+| entusiasmada | excited / enthusiastic (feminine) | Basics |
+| Que entusiasmo! | How exciting! / What enthusiasm! | Basics |
+| de Cabo Verde | from Cape Verde | Travel & Directions |
+| em Cabo Verde | in Cape Verde | Travel & Directions |
+| agradável | pleasant / agreeable / nice | Basics |
+| tudo | everything / all (invariable pronoun) | Basics |
+| todo / toda / todos / todas | all / whole / every (+ noun) | Grammar & Verbs |
