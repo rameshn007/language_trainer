@@ -1,0 +1,667 @@
+[
+  {
+    "id": "syn_ant_q1",
+    "questionText": "Qual é o sinónimo de \"festejar\"?",
+    "options": [
+      "celebrar",
+      "recusar",
+      "terminar",
+      "empurrar"
+    ],
+    "correctAnswer": "celebrar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_1",
+      "portuguese": "festejar = celebrar",
+      "english": "to party = to celebrate",
+      "notes": "Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q2",
+    "questionText": "Qual é o sinónimo de \"preparar\"?",
+    "options": [
+      "arranjar",
+      "acabar",
+      "puxar",
+      "sair"
+    ],
+    "correctAnswer": "arranjar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_2",
+      "portuguese": "preparar = arranjar",
+      "english": "to prepare = to arrange",
+      "notes": "Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q3",
+    "questionText": "Qual é o sinónimo de \"compreender\"?",
+    "options": [
+      "entender",
+      "oferecer",
+      "reservar",
+      "tirar"
+    ],
+    "correctAnswer": "entender",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_3",
+      "portuguese": "compreender = entender",
+      "english": "to comprehend = to understand",
+      "notes": "Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q4",
+    "questionText": "Qual é o sinónimo de \"oferecer\"?",
+    "options": [
+      "dar",
+      "receber",
+      "levar",
+      "recusar"
+    ],
+    "correctAnswer": "dar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_4",
+      "portuguese": "oferecer = dar",
+      "english": "to offer = to give",
+      "notes": "Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q5",
+    "questionText": "Qual é o sinónimo de \"terminar\"?",
+    "options": [
+      "acabar",
+      "começar",
+      "enviar",
+      "entrar"
+    ],
+    "correctAnswer": "acabar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_5",
+      "portuguese": "terminar = acabar",
+      "english": "to finish = to end",
+      "notes": "Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q6",
+    "questionText": "Qual é o sinónimo de \"marcar\" (uma mesa / consulta)?",
+    "options": [
+      "reservar",
+      "puxar",
+      "levantar",
+      "trocar"
+    ],
+    "correctAnswer": "reservar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_6",
+      "portuguese": "marcar = reservar",
+      "english": "to schedule = to reserve",
+      "notes": "Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q7",
+    "questionText": "Qual é o sinónimo de \"mandar\"?",
+    "options": [
+      "enviar",
+      "receber",
+      "aceitar",
+      "trazer"
+    ],
+    "correctAnswer": "enviar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_7",
+      "portuguese": "mandar = enviar",
+      "english": "to send",
+      "notes": "Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q8",
+    "questionText": "Qual é o sinónimo de \"outra vez\"?",
+    "options": [
+      "novamente",
+      "devagar",
+      "bastante",
+      "ontem"
+    ],
+    "correctAnswer": "novamente",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_8",
+      "portuguese": "outra vez = novamente",
+      "english": "again",
+      "notes": "Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q9",
+    "questionText": "Qual é o antónimo (oposto) de \"pôr a mesa\"?",
+    "options": [
+      "levantar a mesa",
+      "arranjar a mesa",
+      "reservar a mesa",
+      "limpar a toalha"
+    ],
+    "correctAnswer": "levantar a mesa",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_9",
+      "portuguese": "pôr a mesa ≠ levantar a mesa",
+      "english": "to set the table ≠ to clear the table",
+      "notes": "Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q10",
+    "questionText": "Qual é o antónimo (oposto) de \"aceitar\"?",
+    "options": [
+      "recusar",
+      "decidir",
+      "oferecer",
+      "compreender"
+    ],
+    "correctAnswer": "recusar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_10",
+      "portuguese": "aceitar ≠ recusar",
+      "english": "to accept ≠ to refuse",
+      "notes": "Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q11",
+    "questionText": "Qual é o antónimo (oposto) de \"enviar\"?",
+    "options": [
+      "receber",
+      "mandar",
+      "dar",
+      "levar"
+    ],
+    "correctAnswer": "receber",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_11",
+      "portuguese": "enviar ≠ receber",
+      "english": "to send ≠ to receive",
+      "notes": "Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q12",
+    "questionText": "Qual é o antónimo (oposto) de \"trazer\"?",
+    "options": [
+      "levar",
+      "tirar",
+      "pôr",
+      "vir"
+    ],
+    "correctAnswer": "levar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_12",
+      "portuguese": "trazer ≠ levar",
+      "english": "to bring ≠ to take",
+      "notes": "Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q13",
+    "questionText": "Qual é o antónimo (oposto) de \"pôr\"?",
+    "options": [
+      "tirar",
+      "entrar",
+      "puxar",
+      "acabar"
+    ],
+    "correctAnswer": "tirar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_13",
+      "portuguese": "pôr ≠ tirar",
+      "english": "to put ≠ to take out",
+      "notes": "Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q14",
+    "questionText": "Qual é o antónimo (oposto) de \"entrar\"?",
+    "options": [
+      "sair",
+      "vir",
+      "empurrar",
+      "ficar"
+    ],
+    "correctAnswer": "sair",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_14",
+      "portuguese": "entrar ≠ sair",
+      "english": "to enter ≠ to leave",
+      "notes": "Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q15",
+    "questionText": "Qual é o antónimo (oposto) de \"puxar\"?",
+    "options": [
+      "empurrar",
+      "trocar",
+      "levantar",
+      "marcar"
+    ],
+    "correctAnswer": "empurrar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_15",
+      "portuguese": "puxar ≠ empurrar",
+      "english": "to pull ≠ to push",
+      "notes": "Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q16",
+    "questionText": "Qual é o antónimo (oposto) de \"depressa\"?",
+    "options": [
+      "devagar",
+      "lento",
+      "bastante",
+      "novamente"
+    ],
+    "correctAnswer": "devagar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_16",
+      "portuguese": "depressa ≠ devagar",
+      "english": "fast ≠ slow (adverbs)",
+      "notes": "Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q17",
+    "questionText": "Qual é o antónimo (oposto) de \"rápido\"?",
+    "options": [
+      "lento",
+      "devagar",
+      "tão",
+      "inevitável"
+    ],
+    "correctAnswer": "lento",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_17",
+      "portuguese": "rápido ≠ lento",
+      "english": "fast ≠ slow (adjectives)",
+      "notes": "Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q18",
+    "questionText": "Complete a frase: \"Nós ___ o convite para a festa de Natal.\"",
+    "options": [
+      "aceitamos",
+      "puxamos",
+      "apagamos",
+      "empurramos"
+    ],
+    "correctAnswer": "aceitamos",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_18",
+      "portuguese": "Nós aceitamos o convite.",
+      "english": "We accept the invitation.",
+      "notes": "Contextual practice"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q19",
+    "questionText": "Complete a frase: \"Eu ___ a comida no forno.\"",
+    "options": [
+      "ponho",
+      "tiro",
+      "saio",
+      "ouço"
+    ],
+    "correctAnswer": "ponho",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_19",
+      "portuguese": "Eu ponho a comida no forno.",
+      "english": "I put the food in the oven.",
+      "notes": "Contextual practice"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q20",
+    "questionText": "Complete a frase: \"Antes de entrar, eu ___ a porta.\"",
+    "options": [
+      "empurro",
+      "recuso",
+      "acabo",
+      "reservo"
+    ],
+    "correctAnswer": "empurro",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_20",
+      "portuguese": "Antes de entrar eu empurro a porta.",
+      "english": "Before entering I push the door.",
+      "notes": "Contextual practice"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q21",
+    "questionText": "Qual é o sinónimo de \"começar\"?",
+    "options": [
+      "iniciar",
+      "terminar",
+      "desligar",
+      "recusar"
+    ],
+    "correctAnswer": "iniciar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_21",
+      "portuguese": "começar = iniciar",
+      "english": "to start = to begin",
+      "notes": "Expanded Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q22",
+    "questionText": "Qual é o sinónimo de \"ouvir\"?",
+    "options": [
+      "escutar",
+      "falar",
+      "esquecer",
+      "vender"
+    ],
+    "correctAnswer": "escutar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_22",
+      "portuguese": "ouvir = escutar",
+      "english": "to hear = to listen",
+      "notes": "Expanded Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q23",
+    "questionText": "Qual é o sinónimo de \"bonito\"?",
+    "options": [
+      "lindo",
+      "vazio",
+      "lento",
+      "complicado"
+    ],
+    "correctAnswer": "lindo",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_23",
+      "portuguese": "bonito = lindo",
+      "english": "pretty = beautiful",
+      "notes": "Expanded Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q24",
+    "questionText": "Qual é o sinónimo de \"fácil\"?",
+    "options": [
+      "simples",
+      "difícil",
+      "caro",
+      "longe"
+    ],
+    "correctAnswer": "simples",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_24",
+      "portuguese": "fácil = simples",
+      "english": "easy = simple",
+      "notes": "Expanded Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q25",
+    "questionText": "Qual é o sinónimo de \"ajudar\"?",
+    "options": [
+      "auxiliar",
+      "perder",
+      "descer",
+      "apagar"
+    ],
+    "correctAnswer": "auxiliar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_25",
+      "portuguese": "ajudar = auxiliar",
+      "english": "to help = to assist",
+      "notes": "Expanded Synonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q26",
+    "questionText": "Qual é o antónimo (oposto) de \"abrir\"?",
+    "options": [
+      "fechar",
+      "iniciar",
+      "aceitar",
+      "ganhar"
+    ],
+    "correctAnswer": "fechar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_26",
+      "portuguese": "abrir ≠ fechar",
+      "english": "to open ≠ to close",
+      "notes": "Expanded Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q27",
+    "questionText": "Qual é o antónimo (oposto) de \"ligar\"?",
+    "options": [
+      "desligar",
+      "acender",
+      "lembrar",
+      "subir"
+    ],
+    "correctAnswer": "desligar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_27",
+      "portuguese": "ligar ≠ desligar",
+      "english": "to turn on ≠ to turn off",
+      "notes": "Expanded Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q28",
+    "questionText": "Qual é o antónimo (oposto) de \"acender\"?",
+    "options": [
+      "apagar",
+      "ligar",
+      "oferecer",
+      "comprar"
+    ],
+    "correctAnswer": "apagar",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_28",
+      "portuguese": "acender ≠ apagar",
+      "english": "to light ≠ to turn off",
+      "notes": "Expanded Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q29",
+    "questionText": "Qual é o antónimo (oposto) de \"subir\"?",
+    "options": [
+      "descer",
+      "entrar",
+      "trazer",
+      "puxar"
+    ],
+    "correctAnswer": "descer",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_29",
+      "portuguese": "subir ≠ descer",
+      "english": "to go up ≠ to go down",
+      "notes": "Expanded Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q30",
+    "questionText": "Qual é o antónimo (oposto) de \"lembrar-se\"?",
+    "options": [
+      "esquecer-se",
+      "compreender",
+      "decidir",
+      "festejar"
+    ],
+    "correctAnswer": "esquecer-se",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_30",
+      "portuguese": "lembrar-se ≠ esquecer-se",
+      "english": "to remember ≠ to forget",
+      "notes": "Expanded Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q31",
+    "questionText": "Qual é o antónimo (oposto) de \"cheio\"?",
+    "options": [
+      "vazio",
+      "quente",
+      "simples",
+      "cedo"
+    ],
+    "correctAnswer": "vazio",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_31",
+      "portuguese": "cheio ≠ vazio",
+      "english": "full ≠ empty",
+      "notes": "Expanded Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q32",
+    "questionText": "Qual é o antónimo (oposto) de \"quente\"?",
+    "options": [
+      "frio",
+      "lento",
+      "barato",
+      "longe"
+    ],
+    "correctAnswer": "frio",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_32",
+      "portuguese": "quente ≠ frio",
+      "english": "hot ≠ cold",
+      "notes": "Expanded Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q33",
+    "questionText": "Qual é o antónimo (oposto) de \"cedo\"?",
+    "options": [
+      "tarde",
+      "perto",
+      "sempre",
+      "depressa"
+    ],
+    "correctAnswer": "tarde",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_33",
+      "portuguese": "cedo ≠ tarde",
+      "english": "early ≠ late",
+      "notes": "Expanded Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q34",
+    "questionText": "Qual é o antónimo (oposto) de \"perto\"?",
+    "options": [
+      "longe",
+      "tarde",
+      "vazio",
+      "nunca"
+    ],
+    "correctAnswer": "longe",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_34",
+      "portuguese": "perto ≠ longe",
+      "english": "near ≠ far",
+      "notes": "Expanded Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  },
+  {
+    "id": "syn_ant_q35",
+    "questionText": "Complete com o antónimo adequado: \"O copo está cheio, mas a garrafa está ___.\"",
+    "options": [
+      "vazia",
+      "quente",
+      "linda",
+      "simples"
+    ],
+    "correctAnswer": "vazia",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "syn_ant_src_35",
+      "portuguese": "O copo está cheio, mas a garrafa está vazia.",
+      "english": "The glass is full, but the bottle is empty.",
+      "notes": "Contextual Antonyms"
+    },
+    "category": "Synonyms & Antonyms"
+  }
+]

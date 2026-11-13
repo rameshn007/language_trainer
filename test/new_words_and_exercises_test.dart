@@ -81,6 +81,14 @@ void main() {
       validateExerciseFile('assets/data/exercises/unit_imperative_formal_informal.json');
     });
 
+    test('unit_synonyms_antonyms.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_synonyms_antonyms.json');
+    });
+
+    test('unit_past_tense_and_holidays.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_past_tense_and_holidays.json');
+    });
+
     test('indirect_object_pronouns.json adheres to exercise invariants and includes target items', () {
       validateExerciseFile('assets/data/exercises/indirect_object_pronouns.json');
 
@@ -124,6 +132,11 @@ void main() {
       expect(verbSet, contains('dormir'));
       expect(verbSet, contains('doer'));
       expect(verbSet, contains('carregar'));
+      expect(verbSet, contains('decidir'));
+      expect(verbSet, contains('trocar'));
+      expect(verbSet, contains('festejar'));
+      expect(verbSet, contains('aceitar'));
+      expect(verbSet, contains('empurrar'));
     });
 
     test('verbs.csv includes traduzir, sentar, espirrar, herdar, and praticar with all conjugation fields populated', () {
@@ -131,7 +144,7 @@ void main() {
       expect(verbsFile.existsSync(), isTrue);
       final lines = verbsFile.readAsLinesSync();
 
-      for (final verb in ['traduzir', 'sentar', 'espirrar', 'herdar', 'praticar', 'atender', 'tirar']) {
+      for (final verb in ['traduzir', 'sentar', 'espirrar', 'herdar', 'praticar', 'atender', 'tirar', 'decidir', 'trocar', 'festejar', 'celebrar', 'aceitar', 'puxar', 'empurrar']) {
         final verbLine = lines.firstWhere((l) => l.startsWith('$verb,'), orElse: () => '');
         expect(verbLine, isNotEmpty, reason: 'verbs.csv must contain an entry for $verb');
         final parts = verbLine.split(',');
@@ -212,6 +225,8 @@ void main() {
       expect(unitPaths.contains('assets/data/exercises/unit_question_formation.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_prepositions_para_por.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_imperative_formal_informal.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_synonyms_antonyms.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_past_tense_and_holidays.json'), isTrue);
     });
 
     test('CategorySelectionScreen covers all categories present in questions.json', () {

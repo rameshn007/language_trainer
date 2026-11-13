@@ -341,6 +341,18 @@ class QuizViewModel extends Notifier<QuizState> {
           items,
         ),
       );
+      exercisePool.addAll(
+        await _loader.loadQuestions(
+          'assets/data/exercises/unit_synonyms_antonyms.json',
+          items,
+        ),
+      );
+      exercisePool.addAll(
+        await _loader.loadQuestions(
+          'assets/data/exercises/unit_past_tense_and_holidays.json',
+          items,
+        ),
+      );
       interrogPool.addAll(
         await _engine.generateInterrogativeQuiz(
           count: poolSize,

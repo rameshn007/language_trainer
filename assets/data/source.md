@@ -2496,3 +2496,141 @@
 | agradável | pleasant / agreeable / nice | Basics |
 | tudo | everything / all (invariable pronoun) | Basics |
 | todo / toda / todos / todas | all / whole / every (+ noun) | Grammar & Verbs |
+
+## Synonyms, Antonyms, Past Tense & Holiday Vocabulary
+
+| Portugues | English | Notes |
+| :--- | :--- | :--- |
+| inevitável | inevitable | Intro / Basics |
+| tão + adjetivo + como | as + adjective + as | Grammar / Comparative |
+| tanto, tanta, tantos, tantas | so much / so many (+ noun) | Grammar / Comparative |
+| verbo + tanto | verb + so much | Grammar / Comparative |
+| ele come tanto | he eats so much | Food & Drink |
+| há tanto tempo | for so long / for a long time | Time / Duration |
+| há quanto tempo | how long...? | Time / Duration |
+| Não estou com eles há tanto tempo | I haven't been with them for so long | Time / Duration |
+| Ela gosta tanto de estar com os avós! | She likes to stay with her grandparents so much! | Family |
+| Ele convida sempre tanta gente! | He always invites so many people! | Family |
+| É um exagero | It is an exaggeration | Intro / Basics |
+| rápido / lento | fast / slow (adjectives) | Intro / Basics |
+| o café | coffee | Food & Drink |
+| o chá | tea | Food & Drink |
+| O dia, hoje, está tão bom | Today is so nice | Intro / Basics |
+| não conduzas tão depressa | don't drive so fast | Travel & Directions |
+| há tantas pessoas na praia | there are so many people at the beach | Travel & Directions |
+| o abraço | hug | Family |
+| Querido Tiago | Dear Tiago | Intro / Greeting |
+| Caro / Cara | Dear (formal) | Office & Work |
+| Estimado cliente | Esteemed client (formal) | Office & Work |
+| Beijinhos dos tios | Kisses from your aunt and uncle | Family |
+| apagamos | we delete / erase / turn off | Grammar / Verb |
+| pagamos | we pay | Grammar / Verb |
+| As melhoras! | Get well soon! | Body & Health |
+| o peru | turkey | Food & Drink |
+| as máscaras | costumes / masks | Hobbies & Leisure |
+| as decorações | decorations | Household Items |
+| os vereadores | councilors | Office & Work |
+| a câmara | city council / town hall | Travel & Directions |
+| Governo Regional da Madeira | Regional Government of Madeira | Travel & Directions |
+| dou-lhe | I give him / her / you (formal) | Grammar / Pronoun |
+| sais | you leave / go out (tu) | Grammar / Verb |
+| ele saiu | he/she left (past of sair) | Grammar / Verb |
+| vêm | they / you (plural) come | Grammar / Verb |
+| conheço | I know (a person or place) | Grammar / Verb |
+| ouço / oiço | I hear | Grammar / Verb |
+| o polvo | octopus | Food & Drink |
+| ou até | or even | Intro / Basics |
+| fatias douradas / rabanadas | Portuguese French toast | Food & Drink |
+| o tronco de Natal | chocolate Yule log cake | Food & Drink |
+| Conversa-se | people talk / one talks | Grammar / Pronoun |
+| Come-se | people eat / everyone eats | Food & Drink |
+| bastante | quite a lot / enough | Intro / Basics |
+| Depois do jantar | After dinner | Time / Duration |
+| à volta da | around the | Travel & Directions |
+| o Pai Natal | Father Christmas / Santa Claus | Family |
+| junta novamente | gets together again | Family |
+| outra vez / novamente | again | Time / Duration |
+| a Véspera de Natal | Christmas Eve | Time / Duration |
+| a véspera | day before / eve | Time / Duration |
+| a Consoada | Christmas Eve dinner | Family |
+| a Missa do Galo | Midnight Mass (Mass of the Rooster) | Family |
+| dá-se / dão-se | is given / are given | Grammar / Pronoun |
+| quando eu era criança | when I was a child | Grammar / Verb |
+| nós víamos muitos filmes | we used to watch many films | Hobbies & Leisure |
+| ontem esteve sol | yesterday it was sunny (completed) | Grammar / Verb |
+| ontem estava sol | yesterday it was sunny (ongoing) | Grammar / Verb |
+| decidir | to decide | Grammar / Verb |
+| eu decidi | I decided | Grammar / Verb |
+| eles decidiram | they decided | Grammar / Verb |
+| a palhinha | drinking straw | Food & Drink |
+| a tampa | lid / cap | Household Items |
+| a garrafa | bottle | Food & Drink |
+| o jarro da água | jug of water | Food & Drink |
+| o guardanapo | napkin | Food & Drink |
+| o lenço de assoar | handkerchief / tissue | Everyday Items |
+| a tigela | bowl | Food & Drink |
+| de serviço | on duty | Office & Work |
+| trocar | to swap / exchange | Office & Work |
+| e não consegue trocar com o colega | and cannot swap with the colleague | Office & Work |
+| Temos muita pena | We are very sorry | Intro / Basics |
+| Espero chegar | I hope to arrive | Travel & Directions |
+| Espero que chegue | I hope he/she arrives | Grammar / Verb |
+| desejo-te | I wish you | Intro / Greeting |
+| dar-te | to give you | Grammar / Pronoun |
+| manda-te | sends you | Grammar / Pronoun |
+| Quantos anos fazes? | How old are you turning? | Family |
+| O que vais fazer? | What are you going to do? | Intro / Basics |
+| Como vais celebrar? | How are you going to celebrate? | Hobbies & Leisure |
+| Onde vais passar o Natal? | Where are you spending Christmas? | Family |
+| Quanto tempo vais ficar? | How long are you going to stay? | Time / Duration |
+| Boas férias! | Have a nice holiday! | Intro / Greeting |
+| Feliz Natal! | Merry Christmas! | Intro / Greeting |
+| Quanto tempo ficam lá? | How long are you staying there? | Time / Duration |
+| Para onde vão nas férias do Natal? | Where are you going on Christmas holidays? | Travel & Directions |
+| Vais para fora nas férias do Natal? | Are you going away for Christmas holidays? | Travel & Directions |
+| pontapé de canto | corner kick | Hobbies & Leisure |
+| pontapé de baliza | goal kick | Hobbies & Leisure |
+| bola na trave | ball hits the crossbar | Hobbies & Leisure |
+| bola no poste | ball hits the goalpost | Hobbies & Leisure |
+| marcar um golo | to score a goal | Hobbies & Leisure |
+| festejar | to party / celebrate (= celebrar) | Hobbies & Leisure |
+| celebrar | to celebrate (= festejar) | Hobbies & Leisure |
+| arranjar | to arrange / prepare (= preparar) | Intro / Basics |
+| entender | to understand (= compreender) | Intro / Basics |
+| reservar | to reserve / book (= marcar) | Travel & Directions |
+| aceitar | to accept (≠ recusar) | Intro / Basics |
+| recusar | to refuse (≠ aceitar) | Intro / Basics |
+| Nós aceitamos o convite | We accept the invitation | Intro / Basics |
+| Eu ponho a comida no forno | I put the food in the oven | Food & Drink |
+| Antes de entrar eu empurro a porta | Before entering I push the door | Everyday Items |
+
+## Expanded Synonyms, Antonyms & Related Phrases
+
+| Portugues | English | Notes |
+| :--- | :--- | :--- |
+| iniciar | to start / begin (= começar) | Intro / Basics |
+| escutar | to listen (= ouvir) | Intro / Basics |
+| auxiliar | to assist / help (= ajudar) | Office & Work |
+| desligar | to turn off (≠ ligar) | Household Items |
+| acender | to light / switch on (≠ apagar) | Household Items |
+| subir | to go up (≠ descer) | Travel & Directions |
+| descer | to go down (≠ subir) | Travel & Directions |
+| bonito / lindo | pretty / beautiful (synonyms) | Intro / Basics |
+| difícil / complicado | difficult / complicated (synonyms) | Intro / Basics |
+| fácil / simples | easy / simple (synonyms) | Intro / Basics |
+| cheio / vazio | full / empty (antonyms) | Food & Drink |
+| quente / frio | hot / cold (antonyms) | Food & Drink |
+| o presente / a prenda | gift / present (synonyms) | Family |
+| o guarda-redes | goalkeeper | Hobbies & Leisure |
+| Acende a luz, por favor | Turn on the light, please | Household Items |
+| Apaga a luz antes de sair | Turn off the light before leaving | Household Items |
+| O copo está cheio, mas a garrafa está vazia | The glass is full, but the bottle is empty | Food & Drink |
+| O chá está quente e a água está fria | The tea is hot and the water is cold | Food & Drink |
+| Chegámos cedo à festa, mas saímos tarde | We arrived early at the party, but left late | Time / Duration |
+| A câmara fica perto daqui | The city hall is near here | Travel & Directions |
+| Eles aceitaram o convite e trouxeram rabanadas | They accepted the invitation and brought French toast | Family |
+| Ela recusou o café e pediu chá | She refused the coffee and ordered tea | Food & Drink |
+| Lembra-te de fechar a porta | Remember to close the door | Household Items |
+| Não te esqueças dos talheres | Don't forget the cutlery | Food & Drink |
+| Nós festejámos o Natal com toda a família | We celebrated Christmas with the whole family | Family |
+| O jogo acabou com dois golos | The match finished with two goals | Hobbies & Leisure |

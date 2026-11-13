@@ -80260,5 +80260,4569 @@
     "answer": "toda",
     "sourceItem": "todo / toda / todos / todas",
     "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5734",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'inevitável'?",
+    "options": [
+      "Here",
+      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
+      "inevitable",
+      "Potato"
+    ],
+    "answer": "inevitable",
+    "sourceItem": "inevitável",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5735",
+    "type": "multipleChoice",
+    "question": "How do you say 'inevitable' in Portuguese?",
+    "options": [
+      "Velho",
+      "os pés",
+      "inevitável",
+      "Está vento"
+    ],
+    "answer": "inevitável",
+    "sourceItem": "inevitável",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5736",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'tão + adjetivo + como'?",
+    "options": [
+      "Reservation",
+      "Retirement",
+      "How funny",
+      "as + adjective + as"
+    ],
+    "answer": "as + adjective + as",
+    "sourceItem": "tão + adjetivo + como",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5737",
+    "type": "multipleChoice",
+    "question": "How do you say 'as + adjective + as' in Portuguese?",
+    "options": [
+      "tão + adjetivo + como",
+      "o tornozelo",
+      "ir ate a rua",
+      "Vai pentear macacos"
+    ],
+    "answer": "tão + adjetivo + como",
+    "sourceItem": "tão + adjetivo + como",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5738",
+    "type": "cloze",
+    "question": "Fill in the blank: 'tão + ______ + como' (as + adjective + as)",
+    "options": [
+      "sorte",
+      "antigo",
+      "adjetivo",
+      "presencial"
+    ],
+    "answer": "adjetivo",
+    "sourceItem": "tão + adjetivo + como",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5739",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'tanto, tanta, tantos, tantas'?",
+    "options": [
+      "Young",
+      "What time do you get up?",
+      "so much / so many (+ noun)",
+      "Departures"
+    ],
+    "answer": "so much / so many (+ noun)",
+    "sourceItem": "tanto, tanta, tantos, tantas",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5740",
+    "type": "multipleChoice",
+    "question": "How do you say 'so much / so many (+ noun)' in Portuguese?",
+    "options": [
+      "O sapo é verde e rugoso.",
+      "tanto, tanta, tantos, tantas",
+      "A praça",
+      "sem"
+    ],
+    "answer": "tanto, tanta, tantos, tantas",
+    "sourceItem": "tanto, tanta, tantos, tantas",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5741",
+    "type": "cloze",
+    "question": "Fill in the blank: 'tanto, tanta, tantos, ______' (so much / so many (+ noun))",
+    "options": [
+      "Impermeável",
+      "tantas",
+      "dias",
+      "Natal"
+    ],
+    "answer": "tantas",
+    "sourceItem": "tanto, tanta, tantos, tantas",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5742",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'verbo + tanto'?",
+    "options": [
+      "Go straight ahead",
+      "Signed",
+      "verb + so much",
+      "At the weekend (every) watch football"
+    ],
+    "answer": "verb + so much",
+    "sourceItem": "verbo + tanto",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5743",
+    "type": "multipleChoice",
+    "question": "How do you say 'verb + so much' in Portuguese?",
+    "options": [
+      "verbo + tanto",
+      "Doente",
+      "depois",
+      "O meu"
+    ],
+    "answer": "verbo + tanto",
+    "sourceItem": "verbo + tanto",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5744",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ + tanto' (verb + so much)",
+    "options": [
+      "Queria",
+      "verbo",
+      "forno",
+      "sabe"
+    ],
+    "answer": "verbo",
+    "sourceItem": "verbo + tanto",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5745",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ele come tanto'?",
+    "options": [
+      "he eats so much",
+      "the ironing board",
+      "To swim",
+      "Of course not"
+    ],
+    "answer": "he eats so much",
+    "sourceItem": "ele come tanto",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5746",
+    "type": "multipleChoice",
+    "question": "How do you say 'he eats so much' in Portuguese?",
+    "options": [
+      "O planeta",
+      "Estás tolo?",
+      "ele come tanto",
+      "Tome este antibiótico e volte daqui a uma semana"
+    ],
+    "answer": "ele come tanto",
+    "sourceItem": "ele come tanto",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5747",
+    "type": "cloze",
+    "question": "Fill in the blank: 'ele ______ tanto' (he eats so much)",
+    "options": [
+      "semanas",
+      "estamos",
+      "baratas",
+      "come"
+    ],
+    "answer": "come",
+    "sourceItem": "ele come tanto",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5748",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'há tanto tempo'?",
+    "options": [
+      "a winner / winning point (tennis)",
+      "The pronunciation is challenging",
+      "for so long / for a long time",
+      "I have many family recipes"
+    ],
+    "answer": "for so long / for a long time",
+    "sourceItem": "há tanto tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5749",
+    "type": "multipleChoice",
+    "question": "How do you say 'for so long / for a long time' in Portuguese?",
+    "options": [
+      "há tanto tempo",
+      "Cozinho o jantar",
+      "penúltima",
+      "Evitar o açúcar"
+    ],
+    "answer": "há tanto tempo",
+    "sourceItem": "há tanto tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5750",
+    "type": "cloze",
+    "question": "Fill in the blank: 'há tanto ______' (for so long / for a long time)",
+    "options": [
+      "gostava",
+      "Aquela",
+      "tempo",
+      "mentira"
+    ],
+    "answer": "tempo",
+    "sourceItem": "há tanto tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5751",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'há quanto tempo'?",
+    "options": [
+      "Singer",
+      "how long...?",
+      "The sky is clear",
+      "What do you do?"
+    ],
+    "answer": "how long...?",
+    "sourceItem": "há quanto tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5752",
+    "type": "multipleChoice",
+    "question": "How do you say 'how long...?' in Portuguese?",
+    "options": [
+      "há quanto tempo",
+      "Onde fica a paragem de barco?",
+      "Vou para o trabalho de comboio.",
+      "e não consegue trocar com o colega"
+    ],
+    "answer": "há quanto tempo",
+    "sourceItem": "há quanto tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5753",
+    "type": "cloze",
+    "question": "Fill in the blank: 'há ______ tempo' (how long...?)",
+    "options": [
+      "barata",
+      "Fica",
+      "quanto",
+      "estás"
+    ],
+    "answer": "quanto",
+    "sourceItem": "há quanto tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5754",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Não estou com eles há tanto tempo'?",
+    "options": [
+      "to lend",
+      "small vegetable gardens (closed vegetable garden)",
+      "And with you? (informal)",
+      "I haven't been with them for so long"
+    ],
+    "answer": "I haven't been with them for so long",
+    "sourceItem": "Não estou com eles há tanto tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5755",
+    "type": "multipleChoice",
+    "question": "How do you say 'I haven't been with them for so long' in Portuguese?",
+    "options": [
+      "ninguém",
+      "arrumam a sala",
+      "Agora mesmo",
+      "Não estou com eles há tanto tempo"
+    ],
+    "answer": "Não estou com eles há tanto tempo",
+    "sourceItem": "Não estou com eles há tanto tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5756",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Não estou com ______ há tanto tempo' (I haven't been with them for so long)",
+    "options": [
+      "urgente",
+      "coração",
+      "lhes",
+      "eles"
+    ],
+    "answer": "eles",
+    "sourceItem": "Não estou com eles há tanto tempo",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5757",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ela gosta tanto de estar com os avós!'?",
+    "options": [
+      "Onion",
+      "She likes to stay with her grandparents so much!",
+      "report",
+      "I agree"
+    ],
+    "answer": "She likes to stay with her grandparents so much!",
+    "sourceItem": "Ela gosta tanto de estar com os avós!",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5758",
+    "type": "multipleChoice",
+    "question": "How do you say 'She likes to stay with her grandparents so much!' in Portuguese?",
+    "options": [
+      "O campo de futebol",
+      "Estás triste?",
+      "No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado",
+      "Ela gosta tanto de estar com os avós!"
+    ],
+    "answer": "Ela gosta tanto de estar com os avós!",
+    "sourceItem": "Ela gosta tanto de estar com os avós!",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5759",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ela ______ tanto de estar com os avós!' (She likes to stay with her grandparents so much!)",
+    "options": [
+      "pernas",
+      "gosta",
+      "Portugal",
+      "individual"
+    ],
+    "answer": "gosta",
+    "sourceItem": "Ela gosta tanto de estar com os avós!",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5760",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ele convida sempre tanta gente!'?",
+    "options": [
+      "attic (house)",
+      "He always invites so many people!",
+      "the stairs",
+      "The crosswalk"
+    ],
+    "answer": "He always invites so many people!",
+    "sourceItem": "Ele convida sempre tanta gente!",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5761",
+    "type": "multipleChoice",
+    "question": "How do you say 'He always invites so many people!' in Portuguese?",
+    "options": [
+      "Ele convida sempre tanta gente!",
+      "cheia",
+      "está sol",
+      "Ela veste-se muito bem."
+    ],
+    "answer": "Ele convida sempre tanta gente!",
+    "sourceItem": "Ele convida sempre tanta gente!",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5762",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ele ______ sempre tanta gente!' (He always invites so many people!)",
+    "options": [
+      "deito-me",
+      "acordo",
+      "convida",
+      "neve"
+    ],
+    "answer": "convida",
+    "sourceItem": "Ele convida sempre tanta gente!",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5763",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'É um exagero'?",
+    "options": [
+      "chocolate Yule log cake",
+      "I like to read",
+      "Go promote monkeys (Get lost)",
+      "It is an exaggeration"
+    ],
+    "answer": "It is an exaggeration",
+    "sourceItem": "É um exagero",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5764",
+    "type": "multipleChoice",
+    "question": "How do you say 'It is an exaggeration' in Portuguese?",
+    "options": [
+      "A contabilidade",
+      "Semana passada, anteontem, ontem, hoje, amanhã, depois de amanhã, próxima semana",
+      "É um exagero",
+      "Vinho tinto"
+    ],
+    "answer": "É um exagero",
+    "sourceItem": "É um exagero",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5765",
+    "type": "cloze",
+    "question": "Fill in the blank: 'É um ______' (It is an exaggeration)",
+    "options": [
+      "exagero",
+      "Estamos",
+      "rotunda",
+      "árvores"
+    ],
+    "answer": "exagero",
+    "sourceItem": "É um exagero",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5766",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'rápido / lento'?",
+    "options": [
+      "the afternoon or da tarde, but after a time it is de tarde",
+      "How long have you been in Portugal?",
+      "fast / slow (adjectives)",
+      "To win"
+    ],
+    "answer": "fast / slow (adjectives)",
+    "sourceItem": "rápido / lento",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5767",
+    "type": "multipleChoice",
+    "question": "How do you say 'fast / slow (adjectives)' in Portuguese?",
+    "options": [
+      "tesouro",
+      "rápido / lento",
+      "muito tranquila",
+      "lojas"
+    ],
+    "answer": "rápido / lento",
+    "sourceItem": "rápido / lento",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5768",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ / lento' (fast / slow (adjectives))",
+    "options": [
+      "tinto",
+      "aquele",
+      "segundo",
+      "rápido"
+    ],
+    "answer": "rápido",
+    "sourceItem": "rápido / lento",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5769",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o café'?",
+    "options": [
+      "the mirror",
+      "coffee",
+      "I would like to go with you to the concert",
+      "Life is beautiful"
+    ],
+    "answer": "coffee",
+    "sourceItem": "o café",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5770",
+    "type": "multipleChoice",
+    "question": "How do you say 'coffee' in Portuguese?",
+    "options": [
+      "A atleta olímpica pratica natação há mais de dez anos",
+      "O sabonete",
+      "O teu",
+      "o café"
+    ],
+    "answer": "o café",
+    "sourceItem": "o café",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5771",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o chá'?",
+    "options": [
+      "This is seat is reserved for you/These seats are reserved for you",
+      "the tongue",
+      "informal)",
+      "tea"
+    ],
+    "answer": "tea",
+    "sourceItem": "o chá",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5772",
+    "type": "multipleChoice",
+    "question": "How do you say 'tea' in Portuguese?",
+    "options": [
+      "o teu marido",
+      "o chá",
+      "Esta cidade tem tanta história como Lisboa",
+      "ao meio-dia"
+    ],
+    "answer": "o chá",
+    "sourceItem": "o chá",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5773",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O dia, hoje, está tão bom'?",
+    "options": [
+      "Today is so nice",
+      "I arrived before you.",
+      "Can you take a photo?",
+      "Day"
+    ],
+    "answer": "Today is so nice",
+    "sourceItem": "O dia, hoje, está tão bom",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5774",
+    "type": "multipleChoice",
+    "question": "How do you say 'Today is so nice' in Portuguese?",
+    "options": [
+      "Eu vou",
+      "cave",
+      "O dia, hoje, está tão bom",
+      "Apague esta luz, por favor. É muito forte!"
+    ],
+    "answer": "O dia, hoje, está tão bom",
+    "sourceItem": "O dia, hoje, está tão bom",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5775",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O dia, hoje, ______ tão bom' (Today is so nice)",
+    "options": [
+      "entusiasmada",
+      "Baixo",
+      "este,esse,aquele",
+      "está"
+    ],
+    "answer": "está",
+    "sourceItem": "O dia, hoje, está tão bom",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5776",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'não conduzas tão depressa'?",
+    "options": [
+      "How old are you?",
+      "don't drive so fast",
+      "Go to Lisbon (destination)",
+      "we delete / erase / turn off"
+    ],
+    "answer": "don't drive so fast",
+    "sourceItem": "não conduzas tão depressa",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5777",
+    "type": "multipleChoice",
+    "question": "How do you say 'don't drive so fast' in Portuguese?",
+    "options": [
+      "Onde são os provadores?",
+      "gorro",
+      "não conduzas tão depressa",
+      "Quanto..? Quanto custa? Quanto tempo leva a viagem?"
+    ],
+    "answer": "não conduzas tão depressa",
+    "sourceItem": "não conduzas tão depressa",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5778",
+    "type": "cloze",
+    "question": "Fill in the blank: 'não ______ tão depressa' (don't drive so fast)",
+    "options": [
+      "Cascais",
+      "livro",
+      "Tenho",
+      "conduzas"
+    ],
+    "answer": "conduzas",
+    "sourceItem": "não conduzas tão depressa",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5779",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'há tantas pessoas na praia'?",
+    "options": [
+      "to hurt / to ache",
+      "there are so many people at the beach",
+      "cross",
+      "Esteemed client (formal)"
+    ],
+    "answer": "there are so many people at the beach",
+    "sourceItem": "há tantas pessoas na praia",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5780",
+    "type": "multipleChoice",
+    "question": "How do you say 'there are so many people at the beach' in Portuguese?",
+    "options": [
+      "A borracha",
+      "esplanada",
+      "há tantas pessoas na praia",
+      "O sinal"
+    ],
+    "answer": "há tantas pessoas na praia",
+    "sourceItem": "há tantas pessoas na praia",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5781",
+    "type": "cloze",
+    "question": "Fill in the blank: 'há tantas ______ na praia' (there are so many people at the beach)",
+    "options": [
+      "gravação",
+      "pessoas",
+      "Estou",
+      "logo"
+    ],
+    "answer": "pessoas",
+    "sourceItem": "há tantas pessoas na praia",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5782",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o abraço'?",
+    "options": [
+      "I watch movies in Portuguese",
+      "I go to work",
+      "hug",
+      "the knife"
+    ],
+    "answer": "hug",
+    "sourceItem": "o abraço",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5783",
+    "type": "multipleChoice",
+    "question": "How do you say 'hug' in Portuguese?",
+    "options": [
+      "comer fora",
+      "Onde é a casa de banho?",
+      "o abraço",
+      "Correr"
+    ],
+    "answer": "o abraço",
+    "sourceItem": "o abraço",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5784",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Querido Tiago'?",
+    "options": [
+      "the attic",
+      "the hands",
+      "dream",
+      "Dear Tiago"
+    ],
+    "answer": "Dear Tiago",
+    "sourceItem": "Querido Tiago",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5785",
+    "type": "multipleChoice",
+    "question": "How do you say 'Dear Tiago' in Portuguese?",
+    "options": [
+      "A escola",
+      "Acordo às sete da manhã",
+      "A praça",
+      "Querido Tiago"
+    ],
+    "answer": "Querido Tiago",
+    "sourceItem": "Querido Tiago",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5786",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Caro / Cara'?",
+    "options": [
+      "The teacher is demanding",
+      "West",
+      "Dear (formal)",
+      "You are (temp)"
+    ],
+    "answer": "Dear (formal)",
+    "sourceItem": "Caro / Cara",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5787",
+    "type": "multipleChoice",
+    "question": "How do you say 'Dear (formal)' in Portuguese?",
+    "options": [
+      "relatório",
+      "fala mais alto",
+      "O fio dental",
+      "Caro / Cara"
+    ],
+    "answer": "Caro / Cara",
+    "sourceItem": "Caro / Cara",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5788",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Caro / ______' (Dear (formal))",
+    "options": [
+      "Cara",
+      "logo",
+      "anos",
+      "n.44"
+    ],
+    "answer": "Cara",
+    "sourceItem": "Caro / Cara",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5789",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Estimado cliente'?",
+    "options": [
+      "Double or single room?",
+      "Esteemed client (formal)",
+      "they know how to play guitar",
+      "walk / hike / hiking"
+    ],
+    "answer": "Esteemed client (formal)",
+    "sourceItem": "Estimado cliente",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5790",
+    "type": "multipleChoice",
+    "question": "How do you say 'Esteemed client (formal)' in Portuguese?",
+    "options": [
+      "Eu leio um livro",
+      "Tenho dores de cabeça",
+      "Cebola",
+      "Estimado cliente"
+    ],
+    "answer": "Estimado cliente",
+    "sourceItem": "Estimado cliente",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5791",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Beijinhos dos tios'?",
+    "options": [
+      "in the afternoon",
+      "both",
+      "Kisses from your aunt and uncle",
+      "To think"
+    ],
+    "answer": "Kisses from your aunt and uncle",
+    "sourceItem": "Beijinhos dos tios",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5792",
+    "type": "multipleChoice",
+    "question": "How do you say 'Kisses from your aunt and uncle' in Portuguese?",
+    "options": [
+      "Beijinhos dos tios",
+      "A universidade é antiga",
+      "Feio",
+      "O duche"
+    ],
+    "answer": "Beijinhos dos tios",
+    "sourceItem": "Beijinhos dos tios",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5793",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ dos tios' (Kisses from your aunt and uncle)",
+    "options": [
+      "sufficiente",
+      "vida",
+      "Beijinhos",
+      "todos"
+    ],
+    "answer": "Beijinhos",
+    "sourceItem": "Beijinhos dos tios",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5794",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'apagamos'?",
+    "options": [
+      "every weekend",
+      "To do blood tests",
+      "we delete / erase / turn off",
+      "What time is it?"
+    ],
+    "answer": "we delete / erase / turn off",
+    "sourceItem": "apagamos",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5795",
+    "type": "multipleChoice",
+    "question": "How do you say 'we delete / erase / turn off' in Portuguese?",
+    "options": [
+      "dezembro",
+      "Este carro é tão rápido como o outro",
+      "apagamos",
+      "Apanhei o comboio errado hoje."
+    ],
+    "answer": "apagamos",
+    "sourceItem": "apagamos",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5796",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'pagamos'?",
+    "options": [
+      "Respectfully",
+      "to call someone",
+      "we pay",
+      "seven hills"
+    ],
+    "answer": "we pay",
+    "sourceItem": "pagamos",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5797",
+    "type": "multipleChoice",
+    "question": "How do you say 'we pay' in Portuguese?",
+    "options": [
+      "A tua",
+      "costumo acordar cedo",
+      "O avião vai descolar agora",
+      "pagamos"
+    ],
+    "answer": "pagamos",
+    "sourceItem": "pagamos",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5798",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'As melhoras!'?",
+    "options": [
+      "personal pronouns",
+      "the mirror",
+      "Get well soon!",
+      "misty"
+    ],
+    "answer": "Get well soon!",
+    "sourceItem": "As melhoras!",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5799",
+    "type": "multipleChoice",
+    "question": "How do you say 'Get well soon!' in Portuguese?",
+    "options": [
+      "O telhado",
+      "Ela gosta tanto de estar com os avós!",
+      "As melhoras!",
+      "Agora mesmo"
+    ],
+    "answer": "As melhoras!",
+    "sourceItem": "As melhoras!",
+    "cat": "Body & Health"
+  },
+  {
+    "id": "q_5800",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o peru'?",
+    "options": [
+      "Cockroaches come out at night.",
+      "turkey",
+      "I hope he/she arrives",
+      "low"
+    ],
+    "answer": "turkey",
+    "sourceItem": "o peru",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5801",
+    "type": "multipleChoice",
+    "question": "How do you say 'turkey' in Portuguese?",
+    "options": [
+      "Recordar é viver",
+      "avião",
+      "o peru",
+      "Vou ficar aí durante toda a semana"
+    ],
+    "answer": "o peru",
+    "sourceItem": "o peru",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5802",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as máscaras'?",
+    "options": [
+      "costumes / masks",
+      "Porto is as beautiful as Lisbon.",
+      "the glass",
+      "I am tired"
+    ],
+    "answer": "costumes / masks",
+    "sourceItem": "as máscaras",
+    "cat": "General"
+  },
+  {
+    "id": "q_5803",
+    "type": "multipleChoice",
+    "question": "How do you say 'costumes / masks' in Portuguese?",
+    "options": [
+      "caro",
+      "Fica longe",
+      "O Pedro é de Viseu",
+      "as máscaras"
+    ],
+    "answer": "as máscaras",
+    "sourceItem": "as máscaras",
+    "cat": "General"
+  },
+  {
+    "id": "q_5804",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'as decorações'?",
+    "options": [
+      "decorations",
+      "land (airplane)",
+      "I only go to the beach when the weather is good",
+      "complete"
+    ],
+    "answer": "decorations",
+    "sourceItem": "as decorações",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5805",
+    "type": "multipleChoice",
+    "question": "How do you say 'decorations' in Portuguese?",
+    "options": [
+      "as decorações",
+      "Imprima este relatório, por favor",
+      "Conhecer",
+      "Bom trabalho"
+    ],
+    "answer": "as decorações",
+    "sourceItem": "as decorações",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5806",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'os vereadores'?",
+    "options": [
+      "Is it free?",
+      "councilors",
+      "my legs hurt",
+      "still"
+    ],
+    "answer": "councilors",
+    "sourceItem": "os vereadores",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5807",
+    "type": "multipleChoice",
+    "question": "How do you say 'councilors' in Portuguese?",
+    "options": [
+      "os vereadores",
+      "lembro-me",
+      "Ele quer",
+      "A universidade é antiga"
+    ],
+    "answer": "os vereadores",
+    "sourceItem": "os vereadores",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5808",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a câmara'?",
+    "options": [
+      "city council / town hall",
+      "with me",
+      "they know how to play guitar",
+      "this, that, that over there (masculine)"
+    ],
+    "answer": "city council / town hall",
+    "sourceItem": "a câmara",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5809",
+    "type": "multipleChoice",
+    "question": "How do you say 'city council / town hall' in Portuguese?",
+    "options": [
+      "Tenho saudades tuas",
+      "Eles têm",
+      "a câmara",
+      "Sinto-me mal"
+    ],
+    "answer": "a câmara",
+    "sourceItem": "a câmara",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5810",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Governo Regional da Madeira'?",
+    "options": [
+      "Let's go out tonight",
+      "Kisses",
+      "Regional Government of Madeira",
+      "there is/there are more"
+    ],
+    "answer": "Regional Government of Madeira",
+    "sourceItem": "Governo Regional da Madeira",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5811",
+    "type": "multipleChoice",
+    "question": "How do you say 'Regional Government of Madeira' in Portuguese?",
+    "options": [
+      "Este casaco é tão confortável como elegante",
+      "Governo Regional da Madeira",
+      "Nadar",
+      "Eu penteio o cabelo"
+    ],
+    "answer": "Governo Regional da Madeira",
+    "sourceItem": "Governo Regional da Madeira",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5812",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Governo Regional da ______' (Regional Government of Madeira)",
+    "options": [
+      "desde",
+      "sala",
+      "Madeira",
+      "natação"
+    ],
+    "answer": "Madeira",
+    "sourceItem": "Governo Regional da Madeira",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5813",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'dou-lhe'?",
+    "options": [
+      "I give him / her / you (formal)",
+      "How boring (slang)",
+      "more time",
+      "Doctor"
+    ],
+    "answer": "I give him / her / you (formal)",
+    "sourceItem": "dou-lhe",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5814",
+    "type": "multipleChoice",
+    "question": "How do you say 'I give him / her / you (formal)' in Portuguese?",
+    "options": [
+      "Faça uma dieta para melhorar a sua saúde",
+      "A higiene",
+      "Vou para Lisboa",
+      "dou-lhe"
+    ],
+    "answer": "dou-lhe",
+    "sourceItem": "dou-lhe",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5815",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'sais'?",
+    "options": [
+      "you leave / go out (tu)",
+      "customs / border control",
+      "this, that, that over there (feminine)",
+      "the window"
+    ],
+    "answer": "you leave / go out (tu)",
+    "sourceItem": "sais",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5816",
+    "type": "multipleChoice",
+    "question": "How do you say 'you leave / go out (tu)' in Portuguese?",
+    "options": [
+      "sais",
+      "Podes vir falar comigo, por favor?",
+      "o passe de transportes",
+      "Sou de Portugal"
+    ],
+    "answer": "sais",
+    "sourceItem": "sais",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5817",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ele saiu'?",
+    "options": [
+      "To eat fruit",
+      "he/she left (past of sair)",
+      "That (over there m)",
+      "In summer, we go on holiday to the Algarve."
+    ],
+    "answer": "he/she left (past of sair)",
+    "sourceItem": "ele saiu",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5818",
+    "type": "multipleChoice",
+    "question": "How do you say 'he/she left (past of sair)' in Portuguese?",
+    "options": [
+      "Posso pagar com cartão?",
+      "Longe",
+      "ele saiu",
+      "antes"
+    ],
+    "answer": "ele saiu",
+    "sourceItem": "ele saiu",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5819",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'vêm'?",
+    "options": [
+      "It's ten to three (2:50)",
+      "each time",
+      "the lips",
+      "they / you (plural) come"
+    ],
+    "answer": "they / you (plural) come",
+    "sourceItem": "vêm",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5820",
+    "type": "multipleChoice",
+    "question": "How do you say 'they / you (plural) come' in Portuguese?",
+    "options": [
+      "metro",
+      "Vai nevar amanhã",
+      "vêm",
+      "O ordenado"
+    ],
+    "answer": "vêm",
+    "sourceItem": "vêm",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5821",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'conheço'?",
+    "options": [
+      "Pedro comes to the university by foot or by bicycle\\`",
+      "I know (a person or place)",
+      "I promisè",
+      "the arms"
+    ],
+    "answer": "I know (a person or place)",
+    "sourceItem": "conheço",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5822",
+    "type": "multipleChoice",
+    "question": "How do you say 'I know (a person or place)' in Portuguese?",
+    "options": [
+      "nevoeiro",
+      "O carro avariou",
+      "ir direção norte",
+      "conheço"
+    ],
+    "answer": "conheço",
+    "sourceItem": "conheço",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5823",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ouço / oiço'?",
+    "options": [
+      "I hear",
+      "flip flops",
+      "This restaurant does not have as many customers as that one",
+      "From the"
+    ],
+    "answer": "I hear",
+    "sourceItem": "ouço / oiço",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5824",
+    "type": "multipleChoice",
+    "question": "How do you say 'I hear' in Portuguese?",
+    "options": [
+      "o penso rápido",
+      "ouço / oiço",
+      "Eu ponho a comida no forno",
+      "o prato"
+    ],
+    "answer": "ouço / oiço",
+    "sourceItem": "ouço / oiço",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5825",
+    "type": "cloze",
+    "question": "Fill in the blank: 'ouço / ______' (I hear)",
+    "options": [
+      "oiço",
+      "chão",
+      "maio",
+      "passada"
+    ],
+    "answer": "oiço",
+    "sourceItem": "ouço / oiço",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5826",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o polvo'?",
+    "options": [
+      "Playing football has as many advantages as playing handball",
+      "To think",
+      "I like this song",
+      "octopus"
+    ],
+    "answer": "octopus",
+    "sourceItem": "o polvo",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5827",
+    "type": "multipleChoice",
+    "question": "How do you say 'octopus' in Portuguese?",
+    "options": [
+      "Ajuda!",
+      "mobilia",
+      "o polvo",
+      "Bebo um café forte"
+    ],
+    "answer": "o polvo",
+    "sourceItem": "o polvo",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5828",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ou até'?",
+    "options": [
+      "or even",
+      "I arrived before you.",
+      "That is a book",
+      "The terrace"
+    ],
+    "answer": "or even",
+    "sourceItem": "ou até",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5829",
+    "type": "multipleChoice",
+    "question": "How do you say 'or even' in Portuguese?",
+    "options": [
+      "Cheguei antes de ti.",
+      "ou até",
+      "Essa casa é tua?",
+      "A minha"
+    ],
+    "answer": "ou até",
+    "sourceItem": "ou até",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5830",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'fatias douradas / rabanadas'?",
+    "options": [
+      "I agree",
+      "the eyes",
+      "She is up there",
+      "Portuguese French toast"
+    ],
+    "answer": "Portuguese French toast",
+    "sourceItem": "fatias douradas / rabanadas",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5831",
+    "type": "multipleChoice",
+    "question": "How do you say 'Portuguese French toast' in Portuguese?",
+    "options": [
+      "Os quadros estão na parede",
+      "É meia-noite",
+      "fatias douradas / rabanadas",
+      "Onde é a casa de banho?"
+    ],
+    "answer": "fatias douradas / rabanadas",
+    "sourceItem": "fatias douradas / rabanadas",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5832",
+    "type": "cloze",
+    "question": "Fill in the blank: 'fatias douradas / ______' (Portuguese French toast)",
+    "options": [
+      "copo",
+      "rabanadas",
+      "Ainda",
+      "anos"
+    ],
+    "answer": "rabanadas",
+    "sourceItem": "fatias douradas / rabanadas",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5833",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o tronco de Natal'?",
+    "options": [
+      "this, that, that over there (masculine)",
+      "chocolate Yule log cake",
+      "Are you coming home by car or on foot? (plural)",
+      "I can't take it anymore"
+    ],
+    "answer": "chocolate Yule log cake",
+    "sourceItem": "o tronco de Natal",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5834",
+    "type": "multipleChoice",
+    "question": "How do you say 'chocolate Yule log cake' in Portuguese?",
+    "options": [
+      "Café",
+      "mirtilos",
+      "Qual é a palavra-passe do Wi-Fi?",
+      "o tronco de Natal"
+    ],
+    "answer": "o tronco de Natal",
+    "sourceItem": "o tronco de Natal",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5835",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o tronco de ______' (chocolate Yule log cake)",
+    "options": [
+      "Carla",
+      "caneta",
+      "seis",
+      "Natal"
+    ],
+    "answer": "Natal",
+    "sourceItem": "o tronco de Natal",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5836",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Conversa-se'?",
+    "options": [
+      "Fat",
+      "ball hits the crossbar",
+      "do your homework",
+      "people talk / one talks"
+    ],
+    "answer": "people talk / one talks",
+    "sourceItem": "Conversa-se",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5837",
+    "type": "multipleChoice",
+    "question": "How do you say 'people talk / one talks' in Portuguese?",
+    "options": [
+      "mobilado",
+      "É melhor comprar fruta barata no mercado.",
+      "Conversa-se",
+      "o micro-ondas"
+    ],
+    "answer": "Conversa-se",
+    "sourceItem": "Conversa-se",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5838",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Come-se'?",
+    "options": [
+      "in the / on the (feminine)",
+      "go direction north",
+      "See you tomorrow",
+      "people eat / everyone eats"
+    ],
+    "answer": "people eat / everyone eats",
+    "sourceItem": "Come-se",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5839",
+    "type": "multipleChoice",
+    "question": "How do you say 'people eat / everyone eats' in Portuguese?",
+    "options": [
+      "Come-se",
+      "cento e sessenta e seis",
+      "O céu está limpo",
+      "O que lhe dizes?"
+    ],
+    "answer": "Come-se",
+    "sourceItem": "Come-se",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5840",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'bastante'?",
+    "options": [
+      "quite a lot / enough",
+      "the plate",
+      "What do you usually do in your free time?",
+      "this, that, that over there (masculine)"
+    ],
+    "answer": "quite a lot / enough",
+    "sourceItem": "bastante",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5841",
+    "type": "multipleChoice",
+    "question": "How do you say 'quite a lot / enough' in Portuguese?",
+    "options": [
+      "Está sol",
+      "bastante",
+      "forno",
+      "A saúde"
+    ],
+    "answer": "bastante",
+    "sourceItem": "bastante",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5842",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Depois do jantar'?",
+    "options": [
+      "I arrived before you.",
+      "this, that, that over there (feminine)",
+      "After dinner",
+      "The bus passes along that street"
+    ],
+    "answer": "After dinner",
+    "sourceItem": "Depois do jantar",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5843",
+    "type": "multipleChoice",
+    "question": "How do you say 'After dinner' in Portuguese?",
+    "options": [
+      "Depois do jantar",
+      "Devagar se vai ao longe",
+      "a melhor forma",
+      "Viseu"
+    ],
+    "answer": "Depois do jantar",
+    "sourceItem": "Depois do jantar",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5844",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Depois do ______' (After dinner)",
+    "options": [
+      "fumo",
+      "eles",
+      "curto",
+      "jantar"
+    ],
+    "answer": "jantar",
+    "sourceItem": "Depois do jantar",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5845",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'à volta da'?",
+    "options": [
+      "It is an emergency",
+      "around the",
+      "The coach",
+      "at midday (masculine)"
+    ],
+    "answer": "around the",
+    "sourceItem": "à volta da",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5846",
+    "type": "multipleChoice",
+    "question": "How do you say 'around the' in Portuguese?",
+    "options": [
+      "Em fevereiro, vamos fazer uma formação",
+      "Nós temos tanta paciência como vocês",
+      "Vem connosco à praia no sábado!",
+      "à volta da"
+    ],
+    "answer": "à volta da",
+    "sourceItem": "à volta da",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5847",
+    "type": "cloze",
+    "question": "Fill in the blank: 'à ______ da' (around the)",
+    "options": [
+      "volta",
+      "Onde",
+      "Este",
+      "duas"
+    ],
+    "answer": "volta",
+    "sourceItem": "à volta da",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5848",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o Pai Natal'?",
+    "options": [
+      "Father Christmas / Santa Claus",
+      "interesting places",
+      "How old is he?",
+      "the water bottle"
+    ],
+    "answer": "Father Christmas / Santa Claus",
+    "sourceItem": "o Pai Natal",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5849",
+    "type": "multipleChoice",
+    "question": "How do you say 'Father Christmas / Santa Claus' in Portuguese?",
+    "options": [
+      "O desodorizante",
+      "galāo escuro",
+      "o Pai Natal",
+      "A cidade"
+    ],
+    "answer": "o Pai Natal",
+    "sourceItem": "o Pai Natal",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5850",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o Pai ______' (Father Christmas / Santa Claus)",
+    "options": [
+      "dormem",
+      "mais",
+      "Natal",
+      "Sinto-me"
+    ],
+    "answer": "Natal",
+    "sourceItem": "o Pai Natal",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5851",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'junta novamente'?",
+    "options": [
+      "That (m)",
+      "Does anyone know where the nearest pharmacy is?",
+      "gets together again",
+      "After dinner"
+    ],
+    "answer": "gets together again",
+    "sourceItem": "junta novamente",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5852",
+    "type": "multipleChoice",
+    "question": "How do you say 'gets together again' in Portuguese?",
+    "options": [
+      "Cordialmente",
+      "junta novamente",
+      "pê",
+      "quarto"
+    ],
+    "answer": "junta novamente",
+    "sourceItem": "junta novamente",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5853",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'outra vez / novamente'?",
+    "options": [
+      "To be able to/Can",
+      "the ironing board",
+      "Outside",
+      "again"
+    ],
+    "answer": "again",
+    "sourceItem": "outra vez / novamente",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5854",
+    "type": "multipleChoice",
+    "question": "How do you say 'again' in Portuguese?",
+    "options": [
+      "Bonito",
+      "Querer",
+      "Em fevereiro, vamos fazer uma formação",
+      "outra vez / novamente"
+    ],
+    "answer": "outra vez / novamente",
+    "sourceItem": "outra vez / novamente",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5855",
+    "type": "cloze",
+    "question": "Fill in the blank: 'outra vez / ______' (again)",
+    "options": [
+      "Desliga",
+      "vantagem",
+      "muito",
+      "novamente"
+    ],
+    "answer": "novamente",
+    "sourceItem": "outra vez / novamente",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5856",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a Véspera de Natal'?",
+    "options": [
+      "Milk",
+      "The cousin (female)",
+      "Christmas Eve",
+      "it is raining"
+    ],
+    "answer": "Christmas Eve",
+    "sourceItem": "a Véspera de Natal",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5857",
+    "type": "multipleChoice",
+    "question": "How do you say 'Christmas Eve' in Portuguese?",
+    "options": [
+      "O tempo está bom",
+      "O Paulo pede o telemóvel à mãe",
+      "a Véspera de Natal",
+      "Tenho febre"
+    ],
+    "answer": "a Véspera de Natal",
+    "sourceItem": "a Véspera de Natal",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5858",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a ______ de Natal' (Christmas Eve)",
+    "options": [
+      "Véspera",
+      "resolver",
+      "pena",
+      "tosse"
+    ],
+    "answer": "Véspera",
+    "sourceItem": "a Véspera de Natal",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5859",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a véspera'?",
+    "options": [
+      "hear",
+      "day before / eve",
+      "Number of bedrooms",
+      "chocolate Yule log cake"
+    ],
+    "answer": "day before / eve",
+    "sourceItem": "a véspera",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5860",
+    "type": "multipleChoice",
+    "question": "How do you say 'day before / eve' in Portuguese?",
+    "options": [
+      "Triste",
+      "a véspera",
+      "Tive boa nota",
+      "Ponha o cinto de segurança"
+    ],
+    "answer": "a véspera",
+    "sourceItem": "a véspera",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5861",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a Consoada'?",
+    "options": [
+      "Good afternoon",
+      "The library",
+      "Is it occupied/busy?",
+      "Christmas Eve dinner"
+    ],
+    "answer": "Christmas Eve dinner",
+    "sourceItem": "a Consoada",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5862",
+    "type": "multipleChoice",
+    "question": "How do you say 'Christmas Eve dinner' in Portuguese?",
+    "options": [
+      "Eu vou viajar para a Grécia com elas",
+      "a Consoada",
+      "descolar",
+      "a tampa"
+    ],
+    "answer": "a Consoada",
+    "sourceItem": "a Consoada",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5863",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a Missa do Galo'?",
+    "options": [
+      "The bonus",
+      "He can",
+      "Midnight Mass (Mass of the Rooster)",
+      "I have"
+    ],
+    "answer": "Midnight Mass (Mass of the Rooster)",
+    "sourceItem": "a Missa do Galo",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5864",
+    "type": "multipleChoice",
+    "question": "How do you say 'Midnight Mass (Mass of the Rooster)' in Portuguese?",
+    "options": [
+      "A praça",
+      "à volta da",
+      "a Missa do Galo",
+      "Queres casar comigo?"
+    ],
+    "answer": "a Missa do Galo",
+    "sourceItem": "a Missa do Galo",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5865",
+    "type": "cloze",
+    "question": "Fill in the blank: 'a ______ do Galo' (Midnight Mass (Mass of the Rooster))",
+    "options": [
+      "Polícia",
+      "noite",
+      "experimentar",
+      "Missa"
+    ],
+    "answer": "Missa",
+    "sourceItem": "a Missa do Galo",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5866",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'dá-se / dão-se'?",
+    "options": [
+      "my legs hurt",
+      "bowl",
+      "is given / are given",
+      "They can"
+    ],
+    "answer": "is given / are given",
+    "sourceItem": "dá-se / dão-se",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5867",
+    "type": "multipleChoice",
+    "question": "How do you say 'is given / are given' in Portuguese?",
+    "options": [
+      "nós vamos fazer",
+      "dá-se / dão-se",
+      "sair",
+      "O oeste"
+    ],
+    "answer": "dá-se / dão-se",
+    "sourceItem": "dá-se / dão-se",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5868",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ / dão-se' (is given / are given)",
+    "options": [
+      "formação",
+      "descolar",
+      "segunda-feira=às",
+      "dá-se"
+    ],
+    "answer": "dá-se",
+    "sourceItem": "dá-se / dão-se",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5869",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'quando eu era criança'?",
+    "options": [
+      "I want the same (thing)",
+      "when I was a child",
+      "Pupils",
+      "they / you (plural) come"
+    ],
+    "answer": "when I was a child",
+    "sourceItem": "quando eu era criança",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5870",
+    "type": "multipleChoice",
+    "question": "How do you say 'when I was a child' in Portuguese?",
+    "options": [
+      "Este carro é tão rápido como o outro",
+      "quando eu era criança",
+      "Atenção!",
+      "Podes ajudar-me a pôr a mesa para o almoço?"
+    ],
+    "answer": "quando eu era criança",
+    "sourceItem": "quando eu era criança",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5871",
+    "type": "cloze",
+    "question": "Fill in the blank: 'quando eu era ______' (when I was a child)",
+    "options": [
+      "criança",
+      "proposta",
+      "festa",
+      "Jantar"
+    ],
+    "answer": "criança",
+    "sourceItem": "quando eu era criança",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5872",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'nós víamos muitos filmes'?",
+    "options": [
+      "we used to watch many films",
+      "I like to travel",
+      "fried",
+      "The library"
+    ],
+    "answer": "we used to watch many films",
+    "sourceItem": "nós víamos muitos filmes",
+    "cat": "General"
+  },
+  {
+    "id": "q_5873",
+    "type": "multipleChoice",
+    "question": "How do you say 'we used to watch many films' in Portuguese?",
+    "options": [
+      "chuvoso",
+      "os óculos de sol",
+      "Ele pode",
+      "nós víamos muitos filmes"
+    ],
+    "answer": "nós víamos muitos filmes",
+    "sourceItem": "nós víamos muitos filmes",
+    "cat": "General"
+  },
+  {
+    "id": "q_5874",
+    "type": "cloze",
+    "question": "Fill in the blank: 'nós víamos ______ filmes' (we used to watch many films)",
+    "options": [
+      "meia",
+      "muitos",
+      "ventoso",
+      "Pode"
+    ],
+    "answer": "muitos",
+    "sourceItem": "nós víamos muitos filmes",
+    "cat": "General"
+  },
+  {
+    "id": "q_5875",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ontem esteve sol'?",
+    "options": [
+      "The friends have been on the terrace for half an hour",
+      "the arms",
+      "they also get up at 6:30",
+      "yesterday it was sunny (completed)"
+    ],
+    "answer": "yesterday it was sunny (completed)",
+    "sourceItem": "ontem esteve sol",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5876",
+    "type": "multipleChoice",
+    "question": "How do you say 'yesterday it was sunny (completed)' in Portuguese?",
+    "options": [
+      "nós vimos ao mercado ao sábado de manhã",
+      "ontem esteve sol",
+      "Eu vou para a Costa da Caparica pela ponte",
+      "ao longo"
+    ],
+    "answer": "ontem esteve sol",
+    "sourceItem": "ontem esteve sol",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5877",
+    "type": "cloze",
+    "question": "Fill in the blank: 'ontem ______ sol' (yesterday it was sunny (completed))",
+    "options": [
+      "atender",
+      "nevar",
+      "jardins",
+      "esteve"
+    ],
+    "answer": "esteve",
+    "sourceItem": "ontem esteve sol",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5878",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'ontem estava sol'?",
+    "options": [
+      "the drawer",
+      "And with you? (formal)",
+      "at \\--",
+      "yesterday it was sunny (ongoing)"
+    ],
+    "answer": "yesterday it was sunny (ongoing)",
+    "sourceItem": "ontem estava sol",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5879",
+    "type": "multipleChoice",
+    "question": "How do you say 'yesterday it was sunny (ongoing)' in Portuguese?",
+    "options": [
+      "Atrasado",
+      "Beijinhos",
+      "ontem estava sol",
+      "Carne de vaca"
+    ],
+    "answer": "ontem estava sol",
+    "sourceItem": "ontem estava sol",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5880",
+    "type": "cloze",
+    "question": "Fill in the blank: 'ontem ______ sol' (yesterday it was sunny (ongoing))",
+    "options": [
+      "estava",
+      "mala",
+      "loiça",
+      "chego"
+    ],
+    "answer": "estava",
+    "sourceItem": "ontem estava sol",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5881",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'decidir'?",
+    "options": [
+      "possible (can)",
+      "to decide",
+      "the paper tissue",
+      "To score"
+    ],
+    "answer": "to decide",
+    "sourceItem": "decidir",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5882",
+    "type": "multipleChoice",
+    "question": "How do you say 'to decide' in Portuguese?",
+    "options": [
+      "Começo a trabalhar às nove",
+      "Hoje, está muito frio. É melhor vestir um casaco mais quente e levar o gorro.",
+      "Para onde vão nas férias do Natal?",
+      "decidir"
+    ],
+    "answer": "decidir",
+    "sourceItem": "decidir",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5883",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eu decidi'?",
+    "options": [
+      "The tunnel",
+      "nobody / no one",
+      "She usually reads at night",
+      "I decided"
+    ],
+    "answer": "I decided",
+    "sourceItem": "eu decidi",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5884",
+    "type": "multipleChoice",
+    "question": "How do you say 'I decided' in Portuguese?",
+    "options": [
+      "eu decidi",
+      "há tanto tempo",
+      "estações do ano",
+      "vêm"
+    ],
+    "answer": "eu decidi",
+    "sourceItem": "eu decidi",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5885",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'eles decidiram'?",
+    "options": [
+      "they decided",
+      "every",
+      "I saw a cockroach in the kitchen today.",
+      "to translate"
+    ],
+    "answer": "they decided",
+    "sourceItem": "eles decidiram",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5886",
+    "type": "multipleChoice",
+    "question": "How do you say 'they decided' in Portuguese?",
+    "options": [
+      "O quadro",
+      "Gato escaldado tem medo de água fria",
+      "eles decidiram",
+      "Porque estás irritado?"
+    ],
+    "answer": "eles decidiram",
+    "sourceItem": "eles decidiram",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5887",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a palhinha'?",
+    "options": [
+      "menu",
+      "drinking straw",
+      "With",
+      "How long have you been in Portugal?"
+    ],
+    "answer": "drinking straw",
+    "sourceItem": "a palhinha",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5888",
+    "type": "multipleChoice",
+    "question": "How do you say 'drinking straw' in Portuguese?",
+    "options": [
+      "Querer",
+      "parar",
+      "a palhinha",
+      "maio"
+    ],
+    "answer": "a palhinha",
+    "sourceItem": "a palhinha",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5889",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a tampa'?",
+    "options": [
+      "Angry",
+      "play on words",
+      "the living room",
+      "lid / cap"
+    ],
+    "answer": "lid / cap",
+    "sourceItem": "a tampa",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5890",
+    "type": "multipleChoice",
+    "question": "How do you say 'lid / cap' in Portuguese?",
+    "options": [
+      "a tampa",
+      "O outono tem cores lindas",
+      "uma peça",
+      "Eu lavo a loiça"
+    ],
+    "answer": "a tampa",
+    "sourceItem": "a tampa",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5891",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a garrafa'?",
+    "options": [
+      "bottle",
+      "Where are the fitting rooms?",
+      "it lands",
+      "I used to wake up early"
+    ],
+    "answer": "bottle",
+    "sourceItem": "a garrafa",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5892",
+    "type": "multipleChoice",
+    "question": "How do you say 'bottle' in Portuguese?",
+    "options": [
+      "a garrafa",
+      "Queijo",
+      "janeiro",
+      "os ouvidos"
+    ],
+    "answer": "a garrafa",
+    "sourceItem": "a garrafa",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5893",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o jarro da água'?",
+    "options": [
+      "Cordially",
+      "old",
+      "Degrees",
+      "jug of water"
+    ],
+    "answer": "jug of water",
+    "sourceItem": "o jarro da água",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5894",
+    "type": "multipleChoice",
+    "question": "How do you say 'jug of water' in Portuguese?",
+    "options": [
+      "Estou cansado de esperar",
+      "com ela",
+      "venho",
+      "o jarro da água"
+    ],
+    "answer": "o jarro da água",
+    "sourceItem": "o jarro da água",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5895",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o ______ da água' (jug of water)",
+    "options": [
+      "levantar",
+      "convosco",
+      "jarro",
+      "terminar"
+    ],
+    "answer": "jarro",
+    "sourceItem": "o jarro da água",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5896",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o guardanapo'?",
+    "options": [
+      "to catch a cold",
+      "At what time do you get up?",
+      "napkin",
+      "the window"
+    ],
+    "answer": "napkin",
+    "sourceItem": "o guardanapo",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5897",
+    "type": "multipleChoice",
+    "question": "How do you say 'napkin' in Portuguese?",
+    "options": [
+      "Fechado",
+      "o guardanapo",
+      "Apanhei o comboio errado hoje.",
+      "O campo de futebol"
+    ],
+    "answer": "o guardanapo",
+    "sourceItem": "o guardanapo",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5898",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o lenço de assoar'?",
+    "options": [
+      "since / from (starting point)",
+      "handkerchief / tissue",
+      "The resignation",
+      "The bed"
+    ],
+    "answer": "handkerchief / tissue",
+    "sourceItem": "o lenço de assoar",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5899",
+    "type": "multipleChoice",
+    "question": "How do you say 'handkerchief / tissue' in Portuguese?",
+    "options": [
+      "Eu posso",
+      "o carregador",
+      "o lenço de assoar",
+      "tão"
+    ],
+    "answer": "o lenço de assoar",
+    "sourceItem": "o lenço de assoar",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5900",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o lenço de ______' (handkerchief / tissue)",
+    "options": [
+      "esplanada",
+      "assoar",
+      "Vamos",
+      "sempre"
+    ],
+    "answer": "assoar",
+    "sourceItem": "o lenço de assoar",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5901",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'a tigela'?",
+    "options": [
+      "bowl",
+      "In my free time I like to read and listen to music",
+      "Doctor",
+      "I go by barco to school."
+    ],
+    "answer": "bowl",
+    "sourceItem": "a tigela",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5902",
+    "type": "multipleChoice",
+    "question": "How do you say 'bowl' in Portuguese?",
+    "options": [
+      "mas",
+      "mesmo + adjetivo",
+      "e assim",
+      "a tigela"
+    ],
+    "answer": "a tigela",
+    "sourceItem": "a tigela",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5903",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'de serviço'?",
+    "options": [
+      "to catch a cold",
+      "Far",
+      "Activities",
+      "on duty"
+    ],
+    "answer": "on duty",
+    "sourceItem": "de serviço",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5904",
+    "type": "multipleChoice",
+    "question": "How do you say 'on duty' in Portuguese?",
+    "options": [
+      "Onde estão os meus chinelos de quarto?",
+      "de serviço",
+      "O prejuízo",
+      "Eles vão"
+    ],
+    "answer": "de serviço",
+    "sourceItem": "de serviço",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5905",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'trocar'?",
+    "options": [
+      "Yellow",
+      "I have an important meeting",
+      "The toothbrush",
+      "to swap / exchange"
+    ],
+    "answer": "to swap / exchange",
+    "sourceItem": "trocar",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5906",
+    "type": "multipleChoice",
+    "question": "How do you say 'to swap / exchange' in Portuguese?",
+    "options": [
+      "verbo + tanto",
+      "No verão faz muito calor.",
+      "trocar",
+      "Nunca faço surf/nunca fiz surf"
+    ],
+    "answer": "trocar",
+    "sourceItem": "trocar",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5907",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'e não consegue trocar com o colega'?",
+    "options": [
+      "I possibly come by foot",
+      "Help!",
+      "and cannot swap with the colleague",
+      "this \\- far from both"
+    ],
+    "answer": "and cannot swap with the colleague",
+    "sourceItem": "e não consegue trocar com o colega",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5908",
+    "type": "multipleChoice",
+    "question": "How do you say 'and cannot swap with the colleague' in Portuguese?",
+    "options": [
+      "e não consegue trocar com o colega",
+      "os filhos dela",
+      "Esquerda",
+      "a porta"
+    ],
+    "answer": "e não consegue trocar com o colega",
+    "sourceItem": "e não consegue trocar com o colega",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5909",
+    "type": "cloze",
+    "question": "Fill in the blank: 'e não consegue ______ com o colega' (and cannot swap with the colleague)",
+    "options": [
+      "primavera",
+      "perdido",
+      "esqui",
+      "trocar"
+    ],
+    "answer": "trocar",
+    "sourceItem": "e não consegue trocar com o colega",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5910",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Temos muita pena'?",
+    "options": [
+      "Speak slower, please, because I don't understand what you say (formal)",
+      "lay down",
+      "you appear / you show up",
+      "We are very sorry"
+    ],
+    "answer": "We are very sorry",
+    "sourceItem": "Temos muita pena",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5911",
+    "type": "multipleChoice",
+    "question": "How do you say 'We are very sorry' in Portuguese?",
+    "options": [
+      "Temos muita pena",
+      "a toalha",
+      "A praça",
+      "Comprar"
+    ],
+    "answer": "Temos muita pena",
+    "sourceItem": "Temos muita pena",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5912",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Temos muita ______' (We are very sorry)",
+    "options": [
+      "Inês",
+      "pena",
+      "Adormeço",
+      "desde"
+    ],
+    "answer": "pena",
+    "sourceItem": "Temos muita pena",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5913",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Espero chegar'?",
+    "options": [
+      "He is a preppy/posh boy",
+      "penultimate / second-to-last (feminine)",
+      "from habit (used to do, still are doing)",
+      "I hope to arrive"
+    ],
+    "answer": "I hope to arrive",
+    "sourceItem": "Espero chegar",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5914",
+    "type": "multipleChoice",
+    "question": "How do you say 'I hope to arrive' in Portuguese?",
+    "options": [
+      "Hora",
+      "aterra",
+      "Espero chegar",
+      "já fiz"
+    ],
+    "answer": "Espero chegar",
+    "sourceItem": "Espero chegar",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5915",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Espero que chegue'?",
+    "options": [
+      "Not possible",
+      "In spring, I usually take photographs in nature",
+      "Second",
+      "I hope he/she arrives"
+    ],
+    "answer": "I hope he/she arrives",
+    "sourceItem": "Espero que chegue",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5916",
+    "type": "multipleChoice",
+    "question": "How do you say 'I hope he/she arrives' in Portuguese?",
+    "options": [
+      "Onde fica a paragem de autocarro?",
+      "Espero que chegue",
+      "Emprestar",
+      "Lamento"
+    ],
+    "answer": "Espero que chegue",
+    "sourceItem": "Espero que chegue",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5917",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Espero que ______' (I hope he/she arrives)",
+    "options": [
+      "Este",
+      "comboio",
+      "chegue",
+      "passear"
+    ],
+    "answer": "chegue",
+    "sourceItem": "Espero que chegue",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5918",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'desejo-te'?",
+    "options": [
+      "with him",
+      "I wish you",
+      "with you (formal masculine)",
+      "Change the channel"
+    ],
+    "answer": "I wish you",
+    "sourceItem": "desejo-te",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5919",
+    "type": "multipleChoice",
+    "question": "How do you say 'I wish you' in Portuguese?",
+    "options": [
+      "agá",
+      "as pernas",
+      "ovos cozidos",
+      "desejo-te"
+    ],
+    "answer": "desejo-te",
+    "sourceItem": "desejo-te",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5920",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'dar-te'?",
+    "options": [
+      "Knowledge is never too much",
+      "Duarte tells the story to the his children",
+      "To hear/listen",
+      "to give you"
+    ],
+    "answer": "to give you",
+    "sourceItem": "dar-te",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5921",
+    "type": "multipleChoice",
+    "question": "How do you say 'to give you' in Portuguese?",
+    "options": [
+      "vestir-se",
+      "Este lugar está reservado Estes lugares estão reservados",
+      "dar-te",
+      "Ir + infinitivo"
+    ],
+    "answer": "dar-te",
+    "sourceItem": "dar-te",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5922",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'manda-te'?",
+    "options": [
+      "Print this report, please (formal)",
+      "I need a tow truck",
+      "sends you",
+      "Where is the bathroom?"
+    ],
+    "answer": "sends you",
+    "sourceItem": "manda-te",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5923",
+    "type": "multipleChoice",
+    "question": "How do you say 'sends you' in Portuguese?",
+    "options": [
+      "Não falo bem português",
+      "Uma casa",
+      "manda-te",
+      "Temos muita pena"
+    ],
+    "answer": "manda-te",
+    "sourceItem": "manda-te",
+    "cat": "Grammar & Verbs"
+  },
+  {
+    "id": "q_5924",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quantos anos fazes?'?",
+    "options": [
+      "the lips",
+      "Smoking is prohibited",
+      "The toothbrush",
+      "How old are you turning?"
+    ],
+    "answer": "How old are you turning?",
+    "sourceItem": "Quantos anos fazes?",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5925",
+    "type": "multipleChoice",
+    "question": "How do you say 'How old are you turning?' in Portuguese?",
+    "options": [
+      "Quantos anos fazes?",
+      "duplo vê",
+      "estás?",
+      "Começar"
+    ],
+    "answer": "Quantos anos fazes?",
+    "sourceItem": "Quantos anos fazes?",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5926",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ anos fazes?' (How old are you turning?)",
+    "options": [
+      "Quantos",
+      "Qual…",
+      "barata",
+      "limite"
+    ],
+    "answer": "Quantos",
+    "sourceItem": "Quantos anos fazes?",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5927",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O que vais fazer?'?",
+    "options": [
+      "What are you going to do?",
+      "Pork",
+      "the living room",
+      "finish \\- to end"
+    ],
+    "answer": "What are you going to do?",
+    "sourceItem": "O que vais fazer?",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5928",
+    "type": "multipleChoice",
+    "question": "How do you say 'What are you going to do?' in Portuguese?",
+    "options": [
+      "A Vera e a irmã são muito simpáticas.",
+      "O que vais fazer?",
+      "a palhinha",
+      "Arquiteto"
+    ],
+    "answer": "O que vais fazer?",
+    "sourceItem": "O que vais fazer?",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5929",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O que ______ fazer?' (What are you going to do?)",
+    "options": [
+      "trabalho",
+      "saber",
+      "sair",
+      "vais"
+    ],
+    "answer": "vais",
+    "sourceItem": "O que vais fazer?",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5930",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Como vais celebrar?'?",
+    "options": [
+      "How are you going to celebrate?",
+      "we did",
+      "bookshelf",
+      "Cook/Chef"
+    ],
+    "answer": "How are you going to celebrate?",
+    "sourceItem": "Como vais celebrar?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5931",
+    "type": "multipleChoice",
+    "question": "How do you say 'How are you going to celebrate?' in Portuguese?",
+    "options": [
+      "ovo estrelado",
+      "Onde é o mercado?",
+      "Como vais celebrar?",
+      "Eu começo a trabalhar"
+    ],
+    "answer": "Como vais celebrar?",
+    "sourceItem": "Como vais celebrar?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5932",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Como ______ celebrar?' (How are you going to celebrate?)",
+    "options": [
+      "vais",
+      "palavras",
+      "Querido",
+      "fazer"
+    ],
+    "answer": "vais",
+    "sourceItem": "Como vais celebrar?",
+    "cat": "General"
+  },
+  {
+    "id": "q_5933",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Onde vais passar o Natal?'?",
+    "options": [
+      "Where are you spending Christmas?",
+      "Juice",
+      "the hand fan",
+      "Sad"
+    ],
+    "answer": "Where are you spending Christmas?",
+    "sourceItem": "Onde vais passar o Natal?",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5934",
+    "type": "multipleChoice",
+    "question": "How do you say 'Where are you spending Christmas?' in Portuguese?",
+    "options": [
+      "Onde vais passar o Natal?",
+      "tenho a certeza",
+      "O departamento",
+      "Aquilo é muito bonito"
+    ],
+    "answer": "Onde vais passar o Natal?",
+    "sourceItem": "Onde vais passar o Natal?",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5935",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ vais passar o Natal?' (Where are you spending Christmas?)",
+    "options": [
+      "Nesse",
+      "nublados",
+      "Onde",
+      "Praticar"
+    ],
+    "answer": "Onde",
+    "sourceItem": "Onde vais passar o Natal?",
+    "cat": "Family"
+  },
+  {
+    "id": "q_5936",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quanto tempo vais ficar?'?",
+    "options": [
+      "Raincoat",
+      "It hurts here",
+      "Water (still",
+      "How long are you going to stay?"
+    ],
+    "answer": "How long are you going to stay?",
+    "sourceItem": "Quanto tempo vais ficar?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5937",
+    "type": "multipleChoice",
+    "question": "How do you say 'How long are you going to stay?' in Portuguese?",
+    "options": [
+      "Aqueça o leite, por favor",
+      "Vou vestir um casaco quente.",
+      "Enviar",
+      "Quanto tempo vais ficar?"
+    ],
+    "answer": "Quanto tempo vais ficar?",
+    "sourceItem": "Quanto tempo vais ficar?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5938",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ tempo vais ficar?' (How long are you going to stay?)",
+    "options": [
+      "tempo",
+      "ordem",
+      "festa",
+      "Quanto"
+    ],
+    "answer": "Quanto",
+    "sourceItem": "Quanto tempo vais ficar?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5939",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Boas férias!'?",
+    "options": [
+      "The school",
+      "pleasant / agreeable / nice",
+      "Have a nice holiday!",
+      "flip flops"
+    ],
+    "answer": "Have a nice holiday!",
+    "sourceItem": "Boas férias!",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5940",
+    "type": "multipleChoice",
+    "question": "How do you say 'Have a nice holiday!' in Portuguese?",
+    "options": [
+      "Moto quattro",
+      "Prontos",
+      "Boas férias!",
+      "Empregado de mesa"
+    ],
+    "answer": "Boas férias!",
+    "sourceItem": "Boas férias!",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5941",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Feliz Natal!'?",
+    "options": [
+      "one costs more",
+      "right right / I see (conversational feedback)",
+      "Dear Madam",
+      "Merry Christmas!"
+    ],
+    "answer": "Merry Christmas!",
+    "sourceItem": "Feliz Natal!",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5942",
+    "type": "multipleChoice",
+    "question": "How do you say 'Merry Christmas!' in Portuguese?",
+    "options": [
+      "Feliz Natal!",
+      "Trás",
+      "contentes",
+      "Habitualmente"
+    ],
+    "answer": "Feliz Natal!",
+    "sourceItem": "Feliz Natal!",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5943",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Quanto tempo ficam lá?'?",
+    "options": [
+      "The Netherlands",
+      "As soon as possible",
+      "How long are you staying there?",
+      "The bill, please"
+    ],
+    "answer": "How long are you staying there?",
+    "sourceItem": "Quanto tempo ficam lá?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5944",
+    "type": "multipleChoice",
+    "question": "How do you say 'How long are you staying there?' in Portuguese?",
+    "options": [
+      "Quanto tempo ficam lá?",
+      "O bilhete",
+      "o andar / piso",
+      "O quadro é bonito"
+    ],
+    "answer": "Quanto tempo ficam lá?",
+    "sourceItem": "Quanto tempo ficam lá?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5945",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Quanto ______ ficam lá?' (How long are you staying there?)",
+    "options": [
+      "tempo",
+      "conhecida",
+      "senhor",
+      "outra"
+    ],
+    "answer": "tempo",
+    "sourceItem": "Quanto tempo ficam lá?",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_5946",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Para onde vão nas férias do Natal?'?",
+    "options": [
+      "the return / coming back",
+      "I hope to arrive",
+      "I feel bad",
+      "Where are you going on Christmas holidays?"
+    ],
+    "answer": "Where are you going on Christmas holidays?",
+    "sourceItem": "Para onde vão nas férias do Natal?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5947",
+    "type": "multipleChoice",
+    "question": "How do you say 'Where are you going on Christmas holidays?' in Portuguese?",
+    "options": [
+      "Para onde vão nas férias do Natal?",
+      "Eu vou no comboio das 18 horas",
+      "Estou doente",
+      "O este"
+    ],
+    "answer": "Para onde vão nas férias do Natal?",
+    "sourceItem": "Para onde vão nas férias do Natal?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5948",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Para onde vão nas férias do ______' (Where are you going on Christmas holidays?)",
+    "options": [
+      "chinelos",
+      "Natal",
+      "inclui",
+      "dela"
+    ],
+    "answer": "Natal",
+    "sourceItem": "Para onde vão nas férias do Natal?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5949",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Vais para fora nas férias do Natal?'?",
+    "options": [
+      "Are you going away for Christmas holidays?",
+      "I saw a cockroach in the kitchen today.",
+      "Strawberry",
+      "both"
+    ],
+    "answer": "Are you going away for Christmas holidays?",
+    "sourceItem": "Vais para fora nas férias do Natal?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5950",
+    "type": "multipleChoice",
+    "question": "How do you say 'Are you going away for Christmas holidays?' in Portuguese?",
+    "options": [
+      "de tarde",
+      "Vais para fora nas férias do Natal?",
+      "Eu vou ao supermercado",
+      "a marquise"
+    ],
+    "answer": "Vais para fora nas férias do Natal?",
+    "sourceItem": "Vais para fora nas férias do Natal?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5951",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ para fora nas férias do Natal?' (Are you going away for Christmas holidays?)",
+    "options": [
+      "Vais",
+      "para",
+      "reciclagem",
+      "Tomar"
+    ],
+    "answer": "Vais",
+    "sourceItem": "Vais para fora nas férias do Natal?",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5952",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'pontapé de canto'?",
+    "options": [
+      "corner kick",
+      "from habit (used to do, still are doing)",
+      "Always",
+      "I like to take small trips"
+    ],
+    "answer": "corner kick",
+    "sourceItem": "pontapé de canto",
+    "cat": "General"
+  },
+  {
+    "id": "q_5953",
+    "type": "multipleChoice",
+    "question": "How do you say 'corner kick' in Portuguese?",
+    "options": [
+      "pontapé de canto",
+      "Vamos ao cinema depois do jantar.",
+      "Ficar",
+      "Socorro!"
+    ],
+    "answer": "pontapé de canto",
+    "sourceItem": "pontapé de canto",
+    "cat": "General"
+  },
+  {
+    "id": "q_5954",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ de canto' (corner kick)",
+    "options": [
+      "semanas",
+      "fazemos",
+      "vivem",
+      "pontapé"
+    ],
+    "answer": "pontapé",
+    "sourceItem": "pontapé de canto",
+    "cat": "General"
+  },
+  {
+    "id": "q_5955",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'pontapé de baliza'?",
+    "options": [
+      "goal kick",
+      "enough",
+      "verb + mesmo (emphasis: really / actually)",
+      "one rent costs more"
+    ],
+    "answer": "goal kick",
+    "sourceItem": "pontapé de baliza",
+    "cat": "General"
+  },
+  {
+    "id": "q_5956",
+    "type": "multipleChoice",
+    "question": "How do you say 'goal kick' in Portuguese?",
+    "options": [
+      "Pequeno-almoço",
+      "com atenção",
+      "Ele sabe",
+      "pontapé de baliza"
+    ],
+    "answer": "pontapé de baliza",
+    "sourceItem": "pontapé de baliza",
+    "cat": "General"
+  },
+  {
+    "id": "q_5957",
+    "type": "cloze",
+    "question": "Fill in the blank: 'pontapé de ______' (goal kick)",
+    "options": [
+      "Arquiteto",
+      "supermercado",
+      "minha",
+      "baliza"
+    ],
+    "answer": "baliza",
+    "sourceItem": "pontapé de baliza",
+    "cat": "General"
+  },
+  {
+    "id": "q_5958",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'bola na trave'?",
+    "options": [
+      "They show them the historic city.",
+      "rainy",
+      "people eat / everyone eats",
+      "ball hits the crossbar"
+    ],
+    "answer": "ball hits the crossbar",
+    "sourceItem": "bola na trave",
+    "cat": "General"
+  },
+  {
+    "id": "q_5959",
+    "type": "multipleChoice",
+    "question": "How do you say 'ball hits the crossbar' in Portuguese?",
+    "options": [
+      "deitar-se",
+      "É um guna",
+      "bola na trave",
+      "Sempre nos lembramos"
+    ],
+    "answer": "bola na trave",
+    "sourceItem": "bola na trave",
+    "cat": "General"
+  },
+  {
+    "id": "q_5960",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ na trave' (ball hits the crossbar)",
+    "options": [
+      "ladra",
+      "rato",
+      "bola",
+      "cento"
+    ],
+    "answer": "bola",
+    "sourceItem": "bola na trave",
+    "cat": "General"
+  },
+  {
+    "id": "q_5961",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'bola no poste'?",
+    "options": [
+      "Can you close the door?",
+      "ball hits the goalpost",
+      "I like you very much",
+      "The table"
+    ],
+    "answer": "ball hits the goalpost",
+    "sourceItem": "bola no poste",
+    "cat": "General"
+  },
+  {
+    "id": "q_5962",
+    "type": "multipleChoice",
+    "question": "How do you say 'ball hits the goalpost' in Portuguese?",
+    "options": [
+      "bola no poste",
+      "Deixe-me em paz",
+      "No inverno, a minha família gosta de ir ao mercado de natal",
+      "a herança"
+    ],
+    "answer": "bola no poste",
+    "sourceItem": "bola no poste",
+    "cat": "General"
+  },
+  {
+    "id": "q_5963",
+    "type": "cloze",
+    "question": "Fill in the blank: 'bola no ______' (ball hits the goalpost)",
+    "options": [
+      "poste",
+      "longo",
+      "virar",
+      "descanso"
+    ],
+    "answer": "poste",
+    "sourceItem": "bola no poste",
+    "cat": "General"
+  },
+  {
+    "id": "q_5964",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'marcar um golo'?",
+    "options": [
+      "Near",
+      "to score a goal",
+      "What or which singular What is your favorite color",
+      "Midnight Mass (Mass of the Rooster)"
+    ],
+    "answer": "to score a goal",
+    "sourceItem": "marcar um golo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5965",
+    "type": "multipleChoice",
+    "question": "How do you say 'to score a goal' in Portuguese?",
+    "options": [
+      "A Maria faz visitas guiadas desde que trabalha na Casa da Música",
+      "há mais",
+      "Com quem vais ao cinema?",
+      "marcar um golo"
+    ],
+    "answer": "marcar um golo",
+    "sourceItem": "marcar um golo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5966",
+    "type": "cloze",
+    "question": "Fill in the blank: 'marcar um ______' (to score a goal)",
+    "options": [
+      "vaca",
+      "golo",
+      "vento",
+      "passe"
+    ],
+    "answer": "golo",
+    "sourceItem": "marcar um golo",
+    "cat": "General"
+  },
+  {
+    "id": "q_5967",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'festejar'?",
+    "options": [
+      "to party / celebrate (= celebrar)",
+      "I like to play tennis with her",
+      "Stick to what you know",
+      "Are you feeling better? (informal)"
+    ],
+    "answer": "to party / celebrate (= celebrar)",
+    "sourceItem": "festejar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5968",
+    "type": "multipleChoice",
+    "question": "How do you say 'to party / celebrate (= celebrar)' in Portuguese?",
+    "options": [
+      "É uma emergência",
+      "dela",
+      "festejar",
+      "recibo"
+    ],
+    "answer": "festejar",
+    "sourceItem": "festejar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5969",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'celebrar'?",
+    "options": [
+      "the granddaughter",
+      "Police",
+      "You're welcome (formal)",
+      "to celebrate (= festejar)"
+    ],
+    "answer": "to celebrate (= festejar)",
+    "sourceItem": "celebrar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5970",
+    "type": "multipleChoice",
+    "question": "How do you say 'to celebrate (= festejar)' in Portuguese?",
+    "options": [
+      "celebrar",
+      "Eles mostram-lhes a cidade histórica.",
+      "Nós ficamos em casa quando chove muito.",
+      "no tamanho medio"
+    ],
+    "answer": "celebrar",
+    "sourceItem": "celebrar",
+    "cat": "General"
+  },
+  {
+    "id": "q_5971",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'arranjar'?",
+    "options": [
+      "I have",
+      "to arrange / prepare (= preparar)",
+      "departures",
+      "motorcycle"
+    ],
+    "answer": "to arrange / prepare (= preparar)",
+    "sourceItem": "arranjar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5972",
+    "type": "multipleChoice",
+    "question": "How do you say 'to arrange / prepare (= preparar)' in Portuguese?",
+    "options": [
+      "Nunca me deito cedo",
+      "esqueço",
+      "A mulher / A esposa",
+      "arranjar"
+    ],
+    "answer": "arranjar",
+    "sourceItem": "arranjar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5973",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'entender'?",
+    "options": [
+      "Lipstick",
+      "to understand (= compreender)",
+      "to refuse (≠ aceitar)",
+      "I do"
+    ],
+    "answer": "to understand (= compreender)",
+    "sourceItem": "entender",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5974",
+    "type": "multipleChoice",
+    "question": "How do you say 'to understand (= compreender)' in Portuguese?",
+    "options": [
+      "entender",
+      "há tantas pessoas na praia",
+      "sete colinas",
+      "O fim de semana foi ótimo"
+    ],
+    "answer": "entender",
+    "sourceItem": "entender",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5975",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'reservar'?",
+    "options": [
+      "to reserve / book (= marcar)",
+      "To leave/depart",
+      "I feel bad",
+      "bowl"
+    ],
+    "answer": "to reserve / book (= marcar)",
+    "sourceItem": "reservar",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5976",
+    "type": "multipleChoice",
+    "question": "How do you say 'to reserve / book (= marcar)' in Portuguese?",
+    "options": [
+      "a despensa",
+      "costumava acordar cedo",
+      "Acreditar",
+      "reservar"
+    ],
+    "answer": "reservar",
+    "sourceItem": "reservar",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_5977",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'aceitar'?",
+    "options": [
+      "quickly",
+      "to accept (≠ recusar)",
+      "When traveling through the Iberian Peninsula, American tourists think Portugal is as beautiful as Spain.",
+      "u"
+    ],
+    "answer": "to accept (≠ recusar)",
+    "sourceItem": "aceitar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5978",
+    "type": "multipleChoice",
+    "question": "How do you say 'to accept (≠ recusar)' in Portuguese?",
+    "options": [
+      "proposta",
+      "Os macacos são animais espertos.",
+      "aceitar",
+      "O Diário de Notícias"
+    ],
+    "answer": "aceitar",
+    "sourceItem": "aceitar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5979",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'recusar'?",
+    "options": [
+      "Congratulations!",
+      "that way (and like this)",
+      "It is cheap",
+      "to refuse (≠ aceitar)"
+    ],
+    "answer": "to refuse (≠ aceitar)",
+    "sourceItem": "recusar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5980",
+    "type": "multipleChoice",
+    "question": "How do you say 'to refuse (≠ aceitar)' in Portuguese?",
+    "options": [
+      "Eu lavo-me",
+      "Ganhar",
+      "recusar",
+      "manda-te"
+    ],
+    "answer": "recusar",
+    "sourceItem": "recusar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5981",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nós aceitamos o convite'?",
+    "options": [
+      "chicks",
+      "Do you play any instrument?",
+      "Currently",
+      "We accept the invitation"
+    ],
+    "answer": "We accept the invitation",
+    "sourceItem": "Nós aceitamos o convite",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5982",
+    "type": "multipleChoice",
+    "question": "How do you say 'We accept the invitation' in Portuguese?",
+    "options": [
+      "A sala de aula",
+      "com elas",
+      "Nós aceitamos o convite",
+      "Eles fazem"
+    ],
+    "answer": "Nós aceitamos o convite",
+    "sourceItem": "Nós aceitamos o convite",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5983",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Nós aceitamos o ______' (We accept the invitation)",
+    "options": [
+      "convite",
+      "bónus",
+      "autocarro",
+      "Eles"
+    ],
+    "answer": "convite",
+    "sourceItem": "Nós aceitamos o convite",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5984",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eu ponho a comida no forno'?",
+    "options": [
+      "The train departs at eight o'clock.",
+      "because I am sick",
+      "I put the food in the oven",
+      "the garden"
+    ],
+    "answer": "I put the food in the oven",
+    "sourceItem": "Eu ponho a comida no forno",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5985",
+    "type": "multipleChoice",
+    "question": "How do you say 'I put the food in the oven' in Portuguese?",
+    "options": [
+      "O champô",
+      "Eu ponho a comida no forno",
+      "Almoço com os colegas",
+      "Não vou à praia desde setembro"
+    ],
+    "answer": "Eu ponho a comida no forno",
+    "sourceItem": "Eu ponho a comida no forno",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5986",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Eu ponho a comida no ______' (I put the food in the oven)",
+    "options": [
+      "tarde",
+      "semana",
+      "chocolate",
+      "forno"
+    ],
+    "answer": "forno",
+    "sourceItem": "Eu ponho a comida no forno",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_5987",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Antes de entrar eu empurro a porta'?",
+    "options": [
+      "Maria wants to marry him",
+      "Vera and her sister are very friendly.",
+      "Before entering I push the door",
+      "I do not understand"
+    ],
+    "answer": "Before entering I push the door",
+    "sourceItem": "Antes de entrar eu empurro a porta",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5988",
+    "type": "multipleChoice",
+    "question": "How do you say 'Before entering I push the door' in Portuguese?",
+    "options": [
+      "colina",
+      "Eu vou ao mercado com vocês",
+      "Antes de entrar eu empurro a porta",
+      "vocês são"
+    ],
+    "answer": "Antes de entrar eu empurro a porta",
+    "sourceItem": "Antes de entrar eu empurro a porta",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5989",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Antes de entrar eu ______ a porta' (Before entering I push the door)",
+    "options": [
+      "cheia",
+      "Puxar",
+      "empurro",
+      "Comer"
+    ],
+    "answer": "empurro",
+    "sourceItem": "Antes de entrar eu empurro a porta",
+    "cat": "Everyday Items"
+  },
+  {
+    "id": "q_5990",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'iniciar'?",
+    "options": [
+      "Here",
+      "All mean “to be” Ser \\- Permanent (A ópera é um estilo de música) Estar \\- Temporary  Ficar \\- Geographical location (or stay),",
+      "to start / begin (= começar)",
+      "Potato"
+    ],
+    "answer": "to start / begin (= começar)",
+    "sourceItem": "iniciar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5991",
+    "type": "multipleChoice",
+    "question": "How do you say 'to start / begin (= começar)' in Portuguese?",
+    "options": [
+      "Velho",
+      "os pés",
+      "iniciar",
+      "Está vento"
+    ],
+    "answer": "iniciar",
+    "sourceItem": "iniciar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5992",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'escutar'?",
+    "options": [
+      "Reservation",
+      "Retirement",
+      "How funny",
+      "to listen (= ouvir)"
+    ],
+    "answer": "to listen (= ouvir)",
+    "sourceItem": "escutar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5993",
+    "type": "multipleChoice",
+    "question": "How do you say 'to listen (= ouvir)' in Portuguese?",
+    "options": [
+      "escutar",
+      "o tornozelo",
+      "ir ate a rua",
+      "Vai pentear macacos"
+    ],
+    "answer": "escutar",
+    "sourceItem": "escutar",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_5994",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'auxiliar'?",
+    "options": [
+      "attic (building/apartment)",
+      "to assist / help (= ajudar)",
+      "The Holland",
+      "How old are you?"
+    ],
+    "answer": "to assist / help (= ajudar)",
+    "sourceItem": "auxiliar",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5995",
+    "type": "multipleChoice",
+    "question": "How do you say 'to assist / help (= ajudar)' in Portuguese?",
+    "options": [
+      "A que horas te levantas?",
+      "Jovem",
+      "O telejornal",
+      "auxiliar"
+    ],
+    "answer": "auxiliar",
+    "sourceItem": "auxiliar",
+    "cat": "Office & Work"
+  },
+  {
+    "id": "q_5996",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'desligar'?",
+    "options": [
+      "to start / begin (= começar)",
+      "j",
+      "to turn off (≠ ligar)",
+      "The frog is green and rough."
+    ],
+    "answer": "to turn off (≠ ligar)",
+    "sourceItem": "desligar",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5997",
+    "type": "multipleChoice",
+    "question": "How do you say 'to turn off (≠ ligar)' in Portuguese?",
+    "options": [
+      "antes",
+      "o espelho",
+      "Ler",
+      "desligar"
+    ],
+    "answer": "desligar",
+    "sourceItem": "desligar",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5998",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'acender'?",
+    "options": [
+      "s",
+      "How exciting! / What enthusiasm!",
+      "It's worth it",
+      "to light / switch on (≠ apagar)"
+    ],
+    "answer": "to light / switch on (≠ apagar)",
+    "sourceItem": "acender",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_5999",
+    "type": "multipleChoice",
+    "question": "How do you say 'to light / switch on (≠ apagar)' in Portuguese?",
+    "options": [
+      "A greve",
+      "Tem um tamanho menor?",
+      "Ele sabe",
+      "acender"
+    ],
+    "answer": "acender",
+    "sourceItem": "acender",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6000",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'subir'?",
+    "options": [
+      "I have a reservation",
+      "to go up (≠ descer)",
+      "The Director (masculine)",
+      "In summer it is very hot."
+    ],
+    "answer": "to go up (≠ descer)",
+    "sourceItem": "subir",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_6001",
+    "type": "multipleChoice",
+    "question": "How do you say 'to go up (≠ descer)' in Portuguese?",
+    "options": [
+      "Não te esqueças dos talheres",
+      "subir",
+      "Eu não sei",
+      "A ponte"
+    ],
+    "answer": "subir",
+    "sourceItem": "subir",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_6002",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'descer'?",
+    "options": [
+      "I lost my suitcase",
+      "to go down (≠ subir)",
+      "Call me before you leave.",
+      "Olívia has been camping since childhood"
+    ],
+    "answer": "to go down (≠ subir)",
+    "sourceItem": "descer",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_6003",
+    "type": "multipleChoice",
+    "question": "How do you say 'to go down (≠ subir)' in Portuguese?",
+    "options": [
+      "A fatura",
+      "O que…? \\+ verbo O que fazes no fim de semana? O que fazes ao fim de semana?",
+      "da manhã",
+      "descer"
+    ],
+    "answer": "descer",
+    "sourceItem": "descer",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_6004",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'bonito / lindo'?",
+    "options": [
+      "I got a good grade",
+      "The sea",
+      "pretty / beautiful (synonyms)",
+      "The sister"
+    ],
+    "answer": "pretty / beautiful (synonyms)",
+    "sourceItem": "bonito / lindo",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_6005",
+    "type": "multipleChoice",
+    "question": "How do you say 'pretty / beautiful (synonyms)' in Portuguese?",
+    "options": [
+      "Tenho muitas receitas de família",
+      "A comida está deliciosa",
+      "bonito / lindo",
+      "Escreve no teu caderno"
+    ],
+    "answer": "bonito / lindo",
+    "sourceItem": "bonito / lindo",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_6006",
+    "type": "cloze",
+    "question": "Fill in the blank: 'bonito / ______' (pretty / beautiful (synonyms))",
+    "options": [
+      "somos",
+      "gostava",
+      "lindo",
+      "proposta"
+    ],
+    "answer": "lindo",
+    "sourceItem": "bonito / lindo",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_6007",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'difícil / complicado'?",
+    "options": [
+      "Singer",
+      "difficult / complicated (synonyms)",
+      "This weekend",
+      "Umbrella"
+    ],
+    "answer": "difficult / complicated (synonyms)",
+    "sourceItem": "difícil / complicado",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_6008",
+    "type": "multipleChoice",
+    "question": "How do you say 'difficult / complicated (synonyms)' in Portuguese?",
+    "options": [
+      "difícil / complicado",
+      "Espero chegar",
+      "rés-do-chão",
+      "acaba"
+    ],
+    "answer": "difícil / complicado",
+    "sourceItem": "difícil / complicado",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_6009",
+    "type": "cloze",
+    "question": "Fill in the blank: 'difícil / ______' (difficult / complicated (synonyms))",
+    "options": [
+      "complicado",
+      "outra",
+      "Fica",
+      "obrigado"
+    ],
+    "answer": "complicado",
+    "sourceItem": "difícil / complicado",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_6010",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'fácil / simples'?",
+    "options": [
+      "therefore",
+      "easy / simple (synonyms)",
+      "small vegetable gardens (closed vegetable garden)",
+      "Potato"
+    ],
+    "answer": "easy / simple (synonyms)",
+    "sourceItem": "fácil / simples",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_6011",
+    "type": "multipleChoice",
+    "question": "How do you say 'easy / simple (synonyms)' in Portuguese?",
+    "options": [
+      "Agora mesmo",
+      "A campainha",
+      "arrumam a sala",
+      "fácil / simples"
+    ],
+    "answer": "fácil / simples",
+    "sourceItem": "fácil / simples",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_6012",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ / simples' (easy / simple (synonyms))",
+    "options": [
+      "urgente",
+      "coração",
+      "lhes",
+      "fácil"
+    ],
+    "answer": "fácil",
+    "sourceItem": "fácil / simples",
+    "cat": "Basics"
+  },
+  {
+    "id": "q_6013",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'cheio / vazio'?",
+    "options": [
+      "Onion",
+      "full / empty (antonyms)",
+      "report",
+      "I agree"
+    ],
+    "answer": "full / empty (antonyms)",
+    "sourceItem": "cheio / vazio",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6014",
+    "type": "multipleChoice",
+    "question": "How do you say 'full / empty (antonyms)' in Portuguese?",
+    "options": [
+      "O campo de futebol",
+      "Estás triste?",
+      "No regresso, ele volta para casa a pé, porque precisa de passar pelo supermercado",
+      "cheio / vazio"
+    ],
+    "answer": "cheio / vazio",
+    "sourceItem": "cheio / vazio",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6015",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ / vazio' (full / empty (antonyms))",
+    "options": [
+      "pernas",
+      "cheio",
+      "Portugal",
+      "individual"
+    ],
+    "answer": "cheio",
+    "sourceItem": "cheio / vazio",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6016",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'quente / frio'?",
+    "options": [
+      "The crosswalk",
+      "the stairs",
+      "hot / cold (antonyms)",
+      "gift / present (synonyms)"
+    ],
+    "answer": "hot / cold (antonyms)",
+    "sourceItem": "quente / frio",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6017",
+    "type": "multipleChoice",
+    "question": "How do you say 'hot / cold (antonyms)' in Portuguese?",
+    "options": [
+      "quente / frio",
+      "cheia",
+      "está sol",
+      "Ela veste-se muito bem."
+    ],
+    "answer": "quente / frio",
+    "sourceItem": "quente / frio",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6018",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ / frio' (hot / cold (antonyms))",
+    "options": [
+      "deito-me",
+      "acordo",
+      "quente",
+      "neve"
+    ],
+    "answer": "quente",
+    "sourceItem": "quente / frio",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6019",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o presente / a prenda'?",
+    "options": [
+      "chocolate Yule log cake",
+      "I like to read",
+      "Go promote monkeys (Get lost)",
+      "gift / present (synonyms)"
+    ],
+    "answer": "gift / present (synonyms)",
+    "sourceItem": "o presente / a prenda",
+    "cat": "Family"
+  },
+  {
+    "id": "q_6020",
+    "type": "multipleChoice",
+    "question": "How do you say 'gift / present (synonyms)' in Portuguese?",
+    "options": [
+      "A contabilidade",
+      "Semana passada, anteontem, ontem, hoje, amanhã, depois de amanhã, próxima semana",
+      "o presente / a prenda",
+      "Vinho tinto"
+    ],
+    "answer": "o presente / a prenda",
+    "sourceItem": "o presente / a prenda",
+    "cat": "Family"
+  },
+  {
+    "id": "q_6021",
+    "type": "cloze",
+    "question": "Fill in the blank: 'o presente / a ______' (gift / present (synonyms))",
+    "options": [
+      "prenda",
+      "Estamos",
+      "rotunda",
+      "árvores"
+    ],
+    "answer": "prenda",
+    "sourceItem": "o presente / a prenda",
+    "cat": "Family"
+  },
+  {
+    "id": "q_6022",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'o guarda-redes'?",
+    "options": [
+      "the afternoon or da tarde, but after a time it is de tarde",
+      "How long have you been in Portugal?",
+      "goalkeeper",
+      "To win"
+    ],
+    "answer": "goalkeeper",
+    "sourceItem": "o guarda-redes",
+    "cat": "General"
+  },
+  {
+    "id": "q_6023",
+    "type": "multipleChoice",
+    "question": "How do you say 'goalkeeper' in Portuguese?",
+    "options": [
+      "tesouro",
+      "o guarda-redes",
+      "muito tranquila",
+      "lojas"
+    ],
+    "answer": "o guarda-redes",
+    "sourceItem": "o guarda-redes",
+    "cat": "General"
+  },
+  {
+    "id": "q_6024",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Acende a luz, por favor'?",
+    "options": [
+      "Pink",
+      "we see",
+      "I am never late (I never late myself)",
+      "Turn on the light, please"
+    ],
+    "answer": "Turn on the light, please",
+    "sourceItem": "Acende a luz, por favor",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6025",
+    "type": "multipleChoice",
+    "question": "How do you say 'Turn on the light, please' in Portuguese?",
+    "options": [
+      "o espelho",
+      "Acende a luz, por favor",
+      "Eu gostava de ir convosco ao concerto",
+      "A vida é bela"
+    ],
+    "answer": "Acende a luz, por favor",
+    "sourceItem": "Acende a luz, por favor",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6026",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Acende a luz, por ______' (Turn on the light, please)",
+    "options": [
+      "alunos",
+      "favor",
+      "correr",
+      "alergia"
+    ],
+    "answer": "favor",
+    "sourceItem": "Acende a luz, por favor",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6027",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Apaga a luz antes de sair'?",
+    "options": [
+      "This is seat is reserved for you/These seats are reserved for you",
+      "the tongue",
+      "informal)",
+      "Turn off the light before leaving"
+    ],
+    "answer": "Turn off the light before leaving",
+    "sourceItem": "Apaga a luz antes de sair",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6028",
+    "type": "multipleChoice",
+    "question": "How do you say 'Turn off the light before leaving' in Portuguese?",
+    "options": [
+      "o teu marido",
+      "Apaga a luz antes de sair",
+      "Esta cidade tem tanta história como Lisboa",
+      "ao meio-dia"
+    ],
+    "answer": "Apaga a luz antes de sair",
+    "sourceItem": "Apaga a luz antes de sair",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6029",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ a luz antes de sair' (Turn off the light before leaving)",
+    "options": [
+      "Apaga",
+      "como",
+      "sobrinha",
+      "tenho"
+    ],
+    "answer": "Apaga",
+    "sourceItem": "Apaga a luz antes de sair",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6030",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O copo está cheio, mas a garrafa está vazia'?",
+    "options": [
+      "Switch off this light, please. It is very strong!",
+      "a business proposal",
+      "The glass is full, but the bottle is empty",
+      "basement"
+    ],
+    "answer": "The glass is full, but the bottle is empty",
+    "sourceItem": "O copo está cheio, mas a garrafa está vazia",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6031",
+    "type": "multipleChoice",
+    "question": "How do you say 'The glass is full, but the bottle is empty' in Portuguese?",
+    "options": [
+      "tanto, tanta, tantos, tantas",
+      "Estou farto disto",
+      "Há quanto tempo…?",
+      "O copo está cheio, mas a garrafa está vazia"
+    ],
+    "answer": "O copo está cheio, mas a garrafa está vazia",
+    "sourceItem": "O copo está cheio, mas a garrafa está vazia",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6032",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O ______ está cheio, mas a garrafa está vazia' (The glass is full, but the bottle is empty)",
+    "options": [
+      "boca",
+      "Eles",
+      "copo",
+      "fica"
+    ],
+    "answer": "copo",
+    "sourceItem": "O copo está cheio, mas a garrafa está vazia",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6033",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O chá está quente e a água está fria'?",
+    "options": [
+      "To have nerve",
+      "bowl",
+      "Cheese",
+      "The tea is hot and the water is cold"
+    ],
+    "answer": "The tea is hot and the water is cold",
+    "sourceItem": "O chá está quente e a água está fria",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6034",
+    "type": "multipleChoice",
+    "question": "How do you say 'The tea is hot and the water is cold' in Portuguese?",
+    "options": [
+      "Para vocês, qual é o melhor filme do Tom Cruise?",
+      "O chá está quente e a água está fria",
+      "Sempre",
+      "gravar"
+    ],
+    "answer": "O chá está quente e a água está fria",
+    "sourceItem": "O chá está quente e a água está fria",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6035",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O chá está quente e a água está ______' (The tea is hot and the water is cold)",
+    "options": [
+      "ponho",
+      "fria",
+      "Azul",
+      "online"
+    ],
+    "answer": "fria",
+    "sourceItem": "O chá está quente e a água está fria",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6036",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Chegámos cedo à festa, mas saímos tarde'?",
+    "options": [
+      "The eraser",
+      "terrace",
+      "We arrived early at the party, but left late",
+      "The sign"
+    ],
+    "answer": "We arrived early at the party, but left late",
+    "sourceItem": "Chegámos cedo à festa, mas saímos tarde",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_6037",
+    "type": "multipleChoice",
+    "question": "How do you say 'We arrived early at the party, but left late' in Portuguese?",
+    "options": [
+      "gelo",
+      "Eu visto-me",
+      "um mito",
+      "Chegámos cedo à festa, mas saímos tarde"
+    ],
+    "answer": "Chegámos cedo à festa, mas saímos tarde",
+    "sourceItem": "Chegámos cedo à festa, mas saímos tarde",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_6038",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ cedo à festa, mas saímos tarde' (We arrived early at the party, but left late)",
+    "options": [
+      "rápido",
+      "Ainda",
+      "Chegámos",
+      "campainha"
+    ],
+    "answer": "Chegámos",
+    "sourceItem": "Chegámos cedo à festa, mas saímos tarde",
+    "cat": "Time & Numbers"
+  },
+  {
+    "id": "q_6039",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'A câmara fica perto daqui'?",
+    "options": [
+      "eat out",
+      "Where is the bathroom?",
+      "The city hall is near here",
+      "To run"
+    ],
+    "answer": "The city hall is near here",
+    "sourceItem": "A câmara fica perto daqui",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_6040",
+    "type": "multipleChoice",
+    "question": "How do you say 'The city hall is near here' in Portuguese?",
+    "options": [
+      "o sótão",
+      "as mãos",
+      "sonhar",
+      "A câmara fica perto daqui"
+    ],
+    "answer": "A câmara fica perto daqui",
+    "sourceItem": "A câmara fica perto daqui",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_6041",
+    "type": "cloze",
+    "question": "Fill in the blank: 'A ______ fica perto daqui' (The city hall is near here)",
+    "options": [
+      "Estou",
+      "ajudar-me",
+      "barata",
+      "câmara"
+    ],
+    "answer": "câmara",
+    "sourceItem": "A câmara fica perto daqui",
+    "cat": "Travel & Directions"
+  },
+  {
+    "id": "q_6042",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Eles aceitaram o convite e trouxeram rabanadas'?",
+    "options": [
+      "They accepted the invitation and brought French toast",
+      "to go up (≠ descer)",
+      "You are (temp)",
+      "West"
+    ],
+    "answer": "They accepted the invitation and brought French toast",
+    "sourceItem": "Eles aceitaram o convite e trouxeram rabanadas",
+    "cat": "Family"
+  },
+  {
+    "id": "q_6043",
+    "type": "multipleChoice",
+    "question": "How do you say 'They accepted the invitation and brought French toast' in Portuguese?",
+    "options": [
+      "A rua",
+      "Eles aceitaram o convite e trouxeram rabanadas",
+      "Férias de verão",
+      "fala mais alto"
+    ],
+    "answer": "Eles aceitaram o convite e trouxeram rabanadas",
+    "sourceItem": "Eles aceitaram o convite e trouxeram rabanadas",
+    "cat": "Family"
+  },
+  {
+    "id": "q_6044",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ aceitaram o convite e trouxeram rabanadas' (They accepted the invitation and brought French toast)",
+    "options": [
+      "máquina",
+      "n.44",
+      "costumas",
+      "Eles"
+    ],
+    "answer": "Eles",
+    "sourceItem": "Eles aceitaram o convite e trouxeram rabanadas",
+    "cat": "Family"
+  },
+  {
+    "id": "q_6045",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Ela recusou o café e pediu chá'?",
+    "options": [
+      "The floor",
+      "She refused the coffee and ordered tea",
+      "Double or single room?",
+      "they know how to play guitar"
+    ],
+    "answer": "She refused the coffee and ordered tea",
+    "sourceItem": "Ela recusou o café e pediu chá",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6046",
+    "type": "multipleChoice",
+    "question": "How do you say 'She refused the coffee and ordered tea' in Portuguese?",
+    "options": [
+      "Eu leio um livro",
+      "Tenho dores de cabeça",
+      "Cebola",
+      "Ela recusou o café e pediu chá"
+    ],
+    "answer": "Ela recusou o café e pediu chá",
+    "sourceItem": "Ela recusou o café e pediu chá",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6047",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Ela recusou o ______ e pediu chá' (She refused the coffee and ordered tea)",
+    "options": [
+      "fica",
+      "estiveste",
+      "café",
+      "seguinte"
+    ],
+    "answer": "café",
+    "sourceItem": "Ela recusou o café e pediu chá",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6048",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Lembra-te de fechar a porta'?",
+    "options": [
+      "Remember to close the door",
+      "The university is old",
+      "Ugly",
+      "The shower"
+    ],
+    "answer": "Remember to close the door",
+    "sourceItem": "Lembra-te de fechar a porta",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6049",
+    "type": "multipleChoice",
+    "question": "How do you say 'Remember to close the door' in Portuguese?",
+    "options": [
+      "A creche",
+      "Lembra-te de fechar a porta",
+      "Posso pagar com cartão de crédito?",
+      "Feliz aniversário!"
+    ],
+    "answer": "Lembra-te de fechar a porta",
+    "sourceItem": "Lembra-te de fechar a porta",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6050",
+    "type": "cloze",
+    "question": "Fill in the blank: '______ de fechar a porta' (Remember to close the door)",
+    "options": [
+      "tomas",
+      "Nunca",
+      "Lembra-te",
+      "conversar"
+    ],
+    "answer": "Lembra-te",
+    "sourceItem": "Lembra-te de fechar a porta",
+    "cat": "Household Items"
+  },
+  {
+    "id": "q_6051",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Não te esqueças dos talheres'?",
+    "options": [
+      "December",
+      "This car is as fast as the other",
+      "Don't forget the cutlery",
+      "I caught the wrong train today."
+    ],
+    "answer": "Don't forget the cutlery",
+    "sourceItem": "Não te esqueças dos talheres",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6052",
+    "type": "multipleChoice",
+    "question": "How do you say 'Don't forget the cutlery' in Portuguese?",
+    "options": [
+      "Respeitosamente",
+      "Chamam",
+      "Não te esqueças dos talheres",
+      "sete colinas"
+    ],
+    "answer": "Não te esqueças dos talheres",
+    "sourceItem": "Não te esqueças dos talheres",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6053",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Não te esqueças dos ______' (Don't forget the cutlery)",
+    "options": [
+      "talheres",
+      "cartão",
+      "noite",
+      "Respiro"
+    ],
+    "answer": "talheres",
+    "sourceItem": "Não te esqueças dos talheres",
+    "cat": "Food & Drink"
+  },
+  {
+    "id": "q_6054",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'Nós festejámos o Natal com toda a família'?",
+    "options": [
+      "with his friends",
+      "You are (formal) We (us) are They (all man)",
+      "the mirror",
+      "We celebrated Christmas with the whole family"
+    ],
+    "answer": "We celebrated Christmas with the whole family",
+    "sourceItem": "Nós festejámos o Natal com toda a família",
+    "cat": "Family"
+  },
+  {
+    "id": "q_6055",
+    "type": "multipleChoice",
+    "question": "How do you say 'We celebrated Christmas with the whole family' in Portuguese?",
+    "options": [
+      "outubro",
+      "Ela gosta tanto de estar com os avós!",
+      "O sinal",
+      "Nós festejámos o Natal com toda a família"
+    ],
+    "answer": "Nós festejámos o Natal com toda a família",
+    "sourceItem": "Nós festejámos o Natal com toda a família",
+    "cat": "Family"
+  },
+  {
+    "id": "q_6056",
+    "type": "cloze",
+    "question": "Fill in the blank: 'Nós festejámos o Natal com ______ a família' (We celebrated Christmas with the whole family)",
+    "options": [
+      "piqueniques",
+      "favor",
+      "neblina",
+      "toda"
+    ],
+    "answer": "toda",
+    "sourceItem": "Nós festejámos o Natal com toda a família",
+    "cat": "Family"
+  },
+  {
+    "id": "q_6057",
+    "type": "multipleChoice",
+    "question": "What is the English translation of 'O jogo acabou com dois golos'?",
+    "options": [
+      "The sofa",
+      "1230",
+      "about",
+      "The match finished with two goals"
+    ],
+    "answer": "The match finished with two goals",
+    "sourceItem": "O jogo acabou com dois golos",
+    "cat": "General"
+  },
+  {
+    "id": "q_6058",
+    "type": "multipleChoice",
+    "question": "How do you say 'The match finished with two goals' in Portuguese?",
+    "options": [
+      "O jogo acabou com dois golos",
+      "antónimo",
+      "Fica longe",
+      "muito verde"
+    ],
+    "answer": "O jogo acabou com dois golos",
+    "sourceItem": "O jogo acabou com dois golos",
+    "cat": "General"
+  },
+  {
+    "id": "q_6059",
+    "type": "cloze",
+    "question": "Fill in the blank: 'O ______ acabou com dois golos' (The match finished with two goals)",
+    "options": [
+      "jogo",
+      "transportes",
+      "chegaram",
+      "fica"
+    ],
+    "answer": "jogo",
+    "sourceItem": "O jogo acabou com dois golos",
+    "cat": "General"
   }
 ]
