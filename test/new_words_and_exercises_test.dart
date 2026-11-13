@@ -249,5 +249,41 @@ void main() {
             reason: 'Category "$cat" from questions.json must have a corresponding route in CategorySelectionScreen');
       }
     });
+
+    test('vocabulary.json present_tense and past_tense are null or 5-person Maps and new entries do not overlap source.md', () {
+      final vocabFile = File('assets/vocabulary.json');
+      expect(vocabFile.existsSync(), isTrue);
+      final List<dynamic> vocabList = jsonDecode(vocabFile.readAsStringSync());
+      const requiredKeys = {'eu', 'tu', 'ele_ela_voce', 'nos', 'voces_eles'};
+
+      final sourceLines = File('assets/data/source.md').readAsLinesSync();
+      final sourcePt = <String>{};
+      for (final line in sourceLines) {
+        final s = line.trim();
+        if (s.startsWith('|')) {
+          final parts = s.split('|').map((p) => p.trim()).toList();
+          if (parts.length >= 4 && !parts[1].contains('Portugues') && !parts[1].contains('---')) {
+            sourcePt.add(parts[1].toLowerCase());
+          }
+        }
+      }
+
+      for (final entry in vocabList) {
+        final id = entry['id'];
+        for (final field in ['present_tense', 'past_tense']) {
+          final val = entry[field];
+          if (val != null) {
+            expect(val, isA<Map>(), reason: 'Entry $id $field must be null or a Map');
+            final keys = (val as Map).keys.map((k) => k.toString()).toSet();
+            expect(keys, equals(requiredKeys), reason: 'Entry $id $field must have 5 person keys');
+          }
+        }
+        if (id is int && id >= 985) {
+          final pt = (entry['portuguese'] as String).trim().toLowerCase();
+          expect(sourcePt.contains(pt), isFalse,
+              reason: 'New vocabulary.json entry $id ("$pt") must not duplicate source.md');
+        }
+      }
+    });
   });
 }

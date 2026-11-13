@@ -2502,7 +2502,6 @@
 | Portugues | English | Notes |
 | :--- | :--- | :--- |
 | inevitável | inevitable | Intro / Basics |
-| tão + adjetivo + como | as + adjective + as | Grammar / Comparative |
 | tanto, tanta, tantos, tantas | so much / so many (+ noun) | Grammar / Comparative |
 | verbo + tanto | verb + so much | Grammar / Comparative |
 | ele come tanto | he eats so much | Food & Drink |
@@ -2538,7 +2537,6 @@
 | vêm | they / you (plural) come | Grammar / Verb |
 | conheço | I know (a person or place) | Grammar / Verb |
 | ouço / oiço | I hear | Grammar / Verb |
-| o polvo | octopus | Food & Drink |
 | ou até | or even | Intro / Basics |
 | fatias douradas / rabanadas | Portuguese French toast | Food & Drink |
 | o tronco de Natal | chocolate Yule log cake | Food & Drink |
@@ -2549,7 +2547,6 @@
 | à volta da | around the | Travel & Directions |
 | o Pai Natal | Father Christmas / Santa Claus | Family |
 | junta novamente | gets together again | Family |
-| outra vez / novamente | again | Time / Duration |
 | a Véspera de Natal | Christmas Eve | Time / Duration |
 | a véspera | day before / eve | Time / Duration |
 | a Consoada | Christmas Eve dinner | Family |
@@ -2559,18 +2556,15 @@
 | nós víamos muitos filmes | we used to watch many films | Hobbies & Leisure |
 | ontem esteve sol | yesterday it was sunny (completed) | Grammar / Verb |
 | ontem estava sol | yesterday it was sunny (ongoing) | Grammar / Verb |
-| decidir | to decide | Grammar / Verb |
 | eu decidi | I decided | Grammar / Verb |
 | eles decidiram | they decided | Grammar / Verb |
 | a palhinha | drinking straw | Food & Drink |
 | a tampa | lid / cap | Household Items |
-| a garrafa | bottle | Food & Drink |
 | o jarro da água | jug of water | Food & Drink |
 | o guardanapo | napkin | Food & Drink |
 | o lenço de assoar | handkerchief / tissue | Everyday Items |
 | a tigela | bowl | Food & Drink |
 | de serviço | on duty | Office & Work |
-| trocar | to swap / exchange | Office & Work |
 | e não consegue trocar com o colega | and cannot swap with the colleague | Office & Work |
 | Temos muita pena | We are very sorry | Intro / Basics |
 | Espero chegar | I hope to arrive | Travel & Directions |
@@ -2583,7 +2577,6 @@
 | Como vais celebrar? | How are you going to celebrate? | Hobbies & Leisure |
 | Onde vais passar o Natal? | Where are you spending Christmas? | Family |
 | Quanto tempo vais ficar? | How long are you going to stay? | Time / Duration |
-| Boas férias! | Have a nice holiday! | Intro / Greeting |
 | Feliz Natal! | Merry Christmas! | Intro / Greeting |
 | Quanto tempo ficam lá? | How long are you staying there? | Time / Duration |
 | Para onde vão nas férias do Natal? | Where are you going on Christmas holidays? | Travel & Directions |
@@ -2593,28 +2586,9 @@
 | bola na trave | ball hits the crossbar | Hobbies & Leisure |
 | bola no poste | ball hits the goalpost | Hobbies & Leisure |
 | marcar um golo | to score a goal | Hobbies & Leisure |
-| festejar | to party / celebrate (= celebrar) | Hobbies & Leisure |
-| celebrar | to celebrate (= festejar) | Hobbies & Leisure |
-| arranjar | to arrange / prepare (= preparar) | Intro / Basics |
-| entender | to understand (= compreender) | Intro / Basics |
-| reservar | to reserve / book (= marcar) | Travel & Directions |
-| aceitar | to accept (≠ recusar) | Intro / Basics |
-| recusar | to refuse (≠ aceitar) | Intro / Basics |
 | Nós aceitamos o convite | We accept the invitation | Intro / Basics |
 | Eu ponho a comida no forno | I put the food in the oven | Food & Drink |
 | Antes de entrar eu empurro a porta | Before entering I push the door | Everyday Items |
-
-## Expanded Synonyms, Antonyms & Related Phrases
-
-| Portugues | English | Notes |
-| :--- | :--- | :--- |
-| iniciar | to start / begin (= começar) | Intro / Basics |
-| escutar | to listen (= ouvir) | Intro / Basics |
-| auxiliar | to assist / help (= ajudar) | Office & Work |
-| desligar | to turn off (≠ ligar) | Household Items |
-| acender | to light / switch on (≠ apagar) | Household Items |
-| subir | to go up (≠ descer) | Travel & Directions |
-| descer | to go down (≠ subir) | Travel & Directions |
 | bonito / lindo | pretty / beautiful (synonyms) | Intro / Basics |
 | difícil / complicado | difficult / complicated (synonyms) | Intro / Basics |
 | fácil / simples | easy / simple (synonyms) | Intro / Basics |
