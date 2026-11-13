@@ -173,11 +173,19 @@ void main() {
       }
     });
 
-    test('combined_questions.json has zero question text overlap with any exercise unit file', () {
+    test('combined_questions.json and questions.json have zero question text overlap with any exercise unit file', () {
       final combinedFile = File('assets/data/combined_questions.json');
       expect(combinedFile.existsSync(), isTrue);
       final List<dynamic> combinedList = jsonDecode(combinedFile.readAsStringSync());
       final combinedQuestions = combinedList
+          .map((q) => (q['question'] ?? q['questionText'] ?? '').toString().trim())
+          .where((t) => t.isNotEmpty)
+          .toSet();
+
+      final questionsFile = File('assets/data/questions.json');
+      expect(questionsFile.existsSync(), isTrue);
+      final List<dynamic> questionsList = jsonDecode(questionsFile.readAsStringSync());
+      final bankQuestions = questionsList
           .map((q) => (q['question'] ?? q['questionText'] ?? '').toString().trim())
           .where((t) => t.isNotEmpty)
           .toSet();
@@ -193,6 +201,8 @@ void main() {
             if (text.isNotEmpty) {
               expect(combinedQuestions.contains(text), isFalse,
                   reason: 'Question "$text" in ${entity.path} must not be duplicated in combined_questions.json');
+              expect(bankQuestions.contains(text), isFalse,
+                  reason: 'Question "$text" in ${entity.path} must not be duplicated in questions.json');
             }
           }
         }
