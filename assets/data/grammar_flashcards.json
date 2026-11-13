@@ -75,5 +75,60 @@
     "cefr_level": "A1",
     "word_type": "grammar",
     "explanation": "Definite articles in Portuguese indicate specific nouns:\n\n• Masculine Singular: o (o livro)\n• Masculine Plural: os (os carros)\n• Feminine Singular: a (a casa)\n• Feminine Plural: as (as meninas)\n\nIn European Portuguese, definite articles are also used before people's names and possessive pronouns: o meu livro, a Maria."
+  },
+  {
+    "id": "G8",
+    "card_number": "#G8",
+    "category": "EXPLANATION",
+    "portuguese": "Antónimos Comuns",
+    "english": "Common Antonyms (≠)",
+    "pronunciation": "ahn-TOH-nee-moosh",
+    "cefr_level": "A2",
+    "word_type": "grammar",
+    "explanation": "Useful Portuguese antonym pairs:\n\n• pôr a mesa ≠ levantar a mesa (set ≠ clear the table)\n• aceitar ≠ recusar (accept ≠ refuse)\n• enviar ≠ receber (send ≠ receive)\n• trazer ≠ levar (bring ≠ take)\n• pôr ≠ tirar (put ≠ take out)\n• entrar ≠ sair (enter ≠ leave)\n• puxar ≠ empurrar (pull ≠ push)\n• depressa ≠ devagar / rápido ≠ lento (fast ≠ slow)"
+  },
+  {
+    "id": "G9",
+    "card_number": "#G9",
+    "category": "EXPLANATION",
+    "portuguese": "Pretérito Perfeito vs. Imperfeito",
+    "english": "Completed Past vs. Ongoing/Habitual Past",
+    "pronunciation": "preh-TEH-ree-too",
+    "cefr_level": "A2",
+    "word_type": "grammar",
+    "explanation": "Use Pretérito Perfeito for completed actions and Imperfeito for habits or background:\n\n• Perfeito (completed):\n  Eu decidi (I decided), Eles decidiram (They decided), Ele saiu (He left), Ontem esteve sol (Yesterday it was sunny — finished).\n\n• Imperfeito (habitual / background):\n  Quando eu era criança (When I was a child), Nós víamos muitos filmes (We used to watch many films), Ontem estava sol (Yesterday it was sunny — ongoing)."
+  },
+  {
+    "id": "G10",
+    "card_number": "#G10",
+    "category": "EXPLANATION",
+    "portuguese": "Construções Impessoais com -se",
+    "english": "Impersonal '-se' (People / Everyone)",
+    "pronunciation": "kohnsh-troo-SOYNGSH eem-peh-soo-AYSH",
+    "cefr_level": "A2",
+    "word_type": "grammar",
+    "explanation": "Add '-se' to a 3rd-person verb to express general actions ('people do / one does / everyone'):\n\n• Conversa-se muito depois do jantar. (People talk a lot after dinner.)\n• Come-se polvo na Consoada. (People eat octopus on Christmas Eve.)\n• Dá-se / Dão-se presentes no Natal. (Presents are given at Christmas.)"
+  },
+  {
+    "id": "G11",
+    "card_number": "#G11",
+    "category": "EXPLANATION",
+    "portuguese": "Sinónimos Comuns",
+    "english": "Common Synonyms (=)",
+    "pronunciation": "see-NOH-nee-moosh",
+    "cefr_level": "A2",
+    "word_type": "grammar",
+    "explanation": "Useful Portuguese synonym pairs:\n\n• festejar = celebrar (to celebrate)\n• preparar = arranjar (to prepare/arrange)\n• compreender = entender (to understand)\n• oferecer = dar (to offer/give)\n• terminar = acabar (to finish/end)\n• marcar = reservar (to schedule/reserve)\n• mandar = enviar (to send)\n• outra vez = novamente (again)"
+  },
+  {
+    "id": "G12",
+    "card_number": "#G12",
+    "category": "EXPLANATION",
+    "portuguese": "Mais Sinónimos e Antónimos",
+    "english": "More Synonyms & Antonyms (Adjectives & Verbs)",
+    "pronunciation": "maysh see-NOH-nee-moosh",
+    "cefr_level": "A2",
+    "word_type": "grammar",
+    "explanation": "Additional synonyms (=) & antonyms (≠):\n\n• começar = iniciar (start) ≠ acabar / terminar\n• escutar = ouvir (listen/hear)\n• bonito = lindo (pretty/beautiful)\n• fácil = simples ≠ difícil = complicado\n• abrir ≠ fechar (open ≠ close)\n• ligar ≠ desligar / acender ≠ apagar\n• cheio ≠ vazio (full ≠ empty)\n• quente ≠ frio (hot ≠ cold)\n• cedo ≠ tarde (early ≠ late)\n• perto ≠ longe (near ≠ far)\n• lembrar-se ≠ esquecer-se (remember ≠ forget)"
   }
 ]

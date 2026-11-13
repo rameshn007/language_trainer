@@ -1382,5 +1382,239 @@
     "english": "in Cape Verde",
     "category": "Travel & Directions",
     "notes": "Sheet1 Conversation"
+  },
+  {
+    "portuguese": "Não estou com eles há tanto tempo.",
+    "english": "I haven't been with them for so long.",
+    "category": "Time & Numbers",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Ela gosta tanto de estar com os avós!",
+    "english": "She likes to stay with her grandparents so much!",
+    "category": "Family",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Ele convida sempre tanta gente!",
+    "english": "He always invites so many people!",
+    "category": "Family",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "O dia, hoje, está tão bom!",
+    "english": "Today is so nice!",
+    "category": "Basics",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Não conduzas tão depressa!",
+    "english": "Don't drive so fast!",
+    "category": "Travel & Directions",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Há tantas pessoas na praia.",
+    "english": "There are so many people at the beach.",
+    "category": "Travel & Directions",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Quando eu era criança, nós víamos muitos filmes.",
+    "english": "When I was a child, we used to watch many films.",
+    "category": "Grammar & Verbs",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Ontem esteve sol, mas hoje está frio.",
+    "english": "Yesterday it was sunny, but today it is cold.",
+    "category": "Basics",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Ontem estava sol quando saí de casa.",
+    "english": "Yesterday it was sunny when I left home.",
+    "category": "Basics",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Nós aceitamos o convite para a festa.",
+    "english": "We accept the invitation to the party.",
+    "category": "Basics",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Eu ponho a comida no forno.",
+    "english": "I put the food in the oven.",
+    "category": "Food & Drink",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Antes de entrar, eu empurro a porta.",
+    "english": "Before entering, I push the door.",
+    "category": "Everyday Items",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Depois do jantar, a família conversa à volta da mesa.",
+    "english": "After dinner, the family talks around the table.",
+    "category": "Family",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Onde vais passar o Natal?",
+    "english": "Where are you spending Christmas?",
+    "category": "Family",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Como vais celebrar o teu aniversário?",
+    "english": "How are you going to celebrate your birthday?",
+    "category": "Hobbies & Leisure",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Para onde vão nas férias do Natal?",
+    "english": "Where are you going on Christmas holidays?",
+    "category": "Travel & Directions",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Quanto tempo vais ficar lá?",
+    "english": "How long are you going to stay there?",
+    "category": "Time & Numbers",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Boas férias e Feliz Natal!",
+    "english": "Have a nice holiday and Merry Christmas!",
+    "category": "Basics",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "As melhoras! Espero que fiques bom depressa.",
+    "english": "Get well soon! I hope you get better fast.",
+    "category": "Body & Health",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Ele está de serviço e não consegue trocar com o colega.",
+    "english": "He is on duty and cannot swap with his colleague.",
+    "category": "Office & Work",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Temos muita pena, mas não podemos ir.",
+    "english": "We are very sorry, but we cannot go.",
+    "category": "Basics",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Podes pôr a mesa com os talheres e os guardanapos?",
+    "english": "Can you set the table with the cutlery and napkins?",
+    "category": "Household Items",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Vamos levantar a mesa depois do jantar.",
+    "english": "Let's clear the table after dinner.",
+    "category": "Household Items",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "O avançado marcou um golo depois do pontapé de canto.",
+    "english": "The striker scored a goal after the corner kick.",
+    "category": "Hobbies & Leisure",
+    "notes": "Synonyms, Antonyms & Past Tense"
+  },
+  {
+    "portuguese": "Acende a luz da cozinha, por favor.",
+    "english": "Turn on the kitchen light, please.",
+    "category": "Household Items",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "Apaga a luz antes de sair de casa.",
+    "english": "Turn off the light before leaving home.",
+    "category": "Household Items",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "O copo está cheio, mas a garrafa está vazia.",
+    "english": "The glass is full, but the bottle is empty.",
+    "category": "Food & Drink",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "O chá está quente, mas a água está fria.",
+    "english": "The tea is hot, but the water is cold.",
+    "category": "Food & Drink",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "Chegámos cedo à festa e saímos tarde.",
+    "english": "We arrived early at the party and left late.",
+    "category": "Time & Numbers",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "A câmara fica perto, não é longe.",
+    "english": "The city hall is nearby, it is not far.",
+    "category": "Travel & Directions",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "Eles aceitaram o convite e trouxeram rabanadas.",
+    "english": "They accepted the invitation and brought French toast.",
+    "category": "Family",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "Ela recusou o café e pediu uma chávena de chá.",
+    "english": "She refused the coffee and ordered a cup of tea.",
+    "category": "Food & Drink",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "Lembra-te de fechar a porta quando saíres.",
+    "english": "Remember to close the door when you leave.",
+    "category": "Household Items",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "Não te esqueças de pôr os talheres na mesa.",
+    "english": "Don't forget to put the cutlery on the table.",
+    "category": "Household Items",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "Nós festejámos o Natal com toda a família.",
+    "english": "We celebrated Christmas with the whole family.",
+    "category": "Family",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "Quando era criança, adorava abrir os presentes.",
+    "english": "When I was a child, I loved opening the presents.",
+    "category": "Family",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "O guarda-redes defendeu a bola antes do intervalo.",
+    "english": "The goalkeeper saved the ball before halftime.",
+    "category": "Hobbies & Leisure",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "A nossa equipa ganhou o jogo por dois golos.",
+    "english": "Our team won the match by two goals.",
+    "category": "Hobbies & Leisure",
+    "notes": "Expanded Synonyms & Antonyms"
+  },
+  {
+    "portuguese": "A receita do tronco de Natal é fácil e simples.",
+    "english": "The Yule log cake recipe is easy and simple.",
+    "category": "Food & Drink",
+    "notes": "Expanded Synonyms & Antonyms"
   }
 ]

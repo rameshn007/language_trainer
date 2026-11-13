@@ -813,5 +813,125 @@
     "verb": "espirrar",
     "portuguese": "Tenho alergias e não paro de espirrar.",
     "english": "I have allergies and I can't stop sneezing."
+  },
+  {
+    "verb": "decidir",
+    "portuguese": "Eu decidi aprender português este ano.",
+    "english": "I decided to learn Portuguese this year."
+  },
+  {
+    "verb": "decidir",
+    "portuguese": "Eles decidiram passar o Natal na Madeira.",
+    "english": "They decided to spend Christmas in Madeira."
+  },
+  {
+    "verb": "trocar",
+    "portuguese": "Não consigo trocar de turno com o meu colega.",
+    "english": "I cannot swap shifts with my colleague."
+  },
+  {
+    "verb": "festejar",
+    "portuguese": "Vamos festejar o Ano Novo juntos.",
+    "english": "We are going to celebrate New Year's together."
+  },
+  {
+    "verb": "celebrar",
+    "portuguese": "Como vais celebrar o teu aniversário?",
+    "english": "How are you going to celebrate your birthday?"
+  },
+  {
+    "verb": "arranjar",
+    "portuguese": "Vou arranjar a mesa para a Consoada.",
+    "english": "I am going to prepare the table for Christmas Eve dinner."
+  },
+  {
+    "verb": "entender",
+    "portuguese": "Eu entendo bem o professor.",
+    "english": "I understand the teacher well."
+  },
+  {
+    "verb": "terminar",
+    "portuguese": "A reunião termina às cinco horas.",
+    "english": "The meeting finishes at five o'clock."
+  },
+  {
+    "verb": "reservar",
+    "portuguese": "Quero reservar uma mesa para quatro pessoas.",
+    "english": "I want to reserve a table for four people."
+  },
+  {
+    "verb": "aceitar",
+    "portuguese": "Nós aceitamos o vosso convite.",
+    "english": "We accept your invitation."
+  },
+  {
+    "verb": "puxar",
+    "portuguese": "Puxa a porta para entrar na loja.",
+    "english": "Pull the door to enter the shop."
+  },
+  {
+    "verb": "empurrar",
+    "portuguese": "Antes de entrar, eu empurro a porta.",
+    "english": "Before entering, I push the door."
+  },
+  {
+    "verb": "juntar",
+    "portuguese": "A família junta-se novamente no Natal.",
+    "english": "The family gets together again at Christmas."
+  },
+  {
+    "verb": "sair",
+    "portuguese": "Ele saiu de casa muito cedo ontem.",
+    "english": "He left home very early yesterday."
+  },
+  {
+    "verb": "ver",
+    "portuguese": "Quando éramos crianças, víamos muitos filmes.",
+    "english": "When we were children, we used to watch many films."
+  },
+  {
+    "verb": "iniciar",
+    "portuguese": "Vamos iniciar a reunião às nove horas.",
+    "english": "We are going to start the meeting at nine o'clock."
+  },
+  {
+    "verb": "auxiliar",
+    "portuguese": "O colega auxiliou-me com o relatório.",
+    "english": "The colleague assisted me with the report."
+  },
+  {
+    "verb": "desligar",
+    "portuguese": "Desliga o computador antes de sair.",
+    "english": "Turn off the computer before leaving."
+  },
+  {
+    "verb": "esquecer",
+    "portuguese": "Não me esqueci do teu aniversário!",
+    "english": "I didn't forget your birthday!"
+  },
+  {
+    "verb": "lembrar",
+    "portuguese": "Lembro-me perfeitamente da nossa viagem.",
+    "english": "I remember our trip perfectly."
+  },
+  {
+    "verb": "acender",
+    "portuguese": "Acendi as luzes da árvore de Natal.",
+    "english": "I turned on the Christmas tree lights."
+  },
+  {
+    "verb": "subir",
+    "portuguese": "Subimos até ao miradouro da Madeira.",
+    "english": "We went up to the viewpoint in Madeira."
+  },
+  {
+    "verb": "descer",
+    "portuguese": "Descemos as escadas devagar.",
+    "english": "We went down the stairs slowly."
+  },
+  {
+    "verb": "ganhar",
+    "portuguese": "Ganhámos o jogo com um golo no final.",
+    "english": "We won the match with a goal at the end."
   }
 ]

@@ -81,6 +81,14 @@ void main() {
       validateExerciseFile('assets/data/exercises/unit_imperative_formal_informal.json');
     });
 
+    test('unit_synonyms_antonyms.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_synonyms_antonyms.json');
+    });
+
+    test('unit_past_tense_and_holidays.json adheres to exercise invariants', () {
+      validateExerciseFile('assets/data/exercises/unit_past_tense_and_holidays.json');
+    });
+
     test('indirect_object_pronouns.json adheres to exercise invariants and includes target items', () {
       validateExerciseFile('assets/data/exercises/indirect_object_pronouns.json');
 
@@ -124,6 +132,11 @@ void main() {
       expect(verbSet, contains('dormir'));
       expect(verbSet, contains('doer'));
       expect(verbSet, contains('carregar'));
+      expect(verbSet, contains('decidir'));
+      expect(verbSet, contains('trocar'));
+      expect(verbSet, contains('festejar'));
+      expect(verbSet, contains('aceitar'));
+      expect(verbSet, contains('empurrar'));
     });
 
     test('verbs.csv includes traduzir, sentar, espirrar, herdar, and praticar with all conjugation fields populated', () {
@@ -131,7 +144,7 @@ void main() {
       expect(verbsFile.existsSync(), isTrue);
       final lines = verbsFile.readAsLinesSync();
 
-      for (final verb in ['traduzir', 'sentar', 'espirrar', 'herdar', 'praticar', 'atender', 'tirar']) {
+      for (final verb in ['traduzir', 'sentar', 'espirrar', 'herdar', 'praticar', 'atender', 'tirar', 'decidir', 'trocar', 'festejar', 'celebrar', 'aceitar', 'puxar', 'empurrar']) {
         final verbLine = lines.firstWhere((l) => l.startsWith('$verb,'), orElse: () => '');
         expect(verbLine, isNotEmpty, reason: 'verbs.csv must contain an entry for $verb');
         final parts = verbLine.split(',');
@@ -160,11 +173,19 @@ void main() {
       }
     });
 
-    test('combined_questions.json has zero question text overlap with any exercise unit file', () {
+    test('combined_questions.json and questions.json have zero question text overlap with any exercise unit file', () {
       final combinedFile = File('assets/data/combined_questions.json');
       expect(combinedFile.existsSync(), isTrue);
       final List<dynamic> combinedList = jsonDecode(combinedFile.readAsStringSync());
       final combinedQuestions = combinedList
+          .map((q) => (q['question'] ?? q['questionText'] ?? '').toString().trim())
+          .where((t) => t.isNotEmpty)
+          .toSet();
+
+      final questionsFile = File('assets/data/questions.json');
+      expect(questionsFile.existsSync(), isTrue);
+      final List<dynamic> questionsList = jsonDecode(questionsFile.readAsStringSync());
+      final bankQuestions = questionsList
           .map((q) => (q['question'] ?? q['questionText'] ?? '').toString().trim())
           .where((t) => t.isNotEmpty)
           .toSet();
@@ -180,9 +201,33 @@ void main() {
             if (text.isNotEmpty) {
               expect(combinedQuestions.contains(text), isFalse,
                   reason: 'Question "$text" in ${entity.path} must not be duplicated in combined_questions.json');
+              expect(bankQuestions.contains(text), isFalse,
+                  reason: 'Question "$text" in ${entity.path} must not be duplicated in questions.json');
             }
           }
         }
+      }
+
+      // Case-insensitive bank x bank check for newly added questions (q_5734+)
+      final preExistingBankLower = <String>{};
+      final newBankQuestions = <Map<String, dynamic>>[];
+      for (final q in questionsList) {
+        final idStr = (q['id'] as String?) ?? '';
+        final numPart = int.tryParse(idStr.replaceFirst('q_', '')) ?? 0;
+        final textLower = (q['question'] ?? q['questionText'] ?? '').toString().trim().toLowerCase();
+        if (numPart <= 5733) {
+          preExistingBankLower.add(textLower);
+        } else {
+          newBankQuestions.add(Map<String, dynamic>.from(q as Map));
+        }
+      }
+      final combinedLower = combinedQuestions.map((t) => t.toLowerCase()).toSet();
+      for (final nq in newBankQuestions) {
+        final textLower = (nq['question'] ?? nq['questionText'] ?? '').toString().trim().toLowerCase();
+        expect(preExistingBankLower.contains(textLower), isFalse,
+            reason: 'New question ${nq['id']} ("${nq['question']}") duplicates pre-existing questions.json');
+        expect(combinedLower.contains(textLower), isFalse,
+            reason: 'New question ${nq['id']} ("${nq['question']}") duplicates combined_questions.json');
       }
     });
 
@@ -212,6 +257,8 @@ void main() {
       expect(unitPaths.contains('assets/data/exercises/unit_question_formation.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_prepositions_para_por.json'), isTrue);
       expect(unitPaths.contains('assets/data/exercises/unit_imperative_formal_informal.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_synonyms_antonyms.json'), isTrue);
+      expect(unitPaths.contains('assets/data/exercises/unit_past_tense_and_holidays.json'), isTrue);
     });
 
     test('CategorySelectionScreen covers all categories present in questions.json', () {
@@ -232,6 +279,42 @@ void main() {
       for (final cat in categoriesInBank) {
         expect(screen.categories.contains(cat), isTrue,
             reason: 'Category "$cat" from questions.json must have a corresponding route in CategorySelectionScreen');
+      }
+    });
+
+    test('vocabulary.json present_tense and past_tense are null or 5-person Maps and new entries do not overlap source.md', () {
+      final vocabFile = File('assets/vocabulary.json');
+      expect(vocabFile.existsSync(), isTrue);
+      final List<dynamic> vocabList = jsonDecode(vocabFile.readAsStringSync());
+      const requiredKeys = {'eu', 'tu', 'ele_ela_voce', 'nos', 'voces_eles'};
+
+      final sourceLines = File('assets/data/source.md').readAsLinesSync();
+      final sourcePt = <String>{};
+      for (final line in sourceLines) {
+        final s = line.trim();
+        if (s.startsWith('|')) {
+          final parts = s.split('|').map((p) => p.trim()).toList();
+          if (parts.length >= 4 && !parts[1].contains('Portugues') && !parts[1].contains('---')) {
+            sourcePt.add(parts[1].toLowerCase());
+          }
+        }
+      }
+
+      for (final entry in vocabList) {
+        final id = entry['id'];
+        for (final field in ['present_tense', 'past_tense']) {
+          final val = entry[field];
+          if (val != null) {
+            expect(val, isA<Map>(), reason: 'Entry $id $field must be null or a Map');
+            final keys = (val as Map).keys.map((k) => k.toString()).toSet();
+            expect(keys, equals(requiredKeys), reason: 'Entry $id $field must have 5 person keys');
+          }
+        }
+        if (id is int && id >= 985) {
+          final pt = (entry['portuguese'] as String).trim().toLowerCase();
+          expect(sourcePt.contains(pt), isFalse,
+              reason: 'New vocabulary.json entry $id ("$pt") must not duplicate source.md');
+        }
       }
     });
   });

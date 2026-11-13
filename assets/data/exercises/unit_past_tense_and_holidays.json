@@ -1,0 +1,572 @@
+[
+  {
+    "id": "past_hol_q1",
+    "questionText": "Como se diz \"I decided\" em português? (verbo decidir)",
+    "options": [
+      "eu decidi",
+      "eu decido",
+      "eles decidiram",
+      "ele decidiu"
+    ],
+    "correctAnswer": "eu decidi",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_1",
+      "portuguese": "eu decidi",
+      "english": "I decided",
+      "notes": "Pretérito Perfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q2",
+    "questionText": "Complete no passado (Pretérito Perfeito): \"Eles ___ passar o Natal na Madeira.\"",
+    "options": [
+      "decidiram",
+      "decidem",
+      "decidi",
+      "decidimos"
+    ],
+    "correctAnswer": "decidiram",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_2",
+      "portuguese": "eles decidiram",
+      "english": "they decided",
+      "notes": "Pretérito Perfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q3",
+    "questionText": "Complete no Pretérito Imperfeito: \"Quando eu ___ criança, brincava muito.\"",
+    "options": [
+      "era",
+      "fui",
+      "sou",
+      "estive"
+    ],
+    "correctAnswer": "era",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_3",
+      "portuguese": "quando eu era criança",
+      "english": "when I was a child",
+      "notes": "Pretérito Imperfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q4",
+    "questionText": "Complete no Pretérito Imperfeito: \"Antigamente nós ___ muitos filmes.\"",
+    "options": [
+      "víamos",
+      "vemos",
+      "vimos",
+      "veem"
+    ],
+    "correctAnswer": "víamos",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_4",
+      "portuguese": "nós víamos muitos filmes",
+      "english": "we used to watch many films",
+      "notes": "Pretérito Imperfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q5",
+    "questionText": "Ação terminada no passado (hoje já não está sol): \"Ontem ___ sol.\"",
+    "options": [
+      "esteve",
+      "estava",
+      "está",
+      "foi"
+    ],
+    "correctAnswer": "esteve",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_5",
+      "portuguese": "ontem esteve sol",
+      "english": "yesterday it was sunny (completed)",
+      "notes": "Pretérito Perfeito vs Imperfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q6",
+    "questionText": "Contexto / descrição no passado (pode ainda estar sol): \"Ontem ___ sol quando saí.\"",
+    "options": [
+      "estava",
+      "esteve",
+      "ficou",
+      "será"
+    ],
+    "correctAnswer": "estava",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_6",
+      "portuguese": "ontem estava sol",
+      "english": "yesterday it was sunny (ongoing)",
+      "notes": "Pretérito Perfeito vs Imperfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q7",
+    "questionText": "Complete no passado (verbo sair): \"Ele ___ de casa cedo ontem.\"",
+    "options": [
+      "saiu",
+      "sais",
+      "saio",
+      "sairam"
+    ],
+    "correctAnswer": "saiu",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_7",
+      "portuguese": "ele saiu",
+      "english": "he left",
+      "notes": "Pretérito Perfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q8",
+    "questionText": "Qual é a forma correta de \"they come\" vs \"they see\"?",
+    "options": [
+      "eles vêm / eles veem",
+      "eles veem / eles vêm",
+      "eles vimos / eles vemos",
+      "eles vão / eles vejo"
+    ],
+    "correctAnswer": "eles vêm / eles veem",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_8",
+      "portuguese": "vêm / veem",
+      "english": "they come / they see",
+      "notes": "Irregular Verbs"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q9",
+    "questionText": "Como se diz \"I hear\" (eu + ouvir) em português?",
+    "options": [
+      "eu ouço / oiço",
+      "eu ponho",
+      "eu conheço",
+      "eu vejo"
+    ],
+    "correctAnswer": "eu ouço / oiço",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_9",
+      "portuguese": "ouço / oiço",
+      "english": "I hear",
+      "notes": "Irregular Verbs"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q10",
+    "questionText": "Qual objeto usamos para comer sopa?",
+    "options": [
+      "a colher",
+      "o garfo",
+      "a faca",
+      "a palhinha"
+    ],
+    "correctAnswer": "a colher",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_10",
+      "portuguese": "a colher",
+      "english": "spoon",
+      "notes": "Tableware"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q11",
+    "questionText": "O conjunto de garfo, faca e colher chama-se:",
+    "options": [
+      "os talheres",
+      "os guardanapos",
+      "as tigelas",
+      "as tampas"
+    ],
+    "correctAnswer": "os talheres",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_11",
+      "portuguese": "os talheres",
+      "english": "cutlery",
+      "notes": "Tableware"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q12",
+    "questionText": "Qual destas palavras significa \"napkin\"?",
+    "options": [
+      "o guardanapo",
+      "a toalha",
+      "o lenço de assoar",
+      "o jarro da água"
+    ],
+    "correctAnswer": "o guardanapo",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_12",
+      "portuguese": "o guardanapo",
+      "english": "napkin",
+      "notes": "Tableware"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q13",
+    "questionText": "O que é \"a Consoada\" em Portugal?",
+    "options": [
+      "O jantar da Véspera de Natal em família",
+      "Um pontapé de canto no futebol",
+      "A câmara municipal da cidade",
+      "Uma tigela de sopa"
+    ],
+    "correctAnswer": "O jantar da Véspera de Natal em família",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_13",
+      "portuguese": "a Consoada",
+      "english": "Christmas Eve dinner / gathering",
+      "notes": "Christmas Traditions"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q14",
+    "questionText": "Qual é uma sobremesa tradicional de Natal em Portugal (pão com ovo e açúcar)?",
+    "options": [
+      "fatias douradas / rabanadas",
+      "polvo assado",
+      "peru com batatas",
+      "chá com café"
+    ],
+    "correctAnswer": "fatias douradas / rabanadas",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_14",
+      "portuguese": "fatias douradas / rabanadas",
+      "english": "Portuguese French toast",
+      "notes": "Christmas Traditions"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q15",
+    "questionText": "Como se diz \"He doesn't manage to swap with his colleague\"?",
+    "options": [
+      "Não consegue trocar com o colega",
+      "Não consegue marcar um golo",
+      "Não está de serviço hoje",
+      "Não quer aceitar o convite"
+    ],
+    "correctAnswer": "Não consegue trocar com o colega",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_15",
+      "portuguese": "não consegue trocar com o colega",
+      "english": "cannot swap with the colleague",
+      "notes": "Work & Duty"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q16",
+    "questionText": "No futebol, o que significa \"marcar um golo\"?",
+    "options": [
+      "to score a goal",
+      "to take a corner kick",
+      "to hit the goalpost",
+      "to reserve a ticket"
+    ],
+    "correctAnswer": "to score a goal",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_16",
+      "portuguese": "marcar um golo",
+      "english": "to score a goal",
+      "notes": "Football"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q17",
+    "questionText": "Complete: \"Não estou com eles ___ tanto tempo!\"",
+    "options": [
+      "há",
+      "tão",
+      "bastante",
+      "até"
+    ],
+    "correctAnswer": "há",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_17",
+      "portuguese": "Não estou com eles há tanto tempo",
+      "english": "I haven't been with them for so long",
+      "notes": "Duration"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q18",
+    "questionText": "Complete com \"tão\" ou \"tanto\": \"Não conduzas ___ depressa!\"",
+    "options": [
+      "tão",
+      "tanto",
+      "tantas",
+      "tantos"
+    ],
+    "correctAnswer": "tão",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_18",
+      "portuguese": "não conduzas tão depressa",
+      "english": "don't drive so fast",
+      "notes": "Tão vs Tanto"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q19",
+    "questionText": "Complete com \"tão\" ou \"tantas\": \"Há ___ pessoas na praia hoje!\"",
+    "options": [
+      "tantas",
+      "tão",
+      "tantos",
+      "tanto"
+    ],
+    "correctAnswer": "tantas",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_19",
+      "portuguese": "há tantas pessoas na praia",
+      "english": "there are so many people at the beach",
+      "notes": "Tão vs Tanto"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q20",
+    "questionText": "Qual expressão usamos para desejar melhoras a alguém doente?",
+    "options": [
+      "As melhoras!",
+      "Boas férias!",
+      "Feliz Natal!",
+      "É um exagero!"
+    ],
+    "correctAnswer": "As melhoras!",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_20",
+      "portuguese": "As melhoras!",
+      "english": "Get well soon!",
+      "notes": "Expressions"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q21",
+    "questionText": "Complete no passado: \"Nós ___ o Natal com toda a família.\"",
+    "options": [
+      "festejámos",
+      "festejamos",
+      "festejar",
+      "festejam"
+    ],
+    "correctAnswer": "festejámos",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_21",
+      "portuguese": "Nós festejámos o Natal com toda a família.",
+      "english": "We celebrated Christmas with the whole family.",
+      "notes": "Pretérito Perfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q22",
+    "questionText": "Complete no passado: \"Eles ___ o convite e trouxeram rabanadas.\"",
+    "options": [
+      "aceitaram",
+      "aceitam",
+      "aceitou",
+      "aceitei"
+    ],
+    "correctAnswer": "aceitaram",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_22",
+      "portuguese": "Eles aceitaram o convite e trouxeram rabanadas.",
+      "english": "They accepted the invitation and brought French toast.",
+      "notes": "Pretérito Perfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q23",
+    "questionText": "Complete no passado: \"Ela ___ o café e pediu uma chávena de chá.\"",
+    "options": [
+      "recusou",
+      "recusa",
+      "recusaram",
+      "recusei"
+    ],
+    "correctAnswer": "recusou",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_23",
+      "portuguese": "Ela recusou o café e pediu uma chávena de chá.",
+      "english": "She refused the coffee and ordered a cup of tea.",
+      "notes": "Pretérito Perfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q24",
+    "questionText": "Complete no passado: \"A nossa equipa ___ o jogo ontem!\"",
+    "options": [
+      "ganhou",
+      "ganha",
+      "ganharam",
+      "ganhei"
+    ],
+    "correctAnswer": "ganhou",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_24",
+      "portuguese": "A nossa equipa ganhou o jogo ontem!",
+      "english": "Our team won the match yesterday!",
+      "notes": "Pretérito Perfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q25",
+    "questionText": "Complete no Imperfeito: \"Quando eu era criança, ___ abrir os presentes.\"",
+    "options": [
+      "adorava",
+      "adorei",
+      "adoro",
+      "adoraram"
+    ],
+    "correctAnswer": "adorava",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_25",
+      "portuguese": "Quando eu era criança, adorava abrir os presentes.",
+      "english": "When I was a child, I loved opening the presents.",
+      "notes": "Pretérito Imperfeito"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q26",
+    "questionText": "Qual jogador defende a baliza no futebol?",
+    "options": [
+      "o guarda-redes",
+      "o árbitro",
+      "o vereador",
+      "o colega"
+    ],
+    "correctAnswer": "o guarda-redes",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_26",
+      "portuguese": "o guarda-redes",
+      "english": "goalkeeper",
+      "notes": "Football"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q27",
+    "questionText": "Onde bebemos normalmente chá ou café?",
+    "options": [
+      "numa chávena",
+      "numa tigela",
+      "numa tampa",
+      "num garfo"
+    ],
+    "correctAnswer": "numa chávena",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_27",
+      "portuguese": "a chávena",
+      "english": "cup (tea/coffee)",
+      "notes": "Tableware"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q28",
+    "questionText": "Complete: \"Não te ___ de pôr os talheres na mesa!\"",
+    "options": [
+      "esqueças",
+      "convides",
+      "decidas",
+      "troques"
+    ],
+    "correctAnswer": "esqueças",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_28",
+      "portuguese": "Não te esqueças de pôr os talheres na mesa!",
+      "english": "Don't forget to set the cutlery on the table!",
+      "notes": "Tableware & Imperative"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q29",
+    "questionText": "Complete: \"___ a luz antes de sair de casa.\"",
+    "options": [
+      "Apaga",
+      "Acende",
+      "Empurra",
+      "Reserva"
+    ],
+    "correctAnswer": "Apaga",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_29",
+      "portuguese": "Apaga a luz antes de sair de casa.",
+      "english": "Turn off the light before leaving home.",
+      "notes": "Everyday Actions"
+    },
+    "category": "Past Tense & Seasonal"
+  },
+  {
+    "id": "past_hol_q30",
+    "questionText": "Qual é o sinónimo de \"o presente\" de Natal?",
+    "options": [
+      "a prenda",
+      "a toalha",
+      "a tampa",
+      "a trave"
+    ],
+    "correctAnswer": "a prenda",
+    "type": "multipleChoice",
+    "sourceItem": {
+      "id": "past_hol_src_30",
+      "portuguese": "o presente = a prenda",
+      "english": "gift = present",
+      "notes": "Christmas"
+    },
+    "category": "Past Tense & Seasonal"
+  }
+]

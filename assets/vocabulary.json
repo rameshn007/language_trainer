@@ -19730,5 +19730,575 @@
     "example_sentence_pt": "Nós limpámos toda a casa no sábado de manhã.",
     "example_sentence_en": "We cleaned the whole house on Saturday morning.",
     "source_file": "More words - Sheet1.csv"
+  },
+  {
+    "id": 985,
+    "portuguese": "decidir",
+    "english": "to decide",
+    "pronunciation": "deh-see-DEER",
+    "word_type": "verb",
+    "cefr_level": "A1",
+    "topic_category": "Grammar & Verbs",
+    "irregular": false,
+    "verb_class": "-ir",
+    "present_tense": {
+      "eu": "decido",
+      "tu": "decides",
+      "ele_ela_voce": "decide",
+      "nos": "decidimos",
+      "voces_eles": "decidem"
+    },
+    "past_tense": {
+      "eu": "decidi",
+      "tu": "decidiste",
+      "ele_ela_voce": "decidiu",
+      "nos": "decidimos",
+      "voces_eles": "decidiram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Eu decidi ficar em casa hoje.",
+    "example_sentence_en": "I decided to stay home today.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 986,
+    "portuguese": "trocar",
+    "english": "to swap / to exchange / to change",
+    "pronunciation": "troh-KAHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Office & Work",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "troco",
+      "tu": "trocas",
+      "ele_ela_voce": "troca",
+      "nos": "trocamos",
+      "voces_eles": "trocam"
+    },
+    "past_tense": {
+      "eu": "troquei",
+      "tu": "trocaste",
+      "ele_ela_voce": "trocou",
+      "nos": "trocámos",
+      "voces_eles": "trocaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Não consegue trocar o turno com o colega.",
+    "example_sentence_en": "He cannot swap the shift with his colleague.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 987,
+    "portuguese": "festejar",
+    "english": "to party / to celebrate (= celebrar)",
+    "pronunciation": "fesh-teh-ZHAHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Hobbies & Leisure",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "festejo",
+      "tu": "festejas",
+      "ele_ela_voce": "festeja",
+      "nos": "festejamos",
+      "voces_eles": "festejam"
+    },
+    "past_tense": {
+      "eu": "festejei",
+      "tu": "festejaste",
+      "ele_ela_voce": "festejou",
+      "nos": "festejámos",
+      "voces_eles": "festejaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Vamos festejar o aniversário no sábado.",
+    "example_sentence_en": "We are going to celebrate the birthday on Saturday.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 988,
+    "portuguese": "celebrar",
+    "english": "to celebrate (= festejar)",
+    "pronunciation": "seh-leh-BRAHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Hobbies & Leisure",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "celebro",
+      "tu": "celebras",
+      "ele_ela_voce": "celebra",
+      "nos": "celebramos",
+      "voces_eles": "celebram"
+    },
+    "past_tense": {
+      "eu": "celebrei",
+      "tu": "celebraste",
+      "ele_ela_voce": "celebrou",
+      "nos": "celebrámos",
+      "voces_eles": "celebraram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Como vais celebrar o Natal?",
+    "example_sentence_en": "How are you going to celebrate Christmas?",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 989,
+    "portuguese": "arranjar",
+    "english": "to arrange / to prepare / to fix (= preparar)",
+    "pronunciation": "ah-hahn-ZHAHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Basics",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "arranjo",
+      "tu": "arranjas",
+      "ele_ela_voce": "arranja",
+      "nos": "arranjamos",
+      "voces_eles": "arranjam"
+    },
+    "past_tense": {
+      "eu": "arranjei",
+      "tu": "arranjaste",
+      "ele_ela_voce": "arranjou",
+      "nos": "arranjámos",
+      "voces_eles": "arranjaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Vou arranjar a sala antes da festa.",
+    "example_sentence_en": "I am going to prepare the living room before the party.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 990,
+    "portuguese": "entender",
+    "english": "to understand (= compreender)",
+    "pronunciation": "ehn-tehn-DEHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Basics",
+    "irregular": false,
+    "verb_class": "-er",
+    "present_tense": {
+      "eu": "entendo",
+      "tu": "entendes",
+      "ele_ela_voce": "entende",
+      "nos": "entendemos",
+      "voces_eles": "entendem"
+    },
+    "past_tense": {
+      "eu": "entendi",
+      "tu": "entendeste",
+      "ele_ela_voce": "entendeu",
+      "nos": "entendemos",
+      "voces_eles": "entenderam"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Eu entendo perfeitamente o que dizes.",
+    "example_sentence_en": "I understand perfectly what you say.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 991,
+    "portuguese": "reservar",
+    "english": "to reserve / to book (= marcar)",
+    "pronunciation": "heh-zehr-VAHR",
+    "word_type": "verb",
+    "cefr_level": "A1",
+    "topic_category": "Travel & Directions",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "reservo",
+      "tu": "reservas",
+      "ele_ela_voce": "reserva",
+      "nos": "reservamos",
+      "voces_eles": "reservam"
+    },
+    "past_tense": {
+      "eu": "reservei",
+      "tu": "reservaste",
+      "ele_ela_voce": "reservou",
+      "nos": "reservámos",
+      "voces_eles": "reservaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Vou reservar uma mesa para o jantar.",
+    "example_sentence_en": "I am going to reserve a table for dinner.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 992,
+    "portuguese": "aceitar",
+    "english": "to accept (≠ recusar)",
+    "pronunciation": "ah-say-TAHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Basics",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "aceito",
+      "tu": "aceitas",
+      "ele_ela_voce": "aceita",
+      "nos": "aceitamos",
+      "voces_eles": "aceitam"
+    },
+    "past_tense": {
+      "eu": "aceitei",
+      "tu": "aceitaste",
+      "ele_ela_voce": "aceitou",
+      "nos": "aceitámos",
+      "voces_eles": "aceitaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Nós aceitamos o convite com muito gosto.",
+    "example_sentence_en": "We accept the invitation with great pleasure.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 993,
+    "portuguese": "recusar",
+    "english": "to refuse (≠ aceitar)",
+    "pronunciation": "heh-koo-ZAHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Basics",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "recuso",
+      "tu": "recusas",
+      "ele_ela_voce": "recusa",
+      "nos": "recusamos",
+      "voces_eles": "recusam"
+    },
+    "past_tense": {
+      "eu": "recusei",
+      "tu": "recusaste",
+      "ele_ela_voce": "recusou",
+      "nos": "recusámos",
+      "voces_eles": "recusaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Ele decidiu recusar a proposta.",
+    "example_sentence_en": "He decided to refuse the proposal.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 994,
+    "portuguese": "juntar",
+    "english": "to gather / to join",
+    "pronunciation": "zhoon-TAHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Family",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "junto",
+      "tu": "juntas",
+      "ele_ela_voce": "junta",
+      "nos": "juntamos",
+      "voces_eles": "juntam"
+    },
+    "past_tense": {
+      "eu": "juntei",
+      "tu": "juntaste",
+      "ele_ela_voce": "juntou",
+      "nos": "juntámos",
+      "voces_eles": "juntaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "A família junta-se novamente no Natal.",
+    "example_sentence_en": "The family gets together again at Christmas.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 995,
+    "portuguese": "iniciar",
+    "english": "to start / to begin (= começar)",
+    "pronunciation": "ee-nee-see-AHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Basics",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "inicio",
+      "tu": "inicias",
+      "ele_ela_voce": "inicia",
+      "nos": "iniciamos",
+      "voces_eles": "iniciam"
+    },
+    "past_tense": {
+      "eu": "iniciei",
+      "tu": "iniciaste",
+      "ele_ela_voce": "iniciou",
+      "nos": "iniciámos",
+      "voces_eles": "iniciaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Vamos iniciar a aula agora.",
+    "example_sentence_en": "Let's start the class now.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 996,
+    "portuguese": "escutar",
+    "english": "to listen (= ouvir)",
+    "pronunciation": "sh-koo-TAHR",
+    "word_type": "verb",
+    "cefr_level": "A1",
+    "topic_category": "Basics",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "escuto",
+      "tu": "escutas",
+      "ele_ela_voce": "escuta",
+      "nos": "escutamos",
+      "voces_eles": "escutam"
+    },
+    "past_tense": {
+      "eu": "escutei",
+      "tu": "escutaste",
+      "ele_ela_voce": "escutou",
+      "nos": "escutámos",
+      "voces_eles": "escutaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Gosto de escutar música portuguesa.",
+    "example_sentence_en": "I like to listen to Portuguese music.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 997,
+    "portuguese": "auxiliar",
+    "english": "to assist / to help (= ajudar)",
+    "pronunciation": "ow-see-lee-AHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Office & Work",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "auxilio",
+      "tu": "auxilias",
+      "ele_ela_voce": "auxilia",
+      "nos": "auxiliamos",
+      "voces_eles": "auxiliam"
+    },
+    "past_tense": {
+      "eu": "auxiliei",
+      "tu": "auxiliaste",
+      "ele_ela_voce": "auxiliou",
+      "nos": "auxiliámos",
+      "voces_eles": "auxiliaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Posso auxiliar-te com o trabalho?",
+    "example_sentence_en": "Can I assist you with the work?",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 998,
+    "portuguese": "desligar",
+    "english": "to turn off / to switch off (≠ ligar)",
+    "pronunciation": "desh-lee-GAHR",
+    "word_type": "verb",
+    "cefr_level": "A1",
+    "topic_category": "Household Items",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "desligo",
+      "tu": "desligas",
+      "ele_ela_voce": "desliga",
+      "nos": "desligamos",
+      "voces_eles": "desligam"
+    },
+    "past_tense": {
+      "eu": "desliguei",
+      "tu": "desligaste",
+      "ele_ela_voce": "desligou",
+      "nos": "desligámos",
+      "voces_eles": "desligaram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Não te esqueças de desligar a televisão.",
+    "example_sentence_en": "Don't forget to turn off the television.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 999,
+    "portuguese": "acender",
+    "english": "to light / to switch on (≠ apagar)",
+    "pronunciation": "ah-sehn-DEHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Household Items",
+    "irregular": false,
+    "verb_class": "-er",
+    "present_tense": {
+      "eu": "acendo",
+      "tu": "acendes",
+      "ele_ela_voce": "acende",
+      "nos": "acendemos",
+      "voces_eles": "acendem"
+    },
+    "past_tense": {
+      "eu": "acendi",
+      "tu": "acendeste",
+      "ele_ela_voce": "acendeu",
+      "nos": "acendemos",
+      "voces_eles": "acenderam"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Acende a luz da sala, por favor.",
+    "example_sentence_en": "Turn on the living room light, please.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 1000,
+    "portuguese": "esquecer",
+    "english": "to forget (≠ lembrar)",
+    "pronunciation": "sh-keh-SEHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Basics",
+    "irregular": true,
+    "verb_class": "-er",
+    "present_tense": {
+      "eu": "esqueço",
+      "tu": "esqueces",
+      "ele_ela_voce": "esquece",
+      "nos": "esquecemos",
+      "voces_eles": "esquecem"
+    },
+    "past_tense": {
+      "eu": "esqueci",
+      "tu": "esqueceste",
+      "ele_ela_voce": "esqueceu",
+      "nos": "esquecemos",
+      "voces_eles": "esqueceram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Esqueci-me de trazer as chaves.",
+    "example_sentence_en": "I forgot to bring the keys.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 1001,
+    "portuguese": "lembrar",
+    "english": "to remember / to remind (≠ esquecer)",
+    "pronunciation": "lehm-BRAHR",
+    "word_type": "verb",
+    "cefr_level": "A2",
+    "topic_category": "Basics",
+    "irregular": false,
+    "verb_class": "-ar",
+    "present_tense": {
+      "eu": "lembro",
+      "tu": "lembras",
+      "ele_ela_voce": "lembra",
+      "nos": "lembramos",
+      "voces_eles": "lembram"
+    },
+    "past_tense": {
+      "eu": "lembrei",
+      "tu": "lembraste",
+      "ele_ela_voce": "lembrou",
+      "nos": "lembrámos",
+      "voces_eles": "lembraram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Lembro-me muito bem daquele Natal.",
+    "example_sentence_en": "I remember that Christmas very well.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 1002,
+    "portuguese": "subir",
+    "english": "to go up / to climb (≠ descer)",
+    "pronunciation": "soo-BEER",
+    "word_type": "verb",
+    "cefr_level": "A1",
+    "topic_category": "Travel & Directions",
+    "irregular": true,
+    "verb_class": "-ir",
+    "present_tense": {
+      "eu": "subo",
+      "tu": "sobes",
+      "ele_ela_voce": "sobe",
+      "nos": "subimos",
+      "voces_eles": "sobem"
+    },
+    "past_tense": {
+      "eu": "subi",
+      "tu": "subiste",
+      "ele_ela_voce": "subiu",
+      "nos": "subimos",
+      "voces_eles": "subiram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Vamos subir as escadas até ao segundo andar.",
+    "example_sentence_en": "Let's go up the stairs to the second floor.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
+  },
+  {
+    "id": 1003,
+    "portuguese": "descer",
+    "english": "to go down / to get off (≠ subir)",
+    "pronunciation": "desh-SEHR",
+    "word_type": "verb",
+    "cefr_level": "A1",
+    "topic_category": "Travel & Directions",
+    "irregular": false,
+    "verb_class": "-er",
+    "present_tense": {
+      "eu": "desço",
+      "tu": "desces",
+      "ele_ela_voce": "desce",
+      "nos": "descemos",
+      "voces_eles": "descem"
+    },
+    "past_tense": {
+      "eu": "desci",
+      "tu": "desceste",
+      "ele_ela_voce": "desceu",
+      "nos": "descemos",
+      "voces_eles": "desceram"
+    },
+    "gender": null,
+    "plural": null,
+    "example_sentence_pt": "Temos de descer na próxima paragem.",
+    "example_sentence_en": "We have to get off at the next stop.",
+    "source_file": "Synonyms, Antonyms & Past Tense Notes"
   }
 ]

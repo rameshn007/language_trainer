@@ -203,7 +203,7 @@ class _FlashcardsScreenState extends ConsumerState<FlashcardsScreen>
     try {
       final List<FlashcardItem> loaded = [];
 
-      // 1. Load #G1 through #G7 Grammar Cards
+      // 1. Load #G1 through #G12 Grammar Cards
       try {
         final grammarRaw = await rootBundle.loadString(
           'assets/data/grammar_flashcards.json',

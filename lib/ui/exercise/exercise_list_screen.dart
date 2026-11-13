@@ -138,6 +138,18 @@ class ExerciseListScreen extends StatelessWidget {
       'path': 'assets/data/exercises/unit_imperative_formal_informal.json',
       'icon': 'build',
     },
+    {
+      'title': 'Unit 19: Synonyms & Antonyms',
+      'subtitle': 'Sinónimos e antónimos essenciais: festejar/celebrar, aceitar/recusar, pôr/tirar...',
+      'path': 'assets/data/exercises/unit_synonyms_antonyms.json',
+      'icon': 'chat',
+    },
+    {
+      'title': 'Unit 20: Past Tense & Seasonal Vocabulary',
+      'subtitle': 'Pretérito Perfeito vs Imperfeito, mesa, talheres, futebol e tradições de Natal',
+      'path': 'assets/data/exercises/unit_past_tense_and_holidays.json',
+      'icon': 'school',
+    },
   ];
 
   @override
