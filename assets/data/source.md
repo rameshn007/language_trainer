@@ -2512,8 +2512,6 @@
 | Ele convida sempre tanta gente! | He always invites so many people! | Family |
 | É um exagero | It is an exaggeration | Intro / Basics |
 | rápido / lento | fast / slow (adjectives) | Intro / Basics |
-| o café | coffee | Food & Drink |
-| o chá | tea | Food & Drink |
 | O dia, hoje, está tão bom | Today is so nice | Intro / Basics |
 | não conduzas tão depressa | don't drive so fast | Travel & Directions |
 | há tantas pessoas na praia | there are so many people at the beach | Travel & Directions |

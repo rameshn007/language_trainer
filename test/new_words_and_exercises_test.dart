@@ -207,6 +207,28 @@ void main() {
           }
         }
       }
+
+      // Case-insensitive bank x bank check for newly added questions (q_5734+)
+      final preExistingBankLower = <String>{};
+      final newBankQuestions = <Map<String, dynamic>>[];
+      for (final q in questionsList) {
+        final idStr = (q['id'] as String?) ?? '';
+        final numPart = int.tryParse(idStr.replaceFirst('q_', '')) ?? 0;
+        final textLower = (q['question'] ?? q['questionText'] ?? '').toString().trim().toLowerCase();
+        if (numPart <= 5733) {
+          preExistingBankLower.add(textLower);
+        } else {
+          newBankQuestions.add(Map<String, dynamic>.from(q as Map));
+        }
+      }
+      final combinedLower = combinedQuestions.map((t) => t.toLowerCase()).toSet();
+      for (final nq in newBankQuestions) {
+        final textLower = (nq['question'] ?? nq['questionText'] ?? '').toString().trim().toLowerCase();
+        expect(preExistingBankLower.contains(textLower), isFalse,
+            reason: 'New question ${nq['id']} ("${nq['question']}") duplicates pre-existing questions.json');
+        expect(combinedLower.contains(textLower), isFalse,
+            reason: 'New question ${nq['id']} ("${nq['question']}") duplicates combined_questions.json');
+      }
     });
 
     test('ExerciseListScreen registers valid units with existing asset paths', () {
